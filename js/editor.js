@@ -293,20 +293,28 @@ Editor.prototype = {
         var btnDef = this.opts.buttonsDef[name];
         var btn = $('<a/>', {
             href: 'javascript:void(0);',
-            class: 'editor-'+name+'-button',
+            class: this.opts.prefix + name +'-button',
             text: btnDef.text || btnDef.title || this.lang[name] || name,
             title: btnDef.title || btnDef.text || this.lang[name] || name,
-            click: $.proxy(function(e){ this.execCommand((btnDef.dropdown ? 'dropdown' : '') || btnDef.func || name, btnDef.param || ''); }, this)
+            click: $.proxy(function(e){
+                this.execCommand((btnDef.dropdown ? 'dropdown' : '') || btnDef.func || name,
+                                 btnDef.param || name);
+                e.stopPropagation();
+                e.preventDefault();
+            }, this)
         });
 
+
+
         if(btnDef.dropdown){
-            btn.addClass(name+'-editor-dropdown-label');
+            var cssClass = this.opts.prefix + this.opts.cssClass.dropdown;
+
             var dropdown = $('<div/>', {
-                class: (btnDef.dropdown.class || name+'-editor-dropdown') + ' ' + this.opts.prefix+this.opts.cssClass.dropdown
+                class: name + '-' + cssClass + ' ' + cssClass
             });
-            for(var name in btnDef.dropdown){
-                if($.isObject(btnDef.dropdown[name]))
-                    dropdown.append(this.buildSubButton(btnDef.dropdown, name));
+            for(var subName in btnDef.dropdown){
+                if($.isObject(btnDef.dropdown[subName]))
+                    dropdown.append(this.buildSubButton(btnDef.dropdown, subName));
             }
             this.$box.append(dropdown.hide());
         }
@@ -319,7 +327,10 @@ Editor.prototype = {
             href: 'javascript:void(0);',
             text: btnDef.text || btnDef.title || this.lang[name] || name,
             title: btnDef.title || btnDef.text || this.lang[name] || name,
-            click: $.proxy(function(e){ this.execCommand(dropdown.defaultFunc || btnDef.func || name, btnDef.param || name || ''); }, this)
+            click: $.proxy(function(e){
+                this.execCommand(dropdown.defaultFunc || btnDef.func || name,
+                                 btnDef.param || name);
+            }, this)
         });
     },
 
@@ -328,6 +339,22 @@ Editor.prototype = {
         this.$editor.toggle();
         this.$e.toggle();
     },
+
+    dropdown: function(name){
+        var dropdown = this.$box.find('.'+name+'-'+this.opts.prefix + this.opts.cssClass.dropdown);
+        var btn = this.$buttonPane.find('.'+this.opts.prefix+name+'-button');
+
+        dropdown.css({
+            top: (this.$buttonPane.css('height')),
+            left: (btn.offset().left - this.$buttonPane.offset().left)+'px'
+        }).toggle();
+        $('body').on('click', function(){
+            dropdown.hide();
+            $('body').off('click');
+        });
+    },
+
+
 
     destroy: function(){
         var html = this.getCode();
@@ -357,15 +384,15 @@ Editor.prototype = {
     },
 
     execCommand: function(cmd, param){
-        this.$editor.focus();
+        if(cmd != 'dropdown')
+            this.$editor.focus();
 
         console.log(cmd + ' : ' + param);
 
         try {
             this[cmd](param);
         } catch(e){
-            console.log(document.execCommand(cmd, false, param));
-
+            document.execCommand(cmd, false, param);
             this.syncCode();
             this.$editor.focus();
         }
