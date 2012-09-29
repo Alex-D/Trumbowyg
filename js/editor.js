@@ -90,24 +90,24 @@ var Editor = function(editorElem, opts){
     if(typeof opts !== 'undefined' && typeof opts.lang !== 'undefined' && typeof $.editor.langs[opts.lang] === 'undefined')
         this.lang = $.editor.langs['en'];
     else
-        this.lang = $.extend($.editor.langs['en'], $.editor.langs[opts.lang]);
-
-    opts_buttonsDef = opts.buttonsDef || {};
-    delete opts.buttonsDef;
+        this.lang = $.extend(true, $.editor.langs['en'], $.editor.langs[opts.lang]);
 
     // Defaults Options
-    this.opts = $.extend({
+    this.opts = $.extend(true, {
         lang: 'en',
         dir: 'ltr',
         mobile: false,
 
-        // CSS Class
-        editorBoxCssClass: 'editor-box',
-        editorEditorCssClass: 'editor-editor',
-        editorTextareaCssClass: 'editor-textarea',
-        buttonPaneCssClass: 'editor-button-pane',
-        separatorCssClass: 'editor-separator',
-        dropdownCssClass: 'editor-dropdown',
+        // CSS class prefixed by opts.prefix
+        cssClass: {
+            editorBox: 'box',
+            editorEditor: 'editor',
+            editorTextrea: 'textarea',
+            buttonPane: 'button-pane',
+            separator: 'separator',
+            dropdown: 'dropdown'
+        },
+        prefix: 'editor-',
 
         convertLink: true,
 
@@ -134,7 +134,7 @@ var Editor = function(editorElem, opts){
          *          title: this.lang.foo
          *      }
          */
-        buttonsDef: $.extend({
+        buttonsDef: {
             viewHTML: {
                 func: 'toggle'
             },
@@ -193,7 +193,7 @@ var Editor = function(editorElem, opts){
             justifyFull: {},
 
             insertHorizontalRule: {}
-        }, opts_buttonsDef)
+        }
     }, opts);
 
     this.init();
@@ -224,7 +224,7 @@ Editor.prototype = {
 
 
         this.$box = $('<div/>', {
-            class: this.opts.editorBoxCssClass
+            class: this.opts.prefix + this.opts.cssClass.editorBox
         });
 
         this.isTextarea = true;
@@ -237,7 +237,7 @@ Editor.prototype = {
         }
 
         this.$e.hide()
-               .addClass(this.opts.editorTextareaCssClass);
+               .addClass(this.opts.prefix + this.opts.cssClass.editorTextarea);
 
         var html = '';
         if(this.isTextarea){
@@ -253,7 +253,7 @@ Editor.prototype = {
             this.syncCode();
         }
 
-        this.$editor.addClass(this.opts.editorEditorCssClass)
+        this.$editor.addClass(this.opts.prefix + this.opts.cssClass.editorEditor)
                     .attr('contenteditable', true)
                     .attr('dir', this.opts.dir)
                     .html(html);
@@ -269,7 +269,7 @@ Editor.prototype = {
         if(this.opts.buttons === false) return;
 
         this.$buttonPane = $('<ul/>', {
-            class: this.opts.buttonPaneCssClass
+            class: this.opts.prefix + this.opts.cssClass.buttonPane
         });
 
         $.each(this.opts.buttons, $.proxy(function(i, btn){
@@ -277,7 +277,7 @@ Editor.prototype = {
                 var li = $('<li/>');
 
                 if(btn == '|')
-                    li.addClass(this.opts.separatorCssClass);
+                    li.addClass(this.opts.prefix + this.opts.cssClass.separator);
                 else
                     li.append(this.buildButton(btn));
 
@@ -302,7 +302,7 @@ Editor.prototype = {
         if(btnDef.dropdown){
             btn.addClass(name+'-editor-dropdown-label');
             var dropdown = $('<div/>', {
-                class: (btnDef.dropdown.class || name+'-editor-dropdown') + ' ' + this.opts.dropdownCssClass
+                class: (btnDef.dropdown.class || name+'-editor-dropdown') + ' ' + this.opts.prefix+this.opts.cssClass.dropdown
             });
             for(var name in btnDef.dropdown){
                 if($.isObject(btnDef.dropdown[name]))
@@ -336,7 +336,7 @@ Editor.prototype = {
             this.$box.after(this.$e.css({height: this.height}).val(html).show());
         else 
             this.$box.after(this.$editor.css({height: this.height})
-                                        .removeClass(this.opts.editorEditorCssClass)
+                                        .removeClass(this.opts.prefix + this.opts.cssClass.editorEditor)
                                         .attr('contenteditable', false)
                                         .html(html)
                                         .show());

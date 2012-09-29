@@ -28,7 +28,10 @@
         <script>
             $.editor.langs.fr.formatting = '¶';
             var editor = $('.editor').editor({
-                lang: 'fr'
+                lang: 'fr',
+                buttonsDef: {
+                    text: {}
+                }
             });
             $('.formatting-editor-dropdown').show();
         </script>
