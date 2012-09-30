@@ -26,6 +26,7 @@ body {
 }
 
 .editor-button-pane {
+	position: relative;
 	width: 100%;
 	line-height: 35px;
 	height: 35px;
@@ -60,3 +61,21 @@ body {
 .editor-button-pane li a.editor-italic-button { font-style: italic; }
 .editor-button-pane li a.editor-underline-button { text-decoration: underline; }
 .editor-button-pane li a.editor-strikethrough-button { text-decoration: line-through; }
+
+.editor-dropdown {
+	position: absolute;
+	width: 180px;
+}
+.editor-dropdown a {
+	display: block;
+	width: 200px;
+	height: 35px;
+	line-height: 35px;
+	text-decoration: none;
+	background: #CCC;
+	padding: 0 7px;
+}
+.editor-dropdown a:hover,
+.editor-dropdown a:focus {
+	background: #DDD;
+}
