@@ -20,7 +20,7 @@
             insertImage: "Insert Image...",
             insertVideo: "Insert Video...",
             link: "Link",
-            createlink: "Insert link...",
+            createLink: "Insert link...",
             unlink: "Remove link",
 
             justifyLeft: "Align Left",
@@ -51,7 +51,7 @@
             insertImage: "Inserer une Image...",
             insertVideo: "Inserer une Video...",
             link: "Lien",
-            createlink: "Insérer un lien...",
+            createLink: "Insérer un lien...",
             unlink: "Supprimer le lien",
 
             justifyLeft: "Aligner à gauche",
@@ -117,7 +117,7 @@ var Editor = function(editorElem, opts){
                     '|', 'formatting',
                     '|', 'bold', 'italic', 'underline', 'strikethrough', 
                     '|', 'unorderedList', 'orderedList',
-                    // '|', 'link', 
+                    '|', 'link', 
                     '|', 'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull',
                     '|', 'insertHorizontalRule'],
         buttonsAdd: [],
@@ -183,7 +183,7 @@ var Editor = function(editorElem, opts){
 
             link: {
                 dropdown: {
-                    createlink: {},
+                    createLink: {},
                     unlink: {}
                 }
             },
@@ -383,6 +383,10 @@ Editor.prototype = {
         } else {
             this.$editor.html(this.$e.val());
         }
+    },
+
+    createLink: function(){
+        this.execCommand('createlink', prompt("URL : ", "http:\/\/"));
     },
 
     execCommand: function(cmd, param){
