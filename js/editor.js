@@ -28,7 +28,9 @@
             justifyRight: "Align Right",
             justifyFull: "Align Justify",
 
-            insertHorizontalRule: "Insert horizontal rule"
+            insertHorizontalRule: "Insert horizontal rule",
+
+            close: "Close"
         },
 
         fr: {
@@ -59,7 +61,9 @@
             justifyRight: "Aligner à droite",
             justifyFull: "Justifier",
 
-            insertHorizontalRule: "Insérer un séparateur horizontal"
+            insertHorizontalRule: "Insérer un séparateur horizontal",
+
+            close: "Fermer"
         }
     }
 };
@@ -97,6 +101,7 @@ var Editor = function(editorElem, opts){
         lang: 'en',
         dir: 'ltr',
         mobile: false,
+        closable: false,
 
         // CSS class prefixed by opts.prefix
         cssClass: {
@@ -105,7 +110,8 @@ var Editor = function(editorElem, opts){
             editorTextarea: 'textarea',
             buttonPane: 'button-pane',
             separator: 'separator',
-            dropdown: 'dropdown'
+            dropdown: 'dropdown',
+            close: 'close'
         },
         prefix: 'editor-',
 
@@ -211,6 +217,36 @@ Editor.prototype = {
 
         this.buildEditor(this.isMobile());
         this.buildButtonPane();
+
+        if(this.opts.fixedButtonPane){
+            this.syncCode();
+            this.isFixed = false;
+
+            $(window).on('scroll', $.proxy(function(e){
+                var wScroll = $(window).scrollTop();
+                var offset = this.$box.offset().top;
+                var toFixed = (wScroll - offset > 0) && ((wScroll - offset - parseInt(this.height.replace('px', ''))) < 0);
+
+                if(!this.isFixed && toFixed){
+                    this.isFixed = true;
+                    this.$buttonPane.css({
+                        position: 'fixed',
+                        top: 0,
+                        width: this.$box.css('width'),
+                        zIndex: 10
+                    });
+                    this.$editor.css({ marginTop: this.$buttonPane.css('height') });
+                    this.$e.css({ marginTop: this.$buttonPane.css('height') });
+                } else if(this.isFixed && !toFixed) {
+                    this.isFixed = false;
+                    this.$buttonPane.css({
+                        position: 'relative'
+                    });
+                    this.$editor.css({ marginTop: 0 });
+                    this.$e.css({ marginTop: 0 });
+                }
+            }, this));
+        }
     },
 
     buildEditor: function(mobile){
@@ -284,6 +320,18 @@ Editor.prototype = {
                 this.$buttonPane.append(li);
             } catch(e){}
         }, this));
+
+        if(this.opts.closable){
+            this.$buttonPane.append($('<li/>', {
+                class: this.opts.prefix + this.opts.cssClass.close,
+            }).append($('<a/>', {
+                href: 'javascript:void(0);',
+                text: this.lang.close,
+                click: $.proxy(function(e){
+                    this.destroy();
+                }, this)
+            })));
+        }
 
 
         this.$box.prepend(this.$buttonPane);

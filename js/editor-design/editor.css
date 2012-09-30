@@ -2,7 +2,7 @@ html, body {
 	min-height: 100%;
 }
 body {
-	width: 1080px;
+	width: 960px;
 	margin: 0 auto;
 	padding: 25px 0;
 	border: 1px solid #999;
@@ -79,4 +79,8 @@ body {
 .editor-dropdown a:hover,
 .editor-dropdown a:focus {
 	background: #DDD;
+}
+
+.editor-button-pane .editor-close {
+	float: right;
 }
