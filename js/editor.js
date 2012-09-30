@@ -102,7 +102,7 @@ var Editor = function(editorElem, opts){
         cssClass: {
             editorBox: 'box',
             editorEditor: 'editor',
-            editorTextrea: 'textarea',
+            editorTextarea: 'textarea',
             buttonPane: 'button-pane',
             separator: 'separator',
             dropdown: 'dropdown'
@@ -201,7 +201,6 @@ var Editor = function(editorElem, opts){
 
 Editor.prototype = {
     init: function(){
-        this.width = this.$e.css('width');
         this.height = this.$e.css('height');
 
         if(!this.opts.mobile && this.isMobile()){
@@ -377,10 +376,12 @@ Editor.prototype = {
         this.$e.val(html);
     },
     syncCode: function(){
-        if(this.$editor.is(':visible'))
-            this.$e.val(this.$editor.html());
-        else
+        this.height = this.$editor.css('height');
+        if(this.$editor.is(':visible')){
+            this.$e.val(this.$editor.html()).css({height: this.height});
+        } else {
             this.$editor.html(this.$e.val());
+        }
     },
 
     execCommand: function(cmd, param){

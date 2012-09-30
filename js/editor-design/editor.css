@@ -23,6 +23,7 @@ body {
 	padding: 2%;
 	min-height: 300px;
 	width: 96%;
+	border-style: none;
 }
 
 .editor-button-pane {
