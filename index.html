@@ -28,7 +28,15 @@
         <script>
             $.editor.langs.fr.formatting = '¶';
             var editor = $('.editor').editor({
-                lang: 'fr'
+                lang: 'fr',
+                buttonsDef: {
+                    test: {
+                        func: function(){
+                            alert('toto');
+                        }
+                    }
+                },
+                buttonsAdd: ['|', 'test']
             });
         </script>
     </body>

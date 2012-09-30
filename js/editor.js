@@ -120,6 +120,7 @@ var Editor = function(editorElem, opts){
                     // '|', 'link', 
                     '|', 'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull',
                     '|', 'insertHorizontalRule'],
+        buttonsAdd: [],
         fixedButtonPane: false,
 
         /**
@@ -271,7 +272,7 @@ Editor.prototype = {
             class: this.opts.prefix + this.opts.cssClass.buttonPane
         });
 
-        $.each(this.opts.buttons, $.proxy(function(i, btn){
+        $.each(this.opts.buttons.concat(this.opts.buttonsAdd), $.proxy(function(i, btn){
             try {
                 var li = $('<li/>');
 
@@ -388,14 +389,16 @@ Editor.prototype = {
         if(cmd != 'dropdown')
             this.$editor.focus();
 
-        console.log(cmd + ' : ' + param);
-
         try {
             this[cmd](param);
         } catch(e){
-            document.execCommand(cmd, false, param);
-            this.syncCode();
-            this.$editor.focus();
+            try {
+                cmd(param);
+            } catch(e){
+                document.execCommand(cmd, false, param);
+                this.syncCode();
+                this.$editor.focus();
+            }
         }
 
         return false;
