@@ -325,7 +325,7 @@ Editor.prototype = {
         var btnDef = dropdown[name];
         return $('<a/>', {
             href: 'javascript:void(0);',
-            text: btnDef.text || btnDef.title || this.lang[name] || name,
+            text: btnDef.text || btnDef.title || this.lang[name] || name,
             title: btnDef.title || btnDef.text || this.lang[name] || name,
             click: $.proxy(function(e){
                 this.execCommand(dropdown.defaultFunc || btnDef.func || name,
