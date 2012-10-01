@@ -72,14 +72,12 @@ jQuery.fn.editor = function(opts){
     return this.each(function(){
         var $that = $(this);
 
-        if(!$that.data('editor')){
+        if(!$that.data('editor'))
             $that.data('editor', new Editor(this, opts));
-        }
     });
 };
 jQuery.fn.destroyEditor = function(){
     this.data('editor').destroy();
-    this.removeData('editor');
 };
 jQuery.fn.getCode = function(){
     return this.data('editor').getCode();
@@ -89,6 +87,7 @@ jQuery.fn.getCode = function(){
 var Editor = function(editorElem, opts){
     // jQuery object of the editor
     this.$e = $(editorElem);
+    this.$creator = $(editorElem);
 
     // Language management
     if(typeof opts !== 'undefined' && typeof opts.lang !== 'undefined' && typeof $.editor.langs[opts.lang] === 'undefined')
@@ -337,7 +336,7 @@ Editor.prototype = {
                 href: 'javascript:void(0);',
                 text: this.lang.close,
                 click: $.proxy(function(e){
-                    this.destroy();
+                    this.$box.find('.editor').destroyEditor();
                 }, this)
             })));
         }
@@ -428,8 +427,9 @@ Editor.prototype = {
                                         .attr('contenteditable', false)
                                         .html(html)
                                         .show());
+
         this.$box.remove();
-        this.$box = null;
+        this.$creator.removeData('editor');
     },
 
     getCode: function(){
