@@ -263,7 +263,7 @@ Editor.prototype = {
 
 
         this.$box = $('<div/>', {
-            class: this.opts.prefix + this.opts.cssClass.editorBox
+            class: this.opts.prefix + this.opts.cssClass.editorBox + ' ' + this.opts.prefix + this.opts.lang
         });
 
         this.isTextarea = true;
