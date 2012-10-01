@@ -79,7 +79,7 @@ jQuery.fn.editor = function(opts){
 };
 jQuery.fn.destroyEditor = function(){
     this.data('editor').destroy();
-    this.removeData('redactor');
+    this.removeData('editor');
 };
 jQuery.fn.getCode = function(){
     return this.data('editor').getCode();
@@ -122,9 +122,10 @@ var Editor = function(editorElem, opts){
         buttons: ['viewHTML', 
                     '|', 'formatting',
                     '|', 'bold', 'italic', 'underline', 'strikethrough', 
-                    '|', 'unorderedList', 'orderedList',
                     '|', 'link', 
+                    '|', 'insertImage',
                     '|', 'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull',
+                    '|', 'unorderedList', 'orderedList',
                     '|', 'insertHorizontalRule'],
         buttonsAdd: [],
         fixedButtonPane: false,
@@ -179,14 +180,6 @@ var Editor = function(editorElem, opts){
                 text: 'S'
             },
 
-            unorderedList: {
-                func: 'insertUnorderedList'
-            },
-            orderedList: {
-                func: 'insertOrderedList'
-            },
-
-
             link: {
                 dropdown: {
                     createLink: {},
@@ -194,10 +187,19 @@ var Editor = function(editorElem, opts){
                 }
             },
 
+            insertImage: {},
+
             justifyLeft: {},
             justifyCenter: {},
             justifyRight: {},
             justifyFull: {},
+
+            unorderedList: {
+                func: 'insertUnorderedList'
+            },
+            orderedList: {
+                func: 'insertOrderedList'
+            },
 
             insertHorizontalRule: {}
         }
@@ -219,10 +221,14 @@ Editor.prototype = {
         this.buildButtonPane();
 
         if(this.opts.fixedButtonPane){
-            this.syncCode();
             this.isFixed = false;
 
             $(window).on('scroll', $.proxy(function(e){
+                if(!this.$box)
+                    return;
+
+                this.syncCode();
+
                 var wScroll = $(window).scrollTop();
                 var offset = this.$box.offset().top;
                 var toFixed = (wScroll - offset > 0) && ((wScroll - offset - parseInt(this.height.replace('px', ''))) < 0);
@@ -235,15 +241,13 @@ Editor.prototype = {
                         width: this.$box.css('width'),
                         zIndex: 10
                     });
-                    this.$editor.css({ marginTop: this.$buttonPane.css('height') });
-                    this.$e.css({ marginTop: this.$buttonPane.css('height') });
+                    $(this.$editor, this.$e).css({ marginTop: this.$buttonPane.css('height') });
                 } else if(this.isFixed && !toFixed) {
                     this.isFixed = false;
                     this.$buttonPane.css({
                         position: 'relative'
                     });
-                    this.$editor.css({ marginTop: 0 });
-                    this.$e.css({ marginTop: 0 });
+                    $(this.$editor, this.$e).css({ marginTop: 0 });
                 }
             }, this));
         }
@@ -293,6 +297,11 @@ Editor.prototype = {
                     .attr('contenteditable', true)
                     .attr('dir', this.opts.dir)
                     .html(html);
+
+        var that = this;
+        this.$editor.on('dblclick', 'img', function(){
+            $(this).attr('src', that.getUrl($(this).attr('src')));
+        });
     },
 
     buildTextarea: function(){
@@ -345,6 +354,9 @@ Editor.prototype = {
             text: btnDef.text || btnDef.title || this.lang[name] || name,
             title: btnDef.title || btnDef.text || this.lang[name] || name,
             click: $.proxy(function(e){
+                if(this.$buttonPane.hasClass(this.opts.prefix + 'disable') && name != 'viewHTML')
+                    return false;
+                
                 this.execCommand((btnDef.dropdown ? 'dropdown' : '') || btnDef.func || name,
                                  btnDef.param || name);
                 e.stopPropagation();
@@ -386,6 +398,7 @@ Editor.prototype = {
         this.syncCode();
         this.$editor.toggle();
         this.$e.toggle();
+        this.$buttonPane.toggleClass(this.opts.prefix + 'disable');
     },
 
     dropdown: function(name){
@@ -416,6 +429,7 @@ Editor.prototype = {
                                         .html(html)
                                         .show());
         this.$box.remove();
+        this.$box = null;
     },
 
     getCode: function(){
@@ -434,7 +448,30 @@ Editor.prototype = {
     },
 
     createLink: function(){
-        this.execCommand('createlink', prompt("URL : ", "http:\/\/"));
+        var url = this.getUrl();
+        if(url) document.execCommand('createlink', false, url);
+        this.syncCode();
+    },
+    formatBlock: function(param){
+        if($.browser.msie)
+            param = '<' + param + '>';
+
+        document.execCommand('formatBlock', false, param);
+        this.syncCode();
+    },
+    insertImage: function(){
+        var url = this.getUrl();
+        if(url) document.execCommand('insertImage', false, url);
+        this.syncCode();
+    },
+
+    getUrl: function(inputUrl){
+        var url = "http://";
+        do {
+            url = prompt("URL : ", inputUrl ? inputUrl : "http://");
+        } while(url == "http://");
+
+        return url ? url : false;
     },
 
     execCommand: function(cmd, param){
@@ -448,12 +485,10 @@ Editor.prototype = {
                 cmd(param);
             } catch(e){
                 document.execCommand(cmd, false, param);
-                this.syncCode();
                 this.$editor.focus();
             }
         }
-
-        return false;
+        this.syncCode();
     },
 
 

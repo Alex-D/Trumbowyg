@@ -13,7 +13,7 @@ body {
 .editor-box {
 	position: relative;
 	border: 1px solid #999;
-	width: 700px;
+	width: 750px;
 	min-height: 300px;
 	margin: 17px auto;
 }
@@ -24,6 +24,7 @@ body {
 	min-height: 300px;
 	width: 96%;
 	border-style: none;
+	resize: none;
 }
 
 .editor-button-pane {
@@ -47,9 +48,17 @@ body {
 	display: block;
 	text-decoration: none;
 }
-.editor-button-pane li a:hover,
-.editor-button-pane li a:focus {
+.editor-button-pane:not(.editor-disable) li a:hover,
+.editor-button-pane:not(.editor-disable) li a:focus,
+.editor-button-pane li a.editor-viewHTML-button:hover,
+.editor-button-pane li a.editor-viewHTML-button:focus,
+.editor-button-pane li.editor-close a:hover,
+.editor-button-pane li.editor-close a:focus {
 	background: #DDD;
+}
+.editor-button-pane.editor-disable li:not(.editor-close) a:not(.editor-viewHTML-button) {
+	opacity: .2;
+	cursor: default;
 }
 .editor-button-pane li.editor-separator {
 	width: 1px;
