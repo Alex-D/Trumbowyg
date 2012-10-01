@@ -7,28 +7,37 @@
     <body>
         <h1>Example of use</h1>
         <form action="#">
-            <textarea id="form-content" class="editor" cols="30" rows="10">
-                <h1>Ceci est un test</h1>
-                <p>
-                    Blabla lorem ipsum dolor at simet
-                </p>
-            </textarea>
             <div class="editor">
                 <h2>Hello, je n'ai pas encore de nom pour mon WYSIWYG</h2>
                 <p>
                     Mon WYSIWYG avance plutôt bien mais je n'ai pas encore de nom à lui donner.
                     Si vous avez des idées, n'hésitez pas. <br>
                     Ce WYSIWYG est voué à devenir open source, très léger et simple d'utilisation.
-                    Le but est  de sortir un code propre.
+                    Le but est de sortir un code propre. <br>
+                    Un design va être apporté à ce petit plugin, pour qu'il soit facilement intégrable
+                    dans à peu près n'importe quel projet.
                 </p>
             </div>
+            <textarea id="form-content" class="editor" cols="30" rows="10">
+                <h1>Ceci est un test</h1>
+                <p>
+                    Vous pouvez notez que le plugin peut s'appliquer aussi bien à un
+                    textarea (logique donc) ou <b>à tout autre élément</b> dans une page (edit in page)
+                    ce qui est relativement pratique ! <br>
+                    <br>
+                    Si vous scrollez, vous pourrez voir l'utilité du paramètre "fixedButtonPane" qui permet tout simplement
+                    d'avoir toujours visible la barre d'outils même lorsque l'on scroll !
+                </p>
+            </textarea>
         </form>
         <script src="js/jquery-1.8.2.min.js"></script>
         <script src="js/editor.js"></script>
         <script>
             $.editor.langs.fr.formatting = '¶';
             var editor = $('.editor').editor({
-                lang: 'fr'
+                lang: 'fr',
+                closable: true,
+                fixedButtonPane: true
             });
         </script>
     </body>
