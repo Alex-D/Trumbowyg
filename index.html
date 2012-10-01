@@ -6,6 +6,12 @@
     </head>
     <body>
         <h1>Example of use</h1>
+
+        <p>
+            Vous pouvez détruire un éditeur en cliquant sur « Fermer » en haut à droite de celui-ci. <br>
+            Pour ré-ouvrir un éditeur, double-cliquez sur le texte.
+        </p>
+
         <form action="#">
             <div class="editor">
                 <h2>Hello, je n'ai pas encore de nom pour mon WYSIWYG</h2>
@@ -34,10 +40,18 @@
         <script src="js/editor.js"></script>
         <script>
             $.editor.langs.fr.formatting = '¶';
-            var editor = $('.editor').editor({
+            $('.editor').editor({
                 lang: 'fr',
                 closable: true,
                 fixedButtonPane: true
+            });
+
+            $('.editor').on('dblclick', function(e){
+                $('.editor').editor({
+                    lang: 'fr',
+                    closable: true,
+                    fixedButtonPane: true
+                });
             });
         </script>
     </body>
