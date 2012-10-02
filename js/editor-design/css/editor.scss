@@ -1,5 +1,6 @@
 @import "compass";
 
+
 html, body {
 	min-height: 100%;
 }
@@ -35,7 +36,7 @@ body {
 	line-height: 35px;
 	height: 35px;
 	background: #CCC;
-	background-image: linear-gradient(#F2F2F2, #CCC);
+	@include background(linear-gradient(#F2F2F2, #CCC));
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
@@ -92,7 +93,7 @@ body {
 }
 .editor-dropdown a:hover,
 .editor-dropdown a:focus {
-	background: #DDD;
+	background: #DDD; 
 }
 
 .editor-button-pane .editor-close {
@@ -100,18 +101,19 @@ body {
 }
 
 
+
 /**
  *	Icons of button pane
  */
 @media screen and (-webkit-max-device-pixel-ratio: 1.5), only screen and (-o-max-device-pixel-ratio: 3/2), only screen and (max--moz-device-pixel-ratio: 1.5), only screen and (max-device-pixel-ratio: 1.5){
 	.editor-button-pane li a {
-		background-image: url(icons.png);
+		background-image: url(images/icons.png);
 		background-size: auto 75%;
 	}
 }
 @media screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5){
 	.editor-button-pane li a {
-		background-image: url(icons@2x.png);
+		background-image: url(images/icons@2x.png);
 		background-size: 66.67%;
 	}
 }

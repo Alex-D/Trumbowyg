@@ -1,1 +1,177 @@
-html,body{min-height:100%}body{width:960px;margin:0 auto;padding:25px 0;border:1px solid #999;border-top:none;border-bottom:none}.editor-box{position:relative;border:1px solid #999;width:750px;min-height:300px;margin:17px auto}.editor-editor,.editor-textarea{position:relative;padding:2%;min-height:300px;width:96%;border-style:none;resize:none}.editor-button-pane{position:relative;width:100%;line-height:35px;height:35px;background:#CCC;background-image:linear-gradient(#f2f2f2,#cccccc);margin:0;padding:0;list-style-type:none}.editor-button-pane li{float:left;height:100%;text-align:center}.editor-button-pane li a{display:block;text-indent:-9999px;width:25px;height:100%;overflow:hidden;margin:0 3px}.editor-button-pane:not(.editor-disable) li a:hover,.editor-button-pane:not(.editor-disable) li a:focus,.editor-button-pane li a.editor-viewHTML-button:hover,.editor-button-pane li a.editor-viewHTML-button:focus,.editor-button-pane li.editor-close a:hover,.editor-button-pane li.editor-close a:focus{background-color:#CCC}.editor-button-pane.editor-disable li:not(.editor-close) a:not(.editor-viewHTML-button){opacity:.2;cursor:default}.editor-button-pane li.editor-separator{width:1px;background:#999;border-right:1px solid #CCC;margin:0 5px}.editor-button-pane li a.editor-bold-button{font-weight:bold}.editor-button-pane li a.editor-italic-button{font-style:italic}.editor-button-pane li a.editor-underline-button{text-decoration:underline}.editor-button-pane li a.editor-strikethrough-button{text-decoration:line-through}.editor-dropdown{position:absolute;width:180px}.editor-dropdown a{display:block;width:200px;height:35px;line-height:35px;text-decoration:none;background:#CCC;padding:0 7px}.editor-dropdown a:hover,.editor-dropdown a:focus{background:#DDD}.editor-button-pane .editor-close{float:right}@media screen and (-webkit-max-device-pixel-ratio: 1.5), only screen and (-o-max-device-pixel-ratio: 3 / 2), only screen and (max--moz-device-pixel-ratio: 1.5), only screen and (max-device-pixel-ratio: 1.5){.editor-button-pane li a{background-image:url(images/icons.png);background-size:auto 75%}}@media screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3 / 2), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5){.editor-button-pane li a{background-image:url(images/icons@2x.png);background-size:66.67%}}@media screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2){.editor-button-pane li a{background-size:50%}}.editor-button-pane li a.editor-viewHTML-button{background-position:0 0}.editor-button-pane li a.editor-formatting-button{background-position:-25px 0}.editor-button-pane li a.editor-bold-button{background-position:-64px 0}.editor-button-pane li a.editor-italic-button{background-position:-128px 0}.editor-button-pane li a.editor-underline-button{background-position:-160px 0}.editor-button-pane li a.editor-strikethrough-button{background-position:-224px 0}.editor-fr .editor-button-pane li a.editor-bold-button{background-position:-96px 0}.editor-fr .editor-button-pane li a.editor-underline-button{background-position:-192px 0}.editor-fr .editor-button-pane li a.editor-strikethrough-button{background-position:-256px 0}.editor-button-pane li a.editor-link-button{background-position:-288px 0}.editor-button-pane li a.editor-insertImage-button{background-position:-320px 0}.editor-button-pane li a.editor-justifyLeft-button{background-position:-384px 0}.editor-button-pane li a.editor-justifyCenter-button{background-position:-416px 0}.editor-button-pane li a.editor-justifyRight-button{background-position:-448px 0}.editor-button-pane li a.editor-justifyFull-button{background-position:-480px 0}.editor-button-pane li a.editor-unorderedList-button{background-position:-512px 0}.editor-button-pane li a.editor-orderedList-button{background-position:-544px 0}.editor-button-pane li a.editor-insertHorizontalRule-button{background-position:-576px 0}.editor-button-pane li.editor-close a{background-position:-608px 0}
+html, body {
+  min-height: 100%; }
+
+body {
+  width: 960px;
+  margin: 0 auto;
+  padding: 25px 0;
+  border: 1px solid #999;
+  border-top: none;
+  border-bottom: none; }
+
+.editor-box {
+  position: relative;
+  border: 1px solid #999;
+  width: 750px;
+  min-height: 300px;
+  margin: 17px auto; }
+
+.editor-editor,
+.editor-textarea {
+  position: relative;
+  padding: 2%;
+  min-height: 300px;
+  width: 96%;
+  border-style: none;
+  resize: none; }
+
+.editor-button-pane {
+  position: relative;
+  width: 100%;
+  line-height: 35px;
+  height: 35px;
+  background: #CCC;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f2f2f2), color-stop(100%, #cccccc));
+  background: -webkit-linear-gradient(#f2f2f2, #cccccc);
+  background: -moz-linear-gradient(#f2f2f2, #cccccc);
+  background: -o-linear-gradient(#f2f2f2, #cccccc);
+  background: linear-gradient(#f2f2f2, #cccccc);
+  margin: 0;
+  padding: 0;
+  list-style-type: none; }
+
+.editor-button-pane li {
+  float: left;
+  height: 100%;
+  text-align: center; }
+
+.editor-button-pane li a {
+  display: block;
+  text-indent: -9999px;
+  width: 25px;
+  height: 100%;
+  overflow: hidden;
+  margin: 0 3px; }
+
+.editor-button-pane:not(.editor-disable) li a:hover,
+.editor-button-pane:not(.editor-disable) li a:focus,
+.editor-button-pane li a.editor-viewHTML-button:hover,
+.editor-button-pane li a.editor-viewHTML-button:focus,
+.editor-button-pane li.editor-close a:hover,
+.editor-button-pane li.editor-close a:focus {
+  background-color: #CCC; }
+
+.editor-button-pane.editor-disable li:not(.editor-close) a:not(.editor-viewHTML-button) {
+  opacity: .2;
+  cursor: default; }
+
+.editor-button-pane li.editor-separator {
+  width: 1px;
+  background: #999;
+  border-right: 1px solid #CCC;
+  margin: 0 5px; }
+
+.editor-button-pane li a.editor-bold-button {
+  font-weight: bold; }
+
+.editor-button-pane li a.editor-italic-button {
+  font-style: italic; }
+
+.editor-button-pane li a.editor-underline-button {
+  text-decoration: underline; }
+
+.editor-button-pane li a.editor-strikethrough-button {
+  text-decoration: line-through; }
+
+.editor-dropdown {
+  position: absolute;
+  width: 180px; }
+
+.editor-dropdown a {
+  display: block;
+  width: 200px;
+  height: 35px;
+  line-height: 35px;
+  text-decoration: none;
+  background: #CCC;
+  padding: 0 7px; }
+
+.editor-dropdown a:hover,
+.editor-dropdown a:focus {
+  background: #DDD; }
+
+.editor-button-pane .editor-close {
+  float: right; }
+
+/**
+ *	Icons of button pane
+ */
+@media screen and (-webkit-max-device-pixel-ratio: 1.5), only screen and (-o-max-device-pixel-ratio: 3 / 2), only screen and (max--moz-device-pixel-ratio: 1.5), only screen and (max-device-pixel-ratio: 1.5) {
+  .editor-button-pane li a {
+    background-image: url(images/icons.png);
+    background-size: auto 75%; } }
+@media screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3 / 2), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
+  .editor-button-pane li a {
+    background-image: url(images/icons@2x.png);
+    background-size: 66.67%; } }
+@media screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+  .editor-button-pane li a {
+    background-size: 50%; } }
+.editor-button-pane li a.editor-viewHTML-button {
+  background-position: 0 0; }
+
+.editor-button-pane li a.editor-formatting-button {
+  background-position: -25px 0; }
+
+/* English and others */
+.editor-button-pane li a.editor-bold-button {
+  background-position: -64px 0; }
+
+.editor-button-pane li a.editor-italic-button {
+  background-position: -128px 0; }
+
+.editor-button-pane li a.editor-underline-button {
+  background-position: -160px 0; }
+
+.editor-button-pane li a.editor-strikethrough-button {
+  background-position: -224px 0; }
+
+/* French */
+.editor-fr .editor-button-pane li a.editor-bold-button {
+  background-position: -96px 0; }
+
+.editor-fr .editor-button-pane li a.editor-underline-button {
+  background-position: -192px 0; }
+
+.editor-fr .editor-button-pane li a.editor-strikethrough-button {
+  background-position: -256px 0; }
+
+.editor-button-pane li a.editor-link-button {
+  background-position: -288px 0; }
+
+.editor-button-pane li a.editor-insertImage-button {
+  background-position: -320px 0; }
+
+.editor-button-pane li a.editor-justifyLeft-button {
+  background-position: -384px 0; }
+
+.editor-button-pane li a.editor-justifyCenter-button {
+  background-position: -416px 0; }
+
+.editor-button-pane li a.editor-justifyRight-button {
+  background-position: -448px 0; }
+
+.editor-button-pane li a.editor-justifyFull-button {
+  background-position: -480px 0; }
+
+.editor-button-pane li a.editor-unorderedList-button {
+  background-position: -512px 0; }
+
+.editor-button-pane li a.editor-orderedList-button {
+  background-position: -544px 0; }
+
+.editor-button-pane li a.editor-insertHorizontalRule-button {
+  background-position: -576px 0; }
+
+.editor-button-pane li.editor-close a {
+  background-position: -608px 0; }
