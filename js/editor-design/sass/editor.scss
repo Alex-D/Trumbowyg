@@ -1,3 +1,5 @@
+@import "compass";
+
 html, body {
 	min-height: 100%;
 }
@@ -33,7 +35,7 @@ body {
 	line-height: 35px;
 	height: 35px;
 	background: #CCC;
-	background-image: -webkit-linear-gradient(#F2F2F2, #CCC);
+	background-image: linear-gradient(#F2F2F2, #CCC);
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
@@ -46,7 +48,7 @@ body {
 .editor-button-pane li a {
 	display: block;
 	text-indent: -9999px;
-	width: 32px;
+	width: 25px;
 	height: 100%;
 	overflow: hidden;
 	margin: 0 3px;
@@ -104,6 +106,7 @@ body {
 @media screen and (-webkit-max-device-pixel-ratio: 1.5), only screen and (-o-max-device-pixel-ratio: 3/2), only screen and (max--moz-device-pixel-ratio: 1.5), only screen and (max-device-pixel-ratio: 1.5){
 	.editor-button-pane li a {
 		background-image: url(icons.png);
+		background-size: auto 75%;
 	}
 }
 @media screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5){
@@ -120,7 +123,7 @@ body {
 
 .editor-button-pane li a.editor-viewHTML-button { background-position: 0 0; }
 
-.editor-button-pane li a.editor-formatting-button { background-position: -32px 0; }
+.editor-button-pane li a.editor-formatting-button { background-position: -25px 0; }
 
 /* English and others */
 .editor-button-pane li a.editor-bold-button { background-position: -64px 0; }

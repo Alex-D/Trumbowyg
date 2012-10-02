@@ -115,6 +115,8 @@ Backup*/
 UpgradeLog*.XML
 
 
+.sass-cache/
+*.bat
 
 ############
 ## Windows
