@@ -107,13 +107,12 @@ body {
  */
 @media screen and (-webkit-max-device-pixel-ratio: 1.5), only screen and (-o-max-device-pixel-ratio: 3/2), only screen and (max--moz-device-pixel-ratio: 1.5), only screen and (max-device-pixel-ratio: 1.5){
 	.editor-button-pane li a {
-		background-image: url(./images/icons.png);
-		background-size: auto 75%;
+		background-image: url(../images/icons.png);
 	}
 }
 @media screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5){
 	.editor-button-pane li a {
-		background-image: url(./images/icons@2x.png);
+		background-image: url(../images/icons@2x.png);
 		background-size: 66.67%;
 	}
 }
