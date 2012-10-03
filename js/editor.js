@@ -403,6 +403,8 @@ Editor.prototype = {
     },
 
     dropdown: function(name){
+        $('body').trigger('click');
+
         var dropdown = this.$box.find('.'+name+'-'+this.opts.prefix + this.opts.cssClass.dropdown);
         var btn = this.$buttonPane.find('.'+this.opts.prefix+name+'-button');
 
@@ -413,14 +415,14 @@ Editor.prototype = {
             left: (btn.offset().left - this.$buttonPane.offset().left)+'px'
         }).toggle();
 
+        $(window).trigger('scroll');
+
         $('body').on('click', $.proxy(function(){
             dropdown.hide();
             console.log('click');
             btn.removeClass(this.opts.prefix + 'active');
             $('body').off('click');
         }, this));
-
-        $(window).trigger('scroll');
     },
 
 

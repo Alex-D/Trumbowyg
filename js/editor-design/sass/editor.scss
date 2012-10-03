@@ -78,8 +78,8 @@ html, body {
 	width: 1px;
 	background: #CCC;
 	border-right: 1px solid #DEDEDE;
-	margin: 3px 5px;
-	height: 29px;
+	margin: 0 5px;
+	height: 35px;
 }
 
 .editor-dropdown {
@@ -90,12 +90,12 @@ html, body {
 }
 .editor-dropdown a {
 	display: block;
-	width: 186px;
+	width: 172px;
 	height: 35px;
 	line-height: 35px;
 	text-decoration: none;
 	background: #DDD;
-	padding: 0 7px;
+	padding: 0 14px;
 	color: #333;
 	@include transition;
 
@@ -119,7 +119,7 @@ html, body {
 	width: 25px;
 	height: 25px;
 	overflow: hidden;
-	margin: 3px;
+	margin: 4px 2px;
 	border: 1px solid transparent;
 
 	&.editor-viewHTML-button { @include icons-sprite('view-html'); }
@@ -144,6 +144,10 @@ html, body {
 	&.editor-orderedList-button { @include icons-sprite('ordered-list'); }
 
 	&.editor-insertHorizontalRule-button { @include icons-sprite('horizontale-rule'); }
+}
+.editor-button-pane li {
+	&:first-child a { margin-left: 6px; }
+	&:last-child a { margin-right: 6px; }
 }
 
 /* French */

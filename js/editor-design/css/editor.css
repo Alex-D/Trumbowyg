@@ -73,8 +73,8 @@ html, body {
   width: 1px;
   background: #CCC;
   border-right: 1px solid #DEDEDE;
-  margin: 3px 5px;
-  height: 29px; }
+  margin: 0 5px;
+  height: 35px; }
 
 .editor-dropdown {
   position: absolute;
@@ -86,12 +86,12 @@ html, body {
 
 .editor-dropdown a {
   display: block;
-  width: 186px;
+  width: 172px;
   height: 35px;
   line-height: 35px;
   text-decoration: none;
   background: #DDD;
-  padding: 0 7px;
+  padding: 0 14px;
   color: #333;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
@@ -110,7 +110,7 @@ html, body {
   width: 25px;
   height: 25px;
   overflow: hidden;
-  margin: 3px;
+  margin: 4px 2px;
   border: 1px solid transparent;
   /* English and others */ }
   .editor-button-pane li a.editor-viewHTML-button {
@@ -143,6 +143,11 @@ html, body {
     background-position: 0 -250px; }
   .editor-button-pane li a.editor-insertHorizontalRule-button {
     background-position: 0 -500px; }
+
+.editor-button-pane li:first-child a {
+  margin-left: 6px; }
+.editor-button-pane li:last-child a {
+  margin-right: 6px; }
 
 /* French */
 .editor-fr .editor-button-pane li a.editor-bold-button {
