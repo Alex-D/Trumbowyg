@@ -1,0 +1,156 @@
+@import "compass";
+@import "icons/*.png";
+
+$default-transition-duration: .2s;
+
+
+html, body {
+	min-height: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: "Trebuchet MS", Verdana, sans-serif, serif;
+}
+#main {
+	width: 960px;
+	margin: 0 auto;
+	padding: 25px 0;
+	border: 1px solid #999;
+	border-top: none;
+	border-bottom: none;
+}
+
+.editor-box,
+.editor {
+	display: block;
+	position: relative;
+	border: 1px solid #CCC;
+	width: 750px;
+	min-height: 300px;
+	margin: 17px auto;
+}
+.editor-box .editor {
+	margin: 0 auto;
+}
+.editor-editor,
+.editor-textarea {
+	position: relative;
+	padding: 1% 2%;
+	min-height: 300px;
+	width: 96%;
+	border-style: none;
+	resize: none;
+	outline: none;
+}
+
+.editor-button-pane {
+	position: relative;
+	width: 100%;
+	line-height: 35px;
+	height: 35px;
+	background: #CCC;
+	@include background(linear-gradient(#F2F2F2, #CCC));
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+.editor-button-pane li {
+	float: left;
+	height: 100%;
+	text-align: center;
+}
+.editor-button-pane {
+	&:not(.editor-disable) li a:hover,
+	&:not(.editor-disable) li a:focus,
+	&:not(.editor-disable) li a.editor-active,
+	li a.editor-viewHTML-button:hover,
+	li a.editor-viewHTML-button:focus,
+	li.editor-close a:hover,
+	li.editor-close a:focus {
+		background-color: #CCC;
+		border-color: #AAA;
+	}
+}
+.editor-button-pane.editor-disable li:not(.editor-close) a:not(.editor-viewHTML-button) {
+	opacity: .2;
+	cursor: default;
+}
+.editor-button-pane li.editor-separator {
+	width: 1px;
+	background: #CCC;
+	border-right: 1px solid #DEDEDE;
+	margin: 3px 5px;
+	height: 29px;
+}
+
+.editor-dropdown {
+	position: absolute;
+	width: 200px;
+	border: 1px solid #CCC;
+	@include box-shadow(#777 0 2px 5px);
+}
+.editor-dropdown a {
+	display: block;
+	width: 186px;
+	height: 35px;
+	line-height: 35px;
+	text-decoration: none;
+	background: #DDD;
+	padding: 0 7px;
+	color: #333;
+	@include transition;
+
+	&:hover,
+	&:focus {
+		background: #EEE;
+		text-indent: 7px;
+	}
+}
+
+.editor-button-pane .editor-close {
+	float: right;
+}
+
+
+
+
+.editor-button-pane li a {
+	display: block;
+	text-indent: -9999px;
+	width: 25px;
+	height: 25px;
+	overflow: hidden;
+	margin: 3px;
+	border: 1px solid transparent;
+
+	&.editor-viewHTML-button { @include icons-sprite('view-html'); }
+	&.editor-formatting-button { @include icons-sprite('formatting'); }
+
+	/* English and others */
+	&.editor-bold-button { @include icons-sprite('bold'); }
+	&.editor-italic-button { @include icons-sprite('italic'); }
+	&.editor-underline-button { @include icons-sprite('underline'); }
+	&.editor-strikethrough-button { @include icons-sprite('strikethrough'); }
+
+	&.editor-link-button { @include icons-sprite('link'); }
+
+	&.editor-insertImage-button { @include icons-sprite('image'); }
+
+	&.editor-justifyLeft-button { @include icons-sprite('left-align'); }
+	&.editor-justifyCenter-button { @include icons-sprite('center-align'); }
+	&.editor-justifyRight-button { @include icons-sprite('right-align'); }
+	&.editor-justifyFull-button { @include icons-sprite('justify-align'); }
+
+	&.editor-unorderedList-button { @include icons-sprite('unordered-list'); }
+	&.editor-orderedList-button { @include icons-sprite('ordered-list'); }
+
+	&.editor-insertHorizontalRule-button { @include icons-sprite('horizontale-rule'); }
+}
+
+/* French */
+.editor-fr .editor-button-pane li a {
+	&.editor-bold-button { @include icons-sprite('gras'); }
+	&.editor-underline-button { @include icons-sprite('souligne'); }
+	&.editor-strikethrough-button { @include icons-sprite('barre'); }
+}
+
+.editor-button-pane li.editor-close a { @include icons-sprite('close'); }

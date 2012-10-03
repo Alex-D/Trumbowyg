@@ -93,7 +93,7 @@ var Editor = function(editorElem, opts){
     if(typeof opts !== 'undefined' && typeof opts.lang !== 'undefined' && typeof $.editor.langs[opts.lang] === 'undefined')
         this.lang = $.editor.langs['en'];
     else
-        this.lang = $.extend(true, $.editor.langs['en'], $.editor.langs[opts.lang]);
+        this.lang = $.extend(true, {}, $.editor.langs['en'], $.editor.langs[opts.lang]);
 
     // Defaults Options
     this.opts = $.extend(true, {
@@ -166,18 +166,10 @@ var Editor = function(editorElem, opts){
                 }
             },
 
-            bold: {
-                text: 'B'
-            },
-            italic: {
-                text: 'I'
-            },
-            underline: {
-                text: 'U'
-            },
-            strikethrough: {
-                text: 'S'
-            },
+            bold: {},
+            italic: {},
+            underline: {},
+            strikethrough: {},
 
             link: {
                 dropdown: {
@@ -229,24 +221,34 @@ Editor.prototype = {
                 this.syncCode();
 
                 var wScroll = $(window).scrollTop();
-                var offset = this.$box.offset().top;
+                var offset = this.$box.offset().top + 2;
                 var toFixed = (wScroll - offset > 0) && ((wScroll - offset - parseInt(this.height.replace('px', ''))) < 0);
 
-                if(!this.isFixed && toFixed){
-                    this.isFixed = true;
-                    this.$buttonPane.css({
-                        position: 'fixed',
-                        top: 0,
-                        width: this.$box.css('width'),
-                        zIndex: 10
+                if(toFixed){
+                    if(!this.isFixed){
+                        this.isFixed = true;
+                        this.$buttonPane.css({
+                            position: 'fixed',
+                            top: 0,
+                            width: this.$box.css('width'),
+                            zIndex: 10
+                        });
+                        $(this.$editor, this.$e).css({ marginTop: this.$buttonPane.css('height') });
+                    }
+
+                    $('.' + this.opts.prefix + this.opts.cssClass.dropdown + ':visible').css({
+                        top: parseInt(this.$buttonPane.css('height').replace('px', '')) + (wScroll - offset) + 'px',
+                        zIndex: 15
                     });
-                    $(this.$editor, this.$e).css({ marginTop: this.$buttonPane.css('height') });
-                } else if(this.isFixed && !toFixed) {
+                } else if(this.isFixed) {
                     this.isFixed = false;
                     this.$buttonPane.css({
                         position: 'relative'
                     });
                     $(this.$editor, this.$e).css({ marginTop: 0 });
+                    $('.' + this.opts.prefix + this.opts.cssClass.dropdown + ':visible').css({
+                        top: this.$buttonPane.css('height')
+                    });
                 }
             }, this));
         }
@@ -404,14 +406,21 @@ Editor.prototype = {
         var dropdown = this.$box.find('.'+name+'-'+this.opts.prefix + this.opts.cssClass.dropdown);
         var btn = this.$buttonPane.find('.'+this.opts.prefix+name+'-button');
 
+        btn.toggleClass(this.opts.prefix + 'active');
+
         dropdown.css({
             top: (this.$buttonPane.css('height')),
             left: (btn.offset().left - this.$buttonPane.offset().left)+'px'
         }).toggle();
-        $('body').on('click', function(){
+
+        $('body').on('click', $.proxy(function(){
             dropdown.hide();
+            console.log('click');
+            btn.removeClass(this.opts.prefix + 'active');
             $('body').off('click');
-        });
+        }, this));
+
+        $(window).trigger('scroll');
     },
 
 
@@ -420,7 +429,10 @@ Editor.prototype = {
         var html = this.getCode();
 
         if(this.isTextarea)
-            this.$box.after(this.$e.css({height: this.height}).val(html).show());
+            this.$box.after(this.$e.css({height: this.height})
+                                   .val(html)
+                                   .removeClass(this.opts.prefix + this.opts.cssClass.editorTextarea)
+                                   .show());
         else 
             this.$box.after(this.$editor.css({height: this.height})
                                         .removeClass(this.opts.prefix + this.opts.cssClass.editorEditor)
