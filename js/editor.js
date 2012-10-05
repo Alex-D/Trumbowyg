@@ -155,7 +155,7 @@
                         p: {},
                         blockquote: {},
                         h1: {
-                            title: this.lang.header + ' 1',
+                            title: this.lang.header + ' 1'
                         },
                         h2: {
                             title: this.lang.header + ' 2'
@@ -268,7 +268,7 @@
 
 
             this.$box = $('<div/>', {
-                class: this.opts.prefix + this.opts.cssClass.editorBox + ' ' + this.opts.prefix + this.opts.lang
+                'class': this.opts.prefix + this.opts.cssClass.editorBox + ' ' + this.opts.prefix + this.opts.lang
             });
 
             this.isTextarea = true;
@@ -319,7 +319,7 @@
             if(this.opts.buttons === false) return;
 
             this.$buttonPane = $('<ul/>', {
-                class: this.opts.prefix + this.opts.cssClass.buttonPane
+                'class': this.opts.prefix + this.opts.cssClass.buttonPane
             });
 
             $.each(this.opts.buttons.concat(this.opts.buttonsAdd), $.proxy(function(i, btn){
@@ -337,7 +337,7 @@
 
             if(this.opts.closable){
                 this.$buttonPane.append($('<li/>', {
-                    class: this.opts.prefix + this.opts.cssClass.close,
+                    'class': this.opts.prefix + this.opts.cssClass.close,
                 }).append($('<a/>', {
                     href: 'javascript:void(null);',
                     text: this.lang.close,
@@ -355,7 +355,7 @@
             var btnDef = this.opts.buttonsDef[name];
             var btn = $('<a/>', {
                 href: 'javascript:void(null);',
-                class: this.opts.prefix + name +'-button',
+                'class': this.opts.prefix + name +'-button',
                 text: btnDef.text || btnDef.title || this.lang[name] || name,
                 title: btnDef.title || btnDef.text || this.lang[name] || name,
                 mousedown: $.proxy(function(e){
@@ -380,7 +380,7 @@
                 var cssClass = this.opts.prefix + this.opts.cssClass.dropdown;
 
                 var dropdown = $('<div/>', {
-                    class: name + '-' + cssClass + ' ' + cssClass
+                    'class': name + '-' + cssClass + ' ' + cssClass
                 });
                 dropdown.data('visible', false);
                 for(var subName in btnDef.dropdown){
