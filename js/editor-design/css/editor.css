@@ -1,6 +1,9 @@
 .icons-sprite, .editor-button-pane li a.editor-viewHTML-button, .editor-button-pane li a.editor-formatting-button, .editor-button-pane li a.editor-bold-button, .editor-button-pane li a.editor-italic-button, .editor-button-pane li a.editor-underline-button, .editor-button-pane li a.editor-strikethrough-button, .editor-button-pane li a.editor-link-button, .editor-button-pane li a.editor-insertImage-button, .editor-button-pane li a.editor-justifyLeft-button, .editor-button-pane li a.editor-justifyCenter-button, .editor-button-pane li a.editor-justifyRight-button, .editor-button-pane li a.editor-justifyFull-button, .editor-button-pane li a.editor-unorderedList-button, .editor-button-pane li a.editor-orderedList-button, .editor-button-pane li a.editor-insertHorizontalRule-button, .editor-fr .editor-button-pane li a.editor-bold-button, .editor-fr .editor-button-pane li a.editor-underline-button, .editor-fr .editor-button-pane li a.editor-strikethrough-button, .editor-button-pane li.editor-close a {
   background: url('../images/icons-s93e7c06a4e.png') no-repeat; }
 
+.icons-2x-sprite {
+  background: url('../images/icons-2x-s33596169e7.png') no-repeat; }
+
 html, body {
   min-height: 100%;
   margin: 0;
@@ -19,7 +22,7 @@ html, body {
 .editor {
   display: block;
   position: relative;
-  border: 1px solid #CCC;
+  border: 1px solid #DDD;
   width: 750px;
   min-height: 300px;
   margin: 17px auto; }
@@ -62,7 +65,7 @@ html, body {
 .editor-button-pane li a.editor-viewHTML-button:focus,
 .editor-button-pane li.editor-close a:hover,
 .editor-button-pane li.editor-close a:focus {
-  background-color: #CCC;
+  background-color: #DDD;
   border-color: #AAA; }
 
 .editor-button-pane.editor-disable li:not(.editor-close) a:not(.editor-viewHTML-button) {
@@ -71,15 +74,14 @@ html, body {
 
 .editor-button-pane li.editor-separator {
   width: 1px;
-  background: #CCC;
-  border-right: 1px solid #DEDEDE;
+  background: #EEE;
+  /*border-right: 1px solid #EFEFEF;*/
   margin: 0 5px;
   height: 35px; }
 
 .editor-dropdown {
-  position: absolute;
   width: 200px;
-  border: 1px solid #CCC;
+  border: 1px solid #DDD;
   -webkit-box-shadow: #777777 0 2px 5px;
   -moz-box-shadow: #777777 0 2px 5px;
   box-shadow: #777777 0 2px 5px; }
@@ -159,3 +161,49 @@ html, body {
 
 .editor-button-pane li.editor-close a {
   background-position: 0 -300px; }
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 4 / 3), only screen and (min-device-pixel-ratio: 1.3), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+  .editor-button-pane li a {
+    background-size: 50%;
+    /* English and others */ }
+    .editor-button-pane li a.editor-viewHTML-button {
+      background-position: 0 -160px; }
+    .editor-button-pane li a.editor-formatting-button {
+      background-position: 0 -448px; }
+    .editor-button-pane li a.editor-bold-button {
+      background-position: 0 -256px; }
+    .editor-button-pane li a.editor-italic-button {
+      background-position: 0 -384px; }
+    .editor-button-pane li a.editor-underline-button {
+      background-position: 0 -352px; }
+    .editor-button-pane li a.editor-strikethrough-button {
+      background-position: 0 -64px; }
+    .editor-button-pane li a.editor-link-button {
+      background-position: 0 -32px; }
+    .editor-button-pane li a.editor-insertImage-button {
+      background-position: 0 -288px; }
+    .editor-button-pane li a.editor-justifyLeft-button {
+      background-position: 0 -512px; }
+    .editor-button-pane li a.editor-justifyCenter-button {
+      background-position: 0 -544px; }
+    .editor-button-pane li a.editor-justifyRight-button {
+      background-position: 0 -576px; }
+    .editor-button-pane li a.editor-justifyFull-button {
+      background-position: 0 -608px; }
+    .editor-button-pane li a.editor-unorderedList-button {
+      background-position: 0 -480px; }
+    .editor-button-pane li a.editor-orderedList-button {
+      background-position: 0 -320px; }
+    .editor-button-pane li a.editor-insertHorizontalRule-button {
+      background-position: 0 -640px; }
+
+  /* French */
+  .editor-fr .editor-button-pane li a.editor-bold-button {
+    background-position: 0 -128px; }
+  .editor-fr .editor-button-pane li a.editor-underline-button {
+    background-position: 0 -96px; }
+  .editor-fr .editor-button-pane li a.editor-strikethrough-button {
+    background-position: 0 -192px; }
+
+  .editor-button-pane li.editor-close a {
+    background-position: 0 -224px; } }

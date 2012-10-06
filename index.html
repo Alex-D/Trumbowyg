@@ -18,9 +18,13 @@
                     <h2>Hello, je n'ai pas encore de nom pour mon WYSIWYG</h2>
                     <p>
                         Mon WYSIWYG avance plutôt bien mais je n'ai pas encore de nom à lui donner.
-                        Si vous avez des idées, n'hésitez pas. <br>
+                        Si vous avez des idées, n'hésitez pas !
+                    </p>
+                    <p>
                         Ce WYSIWYG est voué à devenir open source, très léger et simple d'utilisation.
-                        Le but est de sortir un code propre. <br>
+                        Le but est de sortir un code propre.
+                    </p>
+                    <p>
                         Un design va être apporté à ce petit plugin, pour qu'il soit facilement intégrable
                         dans à peu près n'importe quel projet.
                     </p>
@@ -44,7 +48,9 @@
             $('.editor:first').editor({
                 lang: 'fr',
                 closable: true,
-                fixedButtonPane: true
+                mobile: true,
+                fixedButtonPane: true,
+                fixedFullWidth: true
             });
 
             $('.editor:last').editor({

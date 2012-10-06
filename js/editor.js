@@ -102,8 +102,12 @@
         this.opts = $.extend(true, {
             lang: 'en',
             dir: 'ltr',
+
             mobile: false,
+            tablet: true,
             closable: false,
+            fixedButtonPane: false,
+            fixedFullWidth: false,
 
             // CSS class prefixed by opts.prefix
             cssClass: {
@@ -119,8 +123,6 @@
 
             convertLink: true,
 
-            allowedTags: ["b", "strong", "span", "a", "p", "i", "br", "hr", "img",
-                            "div", "h1", "h2", "h3", "h4", "h5", "h6"],
             buttons: ['viewHTML', 
                         '|', 'formatting',
                         '|', 'bold', 'italic', 'underline', 'strikethrough', 
@@ -130,7 +132,6 @@
                         '|', 'unorderedList', 'orderedList',
                         '|', 'insertHorizontalRule'],
             buttonsAdd: [],
-            fixedButtonPane: false,
 
             /**
              * When the button is associated to a empty object
@@ -206,12 +207,12 @@
         init: function(){
             this.height = this.$e.css('height');
 
-            if(!this.opts.mobile && this.isMobile()){
+            if(this.isEnabled()){
                 this.buildEditor(true);
                 return;
             }
 
-            this.buildEditor(this.isMobile());
+            this.buildEditor();
             this.buildButtonPane();
 
             if(this.opts.fixedButtonPane){
@@ -227,38 +228,43 @@
                     var offset = this.$box.offset().top + 2;
                     var toFixed = (wScroll - offset > 0) && ((wScroll - offset - parseInt(this.height.replace('px', ''))) < 0);
 
+                    
+                    $('.' + this.opts.prefix + this.opts.cssClass.dropdown, this.$box).css({
+                        position: 'absolute',
+                        top: this.$buttonPane.css('height')
+                    });
+
                     if(toFixed){
                         if(!this.isFixed){
                             this.isFixed = true;
                             this.$buttonPane.css({
                                 position: 'fixed',
                                 top: 0,
-                                width: this.$box.css('width'),
+                                left: (this.opts.fixedFullWidth) ? '0' : 'auto',
+                                width: (this.opts.fixedFullWidth) ? '100%' : this.$box.css('width'),
                                 zIndex: 10
                             });
-                            $(this.$editor, this.$e).css({ marginTop: this.$buttonPane.css('height') });
+                            this.$editor.css({ marginTop: this.$buttonPane.css('height') });
+                            this.$e.css({ marginTop: this.$buttonPane.css('height') });
                         }
 
-                        $('.' + this.opts.prefix + this.opts.cssClass.dropdown + ':visible', this.$box).css({
-                            top: parseInt(this.$buttonPane.css('height').replace('px', '')) + (wScroll - offset) + 'px',
+                        $('.' + this.opts.prefix + this.opts.cssClass.dropdown, this.$box).css({
+                            position: this.opts.fixedFullWidth ? 'fixed' : 'absolute',
+                            top: this.opts.fixedFullWidth ? this.$buttonPane.css('height') : parseInt(this.$buttonPane.css('height').replace('px', '')) + (wScroll - offset) + 'px',
                             zIndex: 15
                         });
                     } else if(this.isFixed) {
                         this.isFixed = false;
-                        this.$buttonPane.css({
-                            position: 'relative'
-                        });
-                        $(this.$editor, this.$e).css({ marginTop: 0 });
-                        $('.' + this.opts.prefix + this.opts.cssClass.dropdown + ':visible', this.$box).css({
-                            top: this.$buttonPane.css('height')
-                        });
+                        this.$buttonPane.css({ position: 'relative' });
+                        this.$editor.css({ marginTop: 0 });
+                        this.$e.css({ marginTop: 0 });
                     }
                 }, this));
             }
         },
 
-        buildEditor: function(mobile){
-            if(mobile === true){
+        buildEditor: function(disable){
+            if(disable === true){
                 if(!this.$e.is('textarea')){
                     var textarea = this.buildTextarea().val(this.$e.val());
                     this.$e.hide().after(textarea);
@@ -337,7 +343,8 @@
 
             if(this.opts.closable){
                 this.$buttonPane.append($('<li/>', {
-                    'class': this.opts.prefix + this.opts.cssClass.close,
+                    'class': this.opts.prefix + this.opts.cssClass.close
+
                 }).append($('<a/>', {
                     href: 'javascript:void(null);',
                     text: this.lang.close,
@@ -428,8 +435,7 @@
                 $btn.addClass(this.opts.prefix + 'active');
 
                 $dropdown.css({
-                    top: (this.$buttonPane.css('height')),
-                    left: ($btn.offset().left - this.$buttonPane.offset().left)+'px'
+                    left: (this.opts.fixedFullWidth && this.isFixed) ? $btn.offset().left+'px' : ($btn.offset().left - this.$buttonPane.offset().left)+'px'
                 }).show();
 
                 $(window).trigger('scroll');
@@ -440,7 +446,6 @@
                     $('body').off('mousedown');
                 }, this));
             } else {
-                console.log('elese');
                 $('body').trigger('mousedown');
             }
         },
@@ -501,7 +506,7 @@
         getUrl: function(inputUrl){
             var url = "http://";
             do {
-                url = prompt("URL : ", inputUrl ? inputUrl : "http://");
+                url = prompt("URL : ", inputUrl ? inputUrl : url);
             } while(url == "http://");
 
             return url ? url : false;
@@ -525,12 +530,13 @@
         },
 
 
-        isMobile: function(tablet){
+        isEnabled: function(){
             var mobile = "iPhone|iPod|Android|BlackBerry|Windows Phone|ZuneWP7";
             var exprTablet = new RegExp("(iPad|webOS|"+mobile+")");
             var exprMobile = new RegExp("("+mobile+")");
 
-            return (tablet === true && exprTablet.test(navigator.userAgent)) || exprMobile.test(navigator.userAgent);
+            return (this.opts.tablet === true && exprTablet.test(navigator.userAgent))
+                    || (this.opts.mobile === true && exprMobile.test(navigator.userAgent));
         }
     };
 
