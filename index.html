@@ -45,21 +45,24 @@
         <script src="js/jquery-1.8.2.min.js"></script>
         <script src="js/editor.js"></script>
         <script>
-            $('.editor:first').editor({
+            $('.editor:first').trumbowyg({
                 lang: 'fr',
                 closable: true,
                 mobile: true,
                 fixedButtonPane: true,
-                fixedFullWidth: true
+                fixedFullWidth: true,
+                semantic: true,
+                resetCss: true,
+                autoAjustHeight: true
             });
 
-            $('.editor:last').editor({
+            $('.editor:last').trumbowyg({
                 closable: true,
                 fixedButtonPane: true
             });
 
             $('.editor').on('dblclick', function(e){
-                $(this).editor({
+                $(this).trumbowyg({
                     lang: 'fr',
                     closable: true,
                     fixedButtonPane: true

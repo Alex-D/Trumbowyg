@@ -1,4 +1,4 @@
-﻿$.editor = {
+﻿$.trumbowyg = {
     langs: {
         en: {
             viewHTML: "View HTML",
@@ -13,6 +13,9 @@
             italic: "Italic",
             strikethrough: "Stroke",
             underline: "Underline",
+
+            strong: "Strong",
+            em: "Emphase",
 
             unorderedList: "Unordered list",
             orderedList: "Ordered list",
@@ -29,6 +32,8 @@
             justifyFull: "Align Justify",
 
             insertHorizontalRule: "Insert horizontal rule",
+
+            fullscreen: "fullscreen",
 
             close: "Close"
         },
@@ -47,6 +52,9 @@
             strikethrough: "Rayé",
             underline: "Souligné",
 
+            strong: "Strong",
+            em: "Emphase",
+
             unorderedList: "Liste à puces",
             orderedList: "Liste ordonnée",
 
@@ -63,6 +71,8 @@
 
             insertHorizontalRule: "Insérer un séparateur horizontal",
 
+            fullscreen: "Plein écran",
+
             close: "Fermer"
         }
     }
@@ -70,33 +80,43 @@
 
 
 (function($){
-    $.fn.editor = function(opts){
+    $.fn.trumbowyg = function(opts){
         return this.each(function(){
             var $that = $(this);
 
-            if(!$that.data('editor'))
-                $that.data('editor', new Editor(this, opts));
+            if(!$that.data('trumbowyg'))
+                $that.data('trumbowyg', new Trumbowyg(this, opts));
         });
     };
-    $.fn.destroyEditor = function(){
-        this.data('editor').destroy();
+    $.fn.destroyTrumbowyg = function(){
+        this.data('trumbowyg').destroy();
     };
     $.fn.getCode = function(){
-        return this.data('editor').getCode();
+        return this.data('trumbowyg').getCode();
     };
 
 
 
-    var Editor = function(editorElem, opts){
+    var Trumbowyg = function(editorElem, opts){
         // jQuery object of the editor
         this.$e = $(editorElem);
         this.$creator = $(editorElem);
 
         // Language management
-        if(typeof opts !== 'undefined' && typeof opts.lang !== 'undefined' && typeof $.editor.langs[opts.lang] === 'undefined')
-            this.lang = $.editor.langs['en'];
+        if(typeof opts !== 'undefined' && typeof opts.lang !== 'undefined' && typeof $.trumbowyg.langs[opts.lang] === 'undefined')
+            this.lang = $.trumbowyg.langs['en'];
         else
-            this.lang = $.extend(true, {}, $.editor.langs['en'], $.editor.langs[opts.lang]);
+            this.lang = $.extend(true, {}, $.trumbowyg.langs['en'], $.trumbowyg.langs[opts.lang]);
+
+        // Read only options
+        this.global = {
+            buttonsGroups: {
+                design : ['bold', 'italic', 'underline', 'strikethrough'],
+                semantic : ['strong', 'em'],
+                justify: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                lists: ['unorderedList', 'orderedList']
+            }
+        };
 
         // Defaults Options
         this.opts = $.extend(true, {
@@ -106,8 +126,12 @@
             mobile: false,
             tablet: true,
             closable: false,
+            fullscreenable: true,
             fixedButtonPane: false,
             fixedFullWidth: false,
+            semantic: false,
+            resetCss: false,
+            autoAjustHeight: false,
 
             // CSS class prefixed by opts.prefix
             cssClass: {
@@ -117,19 +141,22 @@
                 buttonPane: 'button-pane',
                 separator: 'separator',
                 dropdown: 'dropdown',
-                close: 'close'
+                fullscreen: 'fullscreen',
+                close: 'close',
+                notDisable: 'not-disable',
+                buttonsRight: 'buttons-right'
             },
-            prefix: 'editor-',
+            prefix: 'trumbowyg-',
 
             convertLink: true,
 
             buttons: ['viewHTML', 
                         '|', 'formatting',
-                        '|', 'bold', 'italic', 'underline', 'strikethrough', 
+                        '|', this.global.buttonsGroups.design,
                         '|', 'link', 
                         '|', 'insertImage',
-                        '|', 'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull',
-                        '|', 'unorderedList', 'orderedList',
+                        '|', this.global.buttonsGroups.justify,
+                        '|', this.global.buttonsGroups.lists,
                         '|', 'insertHorizontalRule'],
             buttonsAdd: [],
 
@@ -175,6 +202,13 @@
                 underline: {},
                 strikethrough: {},
 
+                strong: {
+                    func: 'formatBlock'
+                },
+                em: {
+                    func: 'formatBlock'
+                },
+
                 link: {
                     dropdown: {
                         createLink: {},
@@ -200,10 +234,23 @@
             }
         }, opts);
 
+        if(this.opts.semantic){
+            this.opts.buttons = [
+                'viewHTML', 
+                '|', 'formatting',
+                '|', this.global.buttonsGroups.semantic,
+                '|', 'link', 
+                '|', 'insertImage',
+                '|', this.global.buttonsGroups.justify,
+                '|', this.global.buttonsGroups.lists,
+                '|', 'insertHorizontalRule'
+            ];
+        }
+
         this.init();
     }
 
-    Editor.prototype = {
+    Trumbowyg.prototype = {
         init: function(){
             this.height = this.$e.css('height');
 
@@ -227,12 +274,6 @@
                     var wScroll = $(window).scrollTop();
                     var offset = this.$box.offset().top + 2;
                     var toFixed = (wScroll - offset > 0) && ((wScroll - offset - parseInt(this.height.replace('px', ''))) < 0);
-
-                    
-                    $('.' + this.opts.prefix + this.opts.cssClass.dropdown, this.$box).css({
-                        position: 'absolute',
-                        top: this.$buttonPane.css('height')
-                    });
 
                     if(toFixed){
                         if(!this.isFixed){
@@ -258,6 +299,10 @@
                         this.$buttonPane.css({ position: 'relative' });
                         this.$editor.css({ marginTop: 0 });
                         this.$e.css({ marginTop: 0 });
+                        $('.' + this.opts.prefix + this.opts.cssClass.dropdown, this.$box).css({
+                            position: 'absolute',
+                            top: this.$buttonPane.css('height')
+                        });
                     }
                 }, this));
             }
@@ -274,7 +319,7 @@
 
 
             this.$box = $('<div/>', {
-                'class': this.opts.prefix + this.opts.cssClass.editorBox + ' ' + this.opts.prefix + this.opts.lang
+                'class': this.opts.prefix + this.opts.cssClass.editorBox + ' ' + this.opts.prefix + this.opts.lang + ' trumbowyg'
             });
 
             this.isTextarea = true;
@@ -308,6 +353,20 @@
                         .attr('dir', this.opts.dir)
                         .html(html);
 
+            if(this.opts.resetCss)
+                this.$editor.addClass(this.opts.prefix + 'reset-css');
+
+            if(!this.opts.autoAjustHeight){
+                this.$editor.css({
+                    height: this.height,
+                    overflow: 'auto'
+                });
+                this.$e.css({
+                    height: this.height,
+                    overflow: 'auto'
+                });
+            }
+
             var that = this;
             this.$editor.on('dblclick', 'img', function(){
                 $(this).attr('src', that.getUrl($(this).attr('src')));
@@ -329,30 +388,55 @@
             });
 
             $.each(this.opts.buttons.concat(this.opts.buttonsAdd), $.proxy(function(i, btn){
-                try {
-                    var li = $('<li/>');
+                if(!$.isArray(btn)) btn = [btn];
+                $.each(btn, $.proxy(function(i, btn){
+                    try {
+                        var li = $('<li/>');
 
-                    if(btn == '|')
-                        li.addClass(this.opts.prefix + this.opts.cssClass.separator);
-                    else
-                        li.append(this.buildButton(btn));
+                        if(btn == '|'){
+                            li.addClass(this.opts.prefix + this.opts.cssClass.separator);
+                        } else {
+                            if(btn == 'viewHTML')
+                                li.addClass(this.opts.prefix + this.opts.cssClass.notDisable);
+                            li.append(this.buildButton(btn));
+                        }
 
-                    this.$buttonPane.append(li);
-                } catch(e){}
+                        this.$buttonPane.append(li);
+                    } catch(e){}
+                }, this));
             }, this));
 
-            if(this.opts.closable){
-                this.$buttonPane.append($('<li/>', {
-                    'class': this.opts.prefix + this.opts.cssClass.close
 
-                }).append($('<a/>', {
+
+            var $liRight = $('<li/>', {
+                'class': this.opts.prefix + this.opts.cssClass.notDisable + ' ' + this.opts.prefix + this.opts.cssClass.buttonsRight
+            });
+
+            if(this.opts.fullscreenable){
+                $liRight.append($('<a/>', {
                     href: 'javascript:void(null);',
+                    'class': this.opts.prefix + this.opts.cssClass.fullscreen + '-button',
+                    title: this.lang.fullscreen,
+                    text: this.lang.fullscreen,
+                    click: $.proxy(function(e){
+                        this.$box.toggleClass(this.opts.prefix + this.opts.cssClass.fullscreen);
+                    }, this)
+                }));
+            }
+
+            if(this.opts.closable){
+                $liRight.append($('<a/>', {
+                    href: 'javascript:void(null);',
+                    'class': this.opts.prefix + this.opts.cssClass.close + '-button',
+                    title: this.lang.close,
                     text: this.lang.close,
                     click: $.proxy(function(e){
-                        this.$box.find('.editor').destroyEditor();
+                        this.destroy();
                     }, this)
-                })));
+                }));
             }
+
+            this.$buttonPane.append($liRight);
 
 
             this.$box.prepend(this.$buttonPane);
@@ -371,7 +455,7 @@
 
                     if(this.$buttonPane.hasClass(this.opts.prefix + 'disable') && name != 'viewHTML')
                         return false;
-                    
+
                     this.execCommand((btnDef.dropdown ? 'dropdown' : '') || btnDef.func || name,
                                      btnDef.param || name);
 
@@ -435,6 +519,8 @@
                 $btn.addClass(this.opts.prefix + 'active');
 
                 $dropdown.css({
+                    position: 'absolute',
+                    top: this.$buttonPane.css('height'),
                     left: (this.opts.fixedFullWidth && this.isFixed) ? $btn.offset().left+'px' : ($btn.offset().left - this.$buttonPane.offset().left)+'px'
                 }).show();
 
@@ -468,7 +554,7 @@
                                             .show());
 
             this.$box.remove();
-            this.$creator.removeData('editor');
+            this.$creator.removeData('trumbowyg');
         },
 
         getCode: function(){
@@ -522,8 +608,8 @@
                 try {
                     cmd(param);
                 } catch(e){
-                    document.execCommand(cmd, false, param);
                     this.$editor.focus();
+                    document.execCommand(cmd, false, param);
                 }
             }
             this.syncCode();
