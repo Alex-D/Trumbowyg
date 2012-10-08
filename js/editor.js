@@ -373,9 +373,9 @@
                 $(this).attr('src', that.getUrl($(this).attr('src')));
                 return false;
             });
-            this.$editor.on('click, blur, focus', $.proxy(function(){
-                this.sementicCode();
-            }, this));
+            this.$editor.on('click, blur, focus', function(){
+                that.sementicCode();
+            });
         },
 
         buildTextarea: function(){
