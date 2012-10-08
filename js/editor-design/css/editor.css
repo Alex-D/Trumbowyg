@@ -51,20 +51,6 @@ html, body {
   border: none;
   white-space: normal; }
 
-.trumbowyg-box.trumbowyg-fullscreen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100% !important;
-  height: 100% !important;
-  margin: 0;
-  padding: 0;
-  z-index: 10; }
-  .trumbowyg-box.trumbowyg-fullscreen .trumbowyg-editor,
-  .trumbowyg-box.trumbowyg-fullscreen .trumbowyg-textarea {
-    height: 100% !important;
-    overflow: auto !important; }
-
 .trumbowyg-button-pane {
   position: relative;
   width: 100%;
@@ -85,9 +71,8 @@ html, body {
   height: 100%;
   text-align: center; }
 
-.trumbowyg-button-pane:not(.trumbowyg-disable) li a:hover, .trumbowyg-button-pane:not(.trumbowyg-disable) li a:focus, .trumbowyg-button-pane:not(.trumbowyg-disable) li a.trumbowyg-active,
-.trumbowyg-button-pane li.trumbowyg-not-disable a:hover,
-.trumbowyg-button-pane li.trumbowyg-not-disable a:focus {
+.trumbowyg-button-pane:not(.trumbowyg-disable) li a:hover, .trumbowyg-button-pane:not(.trumbowyg-disable) li a.trumbowyg-active,
+.trumbowyg-button-pane li.trumbowyg-not-disable a:hover {
   background-color: #DDD;
   border-color: #AAA;
   outline: none; }
@@ -99,7 +84,6 @@ html, body {
 .trumbowyg-button-pane li.trumbowyg-separator {
   width: 1px;
   background: #EEE;
-  /*border-right: 1px solid #EFEFEF;*/
   margin: 0 5px;
   height: 35px; }
 

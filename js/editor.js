@@ -118,6 +118,20 @@
             }
         };
 
+        // CSS class prefixed by opts.prefix
+        this.cssClass = {
+            editorBox: 'box',
+            editorEditor: 'editor',
+            editorTextarea: 'textarea',
+            buttonPane: 'button-pane',
+            separator: 'separator',
+            dropdown: 'dropdown',
+            fullscreen: 'fullscreen',
+            close: 'close',
+            notDisable: 'not-disable',
+            buttonsRight: 'buttons-right'
+        };
+
         // Defaults Options
         this.opts = $.extend(true, {
             lang: 'en',
@@ -133,19 +147,6 @@
             resetCss: false,
             autoAjustHeight: false,
 
-            // CSS class prefixed by opts.prefix
-            cssClass: {
-                editorBox: 'box',
-                editorEditor: 'editor',
-                editorTextarea: 'textarea',
-                buttonPane: 'button-pane',
-                separator: 'separator',
-                dropdown: 'dropdown',
-                fullscreen: 'fullscreen',
-                close: 'close',
-                notDisable: 'not-disable',
-                buttonsRight: 'buttons-right'
-            },
             prefix: 'trumbowyg-',
 
             convertLink: true,
@@ -203,10 +204,10 @@
                 strikethrough: {},
 
                 strong: {
-                    func: 'formatBlock'
+                    func: 'bold'
                 },
                 em: {
-                    func: 'formatBlock'
+                    func: 'italic'
                 },
 
                 link: {
@@ -283,13 +284,13 @@
                                 top: 0,
                                 left: (this.opts.fixedFullWidth) ? '0' : 'auto',
                                 width: (this.opts.fixedFullWidth) ? '100%' : this.$box.css('width'),
-                                zIndex: 10
+                                zIndex: 7
                             });
                             this.$editor.css({ marginTop: this.$buttonPane.css('height') });
                             this.$e.css({ marginTop: this.$buttonPane.css('height') });
                         }
 
-                        $('.' + this.opts.prefix + this.opts.cssClass.dropdown, this.$box).css({
+                        $('.' + this.opts.prefix + this.cssClass.dropdown, this.$box).css({
                             position: this.opts.fixedFullWidth ? 'fixed' : 'absolute',
                             top: this.opts.fixedFullWidth ? this.$buttonPane.css('height') : parseInt(this.$buttonPane.css('height').replace('px', '')) + (wScroll - offset) + 'px',
                             zIndex: 15
@@ -299,7 +300,7 @@
                         this.$buttonPane.css({ position: 'relative' });
                         this.$editor.css({ marginTop: 0 });
                         this.$e.css({ marginTop: 0 });
-                        $('.' + this.opts.prefix + this.opts.cssClass.dropdown, this.$box).css({
+                        $('.' + this.opts.prefix + this.cssClass.dropdown, this.$box).css({
                             position: 'absolute',
                             top: this.$buttonPane.css('height')
                         });
@@ -319,7 +320,7 @@
 
 
             this.$box = $('<div/>', {
-                'class': this.opts.prefix + this.opts.cssClass.editorBox + ' ' + this.opts.prefix + this.opts.lang + ' trumbowyg'
+                'class': this.opts.prefix + this.cssClass.editorBox + ' ' + this.opts.prefix + this.opts.lang + ' trumbowyg'
             });
 
             this.isTextarea = true;
@@ -332,7 +333,7 @@
             }
 
             this.$e.hide()
-                   .addClass(this.opts.prefix + this.opts.cssClass.editorTextarea);
+                   .addClass(this.opts.prefix + this.cssClass.editorTextarea);
 
             var html = '';
             if(this.isTextarea){
@@ -348,7 +349,7 @@
                 this.syncCode();
             }
 
-            this.$editor.addClass(this.opts.prefix + this.opts.cssClass.editorEditor)
+            this.$editor.addClass(this.opts.prefix + this.cssClass.editorEditor)
                         .attr('contenteditable', true)
                         .attr('dir', this.opts.dir)
                         .html(html);
@@ -372,6 +373,9 @@
                 $(this).attr('src', that.getUrl($(this).attr('src')));
                 return false;
             });
+            this.$editor.on('click, blur, focus', $.proxy(function(){
+                this.sementicCode();
+            }, this));
         },
 
         buildTextarea: function(){
@@ -384,7 +388,7 @@
             if(this.opts.buttons === false) return;
 
             this.$buttonPane = $('<ul/>', {
-                'class': this.opts.prefix + this.opts.cssClass.buttonPane
+                'class': this.opts.prefix + this.cssClass.buttonPane
             });
 
             $.each(this.opts.buttons.concat(this.opts.buttonsAdd), $.proxy(function(i, btn){
@@ -394,10 +398,10 @@
                         var li = $('<li/>');
 
                         if(btn == '|'){
-                            li.addClass(this.opts.prefix + this.opts.cssClass.separator);
+                            li.addClass(this.opts.prefix + this.cssClass.separator);
                         } else {
                             if(btn == 'viewHTML')
-                                li.addClass(this.opts.prefix + this.opts.cssClass.notDisable);
+                                li.addClass(this.opts.prefix + this.cssClass.notDisable);
                             li.append(this.buildButton(btn));
                         }
 
@@ -409,35 +413,57 @@
 
 
             var $liRight = $('<li/>', {
-                'class': this.opts.prefix + this.opts.cssClass.notDisable + ' ' + this.opts.prefix + this.opts.cssClass.buttonsRight
+                'class': this.opts.prefix + this.cssClass.notDisable + ' ' + this.opts.prefix + this.cssClass.buttonsRight
             });
 
-            if(this.opts.fullscreenable){
-                $liRight.append($('<a/>', {
-                    href: 'javascript:void(null);',
-                    'class': this.opts.prefix + this.opts.cssClass.fullscreen + '-button',
-                    title: this.lang.fullscreen,
-                    text: this.lang.fullscreen,
-                    click: $.proxy(function(e){
-                        this.$box.toggleClass(this.opts.prefix + this.opts.cssClass.fullscreen);
-                    }, this)
-                }));
-            }
+            if(this.opts.fullscreenable)
+                $liRight.append(this.buildRightButton('fullscreen').on('click', $.proxy(function(e){
+                    var cssClass = this.opts.prefix + this.cssClass.fullscreen;
+                    this.$box.toggleClass(cssClass);
 
-            if(this.opts.closable){
-                $liRight.append($('<a/>', {
-                    href: 'javascript:void(null);',
-                    'class': this.opts.prefix + this.opts.cssClass.close + '-button',
-                    title: this.lang.close,
-                    text: this.lang.close,
-                    click: $.proxy(function(e){
-                        this.destroy();
-                    }, this)
-                }));
-            }
+                    if(this.$box.hasClass(cssClass)){
+                        $('body').css('overflow', 'hidden');
+                        this.$box.css({
+                            position: 'fixed',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: '100%',
+                            margin: 0,
+                            padding: 0,
+                            zIndex: 10
+                        });
+                        $([this.$editor, this.$e]).each(function(){
+                            $(this).css({
+                                height: '100%',
+                                overflow: 'auto'
+                            });
+                        });
+                        this.$buttonPane.css({
+                            width: '100%'
+                        });
+                    } else {
+                        $('body').css('overflow', 'auto');
+                        this.$box.removeAttr('style');
+                        if(!this.opts.autoAjustHeight){
+                            var h = this.height;
+                            $([this.$editor, this.$e]).each(function(){
+                                $(this).css({
+                                    height: h
+                                });
+                            });
+                        }
+
+                    }
+                    $(window).trigger('scroll');
+                }, this)));
+
+            if(this.opts.closable)
+                $liRight.append(this.buildRightButton('close').on('click', $.proxy(function(e){
+                    this.destroy();
+                }, this)));
 
             this.$buttonPane.append($liRight);
-
 
             this.$box.prepend(this.$buttonPane);
         },
@@ -450,7 +476,7 @@
                 text: btnDef.text || btnDef.title || this.lang[name] || name,
                 title: btnDef.title || btnDef.text || this.lang[name] || name,
                 mousedown: $.proxy(function(e){
-                    if(!btnDef.dropdown || this.$box.find('.'+name+'-'+this.opts.prefix + this.opts.cssClass.dropdown).is(':hidden'))
+                    if(!btnDef.dropdown || this.$box.find('.'+name+'-'+this.opts.prefix + this.cssClass.dropdown).is(':hidden'))
                         $('body').trigger('mousedown');
 
                     if(this.$buttonPane.hasClass(this.opts.prefix + 'disable') && name != 'viewHTML')
@@ -468,7 +494,7 @@
 
 
             if(btnDef.dropdown){
-                var cssClass = this.opts.prefix + this.opts.cssClass.dropdown;
+                var cssClass = this.opts.prefix + this.cssClass.dropdown;
 
                 var dropdown = $('<div/>', {
                     'class': name + '-' + cssClass + ' ' + cssClass
@@ -503,16 +529,24 @@
                 }, this)
             });
         },
+        buildRightButton: function(name){
+            return $('<a/>', {
+                href: 'javascript:void(null);',
+                'class': this.opts.prefix + (this.cssClass[name] || name) + '-button',
+                title: this.lang[name],
+                text: this.lang[name]
+            });
+        },
 
         toggle: function(){
-            this.syncCode();
+            this.sementicCode();
             this.$editor.toggle();
             this.$e.toggle();
             this.$buttonPane.toggleClass(this.opts.prefix + 'disable');
         },
 
         dropdown: function(name){
-            var $dropdown = this.$box.find('.'+name+'-'+this.opts.prefix + this.opts.cssClass.dropdown);
+            var $dropdown = this.$box.find('.'+name+'-'+this.opts.prefix + this.cssClass.dropdown);
             var $btn = this.$buttonPane.find('.'+this.opts.prefix+name+'-button');
 
             if($dropdown.is(':hidden')){
@@ -527,7 +561,7 @@
                 $(window).trigger('scroll');
 
                 $('body').on('mousedown', $.proxy(function(e){
-                    $('.' + this.opts.prefix + this.opts.cssClass.dropdown).hide();
+                    $('.' + this.opts.prefix + this.cssClass.dropdown).hide();
                     $('.' + this.opts.prefix + 'active').removeClass(this.opts.prefix + 'active');
                     $('body').off('mousedown');
                 }, this));
@@ -544,11 +578,11 @@
             if(this.isTextarea)
                 this.$box.after(this.$e.css({height: this.height})
                                        .val(html)
-                                       .removeClass(this.opts.prefix + this.opts.cssClass.editorTextarea)
+                                       .removeClass(this.opts.prefix + this.cssClass.editorTextarea)
                                        .show());
             else 
                 this.$box.after(this.$editor.css({height: this.height})
-                                            .removeClass(this.opts.prefix + this.opts.cssClass.editorEditor)
+                                            .removeClass(this.opts.prefix + this.cssClass.editorEditor)
                                             .attr('contenteditable', false)
                                             .html(html)
                                             .show());
@@ -564,11 +598,31 @@
             this.$e.val(html);
         },
         syncCode: function(){
-            this.height = this.$editor.css('height');
             if(this.$editor.is(':visible'))
-                this.$e.val(this.$editor.html()).css({height: this.height});
+                this.$e.val(this.$editor.html());
             else
                 this.$editor.html(this.$e.val());
+
+            if(this.opts.autoAjustHeight){
+                this.height = this.$editor.css('height');
+                this.$e.css({height: this.height});
+            }
+        },
+
+        sementicCode: function(){
+            this.syncCode();
+
+            if(this.opts.semantic){
+                this.sementicTag('b', 'strong');
+                this.sementicTag('i', 'em');
+
+                this.$e.val(this.$editor.html());
+            }
+        },
+        sementicTag: function(oldTag, newTag){
+            $(oldTag, this.$editor).each(function(){
+                $(this).replaceWith(function(){ return '<'+newTag+'>' + $(this).html() + '</'+newTag+'>'; });
+            });
         },
 
         createLink: function(){
