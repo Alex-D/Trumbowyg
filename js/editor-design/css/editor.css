@@ -108,8 +108,7 @@ html, body {
   -o-transition: all 0.2s;
   transition: all 0.2s; }
   .trumbowyg-dropdown a:hover, .trumbowyg-dropdown a:focus {
-    background: #FFF;
-    text-indent: 7px; }
+    background: #FFF; }
 
 .trumbowyg-button-pane .trumbowyg-buttons-right {
   float: right;
