@@ -1,103 +1,107 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
-        <title>WYSIWYG by Alex-D</title>
-        <link rel="stylesheet" href="js/editor-design/css/editor.css">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Trumbowyg : the web's most lightweight WYSIWYG editor</title>
+        <meta name="description" content="Trumbowyg is a jQuery plugin for create WYSIWYG editor">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="js/trumbowyg-design/css/trumbowyg.css">
+        <script src="js/vendor/modernizr-2.6.1.min.js"></script>
     </head>
     <body>
-        <div id="main" role="main">
-            <h1>Example of use</h1>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->
 
-            <p>
-                Vous pouvez détruire un éditeur en cliquant sur « Fermer » en haut à droite de celui-ci. <br>
-                Pour ré-ouvrir un éditeur, double-cliquez sur le texte.
-            </p>
+        
 
-            <form action="#">
-                <div class="editor">
-                    <h2>Hello, je n'ai pas encore de nom pour mon WYSIWYG</h2>
-                    <p>
-                        Mon WYSIWYG avance plutôt bien mais je n'ai pas encore de nom à lui donner.
-                        Si vous avez des idées, n'hésitez pas !
-                    </p>
-                    <p>
-                        Ce WYSIWYG est voué à devenir open source, très léger et simple d'utilisation.
-                        Le but est de sortir un code propre.
-                    </p>
-                    <p>
-                        Un design va être apporté à ce petit plugin, pour qu'il soit facilement intégrable
-                        dans à peu près n'importe quel projet.
-                    </p>
+        <header role="banner">
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#demo">Demonstration</a></li>
+                    <li><a href="#get-started">Get Started</a></li>
+                    <li><a href="#customization">Customization</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div id="container" role="main">
+            <div id="promotion">
+                <h1>Trumbowyg</h1>
+                <h2>The web's most lightweight WYSIWYG editor</h2>
+
+                <p>
+                    Trumbony is a light, translatable and customisable jQuery plugin. <br>
+                    Integrates a beatiful design, semantic code, fullscreen and powerful API.
+                </p>
+
+                <div id="promo-links">
+                    <a href="https://github.com/Alex-D/Trumbowyg">Source Code</a>
+                    <a href="https://github.com/Alex-D/Trumbowyg/zipball/master">Download alpha</a>
+                    <a href="documentation.html">Documentation</a>
                 </div>
-                <textarea id="form-content" class="editor" cols="30" rows="10">
-                    <h1>Ceci est un test</h1>
-                    <p>
-                        Vous pouvez notez que le plugin peut s'appliquer aussi bien à un
-                        textarea (logique donc) ou <b>à tout autre élément</b> dans une page (edit in page)
-                        ce qui est relativement pratique ! <br>
-                        <br>
-                        Si vous scrollez, vous pourrez voir l'utilité du paramètre "fixedButtonPane" qui permet tout simplement
-                        d'avoir toujours visible la barre d'outils même lorsque l'on scroll !
-                    </p>
-                </textarea>
-            </form>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
+            </div>
+
+            <div id="introducing">
+                <h2>Introducing Trumbowyg</h2>
+                <p class="subtitle">Why you should love it!</p>
+
+                <div class="wrap">
+                    <div class="span4">
+                        <img src="img/html5.png" alt="HTML5 logo">
+                        <h3>HTML5 ready</h3>
+                        <p>
+                            Editor and generated code are optimized for HTML5 support. Is compatible with all recents browsers like IE8+, Chrome, Opera and Firefox.
+                        </p>
+                    </div>
+                    <div class="span4">
+                        <img src="img/plume.png" alt="Plume">
+                        <h3>Fast &amp; lightweight</h3>
+                        <p>
+                            All existing WYSIWYG editors are larger than 45kB. Trumbowyg is only 15kB for faster page loading. No useless features, just the necessary ones to generate a clean and semantic code.
+                        </p>
+                    </div>
+                    <div class="span4">
+                        <img src="img/gears.png" alt="Gears">
+                        <h3></h3>
+                        <p>
+                            Options and design are fully editable and configurable, but the default design is compatible with Retina display and optimized for a great and simple user usage.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="demo">
+                
+            </div>
+
+            <div id="get-started">
+                
+            </div>
         </div>
-        <script src="js/jquery-1.8.2.min.js"></script>
-        <script src="js/editor.js"></script>
+
+
+
+        <script src="http//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <!--
         <script>
-            $('.editor:first').trumbowyg({
-                lang: 'fr',
-                closable: true,
-                mobile: true,
-                fixedButtonPane: true,
-                fixedFullWidth: true,
-                semantic: true,
-                resetCss: true,
-                autoAjustHeight: true
-            });
-
-            $('.editor:last').trumbowyg({
-                closable: true,
-                fixedButtonPane: true
-            });
-
-            $('.editor').on('dblclick', function(e){
-                $(this).trumbowyg({
-                    lang: 'fr',
-                    closable: true,
-                    fixedButtonPane: true
-                });
-            });
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
+        -->
     </body>
 </html>
