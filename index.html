@@ -1,79 +1,56 @@
 ﻿<!DOCTYPE html>
 <html>
     <head>
-        <title>WYSIWYG by Alex-D</title>
-        <link rel="stylesheet" href="js/editor-design/css/editor.css">
+        <title>Trumbowyg by Alex-D</title>
+        <link rel="stylesheet" href="js/trumbowyg-design/css/trumbowyg.css">
+        <style type="text/css">
+            html, body {
+                margin: 0;
+                padding: 0;
+            }
+            #main {
+                width: 960px;
+                margin: 0 auto;
+                border: 1px solid #DDD;
+                background-color: #F2F2F2;
+            }
+        </style>
     </head>
     <body>
         <div id="main" role="main">
-            <h1>Example of use</h1>
+            <h1>Examples of use Trumbowyg</h1>
 
             <p>
-                Vous pouvez détruire un éditeur en cliquant sur « Fermer » en haut à droite de celui-ci. <br>
-                Pour ré-ouvrir un éditeur, double-cliquez sur le texte.
+                Close an editor on clic on « Close » in top right corner. <br>
+                For re-open a editor, double-click on his text.
             </p>
 
             <form action="#">
                 <div class="editor">
-                    <h2>Hello, je n'ai pas encore de nom pour mon WYSIWYG</h2>
+                    <h2>Trumbowyg is fun ! That's an editor from a div, directly.</h2>
                     <p>
-                        Mon WYSIWYG avance plutôt bien mais je n'ai pas encore de nom à lui donner.
-                        Si vous avez des idées, n'hésitez pas !
+                        The editor active as default the reset CSS, in French, semantic mode and autoAjustHeight
                     </p>
                     <p>
-                        Ce WYSIWYG est voué à devenir open source, très léger et simple d'utilisation.
-                        Le but est de sortir un code propre.
+                        The text is derived from Cicero's De Finibus Bonorum et Malorum (On the Ends of Goods and Evils, or alternatively [About] The Purposes of Good and Evil ). The original passage began: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit (Translation: &quot;Neither is there anyone who loves grief itself since it is grief and thus wants to obtain it&quot;).
                     </p>
                     <p>
-                        Un design va être apporté à ce petit plugin, pour qu'il soit facilement intégrable
-                        dans à peu près n'importe quel projet.
+                        It is not known exactly when the text acquired its current standard form; it may have been as late as the 1960s. The passage was discovered by Richard McClintock, a Latin scholar who is the publications director at Hampden-Sydney College in Virginia, by searching for citings of the rarely used word 'consectetur' in classical literature.
                     </p>
                 </div>
                 <textarea id="form-content" class="editor" cols="30" rows="10">
-                    <h1>Ceci est un test</h1>
+                    <h1>This editor is create from a textarea</h1>
                     <p>
-                        Vous pouvez notez que le plugin peut s'appliquer aussi bien à un
-                        textarea (logique donc) ou <b>à tout autre élément</b> dans une page (edit in page)
-                        ce qui est relativement pratique ! <br>
-                        <br>
-                        Si vous scrollez, vous pourrez voir l'utilité du paramètre "fixedButtonPane" qui permet tout simplement
-                        d'avoir toujours visible la barre d'outils même lorsque l'on scroll !
+                        Even though using &quot;lorem ipsum&quot; often arouses curiosity due to its resemblance to classical Latin, it is not intended to have meaning. Where text is visible in a document, people tend to focus on the textual content rather than upon overall presentation, so publishers use lorem ipsum when displaying a typeface or design in order to direct the focus to presentation. &quot;Lorem ipsum&quot; also approximates a typical distribution of spaces in English.
+                    </p>
+                    <p>
+                        The most common lorem ipsum text reads as follows: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
                 </textarea>
             </form>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
         </div>
-        <script src="js/jquery-1.8.2.min.js"></script>
-        <script src="js/editor.js"></script>
+        <script src="js/vendors/jquery-1.8.2.min.js"></script>
+        <script src="js/trumbowyg.js"></script>
         <script>
             $('.editor:first').trumbowyg({
                 lang: 'fr',
