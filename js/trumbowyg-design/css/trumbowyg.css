@@ -4,30 +4,13 @@
 .icons-2x-sprite {
   background: url('../images/icons-2x-s711c49bee4.png') no-repeat; }
 
-/*
- * Globals styles
- */
-html, body {
-  min-height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: "Trebuchet MS", Verdana, sans-serif, serif; }
-
-#main {
-  width: 960px;
-  margin: 0 auto;
-  padding: 25px 0;
-  border: 1px solid #999;
-  border-top: none;
-  border-bottom: none; }
-
 .trumbowyg-box,
 .editor {
   display: block;
   position: relative;
   border: 1px solid #DDD;
   background: #FEFEFE;
-  width: 750px;
+  width: 96%;
   min-height: 300px;
   margin: 17px auto; }
 
@@ -108,8 +91,7 @@ html, body {
   -o-transition: all 0.2s;
   transition: all 0.2s; }
   .trumbowyg-dropdown a:hover, .trumbowyg-dropdown a:focus {
-    background: #FFF;
-    text-indent: 7px; }
+    background: #FFF; }
 
 .trumbowyg-button-pane .trumbowyg-buttons-right {
   float: right;

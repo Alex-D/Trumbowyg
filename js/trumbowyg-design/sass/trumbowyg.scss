@@ -6,31 +6,13 @@ $default-transition-duration: .2s;
 
 
 
-/*
- * Globals styles
- */
-html, body {
-	min-height: 100%;
-	margin: 0;
-	padding: 0;
-	font-family: "Trebuchet MS", Verdana, sans-serif, serif;
-}
-#main {
-	width: 960px;
-	margin: 0 auto;
-	padding: 25px 0;
-	border: 1px solid #999;
-	border-top: none;
-	border-bottom: none;
-}
-
 .trumbowyg-box,
 .editor {
 	display: block;
 	position: relative;
 	border: 1px solid #DDD;
 	background: #FEFEFE;
-	width: 750px;
+	width: 96%;
 	min-height: 300px;
 	margin: 17px auto;
 }
@@ -110,7 +92,6 @@ html, body {
 	&:hover,
 	&:focus {
 		background: #FFF;
-		text-indent: 7px;
 	}
 }
 

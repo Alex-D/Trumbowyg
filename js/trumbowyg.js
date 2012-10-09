@@ -41,7 +41,7 @@
         fr: {
             viewHTML: "Voir le HTML",
 
-            formatting: "Mise en page",
+            formatting: "Format",
             p: "Paragraphe",
             blockquote: "Citation",
             code: "Code",
