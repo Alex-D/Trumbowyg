@@ -79,10 +79,13 @@ textarea {
   width: 100%;
   margin: 0;
   padding: 0; }
-
-.wrap-in {
-  width: 960px;
-  margin: 0 auto; }
+  .wrap .wrap-in {
+    width: 960px;
+    margin: 0 auto; }
+    .wrap .wrap-in .width4 {
+      float: left;
+      width: 300px;
+      margin: 0 10px; }
 
 h1,
 h2,
@@ -95,7 +98,7 @@ h5 {
 
 body {
   font-family: "Trebuchet MS", Arial, Helvetica, Verdana, serif, sans-serif;
-  background: #f2f2f2 url('../img/background.jpg?1349830270') left top repeat; }
+  background: #f2f2f2 url('../img/background.jpg?1349833088') left top repeat; }
 
 header {
   background-color: #222;
@@ -201,6 +204,28 @@ header {
   margin: -7px 0 0;
   padding: 0;
   text-align: center; }
+
+#introducing {
+  height: 450px; }
+  #introducing .wrap {
+    margin-top: 20px; }
+  #introducing .width4 {
+    text-align: center; }
+    #introducing .width4 .intro-img {
+      height: 170px; }
+    #introducing .width4 h3 {
+      color: #333;
+      font-size: 24px;
+      margin-top: 15px; }
+    #introducing .width4 p {
+      color: #555;
+      text-align: justify;
+      margin: 0;
+      font-size: 15px; }
+  #introducing #intro-fast-lightweight img {
+    margin-top: 30px; }
+  #introducing #intro-customizable img {
+    margin-top: 3px; }
 
 /* ==========================================================================
    Helper classes

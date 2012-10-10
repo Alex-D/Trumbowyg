@@ -106,10 +106,17 @@ $blue-hover-nav: #293d45;
     width: 100%;
     margin: 0;
     padding: 0;
-}
-.wrap-in {
-    width: 960px;
-    margin: 0 auto;
+
+    .wrap-in {
+        width: 960px;
+        margin: 0 auto;
+
+        .width4 {
+            float: left;
+            width: 300px;
+            margin: 0 10px;
+        }
+    }
 }
 
 h1,
@@ -257,6 +264,42 @@ header {
        margin: -7px 0 0;
        padding: 0;
        text-align: center;
+    }
+}
+
+#introducing {
+    height: 450px;
+
+    .wrap {
+        margin-top: 20px;
+    }
+
+    .width4 {
+        text-align: center;
+
+        .intro-img {
+            height: 170px;
+        }
+
+        h3 {
+            color: #333;
+            font-size: 24px;
+            margin-top: 15px;
+        }
+
+        p {
+            color: #555;
+            text-align: justify;
+            margin: 0;
+            font-size: 15px;
+        }
+    }
+
+    #intro-fast-lightweight img {
+        margin-top: 30px;
+    }
+    #intro-customizable img {
+        margin-top: 3px;
     }
 }
 
