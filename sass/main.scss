@@ -1,3 +1,5 @@
+@import "compass";
+
 /*
  * HTML5 Boilerplate
  *
@@ -93,10 +95,170 @@ textarea {
    Alex-D's custom styles
    ========================================================================== */
 
+$default-transition-duration: .2s;
+
+$blue: #2f93c1;
+$blue-active-nav: #232f34;
+$blue-hover-nav: #293d45;
 
 
+.wrap {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.wrap-in {
+    width: 960px;
+    margin: 0 auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
 
 
+body {
+    font-family: "Trebuchet MS", Arial, Helvetica, Verdana, serif, sans-serif;
+    background: #F2F2F2 image-url('background.jpg') left top repeat;
+}
+header {
+    background-color: #222;
+    height: 58px;
+    border-bottom: 1px solid $blue;
+
+    ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+            margin: 0;
+            padding: 0;
+            display: block;
+            width: 160px;
+            height: 100%;
+            float: left;
+
+            a {
+                display: block;
+                width: 100%;
+                height: 100%;
+                line-height: 58px;
+                color: $blue;
+                text-decoration: none;
+                text-align: center;
+                font-size: 16px;
+                text-transform: uppercase;
+                @include text-shadow(0 0 4px rgba(17,17,17,.75));
+                @include transition;
+
+                &.active {
+                    background-color: $blue-active-nav;
+                }
+                &:hover,
+                &:focus {
+                    background-color: $blue-hover-nav;
+                }
+            }
+
+            &.fl-right {
+                float: right;
+            }
+        }
+    }
+}
+
+#promotion {
+    width: 100%;
+    height: 349px;
+    background-color: #224d6a;
+    border-bottom: 2px solid #FFF;
+    color: #F2F2F2;
+    text-align: center;
+    @include background-image(linear-gradient(top right, #295f89 -25%, #173545 125%));
+
+    h1 {
+        font-size: 48px;
+        color: $blue;
+        @include text-shadow(0 1px 2px rgba(34,34,34,.75));
+        padding-top: 27px;
+    }
+    h2 {
+        font-size: 36px;
+    }
+    p {
+        font-size: 18px;
+        margin: 23px 0;
+    }
+
+    .buttons {
+        margin-top: 42px;
+
+        a {
+            display: block;
+            width: 160px;
+            height: 50px;
+            line-height: 50px;
+            background-color: #212121;
+            float: left;
+            text-decoration: none;
+            color: #F2F2F2;
+            margin: 0 80px;
+            @include transition;
+
+            &:hover,
+            &:focus {
+                background-color: #333;
+                color: $blue;
+            }
+
+            &.big {
+                width: 300px;
+                height: 70px;
+                line-height: 70px;
+                font-size: 26px;
+                margin: -10px 10px 0;
+            }
+            &.blue {
+                background-color: $blue;
+
+                &:hover,
+                &:focus {
+                    background-color: #25a4df;
+                    color: #222;
+                }
+            }
+        }
+    }
+}
+
+
+#page {
+    .page-part {
+        margin-top: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #BBB;
+    }
+
+    h2 {
+       color: #333;
+       font-size: 48px;
+       text-align: center;
+       @include text-shadow(0 1px 2px rgba(255,255,255,.75));
+    }
+    .subtitle {
+       color: #777;
+       font-size: 24px;
+       margin: -7px 0 0;
+       padding: 0;
+       text-align: center;
+    }
+}
 
 
 

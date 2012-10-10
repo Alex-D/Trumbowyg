@@ -20,70 +20,95 @@
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->     
 
-        <header role="banner">
-            <nav>
+        <header role="banner" class="wrap">
+            <nav class="wrap-in">
                 <ul>
-                    <li><a href="#">Home</a></li>
+                    <li><a href="#" class="active">Home</a></li>
                     <li><a href="#demo">Demonstration</a></li>
                     <li><a href="#get-started">Get Started</a></li>
                     <li><a href="#customization">Customization</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li class="fl-right"><a href="#">About</a></li>
                 </ul>
             </nav>
         </header>
 
-        <div id="container" role="main">
-            <div id="promotion">
-                <h1>Trumbowyg</h1>
-                <h2>The web's most lightweight WYSIWYG editor</h2>
+        <div id="container" role="main" class="wrap">
+            <div id="promotion" class="wrap">
+                <div class="wrap-in">
+                    <h1>Trumbowyg</h1>
+                    <h2>The web's most lightweight WYSIWYG editor</h2>
 
-                <p>
-                    Trumbony is a light, translatable and customisable jQuery plugin. <br>
-                    Integrates a beatiful design, semantic code, fullscreen and powerful API.
-                </p>
+                    <p>
+                        Trumbony is a light, translatable and customisable jQuery plugin. <br>
+                        Integrates a beatiful design, semantic code, fullscreen and powerful API.
+                    </p>
 
-                <div id="promo-links">
-                    <a href="https://github.com/Alex-D/Trumbowyg">Source Code</a>
-                    <a href="https://github.com/Alex-D/Trumbowyg/zipball/master">Download alpha</a>
-                    <a href="documentation.html">Documentation</a>
-                </div>
-            </div>
-
-            <div id="introducing">
-                <h2>Introducing Trumbowyg</h2>
-                <p class="subtitle">Why you should love it!</p>
-
-                <div class="wrap">
-                    <div class="span4">
-                        <img src="img/html5.png" alt="HTML5 logo">
-                        <h3>HTML5 ready</h3>
-                        <p>
-                            Editor and generated code are optimized for HTML5 support. Is compatible with all recents browsers like IE8+, Chrome, Opera and Firefox.
-                        </p>
-                    </div>
-                    <div class="span4">
-                        <img src="img/plume.png" alt="Plume">
-                        <h3>Fast &amp; lightweight</h3>
-                        <p>
-                            All existing WYSIWYG editors are larger than 45kB. Trumbowyg is only 15kB for faster page loading. No useless features, just the necessary ones to generate a clean and semantic code.
-                        </p>
-                    </div>
-                    <div class="span4">
-                        <img src="img/gears.png" alt="Gears">
-                        <h3></h3>
-                        <p>
-                            Options and design are fully editable and configurable, but the default design is compatible with Retina display and optimized for a great and simple user usage.
-                        </p>
+                    <div class="wrap buttons">
+                        <a href="https://github.com/Alex-D/Trumbowyg">Source Code</a>
+                        <a href="https://github.com/Alex-D/Trumbowyg/zipball/master" class="big blue">Download alpha</a>
+                        <a href="#">Documentation</a>
                     </div>
                 </div>
             </div>
 
-            <div id="demo">
-                
-            </div>
+            <div id="page">
+                <!--
+                <div id="introducing" class="wrap-in">
+                    <h2>Introducing Trumbowyg</h2>
+                    <p class="subtitle">Why you should love it!</p>
 
-            <div id="get-started">
-                
+                    <div class="wrap">
+                        <div class="span4">
+                            <img src="img/html5.png" alt="HTML5 logo">
+                            <h3>HTML5 ready</h3>
+                            <p>
+                                Editor and generated code are optimized for HTML5 support. Is compatible with all recents browsers like IE8+, Chrome, Opera and Firefox.
+                            </p>
+                        </div>
+                        <div class="span4">
+                            <img src="img/plume.png" alt="Plume">
+                            <h3>Fast &amp; lightweight</h3>
+                            <p>
+                                All existing WYSIWYG editors are larger than 45kB. Trumbowyg is only 15kB for faster page loading. No useless features, just the necessary ones to generate a clean and semantic code.
+                            </p>
+                        </div>
+                        <div class="span4">
+                            <img src="img/gears.png" alt="Gears">
+                            <h3></h3>
+                            <p>
+                                Options and design are fully editable and configurable, but the default design is compatible with Retina display and optimized for a great and simple user usage.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                -->
+
+                <div id="demo" class="wrap-in page-part">
+                    <h2>Demonstration</h2>
+                    <p class="subtitle">See with your eyes!</p>
+
+                    <div id="trumbowyg-demo">
+                        <h3>This is a demo of Trumbowyg</h3>
+                        <p>
+                            A simple paragraph, <b>bold</b> and <i>italic</i> funny test.
+                        </p>
+                        <blockquote>
+                            « This sentance always is true » - Alex-D
+                        </blockquote>
+                    </div>
+                </div>
+
+                <div id="get-started" class="wrap-in page-part">
+                    <h2>Getting Started</h2>
+                    <p class="subtitle">It's simple but still I will explains</p>
+
+                    <p>
+                        This the basic code for transform a simple div to an amazing WYSIWYG editor who's Trumbowyg.
+                    </p>
+                    <pre>
+                        $('#trumbowyg-demo').trumbowyg();
+                    </pre>
+                </div>
             </div>
         </div>
 
@@ -93,8 +118,13 @@
 
 
 
-        <script src="http//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+
+        <script src="js/trumbowyg.js"></script>
+        <script type="text/javascript">
+            $('#trumbowyg-demo').trumbowyg();
+        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <!--
