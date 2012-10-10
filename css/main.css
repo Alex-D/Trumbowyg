@@ -103,7 +103,9 @@ body {
 header {
   background-color: #222;
   height: 58px;
-  border-bottom: 1px solid #2f93c1; }
+  border-bottom: 1px solid #2f93c1;
+  position: fixed;
+  z-index: 1; }
   header ul {
     margin: 0;
     padding: 0; }
@@ -135,6 +137,9 @@ header {
           background-color: #293d45; }
       header ul li.fl-right {
         float: right; }
+
+#container {
+  padding-top: 58px; }
 
 #promotion {
   width: 100%;

@@ -138,6 +138,8 @@ header {
     background-color: #222;
     height: 58px;
     border-bottom: 1px solid $blue;
+    position: fixed;
+    z-index: 1;
 
     ul {
         margin: 0;
@@ -178,6 +180,10 @@ header {
             }
         }
     }
+}
+
+#container {
+    padding-top: 58px;
 }
 
 #promotion {
