@@ -7,25 +7,42 @@
             html, body {
                 margin: 0;
                 padding: 0;
+                background-color: #F2F2F2;
+                font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+            }
+            header {
+                text-align: center;
             }
             #main {
                 width: 960px;
                 margin: 0 auto;
-                border: 1px solid #DDD;
-                background-color: #F2F2F2;
             }
         </style>
     </head>
     <body>
         <div id="main" role="main">
-            <h1>Examples of use Trumbowyg</h1>
+            <header>
+                <h1>Examples of use Trumbowyg</h1>
 
-            <p>
-                Close an editor on clic on « Close » in top right corner. <br>
-                For re-open a editor, double-click on his text.
-            </p>
+                <p>
+                    Close an editor on clic on « Close » in top right corner. <br>
+                    For re-open a editor, double-click on his text.
+                </p>
+            </header>
 
             <form action="#">
+                <div id="simple-editor">
+                    <h2>Trumbowyg is fun ! That's an editor from a div, directly.</h2>
+                    <p>
+                        The editor active as default the reset CSS, in French, semantic mode and autoAjustHeight
+                    </p>
+                    <p>
+                        The text is derived from Cicero's De Finibus Bonorum et Malorum (On the Ends of Goods and Evils, or alternatively [About] The Purposes of Good and Evil ). The original passage began: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit (Translation: &quot;Neither is there anyone who loves grief itself since it is grief and thus wants to obtain it&quot;).
+                    </p>
+                    <p>
+                        It is not known exactly when the text acquired its current standard form; it may have been as late as the 1960s. The passage was discovered by Richard McClintock, a Latin scholar who is the publications director at Hampden-Sydney College in Virginia, by searching for citings of the rarely used word 'consectetur' in classical literature.
+                    </p>
+                </div>
                 <div class="editor">
                     <h2>Trumbowyg is fun ! That's an editor from a div, directly.</h2>
                     <p>
@@ -49,9 +66,10 @@
                 </textarea>
             </form>
         </div>
-        <script src="js/vendors/jquery-1.8.2.min.js"></script>
+        <script src="js/vendor/jquery-1.8.2.min.js"></script>
         <script src="js/trumbowyg.js"></script>
         <script>
+            $('#simple-editor').trumbowyg();
             $('.editor:first').trumbowyg({
                 lang: 'fr',
                 closable: true,
