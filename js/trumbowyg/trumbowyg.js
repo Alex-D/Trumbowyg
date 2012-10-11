@@ -103,6 +103,7 @@
         this.opts = $.extend(true, {
             lang: 'en',
             dir: 'ltr',
+            duration: 200, // Duration of modal box animations
 
             mobile: false,
             tablet: true,
@@ -631,31 +632,19 @@
 
 
         createLink: function(){
-            var html = '<label>URL : <input type="text" name="url" value="http://"></label>' +
-                       '<label>Title : <input type="text" name="title" value=""></label>' +
-                       '<label>Text : <input type="text" name="text" value=""></label>';
-            var modal = this.openModal(this.lang.createLink, html);
-
-            modal.on(this.opts.prefix + 'confirm', $.proxy(function(e, m){
-                var $modal = $(m);
-
-                var url = $modal.find('input[name="url"]').val();
-                var title = $modal.find('input[name="title"]').val();
-                var text = $modal.find('input[name="text"]').val();
-                
-                if(url != 'http://'){
-                    document.execCommand('createlink', false, url);
-                    this.syncCode();
-                    this.closeModal();
-                    modal.off(this.opts.prefix + 'confirm');
-                } else {
-                    $modal.append('<span class="error">Invalid URL</span>');
+            this.saveSelection();
+            this.buildInsert(this.lang.insertImage, {
+                title: {
+                    label: 'Title',
+                    name: 'title',
+                    value: this.selection
+                },
+                text: {
+                    label: 'Text',
+                    name: 'text',
+                    value: this.selection
                 }
-            }, this));
-            modal.one(this.opts.prefix + 'cancel', $.proxy(function(){
-                modal.off(this.opts.prefix + 'confirm');
-                this.closeModal();
-            }, this));
+            }, 'createLink');
         },
         formatBlock: function(param){
             if($.browser.msie)
@@ -665,18 +654,37 @@
             this.syncCode();
         },
         insertImage: function(){
-            var html = '<label>URL : <input type="text" name="url" value="http://"></label>' +
-                       '<label>Alt : <input type="text" name="alt" value=""></label>';
-            var modal = this.openModal(this.lang.insertImage, html);
+            this.saveSelection();
+            this.buildInsert(this.lang.insertImage, {
+                alt: {
+                    label: 'Alt',
+                    name: 'alt',
+                    value: this.selection
+                }
+            }, 'insertImage');
+        },
+
+        buildInsert: function(title, fields, cmd){
+            var html = '<label>URL : <input type="text" name="url" value="http://"></label>';
+            for(f in fields){
+                f = fields[f];
+                html += '<label>'+f.label+' : <input type="text" name="'+f.name+'" value="'+ (f.value || '') +'"></label>';
+            }
+
+            var modal = this.openModal(title, html);
 
             modal.on(this.opts.prefix + 'confirm', $.proxy(function(e, m){
                 var $modal = $(m);
 
-                var url = $modal.find('input[name="url"]').val();
-                var alt = $modal.find('input[name="alt"]').val();
+                var values = {};
+                fields['url'] = {};
+                for(f in fields){
+                    values[f] = $('input[name="'+f+'"]', $modal).val();
+                }
                 
-                if(url != 'http://'){
-                    document.execCommand('insertImage', false, url);
+                if(values['url'] != 'http://'){
+                    this.restoreSelection();
+                    document.execCommand(cmd, false, values['url']);
                     this.syncCode();
                     this.closeModal();
                     modal.off(this.opts.prefix + 'confirm');
@@ -687,6 +695,7 @@
             modal.one(this.opts.prefix + 'cancel', $.proxy(function(){
                 modal.off(this.opts.prefix + 'confirm');
                 this.closeModal();
+                this.restoreSelection();
             }, this));
         },
 
@@ -712,6 +721,7 @@
 
 
         openModal: function(title, content){
+            this.saveSelection();
             this.showOverlay();
 
             // Disable all buttonPane buttons
@@ -739,7 +749,7 @@
             }).appendTo($modal)
             .animate({
                 top: 0
-            }, 300);
+            }, this.opts.duration);
 
 
             // Append title
@@ -780,12 +790,38 @@
             var $modalBox = $('.' + this.opts.prefix + this.cssClass.modal + '-box', this.$box);
             $modalBox.animate({
                 top: '-' + $modalBox.css('height')
-            }, 300, function(){
+            }, this.opts.duration, function(){
                 $(this).parent().remove();
                 that.hideOverlay();
             });
         },
 
+
+
+
+
+        saveSelection: function(){
+            this.selection = null;
+            if(window.getSelection){
+                var sel = window.getSelection();
+                if(sel.getRangeAt && sel.rangeCount)
+                    this.selection = sel.getRangeAt(0);
+            } else if(document.selection && document.selection.createRange){
+                this.selection = document.selection.createRange();
+            }
+        },
+        restoreSelection: function(){
+            range = this.selection;
+            if(range){
+                if(window.getSelection){
+                    var sel = window.getSelection();
+                    sel.removeAllRanges();
+                    sel.addRange(range);
+                } else if(document.selection && range.select){
+                    range.select();
+                }
+            }
+        },
         
 
 
@@ -802,5 +838,5 @@
 
     /* isObject */
     var toString = Object.prototype.toString, hasOwnProp = Object.prototype.hasOwnProperty;
-    jQuery.isObject = function(obj) { if(toString.call(obj) !== "[object Object]") return false; var key; for(key in obj){} return !key || hasOwnProp.call(obj, key); }
+    $.isObject = function(obj) { if(toString.call(obj) !== "[object Object]") return false; var key; for(key in obj){} return !key || hasOwnProp.call(obj, key); };
 })(jQuery);

@@ -181,6 +181,15 @@
 /*
  * Reset for resetCss option
  */
+.trumbowyg-editor object,
+.trumbowyg-editor embed,
+.trumbowyg-editor video,
+.trumbowyg-editor img {
+  width: auto;
+  max-width: 100%; }
+.trumbowyg-editor video,
+.trumbowyg-editor img {
+  height: auto; }
 .trumbowyg-editor.trumbowyg-reset-css {
   background: #FEFEFE !important;
   font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif !important;
@@ -191,15 +200,6 @@
   .trumbowyg-editor.trumbowyg-reset-css a {
     color: #15c !important;
     text-decoration: underline !important; }
-  .trumbowyg-editor.trumbowyg-reset-css object,
-  .trumbowyg-editor.trumbowyg-reset-css embed,
-  .trumbowyg-editor.trumbowyg-reset-css video,
-  .trumbowyg-editor.trumbowyg-reset-css img {
-    width: auto;
-    max-width: 100%; }
-  .trumbowyg-editor.trumbowyg-reset-css video,
-  .trumbowyg-editor.trumbowyg-reset-css img {
-    height: auto; }
   .trumbowyg-editor.trumbowyg-reset-css div,
   .trumbowyg-editor.trumbowyg-reset-css p,
   .trumbowyg-editor.trumbowyg-reset-css ul,

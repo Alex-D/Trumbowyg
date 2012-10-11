@@ -208,19 +208,7 @@ $default-transition-duration: .2s;
 /*
  * Reset for resetCss option
  */
-.trumbowyg-editor.trumbowyg-reset-css {
-	background: #FEFEFE !important;
-	font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif !important;      
-	font-size: 14px !important;
-	line-height: 1.45em !important;	
-	white-space: normal !important;
-	color: #333;
-	
-	a {
-		color: #15c !important;
-		text-decoration: underline !important;
-	}
-
+.trumbowyg-editor {
 	object,
 	embed,
 	video,
@@ -233,80 +221,94 @@ $default-transition-duration: .2s;
 		height: auto;
 	}
 
-	div,
-	p,
-	ul,
-	ol,
-	blockquote {
-		box-shadow: none !important;
-		background: none !important;
-		margin: 0 !important;
-		margin-bottom: 15px !important;
-		line-height: 1.4em !important;
+	&.trumbowyg-reset-css {
+		background: #FEFEFE !important;
 		font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif !important;      
 		font-size: 14px !important;
-		border: none;
-	}
-	iframe, 
-	object,
-	hr {
-		margin-bottom: 15px !important;
-	}
-	blockquote {
-		margin-left: 32px !important;
-		font-style: italic !important;
-		color: #555;	
-	}
-	ul, 
-	ol {
-		padding-left: 20px !important;	
-	}
-	ul ul, 
-	ol ol, 
-	ul ol, 
-	ol ul {
-		border: none;
-		margin: 2px !important;
-		padding: 0 !important;
-		padding-left: 24px !important;
-	}
-	hr {
-	  display: block;
-	  height: 1px;
-	  border: 0;
-	  border-top: 1px solid #CCC;
-	}
+		line-height: 1.45em !important;	
+		white-space: normal !important;
+		color: #333;
+		
+		a {
+			color: #15c !important;
+			text-decoration: underline !important;
+		}
 
-	h1, 
-	h2, 
-	h3, 
-	h4 {
-		color: #111;
-		background: none;
-		margin: 0 !important;
-		padding: 0 !important;
-		font-weight: bold;	
-	}
+		div,
+		p,
+		ul,
+		ol,
+		blockquote {
+			box-shadow: none !important;
+			background: none !important;
+			margin: 0 !important;
+			margin-bottom: 15px !important;
+			line-height: 1.4em !important;
+			font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif !important;      
+			font-size: 14px !important;
+			border: none;
+		}
+		iframe, 
+		object,
+		hr {
+			margin-bottom: 15px !important;
+		}
+		blockquote {
+			margin-left: 32px !important;
+			font-style: italic !important;
+			color: #555;
+		}
+		ul, 
+		ol {
+			padding-left: 20px !important;	
+		}
+		ul ul, 
+		ol ol, 
+		ul ol, 
+		ol ul {
+			border: none;
+			margin: 2px !important;
+			padding: 0 !important;
+			padding-left: 24px !important;
+		}
+		hr {
+		  display: block;
+		  height: 1px;
+		  border: 0;
+		  border-top: 1px solid #CCC;
+		}
 
-	h1 {
-		font-size: 32px !important;
-		line-height: 38px !important;
-		margin-bottom: 20px !important;
-	}
-	h2 {
-		font-size: 26px !important;
-		line-height: 34px !important;
-		margin-bottom: 15px !important;
-	}
-	h3 {
-		font-size: 22px !important;
-		line-height: 28px !important;
-		margin-bottom: 7px !important;
-	}
-	h4 {
-		font-size: 16px !important;
-		line-height: 22px !important;
-		margin-bottom: 7px !important;
+		h1, 
+		h2, 
+		h3, 
+		h4 {
+			color: #111;
+			background: none;
+			margin: 0 !important;
+			padding: 0 !important;
+			font-weight: bold;	
+		}
+
+		h1 {
+			font-size: 32px !important;
+			line-height: 38px !important;
+			margin-bottom: 20px !important;
+		}
+		h2 {
+			font-size: 26px !important;
+			line-height: 34px !important;
+			margin-bottom: 15px !important;
+		}
+		h3 {
+			font-size: 22px !important;
+			line-height: 28px !important;
+			margin-bottom: 7px !important;
+		}
+		h4 {
+			font-size: 16px !important;
+			line-height: 22px !important;
+			margin-bottom: 7px !important;
+		}
 	}
 }
 
