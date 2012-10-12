@@ -389,6 +389,8 @@
 
             if(this.opts.closable)
                 $liRight.append(this.buildRightButton('close').on('click', $.proxy(function(e){
+                    if(this.$box.hasClass(cssClass))
+                        $('body').css('overflow', 'auto');
                     this.destroy();
                 }, this)));
 
