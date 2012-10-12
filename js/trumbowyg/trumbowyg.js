@@ -299,7 +299,20 @@
 
             var that = this;
             this.$editor.on('dblclick', 'img', function(){
-                $(this).attr('src', that.getUrl($(this).attr('src')));
+                var img = $(this);
+                that.buildInsert(that.lang.insertImage, {
+                    url: {
+                        value: img.attr('src')
+                    },
+                    alt: {
+                        label: 'Alt',
+                        name: 'alt',
+                        value: img.attr('alt')
+                    }
+                }, function(values){
+                    img.attr('src', values['url']);
+                    img.attr('alt', values['alt']);
+                });
                 return false;
             });
             this.$editor.on('mousedown', function(e){
@@ -389,6 +402,8 @@
 
             if(this.opts.closable)
                 $liRight.append(this.buildRightButton('close').on('click', $.proxy(function(e){
+                    if(this.$box.hasClass(cssClass))
+                        $('body').css('overflow', 'auto');
                     this.destroy();
                 }, this)));
 
@@ -665,7 +680,15 @@
         },
 
         buildInsert: function(title, fields, cmd){
-            var html = '<label>URL : <input type="text" name="url" value="http://"></label>';
+            fields = $.extend(true, {
+                url: {
+                    label: 'URL',
+                    name: 'url',
+                    value: 'http://'
+                }
+            }, fields);
+
+            var html = '';
             for(f in fields){
                 f = fields[f];
                 html += '<label>'+f.label+' : <input type="text" name="'+f.name+'" value="'+ (f.value || '') +'"></label>';
@@ -684,7 +707,10 @@
                 
                 if(values['url'] != 'http://'){
                     this.restoreSelection();
-                    document.execCommand(cmd, false, values['url']);
+                    if($.isString(cmd))
+                        document.execCommand(cmd, false, values['url']);
+                    else
+                        cmd(values);
                     this.syncCode();
                     this.closeModal();
                     modal.off(this.opts.prefix + 'confirm');
@@ -757,6 +783,11 @@
                 text: title,
                 'class': this.opts.prefix + this.cssClass.modal + '-title'
             }).prependTo($modalBox);
+
+
+
+            // Focus in modal box
+            $modalBox.find('input:first').focus();
 
 
             // Append Cancel and Confirm buttons
@@ -839,4 +870,5 @@
     /* isObject */
     var toString = Object.prototype.toString, hasOwnProp = Object.prototype.hasOwnProperty;
     $.isObject = function(obj) { if(toString.call(obj) !== "[object Object]") return false; var key; for(key in obj){} return !key || hasOwnProp.call(obj, key); };
+    $.isString = function(str){ return typeof(str) === 'string' };
 })(jQuery);
