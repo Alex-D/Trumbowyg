@@ -140,6 +140,7 @@ header {
     border-bottom: 1px solid $blue;
     position: fixed;
     z-index: 1;
+    @include box-shadow(#222 0 0 7px);
 
     ul {
         margin: 0;

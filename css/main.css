@@ -98,14 +98,17 @@ h5 {
 
 body {
   font-family: "Trebuchet MS", Arial, Helvetica, Verdana, serif, sans-serif;
-  background: #f2f2f2 url('../img/background.jpg?1349833088') left top repeat; }
+  background: #f2f2f2 url('../img/background.jpg?1350006279') left top repeat; }
 
 header {
   background-color: #222;
   height: 58px;
   border-bottom: 1px solid #2f93c1;
   position: fixed;
-  z-index: 1; }
+  z-index: 1;
+  -webkit-box-shadow: #222222 0 0 7px;
+  -moz-box-shadow: #222222 0 0 7px;
+  box-shadow: #222222 0 0 7px; }
   header ul {
     margin: 0;
     padding: 0; }
