@@ -163,12 +163,13 @@ $default-transition-duration: .2s;
 		margin: 0 10px;
 		background-color: #EFEFEF;
 		border: 1px solid #999;
+		cursor: pointer;
 
-		&.trumbowyg-modal-confirm {
+		&.trumbowyg-modal-submit {
 			right: 120px;
 			border-color: green;
 		}
-		&.trumbowyg-modal-cancel {
+		&.trumbowyg-modal-reset {
 			border-color: red;
 		}
 
@@ -220,6 +221,7 @@ $default-transition-duration: .2s;
 	img {
 		height: auto;
 	}
+	img { cursor: move; }
 
 	&.trumbowyg-reset-css {
 		background: #FEFEFE !important;
