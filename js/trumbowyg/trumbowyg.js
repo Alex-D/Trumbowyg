@@ -15,7 +15,7 @@
             underline: "Underline",
 
             strong: "Strong",
-            em: "Emphase",
+            em: "Emphasis",
 
             unorderedList: "Unordered list",
             orderedList: "Ordered list",
@@ -35,45 +35,10 @@
 
             fullscreen: "fullscreen",
 
-            close: "Close"
-        },
+            close: "Close",
 
-        fr: {
-            viewHTML: "Voir le HTML",
-
-            formatting: "Format",
-            p: "Paragraphe",
-            blockquote: "Citation",
-            code: "Code",
-            header: "Titre",
-
-            bold: "Gras",
-            italic: "Italique",
-            strikethrough: "Rayé",
-            underline: "Souligné",
-
-            strong: "Strong",
-            em: "Emphase",
-
-            unorderedList: "Liste à puces",
-            orderedList: "Liste ordonnée",
-
-            insertImage: "Inserer une Image...",
-            insertVideo: "Inserer une Video...",
-            link: "Lien",
-            createLink: "Insérer un lien...",
-            unlink: "Supprimer le lien",
-
-            justifyLeft: "Aligner à gauche",
-            justifyCenter: "Centrer",
-            justifyRight: "Aligner à droite",
-            justifyFull: "Justifier",
-
-            insertHorizontalRule: "Insérer un séparateur horizontal",
-
-            fullscreen: "Plein écran",
-
-            close: "Fermer"
+            confirm: "Confirm",
+            cancel: "Cancel"
         }
     }
 };
@@ -101,9 +66,8 @@
         // jQuery object of the editor
         this.$e = $(editorElem);
         this.$creator = $(editorElem);
-        this.lang = null;
 
-        // Language management
+        // Localization management
         if(typeof opts === 'undefined' || typeof opts.lang === 'undefined' || typeof $.trumbowyg.langs[opts.lang] === 'undefined')
             this.lang = $.trumbowyg.langs['en'];
         else
@@ -130,13 +94,16 @@
             fullscreen: 'fullscreen',
             close: 'close',
             notDisable: 'not-disable',
-            buttonsRight: 'buttons-right'
+            buttonsRight: 'buttons-right',
+            modal: 'modal',
+            fixedTop: 'fixed-top'
         };
 
         // Defaults Options
         this.opts = $.extend(true, {
             lang: 'en',
             dir: 'ltr',
+            duration: 200, // Duration of modal box animations
 
             mobile: false,
             tablet: true,
@@ -263,51 +230,10 @@
 
             this.buildEditor();
             this.buildButtonPane();
+            
+            this.fixedButtonPaneEvents();
 
-            if(this.opts.fixedButtonPane){
-                this.isFixed = false;
-
-                $(window).on('scroll', $.proxy(function(e){
-                    if(!this.$box)
-                        return;
-
-                    this.syncCode();
-
-                    var wScroll = $(window).scrollTop();
-                    var offset = this.$box.offset().top + 2;
-                    var toFixed = (wScroll - offset > 0) && ((wScroll - offset - parseInt(this.height.replace('px', ''))) < 0);
-
-                    if(toFixed){
-                        if(!this.isFixed){
-                            this.isFixed = true;
-                            this.$buttonPane.css({
-                                position: 'fixed',
-                                top: 0,
-                                left: (this.opts.fixedFullWidth) ? '0' : 'auto',
-                                width: (this.opts.fixedFullWidth) ? '100%' : this.$box.css('width'),
-                                zIndex: 7
-                            });
-                            this.$editor.css({ marginTop: this.$buttonPane.css('height') });
-                            this.$e.css({ marginTop: this.$buttonPane.css('height') });
-                        }
-
-                        $('.' + this.opts.prefix + this.cssClass.dropdown, this.$box).css({
-                            position: this.opts.fixedFullWidth ? 'fixed' : 'absolute',
-                            top: this.opts.fixedFullWidth ? this.$buttonPane.css('height') : parseInt(this.$buttonPane.css('height').replace('px', '')) + (wScroll - offset) + 'px',
-                            zIndex: 15
-                        });
-                    } else if(this.isFixed) {
-                        this.isFixed = false;
-                        this.$buttonPane.css({ position: 'relative' });
-                        this.$editor.css({ marginTop: 0 });
-                        this.$e.css({ marginTop: 0 });
-                        $('.' + this.opts.prefix + this.cssClass.dropdown, this.$box).css({
-                            position: 'absolute',
-                            top: this.$buttonPane.css('height')
-                        });
-                    }
-                }, this));
-            }
+            this.buildOverlay();
         },
 
         buildEditor: function(disable){
@@ -369,12 +295,14 @@
                 });
             }
 
+
+
             var that = this;
             this.$editor.on('dblclick', 'img', function(){
                 $(this).attr('src', that.getUrl($(this).attr('src')));
                 return false;
             });
-            this.$editor.on('click, blur, focus', function(){
+            this.$editor.on('mousedown', function(e){
                 that.sementicCode();
             });
         },
@@ -471,31 +399,34 @@
 
         buildButton: function(name){
             var btnDef = this.opts.buttonsDef[name];
+            var that = this;
             var btn = $('<a/>', {
                 href: 'javascript:void(null);',
                 'class': this.opts.prefix + name +'-button',
                 text: btnDef.text || btnDef.title || this.lang[name] || name,
                 title: btnDef.title || btnDef.text || this.lang[name] || name,
-                mousedown: $.proxy(function(e){
-                    if(!btnDef.dropdown || this.$box.find('.'+name+'-'+this.opts.prefix + this.cssClass.dropdown).is(':hidden'))
+                mousedown: function(e){
+                    if(!btnDef.dropdown || that.$box.find('.'+name+'-'+that.opts.prefix + that.cssClass.dropdown).is(':hidden'))
                         $('body').trigger('mousedown');
 
-                    if(this.$buttonPane.hasClass(this.opts.prefix + 'disable') && name != 'viewHTML')
+                    if(that.$buttonPane.hasClass(that.opts.prefix + 'disable') 
+                        && !$(this).parent().hasClass(that.opts.prefix + that.cssClass.notDisable))
                         return false;
 
-                    this.execCommand((btnDef.dropdown ? 'dropdown' : '') || btnDef.func || name,
+                    that.execCommand((btnDef.dropdown ? 'dropdown' : '') || btnDef.func || name,
                                      btnDef.param || name);
 
                     e.stopPropagation();
                     e.preventDefault();
                     return false;
-                }, this)
+                }
             });
 
 
 
             if(btnDef.dropdown){
-                var cssClass = this.opts.prefix + this.cssClass.dropdown;
+                var cssClass = this.opts.prefix + this.cssClass.dropdown
+                             + ' ' + this.opts.prefix + this.cssClass.fixedTop;
 
                 var dropdown = $('<div/>', {
                     'class': name + '-' + cssClass + ' ' + cssClass
@@ -539,6 +470,95 @@
             });
         },
 
+        buildOverlay: function(){
+            return this.$overlay = $('<div/>', {
+                'class': this.opts.prefix + 'overlay'
+            }).css({
+                top: this.$buttonPane.css('height'),
+                height: this.$editor.outerHeight()
+            }).appendTo(this.$box);
+        },
+        showOverlay: function(){
+            $(window).trigger('scroll');
+            this.$overlay.fadeIn(200);
+        },
+        hideOverlay: function(){
+            this.$overlay.fadeOut(200);
+        },
+
+        fixedButtonPaneEvents: function(){
+            if(!this.opts.fixedButtonPane)
+                return;
+
+            this.isFixed = false;
+
+            $(window).on('scroll', $.proxy(function(e){
+                if(!this.$box)
+                    return;
+
+                this.syncCode();
+
+                var wScroll = $(window).scrollTop();
+                var offset = this.$box.offset().top + 2;
+                var toFixed = (wScroll - offset > 0) && ((wScroll - offset - parseInt(this.height.replace('px', ''))) < 0);
+
+                if(toFixed){
+                    if(!this.isFixed){
+                        this.isFixed = true;
+                        this.$buttonPane.css({
+                            position: 'fixed',
+                            top: 0,
+                            left: (this.opts.fixedFullWidth) ? '0' : 'auto',
+                            width: (this.opts.fixedFullWidth) ? '100%' : this.$box.css('width'),
+                            zIndex: 7
+                        });
+                        this.$editor.css({ marginTop: this.$buttonPane.css('height') });
+                        this.$e.css({ marginTop: this.$buttonPane.css('height') });
+                    }
+
+                    $('.' + this.opts.prefix + this.cssClass.fixedTop, this.$box).css({
+                        position: this.opts.fixedFullWidth ? 'fixed' : 'absolute',
+                        top: this.opts.fixedFullWidth ? this.$buttonPane.css('height') : parseInt(this.$buttonPane.css('height').replace('px', '')) + (wScroll - offset) + 'px',
+                        zIndex: 15
+                    });
+                } else if(this.isFixed) {
+                    this.isFixed = false;
+                    this.$buttonPane.css({ position: 'relative' });
+                    this.$editor.css({ marginTop: 0 });
+                    this.$e.css({ marginTop: 0 });
+                    $('.' + this.opts.prefix + this.cssClass.fixedTop, this.$box).css({
+                        position: 'absolute',
+                        top: this.$buttonPane.css('height')
+                    });
+                }
+            }, this));
+        },
+
+
+
+
+        destroy: function(){
+            var html = this.getCode();
+
+            if(this.isTextarea)
+                this.$box.after(this.$e.css({height: this.height})
+                                       .val(html)
+                                       .removeClass(this.opts.prefix + this.cssClass.editorTextarea)
+                                       .show());
+            else 
+                this.$box.after(this.$editor.css({height: this.height})
+                                            .removeClass(this.opts.prefix + this.cssClass.editorEditor)
+                                            .attr('contenteditable', false)
+                                            .html(html)
+                                            .show());
+
+            this.$box.remove();
+            this.$creator.removeData('trumbowyg');
+        },
+
+
+
+
         toggle: function(){
             this.sementicCode();
             this.$editor.toggle();
@@ -573,24 +593,7 @@
 
 
 
-        destroy: function(){
-            var html = this.getCode();
-
-            if(this.isTextarea)
-                this.$box.after(this.$e.css({height: this.height})
-                                       .val(html)
-                                       .removeClass(this.opts.prefix + this.cssClass.editorTextarea)
-                                       .show());
-            else 
-                this.$box.after(this.$editor.css({height: this.height})
-                                            .removeClass(this.opts.prefix + this.cssClass.editorEditor)
-                                            .attr('contenteditable', false)
-                                            .html(html)
-                                            .show());
-
-            this.$box.remove();
-            this.$creator.removeData('trumbowyg');
-        },
+        
 
         getCode: function(){
             return this.$e.val();
@@ -626,10 +629,22 @@
             });
         },
 
+
+
         createLink: function(){
-            var url = this.getUrl();
-            if(url) document.execCommand('createlink', false, url);
-            this.syncCode();
+            this.saveSelection();
+            this.buildInsert(this.lang.insertImage, {
+                title: {
+                    label: 'Title',
+                    name: 'title',
+                    value: this.selection
+                },
+                text: {
+                    label: 'Text',
+                    name: 'text',
+                    value: this.selection
+                }
+            }, 'createLink');
         },
         formatBlock: function(param){
             if($.browser.msie)
@@ -639,19 +654,52 @@
             this.syncCode();
         },
         insertImage: function(){
-            var url = this.getUrl();
-            if(url) document.execCommand('insertImage', false, url);
-            this.syncCode();
+            this.saveSelection();
+            this.buildInsert(this.lang.insertImage, {
+                alt: {
+                    label: 'Alt',
+                    name: 'alt',
+                    value: this.selection
+                }
+            }, 'insertImage');
         },
 
-        getUrl: function(inputUrl){
-            var url = "http://";
-            do {
-                url = prompt("URL : ", inputUrl ? inputUrl : url);
-            } while(url == "http://");
+        buildInsert: function(title, fields, cmd){
+            var html = '<label>URL : <input type="text" name="url" value="http://"></label>';
+            for(f in fields){
+                f = fields[f];
+                html += '<label>'+f.label+' : <input type="text" name="'+f.name+'" value="'+ (f.value || '') +'"></label>';
+            }
 
-            return url ? url : false;
+            var modal = this.openModal(title, html);
+
+            modal.on(this.opts.prefix + 'confirm', $.proxy(function(e, m){
+                var $modal = $(m);
+
+                var values = {};
+                fields['url'] = {};
+                for(f in fields){
+                    values[f] = $('input[name="'+f+'"]', $modal).val();
+                }
+                
+                if(values['url'] != 'http://'){
+                    this.restoreSelection();
+                    document.execCommand(cmd, false, values['url']);
+                    this.syncCode();
+                    this.closeModal();
+                    modal.off(this.opts.prefix + 'confirm');
+                } else {
+                    $modal.append('<span class="error">Invalid URL</span>');
+                }
+            }, this));
+            modal.one(this.opts.prefix + 'cancel', $.proxy(function(){
+                modal.off(this.opts.prefix + 'confirm');
+                this.closeModal();
+                this.restoreSelection();
+            }, this));
         },
+
+
 
         execCommand: function(cmd, param){
             if(cmd != 'dropdown')
@@ -671,9 +719,116 @@
         },
 
 
+
+        openModal: function(title, content){
+            this.saveSelection();
+            this.showOverlay();
+
+            // Disable all buttonPane buttons
+            this.$buttonPane.addClass(this.opts.prefix + 'disable');
+            $('.' + this.opts.prefix + this.cssClass.notDisable, this.$buttonPane)
+                .not('.' + this.opts.prefix + this.cssClass.buttonsRight)
+                .removeClass(this.opts.prefix + this.cssClass.notDisable)
+                .addClass(this.opts.prefix + this.cssClass.notDisable + '-old');
+
+
+            // Build out of ModalBox, it's the mask for animations
+            var $modal = $('<div/>', {
+                'class': this.opts.prefix + this.cssClass.modal + ' ' + this.opts.prefix + this.cssClass.fixedTop
+            }).css({
+                top: this.$buttonPane.css('height')
+            }).appendTo(this.$box);
+
+
+            // Build ModalBox and animate to show them
+            var $modalBox = $('<div/>', {
+                'class': this.opts.prefix + this.cssClass.modal + '-box',
+                html: content
+            }).css({
+                top: '-' + $modal.css('height')
+            }).appendTo($modal)
+            .animate({
+                top: 0
+            }, this.opts.duration);
+
+
+            // Append title
+            $('<span/>', {
+                text: title,
+                'class': this.opts.prefix + this.cssClass.modal + '-title'
+            }).prependTo($modalBox);
+
+
+            // Append Cancel and Confirm buttons
+            this.buildModalButton('cancel', $modalBox);
+            this.buildModalButton('confirm', $modalBox);
+
+
+            $('body').trigger('scroll');
+
+            return $modalBox;
+        },
+        buildModalButton: function(name, modal){
+            return $('<a/>', {
+                href: 'javascript:void(null);',
+                'class': this.opts.prefix + this.cssClass.modal + '-button '+ this.opts.prefix + this.cssClass.modal + '-' + name,
+                text: this.lang[name] || name,
+                title: this.lang[name] || name,
+                click: $.proxy(function(e){
+                    modal.trigger(this.opts.prefix + name, modal);
+                }, this)
+            }).appendTo(modal);
+        },
+        closeModal: function(){
+            this.$buttonPane.removeClass(this.opts.prefix + 'disable');
+
+            $('.' + this.opts.prefix + this.cssClass.notDisable + '-old', this.$buttonPane)
+                .removeClass(this.opts.prefix + this.cssClass.notDisable + '-old')
+                .addClass(this.opts.prefix + this.cssClass.notDisable);
+
+            var that = this;
+            var $modalBox = $('.' + this.opts.prefix + this.cssClass.modal + '-box', this.$box);
+            $modalBox.animate({
+                top: '-' + $modalBox.css('height')
+            }, this.opts.duration, function(){
+                $(this).parent().remove();
+                that.hideOverlay();
+            });
+        },
+
+
+
+
+
+        saveSelection: function(){
+            this.selection = null;
+            if(window.getSelection){
+                var sel = window.getSelection();
+                if(sel.getRangeAt && sel.rangeCount)
+                    this.selection = sel.getRangeAt(0);
+            } else if(document.selection && document.selection.createRange){
+                this.selection = document.selection.createRange();
+            }
+        },
+        restoreSelection: function(){
+            range = this.selection;
+            if(range){
+                if(window.getSelection){
+                    var sel = window.getSelection();
+                    sel.removeAllRanges();
+                    sel.addRange(range);
+                } else if(document.selection && range.select){
+                    range.select();
+                }
+            }
+        },
+        
+
+
+
         isEnabled: function(){
-            var mobile = "iPhone|iPod|Android|BlackBerry|Windows Phone|ZuneWP7";
-            var exprTablet = new RegExp("(iPad|webOS|"+mobile+")");
+            var mobile = "iPhone|iPod|Android|BlackBerry|Windows\sPhone|ZuneWP7";
+            var exprTablet = new RegExp("(iPad|webOS)");
             var exprMobile = new RegExp("("+mobile+")");
 
             return (this.opts.tablet === true && exprTablet.test(navigator.userAgent))
@@ -683,5 +838,5 @@
 
     /* isObject */
     var toString = Object.prototype.toString, hasOwnProp = Object.prototype.hasOwnProperty;
-    jQuery.isObject = function(obj) { if(toString.call(obj) !== "[object Object]") return false; var key; for(key in obj){} return !key || hasOwnProp.call(obj, key); }
+    $.isObject = function(obj) { if(toString.call(obj) !== "[object Object]") return false; var key; for(key in obj){} return !key || hasOwnProp.call(obj, key); };
 })(jQuery);
