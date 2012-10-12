@@ -74,8 +74,8 @@
             this.lang = $.extend(true, {}, $.trumbowyg.langs['en'], $.trumbowyg.langs[opts.lang]);
 
         // Read only options
-        this.global = {
-            buttonsGroups: {
+        this.glob = {
+            btnsGrps: {
                 design : ['bold', 'italic', 'underline', 'strikethrough'],
                 semantic : ['strong', 'em'],
                 justify: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
@@ -83,24 +83,8 @@
             }
         };
 
-        // CSS class prefixed by opts.prefix
-        this.cssClass = {
-            editorBox: 'box',
-            editorEditor: 'editor',
-            editorTextarea: 'textarea',
-            buttonPane: 'button-pane',
-            separator: 'separator',
-            dropdown: 'dropdown',
-            fullscreen: 'fullscreen',
-            close: 'close',
-            notDisable: 'not-disable',
-            buttonsRight: 'buttons-right',
-            modal: 'modal',
-            fixedTop: 'fixed-top'
-        };
-
         // Defaults Options
-        this.opts = $.extend(true, {
+        this.o = $.extend(true, {
             lang: 'en',
             dir: 'ltr',
             duration: 200, // Duration of modal box animations
@@ -109,7 +93,7 @@
             tablet: true,
             closable: false,
             fullscreenable: true,
-            fixedButtonPane: false,
+            fixedbtnPane: false,
             fixedFullWidth: false,
             semantic: false,
             resetCss: false,
@@ -119,15 +103,15 @@
 
             convertLink: true,
 
-            buttons: ['viewHTML', 
+            btns: ['viewHTML', 
                         '|', 'formatting',
-                        '|', this.global.buttonsGroups.design,
+                        '|', this.glob.btnsGrps.design,
                         '|', 'link', 
                         '|', 'insertImage',
-                        '|', this.global.buttonsGroups.justify,
-                        '|', this.global.buttonsGroups.lists,
+                        '|', this.glob.btnsGrps.justify,
+                        '|', this.glob.btnsGrps.lists,
                         '|', 'insertHorizontalRule'],
-            buttonsAdd: [],
+            btnsAdd: [],
 
             /**
              * When the button is associated to a empty object
@@ -141,7 +125,7 @@
              *          title: this.lang.foo
              *      }
              */
-            buttonsDef: {
+            btnsDef: {
                 viewHTML: {
                     func: 'toggle'
                 },
@@ -203,15 +187,15 @@
             }
         }, opts);
 
-        if(this.opts.semantic){
-            this.opts.buttons = [
+        if(this.o.semantic){
+            this.o.btns = [
                 'viewHTML', 
                 '|', 'formatting',
-                '|', this.global.buttonsGroups.semantic,
+                '|', this.glob.btnsGrps.semantic,
                 '|', 'link', 
                 '|', 'insertImage',
-                '|', this.global.buttonsGroups.justify,
-                '|', this.global.buttonsGroups.lists,
+                '|', this.glob.btnsGrps.justify,
+                '|', this.glob.btnsGrps.lists,
                 '|', 'insertHorizontalRule'
             ];
         }
@@ -229,9 +213,9 @@
             }
 
             this.buildEditor();
-            this.buildButtonPane();
+            this.buildbtnPane();
             
-            this.fixedButtonPaneEvents();
+            this.fixedbtnPaneEvents();
 
             this.buildOverlay();
         },
@@ -247,7 +231,7 @@
 
 
             this.$box = $('<div/>', {
-                'class': this.opts.prefix + this.cssClass.editorBox + ' ' + this.opts.prefix + this.opts.lang + ' trumbowyg'
+                'class': this.o.prefix + 'box ' + this.o.prefix + this.o.lang + ' trumbowyg'
             });
 
             this.isTextarea = true;
@@ -260,7 +244,7 @@
             }
 
             this.$e.hide()
-                   .addClass(this.opts.prefix + this.cssClass.editorTextarea);
+                   .addClass(this.o.prefix + 'textarea');
 
             var html = '';
             if(this.isTextarea){
@@ -276,15 +260,15 @@
                 this.syncCode();
             }
 
-            this.$editor.addClass(this.opts.prefix + this.cssClass.editorEditor)
+            this.$editor.addClass(this.o.prefix + 'editor')
                         .attr('contenteditable', true)
-                        .attr('dir', this.opts.dir)
+                        .attr('dir', this.o.dir)
                         .html(html);
 
-            if(this.opts.resetCss)
-                this.$editor.addClass(this.opts.prefix + 'reset-css');
+            if(this.o.resetCss)
+                this.$editor.addClass(this.o.prefix + 'reset-css');
 
-            if(!this.opts.autoAjustHeight){
+            if(!this.o.autoAjustHeight){
                 this.$editor.css({
                     height: this.height,
                     overflow: 'auto'
@@ -326,28 +310,28 @@
             });
         },
 
-        buildButtonPane: function(){
-            if(this.opts.buttons === false) return;
+        buildbtnPane: function(){
+            if(this.o.btns === false) return;
 
-            this.$buttonPane = $('<ul/>', {
-                'class': this.opts.prefix + this.cssClass.buttonPane
+            this.$btnPane = $('<ul/>', {
+                'class': this.o.prefix + 'button-pane'
             });
 
-            $.each(this.opts.buttons.concat(this.opts.buttonsAdd), $.proxy(function(i, btn){
+            $.each(this.o.btns.concat(this.o.btnsAdd), $.proxy(function(i, btn){
                 if(!$.isArray(btn)) btn = [btn];
                 $.each(btn, $.proxy(function(i, btn){
                     try {
                         var li = $('<li/>');
 
                         if(btn == '|'){
-                            li.addClass(this.opts.prefix + this.cssClass.separator);
+                            li.addClass(this.o.prefix + 'separator');
                         } else {
                             if(btn == 'viewHTML')
-                                li.addClass(this.opts.prefix + this.cssClass.notDisable);
-                            li.append(this.buildButton(btn));
+                                li.addClass(this.o.prefix + 'not-disable');
+                            li.append(this.buildbtn(btn));
                         }
 
-                        this.$buttonPane.append(li);
+                        this.$btnPane.append(li);
                     } catch(e){}
                 }, this));
             }, this));
@@ -355,12 +339,12 @@
 
 
             var $liRight = $('<li/>', {
-                'class': this.opts.prefix + this.cssClass.notDisable + ' ' + this.opts.prefix + this.cssClass.buttonsRight
+                'class': this.o.prefix + 'not-disable' + ' ' + this.o.prefix + 'buttons-right'
             });
 
-            if(this.opts.fullscreenable)
-                $liRight.append(this.buildRightButton('fullscreen').on('click', $.proxy(function(e){
-                    var cssClass = this.opts.prefix + this.cssClass.fullscreen;
+            if(this.o.fullscreenable)
+                $liRight.append(this.buildRightbtn('fullscreen').on('click', $.proxy(function(e){
+                    var cssClass = this.o.prefix + 'fullscreen';
                     this.$box.toggleClass(cssClass);
 
                     if(this.$box.hasClass(cssClass)){
@@ -381,13 +365,13 @@
                                 overflow: 'auto'
                             });
                         });
-                        this.$buttonPane.css({
+                        this.$btnPane.css({
                             width: '100%'
                         });
                     } else {
                         $('body').css('overflow', 'auto');
                         this.$box.removeAttr('style');
-                        if(!this.opts.autoAjustHeight){
+                        if(!this.o.autoAjustHeight){
                             var h = this.height;
                             $([this.$editor, this.$e]).each(function(){
                                 $(this).css({
@@ -400,32 +384,32 @@
                     $(window).trigger('scroll');
                 }, this)));
 
-            if(this.opts.closable)
-                $liRight.append(this.buildRightButton('close').on('click', $.proxy(function(e){
+            if(this.o.closable)
+                $liRight.append(this.buildRightbtn('close').on('click', $.proxy(function(e){
                     if(this.$box.hasClass(cssClass))
                         $('body').css('overflow', 'auto');
                     this.destroy();
                 }, this)));
 
-            this.$buttonPane.append($liRight);
+            this.$btnPane.append($liRight);
 
-            this.$box.prepend(this.$buttonPane);
+            this.$box.prepend(this.$btnPane);
         },
 
-        buildButton: function(name){
-            var btnDef = this.opts.buttonsDef[name];
+        buildbtn: function(name){
+            var btnDef = this.o.btnsDef[name];
             var that = this;
             var btn = $('<a/>', {
                 href: 'javascript:void(null);',
-                'class': this.opts.prefix + name +'-button',
+                'class': this.o.prefix + name +'-button',
                 text: btnDef.text || btnDef.title || this.lang[name] || name,
                 title: btnDef.title || btnDef.text || this.lang[name] || name,
                 mousedown: function(e){
-                    if(!btnDef.dropdown || that.$box.find('.'+name+'-'+that.opts.prefix + that.cssClass.dropdown).is(':hidden'))
+                    if(!btnDef.dropdown || that.$box.find('.'+name+'-'+that.o.prefix + 'dropdown').is(':hidden'))
                         $('body').trigger('mousedown');
 
-                    if(that.$buttonPane.hasClass(that.opts.prefix + 'disable') 
-                        && !$(this).parent().hasClass(that.opts.prefix + that.cssClass.notDisable))
+                    if(that.$btnPane.hasClass(that.o.prefix + 'disable') 
+                        && !$(this).parent().hasClass(that.o.prefix + 'not-disable'))
                         return false;
 
                     that.execCommand((btnDef.dropdown ? 'dropdown' : '') || btnDef.func || name,
@@ -440,8 +424,8 @@
 
 
             if(btnDef.dropdown){
-                var cssClass = this.opts.prefix + this.cssClass.dropdown
-                             + ' ' + this.opts.prefix + this.cssClass.fixedTop;
+                var cssClass = this.o.prefix + 'dropdown'
+                             + ' ' + this.o.prefix + 'fixed-top';
 
                 var dropdown = $('<div/>', {
                     'class': name + '-' + cssClass + ' ' + cssClass
@@ -449,14 +433,14 @@
                 dropdown.data('visible', false);
                 for(var subName in btnDef.dropdown){
                     if($.isObject(btnDef.dropdown[subName]))
-                        dropdown.append(this.buildSubButton(btnDef.dropdown, subName));
+                        dropdown.append(this.buildSubbtn(btnDef.dropdown, subName));
                 }
                 this.$box.append(dropdown.hide());
             }
 
             return btn;
         },
-        buildSubButton: function(dropdown, name){
+        buildSubbtn: function(dropdown, name){
             $('body').trigger('mousedown');
 
             var btnDef = dropdown[name];
@@ -476,10 +460,10 @@
                 }, this)
             });
         },
-        buildRightButton: function(name){
+        buildRightbtn: function(name){
             return $('<a/>', {
                 href: 'javascript:void(null);',
-                'class': this.opts.prefix + (this.cssClass[name] || name) + '-button',
+                'class': this.o.prefix + name+'-button',
                 title: this.lang[name],
                 text: this.lang[name]
             });
@@ -487,9 +471,9 @@
 
         buildOverlay: function(){
             return this.$overlay = $('<div/>', {
-                'class': this.opts.prefix + 'overlay'
+                'class': this.o.prefix + 'overlay'
             }).css({
-                top: this.$buttonPane.css('height'),
+                top: this.$btnPane.css('height'),
                 height: this.$editor.outerHeight()
             }).appendTo(this.$box);
         },
@@ -501,8 +485,8 @@
             this.$overlay.fadeOut(200);
         },
 
-        fixedButtonPaneEvents: function(){
-            if(!this.opts.fixedButtonPane)
+        fixedbtnPaneEvents: function(){
+            if(!this.o.fixedbtnPane)
                 return;
 
             this.isFixed = false;
@@ -520,30 +504,30 @@
                 if(toFixed){
                     if(!this.isFixed){
                         this.isFixed = true;
-                        this.$buttonPane.css({
+                        this.$btnPane.css({
                             position: 'fixed',
                             top: 0,
-                            left: (this.opts.fixedFullWidth) ? '0' : 'auto',
-                            width: (this.opts.fixedFullWidth) ? '100%' : this.$box.css('width'),
+                            left: (this.o.fixedFullWidth) ? '0' : 'auto',
+                            width: (this.o.fixedFullWidth) ? '100%' : this.$box.css('width'),
                             zIndex: 7
                         });
-                        this.$editor.css({ marginTop: this.$buttonPane.css('height') });
-                        this.$e.css({ marginTop: this.$buttonPane.css('height') });
+                        this.$editor.css({ marginTop: this.$btnPane.css('height') });
+                        this.$e.css({ marginTop: this.$btnPane.css('height') });
                     }
 
-                    $('.' + this.opts.prefix + this.cssClass.fixedTop, this.$box).css({
-                        position: this.opts.fixedFullWidth ? 'fixed' : 'absolute',
-                        top: this.opts.fixedFullWidth ? this.$buttonPane.css('height') : parseInt(this.$buttonPane.css('height').replace('px', '')) + (wScroll - offset) + 'px',
+                    $('.' + this.o.prefix + 'fixed-top', this.$box).css({
+                        position: this.o.fixedFullWidth ? 'fixed' : 'absolute',
+                        top: this.o.fixedFullWidth ? this.$btnPane.css('height') : parseInt(this.$btnPane.css('height').replace('px', '')) + (wScroll - offset) + 'px',
                         zIndex: 15
                     });
                 } else if(this.isFixed) {
                     this.isFixed = false;
-                    this.$buttonPane.css({ position: 'relative' });
+                    this.$btnPane.css({ position: 'relative' });
                     this.$editor.css({ marginTop: 0 });
                     this.$e.css({ marginTop: 0 });
-                    $('.' + this.opts.prefix + this.cssClass.fixedTop, this.$box).css({
+                    $('.' + this.o.prefix + 'fixed-top', this.$box).css({
                         position: 'absolute',
-                        top: this.$buttonPane.css('height')
+                        top: this.$btnPane.css('height')
                     });
                 }
             }, this));
@@ -558,11 +542,11 @@
             if(this.isTextarea)
                 this.$box.after(this.$e.css({height: this.height})
                                        .val(html)
-                                       .removeClass(this.opts.prefix + this.cssClass.editorTextarea)
+                                       .removeClass(this.o.prefix + 'textarea')
                                        .show());
             else 
                 this.$box.after(this.$editor.css({height: this.height})
-                                            .removeClass(this.opts.prefix + this.cssClass.editorEditor)
+                                            .removeClass(this.o.prefix + 'editor')
                                             .attr('contenteditable', false)
                                             .html(html)
                                             .show());
@@ -578,27 +562,27 @@
             this.sementicCode();
             this.$editor.toggle();
             this.$e.toggle();
-            this.$buttonPane.toggleClass(this.opts.prefix + 'disable');
+            this.$btnPane.toggleClass(this.o.prefix + 'disable');
         },
 
         dropdown: function(name){
-            var $dropdown = this.$box.find('.'+name+'-'+this.opts.prefix + this.cssClass.dropdown);
-            var $btn = this.$buttonPane.find('.'+this.opts.prefix+name+'-button');
+            var $dropdown = this.$box.find('.'+name+'-'+this.o.prefix + 'dropdown');
+            var $btn = this.$btnPane.find('.'+this.o.prefix+name+'-button');
 
             if($dropdown.is(':hidden')){
-                $btn.addClass(this.opts.prefix + 'active');
+                $btn.addClass(this.o.prefix + 'active');
 
                 $dropdown.css({
                     position: 'absolute',
-                    top: this.$buttonPane.css('height'),
-                    left: (this.opts.fixedFullWidth && this.isFixed) ? $btn.offset().left+'px' : ($btn.offset().left - this.$buttonPane.offset().left)+'px'
+                    top: this.$btnPane.css('height'),
+                    left: (this.o.fixedFullWidth && this.isFixed) ? $btn.offset().left+'px' : ($btn.offset().left - this.$btnPane.offset().left)+'px'
                 }).show();
 
                 $(window).trigger('scroll');
 
                 $('body').on('mousedown', $.proxy(function(e){
-                    $('.' + this.opts.prefix + this.cssClass.dropdown).hide();
-                    $('.' + this.opts.prefix + 'active').removeClass(this.opts.prefix + 'active');
+                    $('.' + this.o.prefix + 'dropdown').hide();
+                    $('.' + this.o.prefix + 'active').removeClass(this.o.prefix + 'active');
                     $('body').off('mousedown');
                 }, this));
             } else {
@@ -622,7 +606,7 @@
             else
                 this.$editor.html(this.$e.val());
 
-            if(this.opts.autoAjustHeight){
+            if(this.o.autoAjustHeight){
                 this.height = this.$editor.css('height');
                 this.$e.css({height: this.height});
             }
@@ -631,7 +615,7 @@
         sementicCode: function(){
             this.syncCode();
 
-            if(this.opts.semantic){
+            if(this.o.semantic){
                 this.sementicTag('b', 'strong');
                 this.sementicTag('i', 'em');
 
@@ -696,7 +680,7 @@
 
             var modal = this.openModal(title, html);
 
-            modal.on(this.opts.prefix + 'confirm', $.proxy(function(e, m){
+            modal.on(this.o.prefix + 'confirm', $.proxy(function(e, m){
                 var $modal = $(m);
 
                 var values = {};
@@ -713,13 +697,13 @@
                         cmd(values);
                     this.syncCode();
                     this.closeModal();
-                    modal.off(this.opts.prefix + 'confirm');
+                    modal.off(this.o.prefix + 'confirm');
                 } else {
                     $modal.append('<span class="error">Invalid URL</span>');
                 }
             }, this));
-            modal.one(this.opts.prefix + 'cancel', $.proxy(function(){
-                modal.off(this.opts.prefix + 'confirm');
+            modal.one(this.o.prefix + 'cancel', $.proxy(function(){
+                modal.off(this.o.prefix + 'confirm');
                 this.closeModal();
                 this.restoreSelection();
             }, this));
@@ -750,38 +734,38 @@
             this.saveSelection();
             this.showOverlay();
 
-            // Disable all buttonPane buttons
-            this.$buttonPane.addClass(this.opts.prefix + 'disable');
-            $('.' + this.opts.prefix + this.cssClass.notDisable, this.$buttonPane)
-                .not('.' + this.opts.prefix + this.cssClass.buttonsRight)
-                .removeClass(this.opts.prefix + this.cssClass.notDisable)
-                .addClass(this.opts.prefix + this.cssClass.notDisable + '-old');
+            // Disable all btnPane btns
+            this.$btnPane.addClass(this.o.prefix + 'disable');
+            $('.' + this.o.prefix + 'not-disable', this.$btnPane)
+                .not('.' + this.o.prefix + 'buttons-right')
+                .removeClass(this.o.prefix + 'not-disable')
+                .addClass(this.o.prefix + 'not-disable' + '-old');
 
 
             // Build out of ModalBox, it's the mask for animations
             var $modal = $('<div/>', {
-                'class': this.opts.prefix + this.cssClass.modal + ' ' + this.opts.prefix + this.cssClass.fixedTop
+                'class': this.o.prefix + 'modal ' + this.o.prefix + 'fixed-top'
             }).css({
-                top: this.$buttonPane.css('height')
+                top: this.$btnPane.css('height')
             }).appendTo(this.$box);
 
 
             // Build ModalBox and animate to show them
             var $modalBox = $('<div/>', {
-                'class': this.opts.prefix + this.cssClass.modal + '-box',
+                'class': this.o.prefix + 'modal-box',
                 html: content
             }).css({
                 top: '-' + $modal.css('height')
             }).appendTo($modal)
             .animate({
                 top: 0
-            }, this.opts.duration);
+            }, this.o.duration);
 
 
             // Append title
             $('<span/>', {
                 text: title,
-                'class': this.opts.prefix + this.cssClass.modal + '-title'
+                'class': this.o.prefix + 'modal-title'
             }).prependTo($modalBox);
 
 
@@ -790,38 +774,38 @@
             $modalBox.find('input:first').focus();
 
 
-            // Append Cancel and Confirm buttons
-            this.buildModalButton('cancel', $modalBox);
-            this.buildModalButton('confirm', $modalBox);
+            // Append Cancel and Confirm btns
+            this.buildModalbtn('cancel', $modalBox);
+            this.buildModalbtn('confirm', $modalBox);
 
 
             $('body').trigger('scroll');
 
             return $modalBox;
         },
-        buildModalButton: function(name, modal){
+        buildModalbtn: function(name, modal){
             return $('<a/>', {
                 href: 'javascript:void(null);',
-                'class': this.opts.prefix + this.cssClass.modal + '-button '+ this.opts.prefix + this.cssClass.modal + '-' + name,
+                'class': this.o.prefix + 'modal-button '+ this.o.prefix + 'modal-' + name,
                 text: this.lang[name] || name,
                 title: this.lang[name] || name,
                 click: $.proxy(function(e){
-                    modal.trigger(this.opts.prefix + name, modal);
+                    modal.trigger(this.o.prefix + name, modal);
                 }, this)
             }).appendTo(modal);
         },
         closeModal: function(){
-            this.$buttonPane.removeClass(this.opts.prefix + 'disable');
+            this.$btnPane.removeClass(this.o.prefix + 'disable');
 
-            $('.' + this.opts.prefix + this.cssClass.notDisable + '-old', this.$buttonPane)
-                .removeClass(this.opts.prefix + this.cssClass.notDisable + '-old')
-                .addClass(this.opts.prefix + this.cssClass.notDisable);
+            $('.' + this.o.prefix + 'not-disable' + '-old', this.$btnPane)
+                .removeClass(this.o.prefix + 'not-disable' + '-old')
+                .addClass(this.o.prefix + 'not-disable');
 
-            var that = this;
-            var $modalBox = $('.' + this.opts.prefix + this.cssClass.modal + '-box', this.$box);
+            that = this;
+            $modalBox = $('.' + this.o.prefix + 'modal-box', this.$box);
             $modalBox.animate({
                 top: '-' + $modalBox.css('height')
-            }, this.opts.duration, function(){
+            }, this.o.duration, function(){
                 $(this).parent().remove();
                 that.hideOverlay();
             });
@@ -862,8 +846,8 @@
             var exprTablet = new RegExp("(iPad|webOS)");
             var exprMobile = new RegExp("("+mobile+")");
 
-            return (this.opts.tablet === true && exprTablet.test(navigator.userAgent))
-                    || (this.opts.mobile === true && exprMobile.test(navigator.userAgent));
+            return (this.o.tablet === true && exprTablet.test(navigator.userAgent))
+                    || (this.o.mobile === true && exprMobile.test(navigator.userAgent));
         }
     };
 
