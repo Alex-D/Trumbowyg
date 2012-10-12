@@ -35,6 +35,6 @@ $.trumbowyg.langs.fr = {
 
     close: "Fermer",
 
-    confirm: "Valider",
-    cancel: "Annuler"
+    submit: "Valider",
+    reset: "Annuler"
 }

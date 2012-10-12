@@ -151,11 +151,12 @@
     line-height: 30px;
     margin: 0 10px;
     background-color: #EFEFEF;
-    border: 1px solid #999; }
-    .trumbowyg-modal-box .trumbowyg-modal-button.trumbowyg-modal-confirm {
+    border: 1px solid #999;
+    cursor: pointer; }
+    .trumbowyg-modal-box .trumbowyg-modal-button.trumbowyg-modal-submit {
       right: 120px;
       border-color: green; }
-    .trumbowyg-modal-box .trumbowyg-modal-button.trumbowyg-modal-cancel {
+    .trumbowyg-modal-box .trumbowyg-modal-button.trumbowyg-modal-reset {
       border-color: red; }
     .trumbowyg-modal-box .trumbowyg-modal-button:hover, .trumbowyg-modal-box .trumbowyg-modal-button:focus {
       background-color: #FFF; }
@@ -190,6 +191,8 @@
 .trumbowyg-editor video,
 .trumbowyg-editor img {
   height: auto; }
+.trumbowyg-editor img {
+  cursor: move; }
 .trumbowyg-editor.trumbowyg-reset-css {
   background: #FEFEFE !important;
   font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif !important;

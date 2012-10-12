@@ -37,8 +37,8 @@
 
             close: "Close",
 
-            confirm: "Confirm",
-            cancel: "Cancel"
+            submit: "Confirm",
+            reset: "Cancel"
         }
     }
 };
@@ -93,7 +93,7 @@
             tablet: true,
             closable: false,
             fullscreenable: true,
-            fixedbtnPane: false,
+            fixedBtnPane: false,
             fixedFullWidth: false,
             semantic: false,
             resetCss: false,
@@ -213,9 +213,9 @@
             }
 
             this.buildEditor();
-            this.buildbtnPane();
+            this.buildBtnPane();
             
-            this.fixedbtnPaneEvents();
+            this.fixedBtnPaneEvents();
 
             this.buildOverlay();
         },
@@ -310,11 +310,12 @@
             });
         },
 
-        buildbtnPane: function(){
+        buildBtnPane: function(){
             if(this.o.btns === false) return;
+            var pfx = this.o.prefix;
 
             this.$btnPane = $('<ul/>', {
-                'class': this.o.prefix + 'button-pane'
+                'class': pfx + 'button-pane'
             });
 
             $.each(this.o.btns.concat(this.o.btnsAdd), $.proxy(function(i, btn){
@@ -324,11 +325,11 @@
                         var li = $('<li/>');
 
                         if(btn == '|'){
-                            li.addClass(this.o.prefix + 'separator');
+                            li.addClass(pfx + 'separator');
                         } else {
                             if(btn == 'viewHTML')
-                                li.addClass(this.o.prefix + 'not-disable');
-                            li.append(this.buildbtn(btn));
+                                li.addClass(pfx + 'not-disable');
+                            li.append(this.buildBtn(btn));
                         }
 
                         this.$btnPane.append(li);
@@ -339,12 +340,12 @@
 
 
             var $liRight = $('<li/>', {
-                'class': this.o.prefix + 'not-disable' + ' ' + this.o.prefix + 'buttons-right'
+                'class': pfx + 'not-disable ' + pfx + 'buttons-right'
             });
 
             if(this.o.fullscreenable)
-                $liRight.append(this.buildRightbtn('fullscreen').on('click', $.proxy(function(e){
-                    var cssClass = this.o.prefix + 'fullscreen';
+                $liRight.append(this.buildRightBtn('fullscreen').on('click', $.proxy(function(e){
+                    var cssClass = pfx + 'fullscreen';
                     this.$box.toggleClass(cssClass);
 
                     if(this.$box.hasClass(cssClass)){
@@ -365,27 +366,22 @@
                                 overflow: 'auto'
                             });
                         });
-                        this.$btnPane.css({
-                            width: '100%'
-                        });
+                        this.$btnPane.css('width', '100%');
                     } else {
                         $('body').css('overflow', 'auto');
                         this.$box.removeAttr('style');
                         if(!this.o.autoAjustHeight){
-                            var h = this.height;
+                            h = this.height;
                             $([this.$editor, this.$e]).each(function(){
-                                $(this).css({
-                                    height: h
-                                });
+                                $(this).css('height', h);
                             });
                         }
-
                     }
                     $(window).trigger('scroll');
                 }, this)));
 
             if(this.o.closable)
-                $liRight.append(this.buildRightbtn('close').on('click', $.proxy(function(e){
+                $liRight.append(this.buildRightBtn('close').on('click', $.proxy(function(e){
                     if(this.$box.hasClass(cssClass))
                         $('body').css('overflow', 'auto');
                     this.destroy();
@@ -396,7 +392,7 @@
             this.$box.prepend(this.$btnPane);
         },
 
-        buildbtn: function(name){
+        buildBtn: function(name){
             var btnDef = this.o.btnsDef[name];
             var that = this;
             var btn = $('<a/>', {
@@ -433,14 +429,14 @@
                 dropdown.data('visible', false);
                 for(var subName in btnDef.dropdown){
                     if($.isObject(btnDef.dropdown[subName]))
-                        dropdown.append(this.buildSubbtn(btnDef.dropdown, subName));
+                        dropdown.append(this.buildSubBtn(btnDef.dropdown, subName));
                 }
                 this.$box.append(dropdown.hide());
             }
 
             return btn;
         },
-        buildSubbtn: function(dropdown, name){
+        buildSubBtn: function(dropdown, name){
             $('body').trigger('mousedown');
 
             var btnDef = dropdown[name];
@@ -460,7 +456,7 @@
                 }, this)
             });
         },
-        buildRightbtn: function(name){
+        buildRightBtn: function(name){
             return $('<a/>', {
                 href: 'javascript:void(null);',
                 'class': this.o.prefix + name+'-button',
@@ -485,8 +481,8 @@
             this.$overlay.fadeOut(200);
         },
 
-        fixedbtnPaneEvents: function(){
-            if(!this.o.fixedbtnPane)
+        fixedBtnPaneEvents: function(){
+            if(!this.o.fixedBtnPane)
                 return;
 
             this.isFixed = false;
@@ -635,12 +631,10 @@
             this.buildInsert(this.lang.insertImage, {
                 title: {
                     label: 'Title',
-                    name: 'title',
                     value: this.selection
                 },
                 text: {
                     label: 'Text',
-                    name: 'text',
                     value: this.selection
                 }
             }, 'createLink');
@@ -657,7 +651,6 @@
             this.buildInsert(this.lang.insertImage, {
                 alt: {
                     label: 'Alt',
-                    name: 'alt',
                     value: this.selection
                 }
             }, 'insertImage');
@@ -667,46 +660,48 @@
             fields = $.extend(true, {
                 url: {
                     label: 'URL',
-                    name: 'url',
                     value: 'http://'
                 }
             }, fields);
 
             var html = '';
             for(f in fields){
+                fields[f].name = f;
                 f = fields[f];
                 html += '<label>'+f.label+' : <input type="text" name="'+f.name+'" value="'+ (f.value || '') +'"></label>';
             }
 
             var modal = this.openModal(title, html);
+            var modBox = modal.parent();
+            var that = this;
 
-            modal.on(this.o.prefix + 'confirm', $.proxy(function(e, m){
-                var $modal = $(m);
+            modBox.on(this.o.prefix + 'confirm', function(){
+                var $form = $(this).find('form');
 
                 var values = {};
                 fields['url'] = {};
-                for(f in fields){
-                    values[f] = $('input[name="'+f+'"]', $modal).val();
-                }
+                for(f in fields)
+                    values[f] = $('input[name="'+f+'"]', $form).val();
                 
                 if(values['url'] != 'http://'){
-                    this.restoreSelection();
+                    that.restoreSelection();
                     if($.isString(cmd))
                         document.execCommand(cmd, false, values['url']);
                     else
                         cmd(values);
-                    this.syncCode();
-                    this.closeModal();
-                    modal.off(this.o.prefix + 'confirm');
+                    that.syncCode();
+                    that.closeModal();
+                    modBox.off(that.o.prefix + 'confirm');
                 } else {
-                    $modal.append('<span class="error">Invalid URL</span>');
+                    $form.find('.error').remove();
+                    $form.append('<span class="error">Invalid URL</span>');
                 }
-            }, this));
-            modal.one(this.o.prefix + 'cancel', $.proxy(function(){
-                modal.off(this.o.prefix + 'confirm');
-                this.closeModal();
-                this.restoreSelection();
-            }, this));
+            });
+            modBox.one(this.o.prefix + 'cancel', function(){
+                modBox.off(that.o.prefix + 'confirm');
+                that.closeModal();
+                that.restoreSelection();
+            });
         },
 
 
@@ -733,72 +728,80 @@
         openModal: function(title, content){
             this.saveSelection();
             this.showOverlay();
+            var pfx = this.o.prefix;
 
             // Disable all btnPane btns
-            this.$btnPane.addClass(this.o.prefix + 'disable');
-            $('.' + this.o.prefix + 'not-disable', this.$btnPane)
-                .not('.' + this.o.prefix + 'buttons-right')
-                .removeClass(this.o.prefix + 'not-disable')
-                .addClass(this.o.prefix + 'not-disable' + '-old');
+            this.$btnPane.addClass(pfx + 'disable');
+            $('.' + pfx + 'not-disable', this.$btnPane)
+                .not('.' + pfx + 'buttons-right')
+                .removeClass(pfx + 'not-disable')
+                .addClass(pfx + 'not-disable-old');
 
 
             // Build out of ModalBox, it's the mask for animations
             var $modal = $('<div/>', {
-                'class': this.o.prefix + 'modal ' + this.o.prefix + 'fixed-top'
+                'class': pfx + 'modal ' + pfx + 'fixed-top'
             }).css({
                 top: this.$btnPane.css('height')
             }).appendTo(this.$box);
 
 
+
+            // Build the form
+            $form = $('<form/>', {
+                action: 'javascript:void(null);',
+                html: content
+            }).on('submit', function(e){
+                $modal.trigger(pfx + 'confirm');
+                e.preventDefault();
+            }).on('reset', function(e){
+                $modal.trigger(pfx + 'cancel');
+                e.preventDefault();
+            });
+
+
             // Build ModalBox and animate to show them
             var $modalBox = $('<div/>', {
-                'class': this.o.prefix + 'modal-box',
-                html: content
-            }).css({
-                top: '-' + $modal.css('height')
-            }).appendTo($modal)
-            .animate({
-                top: 0
-            }, this.o.duration);
+                'class': pfx + 'modal-box',
+                html: $form
+            })
+            .css('top', '-' + $modal.css('height'))
+            .appendTo($modal)
+            .animate({ top: 0 }, this.o.duration);
 
 
             // Append title
             $('<span/>', {
                 text: title,
-                'class': this.o.prefix + 'modal-title'
+                'class': pfx + 'modal-title'
             }).prependTo($modalBox);
-
 
 
             // Focus in modal box
             $modalBox.find('input:first').focus();
 
 
-            // Append Cancel and Confirm btns
-            this.buildModalbtn('cancel', $modalBox);
-            this.buildModalbtn('confirm', $modalBox);
+            // Append Cancel and Confirm buttons
+            this.buildModalBtn('reset', $modalBox);
+            this.buildModalBtn('submit', $modalBox);
 
 
             $('body').trigger('scroll');
 
             return $modalBox;
         },
-        buildModalbtn: function(name, modal){
-            return $('<a/>', {
-                href: 'javascript:void(null);',
-                'class': this.o.prefix + 'modal-button '+ this.o.prefix + 'modal-' + name,
-                text: this.lang[name] || name,
-                title: this.lang[name] || name,
-                click: $.proxy(function(e){
-                    modal.trigger(this.o.prefix + name, modal);
-                }, this)
-            }).appendTo(modal);
+        buildModalBtn: function(name, modal){
+            return $('<input/>', {
+                'class': this.o.prefix + 'modal-button ' + this.o.prefix + 'modal-' + name,
+                value: this.lang[name] || name,
+                type: name
+            }).appendTo(modal.find('form'));
         },
         closeModal: function(){
             this.$btnPane.removeClass(this.o.prefix + 'disable');
 
-            $('.' + this.o.prefix + 'not-disable' + '-old', this.$btnPane)
-                .removeClass(this.o.prefix + 'not-disable' + '-old')
+            $('.' + this.o.prefix + 'not-disable-old', this.$btnPane)
+                .removeClass(this.o.prefix + 'not-disable-old')
                 .addClass(this.o.prefix + 'not-disable');
 
             that = this;
