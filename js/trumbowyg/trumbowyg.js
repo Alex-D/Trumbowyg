@@ -382,7 +382,7 @@
 
             if(this.o.closable)
                 $liRight.append(this.buildRightBtn('close').on('click', $.proxy(function(e){
-                    var cssClass = pfx + 'close';
+                    var cssClass = pfx + 'fullscreen';
                     if(this.$box.hasClass(cssClass))
                         $('body').css('overflow', 'auto');
                     this.destroy();

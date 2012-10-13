@@ -1,6 +1,16 @@
 @import "compass";
-@import "icons/*.png";
-@import "icons-2x/*.png";
+
+$btns: sprite-map("icons/*.png");
+$btns2x: sprite-map("icons-2x/*.png");
+
+@mixin sprite-pos($map, $_item, $retina: false){
+	@if($retina == false){
+		background-position: sprite-position($map, $_item, 0, 0);
+	} @else {
+		background-position: round(nth(sprite-position($map, $_item, 0, 0), 1)/ 2) round(nth(sprite-position($map, $_item, 0, 0), 2)/ 2);
+	}
+}
+
 
 $default-transition-duration: .2s;
 
@@ -327,34 +337,35 @@ $default-transition-duration: .2s;
 	overflow: hidden;
 	margin: 4px 2px;
 	border: 1px solid transparent;
+	background-image: $btns;
 
-	&.trumbowyg-viewHTML-button { @include icons-sprite('view-html'); }
-	&.trumbowyg-formatting-button { @include icons-sprite('formatting'); }
+	&.trumbowyg-viewHTML-button { @include sprite-pos($btns, 'view-html'); }
+	&.trumbowyg-formatting-button { @include sprite-pos($btns, 'formatting'); }
 
 	/* English and others */
-	&.trumbowyg-bold-button, &.trumbowyg-strong-button { @include icons-sprite('bold'); }
-	&.trumbowyg-italic-button, &.trumbowyg-em-button { @include icons-sprite('italic'); }
-	&.trumbowyg-underline-button { @include icons-sprite('underline'); }
-	&.trumbowyg-strikethrough-button { @include icons-sprite('strikethrough'); }
+	&.trumbowyg-bold-button, &.trumbowyg-strong-button { @include sprite-pos($btns, 'bold'); }
+	&.trumbowyg-italic-button, &.trumbowyg-em-button { @include sprite-pos($btns, 'italic'); }
+	&.trumbowyg-underline-button { @include sprite-pos($btns, 'underline'); }
+	&.trumbowyg-strikethrough-button { @include sprite-pos($btns, 'strikethrough'); }
 
-	&.trumbowyg-link-button { @include icons-sprite('link'); }
+	&.trumbowyg-link-button { @include sprite-pos($btns, 'link'); }
 
-	&.trumbowyg-insertImage-button { @include icons-sprite('image'); }
+	&.trumbowyg-insertImage-button { @include sprite-pos($btns, 'image'); }
 
-	&.trumbowyg-justifyLeft-button { @include icons-sprite('left-align'); }
-	&.trumbowyg-justifyCenter-button { @include icons-sprite('center-align'); }
-	&.trumbowyg-justifyRight-button { @include icons-sprite('right-align'); }
-	&.trumbowyg-justifyFull-button { @include icons-sprite('justify-align'); }
+	&.trumbowyg-justifyLeft-button { @include sprite-pos($btns, 'left-align'); }
+	&.trumbowyg-justifyCenter-button { @include sprite-pos($btns, 'center-align'); }
+	&.trumbowyg-justifyRight-button { @include sprite-pos($btns, 'right-align'); }
+	&.trumbowyg-justifyFull-button { @include sprite-pos($btns, 'justify-align'); }
 
-	&.trumbowyg-unorderedList-button { @include icons-sprite('unordered-list'); }
-	&.trumbowyg-orderedList-button { @include icons-sprite('ordered-list'); }
+	&.trumbowyg-unorderedList-button { @include sprite-pos($btns, 'unordered-list'); }
+	&.trumbowyg-orderedList-button { @include sprite-pos($btns, 'ordered-list'); }
 
-	&.trumbowyg-insertHorizontalRule-button { @include icons-sprite('horizontale-rule'); }
+	&.trumbowyg-insertHorizontalRule-button { @include sprite-pos($btns, 'horizontale-rule'); }
 
-	&.trumbowyg-fullscreen-button { @include icons-sprite('fullscreen'); }
-	&.trumbowyg-close-button { @include icons-sprite('close'); }
+	&.trumbowyg-fullscreen-button { @include sprite-pos($btns, 'fullscreen'); }
+	&.trumbowyg-close-button { @include sprite-pos($btns, 'close'); }
 }
-.trumbowyg-fullscreen .trumbowyg-button-pane li a.trumbowyg-fullscreen-button { @include icons-sprite('fullscreen-exit'); }
+.trumbowyg-fullscreen .trumbowyg-button-pane li a.trumbowyg-fullscreen-button { @include sprite-pos($btns, 'fullscreen-exit'); }
 .trumbowyg-button-pane li {
 	&:first-child a { margin-left: 6px; }
 	&:last-child a { margin-right: 6px; }
@@ -362,9 +373,9 @@ $default-transition-duration: .2s;
 
 /* French */
 .trumbowyg-fr .trumbowyg-button-pane li a {
-	&.trumbowyg-bold-button, &.trumbowyg-strong-button { @include icons-sprite('gras'); }
-	&.trumbowyg-underline-button { @include icons-sprite('souligne'); }
-	&.trumbowyg-strikethrough-button { @include icons-sprite('barre'); }
+	&.trumbowyg-bold-button, &.trumbowyg-strong-button { @include sprite-pos($btns, 'gras'); }
+	&.trumbowyg-underline-button { @include sprite-pos($btns, 'souligne'); }
+	&.trumbowyg-strikethrough-button { @include sprite-pos($btns, 'barre'); }
 }
 
 
@@ -373,40 +384,41 @@ $default-transition-duration: .2s;
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 4/3), only screen and (min-device-pixel-ratio: 1.3), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx){ 
 	.trumbowyg-button-pane li a {
-		background-size: 50%;
+		background-size: 100%;
+		background-image: $btns2x;
 
-		&.trumbowyg-viewHTML-button { @include icons-2x-sprite('view-html'); }
-		&.trumbowyg-formatting-button { @include icons-2x-sprite('formatting'); }
+		&.trumbowyg-viewHTML-button { @include sprite-pos($btns2x, 'view-html', true); }
+		&.trumbowyg-formatting-button { @include sprite-pos($btns2x, 'formatting', true); }
 
 		/* English and others */
-		&.trumbowyg-bold-button, &.trumbowyg-strong-button { @include icons-2x-sprite('bold'); }
-		&.trumbowyg-italic-button, &.trumbowyg-em-button { @include icons-2x-sprite('italic'); }
-		&.trumbowyg-underline-button { @include icons-2x-sprite('underline'); }
-		&.trumbowyg-strikethrough-button { @include icons-2x-sprite('strikethrough'); }
+		&.trumbowyg-bold-button, &.trumbowyg-strong-button { @include sprite-pos($btns2x, 'bold', true); }
+		&.trumbowyg-italic-button, &.trumbowyg-em-button { @include sprite-pos($btns2x, 'italic', true); }
+		&.trumbowyg-underline-button { @include sprite-pos($btns2x, 'underline', true); }
+		&.trumbowyg-strikethrough-button { @include sprite-pos($btns2x, 'strikethrough', true); }
 
-		&.trumbowyg-link-button { @include icons-2x-sprite('link'); }
+		&.trumbowyg-link-button { @include sprite-pos($btns2x, 'link', true); }
 
-		&.trumbowyg-insertImage-button { @include icons-2x-sprite('image'); }
+		&.trumbowyg-insertImage-button { @include sprite-pos($btns2x, 'image', true); }
 
-		&.trumbowyg-justifyLeft-button { @include icons-2x-sprite('left-align'); }
-		&.trumbowyg-justifyCenter-button { @include icons-2x-sprite('center-align'); }
-		&.trumbowyg-justifyRight-button { @include icons-2x-sprite('right-align'); }
-		&.trumbowyg-justifyFull-button { @include icons-2x-sprite('justify-align'); }
+		&.trumbowyg-justifyLeft-button { @include sprite-pos($btns2x, 'left-align', true); }
+		&.trumbowyg-justifyCenter-button { @include sprite-pos($btns2x, 'center-align', true); }
+		&.trumbowyg-justifyRight-button { @include sprite-pos($btns2x, 'right-align', true); }
+		&.trumbowyg-justifyFull-button { @include sprite-pos($btns2x, 'justify-align', true); }
 
-		&.trumbowyg-unorderedList-button { @include icons-2x-sprite('unordered-list'); }
-		&.trumbowyg-orderedList-button { @include icons-2x-sprite('ordered-list'); }
+		&.trumbowyg-unorderedList-button { @include sprite-pos($btns2x, 'unordered-list', true); }
+		&.trumbowyg-orderedList-button { @include sprite-pos($btns2x, 'ordered-list', true); }
 
-		&.trumbowyg-insertHorizontalRule-button { @include icons-2x-sprite('horizontale-rule'); }
+		&.trumbowyg-insertHorizontalRule-button { @include sprite-pos($btns2x, 'horizontale-rule', true); }
 
-		&.trumbowyg-fullscreen-button { @include icons-2x-sprite('fullscreen'); }
-		&.trumbowyg-close-button { @include icons-2x-sprite('close'); }
+		&.trumbowyg-fullscreen-button { @include sprite-pos($btns2x, 'fullscreen', true); }
+		&.trumbowyg-close-button { @include sprite-pos($btns2x, 'close', true); }
 	}
-	.trumbowyg-fullscreen .trumbowyg-button-pane li a.trumbowyg-fullscreen-button { @include icons-2x-sprite('fullscreen-exit'); }
+	.trumbowyg-fullscreen .trumbowyg-button-pane li a.trumbowyg-fullscreen-button { @include sprite-pos($btns2x, 'fullscreen-exit', true); }
 
 	/* French */
 	.trumbowyg-fr .trumbowyg-button-pane li a {
-		&.trumbowyg-bold-button, &.trumbowyg-strong-button { @include icons-2x-sprite('gras'); }
-		&.trumbowyg-underline-button { @include icons-2x-sprite('souligne'); }
-		&.trumbowyg-strikethrough-button { @include icons-2x-sprite('barre'); }
+		&.trumbowyg-bold-button, &.trumbowyg-strong-button { @include sprite-pos($btns2x, 'gras', true); }
+		&.trumbowyg-underline-button { @include sprite-pos($btns2x, 'souligne', true); }
+		&.trumbowyg-strikethrough-button { @include sprite-pos($btns2x, 'barre', true); }
 	}
 }
