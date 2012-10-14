@@ -98,7 +98,7 @@ h5 {
 
 body {
   font-family: "Trebuchet MS", Arial, Helvetica, Verdana, serif, sans-serif;
-  background: #f2f2f2 url('../img/background.jpg?1350006279') left top repeat; }
+  background: #f2f2f2 url('../img/background.jpg?1350135033') left top repeat; }
 
 header {
   background-color: #222;
@@ -144,18 +144,23 @@ header {
 #container {
   padding-top: 58px; }
 
-#promotion {
+.page-title {
   width: 100%;
-  height: 349px;
+  height: 70px;
+  line-height: 70px;
   background-color: #224d6a;
   border-bottom: 2px solid #FFF;
   color: #F2F2F2;
-  text-align: center;
   background-image: -webkit-gradient(linear, 100% 0%, 0% 100%, color-stop(-25%, #295f89), color-stop(125%, #173545));
   background-image: -webkit-linear-gradient(top right, #295f89 -25%, #173545 125%);
   background-image: -moz-linear-gradient(top right, #295f89 -25%, #173545 125%);
   background-image: -o-linear-gradient(top right, #295f89 -25%, #173545 125%);
   background-image: linear-gradient(top right, #295f89 -25%, #173545 125%); }
+
+#promotion {
+  text-align: center;
+  height: 349px;
+  line-height: inherit; }
   #promotion h1 {
     font-size: 48px;
     color: #2f93c1;
@@ -234,6 +239,73 @@ header {
     margin-top: 30px; }
   #introducing #intro-customizable img {
     margin-top: 3px; }
+
+.note {
+  color: #999;
+  font-style: italic;
+  padding-left: 15px;
+  margin-left: 15px;
+  border-left: 5px solid #CCC;
+  margin-right: 30px; }
+
+aside {
+  float: left;
+  width: 200px;
+  padding: 15px 0; }
+  aside ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0; }
+    aside ul li {
+      margin-bottom: 13px;
+      padding: 0;
+      font-size: 18px; }
+      aside ul li a {
+        text-decoration: none;
+        color: #111;
+        -webkit-transition: all 0.2s;
+        -moz-transition: all 0.2s;
+        -o-transition: all 0.2s;
+        transition: all 0.2s; }
+        aside ul li a:hover, aside ul li a:focus {
+          color: #173545; }
+    aside ul ul {
+      margin-left: 13px; }
+      aside ul ul li {
+        margin: 0;
+        font-size: 15px; }
+        aside ul ul li a {
+          color: #555; }
+          aside ul ul li a:hover, aside ul ul li a:focus {
+            padding-left: 7px; }
+
+#right-aside {
+  float: right;
+  width: 739px;
+  padding-left: 20px;
+  border-left: 1px solid #EEE; }
+  #right-aside h3 {
+    font-size: 24px;
+    margin-left: 40px;
+    padding-left: 10px;
+    border-left: 5px solid #295f89; }
+  #right-aside p + h3 {
+    margin-top: 50px; }
+  #right-aside a {
+    color: #777;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s; }
+    #right-aside a:hover, #right-aside a:focus {
+      background-color: #295f89;
+      color: #CCC;
+      text-decoration: none; }
+  #right-aside pre code {
+    padding: 0 25px;
+    font-size: 14px;
+    background-color: #DDD;
+    border: 1px solid #CCC; }
 
 /* ==========================================================================
    Helper classes

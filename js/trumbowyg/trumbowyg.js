@@ -45,19 +45,21 @@
 
 
 (function($){
-    $.fn.trumbowyg = function(opts){
-        return this.each(function(){
-            var $that = $(this);
+    $.fn.trumbowyg = function(opts, params){
+        if($.isObject(opts) || opts == null){
+            return this.each(function(){
+                var $that = $(this);
 
-            if(!$that.data('trumbowyg'))
-                $that.data('trumbowyg', new Trumbowyg(this, opts));
-        });
-    };
-    $.fn.destroyTrumbowyg = function(){
-        this.data('trumbowyg').destroy();
-    };
-    $.fn.getCode = function(){
-        return this.data('trumbowyg').getCode();
+                if(!$that.data('trumbowyg'))
+                    $that.data('trumbowyg', new Trumbowyg(this, opts));
+            });
+        } else {
+            return this.each(function(){
+                try {
+                    $(this).data('trumbowyg')[opts](param);
+                } catch(e){}
+            });
+        }
     };
 
 
@@ -74,13 +76,11 @@
             this.lang = $.extend(true, {}, $.trumbowyg.langs['en'], $.trumbowyg.langs[opts.lang]);
 
         // Read only options
-        this.glob = {
-            btnsGrps: {
-                design : ['bold', 'italic', 'underline', 'strikethrough'],
-                semantic : ['strong', 'em'],
-                justify: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
-                lists: ['unorderedList', 'orderedList']
-            }
+        this.btnsGrps = {
+            design : ['bold', 'italic', 'underline', 'strikethrough'],
+            semantic : ['strong', 'em'],
+            justify: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+            lists: ['unorderedList', 'orderedList']
         };
 
         // Defaults Options
@@ -105,11 +105,11 @@
 
             btns: ['viewHTML', 
                         '|', 'formatting',
-                        '|', this.glob.btnsGrps.design,
+                        '|', this.btnsGrps.design,
                         '|', 'link', 
                         '|', 'insertImage',
-                        '|', this.glob.btnsGrps.justify,
-                        '|', this.glob.btnsGrps.lists,
+                        '|', this.btnsGrps.justify,
+                        '|', this.btnsGrps.lists,
                         '|', 'insertHorizontalRule'],
             btnsAdd: [],
 
@@ -191,11 +191,11 @@
             this.o.btns = [
                 'viewHTML', 
                 '|', 'formatting',
-                '|', this.glob.btnsGrps.semantic,
+                '|', this.btnsGrps.semantic,
                 '|', 'link', 
                 '|', 'insertImage',
-                '|', this.glob.btnsGrps.justify,
-                '|', this.glob.btnsGrps.lists,
+                '|', this.btnsGrps.justify,
+                '|', this.btnsGrps.lists,
                 '|', 'insertHorizontalRule'
             ];
         }

@@ -29,13 +29,13 @@
                     <li><a href="#demo">Demonstration</a></li>
                     <li><a href="#get-started">Get Started</a></li>
                     <li><a href="#customization">Customization</a></li>
-                    <li class="fl-right"><a href="#">About</a></li>
+                    <li class="fl-right"><a href="about.html">About</a></li>
                 </ul>
             </nav>
         </header>
 
         <div id="container" role="main" class="wrap">
-            <div id="promotion" class="wrap">
+            <div id="promotion" class="wrap page-title">
                 <div class="wrap-in">
                     <h1>Trumbowyg</h1>
                     <h2>The web's most lightweight WYSIWYG editor</h2>
@@ -48,7 +48,7 @@
                     <div class="wrap buttons">
                         <a href="https://github.com/Alex-D/Trumbowyg">Source Code</a>
                         <a href="https://github.com/Alex-D/Trumbowyg/zipball/master" class="big blue">Download alpha</a>
-                        <a href="#">Documentation</a>
+                        <a href="documentation.html">Documentation</a>
                     </div>
                 </div>
             </div>
@@ -114,9 +114,58 @@
                     <p>
                         This the basic code for transform a simple div to an amazing WYSIWYG editor who's Trumbowyg.
                     </p>
-                    <pre>
+                    <pre><code>
 $('#trumbowyg-demo').trumbowyg();
-                    </pre>
+                    </code></pre>
+                    <p>
+                        If you want set options to Trumbowyg, add an object who contains your options as parameter.
+                    </p>
+                    <pre><code>
+$('#trumbowyg-demo').trumbowyg({
+    fullscreenable: false,
+    closable: true,
+    btns: ['bold', 'italic', '|', 'insertImage']
+});
+                    </code></pre>
+                    <p>
+                        View all options in documentation page.
+                    </p>
+                </div>
+
+                <div id="customization" class="wrap-in page-part">
+                    <h2>Customization</h2>
+                    <p class="subtitle">CSS is cool, make your own Trumbowyg skin!</p>
+
+                    <p>
+                        Trumbowyg is souple and simple. You want to set another skin ?
+                    </p>
+
+                    <h3>Replace existing CSS file</h3>
+                    <p>
+                        Copy <code>/trumbowyg/design</code> folder everywhere and customize style. Finaly, link your new CSS file and remove link to Trumbony default style.
+                    </p>
+                    <p class="note">
+                        Note : It is not recommended to edit this files in the trumbowyg folder, because when you update plugin, new files errase your modifications.
+                    </p>
+
+                    <br>
+
+                    <h3>Multiple skins for multiple Trumbowyg</h3>
+                    <p>
+                        It is possible to prefix all class used by the editor. Indeed, Trumbowyg integrates an option named <code>prefix</code>. That is usefull when you do not want same design for all instances of Trumbowyg.
+                    </p>
+                    <p>
+                        Usage of the prefix option : 
+                        <pre><code>
+$('.editor-modern-ui').trumbowyg({
+    prefix: 'modern-ui'
+});
+                        </code></pre>
+                        In your CSS, you can now stylize <code>.modern-ui-link-button</code> for example, and sure do not have conflicts with default skin. It's necesary to redefined style for all elements. If you want to start from the default skin, copy <code>/trumbowyg/design</code> folder, replace all trumbowyg- by your prefix and work on it.
+                    </p>
+                    <p class="note">
+                        Note : Default value of prefix is "trumbowyg".
+                    </p>
                 </div>
             </div>
         </div>
