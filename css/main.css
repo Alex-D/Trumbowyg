@@ -98,7 +98,7 @@ h5 {
 
 body {
   font-family: "Trebuchet MS", Arial, Helvetica, Verdana, serif, sans-serif;
-  background: #f2f2f2 url('../img/background.jpg?1350258205') left top repeat; }
+  background: #f2f2f2 url('../img/background.jpg?1350336775') left top repeat; }
 
 header {
   background-color: #222;
@@ -254,12 +254,6 @@ header {
       text-align: justify;
       margin: 0;
       font-size: 15px; }
-  #introducing #intro-fast-lightweight img,
-  #js-introducing #intro-fast-lightweight img {
-    margin-top: 30px; }
-  #introducing #intro-customizable img,
-  #js-introducing #intro-customizable img {
-    margin-top: 3px; }
 
 #demo textarea,
 #js-demo textarea {
