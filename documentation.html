@@ -25,11 +25,11 @@
         <header role="banner" class="wrap">
             <nav class="wrap-in">
                 <ul>
-                    <li><a href="./" class="active">Home</a></li>
-                    <li><a href="#general">General</a></li>
-                    <li><a href="#basic-options">Basic Options</a></li>
-                    <li><a href="#advanced-options">Advanced Options</a></li>
-                    <li><a href="#api">API</a></li>
+                    <li><a href="./">Home</a></li>
+                    <li><a class="scroller" href="#general">General</a></li>
+                    <li><a class="scroller" href="#basic-options">Basic Options</a></li>
+                    <li><a class="scroller" href="#advanced-options">Advanced Options</a></li>
+                    <li><a class="scroller" href="#api">API</a></li>
                     <li class="fl-right"><a href="about.html">About</a></li>
                 </ul>
             </nav>
@@ -86,8 +86,8 @@
                     </aside>
 
                     <div id="right-aside">
-                        <div class="page-part">
-                            <h2 id="general">General</h2>
+                        <section id="general" class="section">
+                            <h2>General</h2>
                             <h3 id="prefix">Prefix</h3>
                             <p>
                                 You can change prefix of all class added on elements of Trumbowyg. For that, just use the option like that :
@@ -163,18 +163,18 @@ $('textarea').trumbowyg({
                             <p class="note">
                                 Note : <code class="javascript">duration</code> is defined in milliseconds, because this value was use directly in <code class="javascript">.animate()</code> jQuery method.
                             </p>
-                        </div>
+                        </section class="section">
 
 
-                        <div class="page-part">
-                            <h2 id="basic-options">Basic Options</h2>
+                        <section id="basic-options" class="section">
+                            <h2>Basic Options</h2>
 
 
-                        </div>
+                        </section class="section">
 
 
-                        <div class="page-part">
-                            <h2 id="advanced-options">Advanced Options</h2>
+                        <section id="advanced-options" class="section">
+                            <h2>Advanced Options</h2>
 
                             <h3 id="add-localization">Add a localization</h3>
                             <p>
@@ -186,11 +186,11 @@ $.trumbowyg.lang.fr = {
 };
                                 </code></pre>
                             </p>
-                        </div>
+                        </section class="section">
 
 
-                        <div class="page-part">
-                            <h2 id="api">API</h2>
+                        <section id="api" class="section">
+                            <h2>API</h2>
 
                             <h3 id="modal-box">Modal box</h3>
                             <p>
@@ -218,7 +218,7 @@ $('.close-modal').click(function(e){
 });
                                 </code></pre>
                             </p>
-                        </div>
+                        </section class="section">
                     </div>
                 </div>
             </div>
@@ -233,11 +233,13 @@ $('.close-modal').click(function(e){
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
 
-        <script src="js/main.js"></script>
         <script src="js/highlight.pack.js"></script>
         <script type="text/javascript">
             hljs.initHighlightingOnLoad();
         </script>
+
+        <script src="js/jquery.pagescroller.js"></script>
+        <script src="js/main.js"></script>
 
         <!-- Google Analytics -->
         <script>

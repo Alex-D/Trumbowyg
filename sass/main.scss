@@ -167,13 +167,14 @@ header {
                 @include text-shadow(0 0 4px rgba(17,17,17,.75));
                 @include transition;
 
-                &.active {
-                    background-color: $blue-active-nav;
-                }
                 &:hover,
                 &:focus {
                     background-color: $blue-hover-nav;
                 }
+            }
+
+            &.active a {
+                background-color: $blue-active-nav;
             }
 
             &.fl-right {
@@ -259,10 +260,17 @@ header {
 
 
 #page {
-    .page-part {
+    section {
         margin-top: 15px;
         padding-bottom: 15px;
         border-bottom: 1px solid #BBB;
+
+        pre code {
+            padding: 0 25px;
+            font-size: 14px;
+            background-color: #EDEDED;
+            border: 1px solid #CCC;
+        }
     }
 
     h2 {
@@ -278,9 +286,20 @@ header {
        padding: 0;
        text-align: center;
     }
+
+    a {
+        color: #777;
+        @include transition;
+
+        &:hover, 
+        &:focus {
+            color: #111;
+        }
+    }
 }
 
-#introducing {
+#introducing,
+#js-introducing {
     height: 450px;
 
     .wrap {
@@ -313,6 +332,13 @@ header {
     }
     #intro-customizable img {
         margin-top: 3px;
+    }
+}
+
+#demo,
+#js-demo {
+    textarea {
+        height: 300px;
     }
 }
 
@@ -385,25 +411,6 @@ aside {
     }
     p + h3 {
         margin-top: 50px;
-    }
-
-    a {
-        color: #777;
-        @include transition;
-
-        &:hover, 
-        &:focus {
-            background-color: #295f89;
-            color: #CCC;
-            text-decoration: none;
-        }
-    }
-
-    pre code {
-        padding: 0 25px;
-        font-size: 14px;
-        background-color: #DDD;
-        border: 1px solid #CCC;
     }
 }
 

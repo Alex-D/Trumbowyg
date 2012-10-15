@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="js/trumbowyg/design/css/trumbowyg.css">
+        <link rel="stylesheet" href="css/hightlight-github.css">
         <script src="js/vendor/modernizr-2.6.1.min.js"></script>
     </head>
     <body>
@@ -25,17 +26,17 @@
         <header role="banner" class="wrap">
             <nav class="wrap-in">
                 <ul>
-                    <li><a href="#" class="active">Home</a></li>
-                    <li><a href="#demo">Demonstration</a></li>
-                    <li><a href="#get-started">Get Started</a></li>
-                    <li><a href="#customization">Customization</a></li>
+                    <li><a class="scroller" href="#" class="active">Home</a></li>
+                    <li><a class="scroller" href="#demo">Demonstration</a></li>
+                    <li><a class="scroller" href="#get-started">Get Started</a></li>
+                    <li><a class="scroller" href="#customization">Customization</a></li>
                     <li class="fl-right"><a href="about.html">About</a></li>
                 </ul>
             </nav>
         </header>
 
         <div id="container" role="main" class="wrap">
-            <div id="promotion" class="wrap page-title">
+            <div id="promotion" class="wrap page-title section">
                 <div class="wrap-in">
                     <h1>Trumbowyg</h1>
                     <h2>The web's most lightweight WYSIWYG editor</h2>
@@ -54,7 +55,7 @@
             </div>
 
             <div id="page">
-                <div id="introducing" class="wrap-in page-part">
+                <section id="introducing" class="wrap-in">
                     <h2>Introducing Trumbowyg</h2>
                     <p class="subtitle">Why you should love it!</p>
 
@@ -87,9 +88,9 @@
                             </p>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <div id="demo" class="wrap-in page-part">
+                <section id="demo" class="wrap-in section">
                     <h2>Demonstration</h2>
                     <p class="subtitle">See with your eyes!</p>
 
@@ -105,22 +106,22 @@
                             « This sentance always is true » - Alex-D
                         </blockquote>
                     </div>
-                </div>
+                </section>
 
-                <div id="get-started" class="wrap-in page-part">
+                <section id="get-started" class="wrap-in section">
                     <h2>Getting Started</h2>
                     <p class="subtitle">It's simple but still I will explains</p>
 
                     <p>
                         This the basic code for transform a simple div to an amazing WYSIWYG editor who's Trumbowyg.
                     </p>
-                    <pre><code>
+                    <pre><code class="javascript">
 $('#trumbowyg-demo').trumbowyg();
                     </code></pre>
                     <p>
                         If you want set options to Trumbowyg, add an object who contains your options as parameter.
                     </p>
-                    <pre><code>
+                    <pre><code class="javascript">
 $('#trumbowyg-demo').trumbowyg({
     fullscreenable: false,
     closable: true,
@@ -128,11 +129,11 @@ $('#trumbowyg-demo').trumbowyg({
 });
                     </code></pre>
                     <p>
-                        View all options in documentation page.
+                        View all options in <a href="documentation.html">documentation page</a>.
                     </p>
-                </div>
+                </section>
 
-                <div id="customization" class="wrap-in page-part">
+                <section id="customization" class="wrap-in section">
                     <h2>Customization</h2>
                     <p class="subtitle">CSS is cool, make your own Trumbowyg skin!</p>
 
@@ -156,7 +157,7 @@ $('#trumbowyg-demo').trumbowyg({
                     </p>
                     <p>
                         Usage of the prefix option : 
-                        <pre><code>
+                        <pre><code class="javascript">
 $('.editor-modern-ui').trumbowyg({
     prefix: 'modern-ui'
 });
@@ -166,7 +167,15 @@ $('.editor-modern-ui').trumbowyg({
                     <p class="note">
                         Note : Default value of prefix is "trumbowyg".
                     </p>
-                </div>
+
+                    <br>
+
+                    <h3>More Customization?</h3>
+
+                    <p>
+                        For more customization, go to <a href="documentation.html">full documentation here</a>.
+                    </p>
+                </section>
             </div>
         </div>
 
@@ -179,11 +188,16 @@ $('.editor-modern-ui').trumbowyg({
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
 
-        <script src="js/main.js"></script>
         <script src="js/trumbowyg/trumbowyg.js"></script>
+        <script src="js/highlight.pack.js"></script>
+        <script src="js/jquery.pagescroller.js"></script>
+
         <script type="text/javascript">
             $('#trumbowyg-demo').trumbowyg();
+            hljs.initHighlightingOnLoad();
         </script>
+
+        <script src="js/main.js"></script>
 
         <!-- Google Analytics -->
         <script>

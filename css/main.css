@@ -98,7 +98,7 @@ h5 {
 
 body {
   font-family: "Trebuchet MS", Arial, Helvetica, Verdana, serif, sans-serif;
-  background: #f2f2f2 url('../img/background.jpg?1350135033') left top repeat; }
+  background: #f2f2f2 url('../img/background.jpg?1350258205') left top repeat; }
 
 header {
   background-color: #222;
@@ -134,10 +134,10 @@ header {
         -moz-transition: all 0.2s;
         -o-transition: all 0.2s;
         transition: all 0.2s; }
-        header ul li a.active {
-          background-color: #232f34; }
         header ul li a:hover, header ul li a:focus {
           background-color: #293d45; }
+      header ul li.active a {
+        background-color: #232f34; }
       header ul li.fl-right {
         float: right; }
 
@@ -202,10 +202,15 @@ header {
           background-color: #25a4df;
           color: #222; }
 
-#page .page-part {
+#page section {
   margin-top: 15px;
   padding-bottom: 15px;
   border-bottom: 1px solid #BBB; }
+  #page section pre code {
+    padding: 0 25px;
+    font-size: 14px;
+    background-color: #EDEDED;
+    border: 1px solid #CCC; }
 #page h2 {
   color: #333;
   font-size: 48px;
@@ -217,28 +222,48 @@ header {
   margin: -7px 0 0;
   padding: 0;
   text-align: center; }
+#page a {
+  color: #777;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s; }
+  #page a:hover, #page a:focus {
+    color: #111; }
 
-#introducing {
+#introducing,
+#js-introducing {
   height: 450px; }
-  #introducing .wrap {
+  #introducing .wrap,
+  #js-introducing .wrap {
     margin-top: 20px; }
-  #introducing .width4 {
+  #introducing .width4,
+  #js-introducing .width4 {
     text-align: center; }
-    #introducing .width4 .intro-img {
+    #introducing .width4 .intro-img,
+    #js-introducing .width4 .intro-img {
       height: 170px; }
-    #introducing .width4 h3 {
+    #introducing .width4 h3,
+    #js-introducing .width4 h3 {
       color: #333;
       font-size: 24px;
       margin-top: 15px; }
-    #introducing .width4 p {
+    #introducing .width4 p,
+    #js-introducing .width4 p {
       color: #555;
       text-align: justify;
       margin: 0;
       font-size: 15px; }
-  #introducing #intro-fast-lightweight img {
+  #introducing #intro-fast-lightweight img,
+  #js-introducing #intro-fast-lightweight img {
     margin-top: 30px; }
-  #introducing #intro-customizable img {
+  #introducing #intro-customizable img,
+  #js-introducing #intro-customizable img {
     margin-top: 3px; }
+
+#demo textarea,
+#js-demo textarea {
+  height: 300px; }
 
 .note {
   color: #999;
@@ -291,21 +316,6 @@ aside {
     border-left: 5px solid #295f89; }
   #right-aside p + h3 {
     margin-top: 50px; }
-  #right-aside a {
-    color: #777;
-    -webkit-transition: all 0.2s;
-    -moz-transition: all 0.2s;
-    -o-transition: all 0.2s;
-    transition: all 0.2s; }
-    #right-aside a:hover, #right-aside a:focus {
-      background-color: #295f89;
-      color: #CCC;
-      text-decoration: none; }
-  #right-aside pre code {
-    padding: 0 25px;
-    font-size: 14px;
-    background-color: #DDD;
-    border: 1px solid #CCC; }
 
 /* ==========================================================================
    Helper classes
