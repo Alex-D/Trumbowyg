@@ -7,7 +7,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Documentation of Trumbowyg, the web's most lightweight WYSIWYG editor</title>
-        <meta name="description" content="Documentation of Trumbowyg who is a jQuery plugin for create WYSIWYG editor">
+        <meta name="description" content="Trumbowyg documentation which is a jQuery plugin to create WYSIWYG editor">
         <meta name="viewport" content="width=device-width">
 
         <meta name="google-site-verification" content="ECeSHLIckOv9unlORi9lLtDUy7rk_CI5-AF9AU3upJE">
@@ -90,7 +90,7 @@
                             <h2>General</h2>
                             <h3 id="prefix">Prefix</h3>
                             <p>
-                                You can change prefix of all class added on elements of Trumbowyg. For that, just use the option like that :
+                                You can change prefix of all class added on elements of Trumbowyg using this option :
                                 <pre><code class="javascript">
 $('textarea').trumbowyg({
     prefix: 'custom-prefix'
@@ -109,7 +109,7 @@ $('textarea').trumbowyg({
 
                             <h3 id="localization">Localization</h3>
                             <p>
-                                You don't speek english? No problem, Trumbowyg has a language parameter. It's necessary to load your lang file. Search in <code class="javascript">/trumbowyg/langs</code> folder if a language file already exist, else create and share it :). Go to <a href="#add-localization">Add a localization</a> part for more details on languge file.
+                                You don't speak english? No problem, Trumbowyg has a language parameter. It's necessary to load your lang file. Search in <code class="javascript">/trumbowyg/langs</code> folder if a language file already exist, else create and share it :). Go to <a href="#add-localization">Add a localization</a> part for more details on language file.
                             </p>
                             <p>
                                 Don't forget include the lang file in your pages :
@@ -118,10 +118,7 @@ $('textarea').trumbowyg({
                                 </code></pre>
                             </p>
                             <p class="note">
-                                Warning : Include lang file after Trumbowyg and before use <code class="javascript">$('elem').trumbowyg({ lang: 'fr' })</code>
-                            </p>
-                            <p class="note">
-                                Note : If a translation was not found, the english default value was use.
+                                Warning : Include lang file after Trumbowyg and before instantiate the editor !
                             </p>
                             <p>
                                 Usage of language parameter :
@@ -142,7 +139,7 @@ $('textarea').trumbowyg({
 
                             <h3 id="direction">Direction</h3>
                             <p>
-                                If your language is not read left to right, change with the <code class="javascript">dir</code> option :
+                                If your language needs to be read from left to right, do this with the <code class="javascript">dir</code> option :
                                 <pre><code class="javascript">
 $('textarea').trumbowyg({
     dir: 'rtl'
@@ -153,7 +150,7 @@ $('textarea').trumbowyg({
 
                             <h3 id="animation-duration">Animation duration</h3>
                             <p>
-                                Lot of elements have got animations, and duration of animations is configurable via the <code class="javascript">duration</code> options : 
+                                Lot of elements have animations, and duration of animations is configurable via the <code class="javascript">duration</code> options : 
                                 <pre><code class="javascript">
 $('textarea').trumbowyg({
     duration: 1000
@@ -161,7 +158,7 @@ $('textarea').trumbowyg({
                                 </code></pre>
                             </p>
                             <p class="note">
-                                Note : <code class="javascript">duration</code> is defined in milliseconds, because this value was use directly in <code class="javascript">.animate()</code> jQuery method.
+                                Note : <code class="javascript">duration</code> is defined in milliseconds, because this value is directly used in <code class="javascript">.animate()</code> jQuery method.
                             </p>
                         </section>
 
@@ -178,7 +175,7 @@ $('textarea').trumbowyg({
 
                             <h3 id="add-localization">Add a localization</h3>
                             <p>
-                                The structure of a language file is simple, it is a JavaScript Object witch associate a translation to any key. For example :
+                                The structure of a language file is simple, it is a JavaScript Object which associate a translation to any key. For example :
                                 <pre><code class="javascript">
 $.trumbowyg.lang.fr = {
     bold: "Gras",
