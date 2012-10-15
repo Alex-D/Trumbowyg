@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Documentation of Trumbowyg, the web's most lightweight WYSIWYG editor</title>
+        <meta name="description" content="Trumbowyg documentation which is a jQuery plugin to create WYSIWYG editor">
+        <meta name="viewport" content="width=device-width">
+
+        <meta name="google-site-verification" content="ECeSHLIckOv9unlORi9lLtDUy7rk_CI5-AF9AU3upJE">
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/hightlight-github.css">
+        <script src="js/vendor/modernizr-2.6.1.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->     
+
+        <header role="banner" class="wrap">
+            <nav class="wrap-in">
+                <ul>
+                    <li><a href="./">Home</a></li>
+                    <li><a class="scroller" href="#general">General</a></li>
+                    <li><a class="scroller" href="#basic-options">Basic Options</a></li>
+                    <li><a class="scroller" href="#advanced-options">Advanced Options</a></li>
+                    <li><a class="scroller" href="#api">API</a></li>
+                    <li class="fl-right"><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div id="container" role="main" class="wrap">
+            <div id="page">
+                <div class="page-title">
+                    <h1 class="wrap-in">Documentation</h1>
+                </div>
+
+                <div class="wrap-in">
+                    <aside>
+                        <ul>
+                            <li>
+                                <a href="#general">General</a>
+                                <ul>
+                                    <li><a href="#prefix">Prefix</a></li>
+                                    <li><a href="#localization">Localization</a></li>
+                                    <li><a href="#direction">Direction</a></li>
+                                    <li><a href="#animation-duration">Animations duration</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#basic-options">Basic Options</a>
+                                <ul>
+                                    <li><a href="#mobile-tablet">Mobile/Tablet</a></li>
+                                    <li><a href="#close-button">Close button</a></li>
+                                    <li><a href="#fullscreen">Fullscreen</a></li>
+                                    <li><a href="#semantic">Semantic</a></li>
+                                    <li><a href="#reset-css">Reset CSS</a></li>
+                                    <li><a href="#auto-adjust-height">Auto adjust height</a></li>
+                                    <li><a href="#button-pane">Button pane</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#advanced-options">Advanced Options</a>
+                                <ul>
+                                    <li><a href="#custom-buttons">Custom buttons</a></li>
+                                    <li><a href="#add-button-type">Add button type</a></li>
+                                    <li><a href="#create-plugin">Create a plugin</a></li>
+                                    <li><a href="#add-localization">Add a localization</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#api">API</a>
+                                <ul>
+                                    <li><a href="#modal-box">Modal box</a></li>
+                                    <li><a href="#selection">Selection</a></li>
+                                    <li><a href="#destroy-editor">Destroy editor</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </aside>
+
+                    <div id="right-aside">
+                        <section id="general">
+                            <h2>General</h2>
+                            <h3 id="prefix">Prefix</h3>
+                            <p>
+                                You can change prefix of all class added on elements of Trumbowyg using this option :
+                                <pre><code class="javascript">
+$('textarea').trumbowyg({
+    prefix: 'custom-prefix'
+});
+                                </code></pre>
+
+                                For example, the bold button class is now <code class="javascript">custom-prefix-bold-button</code>
+                            </p>
+                            <p class="note">
+                                Default value is "trumbowyg"
+                            </p>
+
+
+
+
+
+                            <h3 id="localization">Localization</h3>
+                            <p>
+                                You don't speak english? No problem, Trumbowyg has a language parameter. It's necessary to load your lang file. Search in <code class="javascript">/trumbowyg/langs</code> folder if a language file already exist, else create and share it :). Go to <a href="#add-localization">Add a localization</a> part for more details on language file.
+                            </p>
+                            <p>
+                                Don't forget include the lang file in your pages :
+                                <pre><code class="html">
+&lt;script type="text/javascript" src="js/trumbowyg/langs/fr.js"&gt;&lt;/script&gt;
+                                </code></pre>
+                            </p>
+                            <p class="note">
+                                Warning : Include lang file after Trumbowyg and before instantiate the editor !
+                            </p>
+                            <p>
+                                Usage of language parameter :
+                                <pre><code class="javascript">
+$('textarea').trumbowyg({
+    lang: 'fr'
+});
+                                </code></pre>
+                            </p>
+                            <p class="note">
+                                Note : If the lang was not found, english values are used by default.
+                            </p>
+
+
+
+
+
+
+                            <h3 id="direction">Direction</h3>
+                            <p>
+                                If your language needs to be read from left to right, do this with the <code class="javascript">dir</code> option :
+                                <pre><code class="javascript">
+$('textarea').trumbowyg({
+    dir: 'rtl'
+});
+                                </code></pre>
+                            </p>
+
+
+                            <h3 id="animation-duration">Animation duration</h3>
+                            <p>
+                                Lot of elements have animations, and duration of animations is configurable via the <code class="javascript">duration</code> options : 
+                                <pre><code class="javascript">
+$('textarea').trumbowyg({
+    duration: 1000
+});
+                                </code></pre>
+                            </p>
+                            <p class="note">
+                                Note : <code class="javascript">duration</code> is defined in milliseconds, because this value is directly used in <code class="javascript">.animate()</code> jQuery method.
+                            </p>
+                        </section>
+
+
+                        <section id="basic-options">
+                            <h2>Basic Options</h2>
+
+
+                        </section>
+
+
+                        <section id="advanced-options">
+                            <h2>Advanced Options</h2>
+
+                            <h3 id="add-localization">Add a localization</h3>
+                            <p>
+                                The structure of a language file is simple, it is a JavaScript Object which associate a translation to any key. For example :
+                                <pre><code class="javascript">
+$.trumbowyg.lang.fr = {
+    bold: "Gras",
+    close: "Fermer"
+};
+                                </code></pre>
+                            </p>
+                        </section>
+
+
+                        <section id="api">
+                            <h2>API</h2>
+
+                            <h3 id="modal-box">Modal box</h3>
+                            <p>
+                                When you want create your custom extension for Trumbowyg, you can open and close a modal box with custom inner HTML code. For that use the <code class="javascript">.trumbowyg()</code> method and give parameters like that :
+                                <pre><code class="javascript">
+// Open a modal box
+$('textarea:nth-child(2)').trumbowyg('openModal', {
+    title: "A title for modal box",
+    fields: {
+        nbRows: {
+            title: "Number of rows"
+            // or $('textarea:nth-child(2)').trumbowyg('opt').lang.nbRows;
+        },
+        nbCols: {
+            title: "Number of cols",
+            value: 5
+        }
+    }
+});
+
+// Close current modal box
+$('.close-modal').click(function(e){
+    $('.trumbowyg').trumbowyg('closeModal');
+    e.preventDefault();
+});
+                                </code></pre>
+                            </p>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            
+        </footer>
+
+
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+
+        <script src="js/highlight.pack.js"></script>
+        <script type="text/javascript">
+            hljs.initHighlightingOnLoad();
+        </script>
+
+        <script src="js/jquery.pagescroller.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- Google Analytics -->
+        <script>
+            var _gaq=[['_setAccount','UA-35470243-1'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>

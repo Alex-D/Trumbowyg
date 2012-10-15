@@ -1,102 +1,211 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
-        <title>Trumbowyg by Alex-D</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Trumbowyg : the web's most lightweight WYSIWYG editor</title>
+        <meta name="description" content="Trumbowyg is a jQuery plugin for create WYSIWYG editor">
+        <meta name="viewport" content="width=device-width">
+
+        <meta name="google-site-verification" content="ECeSHLIckOv9unlORi9lLtDUy7rk_CI5-AF9AU3upJE">
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="js/trumbowyg/design/css/trumbowyg.css">
-        <style type="text/css">
-            html, body {
-                margin: 0;
-                padding: 0;
-                background-color: #F2F2F2;
-                font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
-            }
-            header {
-                text-align: center;
-            }
-            #main {
-                width: 960px;
-                margin: 0 auto;
-            }
-        </style>
+        <link rel="stylesheet" href="css/hightlight-github.css">
+        <script src="js/vendor/modernizr-2.6.1.min.js"></script>
     </head>
     <body>
-        <div id="main" role="main">
-            <header>
-                <h1>Examples of use Trumbowyg</h1>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->     
 
-                <p>
-                    Close an editor on clic on « Close » in top right corner. <br>
-                    For re-open a editor, double-click on his text.
-                </p>
-            </header>
+        <header role="banner" class="wrap">
+            <nav class="wrap-in">
+                <ul>
+                    <li><a class="scroller" href="#" class="active">Home</a></li>
+                    <li><a class="scroller" href="#introducing">Introducing</a></li>
+                    <li><a class="scroller" href="#demo">Demonstration</a></li>
+                    <li><a class="scroller" href="#get-started">Get Started</a></li>
+                    <li><a class="scroller" href="#customization">Customization</a></li>
+                    <li class="fl-right"><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+        </header>
 
-            <form action="#">
-                <div id="simple-editor">
-                    <h2>Trumbowyg is fun ! That's an editor from a div, directly.</h2>
+        <div id="container" role="main" class="wrap">
+            <div id="promotion" class="wrap page-title">
+                <section class="wrap-in">
+                    <h1>Trumbowyg</h1>
+                    <h2>The web's most lightweight WYSIWYG editor</h2>
+
                     <p>
-                        The editor active as default the reset CSS, in French, semantic mode and autoAjustHeight
+                        Trumbony is a light, translatable and customisable jQuery plugin. <br>
+                        Integrates a beatiful design, semantic code, fullscreen and powerful API.
+                    </p>
+
+                    <div class="wrap buttons">
+                        <a href="https://github.com/Alex-D/Trumbowyg">Source Code</a>
+                        <a href="https://github.com/Alex-D/Trumbowyg/zipball/master" class="big blue">Download alpha</a>
+                        <a href="documentation.html">Documentation</a>
+                    </div>
+                </section>
+            </div>
+
+            <div id="page">
+                <section id="introducing" class="wrap-in">
+                    <h2>Introducing Trumbowyg</h2>
+                    <p class="subtitle">Why you should love it!</p>
+
+                    <div class="wrap">
+                        <div id="intro-html5-ready" class="width4">
+                            <div class="intro-img">
+                                <img src="img/html5.png" alt="HTML5 logo">
+                            </div>
+                            <h3>HTML5 ready</h3>
+                            <p>
+                                Editor and generated code are optimized for HTML5 support. Is compatible with all recents browsers like IE8+, Chrome, Opera and Firefox.
+                            </p>
+                        </div>
+                        <div id="intro-fast-lightweight" class="width4">
+                            <div class="intro-img">
+                                <img src="img/plume.png" alt="Plume">
+                            </div>
+                            <h3>Fast &amp; lightweight</h3>
+                            <p>
+                                All existing WYSIWYG editors are larger than 45kB. Trumbowyg is only 15kB for faster page loading. No useless features, just the necessary ones to generate a clean and semantic code.
+                            </p>
+                        </div>
+                        <div id="intro-customizable" class="width4">
+                            <div class="intro-img">
+                                <img src="img/gears.png" alt="Gears">
+                            </div>
+                            <h3>Customizable</h3>
+                            <p>
+                                Options and design are fully editable and configurable, but the default design is compatible with Retina display and optimized for a great and simple user usage.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="demo" class="wrap-in">
+                    <h2>Demonstration</h2>
+                    <p class="subtitle">See with your eyes!</p>
+
+                    <div id="trumbowyg-demo">
+                        <h3>This is a demo of Trumbowyg</h3>
+                        <p>
+                            A simple paragraph, <b>bold</b> and <i>italic</i> funny test.
+                        </p>
+                        <p>
+                            <img src="http://www.cs.mcgill.ca/~aasbah/music_pic/trombone.jpg" alt="A Trumbone">
+                        </p>
+                        <blockquote>
+                            « This sentance always is true » - Alex-D
+                        </blockquote>
+                    </div>
+                </section>
+
+                <section id="get-started" class="wrap-in">
+                    <h2>Getting Started</h2>
+                    <p class="subtitle">It's simple but still I will explains</p>
+
+                    <p>
+                        This the basic code for transform a simple div to an amazing WYSIWYG editor who's Trumbowyg.
+                    </p>
+                    <pre><code class="javascript">
+$('#trumbowyg-demo').trumbowyg();
+                    </code></pre>
+                    <p>
+                        If you want set options to Trumbowyg, add an object who contains your options as parameter.
+                    </p>
+                    <pre><code class="javascript">
+$('#trumbowyg-demo').trumbowyg({
+    fullscreenable: false,
+    closable: true,
+    btns: ['bold', 'italic', '|', 'insertImage']
+});
+                    </code></pre>
+                    <p>
+                        View all options in <a href="documentation.html">documentation page</a>.
+                    </p>
+                </section>
+
+                <section id="customization" class="wrap-in">
+                    <h2>Customization</h2>
+                    <p class="subtitle">CSS is cool, make your own Trumbowyg skin!</p>
+
+                    <p>
+                        Trumbowyg is souple and simple. You want to set another skin ?
+                    </p>
+
+                    <h3>Replace existing CSS file</h3>
+                    <p>
+                        Copy <code>/trumbowyg/design</code> folder everywhere and customize style. Finaly, link your new CSS file and remove link to Trumbony default style.
+                    </p>
+                    <p class="note">
+                        Note : It is not recommended to edit this files in the trumbowyg folder, because when you update plugin, new files errase your modifications.
+                    </p>
+
+                    <br>
+
+                    <h3>Multiple skins for multiple Trumbowyg</h3>
+                    <p>
+                        It is possible to prefix all class used by the editor. Indeed, Trumbowyg integrates an option named <code>prefix</code>. That is usefull when you do not want same design for all instances of Trumbowyg.
                     </p>
                     <p>
-                        The text is derived from Cicero's De Finibus Bonorum et Malorum (On the Ends of Goods and Evils, or alternatively [About] The Purposes of Good and Evil ). The original passage began: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit (Translation: &quot;Neither is there anyone who loves grief itself since it is grief and thus wants to obtain it&quot;).
+                        Usage of the prefix option : 
+                        <pre><code class="javascript">
+$('.editor-modern-ui').trumbowyg({
+    prefix: 'modern-ui'
+});
+                        </code></pre>
+                        In your CSS, you can now stylize <code>.modern-ui-link-button</code> for example, and sure do not have conflicts with default skin. It's necesary to redefined style for all elements. If you want to start from the default skin, copy <code>/trumbowyg/design</code> folder, replace all trumbowyg- by your prefix and work on it.
                     </p>
-                    <p style="text-align: center;">
-                        <img src="http://alex-d.github.com/Trumbowyg/img/html5.png" alt="Blabla dans le alt">
+                    <p class="note">
+                        Note : Default value of prefix is "trumbowyg".
                     </p>
+
+                    <br>
+
+                    <h3>More Customization?</h3>
+
                     <p>
-                        It is not known exactly when the text acquired its current standard form; it may have been as late as the 1960s. The passage was discovered by Richard McClintock, a Latin scholar who is the publications director at Hampden-Sydney College in Virginia, by searching for citings of the rarely used word 'consectetur' in classical literature.
+                        For more customization, go to <a href="documentation.html">full documentation here</a>.
                     </p>
-                </div>
-                <div class="editor">
-                    <h2>Trumbowyg is fun ! That's an editor from a div, directly.</h2>
-                    <p>
-                        The editor active as default the reset CSS, in French, semantic mode and autoAjustHeight
-                    </p>
-                    <p>
-                        The text is derived from Cicero's De Finibus Bonorum et Malorum (On the Ends of Goods and Evils, or alternatively [About] The Purposes of Good and Evil ). The original passage began: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit (Translation: &quot;Neither is there anyone who loves grief itself since it is grief and thus wants to obtain it&quot;).
-                    </p>
-                    <p>
-                        It is not known exactly when the text acquired its current standard form; it may have been as late as the 1960s. The passage was discovered by Richard McClintock, a Latin scholar who is the publications director at Hampden-Sydney College in Virginia, by searching for citings of the rarely used word 'consectetur' in classical literature.
-                    </p>
-                </div>
-                <textarea id="form-content" class="editor" cols="30" rows="10">
-                    <h1>This editor is create from a textarea</h1>
-                    <p>
-                        Even though using &quot;lorem ipsum&quot; often arouses curiosity due to its resemblance to classical Latin, it is not intended to have meaning. Where text is visible in a document, people tend to focus on the textual content rather than upon overall presentation, so publishers use lorem ipsum when displaying a typeface or design in order to direct the focus to presentation. &quot;Lorem ipsum&quot; also approximates a typical distribution of spaces in English.
-                    </p>
-                    <p>
-                        The most common lorem ipsum text reads as follows: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                </textarea>
-            </form>
+                </section>
+            </div>
         </div>
-        <script src="js/vendor/jquery-1.8.2.min.js"></script>
+
+        <footer>
+            
+        </footer>
+
+
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+
         <script src="js/trumbowyg/trumbowyg.js"></script>
-        <script src="js/trumbowyg/langs/fr.js"></script>
+        <script src="js/highlight.pack.js"></script>
+        <script src="js/jquery.pagescroller.js"></script>
+
+        <script type="text/javascript">
+            $('#trumbowyg-demo').trumbowyg();
+            hljs.initHighlightingOnLoad();
+        </script>
+
+        <script src="js/main.js"></script>
+
+        <!-- Google Analytics -->
         <script>
-            $('#simple-editor').trumbowyg();
-            $('.editor:first').trumbowyg({
-                lang: 'fr',
-                closable: true,
-                mobile: true,
-                fixedBtnPane: true,
-                fixedFullWidth: true,
-                semantic: true,
-                resetCss: true,
-                autoAjustHeight: true
-            });
-
-            $('.editor:last').trumbowyg({
-                closable: true,
-                fixedBtnPane: true
-            });
-
-            $('.editor').on('dblclick', function(e){
-                $(this).trumbowyg({
-                    lang: 'fr',
-                    closable: true,
-                    fixedBtnPane: true
-                });
-            });
+            var _gaq=[['_setAccount','UA-35470243-1'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
     </body>
 </html>

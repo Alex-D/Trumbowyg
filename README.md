@@ -1,5 +1,3 @@
-# Wysiwyg Editor
+# Trumbowyg Github site
 
-This project is in dev, so please don't use in production.
-
-It's a WYSIWYG simple and configurable.
+This site is under construction.
