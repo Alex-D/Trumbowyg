@@ -8,10 +8,10 @@ $('section').each(function(eq){
 
 $(document).ready(function(){
 	$('body').pageScroller({
-		section: ".section",
 		navigation: "header nav",
 		deepLink: true,
-		scrollOffset: - offset -10
+		HTML5mode: true,
+		scrollOffset: - offset - 10
 	});
 });
 
