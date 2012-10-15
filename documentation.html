@@ -51,6 +51,7 @@
                                     <li><a href="#localization">Localization</a></li>
                                     <li><a href="#direction">Direction</a></li>
                                     <li><a href="#animation-duration">Animations duration</a></li>
+                                    <li><a href="#custom-skin">Custom skin</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -80,6 +81,12 @@
                                     <li><a href="#modal-box">Modal box</a></li>
                                     <li><a href="#selection">Selection</a></li>
                                     <li><a href="#destroy-editor">Destroy editor</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#customization">Customization</a>
+                                <ul>
+                                    <li></li>
                                 </ul>
                             </li>
                         </ul>
@@ -159,6 +166,42 @@ $('textarea').trumbowyg({
                             </p>
                             <p class="note">
                                 Note : <code class="javascript">duration</code> is defined in milliseconds, because this value is directly used in <code class="javascript">.animate()</code> jQuery method.
+                            </p>
+
+
+
+
+
+                            <h3 id="custom-skin">Custom skin</h3>
+                            <p>
+                                Trumbowyg is flexible and simple. You want to set another skin ?
+                            </p>
+
+                            <h4>Replace existing CSS file</h4>
+                            <p>
+                                Copy <code>/trumbowyg/design</code> folder everywhere and customize style. Finally, link your new CSS file and remove link to Trumbowyg default style.
+                            </p>
+                            <p class="note">
+                                Note : It is not recommended to edit this files in the trumbowyg folder, because when you update plugin, new files erase your modifications.
+                            </p>
+
+                            <br>
+
+                            <h4>Multiple skins for multiple Trumbowyg</h4>
+                            <p>
+                                It is possible to prefix all class used by the editor. Indeed, Trumbowyg integrates an option named <code>prefix</code>. That is useful when you do not want same design for all instances of Trumbowyg.
+                            </p>
+                            <p>
+                                Usage of the prefix option : 
+                                <pre><code class="javascript">
+        $('.editor-modern-ui').trumbowyg({
+            prefix: 'modern-ui'
+        });
+                                </code></pre>
+                                In your CSS, you can now stylize <code>.modern-ui-link-button</code> for example, and sure you do not have conflicts with default skin. It's necessary to redefine style for all elements. If you want to start from the default skin, copy <code>/trumbowyg/design</code> folder, replace all trumbowyg- by your prefix and work on it.
+                            </p>
+                            <p class="note">
+                                Note : Default value for prefix is "trumbowyg".
                             </p>
                         </section>
 
