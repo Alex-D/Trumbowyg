@@ -55,11 +55,34 @@
             });
         } else {
             return this.each(function(){
-                try {
-                    $(this).data('trumbowyg')[opts](param);
-                } catch(e){}
+                var tbw = $(this).data('trumbowyg');
+                switch(opts){
+                    // Modal box
+                    case 'openModal':
+                        return tbw.openModal(params.title, params.content);
+                    case 'closeModal':
+                        return tbw.closeModal();
+
+                    // Selection
+                    case 'saveSelection':
+                        return tbw.saveSelection();
+                    case 'restoreSelection':
+                        return tbw.restoreSelection();
+
+                    // Destroy
+                    case 'destroy':
+                        return tbw.destroy();
+
+                    // Public options
+                    case 'lang':
+                        return tbw.lang;
+                    case 'duration':
+                        return tbw.o.duration;
+                }
+                    
             });
         }
+        return false;
     };
 
 
@@ -97,7 +120,7 @@
             fixedFullWidth: false,
             semantic: false,
             resetCss: false,
-            autoAjustHeight: false,
+            autogrow: false,
 
             prefix: 'trumbowyg-',
 
@@ -268,7 +291,7 @@
             if(this.o.resetCss)
                 this.$editor.addClass(this.o.prefix + 'reset-css');
 
-            if(!this.o.autoAjustHeight){
+            if(!this.o.autogrow){
                 this.$editor.css({
                     height: this.height,
                     overflow: 'auto'
@@ -304,12 +327,16 @@
             });
         },
 
+
+        // Build the Textarea which contain HTML generated code
         buildTextarea: function(){
             return $('<textarea name="'+this.$e.attr('id')+'"></textarea>', {
                 height: this.height
             });
         },
 
+
+        // Build button pane, use o.btns and o.btnsAdd options
         buildBtnPane: function(){
             if(this.o.btns === false) return;
             var pfx = this.o.prefix;
@@ -321,12 +348,12 @@
             $.each(this.o.btns.concat(this.o.btnsAdd), $.proxy(function(i, btn){
                 if(!$.isArray(btn)) btn = [btn];
                 $.each(btn, $.proxy(function(i, btn){
-                    try {
+                    try { // Prevent buildBtn error
                         var li = $('<li/>');
 
-                        if(btn == '|'){
+                        if(btn == '|'){ // It's a separator
                             li.addClass(pfx + 'separator');
-                        } else {
+                        } else { // It's a button
                             if(btn == 'viewHTML')
                                 li.addClass(pfx + 'not-disable');
                             li.append(this.buildBtn(btn));
@@ -338,11 +365,12 @@
             }, this));
 
 
-
+            // Build right li for fullscreen and close buttons
             var $liRight = $('<li/>', {
                 'class': pfx + 'not-disable ' + pfx + 'buttons-right'
             });
 
+            // Add the fullscreen button
             if(this.o.fullscreenable)
                 $liRight.append(this.buildRightBtn('fullscreen').on('click', $.proxy(function(e){
                     var cssClass = pfx + 'fullscreen';
@@ -370,7 +398,7 @@
                     } else {
                         $('body').css('overflow', 'auto');
                         this.$box.removeAttr('style');
-                        if(!this.o.autoAjustHeight){
+                        if(!this.o.autogrow){
                             h = this.height;
                             $([this.$editor, this.$e]).each(function(){
                                 $(this).css('height', h);
@@ -380,6 +408,7 @@
                     $(window).trigger('scroll');
                 }, this)));
 
+            // Build and add close button
             if(this.o.closable)
                 $liRight.append(this.buildRightBtn('close').on('click', $.proxy(function(e){
                     var cssClass = pfx + 'fullscreen';
@@ -388,11 +417,16 @@
                     this.destroy();
                 }, this)));
 
-            this.$btnPane.append($liRight);
+
+            // Add right li only if isn't empty
+            if($liRight.not(':empty'))
+                this.$btnPane.append($liRight);
 
             this.$box.prepend(this.$btnPane);
         },
 
+
+        // Build a button and this action
         buildBtn: function(name){
             var btnDef = this.o.btnsDef[name];
             var that = this;
@@ -437,6 +471,7 @@
 
             return btn;
         },
+        // Build a button for dropdown menu
         buildSubBtn: function(dropdown, name){
             $('body').trigger('mousedown');
 
@@ -457,6 +492,7 @@
                 }, this)
             });
         },
+        // Build a button for right li
         buildRightBtn: function(name){
             return $('<a/>', {
                 href: 'javascript:void(null);',
@@ -466,6 +502,7 @@
             });
         },
 
+        // Build overlay for modal box
         buildOverlay: function(){
             return this.$overlay = $('<div/>', {
                 'class': this.o.prefix + 'overlay'
@@ -482,6 +519,7 @@
             this.$overlay.fadeOut(200);
         },
 
+        // Management of fixed button pane
         fixedBtnPaneEvents: function(){
             if(!this.o.fixedBtnPane)
                 return;
@@ -554,7 +592,7 @@
 
 
 
-
+        // Function call when click on viewHTML button
         toggle: function(){
             this.sementicCode();
             this.$editor.toggle();
@@ -562,6 +600,7 @@
             this.$btnPane.toggleClass(this.o.prefix + 'disable');
         },
 
+        // Open dropdown when click on a button which open that 
         dropdown: function(name){
             var $dropdown = this.$box.find('.'+name+'-'+this.o.prefix + 'dropdown');
             var $btn = this.$btnPane.find('.'+this.o.prefix+name+'-button');
@@ -590,7 +629,7 @@
 
 
         
-
+        // HTML Code management
         getCode: function(){
             return this.$e.val();
         },
@@ -603,12 +642,13 @@
             else
                 this.$editor.html(this.$e.val());
 
-            if(this.o.autoAjustHeight){
+            if(this.o.autogrow){
                 this.height = this.$editor.css('height');
                 this.$e.css({height: this.height});
             }
         },
 
+        // Analyse and update to semantic code
         sementicCode: function(){
             this.syncCode();
 
@@ -626,7 +666,7 @@
         },
 
 
-
+        // Function call when user click on « Insert Link... » dropdown menu
         createLink: function(){
             this.saveSelection();
             this.buildInsert(this.lang.insertImage, {
@@ -657,56 +697,12 @@
             }, 'insertImage');
         },
 
-        buildInsert: function(title, fields, cmd){
-            fields = $.extend(true, {
-                url: {
-                    label: 'URL',
-                    value: 'http://'
-                }
-            }, fields);
 
-            var html = '';
-            for(f in fields){
-                fields[f].name = f;
-                f = fields[f];
-                html += '<label>'+f.label+' : <input type="text" name="'+f.name+'" value="'+ (f.value || '') +'"></label>';
-            }
-
-            var modal = this.openModal(title, html);
-            var modBox = modal.parent();
-            var that = this;
-
-            modBox.on(this.o.prefix + 'confirm', function(){
-                var $form = $(this).find('form');
-
-                var values = {};
-                fields['url'] = {};
-                for(f in fields)
-                    values[f] = $('input[name="'+f+'"]', $form).val();
-                
-                if(values['url'] != 'http://'){
-                    that.restoreSelection();
-                    if($.isString(cmd))
-                        document.execCommand(cmd, false, values['url']);
-                    else
-                        cmd(values);
-                    that.syncCode();
-                    that.closeModal();
-                    modBox.off(that.o.prefix + 'confirm');
-                } else {
-                    $form.find('.error').remove();
-                    $form.append('<span class="error">Invalid URL</span>');
-                }
-            });
-            modBox.one(this.o.prefix + 'cancel', function(){
-                modBox.off(that.o.prefix + 'confirm');
-                that.closeModal();
-                that.restoreSelection();
-            });
-        },
-
-
-
+        /*
+         * Call method of trumbowyg if exist
+         * else try to call anonymous function
+         * and finaly native execCommand
+         */
         execCommand: function(cmd, param){
             if(cmd != 'dropdown')
                 this.$editor.focus();
@@ -725,11 +721,16 @@
         },
 
 
-
+        // Open a modal box
         openModal: function(title, content){
+            var pfx = this.o.prefix;
+
+            // No open a modal box when exist other modal box
+            if($('.' + pfx + 'modal-box', this.$box).size() > 0)
+                return false;
+
             this.saveSelection();
             this.showOverlay();
-            var pfx = this.o.prefix;
 
             // Disable all btnPane btns
             this.$btnPane.addClass(pfx + 'disable');
@@ -798,6 +799,7 @@
                 type: name
             }).appendTo(modal.find('form'));
         },
+        // close current modal box
         closeModal: function(){
             this.$btnPane.removeClass(this.o.prefix + 'disable');
 
@@ -814,11 +816,59 @@
                 that.hideOverlay();
             });
         },
+        // Preformated build and management modal
+        buildInsert: function(title, fields, cmd){
+            fields = $.extend(true, {
+                url: {
+                    label: 'URL',
+                    value: 'http://'
+                }
+            }, fields);
+
+            var html = '';
+            for(f in fields){
+                fields[f].name = f;
+                f = fields[f];
+                html += '<label>'+f.label+' : <input type="text" name="'+f.name+'" value="'+ (f.value || '') +'"></label>';
+            }
+
+            var modal = this.openModal(title, html);
+            var modBox = modal.parent();
+            var that = this;
+
+            modBox.on(this.o.prefix + 'confirm', function(){
+                var $form = $(this).find('form');
+
+                var values = {};
+                fields['url'] = {};
+                for(f in fields)
+                    values[f] = $('input[name="'+f+'"]', $form).val();
+                
+                if(values['url'] != 'http://'){
+                    that.restoreSelection();
+                    if($.isString(cmd))
+                        document.execCommand(cmd, false, values['url']);
+                    else
+                        cmd(values);
+                    that.syncCode();
+                    that.closeModal();
+                    modBox.off(that.o.prefix + 'confirm');
+                } else {
+                    $form.find('.error').remove();
+                    $form.append('<span class="error">Invalid URL</span>');
+                }
+            });
+            modBox.one(this.o.prefix + 'cancel', function(){
+                modBox.off(that.o.prefix + 'confirm');
+                that.closeModal();
+                that.restoreSelection();
+            });
+        },
 
 
 
 
-
+        // Selection management
         saveSelection: function(){
             this.selection = null;
             if(window.getSelection){
@@ -844,7 +894,7 @@
         
 
 
-
+        // Return true if must enable Trumbowyg on this mobile device
         isEnabled: function(){
             var mobile = "iPhone|iPod|Android|BlackBerry|Windows\sPhone|ZuneWP7";
             var exprTablet = new RegExp("(iPad|webOS)");
