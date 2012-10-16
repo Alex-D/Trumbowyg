@@ -98,7 +98,7 @@ h5 {
 
 body {
   font-family: "Trebuchet MS", Arial, Helvetica, Verdana, serif, sans-serif;
-  background: #f2f2f2 url('../img/background.jpg?1350336775') left top repeat; }
+  background: #f2f2f2 url('../img/background.jpg?1350346874') left top repeat; }
 
 header {
   background-color: #222;
@@ -138,6 +138,8 @@ header {
           background-color: #293d45; }
       header ul li.active a {
         background-color: #232f34; }
+      header ul li a:not(.scroller) {
+        color: #3bb4eb; }
       header ul li.fl-right {
         float: right; }
 
@@ -255,12 +257,11 @@ header {
       margin: 0;
       font-size: 15px; }
 
-#demo textarea,
-#js-demo textarea {
+#trumbowyg-demo {
   height: 300px; }
 
 .note {
-  color: #999;
+  color: #888;
   font-style: italic;
   padding-left: 15px;
   margin-left: 15px;

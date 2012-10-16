@@ -177,6 +177,10 @@ header {
                 background-color: $blue-active-nav;
             }
 
+            a:not(.scroller) {
+                color: #3bb4eb;
+            }
+
             &.fl-right {
                 float: right;
             }
@@ -328,15 +332,12 @@ header {
     }
 }
 
-#demo,
-#js-demo {
-    textarea {
-        height: 300px;
-    }
+#trumbowyg-demo {
+    height: 300px;
 }
 
 .note {
-    color: #999;
+    color: #888;
     font-style: italic;
     padding-left: 15px;
     margin-left: 15px;

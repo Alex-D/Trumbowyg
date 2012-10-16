@@ -26,7 +26,7 @@
             <nav class="wrap-in">
                 <ul>
                     <li><a href="./">Home</a></li>
-                    <li><a class="scroller" href="#general">General</a></li>
+                    <li class="active"><a class="scroller" href="#general">General</a></li>
                     <li><a class="scroller" href="#basic-options">Basic Options</a></li>
                     <li><a class="scroller" href="#advanced-options">Advanced Options</a></li>
                     <li><a class="scroller" href="#api">API</a></li>
@@ -194,9 +194,9 @@ $('textarea').trumbowyg({
                             <p>
                                 Usage of the prefix option : 
                                 <pre><code class="javascript">
-        $('.editor-modern-ui').trumbowyg({
-            prefix: 'modern-ui'
-        });
+$('.editor-modern-ui').trumbowyg({
+    prefix: 'modern-ui'
+});
                                 </code></pre>
                                 In your CSS, you can now stylize <code>.modern-ui-link-button</code> for example, and sure you do not have conflicts with default skin. It's necessary to redefine style for all elements. If you want to start from the default skin, copy <code>/trumbowyg/design</code> folder, replace all trumbowyg- by your prefix and work on it.
                             </p>
@@ -234,29 +234,39 @@ $.trumbowyg.lang.fr = {
 
                             <h3 id="modal-box">Modal box</h3>
                             <p>
-                                When you want create your custom extension for Trumbowyg, you can open and close a modal box with custom inner HTML code. For that use the <code class="javascript">.trumbowyg()</code> method and give parameters like that :
+                                When you want create your custom extension for Trumbowyg, you can open and close a modal box with custom inner HTML code, listen events and more.
+                            </p>
+                            <h4>Open and close</h4>
+                            <p>
+                                For that use the <code class="javascript">.trumbowyg()</code> method and give parameters  <code>"openModal"</code> or <code>"closeModal"</code> like that :
                                 <pre><code class="javascript">
 // Open a modal box
-$('textarea:nth-child(2)').trumbowyg('openModal', {
+var $modal = $("textarea:nth-child(2)").trumbowyg("openModal", {
     title: "A title for modal box",
-    fields: {
-        nbRows: {
-            title: "Number of rows"
-            // or $('textarea:nth-child(2)').trumbowyg('opt').lang.nbRows;
-        },
-        nbCols: {
-            title: "Number of cols",
-            value: 5
-        }
-    }
+    content: "&lt;p&gt;Content in HTML which you want include in created modal box&lt;/p&gt;"
 });
 
 // Close current modal box
-$('.close-modal').click(function(e){
-    $('.trumbowyg').trumbowyg('closeModal');
+$(".close-modal").click(function(e){
+    $(".trumbowyg").trumbowyg("closeModal");
     e.preventDefault();
 });
                                 </code></pre>
+
+                                <code>openModal</code> call return a jQuery object which contains the modal box. It's necessary if you want listen events (view them in next part).
+                            </p>
+                            <p class="note">
+                                Note : Only one modal box can open in same time. So, <code>openModal</code> return false if a modal is curently opened.
+                            </p>
+
+                            <h4>Events on modal box</h4>
+                            <p>
+                                When a modal box is open, Trumbowyg create two buttons : « Confirm » and « Cancel ». A event is associated to each button : 
+                                <ul>
+                                    <li><code>{prefix}-submit</code> : Trigged when form is submit</li>
+                                    <li><code>{prefix}-reset</code> : Trigged when user cancel operation</li>
+                                </ul>
+                                <code>{prefix}</code> is the <code>prefix</code> option value.
                             </p>
                         </section>
                     </div>
