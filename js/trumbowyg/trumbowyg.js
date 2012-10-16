@@ -40,6 +40,13 @@
             submit: "Confirm",
             reset: "Cancel"
         }
+    },
+
+    btnsGrps: {
+        design : ['bold', 'italic', 'underline', 'strikethrough'],
+        semantic : ['strong', 'em'],
+        justify: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+        lists: ['unorderedList', 'orderedList']
     }
 };
 
@@ -55,31 +62,32 @@
             });
         } else {
             return this.each(function(){
-                var tbw = $(this).data('trumbowyg');
-                switch(opts){
-                    // Modal box
-                    case 'openModal':
-                        return tbw.openModal(params.title, params.content);
-                    case 'closeModal':
-                        return tbw.closeModal();
+                try {
+                    var tbw = $(this).data('trumbowyg');
+                    switch(opts){
+                        // Modal box
+                        case 'openModal':
+                            return tbw.openModal(params.title, params.content);
+                        case 'closeModal':
+                            return tbw.closeModal();
 
-                    // Selection
-                    case 'saveSelection':
-                        return tbw.saveSelection();
-                    case 'restoreSelection':
-                        return tbw.restoreSelection();
+                        // Selection
+                        case 'saveSelection':
+                            return tbw.saveSelection();
+                        case 'restoreSelection':
+                            return tbw.restoreSelection();
 
-                    // Destroy
-                    case 'destroy':
-                        return tbw.destroy();
+                        // Destroy
+                        case 'destroy':
+                            return tbw.destroy();
 
-                    // Public options
-                    case 'lang':
-                        return tbw.lang;
-                    case 'duration':
-                        return tbw.o.duration;
-                }
-                    
+                        // Public options
+                        case 'lang':
+                            return tbw.lang;
+                        case 'duration':
+                            return tbw.o.duration;
+                    }
+                } catch(e){}
             });
         }
         return false;
@@ -97,14 +105,6 @@
             this.lang = $.trumbowyg.langs['en'];
         else
             this.lang = $.extend(true, {}, $.trumbowyg.langs['en'], $.trumbowyg.langs[opts.lang]);
-
-        // Read only options
-        this.btnsGrps = {
-            design : ['bold', 'italic', 'underline', 'strikethrough'],
-            semantic : ['strong', 'em'],
-            justify: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
-            lists: ['unorderedList', 'orderedList']
-        };
 
         // Defaults Options
         this.o = $.extend(true, {
@@ -128,11 +128,11 @@
 
             btns: ['viewHTML', 
                         '|', 'formatting',
-                        '|', this.btnsGrps.design,
+                        '|', $.trumbowyg.btnsGrps.design,
                         '|', 'link', 
                         '|', 'insertImage',
-                        '|', this.btnsGrps.justify,
-                        '|', this.btnsGrps.lists,
+                        '|', $.trumbowyg.btnsGrps.justify,
+                        '|', $.trumbowyg.btnsGrps.lists,
                         '|', 'insertHorizontalRule'],
             btnsAdd: [],
 
@@ -214,11 +214,11 @@
             this.o.btns = [
                 'viewHTML', 
                 '|', 'formatting',
-                '|', this.btnsGrps.semantic,
+                '|', $.trumbowyg.btnsGrps.semantic,
                 '|', 'link', 
                 '|', 'insertImage',
-                '|', this.btnsGrps.justify,
-                '|', this.btnsGrps.lists,
+                '|', $.trumbowyg.btnsGrps.justify,
+                '|', $.trumbowyg.btnsGrps.lists,
                 '|', 'insertHorizontalRule'
             ];
         }
