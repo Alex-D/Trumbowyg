@@ -87,8 +87,7 @@
                         case 'duration':
                             return tbw.o.duration;
                     }
-                } catch(){}
-                    
+                } catch(e){}
             });
         }
         return false;
