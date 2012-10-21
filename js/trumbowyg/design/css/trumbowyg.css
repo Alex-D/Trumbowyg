@@ -284,7 +284,7 @@
   overflow: hidden;
   margin: 4px 2px;
   border: 1px solid transparent;
-  background-image: url('../images/icons-sd5b0165c74.png');
+  background-image: url('../images/icons-s86dbba461f.png');
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   -o-transition: all 0.2s;
@@ -315,18 +315,18 @@
   .trumbowyg-button-pane li a.trumbowyg-justifyFull-button {
     background-position: 0 -525px; }
   .trumbowyg-button-pane li a.trumbowyg-unorderedList-button {
-    background-position: 0 -75px; }
+    background-position: 0 -25px; }
   .trumbowyg-button-pane li a.trumbowyg-orderedList-button {
-    background-position: 0 -50px; }
+    background-position: 0 0; }
   .trumbowyg-button-pane li a.trumbowyg-insertHorizontalRule-button {
     background-position: 0 -550px; }
   .trumbowyg-button-pane li a.trumbowyg-fullscreen-button {
-    background-position: 0 0; }
+    background-position: 0 -75px; }
   .trumbowyg-button-pane li a.trumbowyg-close-button {
     background-position: 0 -300px; }
 
 .trumbowyg-fullscreen .trumbowyg-button-pane li a.trumbowyg-fullscreen-button {
-  background-position: 0 -25px; }
+  background-position: 0 -50px; }
 
 .trumbowyg-button-pane li:first-child a {
   margin-left: 6px; }
@@ -344,7 +344,7 @@
 @media only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 4 / 3), only screen and (min-device-pixel-ratio: 1.3), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   .trumbowyg-button-pane li a {
     background-size: 100%;
-    background-image: url('../images/icons-2x-s1c3a452866.png');
+    background-image: url('../images/icons-2x-s2a27a827ea.png');
     /* English and others */ }
     .trumbowyg-button-pane li a.trumbowyg-viewHTML-button {
       background-position: 0 0; }
@@ -377,12 +377,12 @@
     .trumbowyg-button-pane li a.trumbowyg-insertHorizontalRule-button {
       background-position: 0 -550px; }
     .trumbowyg-button-pane li a.trumbowyg-fullscreen-button {
-      background-position: 0 -50px; }
+      background-position: 0 -25px; }
     .trumbowyg-button-pane li a.trumbowyg-close-button {
       background-position: 0 -175px; }
 
   .trumbowyg-fullscreen .trumbowyg-button-pane li a.trumbowyg-fullscreen-button {
-    background-position: 0 -25px; }
+    background-position: 0 -50px; }
 
   /* French */
   .trumbowyg-fr .trumbowyg-button-pane li a.trumbowyg-bold-button, .trumbowyg-fr .trumbowyg-button-pane li a.trumbowyg-strong-button {
