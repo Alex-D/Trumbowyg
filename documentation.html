@@ -321,7 +321,6 @@ $('.simple-editor').trumbowyg({
                                 By default, <code>btns</code> option value is:
                                 <pre><code class="javascript">
 var btnsGrps = $.trumbowyg.btnsGrps;
-
 /** WTF this btnsGrps var? It's just array of strings :)
  *  $.trumbowyg.btnsGrps = {
  *      design : ['bold', 'italic', 'underline', 'strikethrough'],
@@ -412,12 +411,57 @@ $(".close-modal").click(function(e){
                             <p>
                                 When a modal box is open, Trumbowyg create two buttons: « Confirm » and « Cancel ». A event is associated to each button: 
                                 <ul>
-                                    <li><code>{prefix}-submit</code>: Trigged when form is submit</li>
-                                    <li><code>{prefix}-reset</code>: Trigged when user cancel operation</li>
+                                    <li><code>{prefix}submit</code>: Trigged when form is submit</li>
+                                    <li><code>{prefix}reset</code>: Trigged when user cancel operation</li>
                                 </ul>
                             </p>
                             <p class="note">
                                 <code>{prefix}</code> is the <code>prefix</code> option value.
+                            </p>
+
+                            <h4>Only build inputs in modal</h4>
+                            <p>
+                                If you want only add inputs in the modal box, this function was more simple. Indeed, you do not manage confirm and close buttons, and get all input value on confirm.
+
+                                <pre><code class="javascript">
+var img = $('img#an-img');
+$("#tbw").trumbowyg("buildModalInsert", {
+    title: "A title for modal box",
+    fields: {
+        url: {
+            value: img.attr('src')
+        },
+        alt: {
+            label: 'Alt',
+            name: 'alt',
+            value: img.attr('alt')
+        }
+    },
+    callback: function(values){
+        img.attr('src', values['url']);
+        img.attr('alt', values['alt']);
+    }
+});
+                                </code></pre>
+                            </p>
+
+
+
+
+                            <h3 id="selection">Selection</h3>
+                            <p>
+                                For get or set selection, it is not simple. In fact, Trumbowyg has a system to save and restore selection, not getter and setter. So, view examples to learn how to manage selection.
+                            </p>
+
+                            <h4>Save and get current selection</h4>
+                            <p>
+                                <pre><code class="javascript">
+// sel contains a JavaScript range
+var sel = $('#wysiwyg').trumbowyg("saveSelection");
+
+// Get selection value
+
+                                </code></pre>
                             </p>
                         </section>
                     </div>

@@ -19,9 +19,12 @@ $.trumbowyg.langs.fr = {
     orderedList: "Liste ordonnée",
 
     insertImage: "Inserer une Image...",
+    editImage: "Editer l'Image",
     insertVideo: "Inserer une Video...",
+    editVideo: "Editer la Video",
     link: "Lien",
     createLink: "Insérer un lien...",
+    editLink: "Editer le lien",
     unlink: "Supprimer le lien",
 
     justifyLeft: "Aligner à gauche",

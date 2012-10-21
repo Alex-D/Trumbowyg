@@ -21,9 +21,12 @@
             orderedList: "Ordered list",
 
             insertImage: "Insert Image...",
+            editImage: "Edit Image",
             insertVideo: "Insert Video...",
+            editVideo: "Edit Video",
             link: "Link",
             createLink: "Insert link...",
+            editLink: "Edit link",
             unlink: "Remove link",
 
             justifyLeft: "Align Left",
@@ -61,7 +64,7 @@
                     $that.data('trumbowyg', new Trumbowyg(this, opts));
             });
         } else {
-            return this.each(function(){
+            this.each(function(){
                 try {
                     var tbw = $(this).data('trumbowyg');
                     switch(opts){
@@ -70,12 +73,14 @@
                             return tbw.openModal(params.title, params.content);
                         case 'closeModal':
                             return tbw.closeModal();
+                        case 'buildModalInsert':
+                            return tbw.buildModalInsert(params.title, params.fields, params.callback);
 
                         // Selection
                         case 'saveSelection':
                             return tbw.saveSelection();
                         case 'restoreSelection':
-                            return tbw.restoreSelection();
+                            return tbw.restoreSelection(params);
 
                         // Destroy
                         case 'destroy':
@@ -307,7 +312,7 @@
             var that = this;
             this.$editor.on('dblclick', 'img', function(){
                 var img = $(this);
-                that.buildInsert(that.lang.insertImage, {
+                that.buildModalInsert(that.lang.editImage, {
                     url: {
                         value: img.attr('src')
                     },
@@ -669,7 +674,7 @@
         // Function call when user click on « Insert Link... » dropdown menu
         createLink: function(){
             this.saveSelection();
-            this.buildInsert(this.lang.insertImage, {
+            this.buildModalInsert(this.lang.insertImage, {
                 title: {
                     label: 'Title',
                     value: this.selection
@@ -689,7 +694,7 @@
         },
         insertImage: function(){
             this.saveSelection();
-            this.buildInsert(this.lang.insertImage, {
+            this.buildModalInsert(this.lang.insertImage, {
                 alt: {
                     label: 'Alt',
                     value: this.selection
@@ -817,7 +822,7 @@
             });
         },
         // Preformated build and management modal
-        buildInsert: function(title, fields, cmd){
+        buildModalInsert: function(title, fields, cmd){
             fields = $.extend(true, {
                 url: {
                     label: 'URL',
@@ -878,6 +883,7 @@
             } else if(document.selection && document.selection.createRange){
                 this.selection = document.selection.createRange();
             }
+            return this.selection;
         },
         restoreSelection: function(){
             range = this.selection;

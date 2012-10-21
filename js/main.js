@@ -24,11 +24,14 @@ $('a.link').click(function(e){
 
 
 $('#page a[href^="#"]').click(function(e){
-	scrollGoto($(this).attr('href'));
+	if($($(this).attr('href')).size() > 0)
+		scrollGoto($(this).attr('href'));
+	else
+		scrollGoto('#js-' + $(this).attr('href').replace('#', ''));
 	e.preventDefault();
 });
 
 function scrollGoto(cible){
-	var hauteur = ($(cible).length >= 1) ? (parseInt($(cible).offset().top) - offset - 20)+"px" : 0;
+	var hauteur = ($(cible).size() > 0) ? (parseInt($(cible).offset().top) - offset - 10)+"px" : 0;
 	$('html,body').animate({scrollTop: hauteur}, 750);
 }
