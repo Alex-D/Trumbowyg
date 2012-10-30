@@ -73,6 +73,8 @@
         <script src="js/trumbowyg/trumbowyg.js"></script>
         <script src="js/trumbowyg/langs/fr.js"></script>
         <script>
+            var btnsGrps = $.trumbowyg.btnsGrps;
+            
             $('#simple-editor').trumbowyg();
             $('.editor:first').trumbowyg({
                 lang: 'fr',
@@ -87,7 +89,13 @@
 
             $('.editor:last').trumbowyg({
                 closable: true,
-                fixedBtnPane: true
+                fixedBtnPane: true,
+                btns: ['viewHTML', 
+                    '|', 'formatting',
+                    '|', btnsGrps.design,
+                    '|', 'link',
+                    '|', btnsGrps.justify,
+                    '|', btnsGrps.lists]
             });
 
             $('.editor').on('dblclick', function(e){

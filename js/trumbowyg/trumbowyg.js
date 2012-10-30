@@ -210,7 +210,7 @@
             }
         }, opts);
 
-        if(this.o.semantic){
+        if(this.o.semantic && !opts.btns){
             this.o.btns = [
                 'viewHTML', 
                 '|', 'formatting',
@@ -221,6 +221,8 @@
                 '|', $.trumbowyg.btnsGrps.lists,
                 '|', 'insertHorizontalRule'
             ];
+        } else if(opts && opts.btns){
+            this.o.btns = opts.btns;
         }
 
         this.init();
