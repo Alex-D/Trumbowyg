@@ -324,8 +324,11 @@
                 });
                 return false;
             });
-            this.$editor.on('mousedown', function(e){
+            this.$editor.on('mousedown', function(){
                 that.sementicCode();
+            });
+            this.$editor.on('blur', function(){
+                that.syncCode();
             });
         },
 
@@ -648,6 +651,7 @@
                 this.height = this.$editor.css('height');
                 this.$e.css({height: this.height});
             }
+            console.log('sync');
         },
 
         // Analyse and update to semantic code
