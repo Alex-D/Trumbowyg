@@ -29,7 +29,7 @@ $.trumbowyg.langs.fr = {
     justifyRight: "Aligner à droite",
     justifyFull: "Justifier",
 
-    insertHorizontalRule: "Insérer un séparateur horizontal",
+    horizontalRule: "Insérer un séparateur horizontal",
 
     fullscreen: "Plein écran",
 

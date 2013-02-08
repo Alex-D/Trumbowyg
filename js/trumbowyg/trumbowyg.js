@@ -31,7 +31,7 @@
             justifyRight: "Align Right",
             justifyFull: "Align Justify",
 
-            insertHorizontalRule: "Insert horizontal rule",
+            horizontalRule: "Insert horizontal rule",
 
             fullscreen: "fullscreen",
 
@@ -133,7 +133,7 @@
                         '|', 'insertImage',
                         '|', $.trumbowyg.btnsGrps.justify,
                         '|', $.trumbowyg.btnsGrps.lists,
-                        '|', 'insertHorizontalRule'],
+                        '|', 'horizontalRule'],
             btnsAdd: [],
 
             /**
@@ -206,7 +206,9 @@
                     func: 'insertOrderedList'
                 },
 
-                insertHorizontalRule: {}
+                horizontalRule: {
+                    func: 'insertHorizontalRule'
+                }
             }
         }, opts);
 
@@ -219,7 +221,7 @@
                 '|', 'insertImage',
                 '|', $.trumbowyg.btnsGrps.justify,
                 '|', $.trumbowyg.btnsGrps.lists,
-                '|', 'insertHorizontalRule'
+                '|', 'horizontalRule'
             ];
         } else if(opts && opts.btns){
             this.o.btns = opts.btns;
