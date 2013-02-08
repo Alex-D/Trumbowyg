@@ -39,7 +39,7 @@ hr {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #cccccc;
   margin: 1em 0;
   padding: 0; }
 
@@ -98,7 +98,7 @@ h5 {
 
 body {
   font-family: "Trebuchet MS", Arial, Helvetica, Verdana, serif, sans-serif;
-  background: #f2f2f2 url('../img/background.jpg?1350346874') left top repeat; }
+  background: #f2f2f2 url('../img/background.jpg?1350354374') left top repeat; }
 
 header {
   background-color: #222;
@@ -151,7 +151,7 @@ header {
   height: 70px;
   line-height: 70px;
   background-color: #224d6a;
-  border-bottom: 2px solid #FFF;
+  border-bottom: 2px solid white;
   color: #F2F2F2;
   background-image: -webkit-gradient(linear, 100% 0%, 0% 100%, color-stop(-25%, #295f89), color-stop(125%, #173545));
   background-image: -webkit-linear-gradient(top right, #295f89 -25%, #173545 125%);
@@ -207,12 +207,12 @@ header {
 #page section {
   margin-top: 15px;
   padding-bottom: 15px;
-  border-bottom: 1px solid #BBB; }
+  border-bottom: 1px solid #bbbbbb; }
   #page section pre code {
     padding: 0 25px;
     font-size: 14px;
     background-color: #EDEDED;
-    border: 1px solid #CCC; }
+    border: 1px solid #cccccc; }
 #page h2 {
   color: #333;
   font-size: 48px;
@@ -265,7 +265,7 @@ header {
   font-style: italic;
   padding-left: 15px;
   margin-left: 15px;
-  border-left: 5px solid #CCC;
+  border-left: 5px solid #cccccc;
   margin-right: 30px; }
 
 aside {
@@ -303,7 +303,7 @@ aside {
   float: right;
   width: 739px;
   padding-left: 20px;
-  border-left: 1px solid #EEE; }
+  border-left: 1px solid #eeeeee; }
   #right-aside h3 {
     font-size: 24px;
     margin-left: 40px;
@@ -419,7 +419,7 @@ aside {
 @media print {
   * {
     background: transparent !important;
-    color: #000 !important;
+    color: black !important;
     /* Black prints faster: h5bp.com/s */
     box-shadow: none !important;
     text-shadow: none !important; }
@@ -444,7 +444,7 @@ aside {
 
   pre,
   blockquote {
-    border: 1px solid #999;
+    border: 1px solid #999999;
     page-break-inside: avoid; }
 
   thead {
