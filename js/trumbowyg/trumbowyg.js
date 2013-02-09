@@ -1,4 +1,12 @@
-﻿$.trumbowyg = {
+﻿/* ===========================================================
+ * trumbowyg.js v1.0
+ * http://alex-d.github.com/Trumbowyg
+ * ===========================================================
+ * Author : Alex-D (aka Alexandre Demode)
+ *          Twitter : @AlexandreDemode
+ */
+
+$.trumbowyg = {
     langs: {
         en: {
             viewHTML: "View HTML",
@@ -43,12 +51,13 @@
     },
 
     btnsGrps: {
-        design : ['bold', 'italic', 'underline', 'strikethrough'],
-        semantic : ['strong', 'em'],
-        justify: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
-        lists: ['unorderedList', 'orderedList']
+        design:     ['bold', 'italic', 'underline', 'strikethrough'],
+        semantic:   ['strong', 'em'],
+        justify:    ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+        lists:      ['unorderedList', 'orderedList']
     }
 };
+
 
 
 (function($){
@@ -353,6 +362,13 @@
             });
 
             $.each(this.o.btns.concat(this.o.btnsAdd), $.proxy(function(i, btn){
+                // Managment of group of buttons
+                try {
+                    var b = btn.split('btnGrp-');
+                    if(b[1] != undefined)
+                        btn = $.trumbowyg.btnsGrps[b[1]];
+                } catch(e){}
+
                 if(!$.isArray(btn)) btn = [btn];
                 $.each(btn, $.proxy(function(i, btn){
                     try { // Prevent buildBtn error
@@ -653,7 +669,6 @@
                 this.height = this.$editor.css('height');
                 this.$e.css({height: this.height});
             }
-            console.log('sync');
         },
 
         // Analyse and update to semantic code
