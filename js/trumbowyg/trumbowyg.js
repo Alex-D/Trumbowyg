@@ -182,6 +182,30 @@ $.trumbowyg = {
                     }
                 },
 
+                // Formatting flat
+                p: {
+                    func: 'formatBlock'
+                },
+                blockquote: {
+                    func: 'formatBlock'
+                },
+                h1: {
+                    func: 'formatBlock',
+                    title: this.lang.header + ' 1'
+                },
+                h2: {
+                    func: 'formatBlock',
+                    title: this.lang.header + ' 2'
+                },
+                h3: {
+                    func: 'formatBlock',
+                    title: this.lang.header + ' 3'
+                },
+                h4: {
+                    func: 'formatBlock',
+                    title: this.lang.header + ' 4'
+                },
+
                 bold: {},
                 italic: {},
                 underline: {},
@@ -478,6 +502,7 @@ $.trumbowyg = {
 
 
             if(btnDef.dropdown){
+                btn.addClass(this.o.prefix + 'open-dropdown');
                 var cssClass = this.o.prefix + 'dropdown'
                              + ' ' + this.o.prefix + 'fixed-top';
 
@@ -621,6 +646,7 @@ $.trumbowyg = {
             this.$editor.toggle();
             this.$e.toggle();
             this.$btnPane.toggleClass(this.o.prefix + 'disable');
+            this.$btnPane.find('.'+this.o.prefix + 'viewHTML-button').toggleClass(this.o.prefix + 'active');
         },
 
         // Open dropdown when click on a button which open that 
@@ -692,7 +718,11 @@ $.trumbowyg = {
         // Function call when user click on « Insert Link... » dropdown menu
         createLink: function(){
             this.saveSelection();
-            this.buildInsert(this.lang.insertImage, {
+            this.buildInsert(this.lang.createLink, {
+                url: {
+                    label: 'URL',
+                    value: 'http://'
+                },
                 title: {
                     label: 'Title',
                     value: this.selection
@@ -713,6 +743,10 @@ $.trumbowyg = {
         insertImage: function(){
             this.saveSelection();
             this.buildInsert(this.lang.insertImage, {
+                url: {
+                    label: 'URL',
+                    value: 'http://'
+                },
                 alt: {
                     label: 'Alt',
                     value: this.selection
@@ -737,6 +771,9 @@ $.trumbowyg = {
                     cmd(param);
                 } catch(e){
                     this.$editor.focus();
+                    if(cmd == 'insertHorizontalRule')
+                        param = null;
+
                     document.execCommand(cmd, false, param);
                 }
             }
@@ -841,13 +878,6 @@ $.trumbowyg = {
         },
         // Preformated build and management modal
         buildInsert: function(title, fields, cmd){
-            fields = $.extend(true, {
-                url: {
-                    label: 'URL',
-                    value: 'http://'
-                }
-            }, fields);
-
             var html = '';
             for(f in fields){
                 fields[f].name = f;

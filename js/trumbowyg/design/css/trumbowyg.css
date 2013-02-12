@@ -54,12 +54,23 @@
   .trumbowyg-button-pane.trumbowyg-disable li:not(.trumbowyg-not-disable) a {
     opacity: .2;
     cursor: default; }
-  .trumbowyg-button-pane:not(.trumbowyg-disable) li a:hover, .trumbowyg-button-pane:not(.trumbowyg-disable) li a:focus, .trumbowyg-button-pane:not(.trumbowyg-disable) li a.trumbowyg-active,
+  .trumbowyg-button-pane:not(.trumbowyg-disable) li a:hover, .trumbowyg-button-pane:not(.trumbowyg-disable) li a:focus,
+  .trumbowyg-button-pane li a.trumbowyg-active,
   .trumbowyg-button-pane li.trumbowyg-not-disable a:hover,
   .trumbowyg-button-pane li.trumbowyg-not-disable a:focus {
     background-color: #DDD;
     border-color: #AAA;
     outline: none; }
+  .trumbowyg-button-pane li a.trumbowyg-open-dropdown:after {
+    display: block;
+    content: " ";
+    position: absolute;
+    top: 20px;
+    right: 0;
+    height: 0;
+    width: 0;
+    border: 3px solid transparent;
+    border-top-color: #555; }
   .trumbowyg-button-pane .trumbowyg-buttons-right {
     float: right;
     width: auto; }
@@ -278,6 +289,7 @@
  */
 .trumbowyg-button-pane li a {
   display: block;
+  position: relative;
   text-indent: -9999px;
   width: 25px;
   height: 25px;
