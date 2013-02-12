@@ -69,35 +69,33 @@ $.trumbowyg = {
                 if(!$that.data('trumbowyg'))
                     $that.data('trumbowyg', new Trumbowyg(this, opts));
             });
-        } else {
-            return this.each(function(){
-                try {
-                    var tbw = $(this).data('trumbowyg');
-                    switch(opts){
-                        // Modal box
-                        case 'openModal':
-                            return tbw.openModal(params.title, params.content);
-                        case 'closeModal':
-                            return tbw.closeModal();
+        } else if(this.length == 1){
+            try {
+                var tbw = $(this).data('trumbowyg');
+                switch(opts){
+                    // Modal box
+                    case 'openModal':
+                        return tbw.openModal(params.title, params.content);
+                    case 'closeModal':
+                        return tbw.closeModal();
 
-                        // Selection
-                        case 'saveSelection':
-                            return tbw.saveSelection();
-                        case 'restoreSelection':
-                            return tbw.restoreSelection();
+                    // Selection
+                    case 'saveSelection':
+                        return tbw.saveSelection();
+                    case 'restoreSelection':
+                        return tbw.restoreSelection();
 
-                        // Destroy
-                        case 'destroy':
-                            return tbw.destroy();
+                    // Destroy
+                    case 'destroy':
+                        return tbw.destroy();
 
-                        // Public options
-                        case 'lang':
-                            return tbw.lang;
-                        case 'duration':
-                            return tbw.o.duration;
-                    }
-                } catch(e){}
-            });
+                    // Public options
+                    case 'lang':
+                        return tbw.lang;
+                    case 'duration':
+                        return tbw.o.duration;
+                }
+            } catch(e){}
         }
         return false;
     };
@@ -808,6 +806,7 @@ $.trumbowyg = {
             }).appendTo(this.$box);
 
 
+            $e = this.$editor;
 
             // Build the form
             $form = $('<form/>', {
@@ -850,7 +849,7 @@ $.trumbowyg = {
 
             $('body').trigger('scroll');
 
-            return $modalBox;
+            return $modal;
         },
         buildModalBtn: function(name, modal){
             return $('<input/>', {
@@ -885,30 +884,30 @@ $.trumbowyg = {
                 html += '<label>'+f.label+' : <input type="text" name="'+f.name+'" value="'+ (f.value || '') +'"></label>';
             }
 
-            var modal = this.openModal(title, html);
-            var modBox = modal.parent();
+            var modBox = this.openModal(title, html);
             var that = this;
 
             modBox.on(this.o.prefix + 'confirm', function(){
                 var $form = $(this).find('form');
 
                 var values = {};
-                fields['url'] = {};
                 for(f in fields)
                     values[f] = $('input[name="'+f+'"]', $form).val();
                 
-                if(values['url'] != 'http://'){
-                    that.restoreSelection();
-                    if($.isString(cmd))
-                        document.execCommand(cmd, false, values['url']);
-                    else
-                        cmd(values);
-                    that.syncCode();
-                    that.closeModal();
-                    modBox.off(that.o.prefix + 'confirm');
-                } else {
-                    $form.find('.error').remove();
-                    $form.append('<span class="error">Invalid URL</span>');
+                if(values['url'] != null && values['url'] != undefined){
+                    if(values['url'] != 'http://'){
+                        that.restoreSelection();
+                        if($.isString(cmd))
+                            document.execCommand(cmd, false, values['url']);
+                        else
+                            cmd(values);
+                        that.syncCode();
+                        that.closeModal();
+                        modBox.off(that.o.prefix + 'confirm');
+                    } else {
+                        $form.find('.error').remove();
+                        $form.append('<span class="error">Invalid URL</span>');
+                    }
                 }
             });
             modBox.one(this.o.prefix + 'cancel', function(){
