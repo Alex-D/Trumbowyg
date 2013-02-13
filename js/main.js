@@ -9,6 +9,7 @@ $('section').each(function(eq){
 $(document).ready(function(){
 	$('body').pageScroller({
 		navigation: "header nav",
+		keyboardControl: false,
 		deepLink: true,
 		HTML5mode: true,
 		scrollOffset: - offset - 10
