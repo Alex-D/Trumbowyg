@@ -12,7 +12,6 @@ $btns2x: sprite-map("icons-2x/*.png");
 }
 
 
-
 $default-transition-duration: .2s;
 
 
@@ -83,12 +82,24 @@ $default-transition-duration: .2s;
 
 	&:not(.trumbowyg-disable) li a:hover,
 	&:not(.trumbowyg-disable) li a:focus,
-	&:not(.trumbowyg-disable) li a.trumbowyg-active,
+	li a.trumbowyg-active,
 	li.trumbowyg-not-disable a:hover,
 	li.trumbowyg-not-disable a:focus {
 		background-color: #DDD;
 		border-color: #AAA;
 		outline: none;
+	}
+
+	li a.trumbowyg-open-dropdown:after {
+		display: block;
+		content: " ";
+		position: absolute;
+		top: 20px;
+		right: 0;
+		height: 0;
+		width: 0;
+		border: 3px solid transparent;
+		border-top-color: #555;
 	}
 
 	.trumbowyg-buttons-right {
@@ -355,6 +366,7 @@ $default-transition-duration: .2s;
  */
 .trumbowyg-button-pane li a {
 	display: block;
+	position: relative;
 	text-indent: -9999px;
 	width: 25px;
 	height: 25px;
@@ -385,7 +397,7 @@ $default-transition-duration: .2s;
 	&.trumbowyg-unorderedList-button { @include sprite-pos($btns, 'unordered-list'); }
 	&.trumbowyg-orderedList-button { @include sprite-pos($btns, 'ordered-list'); }
 
-	&.trumbowyg-insertHorizontalRule-button { @include sprite-pos($btns, 'horizontale-rule'); }
+	&.trumbowyg-horizontalRule-button { @include sprite-pos($btns, 'horizontale-rule'); }
 
 	&.trumbowyg-fullscreen-button { @include sprite-pos($btns, 'fullscreen'); }
 	&.trumbowyg-close-button { @include sprite-pos($btns, 'close'); }
@@ -433,7 +445,7 @@ $default-transition-duration: .2s;
 		&.trumbowyg-unorderedList-button { @include sprite-pos($btns2x, 'unordered-list', true); }
 		&.trumbowyg-orderedList-button { @include sprite-pos($btns2x, 'ordered-list', true); }
 
-		&.trumbowyg-insertHorizontalRule-button { @include sprite-pos($btns2x, 'horizontale-rule', true); }
+		&.trumbowyg-horizontalRule-button { @include sprite-pos($btns2x, 'horizontale-rule', true); }
 
 		&.trumbowyg-fullscreen-button { @include sprite-pos($btns2x, 'fullscreen', true); }
 		&.trumbowyg-close-button { @include sprite-pos($btns2x, 'close', true); }
