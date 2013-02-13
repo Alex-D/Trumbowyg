@@ -389,16 +389,13 @@ $.trumbowyg.lang.fr = {
                                 For that use the <code class="javascript">.trumbowyg()</code> method and give parameters  <code>"openModal"</code> or <code>"closeModal"</code> like that:
                                 <pre><code class="javascript">
 // Open a modal box
-var $modal = $("textarea:nth-child(2)").trumbowyg("openModal", {
+var $modal = $("#editor").trumbowyg("openModal", {
     title: "A title for modal box",
     content: "&lt;p&gt;Content in HTML which you want include in created modal box&lt;/p&gt;"
 });
 
 // Close current modal box
-$(".close-modal").click(function(e){
-    $(".trumbowyg").trumbowyg("closeModal");
-    e.preventDefault();
-});
+$("#editor").trumbowyg("closeModal");
                                 </code></pre>
 
                                 <code>openModal</code> call return a jQuery object which contains the modal box. It's necessary if you want listen events (view them in next part).
@@ -417,6 +414,24 @@ $(".close-modal").click(function(e){
                             </p>
                             <p class="note">
                                 <code>{prefix}</code> is the <code>prefix</code> option value.
+                            </p>
+                            <p>
+                                <pre><code class="javascript">
+// Open a modal box
+var $modal = $("#editor").trumbowyg("openModal", {
+    title: "A title for modal box",
+    content: "&lt;p&gt;Content in HTML which you want include in created modal box&lt;/p&gt;"
+});
+
+// Listen clicks on modal box buttons
+$modal.on('trumbowyg-confirm', function(e){
+    // Save datas
+    $("#editor").trumbowyg("closeModal");
+});
+$modal.on('trumbowyg-cancel', function(e){
+    $("#editor").trumbowyg("closeModal");
+});
+                                </code></pre>
                             </p>
 
                             <h4>Only build inputs in modal</h4>
