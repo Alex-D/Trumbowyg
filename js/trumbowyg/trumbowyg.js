@@ -1,4 +1,12 @@
-﻿$.trumbowyg = {
+﻿/* ===========================================================
+ * trumbowyg.js v1.0
+ * http://alex-d.github.com/Trumbowyg
+ * ===========================================================
+ * Author : Alex-D (aka Alexandre Demode)
+ *          Twitter : @AlexandreDemode
+ */
+
+$.trumbowyg = {
     langs: {
         en: {
             viewHTML: "View HTML",
@@ -21,12 +29,9 @@
             orderedList: "Ordered list",
 
             insertImage: "Insert Image...",
-            editImage: "Edit Image",
             insertVideo: "Insert Video...",
-            editVideo: "Edit Video",
             link: "Link",
             createLink: "Insert link...",
-            editLink: "Edit link",
             unlink: "Remove link",
 
             justifyLeft: "Align Left",
@@ -34,7 +39,7 @@
             justifyRight: "Align Right",
             justifyFull: "Align Justify",
 
-            insertHorizontalRule: "Insert horizontal rule",
+            horizontalRule: "Insert horizontal rule",
 
             fullscreen: "fullscreen",
 
@@ -46,12 +51,13 @@
     },
 
     btnsGrps: {
-        design : ['bold', 'italic', 'underline', 'strikethrough'],
-        semantic : ['strong', 'em'],
-        justify: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
-        lists: ['unorderedList', 'orderedList']
+        design:     ['bold', 'italic', 'underline', 'strikethrough'],
+        semantic:   ['strong', 'em'],
+        justify:    ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+        lists:      ['unorderedList', 'orderedList']
     }
 };
+
 
 
 (function($){
@@ -63,37 +69,33 @@
                 if(!$that.data('trumbowyg'))
                     $that.data('trumbowyg', new Trumbowyg(this, opts));
             });
-        } else {
-            this.each(function(){
-                try {
-                    var tbw = $(this).data('trumbowyg');
-                    switch(opts){
-                        // Modal box
-                        case 'openModal':
-                            return tbw.openModal(params.title, params.content);
-                        case 'closeModal':
-                            return tbw.closeModal();
-                        case 'buildModalInsert':
-                            return tbw.buildModalInsert(params.title, params.fields, params.callback);
+        } else if(this.length == 1){
+            try {
+                var tbw = $(this).data('trumbowyg');
+                switch(opts){
+                    // Modal box
+                    case 'openModal':
+                        return tbw.openModal(params.title, params.content);
+                    case 'closeModal':
+                        return tbw.closeModal();
 
-                        // Selection
-                        case 'saveSelection':
-                            return tbw.saveSelection();
-                        case 'restoreSelection':
-                            return tbw.restoreSelection(params);
+                    // Selection
+                    case 'saveSelection':
+                        return tbw.saveSelection();
+                    case 'restoreSelection':
+                        return tbw.restoreSelection();
 
-                        // Destroy
-                        case 'destroy':
-                            return tbw.destroy();
+                    // Destroy
+                    case 'destroy':
+                        return tbw.destroy();
 
-                        // Public options
-                        case 'lang':
-                            return tbw.lang;
-                        case 'duration':
-                            return tbw.o.duration;
-                    }
-                } catch(e){}
-            });
+                    // Public options
+                    case 'lang':
+                        return tbw.lang;
+                    case 'duration':
+                        return tbw.o.duration;
+                }
+            } catch(e){}
         }
         return false;
     };
@@ -138,7 +140,7 @@
                         '|', 'insertImage',
                         '|', $.trumbowyg.btnsGrps.justify,
                         '|', $.trumbowyg.btnsGrps.lists,
-                        '|', 'insertHorizontalRule'],
+                        '|', 'horizontalRule'],
             btnsAdd: [],
 
             /**
@@ -178,6 +180,30 @@
                     }
                 },
 
+                // Formatting flat
+                p: {
+                    func: 'formatBlock'
+                },
+                blockquote: {
+                    func: 'formatBlock'
+                },
+                h1: {
+                    func: 'formatBlock',
+                    title: this.lang.header + ' 1'
+                },
+                h2: {
+                    func: 'formatBlock',
+                    title: this.lang.header + ' 2'
+                },
+                h3: {
+                    func: 'formatBlock',
+                    title: this.lang.header + ' 3'
+                },
+                h4: {
+                    func: 'formatBlock',
+                    title: this.lang.header + ' 4'
+                },
+
                 bold: {},
                 italic: {},
                 underline: {},
@@ -211,11 +237,13 @@
                     func: 'insertOrderedList'
                 },
 
-                insertHorizontalRule: {}
+                horizontalRule: {
+                    func: 'insertHorizontalRule'
+                }
             }
         }, opts);
 
-        if(this.o.semantic){
+        if(this.o.semantic && !opts.btns){
             this.o.btns = [
                 'viewHTML', 
                 '|', 'formatting',
@@ -224,8 +252,10 @@
                 '|', 'insertImage',
                 '|', $.trumbowyg.btnsGrps.justify,
                 '|', $.trumbowyg.btnsGrps.lists,
-                '|', 'insertHorizontalRule'
+                '|', 'horizontalRule'
             ];
+        } else if(opts && opts.btns){
+            this.o.btns = opts.btns;
         }
 
         this.init();
@@ -312,7 +342,7 @@
             var that = this;
             this.$editor.on('dblclick', 'img', function(){
                 var img = $(this);
-                that.buildModalInsert(that.lang.editImage, {
+                that.buildInsert(that.lang.insertImage, {
                     url: {
                         value: img.attr('src')
                     },
@@ -327,8 +357,11 @@
                 });
                 return false;
             });
-            this.$editor.on('mousedown', function(e){
+            this.$editor.on('mousedown', function(){
                 that.sementicCode();
+            });
+            this.$editor.on('blur', function(){
+                that.syncCode();
             });
         },
 
@@ -351,6 +384,13 @@
             });
 
             $.each(this.o.btns.concat(this.o.btnsAdd), $.proxy(function(i, btn){
+                // Managment of group of buttons
+                try {
+                    var b = btn.split('btnGrp-');
+                    if(b[1] != undefined)
+                        btn = $.trumbowyg.btnsGrps[b[1]];
+                } catch(e){}
+
                 if(!$.isArray(btn)) btn = [btn];
                 $.each(btn, $.proxy(function(i, btn){
                     try { // Prevent buildBtn error
@@ -460,6 +500,7 @@
 
 
             if(btnDef.dropdown){
+                btn.addClass(this.o.prefix + 'open-dropdown');
                 var cssClass = this.o.prefix + 'dropdown'
                              + ' ' + this.o.prefix + 'fixed-top';
 
@@ -603,6 +644,7 @@
             this.$editor.toggle();
             this.$e.toggle();
             this.$btnPane.toggleClass(this.o.prefix + 'disable');
+            this.$btnPane.find('.'+this.o.prefix + 'viewHTML-button').toggleClass(this.o.prefix + 'active');
         },
 
         // Open dropdown when click on a button which open that 
@@ -674,7 +716,11 @@
         // Function call when user click on « Insert Link... » dropdown menu
         createLink: function(){
             this.saveSelection();
-            this.buildModalInsert(this.lang.insertImage, {
+            this.buildInsert(this.lang.createLink, {
+                url: {
+                    label: 'URL',
+                    value: 'http://'
+                },
                 title: {
                     label: 'Title',
                     value: this.selection
@@ -694,7 +740,11 @@
         },
         insertImage: function(){
             this.saveSelection();
-            this.buildModalInsert(this.lang.insertImage, {
+            this.buildInsert(this.lang.insertImage, {
+                url: {
+                    label: 'URL',
+                    value: 'http://'
+                },
                 alt: {
                     label: 'Alt',
                     value: this.selection
@@ -719,6 +769,9 @@
                     cmd(param);
                 } catch(e){
                     this.$editor.focus();
+                    if(cmd == 'insertHorizontalRule')
+                        param = null;
+
                     document.execCommand(cmd, false, param);
                 }
             }
@@ -753,6 +806,7 @@
             }).appendTo(this.$box);
 
 
+            $e = this.$editor;
 
             // Build the form
             $form = $('<form/>', {
@@ -795,7 +849,7 @@
 
             $('body').trigger('scroll');
 
-            return $modalBox;
+            return $modal;
         },
         buildModalBtn: function(name, modal){
             return $('<input/>', {
@@ -822,14 +876,7 @@
             });
         },
         // Preformated build and management modal
-        buildModalInsert: function(title, fields, cmd){
-            fields = $.extend(true, {
-                url: {
-                    label: 'URL',
-                    value: 'http://'
-                }
-            }, fields);
-
+        buildInsert: function(title, fields, cmd){
             var html = '';
             for(f in fields){
                 fields[f].name = f;
@@ -837,30 +884,30 @@
                 html += '<label>'+f.label+' : <input type="text" name="'+f.name+'" value="'+ (f.value || '') +'"></label>';
             }
 
-            var modal = this.openModal(title, html);
-            var modBox = modal.parent();
+            var modBox = this.openModal(title, html);
             var that = this;
 
             modBox.on(this.o.prefix + 'confirm', function(){
                 var $form = $(this).find('form');
 
                 var values = {};
-                fields['url'] = {};
                 for(f in fields)
                     values[f] = $('input[name="'+f+'"]', $form).val();
                 
-                if(values['url'] != 'http://'){
-                    that.restoreSelection();
-                    if($.isString(cmd))
-                        document.execCommand(cmd, false, values['url']);
-                    else
-                        cmd(values);
-                    that.syncCode();
-                    that.closeModal();
-                    modBox.off(that.o.prefix + 'confirm');
-                } else {
-                    $form.find('.error').remove();
-                    $form.append('<span class="error">Invalid URL</span>');
+                if(values['url'] != null && values['url'] != undefined){
+                    if(values['url'] != 'http://'){
+                        that.restoreSelection();
+                        if($.isString(cmd))
+                            document.execCommand(cmd, false, values['url']);
+                        else
+                            cmd(values);
+                        that.syncCode();
+                        that.closeModal();
+                        modBox.off(that.o.prefix + 'confirm');
+                    } else {
+                        $form.find('.error').remove();
+                        $form.append('<span class="error">Invalid URL</span>');
+                    }
                 }
             });
             modBox.one(this.o.prefix + 'cancel', function(){
@@ -883,7 +930,6 @@
             } else if(document.selection && document.selection.createRange){
                 this.selection = document.selection.createRange();
             }
-            return this.selection;
         },
         restoreSelection: function(){
             range = this.selection;
