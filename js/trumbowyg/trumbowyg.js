@@ -86,6 +86,10 @@ $.trumbowyg = {
                     // Selection
                     case 'saveSelection':
                         return tbw.saveSelection();
+                    case 'getSelection':
+                        return tbw.selection;
+                    case 'getSelectedText':
+                        return tbw.selection+'';
                     case 'restoreSelection':
                         return tbw.restoreSelection();
 
