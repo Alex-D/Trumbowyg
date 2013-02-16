@@ -46,7 +46,9 @@ $.trumbowyg = {
             close: "Close",
 
             submit: "Confirm",
-            reset: "Cancel"
+            reset: "Cancel",
+
+            urlInvalid: "Invalid URL"
         }
     },
 
@@ -78,6 +80,8 @@ $.trumbowyg = {
                         return tbw.openModal(params.title, params.content);
                     case 'closeModal':
                         return tbw.closeModal();
+                    case 'openModalInsert':
+                        return tbw.buildInsert(opts.title, opts.fields, opts.callback);
 
                     // Selection
                     case 'saveSelection':
@@ -344,6 +348,7 @@ $.trumbowyg = {
                 var img = $(this);
                 that.buildInsert(that.lang.insertImage, {
                     url: {
+                        label: 'URL',
                         value: img.attr('src')
                     },
                     alt: {
@@ -878,8 +883,14 @@ $.trumbowyg = {
         // Preformated build and management modal
         buildInsert: function(title, fields, cmd){
             var html = '';
+
             for(f in fields){
-                fields[f].name = f;
+                if(fields[f].label == undefined)
+                    fields[f].label = f.charAt(0).toUpperCase() + f.slice(1);
+
+                if(fields[f].name == undefined)
+                    fields[f].name = f;
+
                 f = fields[f];
                 html += '<label>'+f.label+' : <input type="text" name="'+f.name+'" value="'+ (f.value || '') +'"></label>';
             }
@@ -901,12 +912,13 @@ $.trumbowyg = {
                             document.execCommand(cmd, false, values['url']);
                         else
                             cmd(values);
+
                         that.syncCode();
                         that.closeModal();
                         modBox.off(that.o.prefix + 'confirm');
                     } else {
                         $form.find('.error').remove();
-                        $form.append('<span class="error">Invalid URL</span>');
+                        $form.append('<span class="error">'+that.lang.urlInvalid+'</span>');
                     }
                 }
             });
