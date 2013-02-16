@@ -440,7 +440,7 @@ $modal.on('trumbowyg-cancel', function(e){
 
                                 <pre><code class="javascript">
 var img = $('img#an-img');
-$("#tbw").trumbowyg("buildModalInsert", {
+$("#tbw").trumbowyg("openModalInsert", {
     title: "A title for modal box",
     fields: {
         url: {
@@ -450,6 +450,11 @@ $("#tbw").trumbowyg("buildModalInsert", {
             label: 'Alt',
             name: 'alt',
             value: img.attr('alt')
+        },
+        example: {
+            // Missing label is replaced by url (key of this object)
+            // Missing name is the same
+            // When value is missing, value = ''
         }
     },
     callback: function(values){

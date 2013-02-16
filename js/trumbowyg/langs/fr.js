@@ -39,5 +39,7 @@ $.trumbowyg.langs.fr = {
     close: "Fermer",
 
     submit: "Valider",
-    reset: "Annuler"
+    reset: "Annuler",
+
+    urlInvalid: "URL Invalide"
 }
