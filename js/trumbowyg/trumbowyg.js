@@ -863,9 +863,9 @@ $.trumbowyg = {
             $modalBox.find('input:first').focus();
 
 
-            // Append Cancel and Confirm buttons
-            this.buildModalBtn('reset', $modalBox);
+            // Append Confirm and Cancel buttons
             this.buildModalBtn('submit', $modalBox);
+            this.buildModalBtn('reset', $modalBox);
 
 
             $('body').trigger('scroll');
