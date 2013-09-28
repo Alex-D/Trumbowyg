@@ -228,14 +228,14 @@ header {
     width: 100%;
     height: 70px;
     line-height: 70px;
-    background-color: #224d6a;
     border-bottom: 1px solid #FFF;
     color: #F2F2F2;
-    background: url('http://alex-d.fr/images/background.png');
+    background: #2F2F2F url('http://alex-d.fr/images/background.png');
     @include background-image(linear-gradient(top, rgba(0, 0, 0, .3) 0, rgba(0, 0, 0, 0) 7px),
                               linear-gradient(bottom, rgba(0, 0, 0, .3) 0, rgba(0, 0, 0, 0) 7px),
                               linear-gradient(top right, rgba(255, 255, 255, .05) -25%, rgba(0, 0, 0, .2) 125%),
-                              url('http://alex-d.fr/images/background.png'));
+                              url('http://alex-d.fr/images/background.png'),
+                              #2F2F2F);
 }
 
 #promotion {
