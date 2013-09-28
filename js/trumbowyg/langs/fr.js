@@ -1,40 +1,45 @@
 $.trumbowyg.langs.fr = {
-    viewHTML: "Voir le HTML",
+    viewHTML:       "Voir le HTML",
 
-    formatting: "Format",
-    p: "Paragraphe",
-    blockquote: "Citation",
-    code: "Code",
-    header: "Titre",
+    formatting:     "Format",
+    p:              "Paragraphe",
+    blockquote:     "Citation",
+    code:           "Code",
+    header:         "Titre",
 
-    bold: "Gras",
-    italic: "Italique",
-    strikethrough: "Rayé",
-    underline: "Souligné",
+    bold:           "Gras",
+    italic:         "Italique",
+    strikethrough:  "Rayé",
+    underline:      "Souligné",
 
-    strong: "Fort",
-    em: "Emphase",
+    strong:         "Fort",
+    em:             "Emphase",
 
-    unorderedList: "Liste à puces",
-    orderedList: "Liste ordonnée",
+    unorderedList:  "Liste à puces",
+    orderedList:    "Liste ordonnée",
 
-    insertImage: "Inserer une Image...",
-    insertVideo: "Inserer une Video...",
-    link: "Lien",
-    createLink: "Insérer un lien...",
-    unlink: "Supprimer le lien",
+    insertImage:    "Inserer une Image",
+    insertVideo:    "Inserer une Video",
+    link:           "Lien",
+    createLink:     "Insérer un lien",
+    unlink:         "Supprimer le lien",
 
-    justifyLeft: "Aligner à gauche",
-    justifyCenter: "Centrer",
-    justifyRight: "Aligner à droite",
-    justifyFull: "Justifier",
+    justifyLeft:    "Aligner à gauche",
+    justifyCenter:  "Centrer",
+    justifyRight:   "Aligner à droite",
+    justifyFull:    "Justifier",
 
     horizontalRule: "Insérer un séparateur horizontal",
 
-    fullscreen: "Plein écran",
+    fullscreen:     "Plein écran",
 
-    close: "Fermer",
+    close:          "Fermer",
 
-    submit: "Valider",
-    reset: "Annuler"
+    submit:         "Valider",
+    reset:          "Annuler",
+
+    invalidUrl:     "URL invalide",
+    description:    "Description",
+    title:          "Title",
+    text:           "Text"
 }

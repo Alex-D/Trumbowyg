@@ -10,46 +10,49 @@
 $.trumbowyg = {
     langs: {
         en: {
-            viewHTML: "View HTML",
+            viewHTML:       "View HTML",
 
-            formatting: "Formatting",
-            p: "Paragraph",
-            blockquote: "Quote",
-            code: "Code",
-            header: "Header",
+            formatting:     "Formatting",
+            p:              "Paragraph",
+            blockquote:     "Quote",
+            code:           "Code",
+            header:         "Header",
 
-            bold: "Bold",
-            italic: "Italic",
-            strikethrough: "Stroke",
-            underline: "Underline",
+            bold:           "Bold",
+            italic:         "Italic",
+            strikethrough:  "Stroke",
+            underline:      "Underline",
 
-            strong: "Strong",
-            em: "Emphasis",
+            strong:         "Strong",
+            em:             "Emphasis",
 
-            unorderedList: "Unordered list",
-            orderedList: "Ordered list",
+            unorderedList:  "Unordered list",
+            orderedList:    "Ordered list",
 
-            insertImage: "Insert Image",
-            insertVideo: "Insert Video",
-            link: "Link",
-            createLink: "Insert link",
-            unlink: "Remove link",
+            insertImage:    "Insert Image",
+            insertVideo:    "Insert Video",
+            link:           "Link",
+            createLink:     "Insert link",
+            unlink:         "Remove link",
 
-            justifyLeft: "Align Left",
-            justifyCenter: "Align Center",
-            justifyRight: "Align Right",
-            justifyFull: "Align Justify",
+            justifyLeft:    "Align Left",
+            justifyCenter:  "Align Center",
+            justifyRight:   "Align Right",
+            justifyFull:    "Align Justify",
 
             horizontalRule: "Insert horizontal rule",
 
-            fullscreen: "fullscreen",
+            fullscreen:     "fullscreen",
 
-            close: "Close",
+            close:          "Close",
 
-            submit: "Confirm",
-            reset: "Cancel",
+            submit:         "Confirm",
+            reset:          "Cancel",
 
-            urlInvalid: "Invalid URL"
+            invalidUrl:     "Invalid URL",
+            description:    "Description",
+            title:          "Title",
+            text:           "Text"
         }
     },
 
@@ -357,8 +360,7 @@ $.trumbowyg = {
                         value: img.attr('src')
                     },
                     alt: {
-                        label: 'Alt',
-                        name: 'alt',
+                        label: that.lang.description,
                         value: img.attr('alt')
                     }
                 }, function(values){
@@ -735,11 +737,11 @@ $.trumbowyg = {
                     required: true
                 },
                 title: {
-                    label: 'Title',
+                    label: this.lang.title,
                     value: this.selection
                 },
                 text: {
-                    label: 'Text',
+                    label: this.lang.text,
                     value: this.selection
                 }
             }, 'createLink');
@@ -752,7 +754,7 @@ $.trumbowyg = {
                     value: 'http://'
                 },
                 alt: {
-                    label: 'Alt',
+                    label: this.lang.description,
                     value: this.selection
                 }
             }, 'insertImage');
@@ -933,7 +935,7 @@ $.trumbowyg = {
                         that.closeModal();
                         modBox.off(that.o.prefix + 'confirm');
                     } else {
-                        that.addErrorOnModalField($form.find('input[name=url]'), that.lang.urlInvalid);
+                        that.addErrorOnModalField($form.find('input[name=url]'), that.lang.invalidUrl);
                     }
                 }
             });

@@ -26,7 +26,7 @@
 
 .trumbowyg-box-blur .trumbowyg-editor {
   color: transparent;
-  text-shadow: 0 0 10px #333333; }
+  text-shadow: 0 0 5px #333333; }
 
 .trumbowyg-textarea {
   position: relative;
@@ -150,17 +150,20 @@
     overflow: hidden; }
     .trumbowyg-modal-box label .trumbowyg-input-infos {
       display: block;
-      float: right;
-      width: 96%;
-      padding: 0 2%;
+      text-align: left;
+      height: 25px;
+      line-height: 25px;
       -webkit-transition: all 0.15s;
       -moz-transition: all 0.15s;
       -o-transition: all 0.15s;
       transition: all 0.15s; }
       .trumbowyg-modal-box label .trumbowyg-input-infos span {
         display: block;
-        text-align: right;
-        color: #a3b6bb; }
+        color: #859fa5;
+        background-color: #fbfcfc;
+        border: 1px solid #DEDEDE;
+        padding: 0 2%;
+        width: 19.5%; }
       .trumbowyg-modal-box label .trumbowyg-input-infos span.trumbowyg-msg-error {
         color: #e74c3c; }
     .trumbowyg-modal-box label.trumbowyg-input-error input,
@@ -176,8 +179,9 @@
       line-height: 25px;
       border: 1px solid #DEDEDE;
       background: transparent;
-      width: 95%;
+      width: 72%;
       padding: 0 2%;
+      margin: 0 0 0 23%;
       -webkit-transition: all 0.15s;
       -moz-transition: all 0.15s;
       -o-transition: all 0.15s;

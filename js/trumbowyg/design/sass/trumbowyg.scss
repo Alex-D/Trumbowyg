@@ -45,7 +45,7 @@ $default-transition-duration: .15s;
 }
 .trumbowyg-box-blur .trumbowyg-editor {
 	color: transparent;
-	@include text-shadow(0 0 10px #333);
+	@include text-shadow(0 0 5px #333);
 }
 .trumbowyg-textarea {
 	position: relative;
@@ -198,15 +198,18 @@ $default-transition-duration: .15s;
 
 		.trumbowyg-input-infos {
 			display: block;
-			float: right;
-			width: 96%;
-			padding: 0 2%;
+			text-align: left;
+			height: 25px;
+			line-height: 25px;
 			@include transition;
 
 			span {
 				display: block;
-				text-align: right;
-				color: darken($light-color, 25%);
+				color: darken($light-color, 35%);
+				background-color: lighten($light-color, 5%);
+				border: 1px solid #DEDEDE;
+				padding: 0 2%;
+			width: 19.5%;
 			}
 			span.trumbowyg-msg-error {
 				color: #e74c3c;
@@ -232,8 +235,9 @@ $default-transition-duration: .15s;
 			line-height: 25px;
 			border: 1px solid #DEDEDE;
 			background: transparent;
-			width: 95%;
+			width: 72%;
 			padding: 0 2%;
+			margin: 0 0 0 23%;
 			@include transition;
 
 			&:hover,
