@@ -921,7 +921,7 @@ $.trumbowyg = {
                     values[f] = $('input[name="'+f+'"]', $form).val();
                 
                 if(values['url'] != null && values['url'] != undefined){
-                    var urlRegex = /^(http|https):\/\/([\w#!:.?+=&%@!\-\/]+)$/;
+                    var urlRegex = /^(http|https):\/\/([\w~#!:.?+=&%@!\-\/]+)$/;
                     if(urlRegex.test(values['url'])){
                         that.restoreSelection();
                         if($.isString(cmd))
