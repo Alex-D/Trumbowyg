@@ -2,8 +2,9 @@
  * trumbowyg.js v1.0
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
- * Author : Alex-D (aka Alexandre Demode)
+ * Author : Alexandre Demode (Alex-D)
  *          Twitter : @AlexandreDemode
+ *          Website : alex-d.fr
  */
 
 $.trumbowyg = {
@@ -28,10 +29,10 @@ $.trumbowyg = {
             unorderedList: "Unordered list",
             orderedList: "Ordered list",
 
-            insertImage: "Insert Image...",
-            insertVideo: "Insert Video...",
+            insertImage: "Insert Image",
+            insertVideo: "Insert Video",
             link: "Link",
-            createLink: "Insert link...",
+            createLink: "Insert link",
             unlink: "Remove link",
 
             justifyLeft: "Align Left",
@@ -568,10 +569,12 @@ $.trumbowyg = {
         },
         showOverlay: function(){
             $(window).trigger('scroll');
-            this.$overlay.fadeIn(200);
+            this.$overlay.fadeIn(this.o.duration);
+            this.$box.addClass(this.o.prefix + 'box-blur');
         },
         hideOverlay: function(){
-            this.$overlay.fadeOut(200);
+            this.$overlay.fadeOut(this.o.duration/4);
+            this.$box.removeClass(this.o.prefix + 'box-blur');
         },
 
         // Management of fixed button pane
@@ -722,13 +725,14 @@ $.trumbowyg = {
         },
 
 
-        // Function call when user click on « Insert Link... » dropdown menu
+        // Function call when user click on « Insert Link » dropdown menu
         createLink: function(){
             this.saveSelection();
             this.buildInsert(this.lang.createLink, {
                 url: {
                     label: 'URL',
-                    value: 'http://'
+                    value: 'http://',
+                    required: true
                 },
                 title: {
                     label: 'Title',
@@ -739,13 +743,6 @@ $.trumbowyg = {
                     value: this.selection
                 }
             }, 'createLink');
-        },
-        formatBlock: function(param){
-            if($.browser.msie)
-                param = '<' + param + '>';
-
-            document.execCommand('formatBlock', false, param);
-            this.syncCode();
         },
         insertImage: function(){
             this.saveSelection();
@@ -786,6 +783,13 @@ $.trumbowyg = {
             }
             this.syncCode();
         },
+        formatBlock: function(param){
+            if($.browser.msie)
+                param = '<' + param + '>';
+
+            document.execCommand('formatBlock', false, param);
+            this.syncCode();
+        },
 
 
         // Open a modal box
@@ -813,6 +817,12 @@ $.trumbowyg = {
             }).css({
                 top: this.$btnPane.css('height')
             }).appendTo(this.$box);
+
+            // Click on overflay close modal by cancelling them
+            this.$overlay.one('click', function(e){
+                $modal.trigger(pfx + 'cancel');
+                e.preventDefault();
+            });
 
 
             $e = this.$editor;
@@ -870,6 +880,7 @@ $.trumbowyg = {
         // close current modal box
         closeModal: function(){
             this.$btnPane.removeClass(this.o.prefix + 'disable');
+            this.$overlay.off();
 
             $('.' + this.o.prefix + 'not-disable-old', this.$btnPane)
                 .removeClass(this.o.prefix + 'not-disable-old')
@@ -879,7 +890,7 @@ $.trumbowyg = {
             $modalBox = $('.' + this.o.prefix + 'modal-box', this.$box);
             $modalBox.animate({
                 top: '-' + $modalBox.css('height')
-            }, this.o.duration, function(){
+            }, this.o.duration/2, function(){
                 $(this).parent().remove();
                 that.hideOverlay();
             });
@@ -896,7 +907,7 @@ $.trumbowyg = {
                     fields[f].name = f;
 
                 f = fields[f];
-                html += '<label>'+f.label+' : <input type="text" name="'+f.name+'" value="'+ (f.value || '') +'"></label>';
+                html += '<label><input type="text" name="'+f.name+'" value="'+ (f.value || '') +'" '+(f.required ? 'required' :'')+'><span class="'+this.o.prefix+'input-infos"><span>'+f.label+'</span></span></label>';
             }
 
             var modBox = this.openModal(title, html);
@@ -910,7 +921,8 @@ $.trumbowyg = {
                     values[f] = $('input[name="'+f+'"]', $form).val();
                 
                 if(values['url'] != null && values['url'] != undefined){
-                    if(values['url'] != 'http://'){
+                    var urlRegex = /^(http|https):\/\/([\w#!:.?+=&%@!\-\/]+)$/;
+                    if(urlRegex.test(values['url'])){
                         that.restoreSelection();
                         if($.isString(cmd))
                             document.execCommand(cmd, false, values['url']);
@@ -921,8 +933,7 @@ $.trumbowyg = {
                         that.closeModal();
                         modBox.off(that.o.prefix + 'confirm');
                     } else {
-                        $form.find('.error').remove();
-                        $form.append('<span class="error">'+that.lang.urlInvalid+'</span>');
+                        that.addErrorOnModalField($form.find('input[name=url]'), that.lang.urlInvalid);
                     }
                 }
             });
@@ -931,6 +942,13 @@ $.trumbowyg = {
                 that.closeModal();
                 that.restoreSelection();
             });
+        },
+        addErrorOnModalField : function($field, err){
+            var $label = $field.parent(),
+                prefix = this.o.prefix;
+            $label.addClass(prefix + 'input-error');
+            $field.on('change keyup', function(){ $label.removeClass(prefix + 'input-error'); });
+            $label.find('input+span').append('<span class="'+ prefix +'msg-error">'+ err +'</span>');
         },
 
 

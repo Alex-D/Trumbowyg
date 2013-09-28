@@ -3,17 +3,18 @@
 $btns: sprite-map("icons/*.png");
 $btns2x: sprite-map("icons-2x/*.png");
 
+$light-color: #ecf0f1;
+
 @mixin sprite-pos($map, $_item, $retina: false){
 	@if($retina == false){
-		background-position: sprite-position($map, $_item, 0, 0);
+		background-position: sprite-position($map, $_item, 5, 5);
 	} @else {
-		background-position: round(nth(sprite-position($map, $_item, 0, 0), 1)/ 2) round(nth(sprite-position($map, $_item, 0, 0), 2)/ 2);
+		background-position: round(nth(sprite-position($map, $_item, 10, 10), 1)/ 2) round(nth(sprite-position($map, $_item, 10, 10), 2)/ 2);
 	}
 }
 
 
-$default-transition-duration: .2s;
-
+$default-transition-duration: .15s;
 
 
 .trumbowyg-box,
@@ -21,13 +22,16 @@ $default-transition-duration: .2s;
 	display: block;
 	position: relative;
 	border: 1px solid #DDD;
-	background: #FEFEFE;
 	width: 96%;
 	min-height: 300px;
 	margin: 17px auto;
 }
 .trumbowyg-box .editor {
 	margin: 0 auto;
+	background: #FEFEFE;
+}
+.trumbowyg-box.trumbowyg-fullscreen {
+	background: #FEFEFE;
 }
 .trumbowyg-editor,
 .trumbowyg-textarea {
@@ -38,6 +42,10 @@ $default-transition-duration: .2s;
 	border-style: none;
 	resize: none;
 	outline: none;
+}
+.trumbowyg-box-blur .trumbowyg-editor {
+	color: transparent;
+	@include text-shadow(0 0 10px #333);
 }
 .trumbowyg-textarea {
 	position: relative;
@@ -52,8 +60,8 @@ $default-transition-duration: .2s;
 	width: 100%;
 	line-height: 35px;
 	height: 35px;
-	background: #CCC;
-	@include background(linear-gradient(#F2F2F2, #CCC));
+	background: $light-color;
+	border-bottom: 1px solid darken($light-color, 7%);
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
@@ -65,15 +73,23 @@ $default-transition-duration: .2s;
 
 		&.trumbowyg-separator {
 			width: 1px;
-			background: #EEE;
+			background: darken($light-color, 7%);
 			margin: 0 5px;
 			height: 35px;
 		}
 	}
 
-	&.trumbowyg-disable li:not(.trumbowyg-not-disable) a {
-		opacity: .2;
-		cursor: default;
+	&.trumbowyg-disable {
+		li:not(.trumbowyg-not-disable) a {
+			opacity: .2;
+			cursor: default;
+		}
+		li.trumbowyg-not-disable a.trumbowyg-active {
+			border-bottom: 1px solid #FFF;
+		}
+		li.trumbowyg-separator {
+			background: darken($light-color, 3%);
+		}
 	}
 
 	li a {
@@ -85,8 +101,7 @@ $default-transition-duration: .2s;
 	li a.trumbowyg-active,
 	li.trumbowyg-not-disable a:hover,
 	li.trumbowyg-not-disable a:focus {
-		background-color: #DDD;
-		border-color: #AAA;
+		background-color: #FFF;
 		outline: none;
 	}
 
@@ -94,8 +109,8 @@ $default-transition-duration: .2s;
 		display: block;
 		content: " ";
 		position: absolute;
-		top: 20px;
-		right: 0;
+		top: 25px;
+		right: 3px;
 		height: 0;
 		width: 0;
 		border: 3px solid transparent;
@@ -114,9 +129,12 @@ $default-transition-duration: .2s;
 
 .trumbowyg-dropdown {
 	width: 200px;
-	border: 1px solid #DDD;
-	background-color: #EFEFEF;
-	@include box-shadow(#777 0 2px 5px);
+	border: 1px solid $light-color;
+	padding: 5px 0;
+	border-top: none;
+	background-color: #FFF;
+	margin-left: -1px;
+	@include box-shadow(rgba(0, 0, 0, .1) 0 2px 3px);
 
 	a {
 		display: block;
@@ -124,14 +142,14 @@ $default-transition-duration: .2s;
 		height: 35px;
 		line-height: 35px;
 		text-decoration: none;
-		background: #EFEFEF;
+		background: inherit;
 		padding: 0 14px;
 		color: #333;
 		@include transition;
 
 		&:hover,
 		&:focus {
-			background: #FFF;
+			background: $light-color;
 		}
 	}
 }
@@ -155,24 +173,78 @@ $default-transition-duration: .2s;
 	width: 500px;
 	height: 275px;
 	z-index: 1;
-	background-color: #EFEFEF;
+	background-color: #FFF;
 	text-align: center;
-	@include box-shadow(#777 0 2px 5px);
+	@include box-shadow(rgba(0, 0, 0, .2) 0 2px 3px);
 
 	.trumbowyg-modal-title {
 		font-size: 24px;
 		font-weight: bold;
-		margin: 15px 30px;
-		padding-bottom: 7px;
+		margin: 0 0 20px;
+		padding: 15px 0 13px;
 		display: block;
-		border-bottom: 1px solid #CCC;
+		border-bottom: 1px solid #EEE;
 		color: #333;
+		background: lighten($light-color, 5%);
 	}
 
 	label {
 		display: block;
-		width: 100%;
-		margin: 7px 0;
+		position: relative;
+		margin: 15px 12px;
+		height: 27px;
+		line-height: 27px;
+		overflow: hidden;
+
+		.trumbowyg-input-infos {
+			display: block;
+			float: right;
+			width: 96%;
+			padding: 0 2%;
+			@include transition;
+
+			span {
+				display: block;
+				text-align: right;
+				color: darken($light-color, 25%);
+			}
+			span.trumbowyg-msg-error {
+				color: #e74c3c;
+			}
+		}
+
+		&.trumbowyg-input-error {
+			input,
+			textarea {
+				border: 1px solid #e74c3c;
+			}
+			
+			.trumbowyg-input-infos {
+				margin-top: -27px;
+			}
+		}
+
+		input[type=text] {
+			position: absolute;
+			top: 0;
+			right: 0;
+			height: 25px;
+			line-height: 25px;
+			border: 1px solid #DEDEDE;
+			background: transparent;
+			width: 95%;
+			padding: 0 2%;
+			@include transition;
+
+			&:hover,
+			&:focus {
+				outline: none;
+				border: 1px solid #95a5a6;
+			}
+			&:focus {
+				background: rgba(230, 230, 255, .1);
+			}
+		}
 	}
 
 	.error {
@@ -186,44 +258,45 @@ $default-transition-duration: .2s;
 		bottom: 10px;
 		right: 0;
 		text-decoration: none;
-		color: #333;
+		color: #FFF;
 		display: block;
 		width: 100px;
-		height: 30px;
-		line-height: 26px;
+		height: 35px;
+		line-height: 30px;
 		margin: 0 10px;
-		background-color: #EFEFEF;
-		@include background(linear-gradient(#F2F2F2, #CCC));
-		border: 1px solid #999;
+		background-color: #333;
+		border: none;
+		border-top: none;
 		cursor: pointer;
 		font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif;
 		font-size: 16px;
+		@include transition;
 
+		$modal-submit-color : #2ecc71;
 		&.trumbowyg-modal-submit {
 			right: 110px;
+			background: darken($modal-submit-color, 3%);
 
 			&:hover,
-			&:focus,
+			&:focus {
+				background: lighten($modal-submit-color, 5%);
+			}
 			&:active {
-				border-color: green;
+				background: darken($modal-submit-color, 10%);
 			}
 		}
+
+		$modal-reset-color : #c0392b;
 		&.trumbowyg-modal-reset {
-			&:hover,
-			&:focus,
-			&:active {
-				border-color: red;
-			}
-		}
+			background: darken($modal-reset-color, 3%);
 
-		&:hover,
-		&:focus {
-			background-color: #FFF;
-			@include background(linear-gradient(#FFF, #DEDEDE));
-		}
-		&:active {
-			background-color: #BBB;
-			@include background(linear-gradient(#CCC, #F2F2F2));
+			&:hover,
+			&:focus {
+				background: lighten($modal-reset-color, 5%);
+			}
+			&:active {
+				background: darken($modal-reset-color, 10%);
+			}
 		}
 	}
 }
@@ -368,12 +441,11 @@ $default-transition-duration: .2s;
 	display: block;
 	position: relative;
 	text-indent: -9999px;
-	width: 25px;
-	height: 25px;
+	width: 35px;
+	height: 35px;
 	overflow: hidden;
-	margin: 4px 2px;
-	border: 1px solid transparent;
 	background-image: $btns;
+	background-repeat: none;
 	@include transition;
 
 	&.trumbowyg-viewHTML-button { @include sprite-pos($btns, 'view-html'); }
