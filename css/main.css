@@ -94,21 +94,22 @@ h4,
 h5 {
   margin: 0;
   padding: 0;
-  font-weight: normal; }
+  font-weight: normal;
+  -webkit-font-smoothing: subpixel-antialiased !important;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden; }
 
 body {
   font-family: "Trebuchet MS", Arial, Helvetica, Verdana, serif, sans-serif;
   background: #f2f2f2 url('../img/background.jpg?1380374045') left top repeat; }
 
 header {
-  background-color: #222;
+  background-color: #192730;
   height: 58px;
-  border-bottom: 1px solid #2f93c1;
+  border-bottom: 1px solid #1b4159;
   position: fixed;
-  z-index: 1;
-  -webkit-box-shadow: #222222 0 0 7px;
-  -moz-box-shadow: #222222 0 0 7px;
-  box-shadow: #222222 0 0 7px; }
+  z-index: 1; }
   header ul {
     margin: 0;
     padding: 0; }
@@ -117,33 +118,58 @@ header {
       padding: 0;
       display: block;
       width: 160px;
-      height: 100%;
+      height: 58px;
       float: left; }
       header ul li a {
         display: block;
+        position: relative;
         width: 100%;
         height: 100%;
         line-height: 58px;
-        color: #2f93c1;
+        color: #CCC;
         text-decoration: none;
         text-align: center;
         font-size: 15px;
         text-transform: uppercase;
-        text-shadow: 0 0 4px rgba(17, 17, 17, 0.75);
+        overflow: hidden;
         -webkit-transition: all 0.2s;
         -moz-transition: all 0.2s;
         -o-transition: all 0.2s;
         transition: all 0.2s; }
+        header ul li a b {
+          position: absolute;
+          display: block;
+          font-weight: normal;
+          height: 100%;
+          width: 100%;
+          top: 0;
+          left: 0; }
         header ul li a:hover, header ul li a:focus {
-          background-color: #293d45; }
+          color: #FFF; }
+          header ul li a:hover:before, header ul li a:focus:before {
+            top: 0; }
+        header ul li a:before {
+          content: " ";
+          display: block;
+          height: 100%;
+          width: 100%;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background: #1073b2;
+          -webkit-transition: 0.1s;
+          -moz-transition: 0.1s;
+          -o-transition: 0.1s;
+          transition: 0.1s; }
       header ul li.active a {
-        background-color: #232f34; }
+        background-color: #1b4159; }
       header ul li a:not(.scroller) {
-        color: #3bb4eb;
-        border-bottom: 2px solid #2f93c1;
-        border-top: 2px solid #2f93c1;
-        height: 55px;
-        line-height: 55px; }
+        color: #FFF;
+        border-bottom: 2px solid #1b4159;
+        height: 56px;
+        line-height: 56px; }
+        header ul li a:not(.scroller):hover, header ul li a:not(.scroller):focus {
+          border-bottom-color: #1073b2; }
       header ul li.fl-right {
         float: right; }
 
@@ -155,28 +181,31 @@ header {
   height: 70px;
   line-height: 70px;
   background-color: #224d6a;
-  border-bottom: 2px solid #FFF;
+  border-bottom: 1px solid #FFF;
   color: #F2F2F2;
-  background-image: -webkit-gradient(linear, 100% 0%, 0% 100%, color-stop(-25%, #295f89), color-stop(125%, #173545));
-  background-image: -webkit-linear-gradient(top right, #295f89 -25%, #173545 125%);
-  background-image: -moz-linear-gradient(top right, #295f89 -25%, #173545 125%);
-  background-image: -o-linear-gradient(top right, #295f89 -25%, #173545 125%);
-  background-image: linear-gradient(top right, #295f89 -25%, #173545 125%); }
+  background: url("http://alex-d.fr/images/background.png");
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 7, color-stop(0%, rgba(0, 0, 0, 0.3)), color-stop(100%, rgba(0, 0, 0, 0))), -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, rgba(0, 0, 0, 0.3)), color-stop(100%, rgba(0, 0, 0, 0))), -webkit-gradient(linear, 100% 0%, 0% 100%, color-stop(-25%, rgba(255, 255, 255, 0.05)), color-stop(125%, rgba(0, 0, 0, 0.2))), url("http://alex-d.fr/images/background.png");
+  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 7px), -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 7px), -webkit-linear-gradient(top right, rgba(255, 255, 255, 0.05) -25%, rgba(0, 0, 0, 0.2) 125%), url("http://alex-d.fr/images/background.png");
+  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 7px), -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 7px), -moz-linear-gradient(top right, rgba(255, 255, 255, 0.05) -25%, rgba(0, 0, 0, 0.2) 125%), url("http://alex-d.fr/images/background.png");
+  background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 7px), -o-linear-gradient(bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 7px), -o-linear-gradient(top right, rgba(255, 255, 255, 0.05) -25%, rgba(0, 0, 0, 0.2) 125%), url("http://alex-d.fr/images/background.png");
+  background-image: linear-gradient(top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 7px), linear-gradient(bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 7px), linear-gradient(top right, rgba(255, 255, 255, 0.05) -25%, rgba(0, 0, 0, 0.2) 125%), url("http://alex-d.fr/images/background.png"); }
 
 #promotion {
   text-align: center;
   height: 349px;
   line-height: inherit; }
   #promotion h1 {
-    font-size: 48px;
-    color: #2f93c1;
+    font-size: 52px;
+    color: #FFF;
     text-shadow: 0 1px 2px rgba(34, 34, 34, 0.75);
     padding-top: 27px; }
   #promotion h2 {
-    font-size: 36px; }
+    font-size: 32px;
+    color: #EEE; }
   #promotion p {
     font-size: 18px;
-    margin: 23px 0; }
+    margin: 23px 0;
+    color: #DEDEDE; }
   #promotion .buttons {
     margin-top: 42px; }
     #promotion .buttons a {
@@ -184,18 +213,18 @@ header {
       width: 160px;
       height: 50px;
       line-height: 50px;
-      background-color: #212121;
+      background-color: #192730;
+      border: 1px solid #1b4159;
       float: left;
       text-decoration: none;
       color: #F2F2F2;
-      margin: 0 80px;
+      margin: 0 78px;
       -webkit-transition: all 0.2s;
       -moz-transition: all 0.2s;
       -o-transition: all 0.2s;
       transition: all 0.2s; }
       #promotion .buttons a:hover, #promotion .buttons a:focus {
-        background-color: #333;
-        color: #2f93c1; }
+        background-color: #1073b2; }
       #promotion .buttons a.big {
         width: 300px;
         height: 70px;
@@ -203,10 +232,9 @@ header {
         font-size: 26px;
         margin: -10px 10px 0; }
       #promotion .buttons a.blue {
-        background-color: #2f93c1; }
+        background-color: #1b4159; }
         #promotion .buttons a.blue:hover, #promotion .buttons a.blue:focus {
-          background-color: #25a4df;
-          color: #222; }
+          background-color: #1073b2; }
 
 #page section {
   margin-top: 15px;
@@ -221,7 +249,7 @@ header {
   color: #333;
   font-size: 48px;
   text-align: center;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.75); }
+  text-shadow: 0 1px 2px #999999; }
 #page .subtitle {
   color: #777;
   font-size: 24px;

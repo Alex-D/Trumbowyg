@@ -93,9 +93,7 @@ textarea {
 
 $default-transition-duration: .2s;
 
-$blue: #2f93c1;
-$blue-active-nav: #232f34;
-$blue-hover-nav: #293d45;
+$blue: #1b4159;
 
 
 .wrap {
@@ -123,6 +121,10 @@ h5 {
     margin: 0;
     padding: 0;
     font-weight: normal;
+    -webkit-font-smoothing: subpixel-antialiased !important; 
+    -webkit-backface-visibility: hidden; 
+    -moz-backface-visibility: hidden; 
+    -ms-backface-visibility: hidden;
 }
 
 
@@ -131,12 +133,11 @@ body {
     background: #F2F2F2 image-url('background.jpg') left top repeat;
 }
 header {
-    background-color: #222;
+    background-color: #192730;
     height: 58px;
     border-bottom: 1px solid $blue;
     position: fixed;
     z-index: 1;
-    @include box-shadow(#222 0 0 7px);
 
     ul {
         margin: 0;
@@ -147,38 +148,69 @@ header {
             padding: 0;
             display: block;
             width: 160px;
-            height: 100%;
+            height: 58px;
             float: left;
 
             a {
                 display: block;
+                position: relative;
                 width: 100%;
                 height: 100%;
                 line-height: 58px;
-                color: $blue;
+                color: #CCC;
                 text-decoration: none;
                 text-align: center;
                 font-size: 15px;
                 text-transform: uppercase;
-                @include text-shadow(0 0 4px rgba(17,17,17,.75));
+                overflow: hidden;
                 @include transition;
+
+                b {
+                    position: absolute;
+                    display: block;
+                    font-weight: normal;
+                    height: 100%;
+                    width: 100%;
+                    top: 0;
+                    left: 0;
+                }
 
                 &:hover,
                 &:focus {
-                    background-color: $blue-hover-nav;
+                    color: #FFF;
+
+                    &:before {
+                        top: 0;
+                    }
+                }
+
+                &:before {
+                    content: " ";
+                    display: block;
+                    height: 100%;
+                    width: 100%;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    background: #1073b2;
+                    @include transition(.1s);
                 }
             }
 
             &.active a {
-                background-color: $blue-active-nav;
+                background-color: #1b4159;
             }
 
             a:not(.scroller) {
-                color: #3bb4eb;
-                border-bottom: 2px solid #2f93c1;
-                border-top: 2px solid #2f93c1;
-                height: 55px;
-                line-height: 55px;
+                color: #FFF;
+                border-bottom: 2px solid #1b4159;
+                height: 56px;
+                line-height: 56px;
+
+                &:hover,
+                &:focus {
+                    border-bottom-color: #1073b2;
+                }
             }
 
             &.fl-right {
@@ -197,9 +229,13 @@ header {
     height: 70px;
     line-height: 70px;
     background-color: #224d6a;
-    border-bottom: 2px solid #FFF;
+    border-bottom: 1px solid #FFF;
     color: #F2F2F2;
-    @include background-image(linear-gradient(top right, #295f89 -25%, #173545 125%));
+    background: url('http://alex-d.fr/images/background.png');
+    @include background-image(linear-gradient(top, rgba(0, 0, 0, .3) 0, rgba(0, 0, 0, 0) 7px),
+                              linear-gradient(bottom, rgba(0, 0, 0, .3) 0, rgba(0, 0, 0, 0) 7px),
+                              linear-gradient(top right, rgba(255, 255, 255, .05) -25%, rgba(0, 0, 0, .2) 125%),
+                              url('http://alex-d.fr/images/background.png'));
 }
 
 #promotion {
@@ -208,17 +244,19 @@ header {
     line-height: inherit;
 
     h1 {
-        font-size: 48px;
-        color: $blue;
+        font-size: 52px;
+        color: #FFF;
         @include text-shadow(0 1px 2px rgba(34,34,34,.75));
         padding-top: 27px;
     }
     h2 {
-        font-size: 36px;
+        font-size: 32px;
+        color: #EEE;
     }
     p {
         font-size: 18px;
         margin: 23px 0;
+        color: #DEDEDE;
     }
 
     .buttons {
@@ -229,17 +267,17 @@ header {
             width: 160px;
             height: 50px;
             line-height: 50px;
-            background-color: #212121;
+            background-color: #192730;
+            border: 1px solid $blue;
             float: left;
             text-decoration: none;
             color: #F2F2F2;
-            margin: 0 80px;
+            margin: 0 78px;
             @include transition;
 
             &:hover,
             &:focus {
-                background-color: #333;
-                color: $blue;
+                background-color: #1073b2;
             }
 
             &.big {
@@ -254,8 +292,7 @@ header {
 
                 &:hover,
                 &:focus {
-                    background-color: #25a4df;
-                    color: #222;
+                    background-color: #1073b2;
                 }
             }
         }
@@ -281,7 +318,7 @@ header {
        color: #333;
        font-size: 48px;
        text-align: center;
-       @include text-shadow(0 1px 2px rgba(255,255,255,.75));
+       @include text-shadow(0 1px 2px #999);
     }
     .subtitle {
        color: #777;
