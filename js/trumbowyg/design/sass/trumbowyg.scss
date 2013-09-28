@@ -284,6 +284,7 @@ $default-transition-duration: .15s;
 			&:hover,
 			&:focus {
 				background: lighten($modal-submit-color, 5%);
+				outline: none;
 			}
 			&:active {
 				background: darken($modal-submit-color, 10%);
@@ -297,6 +298,7 @@ $default-transition-duration: .15s;
 			&:hover,
 			&:focus {
 				background: lighten($modal-reset-color, 5%);
+				outline: none;
 			}
 			&:active {
 				background: darken($modal-reset-color, 10%);

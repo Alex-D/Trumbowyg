@@ -220,13 +220,15 @@
       right: 110px;
       background: #2bc06a; }
       .trumbowyg-modal-box .trumbowyg-modal-button.trumbowyg-modal-submit:hover, .trumbowyg-modal-box .trumbowyg-modal-button.trumbowyg-modal-submit:focus {
-        background: #40d47e; }
+        background: #40d47e;
+        outline: none; }
       .trumbowyg-modal-box .trumbowyg-modal-button.trumbowyg-modal-submit:active {
         background: #25a25a; }
     .trumbowyg-modal-box .trumbowyg-modal-button.trumbowyg-modal-reset {
       background: #b33528; }
       .trumbowyg-modal-box .trumbowyg-modal-button.trumbowyg-modal-reset:hover, .trumbowyg-modal-box .trumbowyg-modal-button.trumbowyg-modal-reset:focus {
-        background: #d14233; }
+        background: #d14233;
+        outline: none; }
       .trumbowyg-modal-box .trumbowyg-modal-button.trumbowyg-modal-reset:active {
         background: #962d22; }
 
