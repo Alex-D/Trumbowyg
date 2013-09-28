@@ -98,7 +98,7 @@ h5 {
 
 body {
   font-family: "Trebuchet MS", Arial, Helvetica, Verdana, serif, sans-serif;
-  background: #f2f2f2 url('../img/background.jpg?1380342760') left top repeat; }
+  background: #f2f2f2 url('../img/background.jpg?1380374045') left top repeat; }
 
 header {
   background-color: #222;
@@ -139,7 +139,11 @@ header {
       header ul li.active a {
         background-color: #232f34; }
       header ul li a:not(.scroller) {
-        color: #3bb4eb; }
+        color: #3bb4eb;
+        border-bottom: 2px solid #2f93c1;
+        border-top: 2px solid #2f93c1;
+        height: 55px;
+        line-height: 55px; }
       header ul li.fl-right {
         float: right; }
 

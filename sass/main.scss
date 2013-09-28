@@ -44,7 +44,6 @@ body {
 /*
  * A better looking default horizontal rule
  */
-
 hr {
     display: block;
     height: 1px;
@@ -57,7 +56,6 @@ hr {
 /*
  * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
  */
-
 img {
     vertical-align: middle;
 }
@@ -65,7 +63,6 @@ img {
 /*
  * Remove default fieldset styles.
  */
-
 fieldset {
     border: 0;
     margin: 0;
@@ -75,7 +72,6 @@ fieldset {
 /*
  * Allow only vertical resizing of textareas.
  */
-
 textarea {
     resize: vertical;
 }
@@ -179,6 +175,10 @@ header {
 
             a:not(.scroller) {
                 color: #3bb4eb;
+                border-bottom: 2px solid #2f93c1;
+                border-top: 2px solid #2f93c1;
+                height: 55px;
+                line-height: 55px;
             }
 
             &.fl-right {
