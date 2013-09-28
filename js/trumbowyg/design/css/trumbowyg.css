@@ -399,7 +399,7 @@
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 4 / 3), only screen and (min-device-pixel-ratio: 1.3), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   .trumbowyg-button-pane li a {
-    background-size: 100%;
+    background-size: 72%;
     background-image: url('../images/icons-2x-sa1b75baf11.png');
     /* English and others */ }
     .trumbowyg-button-pane li a.trumbowyg-viewHTML-button {
