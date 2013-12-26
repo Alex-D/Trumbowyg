@@ -102,7 +102,7 @@ h5 {
 
 body {
   font-family: "Trebuchet MS", Arial, Helvetica, Verdana, serif, sans-serif;
-  background: #f2f2f2 url('../img/background.jpg?1380374045') left top repeat; }
+  background: #f2f2f2 url('../img/background.jpg?1388082086') left top repeat; }
 
 header {
   background-color: #192730;
@@ -132,9 +132,9 @@ header {
         font-size: 15px;
         text-transform: uppercase;
         overflow: hidden;
-        -webkit-transition: all 0.2s;
         -moz-transition: all 0.2s;
         -o-transition: all 0.2s;
+        -webkit-transition: all 0.2s;
         transition: all 0.2s; }
         header ul li a b {
           position: absolute;
@@ -157,9 +157,9 @@ header {
           top: 100%;
           left: 0;
           background: #1073b2;
-          -webkit-transition: 0.1s;
           -moz-transition: 0.1s;
           -o-transition: 0.1s;
+          -webkit-transition: 0.1s;
           transition: 0.1s; }
       header ul li.active a {
         background-color: #1b4159; }
@@ -183,11 +183,10 @@ header {
   border-bottom: 1px solid #FFF;
   color: #F2F2F2;
   background: #2f2f2f url("http://alex-d.fr/images/background.png");
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 7, color-stop(0%, rgba(0, 0, 0, 0.3)), color-stop(100%, rgba(0, 0, 0, 0))), -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, rgba(0, 0, 0, 0.3)), color-stop(100%, rgba(0, 0, 0, 0))), -webkit-gradient(linear, 100% 0%, 0% 100%, color-stop(-25%, rgba(255, 255, 255, 0.05)), color-stop(125%, rgba(0, 0, 0, 0.2))), url("http://alex-d.fr/images/background.png"), #2f2f2f;
-  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 7px), -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 7px), -webkit-linear-gradient(top right, rgba(255, 255, 255, 0.05) -25%, rgba(0, 0, 0, 0.2) 125%), url("http://alex-d.fr/images/background.png"), #2f2f2f;
   background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 7px), -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 7px), -moz-linear-gradient(top right, rgba(255, 255, 255, 0.05) -25%, rgba(0, 0, 0, 0.2) 125%), url("http://alex-d.fr/images/background.png"), #2f2f2f;
   background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 7px), -o-linear-gradient(bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 7px), -o-linear-gradient(top right, rgba(255, 255, 255, 0.05) -25%, rgba(0, 0, 0, 0.2) 125%), url("http://alex-d.fr/images/background.png"), #2f2f2f;
-  background-image: linear-gradient(top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 7px), linear-gradient(bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 7px), linear-gradient(top right, rgba(255, 255, 255, 0.05) -25%, rgba(0, 0, 0, 0.2) 125%), url("http://alex-d.fr/images/background.png"), #2f2f2f; }
+  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 7px), -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 7px), -webkit-linear-gradient(top right, rgba(255, 255, 255, 0.05) -25%, rgba(0, 0, 0, 0.2) 125%), url("http://alex-d.fr/images/background.png"), #2f2f2f;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 7px), linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 7px), linear-gradient(to bottom left, rgba(255, 255, 255, 0.05) -25%, rgba(0, 0, 0, 0.2) 125%), url("http://alex-d.fr/images/background.png"), #2f2f2f; }
 
 #promotion {
   text-align: center;
@@ -218,9 +217,9 @@ header {
       text-decoration: none;
       color: #F2F2F2;
       margin: 0 78px;
-      -webkit-transition: all 0.2s;
       -moz-transition: all 0.2s;
       -o-transition: all 0.2s;
+      -webkit-transition: all 0.2s;
       transition: all 0.2s; }
       #promotion .buttons a:hover, #promotion .buttons a:focus {
         background-color: #1073b2; }
@@ -257,9 +256,9 @@ header {
   text-align: center; }
 #page a {
   color: #777;
-  -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   -o-transition: all 0.2s;
+  -webkit-transition: all 0.2s;
   transition: all 0.2s; }
   #page a:hover, #page a:focus {
     color: #111; }
@@ -294,6 +293,10 @@ header {
 #trumbowyg-demo {
   height: 300px; }
 
+#get-started h3,
+#js-get-started h3 {
+  margin-top: 50px; }
+
 .note {
   color: #888;
   font-style: italic;
@@ -317,9 +320,9 @@ aside {
       aside ul li a {
         text-decoration: none;
         color: #111;
-        -webkit-transition: all 0.2s;
         -moz-transition: all 0.2s;
         -o-transition: all 0.2s;
+        -webkit-transition: all 0.2s;
         transition: all 0.2s; }
         aside ul li a:hover, aside ul li a:focus {
           color: #173545; }
@@ -343,12 +346,14 @@ aside {
     margin-left: 40px;
     padding-left: 10px;
     border-left: 5px solid #295f89; }
-  #right-aside p + h3 {
+  #right-aside p + h3,
+  #right-aside pre + h3 {
     margin-top: 50px; }
   #right-aside h4 {
     font-size: 18px;
     margin-left: 40px; }
-  #right-aside p + h4 {
+  #right-aside p + h4,
+  #right-aside pre + h4 {
     margin-top: 30px; }
 
 /* ==========================================================================
@@ -494,7 +499,6 @@ aside {
 
   @page {
     margin: 0.5cm; }
-
   p,
   h2,
   h3 {

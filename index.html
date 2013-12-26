@@ -104,7 +104,7 @@
                             <img src="http://www.cs.mcgill.ca/~aasbah/music_pic/trombone.jpg" alt="A Trumbone">
                         </p>
                         <blockquote>
-                            « This sentence always is true » - Alex-D
+                            « Trumbowyg is awesome ! » - Alex-D
                         </blockquote>
                     </div>
                 </section>
@@ -112,6 +112,36 @@
                 <section id="get-started" class="wrap-in">
                     <h2>Getting Started</h2>
                     <p class="subtitle">It's simple but still I will explains</p>
+
+                    <h3>Installation</h3>
+
+                    <p>
+                        First, if you don't, load jQuery at bottom of &lt;body&gt; like that :
+                    </p>
+                    <pre><code class="html">
+&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">&lt;/script>
+&lt;script>window.jQuery || document.write('&lt;script src="js/vendor/jquery-1.10.2.min.js">&lt;\/script>')&lt;/script>
+                    </code></pre>
+                    <p class="note">
+                        Trumbowyg need jQuery >= 1.7, because it uses .on() a new function appeared in version 1.7.
+                    </p>
+
+                    <p>
+                        After this lines, load Trumbowyg like that :
+                    </p>
+                    <pre><code class="html">
+&lt;script src="js/vendor/trumbowyg.min.js">&lt;\/script>
+                    </code></pre>
+
+                    <p>
+                        Don't forget to load Trumbowyg CSS in your head, or load your own style for the editor.
+                    </p>
+                    <pre><code class="html">
+&lt;link rel="stylesheet" href="css/vendor/trumbowyg.css">
+                    </code></pre>
+
+                    
+                    <h3>Basics</h3>
 
                     <p>
                         This the basic code to transform a simple div to an amazing WYSIWYG editor which is Trumbowyg.
@@ -135,10 +165,6 @@ $('#trumbowyg-demo').trumbowyg({
                 </section>
             </div>
         </div>
-
-        <footer>
-            
-        </footer>
 
 
 
