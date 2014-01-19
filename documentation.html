@@ -20,7 +20,7 @@
     <body>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
-        <![endif]-->     
+        <![endif]-->
 
         <header role="banner" class="wrap">
             <nav class="wrap-in">
@@ -70,9 +70,11 @@
                                 <a href="#advanced-options">Advanced Options</a>
                                 <ul>
                                     <li><a href="#custom-buttons">Custom buttons</a></li>
+                                    <!-- TODO
                                     <li><a href="#add-button-type">Add button type</a></li>
                                     <li><a href="#create-plugin">Create a plugin</a></li>
                                     <li><a href="#add-localization">Add a localization</a></li>
+                                    -->
                                 </ul>
                             </li>
                             <li>
@@ -80,6 +82,7 @@
                                 <ul>
                                     <li><a href="#modal-box">Modal box</a></li>
                                     <li><a href="#selection">Selection</a></li>
+                                    <li><a href="#manage-content">Manage content</a></li>
                                     <li><a href="#destroy-editor">Destroy editor</a></li>
                                 </ul>
                             </li>
@@ -186,7 +189,7 @@ $('textarea').trumbowyg({
                                 It is possible to prefix all class used by the editor. Indeed, Trumbowyg integrates an option named <code>prefix</code>. That is useful when you do not want same design for all instances of Trumbowyg.
                             </p>
                             <p>
-                                Use the prefix option: 
+                                Use the prefix option:
                                 <pre><code class="javascript">
 $('.editor-modern-ui').trumbowyg({
     prefix: 'modern-ui'
@@ -226,7 +229,7 @@ $('.trumbowyg.no-mobile').trumbowyg({
 
                             <h3 id="close-button">Close button</h3>
                             <p>
-                                For automaticly add a close button at top left corner, set closable to true like that: 
+                                For automaticly add a close button at top left corner, set closable to true like that:
                                 <pre><code class="javascript">
 $('.trumbowyg.closable').trumbowyg({
     closable: true
@@ -242,7 +245,7 @@ $('.trumbowyg.closable').trumbowyg({
 
                             <h3 id="fullscreen">Fullscreen</h3>
                             <p>
-                                Same as close button, so for fullscreen: 
+                                Same as close button, so for fullscreen:
                                 <pre><code class="javascript">
 $('.trumbowyg.closable').trumbowyg({
     fullscreenable: false
@@ -256,27 +259,27 @@ $('.trumbowyg.closable').trumbowyg({
 
 
 
-                            
+
                             <h3 id="semantic">Semantic</h3>
                             <p class="note">
                                 ALPHA: This feature is in dev and not completly functionnal.
                             </p>
                             <p>
-                                Transform many HTML tag in an equivalent, but better for semantic of generated code. It's just a boolean: 
+                                Transform many HTML tag in an equivalent, but better for semantic of generated code. It's just a boolean:
                                 <pre><code class="javascript">
 $('.trumbowyg').trumbowyg({
     semantic: true
 });
                                 </code></pre>
-                                This option desactivate <em>underline</em> and <em>strikestroked</em> by default because they are not semantic. If you want reactivate them, go to <a href="#button-pane">Button pane</a> part.
+                                This option desactivate <em>underline</em> by default because they are not semantic. If you want reactivate them, go to <a href="#button-pane">Button pane</a> part.
                             </p>
                             <p class="note">
-                                This option is to <code>false</code> by default.
+                                This option is set to <code>false</code> by default.
                             </p>
 
 
 
-                            
+
                             <h3 id="reset-css">Reset CSS</h3>
                             <p>
                                 Logic of a WYSIWYG editor is to see the content with the same result when he is visible for visitors. But, by defaut no reset-css is applied in the editor. If you want activate, simply active option:
@@ -292,7 +295,7 @@ $('.trumbowyg').trumbowyg({
 
 
 
-                            
+
                             <h3 id="auto-adjust-height">Auto grow</h3>
                             <p>
                                 This WYSIWYG editor can be extensible when you create new lines, for activate this feature use the autogrow option:
@@ -307,7 +310,7 @@ $('.trumbowyg').trumbowyg({
                             </p>
 
 
-                            
+
                             <h3 id="button-pane">Button pane</h3>
                             <p>
                                 It's the very interesting part in all options: you can choose buttons list which visible in button pane. This option just is an array contains string values, arrays and pipes. Pipes are vertical separators. For custom button pane, define an array and pass at <code>btns</code> option like:
@@ -331,10 +334,10 @@ var btnsGrps = $.trumbowyg.btnsGrps;
  */
 
 $('.simple-editor').trumbowyg({
-    btns: ['viewHTML', 
+    btns: ['viewHTML',
             '|', 'formatting',
             '|', btnsGrps.design,
-            '|', 'link', 
+            '|', 'link',
             '|', 'insertImage',
             '|', btnsGrps.justify,
             '|', btnsGrps.lists,
@@ -342,10 +345,6 @@ $('.simple-editor').trumbowyg({
 });
                                 </code></pre>
                             </p>
-
-
-
-                            
                         </section>
 
 
@@ -476,11 +475,56 @@ $("#tbw").trumbowyg("openModalInsert", {
                             <h4>Save and get current selection</h4>
                             <p>
                                 <pre><code class="javascript">
+// Save current selection
+$('#wysiwyg').trumbowyg('saveSelection');
+
+// Restore last saved selection
+$('#wysiwyg').trumbowyg('restoreSelection');
+                                </code></pre>
+                            </p>
+
+                            <h4>Get selection range</h4>
+                            <p>
+                                <pre><code class="javascript">
 // sel contains a JavaScript range
-var sel = $('#wysiwyg').trumbowyg("saveSelection");
+var sel = $('#wysiwyg').trumbowyg('getSelection');
+                                </code></pre>
+                            </p>
 
-// Get selection value
+                            <h4>Get selection value</h4>
+                            <p>
+                                <pre><code class="javascript">
+var text = $('#wysiwyg').trumbowyg('getSelectedText');
+                                </code></pre>
+                            </p>
 
+
+
+
+                            <h3 id="manage-content">Manage content</h3>
+                            <p>
+                                You can set and get current HTML content of the editor with a getter/setter :
+                            </p>
+                            <p>
+                                <pre><code class="javascript">
+// Get HTML content
+$('#wysiwyg').trumbowyg('html');
+
+// Set HTML content
+$('#wysiwyg').trumbowyg('html', "&lt;p&gt;Your content here&lt;/p&gt;");
+                                </code></pre>
+                            </p>
+
+
+
+
+                            <h3 id="destroy-editor">Destroy editor</h3>
+                            <p>
+                                When you want, you can restore the previous state of the element was used to create the editor.
+                            </p>
+                            <p>
+                                <pre><code class="javascript">
+$('#wysiwyg').trumbowyg('destroy');
                                 </code></pre>
                             </p>
                         </section>
@@ -488,10 +532,6 @@ var sel = $('#wysiwyg').trumbowyg("saveSelection");
                 </div>
             </div>
         </div>
-
-        <footer>
-            
-        </footer>
 
 
 
