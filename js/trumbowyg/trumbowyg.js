@@ -25,6 +25,7 @@ $.trumbowyg = {
 
             strong:         "Strong",
             em:             "Emphasis",
+            del:            "Deleted",
 
             unorderedList:  "Unordered list",
             orderedList:    "Ordered list",
@@ -58,7 +59,7 @@ $.trumbowyg = {
 
     btnsGrps: {
         design:     ['bold', 'italic', 'underline', 'strikethrough'],
-        semantic:   ['strong', 'em'],
+        semantic:   ['strong', 'em', 'del'],
         justify:    ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
         lists:      ['unorderedList', 'orderedList']
     }
@@ -106,6 +107,13 @@ $.trumbowyg = {
                         return tbw.lang;
                     case 'duration':
                         return tbw.o.duration;
+
+                    // HTML
+                    case 'html':
+                        if(params)
+                            return tbw.$e.val(params);
+                        else
+                            return tbw.$e.val();
                 }
             } catch(e){}
         }
@@ -148,7 +156,7 @@ $.trumbowyg = {
             btns: ['viewHTML', 
                         '|', 'formatting',
                         '|', $.trumbowyg.btnsGrps.design,
-                        '|', 'link', 
+                        '|', 'link',
                         '|', 'insertImage',
                         '|', $.trumbowyg.btnsGrps.justify,
                         '|', $.trumbowyg.btnsGrps.lists,
@@ -172,27 +180,6 @@ $.trumbowyg = {
                     func: 'toggle'
                 },
 
-                formatting: {
-                    dropdown: {
-                        defaultFunc: 'formatBlock',
-                        p: {},
-                        blockquote: {},
-                        h1: {
-                            title: this.lang.header + ' 1'
-                        },
-                        h2: {
-                            title: this.lang.header + ' 2'
-                        },
-                        h3: {
-                            title: this.lang.header + ' 3'
-                        },
-                        h4: {
-                            title: this.lang.header + ' 4'
-                        }
-                    }
-                },
-
-                // Formatting flat
                 p: {
                     func: 'formatBlock'
                 },
@@ -227,13 +214,12 @@ $.trumbowyg = {
                 em: {
                     func: 'italic'
                 },
-
-                link: {
-                    dropdown: {
-                        createLink: {},
-                        unlink: {}
-                    }
+                del: {
+                    func: 'strikethrough'
                 },
+
+                createLink: {},
+                unlink: {},
 
                 insertImage: {},
 
@@ -251,24 +237,31 @@ $.trumbowyg = {
 
                 horizontalRule: {
                     func: 'insertHorizontalRule'
-                }
+                },
+
+                // Dropdowns
+                formatting: {
+                    dropdown: ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4']
+                },
+                link:       {
+                    dropdown: ['createLink', 'unlink']
+                },
             }
         }, opts);
 
-        if(this.o.semantic && !opts.btns){
+        if(this.o.semantic && !opts.btns)
             this.o.btns = [
                 'viewHTML', 
                 '|', 'formatting',
                 '|', $.trumbowyg.btnsGrps.semantic,
-                '|', 'link', 
+                '|', 'link',
                 '|', 'insertImage',
                 '|', $.trumbowyg.btnsGrps.justify,
                 '|', $.trumbowyg.btnsGrps.lists,
                 '|', 'horizontalRule'
             ];
-        } else if(opts && opts.btns){
+        else if(opts && opts.btns)
             this.o.btns = opts.btns;
-        }
 
         this.init();
     }
@@ -305,9 +298,9 @@ $.trumbowyg = {
             });
 
             this.isTextarea = true;
-            if(this.$e.is('textarea')){
+            if(this.$e.is('textarea'))
                 this.$editor = $('<div/>');
-            } else {
+            else {
                 this.$editor = this.$e;
                 this.$e = this.buildTextarea().val(this.$e.val());
                 this.isTextarea = false;
@@ -408,9 +401,9 @@ $.trumbowyg = {
                     try { // Prevent buildBtn error
                         var li = $('<li/>');
 
-                        if(btn == '|'){ // It's a separator
+                        if(btn == '|') // It's a separator
                             li.addClass(pfx + 'separator');
-                        } else { // It's a button
+                        else { // It's a button
                             if(btn == 'viewHTML')
                                 li.addClass(pfx + 'not-disable');
                             li.append(this.buildBtn(btn));
@@ -520,9 +513,9 @@ $.trumbowyg = {
                     'class': name + '-' + cssClass + ' ' + cssClass
                 });
                 dropdown.data('visible', false);
-                for(var subName in btnDef.dropdown){
-                    if($.isObject(btnDef.dropdown[subName]))
-                        dropdown.append(this.buildSubBtn(btnDef.dropdown, subName));
+                for (var i = 0, c = btnDef.dropdown.length; i < c; i++) {
+                    if(that.o.btnsDef[btnDef.dropdown[i]])
+                        dropdown.append(that.buildSubBtn(btnDef.dropdown[i]));
                 }
                 this.$box.append(dropdown.hide());
             }
@@ -530,10 +523,8 @@ $.trumbowyg = {
             return btn;
         },
         // Build a button for dropdown menu
-        buildSubBtn: function(dropdown, name){
-            $('body').trigger('mousedown');
-
-            var btnDef = dropdown[name];
+        buildSubBtn: function(name){
+            var btnDef = this.o.btnsDef[name];
             return $('<a/>', {
                 href: 'javascript:void(null);',
                 text: btnDef.text || btnDef.title || this.lang[name] || name,
@@ -541,7 +532,7 @@ $.trumbowyg = {
                 mousedown: $.proxy(function(e){
                     $('body').trigger('mousedown');
 
-                    this.execCommand(dropdown.defaultFunc || btnDef.func || name,
+                    this.execCommand(btnDef.func || name,
                                      btnDef.param || name);
 
                     e.stopPropagation();
@@ -716,6 +707,7 @@ $.trumbowyg = {
             if(this.o.semantic){
                 this.sementicTag('b', 'strong');
                 this.sementicTag('i', 'em');
+                this.sementicTag('strike', 'del');
 
                 this.$e.val(this.$editor.html());
             }
@@ -727,7 +719,7 @@ $.trumbowyg = {
         },
 
 
-        // Function call when user click on « Insert Link » dropdown menu
+        // Function call when user click on « Insert Link »
         createLink: function(){
             this.saveSelection();
             this.buildInsert(this.lang.createLink, {
@@ -790,7 +782,6 @@ $.trumbowyg = {
                 param = '<' + param + '>';
 
             document.execCommand('formatBlock', false, param);
-            this.syncCode();
         },
 
 

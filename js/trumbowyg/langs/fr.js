@@ -14,6 +14,7 @@ $.trumbowyg.langs.fr = {
 
     strong:         "Fort",
     em:             "Emphase",
+    del:            "Supprimé",
 
     unorderedList:  "Liste à puces",
     orderedList:    "Liste ordonnée",
