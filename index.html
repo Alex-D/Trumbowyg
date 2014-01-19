@@ -98,7 +98,7 @@
                     <div id="trumbowyg-demo">
                         <h3>This is a demo of Trumbowyg</h3>
                         <p>
-                            A simple paragraph, <b>bold</b> and <i>italic</i> funny test.
+                            A simple paragraph, <strong>strong</strong> and <em>emphasis</em> funny test.
                         </p>
                         <p>
                             <img src="http://www.cs.mcgill.ca/~aasbah/music_pic/trombone.jpg" alt="A Trumbone">
@@ -176,7 +176,9 @@ $('#trumbowyg-demo').trumbowyg({
         <script src="js/jquery.pagescroller.js"></script>
 
         <script type="text/javascript">
-            $('#trumbowyg-demo').trumbowyg();
+            $('#trumbowyg-demo').trumbowyg({
+                semantic: true
+            });
             hljs.initHighlightingOnLoad();
         </script>
 
