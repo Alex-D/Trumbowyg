@@ -110,9 +110,11 @@ $.trumbowyg = {
 
                     // HTML
                     case 'html':
-                        if(params)
-                            return tbw.$e.val(params);
-                        else
+                        if(params){
+                            tbw.$e.val(params);
+                            tbw.sementicCode(true);
+                            return tbw;
+                        } else
                             return tbw.$e.val();
                 }
             } catch(e){}
@@ -153,7 +155,7 @@ $.trumbowyg = {
 
             convertLink: true,
 
-            btns: ['viewHTML', 
+            btns: ['viewHTML',
                         '|', 'formatting',
                         '|', $.trumbowyg.btnsGrps.design,
                         '|', 'link',
@@ -251,7 +253,7 @@ $.trumbowyg = {
 
         if(this.o.semantic && !opts.btns)
             this.o.btns = [
-                'viewHTML', 
+                'viewHTML',
                 '|', 'formatting',
                 '|', $.trumbowyg.btnsGrps.semantic,
                 '|', 'link',
@@ -277,7 +279,7 @@ $.trumbowyg = {
 
             this.buildEditor();
             this.buildBtnPane();
-            
+
             this.fixedBtnPaneEvents();
 
             this.buildOverlay();
@@ -652,7 +654,7 @@ $.trumbowyg = {
             this.$btnPane.find('.'+this.o.prefix + 'viewHTML-button').toggleClass(this.o.prefix + 'active');
         },
 
-        // Open dropdown when click on a button which open that 
+        // Open dropdown when click on a button which open that
         dropdown: function(name){
             var $dropdown = this.$box.find('.'+name+'-'+this.o.prefix + 'dropdown');
             var $btn = this.$btnPane.find('.'+this.o.prefix+name+'-button');
@@ -680,7 +682,7 @@ $.trumbowyg = {
 
 
 
-        
+
         // HTML Code management
         getCode: function(){
             return this.$e.val();
@@ -688,8 +690,8 @@ $.trumbowyg = {
         setCode: function(html){
             this.$e.val(html);
         },
-        syncCode: function(){
-            if(this.$editor.is(':visible'))
+        syncCode: function(force){
+            if(!force && this.$editor.is(':visible'))
                 this.$e.val(this.$editor.html());
             else
                 this.$editor.html(this.$e.val());
@@ -701,8 +703,8 @@ $.trumbowyg = {
         },
 
         // Analyse and update to semantic code
-        sementicCode: function(){
-            this.syncCode();
+        sementicCode: function(force){
+            this.syncCode(force);
 
             if(this.o.semantic){
                 this.sementicTag('b', 'strong');

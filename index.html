@@ -73,11 +73,6 @@
         <script src="js/trumbowyg/trumbowyg.js"></script>
         <script src="js/trumbowyg/langs/fr.js"></script>
         <script>
-            /*
-             * Add your own groups of button
-             */
-            $.trumbowyg.btnsGrps.test = ['bold', 'link'];
-
             $('#simple-editor').trumbowyg();
             $('#form-content').trumbowyg({
                 lang: 'fr',
@@ -91,15 +86,26 @@
                 autogrow: true
             });
 
+            /*
+             * Add your own groups of button
+             */
+            $.trumbowyg.btnsGrps.test = ['bold', 'link'];
+
             $('#customized-buttonpane').trumbowyg({
                 closable: true,
                 fixedBtnPane: true,
-                btns: ['viewHTML', 
+                btnsDef: {
+                    // Customizables dropdowns
+                    justifyLeft: { dropdown: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'] }
+                },
+                btns: ['viewHTML',
                     '|', 'formatting',
                     '|', 'btnGrp-test',
-                    '|', 'btnGrp-justify',
+                    '|', 'justifyLeft',
                     '|', 'btnGrp-lists']
             });
+
+
 
             $('.editor').on('dblclick', function(e){
                 $(this).trumbowyg({
