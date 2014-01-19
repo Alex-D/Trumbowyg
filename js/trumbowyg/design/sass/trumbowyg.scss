@@ -1,3 +1,13 @@
+/* ===========================================================
+ * trumbowyg.scss
+ * Default stylesheet for Trumbowyg editor
+ * http://alex-d.github.com/Trumbowyg
+ * ===========================================================
+ * Author : Alexandre Demode (Alex-D)
+ *          Twitter : @AlexandreDemode
+ *          Website : alex-d.fr
+ */
+
 @import "compass";
 
 $btns: sprite-map("icons/*.png");
@@ -43,8 +53,8 @@ $default-transition-duration: .15s;
     resize: none;
     outline: none;
 }
-.trumbowyg-box-blur .trumbowyg-editor {
-    color: transparent;
+.trumbowyg-box-blur .trumbowyg-editor * {
+    color: transparent !important;
     @include text-shadow(0 0 7px #333);
 }
 .trumbowyg-textarea {
@@ -227,7 +237,7 @@ $default-transition-duration: .15s;
             }
         }
 
-        input[type=text] {
+        input {
             position: absolute;
             top: 0;
             right: 0;
@@ -490,7 +500,7 @@ $default-transition-duration: .15s;
 .trumbowyg-fr .trumbowyg-button-pane li a {
     &.trumbowyg-bold-button, &.trumbowyg-strong-button { @include sprite-pos($btns, 'gras'); }
     &.trumbowyg-underline-button { @include sprite-pos($btns, 'souligne'); }
-    &.trumbowyg-strikethrough-button { @include sprite-pos($btns, 'barre'); }
+    &.trumbowyg-strikethrough-button, &.trumbowyg-del-button { @include sprite-pos($btns, 'barre'); }
 }
 
 
@@ -509,7 +519,7 @@ $default-transition-duration: .15s;
         &.trumbowyg-bold-button, &.trumbowyg-strong-button { @include sprite-pos($btns2x, 'bold', true); }
         &.trumbowyg-italic-button, &.trumbowyg-em-button { @include sprite-pos($btns2x, 'italic', true); }
         &.trumbowyg-underline-button { @include sprite-pos($btns2x, 'underline', true); }
-        &.trumbowyg-strikethrough-button { @include sprite-pos($btns2x, 'strikethrough', true); }
+        &.trumbowyg-strikethrough-button, &.trumbowyg-del-button { @include sprite-pos($btns2x, 'strikethrough', true); }
 
         &.trumbowyg-link-button { @include sprite-pos($btns2x, 'link', true); }
 
@@ -534,6 +544,6 @@ $default-transition-duration: .15s;
     .trumbowyg-fr .trumbowyg-button-pane li a {
         &.trumbowyg-bold-button, &.trumbowyg-strong-button { @include sprite-pos($btns2x, 'gras', true); }
         &.trumbowyg-underline-button { @include sprite-pos($btns2x, 'souligne', true); }
-        &.trumbowyg-strikethrough-button { @include sprite-pos($btns2x, 'barre', true); }
+        &.trumbowyg-strikethrough-button, &.trumbowyg-del-button { @include sprite-pos($btns2x, 'barre', true); }
     }
 }

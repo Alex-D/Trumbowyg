@@ -1,3 +1,13 @@
-# Trumbowyg Github site
+# Trumbowyg WYSIWYG Editor
 
-This site is under construction.
+Trumbowyg is a simple and lightweight WYSIWYG editor, is only 16kB for faster page loading.
+
+
+# Website
+
+http://alex-d.github.io/Trumbowyg/
+
+
+# Documentation
+
+http://alex-d.github.io/Trumbowyg/documentation.html

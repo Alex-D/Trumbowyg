@@ -1,5 +1,6 @@
 ﻿/* ===========================================================
- * trumbowyg.js v1.0
+ * trumbowyg.js
+ * Core code of Trumbowyg plugin
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
  * Author : Alexandre Demode (Alex-D)
@@ -57,6 +58,9 @@ $.trumbowyg = {
         }
     },
 
+    // User default options
+    opts: {},
+
     btnsGrps: {
         design:     ['bold', 'italic', 'underline', 'strikethrough'],
         semantic:   ['strong', 'em', 'del'],
@@ -71,10 +75,8 @@ $.trumbowyg = {
     $.fn.trumbowyg = function(opts, params){
         if($.isObject(opts) || opts == null){
             return this.each(function(){
-                var $that = $(this);
-
-                if(!$that.data('trumbowyg'))
-                    $that.data('trumbowyg', new Trumbowyg(this, opts));
+                if(!$(this).data('trumbowyg'))
+                    $(this).data('trumbowyg', new Trumbowyg(this, opts));
             });
         } else if(this.length == 1){
             try {
@@ -86,7 +88,7 @@ $.trumbowyg = {
                     case 'closeModal':
                         return tbw.closeModal();
                     case 'openModalInsert':
-                        return tbw.buildInsert(opts.title, opts.fields, opts.callback);
+                        return tbw.openModalInsert(params.title, params.fields, params.callback);
 
                     // Selection
                     case 'saveSelection':
@@ -111,14 +113,14 @@ $.trumbowyg = {
                     // HTML
                     case 'html':
                         if(params){
-                            tbw.$e.val(params);
-                            tbw.sementicCode(true);
+                            tbw.setCode(params);
                             return tbw;
                         } else
-                            return tbw.$e.val();
+                            return tbw.getCode();
                 }
             } catch(e){}
         }
+
         return false;
     };
 
@@ -126,7 +128,7 @@ $.trumbowyg = {
 
     var Trumbowyg = function(editorElem, opts){
         // jQuery object of the editor
-        this.$e = $(editorElem);
+        this.$e       = $(editorElem);
         this.$creator = $(editorElem);
 
         // Localization management
@@ -134,6 +136,10 @@ $.trumbowyg = {
             this.lang = $.trumbowyg.langs['en'];
         else
             this.lang = $.extend(true, {}, $.trumbowyg.langs['en'], $.trumbowyg.langs[opts.lang]);
+
+        // Extend with options
+        if ($.trumbowyg.opts)
+            $.extend(true, opts, $.trumbowyg.opts);
 
         // Defaults Options
         this.o = $.extend(true, {
@@ -349,7 +355,7 @@ $.trumbowyg = {
             var that = this;
             this.$editor.on('dblclick', 'img', function(){
                 var img = $(this);
-                that.buildInsert(that.lang.insertImage, {
+                that.openModalInsert(that.lang.insertImage, {
                     url: {
                         label: 'URL',
                         value: img.attr('src')
@@ -530,7 +536,6 @@ $.trumbowyg = {
             return $('<a/>', {
                 href: 'javascript:void(null);',
                 text: btnDef.text || btnDef.title || this.lang[name] || name,
-                title: btnDef.title || btnDef.text || this.lang[name] || name,
                 mousedown: $.proxy(function(e){
                     $('body').trigger('mousedown');
 
@@ -625,6 +630,8 @@ $.trumbowyg = {
 
 
         destroy: function(){
+            console.log("DESTROY");
+            console.log(this);
             var html = this.getCode();
 
             if(this.isTextarea)
@@ -689,6 +696,7 @@ $.trumbowyg = {
         },
         setCode: function(html){
             this.$e.val(html);
+            this.syncCode(true);
         },
         syncCode: function(force){
             if(!force && this.$editor.is(':visible'))
@@ -724,7 +732,7 @@ $.trumbowyg = {
         // Function call when user click on « Insert Link »
         createLink: function(){
             this.saveSelection();
-            this.buildInsert(this.lang.createLink, {
+            this.openModalInsert(this.lang.createLink, {
                 url: {
                     label: 'URL',
                     value: 'http://',
@@ -742,7 +750,7 @@ $.trumbowyg = {
         },
         insertImage: function(){
             this.saveSelection();
-            this.buildInsert(this.lang.insertImage, {
+            this.openModalInsert(this.lang.insertImage, {
                 url: {
                     label: 'URL',
                     value: 'http://'
@@ -768,7 +776,7 @@ $.trumbowyg = {
                 this[cmd](param);
             } catch(e){
                 try {
-                    cmd(param);
+                    cmd(param, this);
                 } catch(e){
                     this.$editor.focus();
                     if(cmd == 'insertHorizontalRule')
@@ -815,8 +823,8 @@ $.trumbowyg = {
 
             // Click on overflay close modal by cancelling them
             this.$overlay.one('click', function(e){
-                $modal.trigger(pfx + 'cancel');
                 e.preventDefault();
+                $modal.trigger(pfx + 'cancel');
             });
 
 
@@ -827,11 +835,11 @@ $.trumbowyg = {
                 action: 'javascript:void(null);',
                 html: content
             }).on('submit', function(e){
+                e.preventDefault();
                 $modal.trigger(pfx + 'confirm');
-                e.preventDefault();
             }).on('reset', function(e){
-                $modal.trigger(pfx + 'cancel');
                 e.preventDefault();
+                $modal.trigger(pfx + 'cancel');
             });
 
 
@@ -874,15 +882,17 @@ $.trumbowyg = {
         },
         // close current modal box
         closeModal: function(){
-            this.$btnPane.removeClass(this.o.prefix + 'disable');
+            var pfx = this.o.prefix;
+
+            this.$btnPane.removeClass(pfx + 'disable');
             this.$overlay.off();
 
             $('.' + this.o.prefix + 'not-disable-old', this.$btnPane)
-                .removeClass(this.o.prefix + 'not-disable-old')
-                .addClass(this.o.prefix + 'not-disable');
+                .removeClass(pfx + 'not-disable-old')
+                .addClass(pfx + 'not-disable');
 
             that = this;
-            $modalBox = $('.' + this.o.prefix + 'modal-box', this.$box);
+            $modalBox = $('.' + pfx + 'modal-box', this.$box);
             $modalBox.animate({
                 top: '-' + $modalBox.css('height')
             }, this.o.duration/2, function(){
@@ -891,24 +901,28 @@ $.trumbowyg = {
             });
         },
         // Preformated build and management modal
-        buildInsert: function(title, fields, cmd){
-            var html = '';
+        openModalInsert: function(title, fields, cmd){
+            var html = '',
+                pfx  = this.o.prefix;
 
             for(f in fields){
-                if(fields[f].label == undefined)
-                    fields[f].label = f.charAt(0).toUpperCase() + f.slice(1);
+                label = (fields[f].label == undefined)
+                    ? (this.lang[f] ? this.lang[f] : f.charAt(0).toUpperCase() + f.slice(1))
+                    : (this.lang[fields[f].label] ? this.lang[fields[f].label] : fields[f].label)
+                ;
 
                 if(fields[f].name == undefined)
                     fields[f].name = f;
 
                 f = fields[f];
-                html += '<label><input type="text" name="'+f.name+'" value="'+ (f.value || '') +'" '+(f.required ? 'required' :'')+'><span class="'+this.o.prefix+'input-infos"><span>'+f.label+'</span></span></label>';
+                html += '<label><input type="'+ (f.type || 'text') +'" name="'+f.name+'" value="'+ (f.value || '') +'" '+(f.required ? 'required' :'')+'><span class="'+pfx+'input-infos"><span>'+label+'</span></span></label>';
             }
 
             var modBox = this.openModal(title, html);
             var that = this;
 
-            modBox.on(this.o.prefix + 'confirm', function(){
+            modBox
+            .on(pfx + 'confirm', function(){
                 var $form = $(this).find('form');
 
                 var values = {};
@@ -920,30 +934,30 @@ $.trumbowyg = {
                     if(urlRegex.test(values['url'])){
                         that.restoreSelection();
                         if($.isString(cmd))
-                            document.execCommand(cmd, false, values['url']);
+                            that.execCommand(cmd, values['url']);
                         else
-                            cmd(values);
+                            cmd(values, fields);
 
                         that.syncCode();
                         that.closeModal();
-                        modBox.off(that.o.prefix + 'confirm');
+                        modBox.off(pfx + 'confirm');
                     } else {
                         that.addErrorOnModalField($form.find('input[name=url]'), that.lang.invalidUrl);
                     }
                 }
-            });
-            modBox.one(this.o.prefix + 'cancel', function(){
-                modBox.off(that.o.prefix + 'confirm');
+            })
+            .one(pfx + 'cancel', function(){
+                modBox.off(pfx + 'confirm');
                 that.closeModal();
                 that.restoreSelection();
             });
         },
-        addErrorOnModalField : function($field, err){
+        addErrorOnModalField: function($field, err){
             var $label = $field.parent(),
-                prefix = this.o.prefix;
-            $label.addClass(prefix + 'input-error');
-            $field.on('change keyup', function(){ $label.removeClass(prefix + 'input-error'); });
-            $label.find('input+span').append('<span class="'+ prefix +'msg-error">'+ err +'</span>');
+                pfx    = this.o.prefix;
+            $label.addClass(pfx + 'input-error');
+            $field.on('change keyup', function(){ $label.removeClass(pfx + 'input-error'); });
+            $label.find('input+span').append('<span class="'+ pfx +'msg-error">'+ err +'</span>');
         },
 
 

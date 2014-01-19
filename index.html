@@ -72,6 +72,7 @@
         <script src="js/vendor/jquery-1.8.2.min.js"></script>
         <script src="js/trumbowyg/trumbowyg.js"></script>
         <script src="js/trumbowyg/langs/fr.js"></script>
+        <script src="js/trumbowyg/trumbowyg.upload.js"></script>
         <script>
             $('#simple-editor').trumbowyg();
             $('#form-content').trumbowyg({
@@ -92,17 +93,20 @@
             $.trumbowyg.btnsGrps.test = ['bold', 'link'];
 
             $('#customized-buttonpane').trumbowyg({
+                lang: 'fr',
                 closable: true,
                 fixedBtnPane: true,
                 btnsDef: {
                     // Customizables dropdowns
-                    justifyLeft: { dropdown: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'] }
+                    justifyLeft: { dropdown: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'] },
+                    insertImage: { dropdown: ['insertImage', 'upload'] }
                 },
                 btns: ['viewHTML',
                     '|', 'formatting',
                     '|', 'btnGrp-test',
                     '|', 'justifyLeft',
-                    '|', 'btnGrp-lists']
+                    '|', 'btnGrp-lists',
+                    '|', 'insertImage']
             });
 
 
