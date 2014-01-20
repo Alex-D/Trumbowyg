@@ -40,6 +40,7 @@ $.trumbowyg.langs.fr = {
     reset:          "Annuler",
 
     invalidUrl:     "URL invalide",
+    required:       "Obligatoire",
     description:    "Description",
     title:          "Title",
     text:           "Text"

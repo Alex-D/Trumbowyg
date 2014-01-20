@@ -52,6 +52,7 @@ $.trumbowyg = {
             reset:          "Cancel",
 
             invalidUrl:     "Invalid URL",
+            required:       "Required",
             description:    "Description",
             title:          "Title",
             text:           "Text"
@@ -354,19 +355,20 @@ $.trumbowyg = {
 
             var that = this;
             this.$editor.on('dblclick', 'img', function(){
-                var img = $(this);
+                var $img = $(this);
                 that.openModalInsert(that.lang.insertImage, {
                     url: {
                         label: 'URL',
-                        value: img.attr('src')
+                        value: $img.attr('src'),
+                        required: true
                     },
                     alt: {
-                        label: that.lang.description,
-                        value: img.attr('alt')
+                        label: 'description',
+                        value: $img.attr('alt')
                     }
                 }, function(values){
-                    img.attr('src', values['url']);
-                    img.attr('alt', values['alt']);
+                    $img.attr('src', values['url']);
+                    $img.attr('alt', values['alt']);
                 });
                 return false;
             });
@@ -630,8 +632,6 @@ $.trumbowyg = {
 
 
         destroy: function(){
-            console.log("DESTROY");
-            console.log(this);
             var html = this.getCode();
 
             if(this.isTextarea)
@@ -719,6 +719,8 @@ $.trumbowyg = {
                 this.sementicTag('i', 'em');
                 this.sementicTag('strike', 'del');
 
+                this.removeTag('br');
+
                 this.$e.val(this.$editor.html());
             }
         },
@@ -727,10 +729,14 @@ $.trumbowyg = {
                 $(this).replaceWith(function(){ return '<'+newTag+'>' + $(this).html() + '</'+newTag+'>'; });
             });
         },
+        removeTag: function(tag){
+            $(tag, this.$editor).remove();
+        },
 
 
         // Function call when user click on « Insert Link »
         createLink: function(){
+            var that = this;
             this.saveSelection();
             this.openModalInsert(this.lang.createLink, {
                 url: {
@@ -746,20 +752,26 @@ $.trumbowyg = {
                     label: this.lang.text,
                     value: this.selection
                 }
-            }, 'createLink');
+            }, function(values){
+                that.execCommand('createLink', values['url']);
+            });
         },
         insertImage: function(){
+            var that = this;
             this.saveSelection();
             this.openModalInsert(this.lang.insertImage, {
                 url: {
                     label: 'URL',
-                    value: 'http://'
+                    value: 'http://',
+                    required: true
                 },
                 alt: {
-                    label: this.lang.description,
+                    label: 'description',
                     value: this.selection
                 }
-            }, 'insertImage');
+            }, function(values){
+                that.execCommand('insertImage', values['url']);
+            });
         },
 
 
@@ -891,8 +903,10 @@ $.trumbowyg = {
                 .removeClass(pfx + 'not-disable-old')
                 .addClass(pfx + 'not-disable');
 
-            that = this;
-            $modalBox = $('.' + pfx + 'modal-box', this.$box);
+
+            var that = this,
+                $modalBox = $('.' + pfx + 'modal-box', this.$box);
+
             $modalBox.animate({
                 top: '-' + $modalBox.css('height')
             }, this.o.duration/2, function(){
@@ -906,44 +920,56 @@ $.trumbowyg = {
                 pfx  = this.o.prefix;
 
             for(f in fields){
-                label = (fields[f].label == undefined)
+                var fd = fields[f];
+
+                label = (fd.label == undefined)
                     ? (this.lang[f] ? this.lang[f] : f.charAt(0).toUpperCase() + f.slice(1))
-                    : (this.lang[fields[f].label] ? this.lang[fields[f].label] : fields[f].label)
+                    : (this.lang[fd.label] ? this.lang[fd.label] : fd.label)
                 ;
 
-                if(fields[f].name == undefined)
-                    fields[f].name = f;
+                if(fd.name == undefined)
+                    fd.name = f;
 
-                f = fields[f];
-                html += '<label><input type="'+ (f.type || 'text') +'" name="'+f.name+'" value="'+ (f.value || '') +'" '+(f.required ? 'required' :'')+'><span class="'+pfx+'input-infos"><span>'+label+'</span></span></label>';
+                if(!fd.pattern && f == 'url'){
+                    fd.pattern = /^(http|https):\/\/([\w~#!:.?+=&%@!\-\/]+)$/;
+                    fd.patternError = this.lang.invalidUrl;
+                }
+
+                html += '<label><input type="'+(fd.type || 'text')+'" name="'+fd.name+'" value="'+(fd.value || '')+'"><span class="'+pfx+'input-infos"><span>'+label+'</span></span></label>';
             }
 
-            var modBox = this.openModal(title, html);
-            var that = this;
+            var modBox = this.openModal(title, html),
+                that = this;
 
             modBox
             .on(pfx + 'confirm', function(){
-                var $form = $(this).find('form');
+                var $form = $(this).find('form'),
+                    valid  = true,
+                    values = {};
 
-                var values = {};
-                for(f in fields)
-                    values[f] = $('input[name="'+f+'"]', $form).val();
-                
-                if(values['url'] != null && values['url'] != undefined){
-                    var urlRegex = /^(http|https):\/\/([\w~#!:.?+=&%@!\-\/]+)$/;
-                    if(urlRegex.test(values['url'])){
-                        that.restoreSelection();
-                        if($.isString(cmd))
-                            that.execCommand(cmd, values['url']);
-                        else
-                            cmd(values, fields);
+                for(f in fields) {
+                    var $field = $('input[name="'+f+'"]', $form);
 
-                        that.syncCode();
-                        that.closeModal();
-                        modBox.off(pfx + 'confirm');
-                    } else {
-                        that.addErrorOnModalField($form.find('input[name=url]'), that.lang.invalidUrl);
+                    values[f] = $field.val();
+
+                    // Validate value
+                    if(fields[f].required && (values[f] == null || values[f] == undefined || $.trim(values[f]) == "")) {
+                        valid  = false;
+                        that.addErrorOnModalField($field, that.lang.required);
+                    } else if(fields[f].pattern && !fields[f].pattern.test(values[f])) {
+                        valid  = false;
+                        that.addErrorOnModalField($field, fields[f].patternError);
                     }
+                }
+
+                if(valid) {
+                    that.restoreSelection();
+                    
+                    cmd(values, fields);
+
+                    that.syncCode();
+                    that.closeModal();
+                    modBox.off(pfx + 'confirm');
                 }
             })
             .one(pfx + 'cancel', function(){
@@ -951,6 +977,8 @@ $.trumbowyg = {
                 that.closeModal();
                 that.restoreSelection();
             });
+
+            return modBox;
         },
         addErrorOnModalField: function($field, err){
             var $label = $field.parent(),

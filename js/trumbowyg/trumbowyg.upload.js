@@ -16,34 +16,45 @@
  * 
  */
 (function($){
-	$.extend($.trumbowyg.langs.en, {
-		upload: "Upload",
-		file: 	"File"
-	});
+	$.extend(true, $.trumbowyg, {
+		langs: {
+			en: {
+				upload: "Upload",
+				file: 	"File"
+			},
+			fr: {
+				upload: "Envoi",
+				file: 	"Fichier"
+			}
+		},
 
-	$.extend($.trumbowyg.langs.fr, {
-		upload: "Envoi",
-		file: 	"Fichier"
-	});
+		opts: {
+			btnsDef: {
+				upload: {
+					func: function(params, tbw){
+						tbw.openModalInsert(
+							// Title
+							tbw.lang['upload'],
 
+							// Fields
+							{
+								file: {
+									type: 'file',
+									required: true
+								},
+								alt: {
+									label: 'description'
+								}
+							},
 
-
-	$.trumbowyg.opts.btnsDef = {
-		upload: {
-			func: function(params, tbw){
-				tbw.openModalInsert(
-					tbw.lang['upload'],
-					{
-						file: {
-							type: 'file'
-						},
-						description: {}
-					},
-					function(){
-						console.log("cool ! It's ok !");
+							// Callback
+							function(values){
+								console.log(values);
+							}
+						);
 					}
-				);
+				}
 			}
 		}
-	};
+	});
 })(jQuery);
