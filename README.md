@@ -11,3 +11,8 @@ http://alex-d.github.io/Trumbowyg/
 # Documentation
 
 http://alex-d.github.io/Trumbowyg/documentation.html
+
+
+# Thanks
+
+Vinz, who has make some icons for default design
