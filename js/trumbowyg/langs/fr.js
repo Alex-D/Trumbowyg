@@ -19,8 +19,8 @@ $.trumbowyg.langs.fr = {
     unorderedList:  "Liste à puces",
     orderedList:    "Liste ordonnée",
 
-    insertImage:    "Inserer une Image",
-    insertVideo:    "Inserer une Video",
+    insertImage:    "Insérer une image",
+    insertVideo:    "Insérer une video",
     link:           "Lien",
     createLink:     "Insérer un lien",
     unlink:         "Supprimer le lien",

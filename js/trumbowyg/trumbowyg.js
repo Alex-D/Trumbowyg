@@ -488,22 +488,23 @@ $.trumbowyg = {
 
         // Build a button and this action
         buildBtn: function(name){
+            var pfx = this.o.prefix;
             var btnDef = this.o.btnsDef[name];
             var that = this;
             var btn = $('<a/>', {
                 href: 'javascript:void(null);',
-                'class': this.o.prefix + name +'-button',
-                text: btnDef.text || btnDef.title || this.lang[name] || name,
-                title: btnDef.title || btnDef.text || this.lang[name] || name,
+                'class': pfx + name +'-button' + (btnDef.ico ? ' '+ pfx + btnDef.ico +'-button' : ''),
+                text: btnDef.text || btnDef.title || this.lang[name] || name.charAt(0).toUpperCase() + name.slice(1),
+                title: btnDef.title || btnDef.text || this.lang[name] || name.charAt(0).toUpperCase() + name.slice(1),
                 mousedown: function(e){
-                    if(!btnDef.dropdown || that.$box.find('.'+name+'-'+that.o.prefix + 'dropdown').is(':hidden'))
+                    if(!btnDef.dropdown || that.$box.find('.'+name+'-'+pfx + 'dropdown').is(':hidden'))
                         $('body').trigger('mousedown');
 
-                    if(that.$btnPane.hasClass(that.o.prefix + 'disable') 
-                        && !$(this).parent().hasClass(that.o.prefix + 'not-disable'))
+                    if(that.$btnPane.hasClass(pfx + 'disable') 
+                        && !$(this).parent().hasClass(pfx + 'not-disable'))
                         return false;
 
-                    that.execCommand((btnDef.dropdown ? 'dropdown' : '') || btnDef.func || name,
+                    that.execCommand((btnDef.dropdown ? 'dropdown' : false) || btnDef.func || name,
                                      btnDef.param || name);
 
                     e.stopPropagation();
@@ -515,12 +516,11 @@ $.trumbowyg = {
 
 
             if(btnDef.dropdown){
-                btn.addClass(this.o.prefix + 'open-dropdown');
-                var cssClass = this.o.prefix + 'dropdown'
-                             + ' ' + this.o.prefix + 'fixed-top';
+                btn.addClass(pfx + 'open-dropdown');
+                var cssClass = pfx + 'dropdown';
 
                 var dropdown = $('<div/>', {
-                    'class': name + '-' + cssClass + ' ' + cssClass
+                    'class': name + '-' + cssClass + ' ' + cssClass + ' ' + pfx + 'fixed-top'
                 });
                 dropdown.data('visible', false);
                 for (var i = 0, c = btnDef.dropdown.length; i < c; i++) {
@@ -565,8 +565,8 @@ $.trumbowyg = {
             return this.$overlay = $('<div/>', {
                 'class': this.o.prefix + 'overlay'
             }).css({
-                top: this.$btnPane.css('height'),
-                height: this.$editor.outerHeight()
+                top: this.$btnPane.outerHeight(),
+                height: (parseInt(this.$editor.outerHeight()) + 1) + 'px'
             }).appendTo(this.$box);
         },
         showOverlay: function(){
@@ -592,9 +592,9 @@ $.trumbowyg = {
 
                 this.syncCode();
 
-                var wScroll = $(window).scrollTop();
-                var offset = this.$box.offset().top + 2;
-                var toFixed = (wScroll - offset > 0) && ((wScroll - offset - parseInt(this.height.replace('px', ''))) < 0);
+                var wScroll = $(window).scrollTop(),
+                    offset = this.$box.offset().top + 1,
+                    toFixed = (wScroll - offset > 0) && ((wScroll - offset - parseInt(this.height)) < 0);
 
                 if(toFixed){
                     if(!this.isFixed){
@@ -603,7 +603,7 @@ $.trumbowyg = {
                             position: 'fixed',
                             top: 0,
                             left: (this.o.fixedFullWidth) ? '0' : 'auto',
-                            width: (this.o.fixedFullWidth) ? '100%' : this.$box.css('width'),
+                            width: (this.o.fixedFullWidth) ? '100%' : ((parseInt(this.$box.css('width'))-1) + 'px'),
                             zIndex: 7
                         });
                         this.$editor.css({ marginTop: this.$btnPane.css('height') });
@@ -612,7 +612,7 @@ $.trumbowyg = {
 
                     $('.' + this.o.prefix + 'fixed-top', this.$box).css({
                         position: this.o.fixedFullWidth ? 'fixed' : 'absolute',
-                        top: this.o.fixedFullWidth ? this.$btnPane.css('height') : parseInt(this.$btnPane.css('height').replace('px', '')) + (wScroll - offset) + 'px',
+                        top: this.o.fixedFullWidth ? this.$btnPane.outerHeight() : parseInt(this.$btnPane.outerHeight()) + (wScroll - offset) + 'px',
                         zIndex: 15
                     });
                 } else if(this.isFixed) {
@@ -622,7 +622,7 @@ $.trumbowyg = {
                     this.$e.css({ marginTop: 0 });
                     $('.' + this.o.prefix + 'fixed-top', this.$box).css({
                         position: 'absolute',
-                        top: this.$btnPane.css('height')
+                        top: this.$btnPane.outerHeight()
                     });
                 }
             }, this));
@@ -663,23 +663,24 @@ $.trumbowyg = {
 
         // Open dropdown when click on a button which open that
         dropdown: function(name){
-            var $dropdown = this.$box.find('.'+name+'-'+this.o.prefix + 'dropdown');
-            var $btn = this.$btnPane.find('.'+this.o.prefix+name+'-button');
+            var pfx = this.o.prefix;
+            var $dropdown = this.$box.find('.'+name+'-'+pfx + 'dropdown'),
+                $btn = this.$btnPane.find('.'+pfx+name+'-button');
 
             if($dropdown.is(':hidden')){
                 $btn.addClass(this.o.prefix + 'active');
 
                 $dropdown.css({
                     position: 'absolute',
-                    top: this.$btnPane.css('height'),
+                    top: this.$btnPane.outerHeight(),
                     left: (this.o.fixedFullWidth && this.isFixed) ? $btn.offset().left+'px' : ($btn.offset().left - this.$btnPane.offset().left)+'px'
                 }).show();
 
                 $(window).trigger('scroll');
 
                 $('body').on('mousedown', $.proxy(function(e){
-                    $('.' + this.o.prefix + 'dropdown').hide();
-                    $('.' + this.o.prefix + 'active').removeClass(this.o.prefix + 'active');
+                    $('.' + pfx + 'dropdown').hide();
+                    $('.' + pfx + 'active').removeClass(pfx + 'active');
                     $('body').off('mousedown');
                 }, this));
             } else {
@@ -830,7 +831,7 @@ $.trumbowyg = {
             var $modal = $('<div/>', {
                 'class': pfx + 'modal ' + pfx + 'fixed-top'
             }).css({
-                top: this.$btnPane.css('height')
+                top: (parseInt(this.$btnPane.css('height')) + 1) + 'px'
             }).appendTo(this.$box);
 
             // Click on overflay close modal by cancelling them
@@ -860,9 +861,15 @@ $.trumbowyg = {
                 'class': pfx + 'modal-box',
                 html: $form
             })
-            .css('top', '-' + $modal.css('height'))
+            .css({
+                top:     '-' + parseInt(this.$btnPane.outerHeight()) + 'px',
+                opacity: 0
+            })
             .appendTo($modal)
-            .animate({ top: 0 }, this.o.duration);
+            .animate({
+                top:     0,
+                opacity: 1
+            }, this.o.duration / 2);
 
 
             // Append title

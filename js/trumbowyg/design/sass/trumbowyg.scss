@@ -87,15 +87,16 @@ $default-transition-duration: .15s;
             margin: 0 5px;
             height: 35px;
         }
+
+        a.trumbowyg-active {
+            border-bottom: 1px solid #FFF;
+        }
     }
 
     &.trumbowyg-disable {
         li:not(.trumbowyg-not-disable) a {
             opacity: .2;
             cursor: default;
-        }
-        li.trumbowyg-not-disable a.trumbowyg-active {
-            border-bottom: 1px solid #FFF;
         }
         li.trumbowyg-separator {
             background: darken($light-color, 3%);
@@ -155,7 +156,7 @@ $default-transition-duration: .15s;
         background: inherit;
         padding: 0 14px;
         color: #333;
-        @include transition;
+        @include transition-property(background);
 
         &:hover,
         &:focus {
@@ -219,7 +220,7 @@ $default-transition-duration: .15s;
                 background-color: lighten($light-color, 5%);
                 border: 1px solid #DEDEDE;
                 padding: 0 2%;
-            width: 19.5%;
+                width: 19.5%;
             }
             span.trumbowyg-msg-error {
                 color: #e74c3c;
@@ -463,6 +464,7 @@ $default-transition-duration: .15s;
     background-image: $btns;
     background-repeat: none;
     @include transition;
+    transition: background-color .15s, background-image .15s, opacity .15s;
 
     &.trumbowyg-viewHTML-button { @include sprite-pos($btns, 'view-html'); }
     &.trumbowyg-formatting-button { @include sprite-pos($btns, 'formatting'); }
@@ -485,7 +487,7 @@ $default-transition-duration: .15s;
     &.trumbowyg-unorderedList-button { @include sprite-pos($btns, 'unordered-list'); }
     &.trumbowyg-orderedList-button { @include sprite-pos($btns, 'ordered-list'); }
 
-    &.trumbowyg-horizontalRule-button { @include sprite-pos($btns, 'horizontale-rule'); }
+    &.trumbowyg-horizontalRule-button { @include sprite-pos($btns, 'horizontal-rule'); }
 
     &.trumbowyg-fullscreen-button { @include sprite-pos($btns, 'fullscreen'); }
     &.trumbowyg-close-button { @include sprite-pos($btns, 'close'); }
@@ -533,7 +535,7 @@ $default-transition-duration: .15s;
         &.trumbowyg-unorderedList-button { @include sprite-pos($btns2x, 'unordered-list', true); }
         &.trumbowyg-orderedList-button { @include sprite-pos($btns2x, 'ordered-list', true); }
 
-        &.trumbowyg-horizontalRule-button { @include sprite-pos($btns2x, 'horizontale-rule', true); }
+        &.trumbowyg-horizontalRule-button { @include sprite-pos($btns2x, 'horizontal-rule', true); }
 
         &.trumbowyg-fullscreen-button { @include sprite-pos($btns2x, 'fullscreen', true); }
         &.trumbowyg-close-button { @include sprite-pos($btns2x, 'close', true); }
