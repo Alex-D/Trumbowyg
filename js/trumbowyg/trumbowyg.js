@@ -132,15 +132,14 @@ $.trumbowyg = {
         this.$e       = $(editorElem);
         this.$creator = $(editorElem);
 
+        // Extend with options
+        opts = $.extend(true, {}, opts, $.trumbowyg.opts);
+
         // Localization management
-        if(typeof opts === 'undefined' || typeof opts.lang === 'undefined' || typeof $.trumbowyg.langs[opts.lang] === 'undefined')
+        if(typeof opts.lang === 'undefined' || typeof $.trumbowyg.langs[opts.lang] === 'undefined')
             this.lang = $.trumbowyg.langs['en'];
         else
             this.lang = $.extend(true, {}, $.trumbowyg.langs['en'], $.trumbowyg.langs[opts.lang]);
-
-        // Extend with options
-        if ($.trumbowyg.opts)
-            $.extend(true, opts, $.trumbowyg.opts);
 
         // Defaults Options
         this.o = $.extend(true, {

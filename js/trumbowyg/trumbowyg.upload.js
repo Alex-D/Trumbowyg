@@ -30,6 +30,7 @@
 
 		opts: {
 			btnsDef: {
+				insertImage: { dropdown: ['insertImage', 'upload'] },
 				upload: {
 					func: function(params, tbw){
 						tbw.openModalInsert(
