@@ -459,6 +459,9 @@ $("#editor").trumbowyg("openModalInsert", {
     callback: function(values){
         img.attr('src', values['url']);
         img.attr('alt', values['alt']);
+
+        return true; // Return true if you have finished with this modal box
+        // If you do not return anything, you need manage yourself the closure of the modal box
     }
 });
                                 </code></pre>
