@@ -16,46 +16,46 @@
  * 
  */
 (function($){
-	$.extend(true, $.trumbowyg, {
-		langs: {
-			en: {
-				upload: "Upload",
-				file: 	"File"
-			},
-			fr: {
-				upload: "Envoi",
-				file: 	"Fichier"
-			}
-		},
+    $.extend(true, $.trumbowyg, {
+        langs: {
+            en: {
+                upload: "Upload",
+                file:   "File"
+            },
+            fr: {
+                upload: "Envoi",
+                file:   "Fichier"
+            }
+        },
 
-		opts: {
-			btnsDef: {
-				insertImage: { dropdown: ['insertImage', 'upload'] },
-				upload: {
-					func: function(params, tbw){
-						tbw.openModalInsert(
-							// Title
-							tbw.lang['upload'],
+        opts: {
+            btnsDef: {
+                insertImage: { dropdown: ['insertImage', 'upload'] },
+                upload: {
+                    func: function(params, tbw){
+                        tbw.openModalInsert(
+                            // Title
+                            tbw.lang['upload'],
 
-							// Fields
-							{
-								file: {
-									type: 'file',
-									required: true
-								},
-								alt: {
-									label: 'description'
-								}
-							},
+                            // Fields
+                            {
+                                file: {
+                                    type: 'file',
+                                    required: true
+                                },
+                                alt: {
+                                    label: 'description'
+                                }
+                            },
 
-							// Callback
-							function(values){
-								console.log(values);
-							}
-						);
-					}
-				}
-			}
-		}
-	});
+                            // Callback
+                            function(values){
+                                console.log(values);
+                            }
+                        );
+                    }
+                }
+            }
+        }
+    });
 })(jQuery);
