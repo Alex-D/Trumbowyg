@@ -754,6 +754,7 @@ $.trumbowyg = {
                 }
             }, function(values){
                 that.execCommand('createLink', values['url']);
+                return true;
             });
         },
         insertImage: function(){
@@ -771,6 +772,7 @@ $.trumbowyg = {
                 }
             }, function(values){
                 that.execCommand('insertImage', values['url']);
+                return true;
             });
         },
 
@@ -971,11 +973,11 @@ $.trumbowyg = {
                 if(valid) {
                     that.restoreSelection();
                     
-                    cmd(values, fields);
-
-                    that.syncCode();
-                    that.closeModal();
-                    modBox.off(pfx + 'confirm');
+                    if(cmd(values, fields)) {
+                        that.syncCode();
+                        that.closeModal();
+                        modBox.off(pfx + 'confirm');
+                    }
                 }
             })
             .one(pfx + 'cancel', function(){
