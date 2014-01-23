@@ -51,6 +51,11 @@
                             // Callback
                             function(values){
                                 console.log(values);
+
+                                // Simulate upload
+                                setTimeout(function(){
+                                    tbw.closeModal();
+                                }, 1000);
                             }
                         );
                     }

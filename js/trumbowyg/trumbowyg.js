@@ -81,43 +81,39 @@ $.trumbowyg = {
             });
         } else if(this.length == 1){
             try {
-                var tbw = $(this).data('trumbowyg');
+                var t = $(this).data('trumbowyg');
                 switch(opts){
                     // Modal box
                     case 'openModal':
-                        return tbw.openModal(params.title, params.content);
+                        return t.openModal(params.title, params.content);
                     case 'closeModal':
-                        return tbw.closeModal();
+                        return t.closeModal();
                     case 'openModalInsert':
-                        return tbw.openModalInsert(params.title, params.fields, params.callback);
+                        return t.openModalInsert(params.title, params.fields, params.callback);
 
                     // Selection
                     case 'saveSelection':
-                        return tbw.saveSelection();
+                        return t.saveSelection();
                     case 'getSelection':
-                        return tbw.selection;
+                        return t.selection;
                     case 'getSelectedText':
-                        return tbw.selection+'';
+                        return t.selection+'';
                     case 'restoreSelection':
-                        return tbw.restoreSelection();
+                        return t.restoreSelection();
 
                     // Destroy
                     case 'destroy':
-                        return tbw.destroy();
+                        return t.destroy();
 
                     // Public options
                     case 'lang':
-                        return tbw.lang;
+                        return t.lang;
                     case 'duration':
-                        return tbw.o.duration;
+                        return t.o.duration;
 
                     // HTML
                     case 'html':
-                        if(params){
-                            tbw.setCode(params);
-                            return tbw;
-                        } else
-                            return tbw.getCode();
+                        return t.html(params);
                 }
             } catch(e){}
         }
@@ -631,7 +627,7 @@ $.trumbowyg = {
 
 
         destroy: function(){
-            var html = this.getCode();
+            var html = this.html();
 
             if(this.isTextarea)
                 this.$box.after(this.$e.css({height: this.height})
@@ -691,12 +687,13 @@ $.trumbowyg = {
 
 
         // HTML Code management
-        getCode: function(){
-            return this.$e.val();
-        },
-        setCode: function(html){
-            this.$e.val(html);
-            this.syncCode(true);
+        html: function(html){
+            if(html){
+                this.$e.val(html);
+                this.syncCode(true);
+                return tbw;
+            } else
+                return this.$e.val();
         },
         syncCode: function(force){
             if(!force && this.$editor.is(':visible'))
