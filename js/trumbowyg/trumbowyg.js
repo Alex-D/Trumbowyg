@@ -445,7 +445,7 @@ $.trumbowyg = {
                             zIndex: 10
                         });
                         $([t.$editor, t.$e]).each(function(){
-                            $(t).css({
+                            $(this).css({
                                 height: '100%',
                                 overflow: 'auto'
                             });
