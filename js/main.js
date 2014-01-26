@@ -1,3 +1,6 @@
+hljs.initHighlightingOnLoad();
+
+
 var offset = parseInt($('#container').css('padding-top'));
 
 $('section').each(function(eq){
