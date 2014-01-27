@@ -8,23 +8,20 @@
  *          Website : alex-d.fr
  */
 
-
-/**
- *
- * /!\ IN DEV - NOT FUNCTIONAL /!\
- * This plugin is in developement, do not use it
- * 
- */
 (function($){
+    addXhrProgressEvent();
+
     $.extend(true, $.trumbowyg, {
         langs: {
             en: {
                 upload: "Upload",
-                file:   "File"
+                file:   "File",
+                uploadError: "Error"
             },
             fr: {
                 upload: "Envoi",
-                file:   "Fichier"
+                file:   "Fichier",
+                uploadError: "Erreur"
             }
         },
 
@@ -34,10 +31,10 @@
 
         opts: {
             btnsDef: {
-                insertImage: { dropdown: ['insertImage', 'upload'] },
                 upload: {
                     func: function(params, tbw){
-                        var files;
+                        var file,
+                            pfx = tbw.o.prefix;
 
                         $modal = tbw.openModalInsert(
                             // Title
@@ -57,9 +54,20 @@
                             // Callback
                             function(values, fields){
                                 var data = new FormData();
-                                $.each(files, function(key, value){
-                                    data.append(key, value);
-                                });
+                                data.append('fileToUpload', file);
+
+                                if($('.' + pfx +'progress', $modal).length == 0)
+                                    $('.' + pfx + 'modal-title', $modal)
+                                    .after(
+                                        $('<div/>', {
+                                            'class': pfx +'progress'
+                                        })
+                                        .append(
+                                            $('<div/>', {
+                                                'class': pfx +'progress-bar'
+                                            })
+                                        )
+                                    );
 
                                 $.ajax({
                                     url:            $.trumbowyg.upload.serverPath,
@@ -70,23 +78,60 @@
                                     processData:    false,
                                     contentType:    false,
 
-                                    success:        function(data){
-                                        tbw.execCommand('insertImage', data.files[0]);
-                                        tbw.closeModal();
+                                    progressUpload: function(e){
+                                        $('.' + pfx + 'progress-bar').stop().animate({
+                                            width: Math.round(e.loaded * 100 / e.total) + '%'
+                                        }, 200);
                                     },
-                                    error:          function(data){
-                                        tbw.addErrorOnModalField(fields['file'], "Error");
+
+                                    success: function(data){
+                                        if(data.message == "uploadSuccess") {
+                                            tbw.execCommand('insertImage', data.file);
+                                            setTimeout(function(){
+                                                tbw.closeModal();
+                                            }, 250);
+                                        } else {
+                                            tbw.addErrorOnModalField(
+                                                $('input[type=file]', $modal),
+                                                tbw.lang[data.message]
+                                            );
+                                        }
+                                    },
+                                    error: function(data){
+                                        tbw.addErrorOnModalField(
+                                            $('input[type=file]', $modal),
+                                            tbw.lang['uploadError']
+                                        );
                                     }
                                 });
                             }
                         );
 
                         $('input[type=file]').on('change', function(e){
-                            files = e.target.files;
+                            file = e.target.files[0];
                         });
                     }
                 }
             }
         }
     });
+
+
+    function addXhrProgressEvent(){
+        var originalXhr = $.ajaxSettings.xhr;
+
+        $.ajaxSetup({
+            xhr: function() {
+                var req  = originalXhr(),
+                    that = this;
+
+                if(req && typeof req.upload == "object" && that.progressUpload !== undefined)
+                    req.upload.addEventListener("progress", function(e){
+                        that.progressUpload(e);
+                    }, false);
+
+                return req;
+            }
+        });
+    }
 })(jQuery);

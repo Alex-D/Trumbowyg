@@ -199,6 +199,20 @@ $default-transition-duration: .15s;
         background: lighten($light-color, 5%);
     }
 
+    .trumbowyg-progress {
+        width: 100%;
+        background: #F00;
+        height: 3px;
+        position: absolute;
+        top: 58px;
+
+        .trumbowyg-progress-bar {
+            background: #2BC06A;
+            height: 100%;
+            @include transition(width .15s linear);
+        }
+    }
+
     label {
         display: block;
         position: relative;
@@ -277,7 +291,7 @@ $default-transition-duration: .15s;
         display: block;
         width: 100px;
         height: 35px;
-        line-height: 30px;
+        line-height: 33px;
         margin: 0 10px;
         background-color: #333;
         border: none;

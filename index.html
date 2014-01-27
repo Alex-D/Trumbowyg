@@ -74,7 +74,54 @@
         <script src="trumbowyg/langs/fr.js"></script>
         <script src="trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
         <script>
+            /** Default editor configuration **/
             $('#simple-editor').trumbowyg();
+
+
+
+            /********************************************************
+             * Customized button pane + buttons groups + dropdowns
+             * Use upload plugin
+             *******************************************************/
+
+            /*
+             * Add your own groups of button
+             */
+            $.trumbowyg.btnsGrps.test = ['bold', 'link'];
+
+            /* Add new words for customs btnsDef just below */
+            $.extend(true, $.trumbowyg.langs, {
+                fr: {
+                    align: 'Alignement',
+                    image: 'Image'
+                }
+            });
+            $('#customized-buttonpane').trumbowyg({
+                lang: 'fr',
+                closable: true,
+                fixedBtnPane: true,
+                btnsDef: {
+                    // Customizables dropdowns
+                    align: {
+                        dropdown: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                        ico: 'justifyLeft'
+                    },
+                    image: {
+                        dropdown: ['insertImage', 'upload'],
+                        ico: 'insertImage'
+                    }
+                },
+                btns: ['viewHTML',
+                    '|', 'formatting',
+                    '|', 'btnGrp-test',
+                    '|', 'align',
+                    '|', 'btnGrp-lists',
+                    '|', 'image']
+            });
+
+
+
+            /** Simple customization with current options **/
             $('#form-content').trumbowyg({
                 lang: 'fr',
                 closable: true,
@@ -87,26 +134,6 @@
                 autogrow: true
             });
 
-            /*
-             * Add your own groups of button
-             */
-            $.trumbowyg.btnsGrps.test = ['bold', 'link'];
-
-            $('#customized-buttonpane').trumbowyg({
-                lang: 'fr',
-                closable: true,
-                fixedBtnPane: true,
-                btnsDef: {
-                    // Customizables dropdowns
-                    align: { dropdown: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'], ico: 'justifyLeft' }
-                },
-                btns: ['viewHTML',
-                    '|', 'formatting',
-                    '|', 'btnGrp-test',
-                    '|', 'align',
-                    '|', 'btnGrp-lists',
-                    '|', 'insertImage']
-            });
 
 
 
