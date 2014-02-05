@@ -626,7 +626,7 @@ $.trumbowyg = {
 
 
 
-
+        // Destroy the editor
         destroy: function(){
             var html = this.html();
 
@@ -704,7 +704,7 @@ $.trumbowyg = {
 
             if(this.o.autogrow){
                 this.height = this.$editor.css('height');
-                this.$e.css({height: this.height});
+                this.$e.css({ height: this.height });
             }
         },
 
@@ -717,7 +717,18 @@ $.trumbowyg = {
                 this.sementicTag('i', 'em');
                 this.sementicTag('strike', 'del');
 
-                this.removeTag('br');
+                // Wrap text nodes in p
+                this.$editor.contents()
+                .filter(function(){
+                    // Only non-empty text nodes
+                    return this.nodeType === 3 && $.trim(this.nodeValue).length > 0;
+                }).wrap('<p></p>').end()
+
+                // Remove all br
+                .filter("br").remove();
+
+                // Remove &nbsp;
+                this.$editor.html(this.$editor.html().replace(/&nbsp;/g, ''));
 
                 this.$e.val(this.$editor.html());
             }
@@ -726,9 +737,6 @@ $.trumbowyg = {
             $(oldTag, this.$editor).each(function(){
                 $(this).replaceWith(function(){ return '<'+newTag+'>' + $(this).html() + '</'+newTag+'>'; });
             });
-        },
-        removeTag: function(tag){
-            $(tag, this.$editor).remove();
         },
 
 
