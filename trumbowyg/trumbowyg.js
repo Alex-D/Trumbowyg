@@ -723,12 +723,7 @@ $.trumbowyg = {
                 .filter(function(){
                     // Only non-empty text nodes
                     return this.nodeType === 3 && $.trim(this.nodeValue).length > 0;
-                }).wrap('<p></p>');
-
-                this.$editor.find('p').contents().filter(function(){
-                    // Only non-empty text nodes
-                    return this.nodeType === 3 && $.trim(this.nodeValue).length > 0;
-                }).unwrap().wrap('<p></p>').end()
+                }).wrap('<p></p>').end()
 
                 // Remove all br
                 .filter("br").remove();
