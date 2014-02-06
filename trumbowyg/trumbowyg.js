@@ -346,6 +346,15 @@ $.trumbowyg = {
                 });
             }
 
+            if(this.o.semantic){
+                this.$editor.html(
+                    this.$editor.html()
+                        .replace("<br>", "</p><p>")
+                        .replace("&nsbp;", "")
+                );
+                this.semanticCode();
+            }
+
 
 
             var that = this;
@@ -368,7 +377,7 @@ $.trumbowyg = {
                 });
                 return false;
             })
-            .on('mousedown', function(){
+            .on('keyup', function(){
                 that.semanticCode();
             })
             .on('blur', function(){
