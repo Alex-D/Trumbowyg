@@ -349,7 +349,8 @@ $.trumbowyg = {
 
 
             var that = this;
-            this.$editor.on('dblclick', 'img', function(){
+            this.$editor
+            .on('dblclick', 'img', function(){
                 var $img = $(this);
                 that.openModalInsert(that.lang.insertImage, {
                     url: {
@@ -366,11 +367,11 @@ $.trumbowyg = {
                     $img.attr('alt', values['alt']);
                 });
                 return false;
-            });
-            this.$editor.on('mousedown', function(){
-                that.sementicCode();
-            });
-            this.$editor.on('blur', function(){
+            })
+            .on('mousedown', function(){
+                that.semanticCode();
+            })
+            .on('blur', function(){
                 that.syncCode();
             });
         },
@@ -650,7 +651,7 @@ $.trumbowyg = {
 
         // Function call when click on viewHTML button
         toggle: function(){
-            this.sementicCode();
+            this.semanticCode();
             this.$editor.toggle();
             this.$e.toggle();
             this.$btnPane.toggleClass(this.o.prefix + 'disable');
@@ -709,31 +710,33 @@ $.trumbowyg = {
         },
 
         // Analyse and update to semantic code
-        sementicCode: function(force){
+        semanticCode: function(force){
             this.syncCode(force);
 
             if(this.o.semantic){
-                this.sementicTag('b', 'strong');
-                this.sementicTag('i', 'em');
-                this.sementicTag('strike', 'del');
+                this.semanticTag('b', 'strong');
+                this.semanticTag('i', 'em');
+                this.semanticTag('strike', 'del');
 
                 // Wrap text nodes in p
                 this.$editor.contents()
                 .filter(function(){
                     // Only non-empty text nodes
                     return this.nodeType === 3 && $.trim(this.nodeValue).length > 0;
-                }).wrap('<p></p>').end()
+                }).wrap('<p></p>');
+
+                this.$editor.find('p').contents().filter(function(){
+                    // Only non-empty text nodes
+                    return this.nodeType === 3 && $.trim(this.nodeValue).length > 0;
+                }).unwrap().wrap('<p></p>').end()
 
                 // Remove all br
                 .filter("br").remove();
 
-                // Remove &nbsp;
-                this.$editor.html(this.$editor.html().replace(/&nbsp;/g, ''));
-
                 this.$e.val(this.$editor.html());
             }
         },
-        sementicTag: function(oldTag, newTag){
+        semanticTag: function(oldTag, newTag){
             $(oldTag, this.$editor).each(function(){
                 $(this).replaceWith(function(){ return '<'+newTag+'>' + $(this).html() + '</'+newTag+'>'; });
             });
@@ -854,10 +857,12 @@ $.trumbowyg = {
             $form = $('<form/>', {
                 action: 'javascript:void(null);',
                 html: content
-            }).on('submit', function(e){
+            })
+            .on('submit', function(e){
                 e.preventDefault();
                 $modal.trigger(pfx + 'confirm');
-            }).on('reset', function(e){
+            })
+            .on('reset', function(e){
                 e.preventDefault();
                 $modal.trigger(pfx + 'cancel');
             });
