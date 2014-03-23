@@ -381,8 +381,8 @@ $.trumbowyg = {
                 });
                 return false;
             })
-            .on('keyup', function(){
-                that.semanticCode();
+            .on('keyup', function(e){
+                that.semanticCode(false, e.which === 13);
             })
             .on('blur', function(){
                 that.syncCode();
@@ -672,7 +672,7 @@ $.trumbowyg = {
 
         // Function call when click on viewHTML button
         toggle: function(){
-            this.semanticCode();
+            this.semanticCode(false, true);
             this.$editor.toggle();
             this.$e.toggle();
             this.$btnPane.toggleClass(this.o.prefix + 'disable');
@@ -731,7 +731,9 @@ $.trumbowyg = {
         },
 
         // Analyse and update to semantic code
-        semanticCode: function(force){
+        // @param force : force to sync code from textarea
+        // @param full  : wrap text nodes in <p>
+        semanticCode: function(force, full){
             this.syncCode(force);
 
             if(this.o.semantic){
@@ -739,15 +741,21 @@ $.trumbowyg = {
                 this.semanticTag('i', 'em');
                 this.semanticTag('strike', 'del');
 
-                // Wrap text nodes in p
-                this.$editor.contents()
-                .filter(function(){
-                    // Only non-empty text nodes
-                    return this.nodeType === 3 && $.trim(this.nodeValue).length > 0;
-                }).wrap('<p></p>').end()
+                if(full){
+                    // Wrap text nodes in p
+                    this.$editor.contents()
+                    .filter(function(){
+                        // Only non-empty text nodes
+                        return this.nodeType === 3 && $.trim(this.nodeValue).length > 0;
+                    }).wrap('<p></p>').end()
 
-                // Remove all br
-                .filter("br").remove();
+                    // Remove all br
+                    .filter("br").remove();
+
+                    this.saveSelection();
+                    this.semanticTag('div', 'p');
+                    this.restoreSelection();
+                }
 
                 this.$e.val(this.$editor.html());
             }
