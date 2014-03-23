@@ -105,6 +105,10 @@ $.trumbowyg = {
                     case 'destroy':
                         return t.destroy();
 
+                    // Empty
+                    case 'empty':
+                        return t.empty();
+
                     // Public options
                     case 'lang':
                         return t.lang;
@@ -654,6 +658,14 @@ $.trumbowyg = {
 
             this.$box.remove();
             this.$creator.removeData('trumbowyg');
+        },
+
+
+
+        // Empty the editor
+        empty: function(){
+            this.$e.val('');
+            this.syncCode(true);
         },
 
 
