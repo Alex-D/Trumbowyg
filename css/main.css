@@ -102,7 +102,7 @@ h5 {
 
 body {
   font-family: "Trebuchet MS", Arial, Helvetica, Verdana, serif, sans-serif;
-  background: #f2f2f2 url('../img/background.jpg?1404435743') left top repeat; }
+  background: #f2f2f2 url('../img/background.jpg?1404437249') left top repeat; }
 
 header {
   background-color: #192730;
@@ -139,7 +139,7 @@ header {
         -o-transition: all 0.2s;
         -webkit-transition: all 0.2s;
         transition: all 0.2s; }
-        header ul li a b {
+        header ul li a span {
           position: absolute;
           display: block;
           font-weight: normal;

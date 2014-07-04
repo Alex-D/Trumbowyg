@@ -164,7 +164,7 @@ header {
                 overflow: hidden;
                 @include transition;
 
-                b {
+                span {
                     position: absolute;
                     display: block;
                     font-weight: normal;
