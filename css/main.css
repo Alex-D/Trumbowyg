@@ -96,20 +96,23 @@ h5 {
   padding: 0;
   font-weight: normal;
   -webkit-font-smoothing: subpixel-antialiased !important;
-  -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
-  -ms-backface-visibility: hidden; }
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden; }
 
 body {
   font-family: "Trebuchet MS", Arial, Helvetica, Verdana, serif, sans-serif;
-  background: #f2f2f2 url('../img/background.jpg?1388082086') left top repeat; }
+  background: #f2f2f2 url('../img/background.jpg?1404435743') left top repeat; }
 
 header {
   background-color: #192730;
   height: 58px;
   border-bottom: 1px solid #1b4159;
   position: fixed;
-  z-index: 1; }
+  z-index: 1;
+  -moz-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden; }
   header ul {
     margin: 0;
     padding: 0; }

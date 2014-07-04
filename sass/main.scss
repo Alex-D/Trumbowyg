@@ -121,10 +121,8 @@ h5 {
     margin: 0;
     padding: 0;
     font-weight: normal;
-    -webkit-font-smoothing: subpixel-antialiased !important; 
-    -webkit-backface-visibility: hidden; 
-    -moz-backface-visibility: hidden; 
-    -ms-backface-visibility: hidden;
+    -webkit-font-smoothing: subpixel-antialiased !important;
+    @include backface-visibility(hidden);
 }
 
 
@@ -138,6 +136,7 @@ header {
     border-bottom: 1px solid $blue;
     position: fixed;
     z-index: 1;
+    @include backface-visibility(hidden);
 
     ul {
         margin: 0;
