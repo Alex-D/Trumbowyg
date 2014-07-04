@@ -53,9 +53,14 @@ $default-transition-duration: .15s;
     resize: none;
     outline: none;
 }
-.trumbowyg-box-blur .trumbowyg-editor * {
-    color: transparent !important;
-    @include text-shadow(0 0 7px #333);
+.trumbowyg-box-blur .trumbowyg-editor {
+    * {
+        color: transparent !important;
+        @include text-shadow(0 0 7px #333);
+    }
+    img {
+        @include opacity(.2);
+    }
 }
 .trumbowyg-textarea {
     position: relative;
@@ -68,17 +73,15 @@ $default-transition-duration: .15s;
 .trumbowyg-button-pane {
     position: relative;
     width: 100%;
-    line-height: 35px;
-    height: 35px;
     background: $light-color;
     border-bottom: 1px solid darken($light-color, 7%);
     margin: 0;
     padding: 0;
     list-style-type: none;
+    line-height: 10px;
 
     li {
-        float: left;
-        height: 100%;
+        display: inline-block;
         text-align: center;
 
         &.trumbowyg-separator {
@@ -86,10 +89,6 @@ $default-transition-duration: .15s;
             background: darken($light-color, 7%);
             margin: 0 5px;
             height: 35px;
-        }
-
-        a.trumbowyg-active {
-            border-bottom: 1px solid #FFF;
         }
     }
 
