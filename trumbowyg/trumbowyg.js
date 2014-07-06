@@ -504,8 +504,8 @@ $.trumbowyg = {
                 t = this,
                 textDef = this.lang[name] || name.charAt(0).toUpperCase() + name.slice(1);
 
-            var $btn = $('<a/>', {
-                'href': 'javascript:void(null);',
+            var $btn = $('<button/>', {
+                'type': 'button',
                 'class': pfx + name +'-button' + (btnDef.ico ? ' '+ pfx + btnDef.ico +'-button' : ''),
                 'text': btnDef.text || btnDef.title || textDef,
                 'title': btnDef.title || btnDef.text || textDef,
@@ -547,10 +547,10 @@ $.trumbowyg = {
         // Build a button for dropdown menu
         buildSubBtn: function(name){
             var btnDef = this.o.btnsDef[name];
-            return $('<a/>', {
-                href: 'javascript:void(null);',
-                text: btnDef.text || btnDef.title || this.lang[name] || name,
-                mousedown: $.proxy(function(e){
+            return $('<button/>', {
+                'type': 'button',
+                'text': btnDef.text || btnDef.title || this.lang[name] || name,
+                'mousedown': $.proxy(function(e){
                     $('body').trigger('mousedown');
 
                     this.execCommand(btnDef.func || name,
@@ -564,11 +564,11 @@ $.trumbowyg = {
         },
         // Build a button for right li
         buildRightBtn: function(name){
-            return $('<a/>', {
-                href: 'javascript:void(null);',
+            return $('<button/>', {
+                'type': 'button',
                 'class': this.o.prefix + name+'-button',
-                title: this.lang[name],
-                text: this.lang[name]
+                'title': this.lang[name],
+                'text': this.lang[name]
             });
         },
         // Check if button is supported

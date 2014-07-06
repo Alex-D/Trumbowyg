@@ -83,6 +83,7 @@ $default-transition-duration: .15s;
     li {
         display: inline-block;
         text-align: center;
+        overflow: hidden;
 
         &.trumbowyg-separator {
             width: 1px;
@@ -93,7 +94,7 @@ $default-transition-duration: .15s;
     }
 
     &.trumbowyg-disable {
-        li:not(.trumbowyg-not-disable) a {
+        li:not(.trumbowyg-not-disable) button {
             opacity: .2;
             cursor: default;
         }
@@ -102,20 +103,20 @@ $default-transition-duration: .15s;
         }
     }
 
-    li a {
+    li button {
         // At bottom of this stylesheet
     }
 
-    &:not(.trumbowyg-disable) li a:hover,
-    &:not(.trumbowyg-disable) li a:focus,
-    li a.trumbowyg-active,
-    li.trumbowyg-not-disable a:hover,
-    li.trumbowyg-not-disable a:focus {
+    &:not(.trumbowyg-disable) li button:hover,
+    &:not(.trumbowyg-disable) li button:focus,
+    li button.trumbowyg-active,
+    li.trumbowyg-not-disable button:hover,
+    li.trumbowyg-not-disable button:focus {
         background-color: #FFF;
         outline: none;
     }
 
-    li a.trumbowyg-open-dropdown:after {
+    li .trumbowyg-open-dropdown:after {
         display: block;
         content: " ";
         position: absolute;
@@ -131,7 +132,7 @@ $default-transition-duration: .15s;
         float: right;
         width: auto;
 
-        a {
+        button {
             float: left;
         }
     }
@@ -142,20 +143,24 @@ $default-transition-duration: .15s;
     border: 1px solid $light-color;
     padding: 5px 0;
     border-top: none;
-    background-color: #FFF;
+    background: #FFF;
     margin-left: -1px;
     @include box-shadow(rgba(0, 0, 0, .1) 0 2px 3px);
 
-    a {
+    button {
         display: block;
-        width: 172px;
+        width: 100%;
         height: 35px;
         line-height: 35px;
         text-decoration: none;
-        background: inherit;
+        background: #FFF;
         padding: 0 14px;
         color: #333;
-        @include transition-property(background);
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        font-size: 15px;
+        @include transition;
 
         &:hover,
         &:focus {
@@ -424,7 +429,7 @@ $default-transition-duration: .15s;
         hr {
             display: block;
             height: 1px;
-            border: 0;
+            border: none;
             border-top: 1px solid #CCC;
         }
 
@@ -467,15 +472,16 @@ $default-transition-duration: .15s;
 /*
  * Buttons icons
  */
-.trumbowyg-button-pane li a {
+.trumbowyg-button-pane li button {
     display: block;
     position: relative;
     text-indent: -9999px;
     width: 35px;
     height: 35px;
     overflow: hidden;
-    background-image: $btns;
-    background-repeat: none;
+    background: transparent $btns no-repeat;
+    border: none;
+    cursor: pointer;
     @include transition;
     transition: background-color .15s, background-image .15s, opacity .15s;
 
@@ -505,14 +511,14 @@ $default-transition-duration: .15s;
     &.trumbowyg-fullscreen-button { @include sprite-pos($btns, 'fullscreen'); }
     &.trumbowyg-close-button { @include sprite-pos($btns, 'close'); }
 }
-.trumbowyg-fullscreen .trumbowyg-button-pane li a.trumbowyg-fullscreen-button { @include sprite-pos($btns, 'fullscreen-exit'); }
+.trumbowyg-fullscreen .trumbowyg-button-pane li button.trumbowyg-fullscreen-button { @include sprite-pos($btns, 'fullscreen-exit'); }
 .trumbowyg-button-pane li {
-    &:first-child a { margin-left: 6px; }
-    &:last-child a { margin-right: 6px; }
+    &:first-child button { margin-left: 6px; }
+    &:last-child button { margin-right: 6px; }
 }
 
 /* French */
-.trumbowyg-fr .trumbowyg-button-pane li a {
+.trumbowyg-fr .trumbowyg-button-pane li button {
     &.trumbowyg-bold-button, &.trumbowyg-strong-button { @include sprite-pos($btns, 'gras'); }
     &.trumbowyg-underline-button { @include sprite-pos($btns, 'souligne'); }
     &.trumbowyg-strikethrough-button, &.trumbowyg-del-button { @include sprite-pos($btns, 'barre'); }
@@ -523,7 +529,7 @@ $default-transition-duration: .15s;
 
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 4/3), only screen and (min-device-pixel-ratio: 1.3), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx){ 
-    .trumbowyg-button-pane li a {
+    .trumbowyg-button-pane li button {
         background-size: 72%;
         background-image: $btns2x;
 
@@ -556,7 +562,7 @@ $default-transition-duration: .15s;
     .trumbowyg-fullscreen .trumbowyg-button-pane li a.trumbowyg-fullscreen-button { @include sprite-pos($btns2x, 'fullscreen-exit', true); }
 
     /* French */
-    .trumbowyg-fr .trumbowyg-button-pane li a {
+    .trumbowyg-fr .trumbowyg-button-pane li button {
         &.trumbowyg-bold-button, &.trumbowyg-strong-button { @include sprite-pos($btns2x, 'gras', true); }
         &.trumbowyg-underline-button { @include sprite-pos($btns2x, 'souligne', true); }
         &.trumbowyg-strikethrough-button, &.trumbowyg-del-button { @include sprite-pos($btns2x, 'barre', true); }
