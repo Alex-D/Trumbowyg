@@ -71,6 +71,7 @@
         <script src="trumbowyg/trumbowyg.js"></script>
         <script src="trumbowyg/langs/fr.js"></script>
         <script src="trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
+        <script src="trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
         <script>
             /** Default editor configuration **/
             $('#simple-editor').trumbowyg();
@@ -105,7 +106,7 @@
                         ico: 'justifyLeft'
                     },
                     image: {
-                        dropdown: ['insertImage', 'upload'],
+                        dropdown: ['insertImage', 'upload','base64'],
                         ico: 'insertImage'
                     }
                 },
