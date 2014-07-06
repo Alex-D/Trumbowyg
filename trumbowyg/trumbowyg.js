@@ -496,7 +496,7 @@ $.trumbowyg = {
         },
 
 
-        // Build a button and this action
+        // Build a button and his action
         buildBtn: function(name){
             var pfx = this.o.prefix;
             var btnDef = this.o.btnsDef[name];
@@ -532,7 +532,6 @@ $.trumbowyg = {
                 var dropdown = $('<div/>', {
                     'class': name + '-' + cssClass + ' ' + cssClass + ' ' + pfx + 'fixed-top'
                 });
-                dropdown.data('visible', false);
                 for (var i = 0, c = btnDef.dropdown.length; i < c; i++) {
                     if(that.o.btnsDef[btnDef.dropdown[i]])
                         dropdown.append(that.buildSubBtn(btnDef.dropdown[i]));

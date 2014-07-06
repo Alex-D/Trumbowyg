@@ -36,7 +36,7 @@
                         var file,
                             pfx = tbw.o.prefix;
 
-                        $modal = tbw.openModalInsert(
+                        var $modal = tbw.openModalInsert(
                             // Title
                             tbw.lang['upload'],
 
