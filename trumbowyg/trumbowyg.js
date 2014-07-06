@@ -253,7 +253,7 @@ $.trumbowyg = {
                 },
                 link:       {
                     dropdown: ['createLink', 'unlink']
-                },
+                }
             }
         }, opts);
 
@@ -420,17 +420,17 @@ $.trumbowyg = {
                 if(!$.isArray(btn)) btn = [btn];
                 $.each(btn, $.proxy(function(i, btn){
                     try { // Prevent buildBtn error
-                        var li = $('<li/>');
+                        var $li = $('<li/>');
 
-                        if(btn == '|') // It's a separator
-                            li.addClass(pfx + 'separator');
-                        else { // It's a button
-                            if(btn == 'viewHTML')
-                                li.addClass(pfx + 'not-disable');
-                            li.append(t.buildBtn(btn));
+                        if(btn === '|') // It's a separator
+                            $li.addClass(pfx + 'separator');
+                        else if(t.isSupportedBtn(btn)){ // It's a supported button
+                            if(btn === 'viewHTML')
+                                $li.addClass(pfx + 'not-disable');
+                            $li.append(t.buildBtn(btn));
                         }
 
-                        t.$btnPane.append(li);
+                        t.$btnPane.append($li);
                     } catch(e){}
                 }, t));
             }, t));
@@ -501,7 +501,7 @@ $.trumbowyg = {
         buildBtn: function(name){
             var pfx = this.o.prefix,
                 btnDef = this.o.btnsDef[name],
-                that = this,
+                t = this,
                 textDef = this.lang[name] || name.charAt(0).toUpperCase() + name.slice(1);
 
             var $btn = $('<a/>', {
@@ -510,14 +510,14 @@ $.trumbowyg = {
                 'text': btnDef.text || btnDef.title || textDef,
                 'title': btnDef.title || btnDef.text || textDef,
                 'mousedown': function(e){
-                    if(!btnDef.dropdown || that.$box.find('.'+name+'-'+pfx + 'dropdown').is(':hidden'))
+                    if(!btnDef.dropdown || t.$box.find('.'+name+'-'+pfx + 'dropdown').is(':hidden'))
                         $('body').trigger('mousedown'); 
 
-                    if(that.$btnPane.hasClass(pfx + 'disable') 
+                    if(t.$btnPane.hasClass(pfx + 'disable') 
                         && !$(this).parent().hasClass(pfx + 'not-disable'))
                         return false;
 
-                    that.execCommand((btnDef.dropdown ? 'dropdown' : false) || btnDef.func || name,
+                    t.execCommand((btnDef.dropdown ? 'dropdown' : false) || btnDef.func || name,
                                      btnDef.param || name);
 
                     e.stopPropagation();
@@ -535,9 +535,9 @@ $.trumbowyg = {
                 var dropdown = $('<div/>', {
                     'class': name + '-' + cssClass + ' ' + cssClass + ' ' + pfx + 'fixed-top'
                 });
-                for (var i = 0, c = btnDef.dropdown.length; i < c; i++) {
-                    if(that.o.btnsDef[btnDef.dropdown[i]])
-                        dropdown.append(that.buildSubBtn(btnDef.dropdown[i]));
+                for(var i = 0, c = btnDef.dropdown.length; i < c; i++){
+                    if(t.o.btnsDef[btnDef.dropdown[i]] && t.isSupportedBtn(btnDef.dropdown[i]))
+                        dropdown.append(t.buildSubBtn(btnDef.dropdown[i]));
                 }
                 this.$box.append(dropdown.hide());
             }
@@ -570,6 +570,10 @@ $.trumbowyg = {
                 title: this.lang[name],
                 text: this.lang[name]
             });
+        },
+        // Check if button is supported
+        isSupportedBtn: function(btn){
+            return typeof this.o.btnsDef[btn].isSupported !== 'function' || this.o.btnsDef[btn].isSupported()
         },
 
         // Build overlay for modal box
