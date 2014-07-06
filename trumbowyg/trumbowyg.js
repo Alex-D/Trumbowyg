@@ -935,10 +935,10 @@ $.trumbowyg = {
             return $modal;
         },
         buildModalBtn: function(name, modal){
-            return $('<input/>', {
+            return $('<button/>', {
                 'class': this.o.prefix + 'modal-button ' + this.o.prefix + 'modal-' + name,
-                value: this.lang[name] || name,
-                type: name
+                'type': name,
+                'text': this.lang[name] || name
             }).appendTo(modal.find('form'));
         },
         // close current modal box
