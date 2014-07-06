@@ -26,34 +26,34 @@
             btnsDef: {
                 base64: {
                     func: function(params, tbw){
-                        if (typeof FileReader === "undefined") {
-                          alert(tbw.lang['errFileReaderNotSupported']);
-                          return;
+                        if(typeof FileReader === "undefined"){
+                            alert(tbw.lang['errFileReaderNotSupported']);
+                            return;
                         }
                         var file,
                             $modal = tbw.openModalInsert(
-                              // Title
-                              tbw.lang['base64'],
+                                // Title
+                                tbw.lang['base64'],
 
-                              // Fields
-                              {
-                                file: {
-                                  type: 'file',
-                                  required: true
+                                // Fields
+                                {
+                                    file: {
+                                        type: 'file',
+                                        required: true
                                 },
                                 alt: {
-                                  label: 'description'
+                                    label: 'description'
                                 }
                               },
 
                               // Callback
                               function(values, fields){
-                                var data = new FormData(),
-                                    fReader  = new FileReader();
+                                  var data = new FormData(),
+                                      fReader  = new FileReader();
 
-                                fReader.onloadend = function () {
-                                  tbw.execCommand('insertImage', fReader.result);
-                                  tbw.closeModal();
+                                  fReader.onloadend = function () {
+                                      tbw.execCommand('insertImage', fReader.result);
+                                      tbw.closeModal();
                                 }
 
                                 fReader.readAsDataURL(file);
