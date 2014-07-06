@@ -54,10 +54,10 @@
                                   fReader.onloadend = function () {
                                       tbw.execCommand('insertImage', fReader.result);
                                       tbw.closeModal();
-                                }
+                                  }
 
-                                fReader.readAsDataURL(file);
-                            }
+                                  fReader.readAsDataURL(file);
+                              }
                         );
 
                         $('input[type=file]').on('change', function(e){
