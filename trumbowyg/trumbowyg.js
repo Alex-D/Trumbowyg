@@ -392,8 +392,9 @@ $.trumbowyg = {
 
         // Build the Textarea which contain HTML generated code
         buildTextarea: function(){
-            return $('<textarea name="'+this.$e.attr('id')+'"></textarea>', {
-                height: this.height
+            return $('<textarea/>', {
+                'name': this.$e.attr('id'),
+                'height': this.height
             });
         },
 
@@ -498,17 +499,19 @@ $.trumbowyg = {
 
         // Build a button and his action
         buildBtn: function(name){
-            var pfx = this.o.prefix;
-            var btnDef = this.o.btnsDef[name];
-            var that = this;
-            var btn = $('<a/>', {
-                href: 'javascript:void(null);',
+            var pfx = this.o.prefix,
+                btnDef = this.o.btnsDef[name],
+                that = this,
+                textDef = this.lang[name] || name.charAt(0).toUpperCase() + name.slice(1);
+
+            var $btn = $('<a/>', {
+                'href': 'javascript:void(null);',
                 'class': pfx + name +'-button' + (btnDef.ico ? ' '+ pfx + btnDef.ico +'-button' : ''),
-                text: btnDef.text || btnDef.title || this.lang[name] || name.charAt(0).toUpperCase() + name.slice(1),
-                title: btnDef.title || btnDef.text || this.lang[name] || name.charAt(0).toUpperCase() + name.slice(1),
-                mousedown: function(e){
+                'text': btnDef.text || btnDef.title || textDef,
+                'title': btnDef.title || btnDef.text || textDef,
+                'mousedown': function(e){
                     if(!btnDef.dropdown || that.$box.find('.'+name+'-'+pfx + 'dropdown').is(':hidden'))
-                        $('body').trigger('mousedown');
+                        $('body').trigger('mousedown'); 
 
                     if(that.$btnPane.hasClass(pfx + 'disable') 
                         && !$(this).parent().hasClass(pfx + 'not-disable'))
@@ -526,7 +529,7 @@ $.trumbowyg = {
 
 
             if(btnDef.dropdown){
-                btn.addClass(pfx + 'open-dropdown');
+                $btn.addClass(pfx + 'open-dropdown');
                 var cssClass = pfx + 'dropdown';
 
                 var dropdown = $('<div/>', {
@@ -539,7 +542,7 @@ $.trumbowyg = {
                 this.$box.append(dropdown.hide());
             }
 
-            return btn;
+            return $btn;
         },
         // Build a button for dropdown menu
         buildSubBtn: function(name){

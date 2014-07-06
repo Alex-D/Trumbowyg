@@ -4,6 +4,7 @@
 uploaded-files/
 screenshot.jpg
 compass_app_log.txt
+node_modules/
 
 # Windows image file caches
 Thumbs.db
