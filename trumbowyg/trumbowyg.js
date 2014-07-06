@@ -340,14 +340,12 @@ $.trumbowyg = {
                 this.$editor.addClass(this.o.prefix + 'reset-css');
 
             if(!this.o.autogrow){
-                this.$editor.css({
-                    height: this.height,
-                    overflow: 'auto'
-                });
-                this.$e.css({
-                    height: this.height,
-                    overflow: 'auto'
-                });
+                $.each([this.$editor, this.$e], $.proxy(function(i, $el){
+                    $el.css({
+                        height: this.height,
+                        overflow: 'auto'
+                    });
+                }, this));
             }
 
             if(this.o.semantic){
@@ -443,50 +441,54 @@ $.trumbowyg = {
 
             // Add the fullscreen button
             if(t.o.fullscreenable)
-                $liRight.append(t.buildRightBtn('fullscreen').on('click', $.proxy(function(e){
-                    var cssClass = pfx + 'fullscreen';
-                    t.$box.toggleClass(cssClass);
+                $liRight
+                    .append(t.buildRightBtn('fullscreen')
+                    .on('click', $.proxy(function(e){
+                        var cssClass = pfx + 'fullscreen';
+                        t.$box.toggleClass(cssClass);
 
-                    if(t.$box.hasClass(cssClass)){
-                        $('body').css('overflow', 'hidden');
-                        t.$box.css({
-                            position: 'fixed',
-                            top: 0,
-                            left: 0,
-                            width: '100%',
-                            height: '100%',
-                            margin: 0,
-                            padding: 0,
-                            zIndex: 10
-                        });
-                        $([t.$editor, t.$e]).each(function(){
-                            $(this).css({
+                        if(t.$box.hasClass(cssClass)){
+                            $('body').css('overflow', 'hidden');
+                            t.$box.css({
+                                position: 'fixed',
+                                top: 0,
+                                left: 0,
+                                width: '100%',
                                 height: '100%',
-                                overflow: 'auto'
+                                margin: 0,
+                                padding: 0,
+                                zIndex: 99999
                             });
-                        });
-                        t.$btnPane.css('width', '100%');
-                    } else {
-                        $('body').css('overflow', 'auto');
-                        t.$box.removeAttr('style');
-                        if(!t.o.autogrow){
-                            h = t.height;
                             $([t.$editor, t.$e]).each(function(){
-                                $(t).css('height', h);
+                                $(this).css({
+                                    height: '100%',
+                                    overflow: 'auto'
+                                });
                             });
+                            t.$btnPane.css('width', '100%');
+                        } else {
+                            $('body').css('overflow', 'auto');
+                            t.$box.removeAttr('style');
+                            if(!t.o.autogrow){
+                                h = t.height;
+                                $([t.$editor, t.$e]).each(function(i, $el){
+                                    $el.css('height', h);
+                                });
+                            }
                         }
-                    }
-                    $(window).trigger('scroll');
-                }, t)));
+                        $(window).trigger('scroll');
+                    }, t)));
 
             // Build and add close button
             if(t.o.closable)
-                $liRight.append(t.buildRightBtn('close').on('click', $.proxy(function(e){
-                    var cssClass = pfx + 'fullscreen';
-                    if(t.$box.hasClass(cssClass))
-                        $('body').css('overflow', 'auto');
-                    t.destroy();
-                }, t)));
+                $liRight
+                    .append(t.buildRightBtn('close')
+                    .on('click', $.proxy(function(e){
+                        var cssClass = pfx + 'fullscreen';
+                        if(t.$box.hasClass(cssClass))
+                            $('body').css('overflow', 'auto');
+                        t.destroy();
+                    }, t)));
 
 
             // Add right li only if isn't empty
