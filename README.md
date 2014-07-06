@@ -15,4 +15,9 @@ http://alex-d.github.io/Trumbowyg/documentation.html
 
 # Thanks
 
-Vinz, who has make some icons for default design
+Vinz, who has make some icons for default design.
+
+
+# License
+
+This project is under MIT license. See LICENSE file for details.
