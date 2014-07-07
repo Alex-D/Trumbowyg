@@ -510,7 +510,7 @@ $.trumbowyg = {
                     if(!btnDef.dropdown || that.$box.find('.'+name+'-'+pfx + 'dropdown').is(':hidden'))
                         $('body').trigger('mousedown');
 
-                    if(that.$btnPane.hasClass(pfx + 'disable') 
+                    if(that.$btnPane.hasClass(pfx + 'disable')
                         && !$(this).parent().hasClass(pfx + 'not-disable'))
                         return false;
 
@@ -649,7 +649,7 @@ $.trumbowyg = {
                                        .val(html)
                                        .removeClass(this.o.prefix + 'textarea')
                                        .show());
-            else 
+            else
                 this.$box.after(this.$editor.css({height: this.height})
                                             .removeClass(this.o.prefix + 'editor')
                                             .attr('contenteditable', false)
@@ -805,6 +805,7 @@ $.trumbowyg = {
                 }
             }, function(values){
                 that.execCommand('insertImage', values['url']);
+                $(['img[src="',values['url'],'"]:not([alt])'].join(''),that.$box).attr('alt',values['alt']);
                 return true;
             });
         },
@@ -1007,7 +1008,7 @@ $.trumbowyg = {
 
                 if(valid) {
                     that.restoreSelection();
-                    
+
                     if(cmd(values, fields)) {
                         that.syncCode();
                         that.closeModal();
@@ -1057,7 +1058,7 @@ $.trumbowyg = {
                 }
             }
         },
-        
+
 
 
         // Return true if must enable Trumbowyg on this mobile device
