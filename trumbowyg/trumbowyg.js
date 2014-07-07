@@ -813,7 +813,7 @@ $.trumbowyg = {
                 }
             }, function(values){
                 that.execCommand('insertImage', values['url']);
-                 $(['img[src="',values['url'],'"]:not([alt])'].join(''),that.$box).attr('alt',values['alt']);
+                $(['img[src="', values['url'], '"]:not([alt])'].join(''), that.$box).attr('alt', values['alt']);
                 return true;
             });
         },
