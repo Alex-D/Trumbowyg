@@ -23,12 +23,12 @@
         <header role="banner" class="wrap">
             <nav class="wrap-in">
                 <ul>
-                    <li><a href="./"><b>Home</b></a></li>
-                    <li class="active"><a class="scroller" href="#general"><b>General</b></a></li>
-                    <li><a class="scroller" href="#basic-options"><b>Basic Options</b></a></li>
-                    <li><a class="scroller" href="#advanced-options"><b>Advanced Options</b></a></li>
-                    <li><a class="scroller" href="#api"><b>API</b></a></li>
-                    <li class="fl-right"><a href="//alex-d.fr"><b>Created by Alex-D</b></a></li>
+                    <li><a href="./"><span>Home</span></a></li>
+                    <li class="active"><a class="scroller" href="#general"><span>General</span></a></li>
+                    <li><a class="scroller" href="#basic-options"><span>Basic Options</span></a></li>
+                    <li><a class="scroller" href="#advanced-options"><span>Advanced Options</span></a></li>
+                    <li><a class="scroller" href="#api"><span>API</span></a></li>
+                    <li class="fl-right"><a href="http://alex-d.fr"><span>Created by Alex-D</span></a></li>
                 </ul>
             </nav>
         </header>
@@ -360,11 +360,20 @@ $('.simple-editor').trumbowyg({
                             <p>
                                 The structure of a language file is simple, it is a JavaScript Object which associate a translation to any key. For example:
                                 <pre><code class="javascript">
-$.trumbowyg.lang.fr = {
+$.trumbowyg.langs.fr = {
     bold: "Gras",
     close: "Fermer"
 };
                                 </code></pre>
+                            </p>
+                            <p>
+                                Some localizations are added each day, you can find them <a href="https://github.com/Alex-D/Trumbowyg/tree/master/trumbowyg/langs">here</a>.
+                            </p>
+                            <p>
+                                You can submit a new localization file by creating a new pull request on the Github repository.
+                            </p>
+                            <p class="note">
+                                English is the default localization, you don't need to include any file to get Trumbowyg in English.
                             </p>
                         </section>
 
