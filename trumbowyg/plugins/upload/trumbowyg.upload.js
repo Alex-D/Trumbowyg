@@ -1,5 +1,5 @@
 /* ===========================================================
- * trumbowyg.upload.js
+ * trumbowyg.upload.js v1.0
  * Upload plugin for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================

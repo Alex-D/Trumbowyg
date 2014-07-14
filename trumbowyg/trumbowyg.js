@@ -1,5 +1,5 @@
 ﻿/* ===========================================================
- * trumbowyg.js
+ * trumbowyg.js v1.0
  * Core code of Trumbowyg plugin
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
