@@ -7,7 +7,7 @@
 *          kiarash.s@hotmail.com
 */
 
-$.trumbowyg.langs.fr = {
+$.trumbowyg.langs.fa = {
     viewHTML: "نمایش کد اچ تی ام ال",
 
     formatting: "قالب بندی",
