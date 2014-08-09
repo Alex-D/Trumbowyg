@@ -52,6 +52,6 @@ $.trumbowyg.langs.fr = {
     invalidUrl:     "URL invalide",
     required:       "Obligatoire",
     description:    "Description",
-    title:          "Title",
-    text:           "Text"
+    title:          "Titre",
+    text:           "Texte"
 }
