@@ -25,7 +25,7 @@ $.trumbowyg.langs.de = {
     em:             "Betont",
     del:            "Gelöscht",
 
-    unorderedList:  "Ungeordnete List",
+    unorderedList:  "Ungeordnete Liste",
     orderedList:    "Geordnete Liste",
 
     insertImage:    "Bild einfügen",
@@ -46,10 +46,10 @@ $.trumbowyg.langs.de = {
     close:          "Schliessen",
 
     submit:         "Bestätigen",
-    reset:          "Abbrechen",
+    reset:          "Rücksetzen",
 
     invalidUrl:     "Ungültige URL",
-    required:       "Benötigt",
+    required:       "Erforderlich",
     description:    "Beschreibung",
     title:          "Titel",
     text:           "Text"
