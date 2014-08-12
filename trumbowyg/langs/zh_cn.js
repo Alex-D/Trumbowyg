@@ -1,5 +1,5 @@
 /* ===========================================================
- * zh-cn.js
+ * zh_cn.js
  * Simplified Chinese translation for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
@@ -7,7 +7,7 @@
  *          Twitter : @akai404
  */
 
-$.trumbowyg.langs["zh-cn"] = {
+$.trumbowyg.langs.zh_cn = {
     viewHTML:       "源代码",
 
     formatting:     "格式",

@@ -1,5 +1,6 @@
 /* ===========================================================
- * es_ar.js - Español (Argentina)
+ * es_ar.js
+ * Español (Argentina) translation for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
  * Author : Félix Vera
