@@ -4,8 +4,8 @@
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
  * Author : JoongSeob Vito Kim (dorajistyle)
- *          github : https://github.com/dorajistyle
- *          blog : http://dorajistyle.pe.kr
+ *          Blog : http://dorajistyle.pe.kr
+ *          Github : https://github.com/dorajistyle
  */
 
 $.trumbowyg.langs.ko = {
@@ -26,7 +26,7 @@ $.trumbowyg.langs.ko = {
     em:             "강조",
     del:            "취소",
 
-    unorderedList:  순차 목록",
+    unorderedList:  "순차 목록",
     orderedList:    "비순차 목록",
 
     insertImage:    "이미지 넣기",

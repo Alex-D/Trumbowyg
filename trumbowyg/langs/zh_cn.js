@@ -3,8 +3,9 @@
  * Simplified Chinese translation for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
- * Author : Liu Kai
+ * Author : Liu Kai (akai)
  *          Twitter : @akai404
+ *          Github : https://github.com/akai
  */
 
 $.trumbowyg.langs.zh_cn = {

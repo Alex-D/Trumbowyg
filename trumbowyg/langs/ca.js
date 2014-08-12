@@ -6,6 +6,7 @@
  * Author : Àlfons Sánchez (alsanan)
  *          Twitter : @alsanan
  *          Website : about.me/alsanan
+ *          Github : https://github.com/alsanan
  */
 
 $.trumbowyg.langs.ca = {

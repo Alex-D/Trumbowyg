@@ -6,6 +6,7 @@
  * Author : Ramiro Varandas Jr (ramirovjr)
  *          Twitter : @ramirovjnr
  *          Website : about.me/ramirovjnr
+ *          Github : https://github.com/ramirovjr
  */
 
 $.trumbowyg.langs.pt = {

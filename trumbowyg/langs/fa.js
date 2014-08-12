@@ -1,11 +1,12 @@
 /* ===========================================================
-* fa.js
-* Persian translation for Trumbowyg
-* http://alex-d.github.com/Trumbowyg
-* ===========================================================
-* Author : Kiarash Soleimanzadeh
-*          kiarash.s@hotmail.com
-*/
+ * fa.js
+ * Persian translation for Trumbowyg
+ * http://alex-d.github.com/Trumbowyg
+ * ===========================================================
+ * Author : Kiarash Soleimanzadeh
+ *          Github : https://github.com/kiyarash
+ *          Email : kiarash.s@hotmail.com
+ */
 
 $.trumbowyg.langs.fa = {
     viewHTML: "نمایش کد اچ تی ام ال",

@@ -3,7 +3,8 @@
  * Finnish translation for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
- * Author : Teppo Koivula
+ * Author : Teppo Koivula (teppokoivula)
+ *          Github : https://github.com/teppokoivula
  */
 
 $.trumbowyg.langs.fi = {

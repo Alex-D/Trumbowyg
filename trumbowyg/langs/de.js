@@ -1,10 +1,11 @@
 /* ===========================================================
-* de.js
-* German translation for Trumbowyg
-* http://alex-d.github.com/Trumbowyg
-* ===========================================================
-* Author : Manfred Timm
-*/
+ * de.js
+ * German translation for Trumbowyg
+ * http://alex-d.github.com/Trumbowyg
+ * ===========================================================
+ * Author : Manfred Timm
+ *          Github : https://github.com/Manfred62
+ */
 
 $.trumbowyg.langs.de = {
     viewHTML:       "HTML anzeigen",
