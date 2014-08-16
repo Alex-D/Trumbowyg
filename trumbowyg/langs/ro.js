@@ -14,7 +14,7 @@
 $.trumbowyg.langs.pt = {
     viewHTML:       "Vizualizare HTML",
 
-    formatting:     "Formatare",
+    formatting:     "Format",
     p:              "Paragraf",
     blockquote:     "Citație",
     code:           "Cod",
@@ -23,10 +23,10 @@ $.trumbowyg.langs.pt = {
     bold:           "Bold",
     italic:         "Italic",
     strikethrough:  "Tăiat",
-    underline:      "Subliniare",
+    underline:      "Subliniat",
 
     strong:         "Puternic",
-    em:             "Accent",
+    em:             "Accentuat",
     del:            "Sterge",
 
     unorderedList:  "Lista dezordonată",
@@ -41,7 +41,7 @@ $.trumbowyg.langs.pt = {
     justifyLeft:    "Aliniază stânga",
     justifyCenter:  "Aliniază centru",
     justifyRight:   "Aliniază dreapta",
-    justifyFull:    "Justificat",
+    justifyFull:    "Justificare",
 
     horizontalRule: "Linie orizontală",
 
