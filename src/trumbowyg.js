@@ -74,7 +74,7 @@ jQuery.trumbowyg = {
 
 (function($){
     $.fn.trumbowyg = function(opts, params){
-        if($.isObject(opts) || opts == null){
+        if($.isObject(opts) || opts === null){
             return this.each(function(){
                 if(!$(this).data('trumbowyg'))
                     $(this).data('trumbowyg', new Trumbowyg(this, opts));
@@ -129,7 +129,7 @@ jQuery.trumbowyg = {
 
     var Trumbowyg = function(editorElem, opts){
         // jQuery object of the editor
-        this.$e       = $(editorElem);
+        this.$e = $(editorElem);
         this.$creator = $(editorElem);
 
         // Extend with options
@@ -137,9 +137,9 @@ jQuery.trumbowyg = {
 
         // Localization management
         if(typeof opts.lang === 'undefined' || typeof $.trumbowyg.langs[opts.lang] === 'undefined')
-            this.lang = $.trumbowyg.langs['en'];
+            this.lang = $.trumbowyg.langs.en;
         else
-            this.lang = $.extend(true, {}, $.trumbowyg.langs['en'], $.trumbowyg.langs[opts.lang]);
+            this.lang = $.extend(true, {}, $.trumbowyg.langs.en, $.trumbowyg.langs[opts.lang]);
 
         // Defaults Options
         this.o = $.extend(true, {
@@ -374,8 +374,8 @@ jQuery.trumbowyg = {
                         value: $img.attr('alt')
                     }
                 }, function(values){
-                    $img.attr('src', values['url']);
-                    $img.attr('alt', values['alt']);
+                    $img.attr('src', values.url);
+                    $img.attr('alt', values.alt);
                 });
                 return false;
             })
@@ -411,7 +411,7 @@ jQuery.trumbowyg = {
                 // Managment of group of buttons
                 try {
                     var b = btn.split('btnGrp-');
-                    if(b[1] != undefined)
+                    if(b[1] !== undefined)
                         btn = $.trumbowyg.btnsGrps[b[1]];
                 } catch(e){}
 
@@ -515,8 +515,7 @@ jQuery.trumbowyg = {
                     if(!btnDef.dropdown || t.$box.find('.'+name+'-'+pfx + 'dropdown').is(':hidden'))
                         $('body').trigger('mousedown');
 
-                    if(t.$btnPane.hasClass(pfx + 'disable')
-                        && !$(this).parent().hasClass(pfx + 'not-disable'))
+                    if(t.$btnPane.hasClass(pfx + 'disable') && !$(this).parent().hasClass(pfx + 'not-disable'))
                         return false;
 
                     t.execCommand((btnDef.dropdown ? 'dropdown' : false) || btnDef.func || name,
@@ -580,12 +579,13 @@ jQuery.trumbowyg = {
 
         // Build overlay for modal box
         buildOverlay: function(){
-            return this.$overlay = $('<div/>', {
+            this.$overlay = $('<div/>', {
                 'class': this.o.prefix + 'overlay'
             }).css({
                 top: this.$btnPane.outerHeight(),
                 height: (parseInt(this.$editor.outerHeight()) + 1) + 'px'
             }).appendTo(this.$box);
+            return this.$overlay;
         },
         showOverlay: function(){
             $(window).trigger('scroll');
@@ -794,13 +794,13 @@ jQuery.trumbowyg = {
                     value: this.selection
                 }
             }, function(values){
-                that.execCommand('createLink', values['url']);
-                var link = $(['a[href="', values['url'], '"]:not([title])'].join(''), that.$box);
-                if($.trim(values['text']).length !== 0)
-                    link.text(values['text']);
+                that.execCommand('createLink', values.url);
+                var link = $(['a[href="', values.url, '"]:not([title])'].join(''), that.$box);
+                if($.trim(values.text).length !== 0)
+                    link.text(values.text);
 
-                if($.trim(values['title']).length !== 0)
-                    link.attr('title', values['title']);
+                if($.trim(values.title).length !== 0)
+                    link.attr('title', values.title);
 
                 return true;
             });
@@ -819,8 +819,8 @@ jQuery.trumbowyg = {
                     value: this.selection
                 }
             }, function(values){
-                that.execCommand('insertImage', values['url']);
-                $(['img[src="', values['url'], '"]:not([alt])'].join(''), that.$box).attr('alt', values['alt']);
+                that.execCommand('insertImage', values.url);
+                $(['img[src="', values.url, '"]:not([alt])'].join(''), that.$box).attr('alt', values.alt);
                 return true;
             });
         },
@@ -840,7 +840,7 @@ jQuery.trumbowyg = {
             } catch(e){
                 try {
                     cmd(param, this);
-                } catch(e){
+                } catch(e2){
                     this.$editor.focus();
                     if(cmd == 'insertHorizontalRule')
                         param = null;
@@ -895,7 +895,7 @@ jQuery.trumbowyg = {
 
             // Build the form
             $form = $('<form/>', {
-                action: 'javascript:void(null);',
+                action: '',
                 html: content
             })
             .on('submit', function(e){
@@ -978,18 +978,18 @@ jQuery.trumbowyg = {
             var html = '',
                 pfx  = this.o.prefix;
 
-            for(f in fields){
+            for(var f in fields){
                 var fd = fields[f];
 
-                label = (fd.label == undefined)
+                label = (fd.label === undefined)
                     ? (this.lang[f] ? this.lang[f] : f.charAt(0).toUpperCase() + f.slice(1))
                     : (this.lang[fd.label] ? this.lang[fd.label] : fd.label)
                 ;
 
-                if(fd.name == undefined)
+                if(fd.name === undefined)
                     fd.name = f;
 
-                if(!fd.pattern && f == 'url'){
+                if(!fd.pattern && f === 'url'){
                     fd.pattern = /^(http|https):\/\/([\w~#!:.?+=&%@!\-\/]+)$/;
                     fd.patternError = this.lang.invalidUrl;
                 }
@@ -1006,13 +1006,13 @@ jQuery.trumbowyg = {
                     valid  = true,
                     values = {};
 
-                for(f in fields) {
+                for(var f in fields) {
                     var $field = $('input[name="'+f+'"]', $form);
 
                     values[f] = $field.val();
 
                     // Validate value
-                    if(fields[f].required && (values[f] == null || values[f] == undefined || $.trim(values[f]) == "")) {
+                    if(fields[f].required && (values[f] === null || values[f] === undefined || $.trim(values[f]) === '')) {
                         valid  = false;
                         that.addErrorOnModalField($field, that.lang.required);
                     } else if(fields[f].pattern && !fields[f].pattern.test(values[f])) {
@@ -1078,7 +1078,7 @@ jQuery.trumbowyg = {
 
         // Return true if must enable Trumbowyg on this mobile device
         isEnabled: function(){
-            var mobile = "iPhone|iPod|Android|BlackBerry|Windows\sPhone|ZuneWP7";
+            var mobile = "iPhone|iPod|Android|BlackBerry|Windows Phone|ZuneWP7";
             var exprTablet = new RegExp("(iPad|webOS)");
             var exprMobile = new RegExp("("+mobile+")");
 
