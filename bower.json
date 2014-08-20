@@ -10,7 +10,7 @@
     }
   ],
   "description": "A lightweight WYSIWYG editor",
-  "main": "trumbowyg/trumbowyg.min.js",
+  "main": "src/trumbowyg.js",
   "keywords": [
     "editor",
     "wysiwyg",
@@ -26,6 +26,6 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~1.11.1"
+    "jquery": ">=1.11.1"
   }
 }
