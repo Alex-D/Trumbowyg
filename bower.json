@@ -1,0 +1,31 @@
+{
+  "name": "trumbowyg",
+  "version": "1.1.0",
+  "homepage": "https://github.com/Alex-D/Trumbowyg",
+  "authors": [
+    {
+      "name": "Alex-D",
+      "email": "contact@alex-d.fr",
+      "homepage": "http://alex-d.fr"
+    }
+  ],
+  "description": "A lightweight WYSIWYG editor",
+  "main": "trumbowyg/trumbowyg.min.js",
+  "keywords": [
+    "editor",
+    "wysiwyg",
+    "javascript",
+    "richtext"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~1.11.1"
+  }
+}
