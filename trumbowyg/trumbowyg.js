@@ -8,7 +8,7 @@
  *          Website : alex-d.fr
  */
 
-$.trumbowyg = {
+jQuery.trumbowyg = {
     langs: {
         en: {
             viewHTML:       "View HTML",
