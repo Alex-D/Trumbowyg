@@ -4,7 +4,7 @@
 /uploaded-files
 /node_modules
 /bower_components
-/dest
+/dist
 
 
 # Windows image file caches
