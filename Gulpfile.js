@@ -1,17 +1,17 @@
 var gulp = require('gulp'),
     $ = require('gulp-load-plugins')(),
     path = require('path'),
-    spritesmith = require('gulp.spritesmith'),
-    mainBowerFiles = require('main-bower-files');
+    spritesmith = require('gulp.spritesmith');
 
 var paths = {
     scripts: ['src/trumbowyg.js'],
     langs: ['src/langs/**.js', '!src/langs/en.js'],
     plugins: ['plugins/*/**.js'],
     sprites: {
-        icons: 'src/design/images/icons/**',
-        icons2x: 'src/design/images/icons-2x/**'
+        'icons': 'src/design/images/icons/**.png',
+        'icons-2x': 'src/design/images/icons-2x/**.png'
     },
+    mainStyle: 'src/design/sass/trumbowyg.scss',
     styles: {
         sass: 'src/design/sass',
         includePaths: ['src/design/sass']
@@ -20,10 +20,10 @@ var paths = {
 
 var pkg = require('./package.json');
 var banner = ['/**',
-    ' * <%= pkg.title %> v<%= pkg.version %>',
-    ' * <%= pkg.description %>',
-    ' * <%= pkg.homepage %>',
+    ' * <%= pkg.title %> v<%= pkg.version %> - <%= pkg.description %>',
+    ' * <%= description %>',
     ' * ------------------------',
+    ' * @link <%= pkg.homepage %>',
     ' * @license <%= pkg.license %>',
     ' * @author <%= pkg.author.name %>',
     ' *         Twitter : @AlexandreDemode',
@@ -43,7 +43,7 @@ var bannerLight = ['/** <%= pkg.title %> v<%= pkg.version %> - <%= pkg.descripti
 
 
 gulp.task('clean', function(){
-    return gulp.src(['dist/*'])
+    return gulp.src(['dist/*', 'src/design/sass/_sprite*.scss'])
         .pipe($.clean());
 });
 
@@ -66,7 +66,7 @@ gulp.task('test-plugins', function(){
 
 gulp.task('scripts', ['test-scripts'], function(){
     return gulp.src(paths.scripts)
-        .pipe($.header(banner, { pkg: pkg }))
+        .pipe($.header(banner, { pkg: pkg, description: 'Trumbowyg core file' }))
         .pipe($.newer('dist/trumbowyg.js'))
         .pipe($.concat('trumbowyg.js', { newLine: '\r\n\r\n' }))
         .pipe(gulp.dest('dist/'))
@@ -81,7 +81,9 @@ gulp.task('scripts', ['test-scripts'], function(){
 gulp.task('langs', ['test-langs'], function(){
     return gulp.src(paths.langs)
         .pipe($.rename({ suffix: ".min" }))
-        .pipe($.uglify())
+        .pipe($.uglify({
+            preserveComments: 'all'
+        }))
         .pipe(gulp.dest('dist/langs/'))
 });
 
@@ -93,12 +95,68 @@ gulp.task('plugins', ['test-plugins'], function(){
         .pipe(gulp.dest('dist/plugins/'))
 });
 
+
+
+gulp.task('sprites', function(){
+    return makeSprite() && makeSprite('-2x');
+});
+function makeSprite(resolution){
+    if(!resolution)
+        resolution = '';
+
+    var sprite = gulp.src(paths.sprites['icons' + resolution])
+        .pipe(spritesmith({
+            imgName: 'icons' + resolution + '.png',
+            cssName: '_sprite' + resolution + '.scss',
+            cssTemplate: function(params){
+                var output = '', e;
+                for(var i in params.items){
+                    e = params.items[i];
+                    output += '$' + e.name + resolution + ': ' + e.px.offset_x + ' ' + e.px.offset_y + ';\n';
+                }
+                if(params.items.length > 0){
+                    output += '\n\n';
+                    output += '$sprite-height' + resolution + ': ' + params.items[0].px.total_height + ';\n';
+                    output += '$sprite-width' + resolution + ': ' + params.items[0].px.total_width + ';\n';
+                    output += '$icons' + resolution + ': "./images/icons' + resolution + '.png";';
+                }
+
+                return output;
+            }
+        }));
+    sprite.img.pipe(gulp.dest('dist/design/images/'));
+    sprite.css.pipe(gulp.dest(paths.styles.sass));
+    return sprite.css;
+}
+
+
+
+gulp.task("styles", ["sprites"], function(){
+  return gulp.src(paths.mainStyle)
+    .pipe($.sass({
+      sass: paths.styles.sass,
+      includePaths: paths.styles.includePaths
+    }))
+    .pipe($.autoprefixer(["last 1 version", "> 1%", "ff >= 20", "ie >= 8", "opera >= 12", "Android >= 2.2"], { cascade: true }))
+    .pipe($.header(banner, { pkg: pkg, description: "Default stylesheet for Trumbowyg editor" }))
+    .pipe(gulp.dest("dist/design/"))
+    .pipe($.size({ title: "trumbowyg.css" }))
+    .pipe($.rename({ suffix: ".min" })) // génère une version minimifié
+    .pipe($.minifyCss())
+    .pipe($.header(bannerLight, { pkg: pkg }))
+    .pipe(gulp.dest("dist/design/"))
+    .pipe($.size({ title: "trumbowyg.min.css" }));
+});
+
+
+
 gulp.task('watch', function(){
     gulp.watch(paths.scripts, ['scripts']);
     gulp.watch(paths.langs, ['langs']);
     gulp.watch(paths.plugins, ['plugins']);
+    gulp.watch(paths.mainStyle, ['styles']);
 });
 
-gulp.task('build', ['clean', 'scripts', 'langs', 'plugins']);
+gulp.task('build', ['scripts', 'langs', 'plugins', 'styles']);
 
 gulp.task('default', ['build', 'watch']);
