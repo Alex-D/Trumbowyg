@@ -6,8 +6,8 @@ var gulp = require('gulp'),
 
 var paths = {
     scripts: ['src/trumbowyg.js'],
-    langs: ['src/langs/**.js'],
-    plugins: ['plugins/**.js'],
+    langs: ['src/langs/**.js', '!src/langs/en.js'],
+    plugins: ['plugins/*/**.js'],
     sprites: {
         icons: 'src/design/images/icons/**',
         icons2x: 'src/design/images/icons-2x/**'
@@ -85,12 +85,20 @@ gulp.task('langs', ['test-langs'], function(){
         .pipe(gulp.dest('dist/langs/'))
 });
 
+gulp.task('plugins', ['test-plugins'], function(){
+    return gulp.src(paths.plugins)
+        .pipe(gulp.dest('dist/plugins/'))
+        .pipe($.rename({ suffix: ".min" }))
+        .pipe($.uglify())
+        .pipe(gulp.dest('dist/plugins/'))
+});
+
 gulp.task('watch', function(){
     gulp.watch(paths.scripts, ['scripts']);
     gulp.watch(paths.langs, ['langs']);
     gulp.watch(paths.plugins, ['plugins']);
 });
 
-gulp.task('build', ['clean', 'scripts', 'langs']);
+gulp.task('build', ['clean', 'scripts', 'langs', 'plugins']);
 
 gulp.task('default', ['build', 'watch']);

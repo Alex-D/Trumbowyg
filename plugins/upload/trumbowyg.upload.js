@@ -26,7 +26,7 @@
         },
 
         upload: {
-            serverPath: './trumbowyg/plugins/upload/trumbowyg.upload.php'
+            serverPath: './src/plugins/upload/trumbowyg.upload.php'
         },
 
         opts: {
@@ -38,7 +38,7 @@
 
                         var $modal = tbw.openModalInsert(
                             // Title
-                            tbw.lang['upload'],
+                            tbw.lang.upload,
 
                             // Fields
                             {
@@ -56,7 +56,7 @@
                                 var data = new FormData();
                                 data.append('fileToUpload', file);
 
-                                if($('.' + pfx +'progress', $modal).length == 0)
+                                if($('.' + pfx +'progress', $modal).length === 0)
                                     $('.' + pfx + 'modal-title', $modal)
                                     .after(
                                         $('<div/>', {
@@ -100,7 +100,7 @@
                                     error: function(data){
                                         tbw.addErrorOnModalField(
                                             $('input[type=file]', $modal),
-                                            tbw.lang['uploadError']
+                                            tbw.lang.uploadError
                                         );
                                     }
                                 });

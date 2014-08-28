@@ -1,14 +1,4 @@
-﻿/* ===========================================================
- * trumbowyg.js v1.0
- * Core code of Trumbowyg plugin
- * http://alex-d.github.com/Trumbowyg
- * ===========================================================
- * Author : Alexandre Demode (Alex-D)
- *          Twitter : @AlexandreDemode
- *          Website : alex-d.fr
- */
-
-jQuery.trumbowyg = {
+﻿jQuery.trumbowyg = {
     langs: {
         en: {
             viewHTML:       "View HTML",
@@ -358,7 +348,7 @@ jQuery.trumbowyg = {
                 t.$editor.html(
                     t.$editor.html()
                         .replace('<br>', '</p><p>')
-                        .replace('&nsbp;', '')
+                        .replace('&nbsp;', '')
                 );
                 t.semanticCode();
             }

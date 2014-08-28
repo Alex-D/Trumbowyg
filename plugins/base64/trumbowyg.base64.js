@@ -34,7 +34,7 @@
                         var file,
                             $modal = tbw.openModalInsert(
                             // Title
-                            tbw.lang['base64'],
+                            tbw.lang.base64,
 
                             // Fields
                             {
@@ -52,11 +52,11 @@
                                 var data = new FormData(),
                                 fReader  = new FileReader();
 
-                                fReader.onloadend = function () {
+                                fReader.onloadend = function(){
                                     tbw.execCommand('insertImage', fReader.result);
-                                    $(['img[src="', fReader.result, '"]:not([alt])'].join(''), tbw.$box).attr('alt', values['alt']);
+                                    $(['img[src="', fReader.result, '"]:not([alt])'].join(''), tbw.$box).attr('alt', values.alt);
                                     tbw.closeModal();
-                                }
+                                };
 
                                 fReader.readAsDataURL(file);
                             }
