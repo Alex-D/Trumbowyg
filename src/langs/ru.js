@@ -6,7 +6,7 @@
  * Author : Yuri Lya
  */
 
-$.trumbowyg.langs.ru = {
+jQuery.trumbowyg.langs.ru = {
    viewHTML:       "Посмотреть HTML",
 
    formatting:     "Форматирование",

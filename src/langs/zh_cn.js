@@ -8,7 +8,7 @@
  *          Github : https://github.com/akai
  */
 
-$.trumbowyg.langs.zh_cn = {
+jQuery.trumbowyg.langs.zh_cn = {
     viewHTML:       "源代码",
 
     formatting:     "格式",
@@ -54,4 +54,4 @@ $.trumbowyg.langs.zh_cn = {
     description:    "描述",
     title:          "标题",
     text:           "文字"
-}
+};

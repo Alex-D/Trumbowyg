@@ -11,7 +11,7 @@
  *          Github : https://github.com/pacMakaveli
  */
 
-$.trumbowyg.langs.pt = {
+jQuery.trumbowyg.langs.pt = {
     viewHTML:       "Vizualizare HTML",
 
     formatting:     "Format",
@@ -57,4 +57,4 @@ $.trumbowyg.langs.pt = {
     description:    "Descriere",
     title:          "Titlu",
     text:           "Text"
-}
+};

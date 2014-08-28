@@ -7,7 +7,7 @@
  *          Github : https://github.com/teppokoivula
  */
 
-$.trumbowyg.langs.fi = {
+jQuery.trumbowyg.langs.fi = {
     viewHTML:       "Näytä HTML",
 
     formatting:     "Muotoilu",
@@ -53,4 +53,4 @@ $.trumbowyg.langs.fi = {
     description:    "Kuvaus",
     title:          "Otsikko",
     text:           "Teksti"
-}
+};

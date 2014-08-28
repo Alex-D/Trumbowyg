@@ -9,7 +9,7 @@
  *          Github : https://github.com/alsanan
  */
 
-$.trumbowyg.langs.ca = {
+jQuery.trumbowyg.langs.ca = {
     viewHTML:       "Veure HTML",
 
     formatting:     "Formatar",
@@ -55,4 +55,4 @@ $.trumbowyg.langs.ca = {
     description:    "Descripció",
     title:          "Títol",
     text:           "Text"
-}
+};

@@ -7,7 +7,7 @@
  *          Github : https://github.com/Manfred62
  */
 
-$.trumbowyg.langs.de = {
+jQuery.trumbowyg.langs.de = {
     viewHTML:       "HTML anzeigen",
 
     formatting:     "Formatieren",
@@ -53,4 +53,4 @@ $.trumbowyg.langs.de = {
     description:    "Beschreibung",
     title:          "Titel",
     text:           "Text"
-}
+};

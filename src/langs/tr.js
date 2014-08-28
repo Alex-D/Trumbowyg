@@ -8,7 +8,7 @@
  *          Website: http://kafe.in/
  */
 
-$.trumbowyg.langs.tr = {
+jQuery.trumbowyg.langs.tr = {
     viewHTML:       "HTML Kodu",
 
     formatting:     "Biçimlendirme",
@@ -54,4 +54,4 @@ $.trumbowyg.langs.tr = {
     description:    "Açıklama",
     title:          "Başlık",
     text:           "Metin"
-}
+};

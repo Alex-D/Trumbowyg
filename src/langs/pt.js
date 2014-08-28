@@ -9,7 +9,7 @@
  *          Github : https://github.com/ramirovjr
  */
 
-$.trumbowyg.langs.pt = {
+jQuery.trumbowyg.langs.pt = {
     viewHTML:       "Ver HTML",
 
     formatting:     "Formatar",
@@ -55,4 +55,4 @@ $.trumbowyg.langs.pt = {
     description:    "Descrição",
     title:          "Título",
     text:           "Texto"
-}
+};

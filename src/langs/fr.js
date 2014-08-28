@@ -8,7 +8,7 @@
  *          Website : alex-d.fr
  */
 
-$.trumbowyg.langs.fr = {
+jQuery.trumbowyg.langs.fr = {
     viewHTML:       "Voir le HTML",
 
     formatting:     "Format",
@@ -54,4 +54,4 @@ $.trumbowyg.langs.fr = {
     description:    "Description",
     title:          "Titre",
     text:           "Texte"
-}
+};

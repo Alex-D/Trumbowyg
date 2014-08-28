@@ -8,7 +8,7 @@
  *          Github : https://github.com/dorajistyle
  */
 
-$.trumbowyg.langs.ko = {
+jQuery.trumbowyg.langs.ko = {
     viewHTML:       "HTML로 보기",
 
     formatting:     "양식",
@@ -54,4 +54,4 @@ $.trumbowyg.langs.ko = {
     description:    "설명",
     title:          "제목",
     text:           "본문 내용"
-}
+};

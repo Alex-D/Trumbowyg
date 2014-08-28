@@ -8,50 +8,50 @@
  *          Email : kiarash.s@hotmail.com
  */
 
-$.trumbowyg.langs.fa = {
-    viewHTML: "نمایش کد اچ تی ام ال",
+jQuery.trumbowyg.langs.fa = {
+    viewHTML:       "نمایش کد اچ تی ام ال",
 
-    formatting: "قالب بندی",
-    p: "پاراگراف",
-    blockquote: "نقل قول",
-    code: "کد",
-    header: "سر تیتر",
+    formatting:     "قالب بندی",
+    p:              "پاراگراف",
+    blockquote:     "نقل قول",
+    code:           "کد",
+    header:         "سر تیتر",
 
-    bold: "ضخیم",
-    italic: "مورب",
-    strikethrough: "میان خط دار",
-    underline: "زیر خط دار",
+    bold:           "ضخیم",
+    italic:         "مورب",
+    strikethrough:  "میان خط دار",
+    underline:      "زیر خط دار",
 
-    strong: "برجسته",
-    em: "مورب",
-    del: "حذف شده",
+    strong:         "برجسته",
+    em:             "مورب",
+    del:            "حذف شده",
 
-    unorderedList: "لیست نامرتب",
-    orderedList: "لیست مرتب",
+    unorderedList:  "لیست نامرتب",
+    orderedList:    "لیست مرتب",
 
-    insertImage: "درج تصویر",
-    insertVideo: "درج ویدئو",
-    link: "لینک",
-    createLink: "درج لینک",
-    unlink: "حذف لینک",
+    insertImage:    "درج تصویر",
+    insertVideo:    "درج ویدئو",
+    link:           "لینک",
+    createLink:     "درج لینک",
+    unlink:         "حذف لینک",
 
-    justifyLeft: "تراز به چپ",
-    justifyCenter: "تراز به وسط",
-    justifyRight: "تراز به راست",
-    justifyFull: "تراز به چپ و راست",
+    justifyLeft:    "تراز به چپ",
+    justifyCenter:  "تراز به وسط",
+    justifyRight:   "تراز به راست",
+    justifyFull:    "تراز به چپ و راست",
 
     horizontalRule: "درج خط افقی",
 
-    fullscreen: "تمام صفحه",
+    fullscreen:     "تمام صفحه",
 
-    close: "بستن",
+    close:          "بستن",
 
-    submit: "تائید",
-    reset: "انصراف",
+    submit:         "تائید",
+    reset:          "انصراف",
 
-    invalidUrl: "لینک نامعتبر",
-    required: "اجباری",
-    description: "توضیحات",
-    title: "عنوان",
-    text: "متن"
-}
+    invalidUrl:     "لینک نامعتبر",
+    required:       "اجباری",
+    description:    "توضیحات",
+    title:          "عنوان",
+    text:           "متن"
+};

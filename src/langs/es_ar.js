@@ -7,7 +7,7 @@
  *          Email : felix.vera@gmail.com
  */
 
-$.trumbowyg.langs.es_ar = {
+jQuery.trumbowyg.langs.es_ar = {
     viewHTML:       "Ver HTML",
 
     formatting:     "Formato",
@@ -53,4 +53,4 @@ $.trumbowyg.langs.es_ar = {
     description:    "Descripción",
     title:          "Título",
     text:           "Texto"
-}
+};

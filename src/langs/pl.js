@@ -7,7 +7,7 @@
  *          Github : https://github.com/pawelabrams
  */
 
-$.trumbowyg.langs.pl = {
+jQuery.trumbowyg.langs.pl = {
     viewHTML:       "Pokaż HTML",
 
     formatting:     "Format",
@@ -53,4 +53,4 @@ $.trumbowyg.langs.pl = {
     description:    "Opis",
     title:          "Tytuł",
     text:           "Tekst"
-}
+};

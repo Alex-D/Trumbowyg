@@ -7,7 +7,7 @@
  *          Email : moises.marquez.g@gmail.com
  */
 
-$.trumbowyg.langs.es = {
+jQuery.trumbowyg.langs.es = {
     viewHTML:       "Ver HTML",
 
     formatting:     "Formato",
@@ -53,4 +53,4 @@ $.trumbowyg.langs.es = {
     description:    "Descripción",
     title:          "Título",
     text:           "Texto"
-}
+};
