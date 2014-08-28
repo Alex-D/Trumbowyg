@@ -155,6 +155,12 @@ gulp.task('watch', function(){
     gulp.watch(paths.langs, ['langs']);
     gulp.watch(paths.plugins, ['plugins']);
     gulp.watch(paths.mainStyle, ['styles']);
+
+    gulp.watch(['dist/**', 'dist/*/**'], function(file){
+        $.livereload.changed(file);
+    });
+
+    $.livereload.listen();
 });
 
 gulp.task('build', ['scripts', 'langs', 'plugins', 'styles']);

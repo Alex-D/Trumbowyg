@@ -64,12 +64,12 @@
 
 (function($){
     $.fn.trumbowyg = function(opts, params){
-        if($.isObject(opts) || opts === null){
+        if($.isObject(opts) || !opts){
             return this.each(function(){
                 if(!$(this).data('trumbowyg'))
                     $(this).data('trumbowyg', new Trumbowyg(this, opts));
             });
-        } else if(this.length == 1){
+        } else if(this.length === 1){
             try {
                 var t = $(this).data('trumbowyg');
                 switch(opts){
