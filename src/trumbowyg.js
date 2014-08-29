@@ -976,7 +976,7 @@
             $modalBox.animate({
                 top: '-' + $modalBox.css('height')
             }, t.o.duration/2, function(){
-                $(t).parent().remove();
+                $(this).parent().remove();
                 t.hideOverlay();
             });
         },
@@ -990,9 +990,9 @@
                 var fd = fields[f];
 
                 if(fd.label === undefined)
-                    label = (t.lang[f] ? t.lang[f] : f.charAt(0).toUpperCase() + f.slice(1));
+                    label = t.lang[f] ? t.lang[f] : f;
                 else
-                    label = (t.lang[fd.label] ? t.lang[fd.label] : fd.label);
+                    label = t.lang[fd.label] ? t.lang[fd.label] : fd.label;
 
                 if(fd.name === undefined)
                     fd.name = f;
@@ -1005,15 +1005,13 @@
                 html += '<label><input type="'+(fd.type || 'text')+'" name="'+fd.name+'" value="'+(fd.value || '')+'"><span class="'+pfx+'input-infos"><span>'+label+'</span></span></label>';
             }
 
-            var modBox = t.openModal(title, html);
-
-            modBox
+            return t.openModal(title, html)
             .on(pfx + 'confirm', function(){
                 var $form = $(this).find('form'),
                     valid = true,
                     values = {};
 
-                for(var f in fields) {
+                for(var f in fields){
                     var $field = $('input[name="'+f+'"]', $form);
 
                     values[f] = $field.val();
@@ -1028,30 +1026,37 @@
                     }
                 }
 
-                if(valid) {
+                if(valid){
                     t.restoreSelection();
 
-                    if(cmd(values, fields)) {
+                    if(cmd(values, fields)){
                         t.syncCode();
                         t.closeModal();
-                        modBox.off(pfx + 'confirm');
+                        $(this).off(pfx + 'confirm');
                     }
                 }
             })
             .one(pfx + 'cancel', function(){
-                modBox.off(pfx + 'confirm');
+                $(this).off(pfx + 'confirm');
                 t.closeModal();
                 t.restoreSelection();
             });
-
-            return modBox;
         },
         addErrorOnModalField: function($field, err){
             var $label = $field.parent(),
                 pfx = this.o.prefix;
-            $label.addClass(pfx + 'input-error');
-            $field.on('change keyup', function(){ $label.removeClass(pfx + 'input-error'); });
-            $label.find('input+span').append('<span class="'+ pfx +'msg-error">'+ err +'</span>');
+
+            $field.on('change keyup', function(){
+                $label.removeClass(pfx + 'input-error');
+            });
+            $label
+            .addClass(pfx + 'input-error')
+            .find('input+span').append(
+                $('<span/>', {
+                    class: pfx +'msg-error',
+                    text: err
+                })
+            );
         },
 
 

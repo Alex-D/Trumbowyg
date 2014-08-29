@@ -20,10 +20,12 @@
   "license": "MIT",
   "ignore": [
     "**/.*",
-    "node_modules",
     "bower_components",
+    "node_modules",
+    "plugins",
     "test",
-    "tests"
+    "tests",
+    "src"
   ],
   "dependencies": {
     "jquery": ">=1.11.1"

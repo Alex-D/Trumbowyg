@@ -3,10 +3,7 @@
   "title": "Trumbowyg",
   "description": "A lightweight WYSIWYG editor",
   "version": "1.1.0",
-  "main": [
-    "trumbowyg/trumbowyg.min.js",
-    "trumbowyg/trumbowyg.js"
-  ],
+  "main": "dist/trumbowyg.js",
   "homepage": "http://alex-d.github.io/Trumbowyg",
   "author": {
     "name": "Alexandre Demode (Alex-D)",

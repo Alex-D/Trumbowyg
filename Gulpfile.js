@@ -8,13 +8,13 @@ var paths = {
     langs: ['src/langs/**.js', '!src/langs/en.js'],
     plugins: ['plugins/*/**.js'],
     sprites: {
-        'icons': 'src/design/images/icons/**.png',
-        'icons-2x': 'src/design/images/icons-2x/**.png'
+        'icons': 'src/ui/images/icons/**.png',
+        'icons-2x': 'src/ui/images/icons-2x/**.png'
     },
-    mainStyle: 'src/design/sass/trumbowyg.scss',
+    mainStyle: 'src/ui/sass/trumbowyg.scss',
     styles: {
-        sass: 'src/design/sass',
-        includePaths: ['src/design/sass']
+        sass: 'src/ui/sass',
+        includePaths: ['src/ui/sass']
     }
 };
 
@@ -43,7 +43,7 @@ var bannerLight = ['/** <%= pkg.title %> v<%= pkg.version %> - <%= pkg.descripti
 
 
 gulp.task('clean', function(){
-    return gulp.src(['dist/*', 'src/design/sass/_sprite*.scss'])
+    return gulp.src(['dist/*', 'src/ui/sass/_sprite*.scss'])
         .pipe($.clean());
 });
 
@@ -124,7 +124,7 @@ function makeSprite(resolution){
                 return output;
             }
         }));
-    sprite.img.pipe(gulp.dest('dist/design/images/'));
+    sprite.img.pipe(gulp.dest('dist/ui/images/'));
     sprite.css.pipe(gulp.dest(paths.styles.sass));
     return sprite.css;
 }
@@ -139,12 +139,12 @@ gulp.task("styles", ["sprites"], function(){
     }))
     .pipe($.autoprefixer(["last 1 version", "> 1%", "ff >= 20", "ie >= 8", "opera >= 12", "Android >= 2.2"], { cascade: true }))
     .pipe($.header(banner, { pkg: pkg, description: "Default stylesheet for Trumbowyg editor" }))
-    .pipe(gulp.dest("dist/design/"))
+    .pipe(gulp.dest("dist/ui/"))
     .pipe($.size({ title: "trumbowyg.css" }))
     .pipe($.rename({ suffix: ".min" })) // génère une version minimifié
     .pipe($.minifyCss())
     .pipe($.header(bannerLight, { pkg: pkg }))
-    .pipe(gulp.dest("dist/design/"))
+    .pipe(gulp.dest("dist/ui/"))
     .pipe($.size({ title: "trumbowyg.min.css" }));
 });
 
