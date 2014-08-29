@@ -43,5 +43,9 @@
     "gulp-uglify": "~0.3.1",
     "jshint-stylish": "~0.4.0"
   },
-  "scripts": {}
+  "scripts": {
+    "build": "npm install && gulp build",
+    "start": "gulp",
+    "test": "gulp test"
+  }
 }
