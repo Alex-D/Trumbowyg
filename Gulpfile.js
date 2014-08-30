@@ -31,10 +31,9 @@ var banner = ['/**',
     ' */',
     '\n'].join('\n');
 var bannerLight = ['/** <%= pkg.title %> v<%= pkg.version %> - <%= pkg.description %>',
-    ' - <%= pkg.homepage %>',
+    ' - <%= pkg.homepage.replace("http://", "") %>',
     ' - License <%= pkg.license %>',
     ' - Author : <%= pkg.author.name %>',
-    ' / @AlexandreDemode',
     ' / <%= pkg.author.url.replace("http://", "") %>',
     ' */',
     '\n'].join('');
