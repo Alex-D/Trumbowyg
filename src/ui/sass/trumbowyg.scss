@@ -79,7 +79,7 @@ $light-color: #ecf0f1;
     }
 
     &.trumbowyg-disable {
-        li:not(.trumbowyg-not-disable) button {
+        li:not(.trumbowyg-not-disable) button:not(.trumbowyg-active) {
             opacity: .2;
             cursor: default;
         }
@@ -333,6 +333,15 @@ $light-color: #ecf0f1;
  * Fullscreen
  */
 .trumbowyg-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    z-index: 99999;
+
     &.trumbowyg-box,
     .editor {
         border: none;
