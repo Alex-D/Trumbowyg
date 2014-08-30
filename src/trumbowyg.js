@@ -63,23 +63,25 @@
 
 
 (function($){
-    $.fn.trumbowyg = function(opts, params){
-        if(opts === Object(opts) || !opts){
+    // @param : o are options
+    // @param : p are params
+    $.fn.trumbowyg = function(o, p){
+        if(o === Object(o) || !o){
             return this.each(function(){
                 if(!$(this).data('trumbowyg'))
-                    $(this).data('trumbowyg', new Trumbowyg(this, opts));
+                    $(this).data('trumbowyg', new Trumbowyg(this, o));
             });
         } else if(this.length === 1){
             try {
                 var t = $(this).data('trumbowyg');
-                switch(opts){
+                switch(o){
                     // Modal box
                     case 'openModal':
-                        return t.openModal(params.title, params.content);
+                        return t.openModal(p.title, p.content);
                     case 'closeModal':
                         return t.closeModal();
                     case 'openModalInsert':
-                        return t.openModalInsert(params.title, params.fields, params.callback);
+                        return t.openModalInsert(p.title, p.fields, p.callback);
 
                     // Selection
                     case 'saveSelection':
@@ -107,7 +109,7 @@
 
                     // HTML
                     case 'html':
-                        return t.html(params);
+                        return t.html(p);
                 }
             } catch(e){}
         }
