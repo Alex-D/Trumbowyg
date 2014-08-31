@@ -300,7 +300,7 @@
 
 
             t.$box = $('<div/>', {
-                'class': pfx + 'box ' + pfx + t.o.lang + ' trumbowyg'
+                class: pfx + 'box ' + pfx + t.o.lang + ' trumbowyg'
             });
 
             t.isTextarea = true;
@@ -388,8 +388,8 @@
         // Build the Textarea which contain HTML generated code
         buildTextarea: function(){
             return $('<textarea/>', {
-                'name': this.$e.attr('id'),
-                'height': this.height
+                name: this.$e.attr('id'),
+                height: this.height
             });
         },
 
@@ -403,7 +403,7 @@
                 return;
 
             t.$btnPane = $('<ul/>', {
-                'class': pfx + 'button-pane'
+                class: pfx + 'button-pane'
             });
 
             $.each(t.o.btns.concat(t.o.btnsAdd), function(i, btn){
@@ -433,7 +433,7 @@
 
             // Build right li for fullscreen and close buttons
             var $liRight = $('<li/>', {
-                'class': pfx + 'not-disable ' + pfx + 'buttons-right'
+                class: pfx + 'not-disable ' + pfx + 'buttons-right'
             });
 
             // Add the fullscreen button
@@ -519,7 +519,7 @@
                 $btn.addClass(pfx + 'open-dropdown');
                 var c = pfx + 'dropdown',
                     dd = $('<div/>', { // the dropdown
-                        'class': n + '-' + c + ' ' + c + ' ' + pfx + 'fixed-top'
+                        class: n + '-' + c + ' ' + c + ' ' + pfx + 'fixed-top'
                     });
                 for(var i = 0, l = d.length; i < l; i++)
                     if(t.o.btnsDef[d[i]] && t.isSupportedBtn(d[i]))
@@ -553,10 +553,10 @@
         // @param n : name of the right button
         buildRightBtn: function(n){
             return $('<button/>', {
-                'type': 'button',
-                'class': this.o.prefix + n+'-button',
-                'title': this.lang[n],
-                'text': this.lang[n]
+                type: 'button',
+                class: this.o.prefix + n + '-button',
+                title: this.lang[n],
+                text: this.lang[n]
             });
         },
         // Check if button is supported
@@ -568,7 +568,7 @@
         buildOverlay: function(){
             var t = this;
             t.$overlay = $('<div/>', {
-                'class': t.o.prefix + 'overlay'
+                class: t.o.prefix + 'overlay'
             }).css({
                 top: t.$btnPane.outerHeight(),
                 height: (parseInt(t.$editor.outerHeight()) + 1) + 'px'
@@ -816,9 +816,6 @@
                 if(v.title.length > 0)
                     l.attr('title', v.title);
 
-                if(v.target.length > 0)
-                    l.attr('target', v.target);
-
                 return true;
             });
         },
@@ -889,7 +886,7 @@
 
             // Build out of ModalBox, it's the mask for animations
             var $modal = $('<div/>', {
-                'class': pfx + 'modal ' + pfx + 'fixed-top'
+                class: pfx + 'modal ' + pfx + 'fixed-top'
             }).css({
                 top: (parseInt(t.$btnPane.css('height')) + 1) + 'px'
             }).appendTo(t.$box);
