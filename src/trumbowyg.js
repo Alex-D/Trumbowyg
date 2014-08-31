@@ -448,7 +448,7 @@
                             $('body').css('overflow', 'hidden');
                             $.each([t.$editor, t.$e], function(){
                                 $(this).css({
-                                    height: '100%',
+                                    height: 'calc(100% - 35px)',
                                     overflow: 'auto'
                                 });
                             });
@@ -589,7 +589,8 @@
 
         // Management of fixed button pane
         fixedBtnPaneEvents: function(){
-            var t = this;
+            var t = this,
+                ffw = t.o.fixedFullWidth;
             if(!t.o.fixedBtnPane)
                 return;
 
@@ -603,8 +604,10 @@
                 t.syncCode();
 
                 var s = $(window).scrollTop(), // s is top scroll
-                    o = t.$box.o().top + 1, // o is offset
-                    toFixed = (s - o > 0) && ((s - o - parseInt(t.height)) < 0);
+                    o = t.$box.offset().top + 1, // o is offset
+                    toFixed = (s - o > 0) && ((s - o - parseInt(t.height)) < 0),
+                    mt = t.$btnPane.css('height'),
+                    oh = t.$btnPane.outerHeight();
 
                 if(toFixed){
                     if(!t.isFixed){
@@ -612,18 +615,17 @@
                         t.$btnPane.css({
                             position: 'fixed',
                             top: 0,
-                            left: (t.o.fixedFullWidth) ? '0' : 'auto',
-                            width: (t.o.fixedFullWidth) ? '100%' : ((parseInt(t.$box.css('width'))-1) + 'px'),
+                            left: ffw ? '0' : 'auto',
+                            width: ffw ? '100%' : ((parseInt(t.$box.css('width'))-1) + 'px'),
                             zIndex: 7
                         });
-                        var mt = t.$btnPane.css('height');
                         t.$editor.css({ marginTop: mt });
                         t.$e.css({ marginTop: mt });
                     }
 
                     $('.' + t.o.prefix + 'fixed-top', t.$box).css({
-                        position: t.o.fixedFullWidth ? 'fixed' : 'absolute',
-                        top: t.o.fixedFullWidth ? t.$btnPane.outerHeight() : parseInt(t.$btnPane.outerHeight()) + (s - o) + 'px',
+                        position: ffw ? 'fixed' : 'absolute',
+                        top: ffw ? oh : parseInt(oh) + (s - o) + 'px',
                         zIndex: 15
                     });
                 } else if(t.isFixed) {
@@ -644,20 +646,22 @@
         // Destroy the editor
         destroy: function(){
             var t = this,
+                pfx = t.o.prefix,
+                h = t.height,
                 html = t.html();
 
             if(t.isTextarea)
                 t.$box.after(
-                    t.$e.css({height: t.height})
+                    t.$e.css({height: h})
                         .val(html)
-                        .removeClass(t.o.prefix + 'textarea')
+                        .removeClass(pfx + 'textarea')
                         .show()
                 );
             else
                 t.$box.after(
                     t.$editor
-                        .css({height: t.height})
-                        .removeClass(t.o.prefix + 'editor')
+                        .css({height: h})
+                        .removeClass(pfx + 'editor')
                         .attr('contenteditable', false)
                         .html(html)
                         .show()
@@ -679,12 +683,13 @@
 
         // Function call when click on viewHTML button
         toggle: function(){
-            var t = this;
+            var t = this,
+                pfx = t.o.prefix;
             t.semanticCode(false, true);
             t.$editor.toggle();
             t.$e.toggle();
-            t.$btnPane.toggleClass(t.o.prefix + 'disable');
-            t.$btnPane.find('.'+t.o.prefix + 'viewHTML-button').toggleClass(t.o.prefix + 'active');
+            t.$btnPane.toggleClass(pfx + 'disable');
+            t.$btnPane.find('.'+pfx + 'viewHTML-button').toggleClass(pfx + 'active');
         },
 
         // Open dropdown when click on a button which open that
@@ -802,11 +807,14 @@
             }, function(v){ // v is value
                 t.execCmd('createLink', v.url);
                 var l = $(['a[href="', v.url, '"]:not([title])'].join(''), t.$box);
-                if($.trim(v.text).length > 0)
+                if(v.text.length > 0)
                     l.text(v.text);
 
-                if($.trim(v.title).length > 0)
+                if(v.title.length > 0)
                     l.attr('title', v.title);
+
+                if(v.target.length > 0)
+                    l.attr('target', v.target);
 
                 return true;
             });
@@ -824,9 +832,9 @@
                     label: t.lang.description,
                     value: t.selection
                 }
-            }, function(values){
-                t.execCmd('insertImage', values.url);
-                $(['img[src="', values.url, '"]:not([alt])'].join(''), t.$box).attr('alt', values.alt);
+            }, function(v){ // v are values
+                t.execCmd('insertImage', v.url);
+                $(['img[src="', v.url, '"]:not([alt])'].join(''), t.$box).attr('alt', v.alt);
                 return true;
             });
         },
@@ -999,13 +1007,13 @@
                 for(var f in fields){
                     var $field = $('input[name="'+f+'"]', $form);
 
-                    v[f] = $field.val();
+                    v[f] = $.trim($field.val());
 
                     // Validate value
-                    if(fields[f].required && (v[f] === null || v[f] === undefined || $.trim(v[f]) === '')){
+                    if(fields[f].required && v[f] === ''){
                         valid = false;
                         t.addErrorOnModalField($field, t.lang.required);
-                    } else if(fields[f].pattern && !fields[f].pattern.test(v[f])) {
+                    } else if(fields[f].pattern && !fields[f].pattern.test(v[f])){
                         valid = false;
                         t.addErrorOnModalField($field, fields[f].patternError);
                     }

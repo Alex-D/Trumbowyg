@@ -13,7 +13,7 @@ $light-color: #ecf0f1;
 
 
 .trumbowyg-box,
-.editor {
+.trumbowyg-editor {
     display: block;
     position: relative;
     border: 1px solid #DDD;
@@ -21,9 +21,8 @@ $light-color: #ecf0f1;
     min-height: 300px;
     margin: 17px auto;
 }
-.trumbowyg-box .editor {
+.trumbowyg-box .trumbowyg-editor {
     margin: 0 auto;
-    background: #FEFEFE;
 }
 .trumbowyg-box.trumbowyg-fullscreen {
     background: #FEFEFE;
@@ -31,9 +30,10 @@ $light-color: #ecf0f1;
 .trumbowyg-editor,
 .trumbowyg-textarea {
     position: relative;
+    box-sizing: border-box;
     padding: 1% 2%;
     min-height: 300px;
-    width: 96%;
+    width: 100%;
     border-style: none;
     resize: none;
     outline: none;
@@ -64,6 +64,7 @@ $light-color: #ecf0f1;
     padding: 0;
     list-style-type: none;
     line-height: 10px;
+    backface-visibility: hidden;
 
     li {
         display: inline-block;
@@ -305,8 +306,9 @@ $light-color: #ecf0f1;
             }
         }
 
-        $modal-reset-color : #c0392b;
+        $modal-reset-color : #EEE;
         &.trumbowyg-modal-reset {
+            color: #555;
             background: darken($modal-reset-color, 3%);
 
             &:hover,
@@ -343,7 +345,7 @@ $light-color: #ecf0f1;
     z-index: 99999;
 
     &.trumbowyg-box,
-    .editor {
+    .trumbowyg-editor {
         border: none;
     }
     .trumbowyg-overlay {
