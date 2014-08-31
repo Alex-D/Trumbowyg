@@ -177,6 +177,7 @@ $light-color: #ecf0f1;
     background-color: #FFF;
     text-align: center;
     box-shadow: rgba(0, 0, 0, .2) 0 2px 3px;
+    backface-visibility: hidden;
 
     .trumbowyg-modal-title {
         font-size: 24px;

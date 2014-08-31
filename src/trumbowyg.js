@@ -859,7 +859,7 @@
                     t.$editor.focus();
                     if(cmd == 'insertHorizontalRule')
                         param = null;
-                    else if(cmd == 'formatBlock' && $.browser.msie)
+                    else if(cmd == 'formatBlock' && navigator.userAgent.toLowerCase().indexOf('msie') !== -1)
                         param = '<' + param + '>';
 
                     document.execCommand(cmd, false, param);
