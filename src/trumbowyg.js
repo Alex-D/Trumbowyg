@@ -597,7 +597,7 @@
             t.isFixed = false;
 
             $(window)
-            .on('scroll', function(e){
+            .on('scroll resize', function(e){
                 if(!t.$box)
                     return;
 
@@ -606,22 +606,25 @@
                 var s = $(window).scrollTop(), // s is top scroll
                     o = t.$box.offset().top + 1, // o is offset
                     toFixed = (s - o > 0) && ((s - o - parseInt(t.height)) < 0),
-                    mt = t.$btnPane.css('height'),
-                    oh = t.$btnPane.outerHeight();
+                    bp = t.$btnPane,
+                    mt = bp.css('height'),
+                    oh = bp.outerHeight();
 
                 if(toFixed){
                     if(!t.isFixed){
                         t.isFixed = true;
-                        t.$btnPane.css({
+                        bp.css({
                             position: 'fixed',
                             top: 0,
                             left: ffw ? '0' : 'auto',
-                            width: ffw ? '100%' : ((parseInt(t.$box.css('width'))-1) + 'px'),
                             zIndex: 7
                         });
                         t.$editor.css({ marginTop: mt });
                         t.$e.css({ marginTop: mt });
                     }
+                    bp.css({
+                        width: ffw ? '100%' : ((parseInt(t.$box.css('width'))-1) + 'px')
+                    });
 
                     $('.' + t.o.prefix + 'fixed-top', t.$box).css({
                         position: ffw ? 'fixed' : 'absolute',
@@ -630,12 +633,12 @@
                     });
                 } else if(t.isFixed) {
                     t.isFixed = false;
-                    t.$btnPane.css({ position: 'relative' });
+                    bp.removeAttr('style');
                     t.$editor.css({ marginTop: 0 });
                     t.$e.css({ marginTop: 0 });
                     $('.' + t.o.prefix + 'fixed-top', t.$box).css({
                         position: 'absolute',
-                        top: t.$btnPane.outerHeight()
+                        top: oh
                     });
                 }
             });
@@ -806,7 +809,7 @@
                 }
             }, function(v){ // v is value
                 t.execCmd('createLink', v.url);
-                var l = $(['a[href="', v.url, '"]:not([title])'].join(''), t.$box);
+                var l = $('a[href="'+v.url+'"]:not([title])', t.$box);
                 if(v.text.length > 0)
                     l.text(v.text);
 
@@ -834,7 +837,7 @@
                 }
             }, function(v){ // v are values
                 t.execCmd('insertImage', v.url);
-                $(['img[src="', v.url, '"]:not([alt])'].join(''), t.$box).attr('alt', v.alt);
+                $('img[src="'+v.url+'"]:not([alt])', t.$box).attr('alt', v.alt);
                 return true;
             });
         },
@@ -859,7 +862,7 @@
                     t.$editor.focus();
                     if(cmd == 'insertHorizontalRule')
                         param = null;
-                    else if(cmd == 'formatBlock' && navigator.userAgent.toLowerCase().indexOf('msie') !== -1)
+                    else if(cmd == 'formatBlock' && (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0))
                         param = '<' + param + '>';
 
                     document.execCommand(cmd, false, param);
@@ -1069,7 +1072,7 @@
                 t.selection = d.selection.createRange();
         },
         restoreSelection: function(){
-            range = this.selection;
+            var range = this.selection;
             if(range){
                 if(window.getSelection){
                     var s = window.getSelection();
