@@ -112,12 +112,12 @@ $('textarea').trumbowyg({
 
                             <h3 id="localization">Localization</h3>
                             <p>
-                                Your users don't speak english? No problem, Trumbowyg has a language parameter. You have to load the appropriate lang file. Search in <code class="javascript">/trumbowyg/langs</code> folder to see if a language file already exists, if not create it and share it :). See <a href="#add-localization">add a localization</a> for more details on language file.
+                                Your users don't speak english? No problem, Trumbowyg has a language parameter. You have to load the appropriate lang file. Search in <code class="javascript">/dist/langs</code> folder to see if a language file already exists, if not create it and share it :). See <a href="#add-localization">add a localization</a> for more details on language file.
                             </p>
                             <p>
                                 Don't forget include the lang file in your pages:
                                 <pre><code class="html">
-&lt;script type="text/javascript" src="js/trumbowyg/langs/fr.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="js/dist/langs/fr.min.js"&gt;&lt;/script&gt;
                                 </code></pre>
                             </p>
                             <p class="note">
@@ -175,7 +175,7 @@ $('textarea').trumbowyg({
 
                             <h4>Replace existing CSS file</h4>
                             <p>
-                                Copy <code>/trumbowyg/design</code> folder somewhere and customize style. Finally, link your new CSS file and remove link to Trumbowyg default style.
+                                Copy <code>/src/ui/</code> folder somewhere and customize style. Finally, link your new CSS file and remove link to Trumbowyg default style.
                             </p>
                             <p class="note">
                                 It is not recommended to directly edit the CSS file in the trumbowyg folder. When you update the plugin, your modifications will be erased.
@@ -194,7 +194,7 @@ $('.editor-modern-ui').trumbowyg({
     prefix: 'modern-ui'
 });
                                 </code></pre>
-                                In your CSS, you can now stylize <code>.modern-ui-link-button</code> for example, whitout conflicts with the default skin. It's necessary to redefine style for all elements. If you want to start from the default skin, copy <code>/trumbowyg/design</code> folder, replace all <code>trumbowyg-</code> by your prefix and work from here.
+                                In your CSS, you can now stylize <code>.modern-ui-link-button</code> for example, whitout conflicts with the default skin. It's necessary to redefine style for all elements. If you want to start from the default skin, copy <code>/src/ui/</code> folder, replace all <code>trumbowyg-</code> by your prefix and work from here.
                             </p>
                         </section>
 
@@ -367,7 +367,7 @@ jQuery.trumbowyg.langs.fr = {
                                 </code></pre>
                             </p>
                             <p>
-                                Some localizations are added each day, you can find them <a href="https://github.com/Alex-D/Trumbowyg/tree/master/trumbowyg/langs">here</a>.
+                                Some localizations are added each day, you can find them <a href="https://github.com/Alex-D/Trumbowyg/tree/1.1.0/dist/langs">here</a>.
                             </p>
                             <p>
                                 You can submit a new localization file by creating a new pull request on the Github repository.
