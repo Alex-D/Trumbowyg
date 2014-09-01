@@ -1,0 +1,15 @@
+{
+    "expr": true,
+    "noarg": true,
+    "onevar": true,
+    "quotmark": "simple",
+    "undef": true,
+    "unused": true,
+
+    "browser": true,
+    "node": true,
+
+    "globals": {
+        "jQuery": false
+    }
+}

@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Trumbowyg by Alex-D</title>
-        <link rel="stylesheet" href="trumbowyg/design/css/trumbowyg.css">
+        <link rel="stylesheet" href="dist/ui/trumbowyg.css">
         <style type="text/css">
             html, body {
                 margin: 0;
@@ -40,6 +40,9 @@
                     <p>
                         The text is derived from Cicero's De Finibus Bonorum et Malorum (On the Ends of Goods and Evils, or alternatively [About] The Purposes of Good and Evil ). The original passage began: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit (Translation: &quot;Neither is there anyone who loves grief itself since it is grief and thus wants to obtain it&quot;).
                     </p>
+                    <code><pre>
+$('#simple-editor').trumbowyg();
+                    </pre></code>
                 </div>
 
                 <div id="customized-buttonpane" class="editor">
@@ -56,6 +59,42 @@
                     <p>
                         It is not known exactly when the text acquired its current standard form; it may have been as late as the 1960s. The passage was discovered by Richard McClintock, a Latin scholar who is the publications director at Hampden-Sydney College in Virginia, by searching for citings of the rarely used word 'consectetur' in classical literature.
                     </p>
+                    <code><pre>
+/*
+ * Add your own groups of button
+ */
+$.trumbowyg.btnsGrps.test = ['bold', 'link'];
+
+/* Add new words for customs btnsDef just below */
+$.extend(true, $.trumbowyg.langs, {
+    fr: {
+        align: 'Alignement',
+        image: 'Image'
+    }
+});
+$('#customized-buttonpane').trumbowyg({
+    lang: 'fr',
+    closable: true,
+    fixedBtnPane: true,
+    btnsDef: {
+        // Customizables dropdowns
+        align: {
+            dropdown: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+            ico: 'justifyLeft'
+        },
+        image: {
+            dropdown: ['insertImage', 'upload', 'base64'],
+            ico: 'insertImage'
+        }
+    },
+    btns: ['viewHTML',
+        '|', 'formatting',
+        '|', 'btnGrp-test',
+        '|', 'align',
+        '|', 'btnGrp-lists',
+        '|', 'image']
+});
+                    </pre></code>
                 </div>
 
                 <textarea id="form-content" class="editor" cols="30" rows="10">
@@ -64,14 +103,27 @@
                         Even though using &quot;lorem ipsum&quot; often arouses curiosity due to its resemblance to classical Latin, it is not intended to have meaning. Where text is visible in a document, people tend to focus on the textual content rather than upon overall presentation, so publishers use lorem ipsum when displaying a typeface or design in order to direct the focus to presentation. &quot;Lorem ipsum&quot; also approximates a typical distribution of spaces in English. <br>
                         The most common lorem ipsum text reads as follows: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
+                    <code><pre>
+$('#form-content').trumbowyg({
+    lang: 'fr',
+    closable: true,
+    mobile: true,
+    fixedBtnPane: true,
+    fixedFullWidth: true,
+    semantic: true,
+    resetCss: true,
+    autoAjustHeight: true,
+    autogrow: true
+});
+                    </pre></code>
                 </textarea>
             </form>
         </div>
-        <script src="jquery.min.js"></script>
-        <script src="trumbowyg/trumbowyg.js"></script>
-        <script src="trumbowyg/langs/fr.js"></script>
-        <script src="trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
-        <script src="trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="dist/trumbowyg.js"></script>
+        <script src="dist/langs/fr.min.js"></script>
+        <script src="dist/plugins/upload/trumbowyg.upload.js"></script>
+        <script src="dist/plugins/base64/trumbowyg.base64.js"></script>
         <script>
             /** Default editor configuration **/
             $('#simple-editor').trumbowyg();
@@ -80,7 +132,7 @@
 
             /********************************************************
              * Customized button pane + buttons groups + dropdowns
-             * Use upload plugin
+             * Use upload and base64 plugins
              *******************************************************/
 
             /*
