@@ -1,6 +1,6 @@
 /* ===========================================================
  * es.js
- * Spanish (Spain) translation for Trumbowyg
+ * Spanish translation for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
  * Author : Moisés Márquez
