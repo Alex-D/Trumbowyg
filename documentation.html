@@ -322,9 +322,9 @@ $('.simple-editor').trumbowyg({
                             <p class="note">
                                 By default, <code>btns</code> option value is:
                                 <pre><code class="javascript">
-var btnsGrps = $.trumbowyg.btnsGrps;
+var btnsGrps = jQuery.trumbowyg.btnsGrps;
 /** WTF this btnsGrps var? It's just array of strings :)
- *  $.trumbowyg.btnsGrps = {
+ *  jQuery.trumbowyg.btnsGrps = {
  *      design:   ['bold', 'italic', 'underline', 'strikethrough'],
  *      semantic: ['strong', 'em'],
  *      justify:  ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
@@ -360,7 +360,7 @@ $('.simple-editor').trumbowyg({
                             <p>
                                 The structure of a language file is simple, it is a JavaScript Object which associate a translation to any key. For example:
                                 <pre><code class="javascript">
-$.trumbowyg.langs.fr = {
+jQuery.trumbowyg.langs.fr = {
     bold: "Gras",
     close: "Fermer"
 };
