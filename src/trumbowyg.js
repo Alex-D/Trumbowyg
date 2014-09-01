@@ -62,7 +62,7 @@
 
 
 
-(function($){
+(function(window, document, $){
     'use strict';
 
     // @param : o are options
@@ -1093,4 +1093,4 @@
             return (this.o.tablet === true && exprTablet.test(ua)) || (this.o.mobile === true && exprMobile.test(ua));
         }
     };
-})(jQuery);
+})(window, document, jQuery);
