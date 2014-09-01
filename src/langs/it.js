@@ -6,7 +6,7 @@
  * Author : Mirko Buffoni
  */
 
-$.trumbowyg.langs.it = {
+jQuery.trumbowyg.langs.it = {
     viewHTML:       "Mostra HTML",
 
     formatting:     "Formattazione",
@@ -52,4 +52,4 @@ $.trumbowyg.langs.it = {
     description:    "Descrizione",
     title:          "Titolo",
     text:           "Testo"
-}
+};
