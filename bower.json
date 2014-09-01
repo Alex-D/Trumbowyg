@@ -10,7 +10,7 @@
     }
   ],
   "description": "A lightweight WYSIWYG editor",
-  "main": "src/trumbowyg.js",
+  "main": "dist/trumbowyg.js",
   "keywords": [
     "editor",
     "wysiwyg",
