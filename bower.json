@@ -25,9 +25,11 @@
     "plugins",
     "test",
     "tests",
-    "src"
+    "src",
+    "Gulpfile.js",
+    "package.json"
   ],
   "dependencies": {
-    "jquery": ">=1.11.1"
+    "jquery": ">=1.7"
   }
 }
