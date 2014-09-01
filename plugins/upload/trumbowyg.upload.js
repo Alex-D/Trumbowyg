@@ -9,6 +9,8 @@
  */
 
 (function($){
+    'use strict';
+
     addXhrProgressEvent();
 
     $.extend(true, $.trumbowyg, {
@@ -52,7 +54,7 @@
                             },
 
                             // Callback
-                            function(values, fields){
+                            function(){
                                 var data = new FormData();
                                 data.append('fileToUpload', file);
 
@@ -97,7 +99,7 @@
                                             );
                                         }
                                     },
-                                    error: function(data){
+                                    error: function(){
                                         tbw.addErrorOnModalField(
                                             $('input[type=file]', $modal),
                                             tbw.lang.uploadError

@@ -7,6 +7,8 @@
  */
 
 (function($){
+    'use strict';
+    
     $.extend(true, $.trumbowyg, {
         langs: {
             en: {
@@ -31,8 +33,8 @@
                         return true;
                     },
                     func: function(params, tbw){
-                        var file,
-                            $modal = tbw.openModalInsert(
+                        var file;
+                        tbw.openModalInsert(
                             // Title
                             tbw.lang.base64,
 
@@ -48,9 +50,8 @@
                             },
 
                             // Callback
-                            function(values, fields){
-                                var data = new FormData(),
-                                fReader  = new FileReader();
+                            function(values){
+                                var fReader = new FileReader();
 
                                 fReader.onloadend = function(){
                                     tbw.execCommand('insertImage', fReader.result);

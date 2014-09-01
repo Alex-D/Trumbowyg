@@ -63,6 +63,8 @@
 
 
 (function($){
+    'use strict';
+
     // @param : o are options
     // @param : p are params
     $.fn.trumbowyg = function(o, p){
@@ -440,7 +442,7 @@
             if(t.o.fullscreenable)
                 $liRight
                     .append(t.buildRightBtn('fullscreen')
-                    .on('click', function(e){
+                    .on('click', function(){
                         var cssClass = pfx + 'fullscreen';
                         t.$box.toggleClass(cssClass);
 
@@ -469,7 +471,7 @@
                 $liRight
                     .append(
                         t.buildRightBtn('close')
-                        .on('click', function(e){
+                        .on('click', function(){
                             if(t.$box.hasClass(pfx + 'fullscreen'))
                                 $('body').css('overflow', 'auto');
                             t.destroy();
@@ -597,7 +599,7 @@
             t.isFixed = false;
 
             $(window)
-            .on('scroll resize', function(e){
+            .on('scroll resize', function(){
                 if(!t.$box)
                     return;
 
@@ -714,7 +716,7 @@
 
                 $(window).trigger('scroll');
 
-                $('body').on('mousedown', function(e){
+                $('body').on('mousedown', function(){
                     $('.' + pfx + 'dropdown').hide();
                     $('.' + pfx + 'active').removeClass(pfx + 'active');
                     $('body').off('mousedown');
@@ -898,7 +900,7 @@
             });
 
             // Build the form
-            $form = $('<form/>', {
+            var $form = $('<form/>', {
                 action: '',
                 html: content
             })
