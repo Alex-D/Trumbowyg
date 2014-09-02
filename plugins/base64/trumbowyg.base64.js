@@ -54,7 +54,7 @@
                                 var fReader = new FileReader();
 
                                 fReader.onloadend = function(){
-                                    tbw.execCommand('insertImage', fReader.result);
+                                    tbw.execCmd('insertImage', fReader.result);
                                     $(['img[src="', fReader.result, '"]:not([alt])'].join(''), tbw.$box).attr('alt', values.alt);
                                     tbw.closeModal();
                                 };
