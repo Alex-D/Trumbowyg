@@ -7,7 +7,7 @@ $light-color: #ecf0f1;
     @if($retina == false){
         background-position: nth($_item, 1)+5 nth($_item, 2)+5;
     } @else {
-        background-position: round(nth($_item, 1)/ 2) round(nth($_item, 2)/ 2);
+        background-position: round(nth($_item, 1)/ 2)+5 round(nth($_item, 2)/ 2)+5;
     }
 }
 
@@ -529,38 +529,38 @@ $light-color: #ecf0f1;
         background-size: round($sprite-width-2x / 2) round($sprite-height-2x / 2) !important;
         background-image: url($icons-2x) !important;
 
-        &.trumbowyg-viewHTML-button { @include sprite-pos($view-html, true); }
-        &.trumbowyg-formatting-button { @include sprite-pos($formatting, true); }
+        &.trumbowyg-viewHTML-button { @include sprite-pos($view-html-2x, true); }
+        &.trumbowyg-formatting-button { @include sprite-pos($formatting-2x, true); }
 
         /* English and others */
-        &.trumbowyg-bold-button, &.trumbowyg-strong-button { @include sprite-pos($bold, true); }
-        &.trumbowyg-italic-button, &.trumbowyg-em-button { @include sprite-pos($italic, true); }
-        &.trumbowyg-underline-button { @include sprite-pos($underline, true); }
-        &.trumbowyg-strikethrough-button, &.trumbowyg-del-button { @include sprite-pos($strikethrough, true); }
+        &.trumbowyg-bold-button, &.trumbowyg-strong-button { @include sprite-pos($bold-2x, true); }
+        &.trumbowyg-italic-button, &.trumbowyg-em-button { @include sprite-pos($italic-2x, true); }
+        &.trumbowyg-underline-button { @include sprite-pos($underline-2x, true); }
+        &.trumbowyg-strikethrough-button, &.trumbowyg-del-button { @include sprite-pos($strikethrough-2x, true); }
 
-        &.trumbowyg-link-button { @include sprite-pos($link, true); }
+        &.trumbowyg-link-button { @include sprite-pos($link-2x, true); }
 
-        &.trumbowyg-insertImage-button { @include sprite-pos($image, true); }
+        &.trumbowyg-insertImage-button { @include sprite-pos($image-2x, true); }
 
-        &.trumbowyg-justifyLeft-button { @include sprite-pos($left-align, true); }
-        &.trumbowyg-justifyCenter-button { @include sprite-pos($center-align, true); }
-        &.trumbowyg-justifyRight-button { @include sprite-pos($right-align, true); }
-        &.trumbowyg-justifyFull-button { @include sprite-pos($justify-align, true); }
+        &.trumbowyg-justifyLeft-button { @include sprite-pos($left-align-2x, true); }
+        &.trumbowyg-justifyCenter-button { @include sprite-pos($center-align-2x, true); }
+        &.trumbowyg-justifyRight-button { @include sprite-pos($right-align-2x, true); }
+        &.trumbowyg-justifyFull-button { @include sprite-pos($justify-align-2x, true); }
 
-        &.trumbowyg-unorderedList-button { @include sprite-pos($unordered-list, true); }
-        &.trumbowyg-orderedList-button { @include sprite-pos($ordered-list, true); }
+        &.trumbowyg-unorderedList-button { @include sprite-pos($unordered-list-2x, true); }
+        &.trumbowyg-orderedList-button { @include sprite-pos($ordered-list-2x, true); }
 
-        &.trumbowyg-horizontalRule-button { @include sprite-pos($horizontal-rule, true); }
+        &.trumbowyg-horizontalRule-button { @include sprite-pos($horizontal-rule-2x, true); }
 
-        &.trumbowyg-fullscreen-button { @include sprite-pos($fullscreen, true); }
-        &.trumbowyg-close-button { @include sprite-pos($close, true); }
+        &.trumbowyg-fullscreen-button { @include sprite-pos($fullscreen-2x, true); }
+        &.trumbowyg-close-button { @include sprite-pos($close-2x, true); }
     }
-    .trumbowyg-fullscreen .trumbowyg-button-pane li a.trumbowyg-fullscreen-button { @include sprite-pos($fullscreen-exit, true); }
+    .trumbowyg-fullscreen .trumbowyg-button-pane li a.trumbowyg-fullscreen-button { @include sprite-pos($fullscreen-exit-2x, true); }
 
     /* French */
     .trumbowyg-fr .trumbowyg-button-pane li button {
-        &.trumbowyg-bold-button, &.trumbowyg-strong-button { @include sprite-pos($gras, true); }
-        &.trumbowyg-underline-button { @include sprite-pos($souligne, true); }
-        &.trumbowyg-strikethrough-button, &.trumbowyg-del-button { @include sprite-pos($barre, true); }
+        &.trumbowyg-bold-button, &.trumbowyg-strong-button { @include sprite-pos($gras-2x, true); }
+        &.trumbowyg-underline-button { @include sprite-pos($souligne-2x, true); }
+        &.trumbowyg-strikethrough-button, &.trumbowyg-del-button { @include sprite-pos($barre-2x, true); }
     }
 }
