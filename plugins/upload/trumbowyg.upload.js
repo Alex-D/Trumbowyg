@@ -120,20 +120,21 @@
 
 
     function addXhrProgressEvent(){
-        var originalXhr = $.ajaxSettings.xhr;
+        if (!$.trumbowyg && !$.trumbowyg.addedXhrProgressEvent) {   // Avoid adding progress event multiple times
+            var originalXhr = $.ajaxSettings.xhr;
+            $.ajaxSetup({
+                xhr: function() {
+                    var req  = originalXhr(),
+                        that = this;
+                    if(req && typeof req.upload == "object" && that.progressUpload !== undefined)
+                        req.upload.addEventListener("progress", function(e){
+                            that.progressUpload(e);
+                        }, false);
 
-        $.ajaxSetup({
-            xhr: function() {
-                var req  = originalXhr(),
-                    that = this;
-
-                if(req && typeof req.upload == "object" && that.progressUpload !== undefined)
-                    req.upload.addEventListener("progress", function(e){
-                        that.progressUpload(e);
-                    }, false);
-
-                return req;
-            }
-        });
+                    return req;
+                }
+            });
+            $.trumbowyg.addedXhrProgressEvent = true;
+        }
     }
 })(jQuery);
