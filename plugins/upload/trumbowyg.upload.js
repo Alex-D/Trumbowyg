@@ -88,7 +88,7 @@
 
                                     success: function(data){
                                         if(data.message == "uploadSuccess") {
-                                            tbw.execCommand('insertImage', data.file);
+                                            tbw.execCmd('insertImage', data.file);
                                             setTimeout(function(){
                                                 tbw.closeModal();
                                             }, 250);
