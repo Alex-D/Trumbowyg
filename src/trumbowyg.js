@@ -121,11 +121,11 @@
 
     var Trumbowyg = function(editorElem, opts){
         var t = this;
+        // Get the document of the element. It use to makes the plugin
+        // compatible on iframes.
         t.ownerDocument = editorElem.ownerDocument || document;
-
         // jQuery object of the editor
         t.$e = $(editorElem);
-
         t.$creator = $(editorElem);
 
         // Extend with options
@@ -502,7 +502,6 @@
                     text: btn.text || btn.title || textDef,
                     title: btn.title || btn.text || textDef,
                     mousedown: function(e){
-
                         if(!d || t.$box.find('.'+n+'-'+pfx + 'dropdown').is(':hidden'))
                             $('body', t.ownerDocument).trigger('mousedown');
 
