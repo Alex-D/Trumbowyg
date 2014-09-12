@@ -210,8 +210,7 @@ $('#form-content').trumbowyg({
                 });
             $('#dynamic-iframe-example').append(iframe);
             // Get the document of the iframe.
-            var contextIframe = iframe.contents()[0],
-                contentExampleIframe = '<h2>This is within an iframe</h2>Soc'
+            var contentExampleIframe = '<h2>This is within an iframe</h2>Soc'
                     + 'tempor pulvinar ac ultricies, placerat in, elementum,'
                     + 'adipiscing pid, mid augue pulvinar eros nisi! In magn'
                     + 'magnis. Porttitor platea turpis nisi. Pulvinar massa,'
@@ -229,14 +228,19 @@ $('#form-content').trumbowyg({
                     fullscreenable: false
                 };
 
-            // Set the style on the head of the iframe.
-            $('head', contextIframe).append(styleTrumbowyg);
-            // Set the content to be editable.
-            $('body', contextIframe).append(editor);
+            var setContentIframe = function() {
+                var contextIframe = iframe.contents()[0];
+                // Set the style on the head of the iframe.
+                $('head', contextIframe).append(styleTrumbowyg);
+                // Set the content to be editable.
+                $('body', contextIframe).append(editor);
 
-            editor.trumbowyg(optionsTrumbowyg).on('dblclick', function(e) {
-                $(this).trumbowyg(optionsTrumbowyg);
-            });
+                editor.trumbowyg(optionsTrumbowyg).on('dblclick', function(e) {
+                    $(this).trumbowyg(optionsTrumbowyg);
+                });
+            };
+            setTimeout(setContentIframe, 500);
+
         </script>
     </body>
 </html>
