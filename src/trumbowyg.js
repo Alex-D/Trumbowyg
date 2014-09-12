@@ -119,12 +119,13 @@
         return false;
     };
 
-
-
     var Trumbowyg = function(editorElem, opts){
         var t = this;
+        t.ownerDocument = editorElem.ownerDocument || document;
+
         // jQuery object of the editor
         t.$e = $(editorElem);
+
         t.$creator = $(editorElem);
 
         // Extend with options
@@ -501,8 +502,9 @@
                     text: btn.text || btn.title || textDef,
                     title: btn.title || btn.text || textDef,
                     mousedown: function(e){
+
                         if(!d || t.$box.find('.'+n+'-'+pfx + 'dropdown').is(':hidden'))
-                            $('body').trigger('mousedown');
+                            $('body', t.ownerDocument).trigger('mousedown');
 
                         if(t.$btnPane.hasClass(pfx + 'disable') && !$(this).hasClass(pfx + 'active') && !$(this).parent().hasClass(pfx + 'not-disable'))
                             return false;
@@ -540,7 +542,7 @@
                 type: 'button',
                 text: btnDef.text || btnDef.title || t.lang[n] || n,
                 mousedown: function(e){
-                    $('body').trigger('mousedown');
+                    $('body', t.ownerDocument).trigger('mousedown');
 
                     t.execCmd(btnDef.func || n,
                               btnDef.param || n);
@@ -716,13 +718,13 @@
 
                 $(window).trigger('scroll');
 
-                $('body').on('mousedown', function(){
-                    $('.' + pfx + 'dropdown').hide();
-                    $('.' + pfx + 'active').removeClass(pfx + 'active');
-                    $('body').off('mousedown');
+                $('body', t.ownerDocument).on('mousedown', function(){
+                    $('.' + pfx + 'dropdown', t.ownerDocument).hide();
+                    $('.' + pfx + 'active', t.ownerDocument).removeClass(pfx + 'active');
+                    $('body', t.ownerDocument).off('mousedown');
                 });
             } else
-                $('body').trigger('mousedown');
+                $('body', t.ownerDocument).trigger('mousedown');
         },
 
 
@@ -864,7 +866,7 @@
                     else if(cmd == 'formatBlock' && (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0))
                         param = '<' + param + '>';
 
-                    document.execCommand(cmd, false, param);
+                    t.ownerDocument.execCommand(cmd, false, param);
                 }
             }
             t.syncCode();
@@ -1060,7 +1062,7 @@
         // Selection management
         saveSelection: function(){
             var t = this,
-                d = document;
+                d = t.ownerDocument;
 
             t.selection = null;
             if(window.getSelection){
@@ -1071,13 +1073,15 @@
                 t.selection = d.selection.createRange();
         },
         restoreSelection: function(){
-            var range = this.selection;
+            var t = this,
+                range = t.selection;
+
             if(range){
                 if(window.getSelection){
                     var s = window.getSelection();
                     s.removeAllRanges();
                     s.addRange(range);
-                } else if(document.selection && range.select)
+                } else if(t.ownerDocument.selection && range.select)
                     range.select();
             }
         },
