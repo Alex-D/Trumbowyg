@@ -123,7 +123,7 @@
         var t = this;
         // Get the document of the element. It use to makes the plugin
         // compatible on iframes.
-        t.ownerDocument = editorElem.ownerDocument || document;
+        t.doc = editorElem.ownerDocument || document;
         // jQuery object of the editor
         t.$e = $(editorElem);
         t.$creator = $(editorElem);
@@ -503,7 +503,7 @@
                     title: btn.title || btn.text || textDef,
                     mousedown: function(e){
                         if(!d || t.$box.find('.'+n+'-'+pfx + 'dropdown').is(':hidden'))
-                            $('body', t.ownerDocument).trigger('mousedown');
+                            $('body', t.doc).trigger('mousedown');
 
                         if(t.$btnPane.hasClass(pfx + 'disable') && !$(this).hasClass(pfx + 'active') && !$(this).parent().hasClass(pfx + 'not-disable'))
                             return false;
@@ -541,7 +541,7 @@
                 type: 'button',
                 text: btnDef.text || btnDef.title || t.lang[n] || n,
                 mousedown: function(e){
-                    $('body', t.ownerDocument).trigger('mousedown');
+                    $('body', t.doc).trigger('mousedown');
 
                     t.execCmd(btnDef.func || n,
                               btnDef.param || n);
@@ -701,6 +701,7 @@
         // Open dropdown when click on a button which open that
         dropdown: function(name){
             var t = this,
+                d = t.doc,
                 pfx = t.o.prefix,
                 $dropdown = t.$box.find('.'+name+'-'+pfx + 'dropdown'),
                 $btn = t.$btnPane.find('.'+pfx+name+'-button');
@@ -717,13 +718,13 @@
 
                 $(window).trigger('scroll');
 
-                $('body', t.ownerDocument).on('mousedown', function(){
-                    $('.' + pfx + 'dropdown', t.ownerDocument).hide();
-                    $('.' + pfx + 'active', t.ownerDocument).removeClass(pfx + 'active');
-                    $('body', t.ownerDocument).off('mousedown');
+                $('body', d).on('mousedown', function(){
+                    $('.' + pfx + 'dropdown', d).hide();
+                    $('.' + pfx + 'active', d).removeClass(pfx + 'active');
+                    $('body', d).off('mousedown');
                 });
             } else
-                $('body', t.ownerDocument).trigger('mousedown');
+                $('body', d).trigger('mousedown');
         },
 
 
@@ -865,7 +866,7 @@
                     else if(cmd == 'formatBlock' && (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0))
                         param = '<' + param + '>';
 
-                    t.ownerDocument.execCommand(cmd, false, param);
+                    t.doc.execCommand(cmd, false, param);
                 }
             }
             t.syncCode();
@@ -1061,7 +1062,7 @@
         // Selection management
         saveSelection: function(){
             var t = this,
-                d = t.ownerDocument;
+                d = t.doc;
 
             t.selection = null;
             if(window.getSelection){
@@ -1080,7 +1081,7 @@
                     var s = window.getSelection();
                     s.removeAllRanges();
                     s.addRange(range);
-                } else if(t.ownerDocument.selection && range.select)
+                } else if(t.doc.selection && range.select)
                     range.select();
             }
         },
