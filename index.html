@@ -45,7 +45,7 @@ $('#simple-editor').trumbowyg();
                     </pre></code>
                 </div>
 
-                <div id="customized-buttonpane" class="editor">
+                <div id="customized-buttonpane">
                     <h2>This is a demo of Trumbowyg with a customized button pane</h2>
                     <p>
                         The text is derived from Cicero's De Finibus Bonorum et Malorum (On the Ends of Goods and Evils, or alternatively [About] The Purposes of Good and Evil ). The original passage began: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit (Translation: &quot;Neither is there anyone who loves grief itself since it is grief and thus wants to obtain it&quot;).
@@ -97,7 +97,7 @@ $('#customized-buttonpane').trumbowyg({
                     </pre></code>
                 </div>
 
-                <textarea id="form-content" class="editor" cols="30" rows="10">
+                <textarea id="form-content" cols="30" rows="10">
                     <h1>This editor is create from a textarea</h1>
                     <p>
                         Even though using &quot;lorem ipsum&quot; often arouses curiosity due to its resemblance to classical Latin, it is not intended to have meaning. Where text is visible in a document, people tend to focus on the textual content rather than upon overall presentation, so publishers use lorem ipsum when displaying a typeface or design in order to direct the focus to presentation. &quot;Lorem ipsum&quot; also approximates a typical distribution of spaces in English. <br>
@@ -119,6 +119,8 @@ $('#form-content').trumbowyg({
                 </textarea>
 
                 <div id="dynamic-iframe-example"></div>
+
+                <textarea id="placeholder-editor" cols="30" rows="10" placeholder="This is a placeholder..."></textarea>
             </form>
         </div>
         <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -242,6 +244,14 @@ $('#form-content').trumbowyg({
                     $(this).trumbowyg(optionTbwIframe);
                 });
             }, 500);
+
+
+            /** Editor with placeholder **/
+            $('#placeholder-editor')
+            .trumbowyg()
+            .on('dblclick', function(){
+                $(this).trumbowyg();
+            });
         </script>
     </body>
 </html>

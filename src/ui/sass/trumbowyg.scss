@@ -54,6 +54,10 @@ $light-color: #ecf0f1;
     border: none;
     white-space: normal;
 }
+.trumbowyg-editor[contenteditable=true]:empty:before{
+    content: attr(placeholder);
+    color: #999;
+}
 
 .trumbowyg-button-pane {
     position: relative;

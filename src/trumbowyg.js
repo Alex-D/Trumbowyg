@@ -315,6 +315,9 @@
                 t.isTextarea = false;
             }
 
+            if(t.$creator.is('[placeholder]'))
+                t.$editor.attr('placeholder', t.$creator.attr('placeholder'));
+
             t.$e.hide()
                    .addClass(pfx + 'textarea');
 
