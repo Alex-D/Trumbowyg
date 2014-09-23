@@ -138,7 +138,7 @@
             t.lang = $.extend(true, {}, $.trumbowyg.langs.en, $.trumbowyg.langs[opts.lang]);
 
         // Defaults Options
-        t.o = $.extend(true, {
+        t.o = $.extend(true, {}, {
             lang: 'en',
             dir: 'ltr',
             duration: 200, // Duration of modal box animations
