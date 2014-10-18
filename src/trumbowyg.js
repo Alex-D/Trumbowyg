@@ -341,7 +341,7 @@
 
             t.$editor.addClass(pfx + 'editor')
                         .attr('contenteditable', true)
-                        .attr('dir', t.o.dir)
+                        .attr('dir', t.lang._dir || t.o.dir)
                         .html(html);
 
             if(t.o.resetCss)

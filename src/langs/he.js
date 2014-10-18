@@ -3,53 +3,56 @@
 * Hebrew translation for Trumbowyg
 * http://alex-d.github.com/Trumbowyg
 * ===========================================================
-* Author : Udi Doron
-* Github : https://github.com/udidoron
-* Note: requires dir:rtl to work properly (Hebrew is written right to left).
+* Author : Udi Doron (udidoron)
+*          Github : https://github.com/udidoron
 */
-jQuery.trumbowyg.langs.he={
-		viewHTML:"צפה ב-HTML",
 
-		formatting:"פורמט",
-		p:"פסקה",
-		blockquote:"ציטוט",
+jQuery.trumbowyg.langs.he = {
+    _dir:           "rtl",
 
-		code:"קוד",
+    viewHTML:       "צפה ב-HTML",
 
-		header:"ראשית",
-		bold:"מודגש",
-		italic:"נטוי",
-		strikethrough:"קו חוצה",
-		underline:"קו תחתון",
-		strong:"בולט",
-		em:"הדגשה",
-		del:"נמחק",
+    formatting:     "פורמט",
+    p:              "פסקה",
+    blockquote:     "ציטוט",
+    code:           "קוד",
+    header:         "ראשית",
 
-		unorderedList:"רשימה ללא סדר",
-		orderedList:"רשימה מסודרת",
+    bold:           "מודגש",
+    italic:         "נטוי",
+    strikethrough:  "קו חוצה",
+    underline:      "קו תחתון",
 
-		insertImage:"הכנס תמונה",
-		insertVideo:"הכנס סרטון",
-		link:"קישור",
-		createLink:"צור קישור",
-		unlink:"הסר קישור",
+    strong:         "בולט",
+    em:             "הדגשה",
+    del:            "נמחק",
 
-		justifyLeft:"ישר לשמאל",
-		justifyCenter:"מרכז",
-		justifyRight:"ישר לימין",
-		justifyFull:"ישר לשני הצדדים",
+    unorderedList:  "רשימה ללא סדר",
+    orderedList:    "רשימה מסודרת",
 
-		horizontalRule:"הכנס קו אופקי",
+    insertImage:    "הכנס תמונה",
+    insertVideo:    "הכנס סרטון",
+    link:           "קישור",
+    createLink:     "צור קישור",
+    unlink:         "הסר קישור",
 
-		fullscreen:"מסך מלא",
-		close:"סגור",
+    justifyLeft:    "ישר לשמאל",
+    justifyCenter:  "מרכז",
+    justifyRight:   "ישר לימין",
+    justifyFull:    "ישר לשני הצדדים",
 
-		submit:"שלח",
-		reset:"אתחל מחדש",
+    horizontalRule: "הכנס קו אופקי",
 
-		invalidUrl:"כתובת אתר לא תקינה",
-		required:"נחוץ",
-		description:"תיאור",
-		title:"כותרת",
-		text:"טקסט"
-	};
+    fullscreen:     "מסך מלא",
+
+    close:          "סגור",
+
+    submit:         "שלח",
+    reset:          "אתחל מחדש",
+
+    invalidUrl:     "כתובת אתר לא תקינה",
+    required:       "נחוץ",
+    description:    "תיאור",
+    title:          "כותרת",
+    text:           "טקסט"
+};
