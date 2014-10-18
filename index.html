@@ -251,6 +251,12 @@ $('#form-content').trumbowyg({
             .trumbowyg()
             .on('dblclick', function(){
                 $(this).trumbowyg();
+            })
+            .on('tbwfocus', function(){
+                console.log('focus event fired');
+            })
+            .on('tbwblur', function(){
+                console.log('blur event fired');
             });
         </script>
     </body>

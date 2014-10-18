@@ -62,7 +62,7 @@
 
 
 
-(function(window, document, $){
+(function(window, document, $, undefined){
     'use strict';
 
     // @param : o are options
@@ -149,22 +149,25 @@
             fullscreenable: true,
             fixedBtnPane: false,
             fixedFullWidth: false,
-            semantic: false,
-            resetCss: false,
             autogrow: false,
 
             prefix: 'trumbowyg-',
 
-            convertLink: true,
+            // WYSIWYG only
+            convertLink: true, // TODO
+            semantic: false,
+            resetCss: false,
 
-            btns: ['viewHTML',
-                        '|', 'formatting',
-                        '|', $.trumbowyg.btnsGrps.design,
-                        '|', 'link',
-                        '|', 'insertImage',
-                        '|', $.trumbowyg.btnsGrps.justify,
-                        '|', $.trumbowyg.btnsGrps.lists,
-                        '|', 'horizontalRule'],
+            btns: [
+                'viewHTML',
+                '|', 'formatting',
+                '|', $.trumbowyg.btnsGrps.design,
+                '|', 'link',
+                '|', 'insertImage',
+                '|', $.trumbowyg.btnsGrps.justify,
+                '|', $.trumbowyg.btnsGrps.lists,
+                '|', 'horizontalRule'
+            ],
             btnsAdd: [],
 
             /**
@@ -247,7 +250,7 @@
                 formatting: {
                     dropdown: ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4']
                 },
-                link:       {
+                link: {
                     dropdown: ['createLink', 'unlink']
                 }
             }
@@ -289,8 +292,9 @@
         },
 
         buildEditor: function(disable){
-            var t = this;
-            var pfx = t.o.prefix;
+            var t = this,
+                pfx = t.o.prefix,
+                html = '';
 
 
             if(disable === true){
@@ -321,7 +325,7 @@
             t.$e.hide()
                    .addClass(pfx + 'textarea');
 
-            var html = '';
+
             if(t.isTextarea){
                 html = t.$e.val();
                 t.$box.insertAfter(t.$e)
@@ -364,7 +368,7 @@
 
 
             t.$editor
-            .on('dblclick', 'img', function(){
+            .on('dblclick', 'img', function(e){
                 var $img = $(this);
                 t.openModalInsert(t.lang.insertImage, {
                     url: {
@@ -377,16 +381,22 @@
                         value: $img.attr('alt')
                     }
                 }, function(v){
-                    $img.attr('src', v.url);
-                    $img.attr('alt', v.alt);
+                    $img.attr({
+                        src: v.url,
+                        alt: v.alt
+                    });
                 });
-                return false;
+                e.stopPropagation();
             })
             .on('keyup', function(e){
                 t.semanticCode(false, e.which === 13);
             })
+            .on('focus', function(){
+                t.$creator.trigger('tbwfocus');
+            })
             .on('blur', function(){
                 t.syncCode();
+                t.$creator.trigger('tbwblur');
             });
         },
 
@@ -444,8 +454,8 @@
 
             // Add the fullscreen button
             if(t.o.fullscreenable)
-                $liRight
-                    .append(t.buildRightBtn('fullscreen')
+                $liRight.append(
+                    t.buildRightBtn('fullscreen')
                     .on('click', function(){
                         var cssClass = pfx + 'fullscreen';
                         t.$box.toggleClass(cssClass);
@@ -463,12 +473,13 @@
                             $('body').css('overflow', 'auto');
                             t.$box.removeAttr('style');
                             if(!t.o.autogrow)
-                                $([t.$editor, t.$e]).each(function(i, $el){
-                                    $el.css('height', t.height);
+                                $.each([t.$editor, t.$e], function(){
+                                    $(this).css('height', t.height);
                                 });
                         }
                         $(window).trigger('scroll');
-                    }));
+                    })
+                );
 
             // Build and add close button
             if(t.o.closable)
@@ -527,9 +538,10 @@
                     dd = $('<div/>', { // the dropdown
                         class: n + '-' + c + ' ' + c + ' ' + pfx + 'fixed-top'
                     });
-                for(var i = 0, l = d.length; i < l; i++)
-                    if(t.o.btnsDef[d[i]] && t.isSupportedBtn(d[i]))
-                        dd.append(t.buildSubBtn(d[i]));
+                $.each(d, function(i, def){
+                    if(t.o.btnsDef[def] && t.isSupportedBtn(def))
+                        dd.append(t.buildSubBtn(def));
+                });
                 t.$box.append(dd.hide());
             }
 
@@ -550,8 +562,6 @@
                               btnDef.param || n);
 
                     e.stopPropagation();
-                    e.preventDefault();
-                    return false;
                 }
             });
         },
@@ -567,7 +577,8 @@
         },
         // Check if button is supported
         isSupportedBtn: function(btn){
-            return typeof this.o.btnsDef[btn].isSupported !== 'function' || this.o.btnsDef[btn].isSupported();
+            var def = this.o.btnsDef[btn];
+            return typeof def.isSupported !== 'function' || def.isSupported();
         },
 
         // Build overlay for modal box
@@ -625,8 +636,7 @@
                             left: ffw ? '0' : 'auto',
                             zIndex: 7
                         });
-                        t.$editor.css({ marginTop: mt });
-                        t.$e.css({ marginTop: mt });
+                        $([t.$editor, t.$e]).css({ marginTop: mt });
                     }
                     bp.css({
                         width: ffw ? '100%' : ((parseInt(t.$box.css('width'))-1) + 'px')
@@ -640,8 +650,7 @@
                 } else if(t.isFixed) {
                     t.isFixed = false;
                     bp.removeAttr('style');
-                    t.$editor.css({ marginTop: 0 });
-                    t.$e.css({ marginTop: 0 });
+                    $([t.$editor, t.$e]).css({ marginTop: 0 });
                     $('.' + t.o.prefix + 'fixed-top', t.$box).css({
                         position: 'absolute',
                         top: oh
@@ -661,7 +670,7 @@
 
             if(t.isTextarea)
                 t.$box.after(
-                    t.$e.css({height: h})
+                    t.$e.css({ height: h })
                         .val(html)
                         .removeClass(pfx + 'textarea')
                         .show()
@@ -669,9 +678,9 @@
             else
                 t.$box.after(
                     t.$editor
-                        .css({height: h})
+                        .css({ height: h })
                         .removeClass(pfx + 'editor')
-                        .attr('contenteditable', false)
+                        .removeAttr('contenteditable')
                         .html(html)
                         .show()
                 );
@@ -863,7 +872,7 @@
                 try {
                     cmd(param, t);
                 } catch(e2){
-                    t.$editor.focus();
+                    //t.$editor.focus();
                     if(cmd == 'insertHorizontalRule')
                         param = null;
                     else if(cmd == 'formatBlock' && (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0))
