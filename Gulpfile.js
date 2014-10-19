@@ -6,7 +6,7 @@ var gulp = require('gulp'),
 var paths = {
     scripts: ['src/trumbowyg.js'],
     langs: ['src/langs/**.js', '!src/langs/en.js'],
-    plugins: ['plugins/*/**.js'],
+    plugins: ['plugins/*/**.js', '!plugins/*/Gulpfile.js'],
     sprites: {
         'icons': 'src/ui/images/icons/**.png',
         'icons-2x': 'src/ui/images/icons-2x/**.png'

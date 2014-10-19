@@ -6,6 +6,7 @@
 /bower_components
 /dist
 /src/ui/sass/_sprite*
+/plugins/**/ui/sass/_sprite*
 
 
 # Windows image file caches

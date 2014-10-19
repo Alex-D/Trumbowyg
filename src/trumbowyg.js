@@ -555,6 +555,7 @@
             return $('<button/>', {
                 type: 'button',
                 text: btnDef.text || btnDef.title || t.lang[n] || n,
+                style: btnDef.style || null,
                 mousedown: function(e){
                     $('body', t.doc).trigger('mousedown');
 

@@ -1,0 +1,7 @@
+@mixin sprite-pos($_item, $retina: false){
+    @if($retina == false){
+        background-position: nth($_item, 1)+5 nth($_item, 2)+5;
+    } @else {
+        background-position: round(nth($_item, 1)/ 2)+5 round(nth($_item, 2)/ 2)+5;
+    }
+}
