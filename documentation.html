@@ -50,6 +50,7 @@
                                     <li><a href="#direction">Direction</a></li>
                                     <li><a href="#animation-duration">Animations duration</a></li>
                                     <li><a href="#custom-skin">Custom skin</a></li>
+                                    <li><a href="#placeholder">Placeholder</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -83,6 +84,7 @@
                                     <li><a href="#manage-content">Manage content</a></li>
                                     <li><a href="#empty">Empty</a></li>
                                     <li><a href="#destroy-editor">Destroy editor</a></li>
+                                    <li><a href="#events">Events</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -94,12 +96,13 @@
                             <h3 id="prefix">Prefix</h3>
                             <p>
                                 You can change prefix of all class added on elements of Trumbowyg using this option:
-                                <pre><code class="javascript">
+                            </p>
+                            <pre><code class="javascript">
 $('textarea').trumbowyg({
     prefix: 'custom-prefix'
 });
-                                </code></pre>
-
+                            </code></pre>
+                            <p>
                                 For example, the bold button class is now <code class="javascript">custom-prefix-bold-button</code>
                             </p>
                             <p class="note">
@@ -112,25 +115,25 @@ $('textarea').trumbowyg({
 
                             <h3 id="localization">Localization</h3>
                             <p>
-                                Your users don't speak english? No problem, Trumbowyg has a language parameter. You have to load the appropriate lang file. Search in <code class="javascript">/dist/langs</code> folder to see if a language file already exists, if not create it and share it :). See <a href="#add-localization">add a localization</a> for more details on language file.
+                                Your users don't speak english? No problem, Trumbowyg has a language parameter. You have to load the appropriate lang file. Search in <code>/dist/langs</code> folder to see if a language file already exists, if not create it and share it :). See <a href="#add-localization">add a localization</a> for more details on language file.
                             </p>
                             <p>
                                 Don't forget include the lang file in your pages:
-                                <pre><code class="html">
-&lt;script type="text/javascript" src="js/dist/langs/fr.min.js"&gt;&lt;/script&gt;
-                                </code></pre>
                             </p>
+                            <pre><code class="html">
+&lt;script type="text/javascript" src="js/dist/langs/fr.min.js"&gt;&lt;/script&gt;
+                            </code></pre>
                             <p class="note">
                                 Warning, include lang file after Trumbowyg and before instantiating the editor!
                             </p>
                             <p>
                                 Usage of language parameter:
-                                <pre><code class="javascript">
+                            </p>
+                            <pre><code class="javascript">
 $('textarea').trumbowyg({
     lang: 'fr'
 });
-                                </code></pre>
-                            </p>
+                            </code></pre>
                             <p class="note">
                                 If the lang was not found, english values are used by default.
                             </p>
@@ -142,12 +145,15 @@ $('textarea').trumbowyg({
 
                             <h3 id="direction">Direction</h3>
                             <p>
-                                If your language needs to be read from left to right, use the <code class="javascript">dir</code> option:
-                                <pre><code class="javascript">
+                                If your language needs to be read from left to right, use the <code>dir</code> option:
+                            </p>
+                            <pre><code class="javascript">
 $('textarea').trumbowyg({
     dir: 'rtl'
 });
-                                </code></pre>
+                            </code></pre>
+                            <p class="note">
+                                If the localization file used define a direction, you cannot override it.
                             </p>
 
 
@@ -161,7 +167,7 @@ $('textarea').trumbowyg({
                                 </code></pre>
                             </p>
                             <p class="note">
-                                <code class="javascript">duration</code> is defined in milliseconds, because this value is directly used in <code class="javascript">.animate()</code> jQuery method.
+                                <code>duration</code> is defined in milliseconds, because this value is directly used in <code>.animate()</code> jQuery method.
                             </p>
 
 
@@ -189,13 +195,41 @@ $('textarea').trumbowyg({
                             </p>
                             <p>
                                 Use the prefix option:
-                                <pre><code class="javascript">
+                            </p>
+                            <pre><code class="javascript">
 $('.editor-modern-ui').trumbowyg({
     prefix: 'modern-ui'
 });
-                                </code></pre>
+                            </code></pre>
+                            <p>
                                 In your CSS, you can now stylize <code>.modern-ui-link-button</code> for example, whitout conflicts with the default skin. It's necessary to redefine style for all elements. If you want to start from the default skin, copy <code>/src/ui/</code> folder, replace all <code>trumbowyg-</code> by your prefix and work from here.
                             </p>
+
+
+
+
+
+                            <h3 id="placeholder">Placeholder</h3>
+                            <p>
+                                Like the HTML5 attribute on input and textarea, you can add a placeholder with Trumbowyg.
+                            </p>
+                            <pre><code class="javascript">
+<div class="my-editor" placeholder="Your text as placeholder"></div>
+                            </code></pre>
+                            <p class="note">
+                                Placeholder is visible only if the element is empty (no HTML/text).
+                            </p>
+                            <div class="note">
+                                <p>
+                                    Placeholder is both managed in JS and CSS with the default style. If you create your own style, you need to apply the following style (replace <code>trumbowyg</code> by your prefix):
+                                </p>
+                                <pre><code class="css">
+.trumbowyg-editor[contenteditable=true]:empty:before{
+    content: attr(placeholder);
+    color: #999;
+}
+                                </code></pre>
+                            </div>
                         </section>
 
 
@@ -211,12 +245,14 @@ $('.editor-modern-ui').trumbowyg({
                             <h3 id="mobile-tablet">Mobile &amp; Tablet</h3>
                             <p>
                                 Trumbowyg is compatible with mobiles devices, but you can deactive support for mobile and tablet with the following:
-                                <pre><code class="javascript">
+                            </p>
+                            <pre><code class="javascript">
 $('.trumbowyg.allow-mobile').trumbowyg({
     mobile: true,
     tablet: true
 });
-                                </code></pre>
+                            </code></pre>
+                            <p>
                                 If you set false, Trumbowyg transforms the targeted element as a textarea.
                             </p>
                             <p class="note">
@@ -229,12 +265,12 @@ $('.trumbowyg.allow-mobile').trumbowyg({
                             <h3 id="close-button">Close button</h3>
                             <p>
                                 To have a close button in the top left corner, set closable to true.
-                                <pre><code class="javascript">
+                            </p>
+                            <pre><code class="javascript">
 $('.trumbowyg.closable').trumbowyg({
     closable: true
 });
-                                </code></pre>
-                            </p>
+                            </code></pre>
                             <p class="note">
                                 By default, a Trumbowyg editor is not closable.
                             </p>
@@ -245,11 +281,13 @@ $('.trumbowyg.closable').trumbowyg({
                             <h3 id="fullscreen">Fullscreen</h3>
                             <p>
                                 To disable the fullscreen button:
-                                <pre><code class="javascript">
+                            </p>
+                            <pre><code class="javascript">
 $('.trumbowyg.closable').trumbowyg({
     fullscreenable: false
 });
-                                </code></pre>
+                            </code></pre>
+                            <p>
                                 This code desactives the possibility for user to edit content in fullscreen. Note that fullscreen mode is not really fullscreen (like with a press on <em>F11</em>), it just expands the editor to the whole current page.
                             </p>
                             <p class="note">
@@ -265,11 +303,13 @@ $('.trumbowyg.closable').trumbowyg({
                             </p>
                             <p>
                                 Generates a better, more semantic oriented HTML (i.e. <code>&lt;em&gt;</code> instead of <code>&lt;i&gt;</code>,  <code>&lt;strong&gt;</code> intsead of <code>&lt;b&gt;</code>, etc.). It's just a boolean:
-                                <pre><code class="javascript">
+                            </p>
+                            <pre><code class="javascript">
 $('.trumbowyg').trumbowyg({
     semantic: true
 });
-                                </code></pre>
+                            </code></pre>
+                            <p>
                                 This option deactivates the <em>underline</em> button by default because they do not convey any real semantic. If you want to reactivate them, you have to do it explicitly, see <a href="#button-pane">Button pane</a>.
                             </p>
                             <p class="note">
@@ -282,12 +322,12 @@ $('.trumbowyg').trumbowyg({
                             <h3 id="reset-css">Reset CSS</h3>
                             <p>
                                 If you don't want the page style to impact on the look of the text in the editor, you will need to apply a reset-css on the editor. You can activate this with the <code>resetCss</code> option:
-                                <pre><code class="javascript">
+                            </p>
+                            <pre><code class="javascript">
 $('.trumbowyg').trumbowyg({
     resetCss: true
 });
-                                </code></pre>
-                            </p>
+                            </code></pre>
                             <p class="note">
                                 This option is set to <code>false</code> by default. The reset only applies to the editor, not to the generated HTML code.
                             </p>
@@ -298,14 +338,14 @@ $('.trumbowyg').trumbowyg({
                             <h3 id="auto-adjust-height">Auto grow</h3>
                             <p>
                                 The text editon zone can extend itself when writing a long text. To activate this feature, use the autogrow option:
-                                <pre><code class="javascript">
+                            </p>
+                            <pre><code class="javascript">
 $('.trumbowyg').trumbowyg({
     autogrow: true
 });
-                                </code></pre>
-                            </p>
+                            </code></pre>
                             <p class="note">
-                                Autogrow is not active by default.
+                                Autogrow is not active by default (set to <code>false</code>).
                             </p>
 
 
@@ -313,14 +353,16 @@ $('.trumbowyg').trumbowyg({
                             <h3 id="button-pane">Button pane</h3>
                             <p>
                                 It's probably the most interesting option, it allows you to choose the buttons that appears in the button pane. This option is an array containing string values representing the buttons or vertical separators (using the pipe character). To create your own custom button pane, define an array and pass it to the <code>btns</code> option.
-                                <pre><code class="javascript">
+                            </p>
+                            <pre><code class="javascript">
 $('.simple-editor').trumbowyg({
     btns: ['bold', 'italic', '|', 'link']
 });
-                                </code></pre>
-                            </p>
-                            <p class="note">
-                                By default, <code>btns</code> option value is:
+                            </code></pre>
+                            <div class="note">
+                                <p>
+                                    By default, <code>btns</code> option value is:
+                                </p>
                                 <pre><code class="javascript">
 var btnsGrps = jQuery.trumbowyg.btnsGrps;
 /** WTF this btnsGrps var? It's just array of strings :)
@@ -343,7 +385,7 @@ $('.simple-editor').trumbowyg({
            '|', 'insertHorizontalRule']
 });
                                 </code></pre>
-                            </p>
+                            </div>
                         </section>
 
 
@@ -359,15 +401,17 @@ $('.simple-editor').trumbowyg({
                             <h3 id="add-localization">Add a localization</h3>
                             <p>
                                 The structure of a language file is simple, it is a JavaScript Object which associate a translation to any key. For example:
-                                <pre><code class="javascript">
+                            </p>
+                            <pre><code class="javascript">
 jQuery.trumbowyg.langs.fr = {
+    _dir: "ltr", // This line is optionnal, but usefull to override the `dir` option
+
     bold: "Gras",
     close: "Fermer"
 };
-                                </code></pre>
-                            </p>
+                            </code></pre>
                             <p>
-                                Some localizations are added each day, you can find them <a href="https://github.com/Alex-D/Trumbowyg/tree/1.1.0/dist/langs">here</a>.
+                                Some localizations are added each day, you can find them <a href="https://github.com/Alex-D/Trumbowyg/tree/1.1.5/dist/langs">here</a>.
                             </p>
                             <p>
                                 You can submit a new localization file by creating a new pull request on the Github repository.
@@ -394,7 +438,8 @@ jQuery.trumbowyg.langs.fr = {
                             <h4>Open and close</h4>
                             <p>
                                 For that use the <code class="javascript">.trumbowyg()</code> method and give parameters  <code>"openModal"</code> or <code>"closeModal"</code> like that:
-                                <pre><code class="javascript">
+                            </p>
+                            <pre><code class="javascript">
 // Open a modal box
 var $modal = $("#editor").trumbowyg("openModal", {
     title: "A title for modal box",
@@ -403,8 +448,8 @@ var $modal = $("#editor").trumbowyg("openModal", {
 
 // Close current modal box
 $("#editor").trumbowyg("closeModal");
-                                </code></pre>
-
+                            </code></pre>
+                            <p>
                                 An <code>openModal</code> call returns a jQuery object which contains the modal box. You need this object if you want to use listen events (see below).
                             </p>
                             <p class="note">
@@ -414,16 +459,15 @@ $("#editor").trumbowyg("closeModal");
                             <h4>Events on modal box</h4>
                             <p>
                                 Modal boxes in Trumbowy come with two buttons: "Confirm" and "Cancel". An event is associated to each button: 
-                                <ul>
-                                    <li><code>{prefix}submit</code>: Trigged when form is submit</li>
-                                    <li><code>{prefix}reset</code>: Trigged when user cancel operation</li>
-                                </ul>
                             </p>
+                            <ul>
+                                <li><code>{prefix}submit</code>: Trigged when form is submit</li>
+                                <li><code>{prefix}reset</code>: Trigged when user cancel operation</li>
+                            </ul>
                             <p class="note">
                                 <code>{prefix}</code> is the <code>prefix</code> option value.
                             </p>
-                            <p>
-                                <pre><code class="javascript">
+                            <pre><code class="javascript">
 // Open a modal box
 var $modal = $("#editor").trumbowyg("openModal", {
     title: "A title for modal box",
@@ -438,14 +482,13 @@ $modal.on('trumbowyg-confirm', function(e){
 $modal.on('trumbowyg-cancel', function(e){
     $("#editor").trumbowyg("closeModal");
 });
-                                </code></pre>
-                            </p>
+                            </code></pre>
 
                             <h4>Only build inputs in modal</h4>
                             <p>
                                 If you want only add inputs in the modal box, this function was more simple. Indeed, you do not manage confirm and close buttons, and get all input value on confirm.
-
-                                <pre><code class="javascript">
+                            </p>
+                            <pre><code class="javascript">
 var img = $('img#an-img');
 $("#editor").trumbowyg("openModalInsert", {
     title: "A title for modal box",
@@ -472,8 +515,7 @@ $("#editor").trumbowyg("openModalInsert", {
         // If you do not return anything, you need manage yourself the closure of the modal box
     }
 });
-                                </code></pre>
-                            </p>
+                            </code></pre>
 
 
 
@@ -484,30 +526,24 @@ $("#editor").trumbowyg("openModalInsert", {
                             </p>
 
                             <h4>Save and get current selection</h4>
-                            <p>
-                                <pre><code class="javascript">
+                            <pre><code class="javascript">
 // Save current selection
 $('#editor').trumbowyg('saveSelection');
 
 // Restore last saved selection
 $('#editor').trumbowyg('restoreSelection');
-                                </code></pre>
-                            </p>
+                            </code></pre>
 
                             <h4>Get selection range</h4>
-                            <p>
-                                <pre><code class="javascript">
+                            <pre><code class="javascript">
 // sel contains a JavaScript range
 var sel = $('#editor').trumbowyg('getSelection');
-                                </code></pre>
-                            </p>
+                            </code></pre>
 
                             <h4>Get selection value</h4>
-                            <p>
-                                <pre><code class="javascript">
+                            <pre><code class="javascript">
 var text = $('#editor').trumbowyg('getSelectedText');
-                                </code></pre>
-                            </p>
+                            </code></pre>
 
 
 
@@ -516,15 +552,13 @@ var text = $('#editor').trumbowyg('getSelectedText');
                             <p>
                                 You can set and get current HTML content of the editor with a getter/setter:
                             </p>
-                            <p>
-                                <pre><code class="javascript">
+                            <pre><code class="javascript">
 // Get HTML content
 $('#editor').trumbowyg('html');
 
 // Set HTML content
 $('#editor').trumbowyg('html', "&lt;p&gt;Your content here&lt;/p&gt;");
-                                </code></pre>
-                            </p>
+                            </code></pre>
 
 
 
@@ -533,11 +567,9 @@ $('#editor').trumbowyg('html', "&lt;p&gt;Your content here&lt;/p&gt;");
                             <p>
                                 You can empty the content of the editor.
                             </p>
-                            <p>
-                                <pre><code class="javascript">
+                            <pre><code class="javascript">
 $('#editor').trumbowyg('empty');
-                                </code></pre>
-                            </p>
+                            </code></pre>
 
 
 
@@ -546,11 +578,28 @@ $('#editor').trumbowyg('empty');
                             <p>
                                 When you wish, you can restore the previous state of the element was used to create the editor.
                             </p>
-                            <p>
-                                <pre><code class="javascript">
+                            <pre><code class="javascript">
 $('#editor').trumbowyg('destroy');
-                                </code></pre>
+                            </code></pre>
+
+
+
+
+
+                            <h3 id="events">Events</h3>
+                            <p>
+                                Some events are avaibles on the jQuery element which is used to build the editor.
                             </p>
+                            <ul>
+                                <li>Focus on editor: <code>tbwfocus</code></li>
+                                <li>Blur on editor: <code>tbwblur</code></li>
+                            </ul>
+                            <pre><code class="javascript">
+$('#editor')
+.trumbowyg() // Build Trumbowyg on the #editor element
+.on('twbfocus', function(){ console.log('Focus!'); }); // Listen for `tbwfocus` event
+.on('twbblur', function(){ console.log('Blur!'); }); // Listen for `tbwblur` event
+                            </code></pre>
                         </section>
                     </div>
                 </div>
