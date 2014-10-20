@@ -2,7 +2,7 @@
   "name": "trumbowyg",
   "title": "Trumbowyg",
   "description": "A lightweight WYSIWYG editor",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "main": "dist/trumbowyg.js",
   "homepage": "http://alex-d.github.io/Trumbowyg",
   "author": {
