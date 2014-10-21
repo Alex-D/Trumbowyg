@@ -161,11 +161,11 @@
             btns: [
                 'viewHTML',
                 '|', 'formatting',
-                '|', $.trumbowyg.btnsGrps.design,
+                '|', 'btnGrp-design',
                 '|', 'link',
                 '|', 'insertImage',
-                '|', $.trumbowyg.btnsGrps.justify,
-                '|', $.trumbowyg.btnsGrps.lists,
+                '|', 'btnGrp-justify',
+                '|', 'btnGrp-lists',
                 '|', 'horizontalRule'
             ],
             btnsAdd: [],
@@ -260,11 +260,11 @@
             t.o.btns = [
                 'viewHTML',
                 '|', 'formatting',
-                '|', $.trumbowyg.btnsGrps.semantic,
+                '|', 'btnGrp-semantic',
                 '|', 'link',
                 '|', 'insertImage',
-                '|', $.trumbowyg.btnsGrps.justify,
-                '|', $.trumbowyg.btnsGrps.lists,
+                '|', 'btnGrp-justify',
+                '|', 'btnGrp-lists',
                 '|', 'horizontalRule'
             ];
         else if(opts && opts.btns)
