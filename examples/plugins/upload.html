@@ -2,24 +2,27 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>base64 plugin | Trumbowyg by Alex-D</title>
+        <title>upload plugin | Trumbowyg by Alex-D</title>
         <link rel="stylesheet" href="../css/main.css">
         <link rel="stylesheet" href="../../dist/ui/trumbowyg.css">
     </head>
     <body>
         <div id="main" role="main">
             <header>
-                <h1>base64 plugin for Trumbowyg</h1>
+                <h1>upload plugin for Trumbowyg</h1>
 
                 <p>
-                    You can insert an image in <em>base64</em> in src attribute of <code>img</code> tag.
+                    You can insert an image by upload.
+                </p>
+                <p>
+                    <strong>Note:</strong> this demo does not works without a PHP server, but you can take a look at the files to understand how to use this plugin and how to implement the back-end to match with the plugin.
                 </p>
             </header>
 
 
 
             <div id="editor">
-                <h2>Insert your base64 image!</h2>
+                <h2>Insert your uploaded image!</h2>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident optio nam reiciendis eius beatae quibusdam!
                 </p>
@@ -32,7 +35,7 @@
             <code><pre>
 $('#editor')
 .trumbowyg({
-    btnsAdd: ['base64']
+    btnsAdd: ['upload']
 });
             </pre></code>
 
@@ -41,7 +44,7 @@ $('#editor')
 
 
             <div id="editor-dropdown">
-                <h2>Insert your base64 image through image dropdown!</h2>
+                <h2>Insert your uploaded image through image dropdown!</h2>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident optio nam reiciendis eius beatae quibusdam!
                 </p>
@@ -57,7 +60,7 @@ $('#editor-dropdown')
     btnsDef: {
         // Create a new dropdown
         image: {
-            dropdown: ['insertImage', 'base64'],
+            dropdown: ['insertImage', 'upload'],
             ico: 'insertImage'
         }
     },
@@ -75,11 +78,11 @@ $('#editor-dropdown')
         </div>
         <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
         <script src="../../dist/trumbowyg.js"></script>
-        <script src="../../dist/plugins/base64/trumbowyg.base64.js"></script>
+        <script src="../../dist/plugins/upload/trumbowyg.upload.js"></script>
         <script>
             $('#editor')
             .trumbowyg({
-                btnsAdd: ['base64']
+                btnsAdd: ['upload']
             });
 
 
@@ -89,7 +92,7 @@ $('#editor-dropdown')
                 btnsDef: {
                     // Create a new dropdown
                     image: {
-                        dropdown: ['insertImage', 'base64'],
+                        dropdown: ['insertImage', 'upload'],
                         ico: 'insertImage'
                     }
                 },
