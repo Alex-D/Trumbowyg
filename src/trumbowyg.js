@@ -40,7 +40,7 @@
 
             submit:         "Confirm",
             reset:          "Cancel",
-            
+
             required:       "Required",
             description:    "Description",
             title:          "Title",
@@ -61,7 +61,7 @@
 
 
 
-(function(window, document, $, undefined){
+(function(navigator, window, document, $, undefined){
     'use strict';
 
     // @param : o are options
@@ -209,22 +209,30 @@
                     title: t.lang.header + ' 4'
                 },
 
-                bold: {},
-                italic: {},
+                bold: {
+                    key: 'B'
+                },
+                italic: {
+                    key: 'I'
+                },
                 underline: {},
                 strikethrough: {},
 
                 strong: {
-                    func: 'bold'
+                    func: 'bold',
+                    key: 'B'
                 },
                 em: {
-                    func: 'italic'
+                    func: 'italic',
+                    key: 'I'
                 },
                 del: {
                     func: 'strikethrough'
                 },
 
-                createLink: {},
+                createLink: {
+                    key: 'K'
+                },
                 unlink: {},
 
                 insertImage: {},
@@ -269,28 +277,31 @@
         else if(opts && opts.btns)
             t.o.btns = opts.btns;
 
+        // Keyboard shortcuts are load in this array
+        t.keys = [];
+
         t.init();
     };
 
     Trumbowyg.prototype = {
         init: function(){
             var t = this;
-            t.height = t.$e.css('height');
+            t.height = t.$e.height();
 
             if(t.isEnabled()){
-                t.buildEditor(true);
+                t.bldEditor(true);
                 return;
             }
 
-            t.buildEditor();
-            t.buildBtnPane();
+            t.bldEditor();
+            t.bldBtnPane();
 
             t.fixedBtnPaneEvents();
 
-            t.buildOverlay();
+            t.bldOverlay();
         },
 
-        buildEditor: function(disable){
+        bldEditor: function(disable){
             var t = this,
                 pfx = t.o.prefix,
                 html = '';
@@ -298,7 +309,7 @@
 
             if(disable === true){
                 if(!t.$e.is('textarea')){
-                    var textarea = t.buildTextarea().val(t.$e.val());
+                    var textarea = t.bldTextarea().val(t.$e.val());
                     t.$e.hide().after(textarea);
                 }
                 return;
@@ -314,7 +325,7 @@
                 t.$editor = $('<div/>');
             else {
                 t.$editor = t.$e;
-                t.$e = t.buildTextarea().val(t.$e.val());
+                t.$e = t.bldTextarea().val(t.$e.val());
                 t.isTextarea = false;
             }
 
@@ -387,6 +398,16 @@
                 });
                 e.stopPropagation();
             })
+            .on('keydown', function(e){
+                if(e.ctrlKey){
+                    var k = t.keys[String.fromCharCode(e.which).toUpperCase()];
+                    try {
+                        t[k.func](k.param);
+                        e.stopPropagation();
+                        e.preventDefault();
+                    } catch(e){}
+                }
+            })
             .on('keyup', function(e){
                 t.semanticCode(false, e.which === 13);
             })
@@ -397,11 +418,16 @@
                 t.syncCode();
                 t.$creator.trigger('tbwblur');
             });
+
+            $(t.doc).on('keydown', function(e){
+                if(e.which === 27)
+                    t.closeModal();
+            });
         },
 
 
-        // Build the Textarea which contain HTML generated code
-        buildTextarea: function(){
+        // bld the Textarea which contain HTML generated code
+        bldTextarea: function(){
             return $('<textarea/>', {
                 name: this.$e.attr('id'),
                 height: this.height
@@ -409,8 +435,8 @@
         },
 
 
-        // Build button pane, use o.btns and o.btnsAdd options
-        buildBtnPane: function(){
+        // bld button pane, use o.btns and o.btnsAdd options
+        bldBtnPane: function(){
             var t = this,
                 pfx = t.o.prefix;
 
@@ -433,20 +459,20 @@
                     btn = [btn];
 
                 $.each(btn, function(i, b){
-                    try { // Prevent buildBtn error
+                    try { // Prevent bldBtn error
                         var $li = $('<li/>');
 
                         if(b === '|') // It's a separator
                             $li.addClass(pfx + 'separator');
                         else if(t.isSupportedBtn(b)) // It's a supported button
-                            $li.append(t.buildBtn(b));
+                            $li.append(t.bldBtn(b));
 
                         t.$btnPane.append($li);
                     } catch(e){}
                 });
             });
 
-            // Build right li for fullscreen and close buttons
+            // bld right li for fullscreen and close buttons
             var $liRight = $('<li/>', {
                 class: pfx + 'not-disable ' + pfx + 'buttons-right'
             });
@@ -454,7 +480,7 @@
             // Add the fullscreen button
             if(t.o.fullscreenable)
                 $liRight.append(
-                    t.buildRightBtn('fullscreen')
+                    t.bldRightBtn('fullscreen')
                     .on('click', function(){
                         var cssClass = pfx + 'fullscreen';
                         t.$box.toggleClass(cssClass);
@@ -480,11 +506,11 @@
                     })
                 );
 
-            // Build and add close button
+            // bld and add close button
             if(t.o.closable)
                 $liRight
                     .append(
-                        t.buildRightBtn('close')
+                        t.bldRightBtn('close')
                         .on('click', function(){
                             if(t.$box.hasClass(pfx + 'fullscreen'))
                                 $('body').css('overflow', 'auto');
@@ -501,8 +527,8 @@
         },
 
 
-        // Build a button and his action
-        buildBtn: function(n){ // n is name of the button
+        // bld a button and his action
+        bldBtn: function(n){ // n is name of the button
             var t = this,
                 pfx = t.o.prefix,
                 btn = t.o.btnsDef[n],
@@ -513,9 +539,9 @@
                     type: 'button',
                     class: pfx + n +'-button' + (btn.ico ? ' '+ pfx + btn.ico +'-button' : ''),
                     text: btn.text || btn.title || textDef,
-                    title: btn.title || btn.text || textDef,
+                    title: btn.title || btn.text || textDef + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
                     mousedown: function(e){
-                        if(!d || t.$box.find('.'+n+'-'+pfx + 'dropdown').is(':hidden'))
+                        if(!d || $('.'+n+'-'+pfx + 'dropdown', t.$box).is(':hidden'))
                             $('body', t.doc).trigger('mousedown');
 
                         if(t.$btnPane.hasClass(pfx + 'disable') && !$(this).hasClass(pfx + 'active') && !$(this).parent().hasClass(pfx + 'not-disable'))
@@ -529,8 +555,6 @@
                     }
                 });
 
-
-
             if(d){
                 $btn.addClass(pfx + 'open-dropdown');
                 var c = pfx + 'dropdown',
@@ -539,50 +563,66 @@
                     });
                 $.each(d, function(i, def){
                     if(t.o.btnsDef[def] && t.isSupportedBtn(def))
-                        dd.append(t.buildSubBtn(def));
+                        dd.append(t.bldSubBtn(def));
                 });
                 t.$box.append(dd.hide());
+            } else if(btn.key){
+                t.keys[btn.key] = {
+                    func: btn.func || n,
+                    param: btn.param || n
+                };
             }
 
             return $btn;
         },
-        // Build a button for dropdown menu
+        // bld a button for dropdown menu
         // @param n : name of the subbutton
-        buildSubBtn: function(n){
+        bldSubBtn: function(n){
             var t = this,
-                btnDef = t.o.btnsDef[n];
+                b = t.o.btnsDef[n];
+
+            if(b.key)
+                t.keys[b.key] = {
+                    func: b.func || n,
+                    param: b.param || n
+                };
+
             return $('<button/>', {
                 type: 'button',
-                text: btnDef.text || btnDef.title || t.lang[n] || n,
-                style: btnDef.style || null,
+                text: b.text || b.title || t.lang[n] || n,
+                title: ((b.key) ? ' (Ctrl + ' + b.key + ')' : null),
+                style: b.style || null,
                 mousedown: function(e){
                     $('body', t.doc).trigger('mousedown');
 
-                    t.execCmd(btnDef.func || n,
-                              btnDef.param || n);
+                    t.execCmd(b.func || n,
+                              b.param || n);
 
                     e.stopPropagation();
                 }
             });
         },
-        // Build a button for right li
+        // bld a button for right li
         // @param n : name of the right button
-        buildRightBtn: function(n){
+        bldRightBtn: function(n){
+            var l = this.lang[n];
             return $('<button/>', {
                 type: 'button',
                 class: this.o.prefix + n + '-button',
-                title: this.lang[n],
-                text: this.lang[n]
+                title: l,
+                text: l
             });
         },
         // Check if button is supported
-        isSupportedBtn: function(btn){
-            var def = this.o.btnsDef[btn];
-            return typeof def.isSupported !== 'function' || def.isSupported();
+        isSupportedBtn: function(b){
+            try {
+                return this.o.btnsDef[b].isSupported();
+            } catch(e){}
+            return true;
         },
 
-        // Build overlay for modal box
-        buildOverlay: function(){
+        // bld overlay for modal box
+        bldOverlay: function(){
             var t = this;
             t.$overlay = $('<div/>', {
                 class: t.o.prefix + 'overlay'
@@ -622,12 +662,11 @@
 
                 var s = $(window).scrollTop(), // s is top scroll
                     o = t.$box.offset().top + 1, // o is offset
-                    toFixed = (s - o > 0) && ((s - o - parseInt(t.height)) < 0),
                     bp = t.$btnPane,
-                    mt = bp.css('height'),
+                    mt = bp.height(),
                     oh = bp.outerHeight();
 
-                if(toFixed){
+                if((s - o > 0) && ((s - o - parseInt(t.height)) < 0)){
                     if(!t.isFixed){
                         t.isFixed = true;
                         bp.css({
@@ -639,7 +678,7 @@
                         $([t.$editor, t.$e]).css({ marginTop: mt });
                     }
                     bp.css({
-                        width: ffw ? '100%' : ((parseInt(t.$box.css('width'))-1) + 'px')
+                        width: ffw ? '100%' : ((parseInt(t.$box.width())-1) + 'px')
                     });
 
                     $('.' + t.o.prefix + 'fixed-top', t.$box).css({
@@ -707,7 +746,7 @@
             t.$editor.toggle();
             t.$e.toggle();
             t.$btnPane.toggleClass(pfx + 'disable');
-            t.$btnPane.find('.'+pfx + 'viewHTML-button').toggleClass(pfx + 'active');
+            $('.'+pfx + 'viewHTML-button', t.$btnPane).toggleClass(pfx + 'active');
         },
 
         // Open dropdown when click on a button which open that
@@ -715,14 +754,14 @@
             var t = this,
                 d = t.doc,
                 pfx = t.o.prefix,
-                $dropdown = t.$box.find('.'+name+'-'+pfx + 'dropdown'),
-                $btn = t.$btnPane.find('.'+pfx+name+'-button');
+                $dd = $('.'+name+'-'+pfx + 'dropdown', t.$box),
+                $btn = $('.'+pfx+name+'-button', t.$btnPane);
 
-            if($dropdown.is(':hidden')){
+            if($dd.is(':hidden')){
                 var o = $btn.offset().left;
                 $btn.addClass(pfx + 'active');
 
-                $dropdown.css({
+                $dd.css({
                     position: 'absolute',
                     top: t.$btnPane.outerHeight(),
                     left: (t.o.fixedFullWidth && t.isFixed) ? o+'px' : (o - t.$btnPane.offset().left)+'px'
@@ -760,7 +799,7 @@
                 t.$editor.html(t.$e.val());
 
             if(t.o.autogrow){
-                t.height = t.$editor.css('height');
+                t.height = t.$editor.height();
                 t.$e.css({ height: t.height });
             }
         },
@@ -773,6 +812,8 @@
             t.syncCode(force);
 
             if(t.o.semantic){
+                t.saveSelection();
+
                 t.semanticTag('b', 'strong');
                 t.semanticTag('i', 'em');
                 t.semanticTag('strike', 'del');
@@ -788,12 +829,12 @@
                     // Remove all br
                     .filter('br').remove();
 
-                    t.saveSelection();
                     t.semanticTag('div', 'p');
-                    t.restoreSelection();
                 }
 
                 t.$e.val(t.$editor.html());
+
+                t.restoreSelection();
             }
         },
         semanticTag: function(oldTag, newTag){
@@ -898,11 +939,11 @@
             // Disable all btnPane btns
             t.$btnPane.addClass(pfx + 'disable');
 
-            // Build out of ModalBox, it's the mask for animations
+            // bld out of ModalBox, it's the mask for animations
             var $modal = $('<div/>', {
                 class: pfx + 'modal ' + pfx + 'fixed-top'
             }).css({
-                top: (parseInt(t.$btnPane.css('height')) + 1) + 'px'
+                top: (parseInt(t.$btnPane.height()) + 1) + 'px'
             }).appendTo(t.$box);
 
             // Click on overflay close modal by cancelling them
@@ -911,7 +952,7 @@
                 $modal.trigger(pfx + 'cancel');
             });
 
-            // Build the form
+            // bld the form
             var $form = $('<form/>', {
                 action: '',
                 html: content
@@ -926,7 +967,7 @@
             });
 
 
-            // Build ModalBox and animate to show them
+            // bld ModalBox and animate to show them
             var $box = $('<div/>', {
                 class: pfx + 'modal-box',
                 html: $form
@@ -950,12 +991,12 @@
 
 
             // Focus in modal box
-            $box.find('input:first').focus();
+            $('input:first', $box).focus();
 
 
             // Append Confirm and Cancel buttons
-            t.buildModalBtn('submit', $box);
-            t.buildModalBtn('reset', $box);
+            t.bldModalBtn('submit', $box);
+            t.bldModalBtn('reset', $box);
 
 
             $(window).trigger('scroll');
@@ -963,7 +1004,7 @@
             return $modal;
         },
         // @param n is name of modal
-        buildModalBtn: function(n, modal){
+        bldModalBtn: function(n, $modal){
             var t = this,
                 pfx = t.o.prefix;
 
@@ -971,7 +1012,7 @@
                 class: pfx + 'modal-button ' + pfx + 'modal-' + n,
                 type: n,
                 text: t.lang[n] || n
-            }).appendTo(modal.find('form'));
+            }).appendTo($('form', $modal));
         },
         // close current modal box
         closeModal: function(){
@@ -984,13 +1025,13 @@
             var $modalBox = $('.' + pfx + 'modal-box', t.$box);
 
             $modalBox.animate({
-                top: '-' + $modalBox.css('height')
+                top: '-' + $modalBox.height()
             }, t.o.duration/2, function(){
                 $(this).parent().remove();
                 t.hideOverlay();
             });
         },
-        // Preformated build and management modal
+        // Preformated bld and management modal
         openModalInsert: function(title, fields, cmd){
             var t = this,
                 pfx  = t.o.prefix,
@@ -999,9 +1040,9 @@
 
             for(var f in fields){
                 var fd = fields[f], // field definition
-                    label = (fd.label === undefined) ? (lg[f] ? lg[f] : f) : (lg[fd.label] ? lg[fd.label] : fd.label);
+                    label = (!fd.label) ? (lg[f] ? lg[f] : f) : (lg[fd.label] ? lg[fd.label] : fd.label);
 
-                if(fd.name === undefined)
+                if(!fd.name)
                     fd.name = f;
 
                 html += '<label><input type="'+(fd.type || 'text')+'" name="'+fd.name+'" value="'+(fd.value || '')+'"><span class="'+pfx+'input-infos"><span>'+label+'</span></span></label>';
@@ -1009,7 +1050,7 @@
 
             return t.openModal(title, html)
             .on(pfx + 'confirm', function(){
-                var $form = $(this).find('form'),
+                var $form = $('form', $(this)),
                     valid = true,
                     v = {}; // values
 
@@ -1048,12 +1089,15 @@
             var pfx = this.o.prefix,
                 $label = $field.parent();
 
-            $field.on('change keyup', function(){
+            $field
+            .on('change keyup', function(){
                 $label.removeClass(pfx + 'input-error');
             });
+
             $label
             .addClass(pfx + 'input-error')
-            .find('input+span').append(
+            .find('input+span')
+            .append(
                 $('<span/>', {
                     class: pfx +'msg-error',
                     text: err
@@ -1067,15 +1111,15 @@
         // Selection management
         saveSelection: function(){
             var t = this,
-                d = t.doc;
+                ds = t.doc.selection;
 
             t.selection = null;
             if(window.getSelection){
                 var s = window.getSelection();
                 if(s.getRangeAt && s.rangeCount)
                     t.selection = s.getRangeAt(0);
-            } else if(d.selection && d.selection.createRange)
-                t.selection = d.selection.createRange();
+            } else if(ds && ds.createRange)
+                t.selection = ds.createRange();
         },
         restoreSelection: function(){
             var t = this,
@@ -1095,11 +1139,12 @@
 
         // Return true if must enable Trumbowyg on this mobile device
         isEnabled: function(){
-            var exprTablet = new RegExp("(iPad|webOS)"),
-                exprMobile = new RegExp("(iPhone|iPod|Android|BlackBerry|Windows Phone|ZuneWP7)"),
-                ua = navigator.userAgent;
+            var tablet = new RegExp("(iPad|webOS)"),
+                mobile = new RegExp("(iPhone|iPod|Android|BlackBerry|Windows Phone|ZuneWP7)"),
+                ua = navigator.userAgent,
+                o = this.o;
 
-            return (this.o.tablet === true && exprTablet.test(ua)) || (this.o.mobile === true && exprMobile.test(ua));
+            return (o.tablet === true && tablet.test(ua)) || (o.mobile === true && mobile.test(ua));
         }
     };
-})(window, document, jQuery);
+})(navigator, window, document, jQuery);
