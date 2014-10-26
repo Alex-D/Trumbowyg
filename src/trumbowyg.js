@@ -367,7 +367,7 @@
             }
 
 
-
+            t._ctrl = false;
             t.$editor
             .on('dblclick', 'img', function(e){
                 var $img = $(this);
@@ -391,16 +391,23 @@
             })
             .on('keydown', function(e){
                 if(e.ctrlKey){
+                    t._ctrl = true;
                     var k = t.keys[String.fromCharCode(e.which).toUpperCase()];
+
                     try {
+                        t.execCmd(k.func, k.param);
                         e.stopPropagation();
                         e.preventDefault();
-                        t[k.func](k.param);
                     } catch(e){}
                 }
             })
             .on('keyup', function(e){
-                t.semanticCode(false, e.which === 13);
+                if(!t._ctrl && e.which !== 17)
+                    t.semanticCode(false, e.which === 13);
+
+                setTimeout(function(){
+                    t._ctrl = false;
+                }, 200);
             })
             .on('focus', function(){
                 t.$creator.trigger('tbwfocus');
