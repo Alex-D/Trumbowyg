@@ -72,7 +72,8 @@
                 if(!$(this).data('trumbowyg'))
                     $(this).data('trumbowyg', new Trumbowyg(this, o));
             });
-        } else if(this.length === 1){
+        }
+        if(this.length === 1){
             try {
                 var t = $(this).data('trumbowyg');
                 switch(o){
@@ -118,7 +119,9 @@
         return false;
     };
 
-    var Trumbowyg = function(editorElem, opts){
+    // @param : editorElem is the DOM element
+    // @param : o are options
+    var Trumbowyg = function(editorElem, o){
         var t = this;
         // Get the document of the element. It use to makes the plugin
         // compatible on iframes.
@@ -128,13 +131,13 @@
         t.$creator = $(editorElem);
 
         // Extend with options
-        opts = $.extend(true, {}, opts, $.trumbowyg.opts);
+        o = $.extend(true, {}, o, $.trumbowyg.opts);
 
         // Localization management
-        if(typeof opts.lang === 'undefined' || typeof $.trumbowyg.langs[opts.lang] === 'undefined')
+        if(typeof o.lang === 'undefined' || typeof $.trumbowyg.langs[o.lang] === 'undefined')
             t.lang = $.trumbowyg.langs.en;
         else
-            t.lang = $.extend(true, {}, $.trumbowyg.langs.en, $.trumbowyg.langs[opts.lang]);
+            t.lang = $.extend(true, {}, $.trumbowyg.langs.en, $.trumbowyg.langs[o.lang]);
 
         // Defaults Options
         t.o = $.extend(true, {}, {
@@ -153,7 +156,6 @@
             prefix: 'trumbowyg-',
 
             // WYSIWYG only
-            convertLink: true, // TODO
             semantic: false,
             resetCss: false,
 
@@ -261,21 +263,10 @@
                     dropdown: ['createLink', 'unlink']
                 }
             }
-        }, opts);
+        }, o);
 
-        if(t.o.semantic && !opts.btns)
-            t.o.btns = [
-                'viewHTML',
-                '|', 'formatting',
-                '|', 'btnGrp-semantic',
-                '|', 'link',
-                '|', 'insertImage',
-                '|', 'btnGrp-justify',
-                '|', 'btnGrp-lists',
-                '|', 'horizontalRule'
-            ];
-        else if(opts && opts.btns)
-            t.o.btns = opts.btns;
+        if(t.o.semantic && !o.btns)
+            t.o.btns[4] = 'btnGrp-semantic';
 
         // Keyboard shortcuts are load in this array
         t.keys = [];
