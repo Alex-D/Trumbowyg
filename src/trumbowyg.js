@@ -280,19 +280,19 @@
             t.height = t.$e.height();
 
             if(t.isEnabled()){
-                t.bldEditor(true);
+                t.buildEditor(true);
                 return;
             }
 
-            t.bldEditor();
-            t.bldBtnPane();
+            t.buildEditor();
+            t.buildBtnPane();
 
             t.fixedBtnPaneEvents();
 
-            t.bldOverlay();
+            t.buildOverlay();
         },
 
-        bldEditor: function(disable){
+        buildEditor: function(disable){
             var t = this,
                 pfx = t.o.prefix,
                 html = '';
@@ -300,7 +300,7 @@
 
             if(disable === true){
                 if(!t.$e.is('textarea')){
-                    var textarea = t.bldTextarea().val(t.$e.val());
+                    var textarea = t.buildTextarea().val(t.$e.val());
                     t.$e.hide().after(textarea);
                 }
                 return;
@@ -316,7 +316,7 @@
                 t.$editor = $('<div/>');
             else {
                 t.$editor = t.$e;
-                t.$e = t.bldTextarea().val(t.$e.val());
+                t.$e = t.buildTextarea().val(t.$e.val());
                 t.isTextarea = false;
             }
 
@@ -393,9 +393,9 @@
                 if(e.ctrlKey){
                     var k = t.keys[String.fromCharCode(e.which).toUpperCase()];
                     try {
-                        t[k.func](k.param);
                         e.stopPropagation();
                         e.preventDefault();
+                        t[k.func](k.param);
                     } catch(e){}
                 }
             })
@@ -411,14 +411,17 @@
             });
 
             $(t.doc).on('keydown', function(e){
-                if(e.which === 27)
+                if(e.which === 27){
                     t.closeModal();
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
             });
         },
 
 
-        // bld the Textarea which contain HTML generated code
-        bldTextarea: function(){
+        // build the Textarea which contain HTML generated code
+        buildTextarea: function(){
             return $('<textarea/>', {
                 name: this.$e.attr('id'),
                 height: this.height
@@ -426,8 +429,8 @@
         },
 
 
-        // bld button pane, use o.btns and o.btnsAdd options
-        bldBtnPane: function(){
+        // build button pane, use o.btns and o.btnsAdd options
+        buildBtnPane: function(){
             var t = this,
                 pfx = t.o.prefix;
 
@@ -450,20 +453,20 @@
                     btn = [btn];
 
                 $.each(btn, function(i, b){
-                    try { // Prevent bldBtn error
+                    try { // Prevent buildBtn error
                         var $li = $('<li/>');
 
                         if(b === '|') // It's a separator
                             $li.addClass(pfx + 'separator');
                         else if(t.isSupportedBtn(b)) // It's a supported button
-                            $li.append(t.bldBtn(b));
+                            $li.append(t.buildBtn(b));
 
                         t.$btnPane.append($li);
                     } catch(e){}
                 });
             });
 
-            // bld right li for fullscreen and close buttons
+            // build right li for fullscreen and close buttons
             var $liRight = $('<li/>', {
                 class: pfx + 'not-disable ' + pfx + 'buttons-right'
             });
@@ -471,7 +474,7 @@
             // Add the fullscreen button
             if(t.o.fullscreenable)
                 $liRight.append(
-                    t.bldRightBtn('fullscreen')
+                    t.buildRightBtn('fullscreen')
                     .on('click', function(){
                         var cssClass = pfx + 'fullscreen';
                         t.$box.toggleClass(cssClass);
@@ -497,11 +500,11 @@
                     })
                 );
 
-            // bld and add close button
+            // build and add close button
             if(t.o.closable)
                 $liRight
                     .append(
-                        t.bldRightBtn('close')
+                        t.buildRightBtn('close')
                         .on('click', function(){
                             if(t.$box.hasClass(pfx + 'fullscreen'))
                                 $('body').css('overflow', 'auto');
@@ -518,8 +521,8 @@
         },
 
 
-        // bld a button and his action
-        bldBtn: function(n){ // n is name of the button
+        // build a button and his action
+        buildBtn: function(n){ // n is name of the button
             var t = this,
                 pfx = t.o.prefix,
                 btn = t.o.btnsDef[n],
@@ -554,7 +557,7 @@
                     });
                 $.each(d, function(i, def){
                     if(t.o.btnsDef[def] && t.isSupportedBtn(def))
-                        dd.append(t.bldSubBtn(def));
+                        dd.append(t.buildSubBtn(def));
                 });
                 t.$box.append(dd.hide());
             } else if(btn.key){
@@ -566,9 +569,9 @@
 
             return $btn;
         },
-        // bld a button for dropdown menu
+        // build a button for dropdown menu
         // @param n : name of the subbutton
-        bldSubBtn: function(n){
+        buildSubBtn: function(n){
             var t = this,
                 b = t.o.btnsDef[n];
 
@@ -593,9 +596,9 @@
                 }
             });
         },
-        // bld a button for right li
+        // build a button for right li
         // @param n : name of the right button
-        bldRightBtn: function(n){
+        buildRightBtn: function(n){
             var l = this.lang[n];
             return $('<button/>', {
                 type: 'button',
@@ -612,8 +615,8 @@
             return true;
         },
 
-        // bld overlay for modal box
-        bldOverlay: function(){
+        // build overlay for modal box
+        buildOverlay: function(){
             var t = this;
             t.$overlay = $('<div/>', {
                 class: t.o.prefix + 'overlay'
@@ -930,7 +933,7 @@
             // Disable all btnPane btns
             t.$btnPane.addClass(pfx + 'disable');
 
-            // bld out of ModalBox, it's the mask for animations
+            // build out of ModalBox, it's the mask for animations
             var $modal = $('<div/>', {
                 class: pfx + 'modal ' + pfx + 'fixed-top'
             }).css({
@@ -943,7 +946,7 @@
                 $modal.trigger(pfx + 'cancel');
             });
 
-            // bld the form
+            // build the form
             var $form = $('<form/>', {
                 action: '',
                 html: content
@@ -958,7 +961,7 @@
             });
 
 
-            // bld ModalBox and animate to show them
+            // build ModalBox and animate to show them
             var $box = $('<div/>', {
                 class: pfx + 'modal-box',
                 html: $form
@@ -986,8 +989,8 @@
 
 
             // Append Confirm and Cancel buttons
-            t.bldModalBtn('submit', $box);
-            t.bldModalBtn('reset', $box);
+            t.buildModalBtn('submit', $box);
+            t.buildModalBtn('reset', $box);
 
 
             $(window).trigger('scroll');
@@ -995,7 +998,7 @@
             return $modal;
         },
         // @param n is name of modal
-        bldModalBtn: function(n, $modal){
+        buildModalBtn: function(n, $modal){
             var t = this,
                 pfx = t.o.prefix;
 
@@ -1021,8 +1024,10 @@
                 $(this).parent().remove();
                 t.hideOverlay();
             });
+            
+            t.restoreSelection();
         },
-        // Preformated bld and management modal
+        // Preformated build and management modal
         openModalInsert: function(title, fields, cmd){
             var t = this,
                 pfx  = t.o.prefix,
@@ -1073,7 +1078,6 @@
             .one(pfx + 'cancel', function(){
                 $(this).off(pfx + 'confirm');
                 t.closeModal();
-                t.restoreSelection();
             });
         },
         addErrorOnModalField: function($field, err){

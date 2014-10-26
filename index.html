@@ -184,7 +184,13 @@ $('#form-content').trumbowyg({
                 semantic: true,
                 resetCss: true,
                 autoAjustHeight: true,
-                autogrow: true
+                autogrow: true,
+
+                btnsDef: {
+                    strong: {
+                        key: 'G'
+                    }
+                }
             };
             $('#form-content')
             .trumbowyg(formTbwOptions)
