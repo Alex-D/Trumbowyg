@@ -49,7 +49,6 @@ jQuery.trumbowyg.langs.fr = {
     submit:         "Valider",
     reset:          "Annuler",
 
-    invalidUrl:     "URL invalide",
     required:       "Obligatoire",
     description:    "Description",
     title:          "Titre",

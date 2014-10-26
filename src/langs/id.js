@@ -50,7 +50,6 @@ jQuery.trumbowyg.langs.id = {
     submit:         "Setuju",
     reset:          "Batal",
 
-    invalidUrl:     "Tautan salah",
     required:       "Diperlukan",
     description:    "Deskripsi",
     title:          "Judul",

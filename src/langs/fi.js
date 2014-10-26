@@ -48,7 +48,6 @@ jQuery.trumbowyg.langs.fi = {
     submit:         "Lähetä",
     reset:          "Palauta",
 
-    invalidUrl:     "Viallinen URL-osoite",
     required:       "Pakollinen",
     description:    "Kuvaus",
     title:          "Otsikko",

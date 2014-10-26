@@ -49,7 +49,6 @@ jQuery.trumbowyg.langs.fa = {
     submit:         "تائید",
     reset:          "انصراف",
 
-    invalidUrl:     "لینک نامعتبر",
     required:       "اجباری",
     description:    "توضیحات",
     title:          "عنوان",

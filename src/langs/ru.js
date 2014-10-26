@@ -47,7 +47,6 @@ jQuery.trumbowyg.langs.ru = {
    submit:         "Вставить",
    reset:          "Отменить",
 
-   invalidUrl:     "Неверный URL",
    required:       "Обязательное",
    description:    "Описание",
    title:          "Подсказка",

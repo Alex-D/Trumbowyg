@@ -52,7 +52,6 @@ jQuery.trumbowyg.langs.pt = {
     submit:         "Procesează",
     reset:          "Resetează",
 
-    invalidUrl:     "URL invalid",
     required:       "Obligatoriu",
     description:    "Descriere",
     title:          "Titlu",

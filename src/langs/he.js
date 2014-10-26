@@ -50,7 +50,6 @@ jQuery.trumbowyg.langs.he = {
     submit:         "שלח",
     reset:          "אתחל מחדש",
 
-    invalidUrl:     "כתובת אתר לא תקינה",
     required:       "נחוץ",
     description:    "תיאור",
     title:          "כותרת",

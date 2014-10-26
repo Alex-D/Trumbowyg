@@ -49,7 +49,6 @@ jQuery.trumbowyg.langs.tr = {
     submit:         "Onayla",
     reset:          "Sıfırla",
 
-    invalidUrl:     "Hatalı URL",
     required:       "Gerekli",
     description:    "Açıklama",
     title:          "Başlık",

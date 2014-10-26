@@ -50,7 +50,6 @@ jQuery.trumbowyg.langs.pt = {
     submit:         "Enviar",
     reset:          "Limpar",
 
-    invalidUrl:     "URL inválida",
     required:       "Obrigatório",
     description:    "Descrição",
     title:          "Título",

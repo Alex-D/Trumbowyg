@@ -48,7 +48,6 @@ jQuery.trumbowyg.langs.de = {
     submit:         "Bestätigen",
     reset:          "Rücksetzen",
 
-    invalidUrl:     "Ungültige URL",
     required:       "Erforderlich",
     description:    "Beschreibung",
     title:          "Titel",

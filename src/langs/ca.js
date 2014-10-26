@@ -50,7 +50,6 @@ jQuery.trumbowyg.langs.ca = {
     submit:         "Enviar",
     reset:          "Reiniciar",
 
-    invalidUrl:     "URL invàlida",
     required:       "Obligatori",
     description:    "Descripció",
     title:          "Títol",

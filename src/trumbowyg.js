@@ -40,8 +40,7 @@
 
             submit:         "Confirm",
             reset:          "Cancel",
-
-            invalidUrl:     "Invalid URL",
+            
             required:       "Required",
             description:    "Description",
             title:          "Title",
@@ -813,7 +812,6 @@
             t.openModalInsert(t.lang.createLink, {
                 url: {
                     label: 'URL',
-                    value: 'http://',
                     required: true
                 },
                 title: {
@@ -842,7 +840,6 @@
             t.openModalInsert(t.lang.insertImage, {
                 url: {
                     label: 'URL',
-                    value: 'http://',
                     required: true
                 },
                 alt: {
@@ -1006,11 +1003,6 @@
 
                 if(fd.name === undefined)
                     fd.name = f;
-
-                if(!fd.pattern && f === 'url'){
-                    fd.pattern = /^(http|https):\/\/([\w~#!:.?+=&%@!\-\/]+)$/;
-                    fd.patternError = lg.invalidUrl;
-                }
 
                 html += '<label><input type="'+(fd.type || 'text')+'" name="'+fd.name+'" value="'+(fd.value || '')+'"><span class="'+pfx+'input-infos"><span>'+label+'</span></span></label>';
             }

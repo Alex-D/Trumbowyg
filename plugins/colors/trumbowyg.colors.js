@@ -18,7 +18,7 @@
                 backColor: "Background color"
             },
             fr: {
-                foreColor: "Couleur du text",
+                foreColor: "Couleur du texte",
                 backColor: "Couleur de fond"
             }
         }

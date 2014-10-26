@@ -49,7 +49,6 @@ jQuery.trumbowyg.langs.zh_cn = {
     submit:         "确定",
     reset:          "取消",
 
-    invalidUrl:     "无效的 URL",
     required:       "必需的",
     description:    "描述",
     title:          "标题",

@@ -48,7 +48,6 @@ jQuery.trumbowyg.langs.da = {
     submit:         "Bekræft",
     reset:          "Annuller",
 
-    invalidUrl:     "Ugyldig URL",
     required:       "Påkrævet",
     description:    "Beskrivelse",
     title:          "Titel",

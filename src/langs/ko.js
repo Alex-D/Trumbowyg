@@ -49,7 +49,6 @@ jQuery.trumbowyg.langs.ko = {
     submit:         "전송",
     reset:          "초기화",
 
-    invalidUrl:     "올바르지 않은 URL입니다.",
     required:       "꼭 입력해야 합니다.",
     description:    "설명",
     title:          "제목",
