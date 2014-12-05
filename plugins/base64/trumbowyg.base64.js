@@ -19,6 +19,10 @@
             fr: {
                 base64: "Image en base64",
                 file:   "Fichier"
+            },
+            cs: {
+              base64: "Vložit obrázek",
+              file: "Soubor"
             }
         },
 
@@ -27,7 +31,9 @@
                 base64: {
                     isSupported: function(){
                         if(typeof FileReader === "undefined"){
-                            console.err('[Trumbowyg - Plugin base64] FileReader is not supported by your browser.');
+                            if (window.console !== undefined) {
+                              console.err('[Trumbowyg - Plugin base64] FileReader is not supported by your browser.');
+                            }
                             return false;
                         }
                         return true;
