@@ -801,7 +801,10 @@
 
             if(t.o.autogrow){
                 t.height = t.$editor.height();
-                t.$e.css({ height: t.height });
+                if(t.height != t.$e.css('height')) {
+                    t.$e.css({ height: t.height });
+                    t.$creator.trigger('tbwresize');
+                }
             }
         },
 
