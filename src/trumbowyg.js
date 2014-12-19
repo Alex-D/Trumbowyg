@@ -308,7 +308,7 @@
 
 
             t.$box = $('<div/>', {
-                class: pfx + 'box ' + pfx + t.o.lang + ' trumbowyg'
+                'class': pfx + 'box ' + pfx + t.o.lang + ' trumbowyg'
             });
 
             t.isTextarea = true;
@@ -445,7 +445,7 @@
                 return;
 
             t.$btnPane = $('<ul/>', {
-                class: pfx + 'button-pane'
+                'class': pfx + 'button-pane'
             });
 
             $.each(t.o.btns.concat(t.o.btnsAdd), function(i, btn){
@@ -475,7 +475,7 @@
 
             // build right li for fullscreen and close buttons
             var $liRight = $('<li/>', {
-                class: pfx + 'not-disable ' + pfx + 'buttons-right'
+                'class': pfx + 'not-disable ' + pfx + 'buttons-right'
             });
 
             // Add the fullscreen button
@@ -538,7 +538,7 @@
 
                 $btn = $('<button/>', {
                     type: 'button',
-                    class: pfx + n +'-button' + (btn.ico ? ' '+ pfx + btn.ico +'-button' : ''),
+                    'class': pfx + n +'-button' + (btn.ico ? ' '+ pfx + btn.ico +'-button' : ''),
                     text: btn.text || btn.title || textDef,
                     title: btn.title || btn.text || textDef + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
                     mousedown: function(e){
@@ -560,7 +560,7 @@
                 $btn.addClass(pfx + 'open-dropdown');
                 var c = pfx + 'dropdown',
                     dd = $('<div/>', { // the dropdown
-                        class: n + '-' + c + ' ' + c + ' ' + pfx + 'fixed-top'
+                        'class': n + '-' + c + ' ' + c + ' ' + pfx + 'fixed-top'
                     });
                 $.each(d, function(i, def){
                     if(t.o.btnsDef[def] && t.isSupportedBtn(def))
@@ -609,7 +609,7 @@
             var l = this.lang[n];
             return $('<button/>', {
                 type: 'button',
-                class: this.o.prefix + n + '-button',
+                'class': this.o.prefix + n + '-button',
                 title: l,
                 text: l
             });
@@ -626,7 +626,7 @@
         buildOverlay: function(){
             var t = this;
             t.$overlay = $('<div/>', {
-                class: t.o.prefix + 'overlay'
+                'class': t.o.prefix + 'overlay'
             }).css({
                 top: t.$btnPane.outerHeight(),
                 height: (parseInt(t.$editor.outerHeight()) + 1) + 'px'
@@ -942,7 +942,7 @@
 
             // build out of ModalBox, it's the mask for animations
             var $modal = $('<div/>', {
-                class: pfx + 'modal ' + pfx + 'fixed-top'
+                'class': pfx + 'modal ' + pfx + 'fixed-top'
             }).css({
                 top: (parseInt(t.$btnPane.height()) + 1) + 'px'
             }).appendTo(t.$box);
@@ -970,7 +970,7 @@
 
             // build ModalBox and animate to show them
             var $box = $('<div/>', {
-                class: pfx + 'modal-box',
+                'class': pfx + 'modal-box',
                 html: $form
             })
             .css({
@@ -987,7 +987,7 @@
             // Append title
             $('<span/>', {
                 text: title,
-                class: pfx + 'modal-title'
+                'class': pfx + 'modal-title'
             }).prependTo($box);
 
 
@@ -1010,7 +1010,7 @@
                 pfx = t.o.prefix;
 
             return $('<button/>', {
-                class: pfx + 'modal-button ' + pfx + 'modal-' + n,
+                'class': pfx + 'modal-button ' + pfx + 'modal-' + n,
                 type: n,
                 text: t.lang[n] || n
             }).appendTo($('form', $modal));
@@ -1101,7 +1101,7 @@
             .find('input+span')
             .append(
                 $('<span/>', {
-                    class: pfx +'msg-error',
+                    'class': pfx +'msg-error',
                     text: err
                 })
             );
