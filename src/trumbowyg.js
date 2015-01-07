@@ -386,6 +386,7 @@
                         src: v.url,
                         alt: v.alt
                     });
+                    return true;
                 });
                 e.stopPropagation();
             })
