@@ -91,7 +91,7 @@
                     case 'getSelection':
                         return t.selection;
                     case 'getSelectedText':
-                        return t.selection.text || t.selection+'';
+                        return t.getSelectedText();
                     case 'restoreSelection':
                         return t.restoreSelection();
 
@@ -858,11 +858,11 @@
                 },
                 title: {
                     label: t.lang.title,
-                    value: t.selection.text || t.selection
+                    value: t.getSelectedText()
                 },
                 text: {
                     label: t.lang.text,
-                    value: t.selection.text || t.selection
+                    value: t.getSelectedText()
                 }
             }, function(v){ // v is value
                 t.execCmd('createLink', v.url);
@@ -886,7 +886,7 @@
                 },
                 alt: {
                     label: t.lang.description,
-                    value: t.selection.text || t.selection
+                    value: t.getSelectedText()
                 }
             }, function(v){ // v are values
                 t.execCmd('insertImage', v.url);
@@ -1135,6 +1135,10 @@
                 } else if(t.doc.selection && range.select)
                     range.select();
             }
+        },
+        getSelectedText: function(){
+            var s = this.selection;
+            return (s.text !== undefined) ? s.text : s;
         },
 
 
