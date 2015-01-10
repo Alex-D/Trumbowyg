@@ -91,7 +91,7 @@
                     case 'getSelection':
                         return t.selection;
                     case 'getSelectedText':
-                        return t.selection+'';
+                        return t.selection.text || t.selection+'';
                     case 'restoreSelection':
                         return t.restoreSelection();
 
@@ -382,7 +382,7 @@
                         value: $img.attr('alt')
                     }
                 }, function(v){
-                    $img.attr({
+                    return $img.attr({
                         src: v.url,
                         alt: v.alt
                     });
@@ -858,11 +858,11 @@
                 },
                 title: {
                     label: t.lang.title,
-                    value: t.selection
+                    value: t.selection.text || t.selection
                 },
                 text: {
                     label: t.lang.text,
-                    value: t.selection
+                    value: t.selection.text || t.selection
                 }
             }, function(v){ // v is value
                 t.execCmd('createLink', v.url);
@@ -886,7 +886,7 @@
                 },
                 alt: {
                     label: t.lang.description,
-                    value: t.selection
+                    value: t.selection.text || t.selection
                 }
             }, function(v){ // v are values
                 t.execCmd('insertImage', v.url);
