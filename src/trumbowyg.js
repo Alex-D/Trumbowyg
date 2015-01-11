@@ -912,7 +912,6 @@
                 try {
                     cmd(param, t);
                 } catch(e2){
-                    //t.$editor.focus();
                     if(cmd == 'insertHorizontalRule')
                         param = null;
                     else if(cmd == 'formatBlock' && (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0))
@@ -1138,7 +1137,7 @@
         },
         getSelectedText: function(){
             var s = this.selection;
-            return (s.text !== undefined) ? s.text : s;
+            return (s.text !== undefined) ? s.text : s+'';
         },
 
 
