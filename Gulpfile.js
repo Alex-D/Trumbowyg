@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
+    del = require('del'),
+    vinylPaths = require('vinyl-paths'),
     $ = require('gulp-load-plugins')(),
-    path = require('path'),
     spritesmith = require('gulp.spritesmith');
 
 var paths = {
@@ -13,8 +14,7 @@ var paths = {
     },
     mainStyle: 'src/ui/sass/trumbowyg.scss',
     styles: {
-        sass: 'src/ui/sass',
-        includePaths: ['src/ui/sass']
+        sass: 'src/ui/sass'
     }
 };
 
@@ -43,7 +43,7 @@ var bannerLight = ['/** <%= pkg.title %> v<%= pkg.version %> - <%= pkg.descripti
 
 gulp.task('clean', function(){
     return gulp.src(['dist/*', 'src/ui/sass/_sprite*.scss'])
-        .pipe($.clean());
+        .pipe(vinylPaths(del));
 });
 
 gulp.task('test', ['test-scripts', 'test-langs', 'test-plugins']);
@@ -133,8 +133,7 @@ function makeSprite(resolution){
 gulp.task("styles", ["sprites"], function(){
   return gulp.src(paths.mainStyle)
     .pipe($.sass({
-      sass: paths.styles.sass,
-      includePaths: paths.styles.includePaths
+      sass: paths.styles.sass
     }))
     .pipe($.autoprefixer(["last 1 version", "> 1%", "ff >= 20", "ie >= 8", "opera >= 12", "Android >= 2.2"], { cascade: true }))
     .pipe($.header(banner, { pkg: pkg, description: "Default stylesheet for Trumbowyg editor" }))

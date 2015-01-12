@@ -145,8 +145,6 @@
             dir: 'ltr',
             duration: 200, // Duration of modal box animations
 
-            mobile: false,
-            tablet: true,
             closable: false,
             fullscreenable: true,
             fixedBtnPane: false,
@@ -279,11 +277,6 @@
             var t = this;
             t.height = t.$e.height();
 
-            if(t.isEnabled()){
-                t.buildEditor(true);
-                return;
-            }
-
             t.buildEditor();
             t.buildBtnPane();
 
@@ -292,20 +285,10 @@
             t.buildOverlay();
         },
 
-        buildEditor: function(disable){
+        buildEditor: function(){
             var t = this,
                 pfx = t.o.prefix,
                 html = '';
-
-
-            if(disable === true){
-                if(!t.$e.is('textarea')){
-                    var textarea = t.buildTextarea().val(t.$e.val());
-                    t.$e.hide().after(textarea);
-                }
-                return;
-            }
-
 
             t.$box = $('<div/>', {
                 'class': pfx + 'box ' + pfx + t.o.lang + ' trumbowyg'
@@ -1138,18 +1121,6 @@
         getSelectedText: function(){
             var s = this.selection;
             return (s.text !== undefined) ? s.text : s+'';
-        },
-
-
-
-        // Return true if must enable Trumbowyg on this mobile device
-        isEnabled: function(){
-            var tablet = new RegExp("(iPad|webOS)"),
-                mobile = new RegExp("(iPhone|iPod|Android|BlackBerry|Windows Phone|ZuneWP7)"),
-                ua = navigator.userAgent,
-                o = this.o;
-
-            return (o.tablet === true && tablet.test(ua)) || (o.mobile === true && mobile.test(ua));
         }
     };
 })(navigator, window, document, jQuery);
