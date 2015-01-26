@@ -573,6 +573,7 @@
 
             return $('<button/>', {
                 type: 'button',
+                'class': t.o.prefix + n +'-button' + (b.ico ? ' '+ pfx + b.ico +'-button' : ''),
                 text: b.text || b.title || t.lang[n] || n,
                 title: ((b.key) ? ' (Ctrl + ' + b.key + ')' : null),
                 style: b.style || null,
