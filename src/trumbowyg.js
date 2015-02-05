@@ -470,7 +470,7 @@
                         t.$box.toggleClass(cssClass);
 
                         if(t.$box.hasClass(cssClass)){
-                            $('body').css('overflow', 'hidden');
+                            $('body').addClass(pfx + 'body-fullscreen');
                             $.each([t.$editor, t.$e], function(){
                                 $(this).css({
                                     height: 'calc(100% - 35px)',
@@ -479,7 +479,7 @@
                             });
                             t.$btnPane.css('width', '100%');
                         } else {
-                            $('body').css('overflow', 'auto');
+                            $('body').removeClass(pfx + 'body-fullscreen');
                             t.$box.removeAttr('style');
                             if(!t.o.autogrow)
                                 $.each([t.$editor, t.$e], function(){

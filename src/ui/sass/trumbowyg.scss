@@ -333,6 +333,9 @@ $light-color: #ecf0f1;
 /**
  * Fullscreen
  */
+body.trumbowyg-body-fullscreen {
+    overflow: hidden;
+}
 .trumbowyg-fullscreen {
     position: fixed;
     top: 0;
