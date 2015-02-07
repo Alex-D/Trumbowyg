@@ -344,7 +344,7 @@
                 t.$editor.html(
                     t.$editor.html()
                         .replace('<br>', '</p><p>')
-                        .replace('&nbsp;', '')
+                        .replace('&nbsp;', ' ')
                 );
                 t.semanticCode();
             }
@@ -385,8 +385,10 @@
                 }
             })
             .on('keyup', function(e){
-                if(!t._ctrl && e.which !== 17)
+                if(!t._ctrl && e.which !== 17){
                     t.semanticCode(false, e.which === 13);
+                    t.$creator.trigger('tbwchange');
+                }
 
                 setTimeout(function(){
                     t._ctrl = false;
