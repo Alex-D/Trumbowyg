@@ -38,3 +38,14 @@ function scrollGoto(cible){
 	var hauteur = ($(cible).size() > 0) ? (parseInt($(cible).offset().top) - offset - 10)+"px" : 0;
 	$('html,body').animate({scrollTop: hauteur}, 750);
 }
+
+
+
+// Add anchors
+$('#documentation h3[id]').each(function(){
+	$(this).after($('<a/>', {
+		text: '§',
+		'class': 'title-link',
+		href: '#' + $(this).attr('id')
+	}));
+});

@@ -146,8 +146,12 @@ $('textarea').trumbowyg({
 
 
 
-                            <div class="feature" data-added="1.0.0">
+                            <div class="feature" data-added="1.0.0" data-deprecated="2.0.0">
                                 <h3 id="direction">Direction</h3>
+                                <p class="deprecated-feature">Deprecated since 2.0.0</p>
+                                <p class="deprecated-info">
+                                    Since 2.0.0, prefer use the <code>_dir</code> variable in the language file.
+                                </p>
                                 <p>
                                     If your language needs to be read from left to right, use the <code>dir</code> option:
                                 </p>
@@ -164,7 +168,7 @@ $('textarea').trumbowyg({
 
                             <div class="feature" data-added="1.0.0" data-removed="2.0.0">
                                 <h3 id="animation-duration">Animation duration</h3>
-                                <p class="removed-feature">Removed in v2.0.0</p>
+                                <p class="removed-feature">Removed since 2.0.0</p>
                                 <p>
                                     Lot of elements have animations, their duration is configurable via the <code class="javascript">duration</code> option: 
                                     <pre><code class="javascript">
@@ -257,7 +261,7 @@ $('.editor-modern-ui').trumbowyg({
                             
                             <div class="feature" data-added="1.0.0" data-removed="2.0.0">
                                 <h3 id="mobile-tablet">Mobile &amp; Tablet</h3>
-                                <p class="removed-feature">Removed in 2.0.0</p>
+                                <p class="removed-feature">Removed since 2.0.0</p>
                                 <p>
                                     Trumbowyg is compatible with mobiles devices, but you can deactive support for mobile and tablet with the following:
                                 </p>
@@ -631,9 +635,9 @@ $('#editor').trumbowyg('destroy');
                                 <ul>
                                     <li>Focus on editor: <code>tbwfocus</code></li>
                                     <li>Blur on editor: <code>tbwblur</code></li>
-                                    <li>Change in editor: <code>tbwchange</code> (appeared in 2.0.0)</li>
-                                    <li>Resize the editor on autogrow: <code>tbwresize</code> (appeared in 2.0.0)</li>
-                                    <li>Paste something in the editor: <code>tbwpaste</code> (appeared in 2.0.0)</li>
+                                    <li>Change in editor: <code>tbwchange</code> <span class="version-tag">2.0.0</span></li>
+                                    <li>Resize the editor on autogrow: <code>tbwresize</code> <span class="version-tag">2.0.0</span></li>
+                                    <li>Paste something in the editor: <code>tbwpaste</code> <span class="version-tag">2.0.0</span></li>
                                 </ul>
                                 <pre><code class="javascript">
 $('#editor')
