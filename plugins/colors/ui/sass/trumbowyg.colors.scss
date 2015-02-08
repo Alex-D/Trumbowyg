@@ -57,6 +57,7 @@
         &.trumbowyg-foreColor-button,
         &.trumbowyg-backColor-button {
             background-image: url($icons-2x) !important;
+            background-size: round($sprite-width-2x / 2) round($sprite-height-2x / 2) !important;
         }
 
         &.trumbowyg-foreColor-button { @include sprite-pos($forecolor-2x, true); }
