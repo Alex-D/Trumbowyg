@@ -505,6 +505,8 @@ body.trumbowyg-body-fullscreen {
 
     &.trumbowyg-horizontalRule-button { @include sprite-pos($horizontal-rule); }
 
+    &.trumbowyg-removeformat-button { @include sprite-pos($removeformat); }
+
     &.trumbowyg-fullscreen-button { @include sprite-pos($fullscreen); }
     &.trumbowyg-close-button { @include sprite-pos($close); }
 }
@@ -552,6 +554,8 @@ body.trumbowyg-body-fullscreen {
         &.trumbowyg-orderedList-button { @include sprite-pos($ordered-list-2x, true); }
 
         &.trumbowyg-horizontalRule-button { @include sprite-pos($horizontal-rule-2x, true); }
+
+        &.trumbowyg-removeformat-button { @include sprite-pos($removeformat-2x, true); }
 
         &.trumbowyg-fullscreen-button { @include sprite-pos($fullscreen-2x, true); }
         &.trumbowyg-close-button { @include sprite-pos($close-2x, true); }
