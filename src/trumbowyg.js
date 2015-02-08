@@ -33,6 +33,7 @@
             justifyFull:    "Align Justify",
 
             horizontalRule: "Insert horizontal rule",
+            removeformat:   "Remove format",
 
             fullscreen:     "fullscreen",
 
@@ -106,8 +107,6 @@
                     // Public options
                     case 'lang':
                         return t.lang;
-                    case 'duration':
-                        return t.o.duration;
 
                     // HTML
                     case 'html':
@@ -143,7 +142,6 @@
         t.o = $.extend(true, {}, {
             lang: 'en',
             dir: 'ltr',
-            duration: 200, // Duration of modal box animations
 
             closable: false,
             fullscreenable: true,
@@ -156,6 +154,7 @@
             // WYSIWYG only
             semantic: false,
             resetCss: false,
+            removeformatPasted: false,
 
             btns: [
                 'viewHTML',
@@ -165,7 +164,8 @@
                 '|', 'insertImage',
                 '|', 'btnGrp-justify',
                 '|', 'btnGrp-lists',
-                '|', 'horizontalRule'
+                '|', 'horizontalRule',
+                '|', 'removeformat'
             ],
             btnsAdd: [],
 
@@ -252,6 +252,8 @@
                 horizontalRule: {
                     func: 'insertHorizontalRule'
                 },
+
+                removeformat: {},
 
                 // Dropdowns
                 formatting: {
@@ -400,6 +402,29 @@
             .on('blur', function(){
                 t.syncCode();
                 t.$creator.trigger('tbwblur');
+            })
+            .on('paste', function(e){
+                t.$creator.trigger('tbwpaste');
+
+                if(t.o.removeformatPasted){
+                    e.preventDefault();
+
+                    try {
+                        // IE
+                        var text = window.clipboardData.getData("Text");
+
+                        try {
+                            // <= IE10
+                            t.doc.selection.createRange().pasteHTML(text);
+                        } catch(err){
+                            // IE 11
+                            t.doc.getSelection().getRangeAt(0).insertNode(document.createTextNode(text));
+                        }
+                    } catch(err) {
+                        // Not IE
+                        t.execCmd('insertText', (e.originalEvent || e).clipboardData.getData('text/plain'));
+                    }
+                }
             });
 
             $(t.doc).on('keydown', function(e){
@@ -622,12 +647,12 @@
         showOverlay: function(){
             var t = this;
             $(window).trigger('scroll');
-            t.$overlay.fadeIn(t.o.duration);
+            t.$overlay.fadeIn(200);
             t.$box.addClass(t.o.prefix + 'box-blur');
         },
         hideOverlay: function(){
             var t = this;
-            t.$overlay.fadeOut(t.o.duration/4);
+            t.$overlay.fadeOut(50);
             t.$box.removeClass(t.o.prefix + 'box-blur');
         },
 
@@ -969,7 +994,7 @@
             .animate({
                 top: 0,
                 opacity: 1
-            }, t.o.duration / 2);
+            }, 100);
 
 
             // Append title
@@ -1015,7 +1040,7 @@
 
             $modalBox.animate({
                 top: '-' + $modalBox.height()
-            }, t.o.duration/2, function(){
+            }, 100, function(){
                 $(this).parent().remove();
                 t.hideOverlay();
             });
