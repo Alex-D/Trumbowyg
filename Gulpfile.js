@@ -1,15 +1,16 @@
 var gulp = require('gulp'),
-    $ = require('gulp-load-plugins')(),
-    path = require('path');
+    del = require('del'),
+    vinylPaths = require('vinyl-paths'),
+    $ = require('gulp-load-plugins')();
 
-var mainStyle = 'sass/main.scss';
+var mainStyle = 'scss/main.scss';
 
 
 
 
 gulp.task('clean', function(){
-    return gulp.src('dist/*')
-        .pipe($.clean());
+    return gulp.src(['*.min.js'])
+        .pipe(vinylPaths(del));
 });
 
 gulp.task("styles", function(){
@@ -26,9 +27,9 @@ gulp.task("styles", function(){
 
 
 gulp.task('watch', function(){
-    gulp.watch(mainStyle, ['styles']);
+    gulp.watch(['scss/*.scss'], ['styles']);
 
-    gulp.watch(['dist/**', 'dist/*/**'], function(file){
+    gulp.watch(['css/**', 'img/*', 'js/*'], function(file){
         $.livereload.changed(file);
     });
 
