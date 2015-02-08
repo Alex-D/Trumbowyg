@@ -404,7 +404,7 @@
                 t.$creator.trigger('tbwblur');
             })
             .on('paste', function(e){
-                t.$creator.trigger('tbwpaste');
+                t.$creator.trigger('tbwpaste', e);
 
                 if(t.o.removeformatPasted){
                     e.preventDefault();
@@ -437,7 +437,7 @@
         },
 
 
-        // build the Textarea which contain HTML generated code
+        // Build the Textarea which contain HTML generated code
         buildTextarea: function(){
             return $('<textarea/>', {
                 name: this.$e.attr('id'),
@@ -446,7 +446,7 @@
         },
 
 
-        // build button pane, use o.btns and o.btnsAdd options
+        // Build button pane, use o.btns and o.btnsAdd options
         buildBtnPane: function(){
             var t = this,
                 pfx = t.o.prefix;
@@ -483,7 +483,7 @@
                 });
             });
 
-            // build right li for fullscreen and close buttons
+            // Build right li for fullscreen and close buttons
             var $liRight = $('<li/>', {
                 'class': pfx + 'not-disable ' + pfx + 'buttons-right'
             });
@@ -517,7 +517,7 @@
                     })
                 );
 
-            // build and add close button
+            // Build and add close button
             if(t.o.closable)
                 $liRight
                     .append(
@@ -539,7 +539,7 @@
         },
 
 
-        // build a button and his action
+        // Build a button and his action
         buildBtn: function(n){ // n is name of the button
             var t = this,
                 pfx = t.o.prefix,
@@ -587,7 +587,7 @@
 
             return $btn;
         },
-        // build a button for dropdown menu
+        // Build a button for dropdown menu
         // @param n : name of the subbutton
         buildSubBtn: function(n){
             var t = this,
@@ -615,7 +615,7 @@
                 }
             });
         },
-        // build a button for right li
+        // Build a button for right li
         // @param n : name of the right button
         buildRightBtn: function(n){
             var l = this.lang[n];
@@ -634,7 +634,7 @@
             return true;
         },
 
-        // build overlay for modal box
+        // Build overlay for modal box
         buildOverlay: function(){
             var t = this;
             t.$overlay = $('<div/>', {
@@ -954,7 +954,7 @@
             // Disable all btnPane btns
             t.$btnPane.addClass(pfx + 'disable');
 
-            // build out of ModalBox, it's the mask for animations
+            // Build out of ModalBox, it's the mask for animations
             var $modal = $('<div/>', {
                 'class': pfx + 'modal ' + pfx + 'fixed-top'
             }).css({
@@ -967,7 +967,7 @@
                 $modal.trigger(pfx + 'cancel');
             });
 
-            // build the form
+            // Build the form
             var $form = $('<form/>', {
                 action: '',
                 html: content
@@ -982,7 +982,7 @@
             });
 
 
-            // build ModalBox and animate to show them
+            // Build ModalBox and animate to show them
             var $box = $('<div/>', {
                 'class': pfx + 'modal-box',
                 html: $form
