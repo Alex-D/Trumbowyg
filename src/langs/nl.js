@@ -7,7 +7,7 @@
  *          Github : https://github.com/dhiemstra
  */
 
-jQuery.trumbowyg.langs.de = {
+jQuery.trumbowyg.langs.nl = {
     viewHTML:       "HTML bekijken",
 
     formatting:     "Formatering",
