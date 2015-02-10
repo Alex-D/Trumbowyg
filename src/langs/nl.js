@@ -40,6 +40,7 @@ jQuery.trumbowyg.langs.nl = {
     justifyFull:    "Spreiden",
 
     horizontalRule: "Horizontale lijn",
+    removeFormat:   "Opmaak verwijderen",
 
     fullscreen:     "Volledig scherm",
 
