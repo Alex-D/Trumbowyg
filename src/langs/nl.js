@@ -10,7 +10,7 @@
 jQuery.trumbowyg.langs.nl = {
     viewHTML:       "HTML bekijken",
 
-    formatting:     "Formatering",
+    formatting:     "Opmaak",
     p:              "Paragraaf",
     blockquote:     "Citaat",
     code:           "Code",
