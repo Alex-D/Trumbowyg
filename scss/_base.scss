@@ -1,0 +1,241 @@
+/*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
+
+html,
+button,
+input,
+select,
+textarea {
+    color: #222;
+}
+
+html {
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+html,
+body {
+    background: #efefef;
+}
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+audio,
+canvas,
+img,
+video {
+    vertical-align: middle;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: vertical;
+}
+
+
+
+
+
+
+html {
+    box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+    font-family: $font;
+    font-size: 18px;
+}
+
+.wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+
+
+/*
+ * Big button animation
+ */
+.big-button {
+    display: block;
+    position: relative;
+    background: $main-color;
+    margin: 0 auto;
+    font-weight: 100;
+    text-decoration: none;
+    color: #FFF;
+    transition: all 0.15s;
+}
+.big-button-effects {
+    display: block;
+    position: relative;
+    width: 100%;
+}
+.big-button::before,
+.big-button::after,
+.big-button + .big-button-effects::before,
+.big-button + .big-button-effects::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    width: 0%;
+    height: 1px;
+    background: $main-color;
+    opacity: 0.7;
+    transition: none;
+}
+.big-button + .big-button-effects::before,
+.big-button + .big-button-effects::after {
+    height: 2px;
+    opacity: 1;
+}
+.big-button::before,
+.big-button + .big-button-effects::before {
+    top: 0;
+    left: 0;
+}
+.big-button::after,
+.big-button + .big-button-effects::after {
+    right: 0;
+    bottom: 0;
+}
+.big-button:hover::before,
+.big-button:focus::before,
+.big-button:hover::after,
+.big-button:focus::after,
+.big-button:hover + .big-button-effects::before,
+.big-button:focus + .big-button-effects::before,
+.big-button:hover + .big-button-effects::after,
+.big-button:focus + .big-button-effects::after {
+    width: 100%;
+    opacity: 0;
+    transition: width 0.15s ease 0.15s, opacity 0.5s ease 0.2s;
+}
+.big-button:hover,
+.big-button:focus {
+    background: $header-dark;
+    color: $main-color;
+}
+
+
+
+.text-center {
+    text-align: center;
+}
+
+
+
+
+
+/* ==========================================================================
+   Print styles
+   ========================================================================== */
+
+@media print {
+    * {
+        background: transparent !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    .ir a:after,
+    a[href^="javascript:"]:after,
+    a[href^="#"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    @page {
+        margin: 0.5cm;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}

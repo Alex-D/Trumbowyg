@@ -1,0 +1,27 @@
+.footer {
+	margin-top: 100px;
+	text-align: center;
+	color: #999;
+	background: $header-dark;
+	border-top: 3px solid $main-color;
+
+	.footer-text,
+	.footer-link {
+		display: inline-block;
+		padding: 15px;
+		text-shadow: #000 2px 2px 0;
+	}
+	.footer-text {
+		padding-bottom: 0;
+	}
+	.footer-link {
+		text-decoration: none;
+		color: #fff;
+		transition: color 0.15s;
+
+		&:hover,
+		&:focus {
+			color: $main-color;
+		}
+	}
+}

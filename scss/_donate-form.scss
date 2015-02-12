@@ -1,0 +1,103 @@
+$donate-padding: 40px;
+
+.donate-form {
+	position: relative;
+	width: 300px + $donate-padding*2;
+	margin: 50px auto;
+	background: #fcfcfc;
+	padding: $donate-padding;
+
+	.via-paypal {
+		display: block;
+		position: absolute;
+		bottom: 9px;
+		right: $donate-padding;
+		font-size: 16px;
+		color: #999;
+	}
+
+	label {
+		position: absolute;
+		display: block;
+		top: $donate-padding;
+		left: $donate-padding;
+		height: 26px;
+		font-size: 18px;
+		color: #777;
+		font-weight: 100;
+
+		&::before,
+		&::after {
+			content: " ";
+			position: absolute;
+			top: 75px;
+			display: block;
+			height: 2px;
+			width: 255px;
+			background: #DDD;
+		}
+		&::after {
+			width: 0;
+			background: $main-color;
+			transition: width 0.15s;
+		}
+	}
+
+	input {
+		background: none;
+		border: none;
+		width: 255px;
+		font-size: 30px;
+		margin-top: 26px;
+
+		&:focus {
+			outline: none;
+
+			& + label::after {
+				width: 255px;
+			}
+		}
+	}
+
+	select {
+		position: absolute;
+		top: 26 + $donate-padding;
+		right: $donate-padding;
+		background: none;
+		border: none;
+		font-size: 30px;
+		width: 40px;
+
+		&:focus {
+			outline-color: $main-color;
+		}
+	}
+
+	[type=submit] {
+		z-index: 1;
+		border: none;
+		background: $main-color;
+		color: #FFF;
+		padding: 15px;
+		text-align: center;
+		font-size: 22px;
+		width: 100%;
+		height: 60px;
+		line-height: 22px;
+		margin-top: 35px;
+		transition: all 0.15s;
+
+		&:hover,
+		&:focus {
+			color: $main-color;
+			background: transparent;
+		}
+
+		& + .big-button-effects {
+			z-index: 0;
+			height: 60px;
+			margin-top: -60px;
+			background: $header-dark;
+		}
+	}
+}
