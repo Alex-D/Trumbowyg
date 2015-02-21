@@ -526,6 +526,7 @@
                             if(t.$box.hasClass(pfx + 'fullscreen'))
                                 $('body').css('overflow', 'auto');
                             t.destroy();
+                            t.$creator.trigger('tbwclose');
                         })
                     );
 
