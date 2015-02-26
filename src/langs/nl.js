@@ -14,7 +14,7 @@ jQuery.trumbowyg.langs.nl = {
     p:              "Paragraaf",
     blockquote:     "Citaat",
     code:           "Code",
-    header:         "Titel",
+    header:         "Kop",
 
     bold:           "Vet",
     italic:         "Cursief",
@@ -28,7 +28,7 @@ jQuery.trumbowyg.langs.nl = {
     unorderedList:  "Ongenummerde lijst",
     orderedList:    "Genummerde lijst",
 
-    insertImage:    "Plaatje invoegen",
+    insertImage:    "Afbeelding invoegen",
     insertVideo:    "Video invoegen",
     link:           "Link",
     createLink:     "Link maken",
@@ -37,7 +37,7 @@ jQuery.trumbowyg.langs.nl = {
     justifyLeft:    "Links uitlijnen",
     justifyCenter:  "Centreren",
     justifyRight:   "Rechts uitlijnen",
-    justifyFull:    "Spreiden",
+    justifyFull:    "Uitvullen",
 
     horizontalRule: "Horizontale lijn",
     removeFormat:   "Opmaak verwijderen",
