@@ -40,7 +40,7 @@ jQuery.trumbowyg.langs.sk = {
 
     horizontalRule: "Vložit vodorovnú čiaru",
 
-    fullscreen:     "Režim celéej obrazovky",
+    fullscreen:     "Režim celej obrazovky",
 
     close:          "Zavrieť",
 
