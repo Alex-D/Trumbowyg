@@ -20,6 +20,11 @@
                 file:   "File",
                 uploadError: "Error"
             },
+            sk: {
+                upload: "Nahrať",
+                file:   "Súbor",
+                uploadError: "Chyba"
+            },
             fr: {
                 upload: "Envoi",
                 file:   "Fichier",
