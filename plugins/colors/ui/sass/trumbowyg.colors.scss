@@ -1,5 +1,8 @@
-@import "sprite";
-@import "sprite-2x";
+@import "sprite-black";
+@import "sprite-black-2x";
+@import "sprite-white";
+@import "sprite-white-2x";
+
 @import "sprite-pos";
 
 .foreColor-trumbowyg-dropdown,
@@ -45,22 +48,47 @@
 .trumbowyg-button-pane li button {
     &.trumbowyg-foreColor-button,
     &.trumbowyg-backColor-button {
-        background-image: url($icons);
+        background-image: url($icons-black);
     }
 
-    &.trumbowyg-foreColor-button { @include sprite-pos($forecolor); }
-    &.trumbowyg-backColor-button { @include sprite-pos($backcolor); }
+    &.trumbowyg-foreColor-button { @include sprite-pos($forecolor-black); }
+    &.trumbowyg-backColor-button { @include sprite-pos($backcolor-black); }
 }
+
+.trumbowyg-black {
+    .trumbowyg-button-pane li button {
+        &.trumbowyg-foreColor-button,
+        &.trumbowyg-backColor-button {
+            background-image: url($icons-white);
+        }
+
+        &.trumbowyg-foreColor-button { @include sprite-pos($forecolor-white); }
+        &.trumbowyg-backColor-button { @include sprite-pos($backcolor-white); }
+    }
+}
+
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 4/3), only screen and (min-device-pixel-ratio: 1.3), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx){ 
     .trumbowyg-button-pane li button {
         &.trumbowyg-foreColor-button,
         &.trumbowyg-backColor-button {
-            background-image: url($icons-2x) !important;
-            background-size: round($sprite-width-2x / 2) round($sprite-height-2x / 2) !important;
+            background-image: url($icons-black-2x) !important;
+            background-size: round($sprite-width-black-2x / 2) round($sprite-height-black-2x / 2) !important;
         }
 
-        &.trumbowyg-foreColor-button { @include sprite-pos($forecolor-2x, true); }
-        &.trumbowyg-backColor-button { @include sprite-pos($backcolor-2x, true); }
+        &.trumbowyg-foreColor-button { @include sprite-pos($forecolor-black-2x, true); }
+        &.trumbowyg-backColor-button { @include sprite-pos($backcolor-black-2x, true); }
+    }
+
+    .trumbowyg-black {
+        .trumbowyg-button-pane li button {
+            &.trumbowyg-foreColor-button,
+            &.trumbowyg-backColor-button {
+                background-image: url($icons-white-2x) !important;
+            }
+
+            &.trumbowyg-foreColor-button { @include sprite-pos($forecolor-white-2x, true); }
+            &.trumbowyg-backColor-button { @include sprite-pos($backcolor-white-2x, true); }
+        }
     }
 }

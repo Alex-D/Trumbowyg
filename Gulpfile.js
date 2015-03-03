@@ -9,8 +9,10 @@ var paths = {
     langs: ['src/langs/**.js', '!src/langs/en.js'],
     plugins: ['plugins/*/**.js', '!plugins/*/Gulpfile.js'],
     sprites: {
-        'icons': 'src/ui/images/icons/**.png',
-        'icons-2x': 'src/ui/images/icons-2x/**.png'
+        'icons-white': 'src/ui/images/icons-white/**.png',
+        'icons-white-2x': 'src/ui/images/icons-white-2x/**.png',
+        'icons-black': 'src/ui/images/icons-black/**.png',
+        'icons-black-2x': 'src/ui/images/icons-black-2x/**.png'
     },
     mainStyle: 'src/ui/sass/trumbowyg.scss',
     styles: {
@@ -97,27 +99,25 @@ gulp.task('plugins', ['test-plugins'], function(){
 
 
 gulp.task('sprites', function(){
-    return makeSprite() && makeSprite('-2x');
+    return makeSprite('white') && makeSprite('white', '-2x') && makeSprite('black') && makeSprite('black', '-2x');
 });
-function makeSprite(resolution){
-    if(!resolution)
-        resolution = '';
-
-    var sprite = gulp.src(paths.sprites['icons' + resolution])
+function makeSprite(color, resolution){
+    var suffix =  '-' + color + ((resolution) ? resolution : '');
+    var sprite = gulp.src(paths.sprites['icons' + suffix])
         .pipe(spritesmith({
-            imgName: 'icons' + resolution + '.png',
-            cssName: '_sprite' + resolution + '.scss',
+            imgName: 'icons' + suffix + '.png',
+            cssName: '_sprite' + suffix + '.scss',
             cssTemplate: function(params){
                 var output = '', e;
                 for(var i in params.items){
                     e = params.items[i];
-                    output += '$' + e.name + resolution + ': ' + e.px.offset_x + ' ' + e.px.offset_y + ';\n';
+                    output += '$' + e.name + suffix + ': ' + e.px.offset_x + ' ' + e.px.offset_y + ';\n';
                 }
                 if(params.items.length > 0){
                     output += '\n\n';
-                    output += '$sprite-height' + resolution + ': ' + params.items[0].px.total_height + ';\n';
-                    output += '$sprite-width' + resolution + ': ' + params.items[0].px.total_width + ';\n';
-                    output += '$icons' + resolution + ': "./images/icons' + resolution + '.png";';
+                    output += '$sprite-height' + suffix + ': ' + params.items[0].px.total_height + ';\n';
+                    output += '$sprite-width' + suffix + ': ' + params.items[0].px.total_width + ';\n';
+                    output += '$icons' + suffix + ': "./images/icons' + suffix + '.png";';
                 }
 
                 return output;
@@ -130,7 +130,7 @@ function makeSprite(resolution){
 
 
 
-gulp.task("styles", ["sprites"], function(){
+gulp.task("styles", function(){
   return gulp.src(paths.mainStyle)
     .pipe($.sass({
       sass: paths.styles.sass
@@ -161,6 +161,6 @@ gulp.task('watch', function(){
     $.livereload.listen();
 });
 
-gulp.task('build', ['scripts', 'langs', 'plugins', 'styles']);
+gulp.task('build', ['scripts', 'langs', 'plugins', 'sprites', 'styles']);
 
 gulp.task('default', ['build', 'watch']);
