@@ -20,6 +20,10 @@
             fr: {
                 foreColor: "Couleur du texte",
                 backColor: "Couleur de fond"
+            },
+            sk: {
+                foreColor: "Farba textu",
+                backColor: "Farba pozadia"
             }
         }
     });
@@ -63,7 +67,13 @@
             };
             dropdown.push(btn);
         });
-
+        var btn = '_' + func + 'transparent';
+        $.trumbowyg.opts.btnsDef[btn] = {
+            func: func,
+            param: 'transparent',
+            style: 'background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAG0lEQVQIW2NkQAAfEJMRmwBYhoGBYQtMBYoAADziAp0jtJTgAAAAAElFTkSuQmCC);'
+        };
+        dropdown.push(btn);
         return dropdown;
     }
 })(jQuery);
