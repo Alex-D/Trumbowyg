@@ -7,7 +7,7 @@
 /dist
 /src/ui/sass/_sprite*
 /plugins/**/ui/sass/_sprite*
-
+/nbproject/
 
 # Windows image file caches
 Thumbs.db
