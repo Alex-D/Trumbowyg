@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>HTML5 Validation | Trumbowyg by Alex-D</title>
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="../dist/ui/trumbowyg.css">
+    </head>
+
+    <body>
+        <main>
+            <h1>HTML5 Validation</h1>
+
+            <div id="test-1">
+                <p>The <code>textarea</code> associated with the following Trumbowyg has the <code>required</code> HTML5
+                attribute.  Modern browsers should not let you submit the form if the field is empty, and they should 
+                let you know there's a problem if you do try.</p>
+
+                <form action="?">
+                    <div>
+                        <textarea placeholder="This field is empty." required></textarea>
+                    </div>
+
+                    <div>
+                        <input type="submit" value="Submit"/>
+                    </div>
+                </form>
+
+                <h2>The code</h2>
+
+                <pre><code>
+$('#test-1').each(function () {
+    $(this).find('textarea').trumbowyg();
+});
+                </code></pre>
+            </div>
+        </main>
+
+        <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="../dist/trumbowyg.js"></script>
+        <script>
+            $('#test-1').each(function () {
+                $(this).find('textarea').trumbowyg();
+            });
+        </script>
+    </body>
+</html>

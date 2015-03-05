@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>destroy() | Trumbowyg by Alex-D</title>
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="../dist/ui/trumbowyg.css">
+    </head>
+
+    <body>
+        <main>
+            <h1><code>destroy()</code></h1>
+
+            <div id="test-1">
+                <form action="?">
+                    <div>
+                        <textarea placeholder="This field is empty." required></textarea>
+                    </div>
+
+                    <div>
+                        <input type="submit" value="Destroy"/>
+                    </div>
+                </form>
+
+                <h2>The code</h2>
+
+                <pre><code>
+$('#test-1').each(function () {
+    var $test1 = $(this),
+        $textarea;
+
+    $textarea = $test1.find('textarea');
+    $textarea.trumbowyg();
+
+    $test1.find(':submit').click(function (e) {
+        e.preventDefault();
+        $textarea.trumbowyg('destroy');
+    });
+});
+                </code></pre>
+            </div>
+        </main>
+
+        <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="../dist/trumbowyg.js"></script>
+        <script>
+            $('#test-1').each(function () {
+                var $test1 = $(this),
+                    $textarea;
+
+                $textarea = $test1.find('textarea');
+                $textarea.trumbowyg();
+
+                $test1.find(':submit').click(function (e) {
+                    e.preventDefault();
+                    $textarea.trumbowyg('destroy');
+                });
+            });
+        </script>
+    </body>
+</html>

@@ -3,6 +3,7 @@
 @import "mixins/sprite-pos";
 
 $light-color: #ecf0f1;
+$background-color: #fff;
 
 
 
@@ -31,6 +32,7 @@ $light-color: #ecf0f1;
     border-style: none;
     resize: none;
     outline: none;
+    background-color: $background-color;
 }
 .trumbowyg-box-blur .trumbowyg-editor {
     * {
@@ -96,7 +98,7 @@ $light-color: #ecf0f1;
     li button.trumbowyg-active,
     li.trumbowyg-not-disable button:hover,
     li.trumbowyg-not-disable button:focus {
-        background-color: #FFF;
+        background-color: $background-color;
         outline: none;
     }
 
@@ -127,7 +129,7 @@ $light-color: #ecf0f1;
     border: 1px solid $light-color;
     padding: 5px 0;
     border-top: none;
-    background: #FFF;
+    background: $background-color;
     margin-left: -1px;
     box-shadow: rgba(0, 0, 0, .1) 0 2px 3px;
 
@@ -137,7 +139,7 @@ $light-color: #ecf0f1;
         height: 35px;
         line-height: 35px;
         text-decoration: none;
-        background: #FFF;
+        background: $background-color;
         padding: 0 14px;
         color: #333;
         border: none;
@@ -171,8 +173,8 @@ $light-color: #ecf0f1;
     margin-left: -250px;
     width: 500px;
     height: 275px;
-    z-index: 1;
-    background-color: #FFF;
+    z-index: 2;
+    background-color: $background-color;
     text-align: center;
     box-shadow: rgba(0, 0, 0, .2) 0 2px 3px;
     backface-visibility: hidden;
@@ -276,7 +278,7 @@ $light-color: #ecf0f1;
         bottom: 10px;
         right: 0;
         text-decoration: none;
-        color: #FFF;
+        color: $background-color;
         display: block;
         width: 100px;
         height: 35px;

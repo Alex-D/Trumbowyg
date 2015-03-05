@@ -128,6 +128,9 @@
         // jQuery object of the editor
         t.$e = $(editorElem);
         t.$creator = $(editorElem);
+        t.$editor = undefined;
+        t.isTextarea = true;
+        t.layers = new LayersStack();
 
         // Extend with options
         o = $.extend(true, {}, o, $.trumbowyg.opts);
@@ -285,21 +288,23 @@
             t.fixedBtnPaneEvents();
 
             t.buildOverlay();
+
+            t.afterInit();
         },
 
         buildEditor: function(){
             var t = this,
                 pfx = t.o.prefix,
-                html = '';
+                html = '',
+                $attachmentRef;
 
             t.$box = $('<div/>', {
                 'class': pfx + 'box ' + pfx + t.o.lang + ' trumbowyg'
             });
 
-            t.isTextarea = true;
-            if(t.$e.is('textarea'))
+            if(t.$e.is('textarea')){
                 t.$editor = $('<div/>');
-            else {
+            }else{
                 t.$editor = t.$e;
                 t.$e = t.buildTextarea().val(t.$e.val());
                 t.isTextarea = false;
@@ -308,27 +313,45 @@
             if(t.$creator.is('[placeholder]'))
                 t.$editor.attr('placeholder', t.$creator.attr('placeholder'));
 
-            t.$e.hide()
-                   .addClass(pfx + 'textarea');
+            t.$e.addClass(pfx + 'textarea');
 
+            t.$editor
+                .data('trumbowyg.previousPosition', t.$editor.css('position'))
+                .css('position', 'relative');
+
+            t.$e
+                .data('trumbowyg.previousPosition', t.$e.css('position'))
+                .css('position', 'absolute');
+
+            //Layer the editor on top of the textarea.  Because the textarea is never actually hidden, browser-based 
+            //(HTML5) validation will work as normal.
+            t.layers
+                .setLayers([t.$e, t.$editor])
+                .bringToTop(t.$editor);
 
             if(t.isTextarea){
-                html = t.$e.val();
-                t.$box.insertAfter(t.$e)
-                         .append(t.$editor)
-                         .append(t.$e);
-            } else {
-                html = t.$editor.html();
-                t.$box.insertAfter(t.$editor)
-                         .append(t.$e)
-                         .append(t.$editor);
+                $attachmentRef = t.$e;
+                html = $attachmentRef.val();
+            }else{
+                $attachmentRef = t.$editor;
+                html = $attachmentRef.html();
+            }
+
+            //Always arrange components in the same order to ensure that subsequent code behaves consistently.
+            t.$box
+                .insertAfter($attachmentRef)
+                .append(t.$editor)
+                .append(t.$e);
+
+            if(!t.isTextarea){
                 t.syncCode();
             }
 
-            t.$editor.addClass(pfx + 'editor')
-                        .attr('contenteditable', true)
-                        .attr('dir', t.lang._dir || t.o.dir)
-                        .html(html);
+            t.$editor
+                .addClass(pfx + 'editor')
+                .attr('contenteditable', true)
+                .attr('dir', t.lang._dir || t.o.dir)
+                .html(html);
 
             if(t.o.resetCss)
                 t.$editor.addClass(pfx + 'reset-css');
@@ -711,6 +734,20 @@
             });
         },
 
+        /**
+         * Called at the very of end `init()`, after all GUI components have been built and added to the page, this 
+         * method applies the finishing touches.
+         * 
+         * @private
+         * @returns {undefined}
+         */
+        afterInit: function(){
+            //Finally, now that all GUI components are in place, position the textarea relative to the editor.
+            this.$e
+                .data('trumbowyg.previousTop', this.$e.css('top'))
+                .css('top', String(this.$editor.position().top) + 'px');
+        },
+
 
 
         // Destroy the editor
@@ -720,22 +757,32 @@
                 h = t.height,
                 html = t.html();
 
-            if(t.isTextarea)
+            t.$e.css('top', t.$e.data('trumbowyg.previousTop'));
+            t.$e.removeData('trumbowyg.previousTop');
+
+            t.layers.purge();
+
+            t.$editor.css('position', t.$editor.data('trumbowyg.previousPosition'));
+            t.$editor.removeData('trumbowyg.previousPosition');
+            t.$e.css('position', t.$e.data('trumbowyg.previousPosition'));
+            t.$e.removeData('trumbowyg.previousPosition');
+
+            if(t.isTextarea){
                 t.$box.after(
-                    t.$e.css({ height: h })
+                    t.$e
+                        .css({ height: h })
                         .val(html)
                         .removeClass(pfx + 'textarea')
-                        .show()
                 );
-            else
+            }else{
                 t.$box.after(
                     t.$editor
                         .css({ height: h })
                         .removeClass(pfx + 'editor')
                         .removeAttr('contenteditable')
                         .html(html)
-                        .show()
                 );
+            }
 
             t.$box.remove();
             t.$creator.removeData('trumbowyg');
@@ -755,9 +802,15 @@
         toggle: function(){
             var t = this,
                 pfx = t.o.prefix;
+
             t.semanticCode(false, true);
-            t.$editor.toggle();
-            t.$e.toggle();
+
+            if(t.layers.atTop(t.$e)){
+                t.layers.bringToTop(t.$editor);
+            }else{
+                t.layers.bringToTop(t.$e);
+            }
+
             t.$btnPane.toggleClass(pfx + 'disable');
             $('.'+pfx + 'viewHTML-button', t.$btnPane).toggleClass(pfx + 'active');
         },
@@ -804,12 +857,15 @@
             } else
                 return t.$e.val();
         },
-        syncCode: function(force){
+
+        syncCode: function (syncFromTextarea) {
             var t = this;
-            if(!force && t.$editor.is(':visible'))
+
+            if(!syncFromTextarea && t.layers.atTop(t.$editor)){
                 t.$e.val(t.$editor.html());
-            else
+            }else{
                 t.$editor.html(t.$e.val());
+            }
 
             if(t.o.autogrow){
                 t.height = t.$editor.height();
@@ -821,11 +877,11 @@
         },
 
         // Analyse and update to semantic code
-        // @param force : force to sync code from textarea
+        // @param syncFromTextarea
         // @param full  : wrap text nodes in <p>
-        semanticCode: function(force, full){
+        semanticCode: function(syncFromTextarea, full){
             var t = this;
-            t.syncCode(force);
+            t.syncCode(syncFromTextarea);
 
             if(t.o.semantic){
                 t.saveSelection();
@@ -1153,6 +1209,144 @@
         getSelectedText: function(){
             var s = this.selection;
             return (s.text !== undefined) ? s.text : s+'';
+        }
+    };
+
+    /**
+     * Basic implementation of a stack of layers, each of which is represented by a jQuery element.
+     * 
+     * @author Dan Bettles <danbettles@yahoo.co.uk>
+     * @param {jQuery[]} layers
+     * @returns {LayersStack}
+     */
+    function LayersStack(layers) {
+        this.setLayers(layers || []);
+    }
+
+    LayersStack.TOP_Z_INDEX = 1;
+
+    LayersStack.BOTTOM_Z_INDEX = -9999;
+
+    LayersStack.prototype = {
+
+        /**
+         * @param {jQuery[]} layers
+         * @returns {LayersStack}
+         */
+        setLayers: function (layers) {
+            var newLayers = [];
+
+            $.each(layers, function (i, $layer) {
+                $layer
+                    //Make a note of the layer CSS we'll be changing
+                    .data('LayersStack.previousZIndex', $layer.css('z-index'))
+                    //Change the layer's CSS for the purposes of stacking
+                    .css('z-index', LayersStack.TOP_Z_INDEX);
+
+                newLayers.push($layer);
+            });
+
+            this.layers = newLayers;
+
+            return this;
+        },
+
+        /**
+         * @returns {jQuery[]}
+         */
+        getLayers: function () {
+            return this.layers;
+        },
+
+        /**
+         * Restores each layer to its 'original' position and then removes it from the stack of layers.
+         * 
+         * @returns {LayersStack}
+         */
+        purge: function () {
+            $.each(this.getLayers(), function (i, $layer) {
+                $layer
+                    .css('z-index', $layer.data('LayersStack.previousZIndex'))
+                    .removeData('LayersStack.previousZIndex');
+            });
+
+            this.setLayers([]);
+
+            return this;
+        },
+
+        /**
+         * Returns TRUE if the specified jQuery is in the stack of layers, or FALSE otherwise.
+         * 
+         * @param {jQuery} $selected
+         * @returns {Boolean}
+         */
+        includes: function ($selected) {
+            var included = false;
+
+            $.each(this.getLayers(), function (i, $layer) {
+                if ($layer.get(0) === $selected.get(0)) {
+                    included = true;
+                    return false;
+                }
+
+                return true;
+            });
+
+            return included;
+        },
+
+        /**
+         * Brings the specified jQuery to the top of the stack of layers and sends the others to the bottom.
+         * 
+         * @param {jQuery} $selected
+         * @returns {LayersStack}
+         * @throws {String} If the specified jQuery is not one of the layers in the stack.
+         */
+        bringToTop: function ($selected) {
+            if (!this.includes($selected)) {
+                throw "The specified jQuery is not one of the layers in the stack.";
+            }
+
+            $selected.css('z-index', LayersStack.TOP_Z_INDEX);
+
+            $.each(this.getLayers(), function (i, $layer) {
+                if ($layer.get(0) !== $selected.get(0)) {
+                    $layer.css('z-index', LayersStack.BOTTOM_Z_INDEX);
+                }
+            });
+
+            return this;
+        },
+
+        /**
+         * Returns the layer that's on the top of the stack.
+         * 
+         * @returns {jQuery}
+         */
+        getTopLayer: function () {
+            var $topLayer;
+
+            $.each(this.getLayers(), function (i, $layer) {
+                if (parseInt($layer.css('z-index'), 10) === LayersStack.TOP_Z_INDEX) {
+                    $topLayer = $layer;
+                    return false;
+                }
+
+                return true;
+            });
+
+            return $topLayer;
+        },
+
+        /**
+         * Returns TRUE if the specified jQuery is at the top of the stack of layers, or FALSE otherwise.
+         * 
+         * @param {jQuery} $layer
+         * @returns {Boolean}
+         */
+        atTop: function ($layer) {
+            return this.getTopLayer().get(0) === $layer.get(0);
         }
     };
 })(navigator, window, document, jQuery);
