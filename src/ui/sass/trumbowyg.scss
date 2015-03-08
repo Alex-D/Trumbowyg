@@ -508,15 +508,15 @@ body.trumbowyg-body-fullscreen {
     }
     .trumbowyg-dropdown {
         border-color: $dark-color;
-        background: #555;
+        background: $dark-color;
 
         button {
-            background: #555;
+            background: $dark-color;
             color: #fff;
 
             &:hover,
             &:focus {
-                background: $dark-color;
+                background: #555;
             }
         }
     }
