@@ -52,6 +52,25 @@ $dark-color: #222;
     border: none;
     white-space: normal;
 }
+.trumbowyg-box.trumbowyg-editor-visible {
+    .trumbowyg-textarea {
+        position: absolute;
+        top: 37px;
+        height: 1px !important;
+        width: 25%;
+        min-height: 0 !important;
+        padding: 0;
+        background: none;
+    }
+}
+.trumbowyg-box.trumbowyg-editor-hidden {
+    .trumbowyg-textarea {
+        display: block;
+    }
+    .trumbowyg-editor {
+        display: none;
+    }
+}
 .trumbowyg-editor[contenteditable=true]:empty:before{
     content: attr(placeholder);
     color: #999;

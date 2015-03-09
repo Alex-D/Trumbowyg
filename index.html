@@ -84,7 +84,7 @@ $('#customized-buttonpane').trumbowyg({
                     </pre></code>
                 </div>
 
-                <textarea id="form-content" cols="30" rows="10">
+                <textarea id="form-content" cols="30" rows="10" required>
                     <h1>This editor is create from a textarea</h1>
                     <p>
                         Even though using &quot;lorem ipsum&quot; often arouses curiosity due to its resemblance to classical Latin, it is not intended to have meaning. Where text is visible in a document, people tend to focus on the textual content rather than upon overall presentation, so publishers use lorem ipsum when displaying a typeface or design in order to direct the focus to presentation. &quot;Lorem ipsum&quot; also approximates a typical distribution of spaces in English. <br>
@@ -107,7 +107,9 @@ $('#form-content').trumbowyg({
 
                 <div id="dynamic-iframe-example"></div>
 
-                <textarea id="placeholder-editor" cols="30" rows="10" placeholder="This is a placeholder..."></textarea>
+                <textarea id="placeholder-editor" cols="30" rows="10" placeholder="This is a placeholder..." required></textarea>
+
+                <button type="submit">Submit</button>
             </form>
         </div>
         <script src="bower_components/jquery/dist/jquery.min.js"></script>

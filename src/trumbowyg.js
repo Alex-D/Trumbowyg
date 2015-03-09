@@ -126,8 +126,8 @@
         // compatible on iframes.
         t.doc = editorElem.ownerDocument || document;
         // jQuery object of the editor
-        t.$e = $(editorElem);
-        t.$creator = $(editorElem);
+        t.$ta = $(editorElem); // $ta : Textarea
+        t.$c = $(editorElem); // $c : creator
 
         // Extend with options
         o = $.extend(true, {}, o, $.trumbowyg.opts);
@@ -137,6 +137,9 @@
             t.lang = $.trumbowyg.langs.en;
         else
             t.lang = $.extend(true, {}, $.trumbowyg.langs.en, $.trumbowyg.langs[o.lang]);
+
+        // Header translation
+        var h = t.lang.header;
 
         // Defaults Options
         t.o = $.extend(true, {}, {
@@ -152,7 +155,7 @@
             prefix: 'trumbowyg-',
 
             // WYSIWYG only
-            semantic: false,
+            semantic: true,
             resetCss: false,
             removeformatPasted: false,
 
@@ -194,19 +197,19 @@
                 },
                 h1: {
                     func: 'formatBlock',
-                    title: t.lang.header + ' 1'
+                    title: h + ' 1'
                 },
                 h2: {
                     func: 'formatBlock',
-                    title: t.lang.header + ' 2'
+                    title: h + ' 2'
                 },
                 h3: {
                     func: 'formatBlock',
-                    title: t.lang.header + ' 3'
+                    title: h + ' 3'
                 },
                 h4: {
                     func: 'formatBlock',
-                    title: t.lang.header + ' 4'
+                    title: h + ' 4'
                 },
 
                 bold: {
@@ -277,7 +280,7 @@
     Trumbowyg.prototype = {
         init: function(){
             var t = this;
-            t.height = t.$e.height();
+            t.height = t.$ta.height();
 
             t.buildEditor();
             t.buildBtnPane();
@@ -289,62 +292,62 @@
 
         buildEditor: function(){
             var t = this,
-                pfx = t.o.prefix,
+                prefix = t.o.prefix,
                 html = '';
 
             t.$box = $('<div/>', {
-                'class': pfx + 'box ' + pfx + t.o.lang + ' trumbowyg'
+                'class': prefix + 'box ' + prefix + 'editor-visible ' + prefix + t.o.lang + ' trumbowyg'
             });
 
+            // $ta = Textarea
+            // $ed = Editor
             t.isTextarea = true;
-            if(t.$e.is('textarea'))
-                t.$editor = $('<div/>');
+            if(t.$ta.is('textarea'))
+                t.$ed = $('<div/>');
             else {
-                t.$editor = t.$e;
-                t.$e = t.buildTextarea().val(t.$e.val());
+                t.$ed = t.$ta;
+                t.$ta = t.buildTextarea().val(t.$ta.val());
                 t.isTextarea = false;
             }
 
-            if(t.$creator.is('[placeholder]'))
-                t.$editor.attr('placeholder', t.$creator.attr('placeholder'));
+            if(t.$c.is('[placeholder]'))
+                t.$ed.attr('placeholder', t.$c.attr('placeholder'));
 
-            t.$e.hide()
-                   .addClass(pfx + 'textarea');
+            t.$ta.addClass(prefix + 'textarea');
 
 
             if(t.isTextarea){
-                html = t.$e.val();
-                t.$box.insertAfter(t.$e)
-                         .append(t.$editor)
-                         .append(t.$e);
+                html = t.$ta.val();
+                t.$box.insertAfter(t.$ta)
+                         .append(t.$ed)
+                         .append(t.$ta);
             } else {
-                html = t.$editor.html();
-                t.$box.insertAfter(t.$editor)
-                         .append(t.$e)
-                         .append(t.$editor);
+                html = t.$ed.html();
+                t.$box.insertAfter(t.$ed)
+                         .append(t.$ta)
+                         .append(t.$ed);
                 t.syncCode();
             }
 
-            t.$editor.addClass(pfx + 'editor')
+            t.$ed.addClass(prefix + 'editor')
                         .attr('contenteditable', true)
                         .attr('dir', t.lang._dir || t.o.dir)
                         .html(html);
 
             if(t.o.resetCss)
-                t.$editor.addClass(pfx + 'reset-css');
+                t.$ed.addClass(prefix + 'reset-css');
 
-            if(!t.o.autogrow){
-                $.each([t.$editor, t.$e], function(i, $el){
+            if(!t.o.autogrow)
+                $.each([t.$ta, t.$ed], function(i, $el){
                     $el.css({
                         height: t.height,
                         overflow: 'auto'
                     });
                 });
-            }
 
             if(t.o.semantic){
-                t.$editor.html(
-                    t.$editor.html()
+                t.$ed.html(
+                    t.$ed.html()
                         .replace('<br>', '</p><p>')
                         .replace('&nbsp;', ' ')
                 );
@@ -353,8 +356,8 @@
 
 
             t._ctrl = false;
-            t.$editor
-            .on('dblclick', 'img', function(e){
+            t.$ed
+            .on('dblclick', 'img', function(){
                 var $img = $(this);
                 t.openModalInsert(t.lang.insertImage, {
                     url: {
@@ -372,7 +375,7 @@
                         alt: v.alt
                     });
                 });
-                e.stopPropagation();
+                return false;
             })
             .on('keydown', function(e){
                 if(e.ctrlKey){
@@ -381,15 +384,14 @@
 
                     try {
                         t.execCmd(k.func, k.param);
-                        e.stopPropagation();
-                        e.preventDefault();
+                        return false;
                     } catch(e){}
                 }
             })
             .on('keyup', function(e){
                 if(!t._ctrl && e.which !== 17){
                     t.semanticCode(false, e.which === 13);
-                    t.$creator.trigger('tbwchange');
+                    t.$c.trigger('tbwchange');
                 }
 
                 setTimeout(function(){
@@ -397,14 +399,14 @@
                 }, 200);
             })
             .on('focus', function(){
-                t.$creator.trigger('tbwfocus');
+                t.$c.trigger('tbwfocus');
             })
             .on('blur', function(){
                 t.syncCode();
-                t.$creator.trigger('tbwblur');
+                t.$c.trigger('tbwblur');
             })
             .on('paste', function(e){
-                t.$creator.trigger('tbwpaste', e);
+                t.$c.trigger('tbwpaste', e);
 
                 if(t.o.removeformatPasted){
                     e.preventDefault();
@@ -430,8 +432,7 @@
             $(t.doc).on('keydown', function(e){
                 if(e.which === 27){
                     t.closeModal();
-                    e.preventDefault();
-                    e.stopPropagation();
+                    return false;
                 }
             });
         },
@@ -440,7 +441,7 @@
         // Build the Textarea which contain HTML generated code
         buildTextarea: function(){
             return $('<textarea/>', {
-                name: this.$e.attr('id'),
+                name: this.$ta.attr('id'),
                 height: this.height
             });
         },
@@ -449,13 +450,13 @@
         // Build button pane, use o.btns and o.btnsAdd options
         buildBtnPane: function(){
             var t = this,
-                pfx = t.o.prefix;
+                prefix = t.o.prefix;
 
             if(t.o.btns === false)
                 return;
 
             t.$btnPane = $('<ul/>', {
-                'class': pfx + 'button-pane'
+                'class': prefix + 'button-pane'
             });
 
             $.each(t.o.btns.concat(t.o.btnsAdd), function(i, btn){
@@ -474,7 +475,7 @@
                         var $li = $('<li/>');
 
                         if(b === '|') // It's a separator
-                            $li.addClass(pfx + 'separator');
+                            $li.addClass(prefix + 'separator');
                         else if(t.isSupportedBtn(b)) // It's a supported button
                             $li.append(t.buildBtn(b));
 
@@ -485,7 +486,7 @@
 
             // Build right li for fullscreen and close buttons
             var $liRight = $('<li/>', {
-                'class': pfx + 'not-disable ' + pfx + 'buttons-right'
+                'class': prefix + 'not-disable ' + prefix + 'buttons-right'
             });
 
             // Add the fullscreen button
@@ -493,12 +494,12 @@
                 $liRight.append(
                     t.buildRightBtn('fullscreen')
                     .on('click', function(){
-                        var cssClass = pfx + 'fullscreen';
+                        var cssClass = prefix + 'fullscreen';
                         t.$box.toggleClass(cssClass);
 
                         if(t.$box.hasClass(cssClass)){
-                            $('body').addClass(pfx + 'body-fullscreen');
-                            $.each([t.$editor, t.$e], function(){
+                            $('body').addClass(prefix + 'body-fullscreen');
+                            $.each([t.$ta, t.$ed], function(){
                                 $(this).css({
                                     height: 'calc(100% - 35px)',
                                     overflow: 'auto'
@@ -506,10 +507,10 @@
                             });
                             t.$btnPane.css('width', '100%');
                         } else {
-                            $('body').removeClass(pfx + 'body-fullscreen');
+                            $('body').removeClass(prefix + 'body-fullscreen');
                             t.$box.removeAttr('style');
                             if(!t.o.autogrow)
-                                $.each([t.$editor, t.$e], function(){
+                                $.each([t.$ta, t.$ed], function(){
                                     $(this).css('height', t.height);
                                 });
                         }
@@ -523,10 +524,10 @@
                     .append(
                         t.buildRightBtn('close')
                         .on('click', function(){
-                            if(t.$box.hasClass(pfx + 'fullscreen'))
+                            if(t.$box.hasClass(prefix + 'fullscreen'))
                                 $('body').css('overflow', 'auto');
                             t.destroy();
-                            t.$creator.trigger('tbwclose');
+                            t.$c.trigger('tbwclose');
                         })
                     );
 
@@ -542,36 +543,35 @@
         // Build a button and his action
         buildBtn: function(n){ // n is name of the button
             var t = this,
-                pfx = t.o.prefix,
+                prefix = t.o.prefix,
                 btn = t.o.btnsDef[n],
                 d = btn.dropdown,
                 textDef = t.lang[n] || n,
 
                 $btn = $('<button/>', {
                     type: 'button',
-                    'class': pfx + n +'-button' + (btn.ico ? ' '+ pfx + btn.ico +'-button' : ''),
+                    'class': prefix + n +'-button' + (btn.ico ? ' '+ prefix + btn.ico +'-button' : ''),
                     text: btn.text || btn.title || textDef,
                     title: btn.title || btn.text || textDef + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
-                    mousedown: function(e){
-                        if(!d || $('.'+n+'-'+pfx + 'dropdown', t.$box).is(':hidden'))
+                    mousedown: function(){
+                        if(!d || $('.'+n+'-'+prefix + 'dropdown', t.$box).is(':hidden'))
                             $('body', t.doc).trigger('mousedown');
 
-                        if(t.$btnPane.hasClass(pfx + 'disable') && !$(this).hasClass(pfx + 'active') && !$(this).parent().hasClass(pfx + 'not-disable'))
+                        if(t.$btnPane.hasClass(prefix + 'disable') && !$(this).hasClass(prefix + 'active') && !$(this).parent().hasClass(prefix + 'not-disable'))
                             return false;
 
                         t.execCmd((d ? 'dropdown' : false) || btn.func || n,
                                   btn.param || n);
 
-                        e.stopPropagation();
-                        e.preventDefault();
+                        return false;
                     }
                 });
 
             if(d){
-                $btn.addClass(pfx + 'open-dropdown');
-                var c = pfx + 'dropdown',
+                $btn.addClass(prefix + 'open-dropdown');
+                var c = prefix + 'dropdown',
                     dd = $('<div/>', { // the dropdown
-                        'class': n + '-' + c + ' ' + c + ' ' + pfx + 'fixed-top'
+                        'class': n + '-' + c + ' ' + c + ' ' + prefix + 'fixed-top'
                     });
                 $.each(d, function(i, def){
                     if(t.o.btnsDef[def] && t.isSupportedBtn(def))
@@ -605,13 +605,13 @@
                 text: b.text || b.title || t.lang[n] || n,
                 title: ((b.key) ? ' (Ctrl + ' + b.key + ')' : null),
                 style: b.style || null,
-                mousedown: function(e){
+                mousedown: function(){
                     $('body', t.doc).trigger('mousedown');
 
                     t.execCmd(b.func || n,
                               b.param || n);
 
-                    e.stopPropagation();
+                    return false;
                 }
             });
         },
@@ -641,7 +641,7 @@
                 'class': t.o.prefix + 'overlay'
             }).css({
                 top: t.$btnPane.outerHeight(),
-                height: (parseInt(t.$editor.outerHeight()) + 1) + 'px'
+                height: (t.$ed.outerHeight() + 1) + 'px'
             }).appendTo(t.$box);
             return t.$overlay;
         },
@@ -660,7 +660,8 @@
         // Management of fixed button pane
         fixedBtnPaneEvents: function(){
             var t = this,
-                ffw = t.o.fixedFullWidth;
+                fixedFullWidth = t.o.fixedFullWidth,
+                box = t.$box;
             if(!t.o.fixedBtnPane)
                 return;
 
@@ -668,42 +669,41 @@
 
             $(window)
             .on('scroll resize', function(){
-                if(!t.$box)
+                if(!box)
                     return;
 
                 t.syncCode();
 
-                var s = $(window).scrollTop(), // s is top scroll
-                    o = t.$box.offset().top + 1, // o is offset
+                var scrollTop = $(window).scrollTop(),
+                    offset = box.offset().top + 1,
                     bp = t.$btnPane,
-                    mt = bp.height(),
                     oh = bp.outerHeight();
 
-                if((s - o > 0) && ((s - o - parseInt(t.height)) < 0)){
+                if((scrollTop - offset > 0) && ((scrollTop - offset - t.height) < 0)){
                     if(!t.isFixed){
                         t.isFixed = true;
                         bp.css({
                             position: 'fixed',
                             top: 0,
-                            left: ffw ? '0' : 'auto',
+                            left: fixedFullWidth ? '0' : 'auto',
                             zIndex: 7
                         });
-                        $([t.$editor, t.$e]).css({ marginTop: mt });
+                        $([t.$ta, t.$ed]).css({ marginTop: bp.height() });
                     }
                     bp.css({
-                        width: ffw ? '100%' : ((parseInt(t.$box.width())-1) + 'px')
+                        width: fixedFullWidth ? '100%' : ((box.width()-1) + 'px')
                     });
 
-                    $('.' + t.o.prefix + 'fixed-top', t.$box).css({
-                        position: ffw ? 'fixed' : 'absolute',
-                        top: ffw ? oh : parseInt(oh) + (s - o) + 'px',
+                    $('.' + t.o.prefix + 'fixed-top', box).css({
+                        position: fixedFullWidth ? 'fixed' : 'absolute',
+                        top: fixedFullWidth ? oh : oh + (scrollTop - offset) + 'px',
                         zIndex: 15
                     });
                 } else if(t.isFixed) {
                     t.isFixed = false;
                     bp.removeAttr('style');
-                    $([t.$editor, t.$e]).css({ marginTop: 0 });
-                    $('.' + t.o.prefix + 'fixed-top', t.$box).css({
+                    $([t.$ta, t.$ed]).css({ marginTop: 0 });
+                    $('.' + t.o.prefix + 'fixed-top', box).css({
                         position: 'absolute',
                         top: oh
                     });
@@ -716,36 +716,36 @@
         // Destroy the editor
         destroy: function(){
             var t = this,
-                pfx = t.o.prefix,
-                h = t.height,
+                prefix = t.o.prefix,
+                height = t.height,
                 html = t.html();
 
             if(t.isTextarea)
                 t.$box.after(
-                    t.$e.css({ height: h })
+                    t.$ta.css({ height: height })
                         .val(html)
-                        .removeClass(pfx + 'textarea')
+                        .removeClass(prefix + 'textarea')
                         .show()
                 );
             else
                 t.$box.after(
-                    t.$editor
-                        .css({ height: h })
-                        .removeClass(pfx + 'editor')
+                    t.$ed
+                        .css({ height: height })
+                        .removeClass(prefix + 'editor')
                         .removeAttr('contenteditable')
                         .html(html)
                         .show()
                 );
 
             t.$box.remove();
-            t.$creator.removeData('trumbowyg');
+            t.$c.removeData('trumbowyg');
         },
 
 
 
         // Empty the editor
         empty: function(){
-            this.$e.val('');
+            this.$ta.val('');
             this.syncCode(true);
         },
 
@@ -754,25 +754,24 @@
         // Function call when click on viewHTML button
         toggle: function(){
             var t = this,
-                pfx = t.o.prefix;
+                prefix = t.o.prefix;
             t.semanticCode(false, true);
-            t.$editor.toggle();
-            t.$e.toggle();
-            t.$btnPane.toggleClass(pfx + 'disable');
-            $('.'+pfx + 'viewHTML-button', t.$btnPane).toggleClass(pfx + 'active');
+            t.$box.toggleClass(prefix + 'editor-hidden ' + prefix + 'editor-visible');
+            t.$btnPane.toggleClass(prefix + 'disable');
+            $('.'+prefix + 'viewHTML-button', t.$btnPane).toggleClass(prefix + 'active');
         },
 
         // Open dropdown when click on a button which open that
         dropdown: function(name){
             var t = this,
                 d = t.doc,
-                pfx = t.o.prefix,
-                $dd = $('.'+name+'-'+pfx + 'dropdown', t.$box),
-                $btn = $('.'+pfx+name+'-button', t.$btnPane);
+                prefix = t.o.prefix,
+                $dd = $('.'+name+'-'+prefix + 'dropdown', t.$box),
+                $btn = $('.'+prefix+name+'-button', t.$btnPane);
 
             if($dd.is(':hidden')){
                 var o = $btn.offset().left;
-                $btn.addClass(pfx + 'active');
+                $btn.addClass(prefix + 'active');
 
                 $dd.css({
                     position: 'absolute',
@@ -783,8 +782,8 @@
                 $(window).trigger('scroll');
 
                 $('body', d).on('mousedown', function(){
-                    $('.' + pfx + 'dropdown', d).hide();
-                    $('.' + pfx + 'active', d).removeClass(pfx + 'active');
+                    $('.' + prefix + 'dropdown', d).hide();
+                    $('.' + prefix + 'active', d).removeClass(prefix + 'active');
                     $('body', d).off('mousedown');
                 });
             } else
@@ -798,24 +797,24 @@
         html: function(html){
             var t = this;
             if(html){
-                t.$e.val(html);
+                t.$ta.val(html);
                 t.syncCode(true);
                 return t;
             } else
-                return t.$e.val();
+                return t.$ta.val();
         },
         syncCode: function(force){
             var t = this;
-            if(!force && t.$editor.is(':visible'))
-                t.$e.val(t.$editor.html());
+            if(!force && t.$ed.is(':visible'))
+                t.$ta.val(t.$ed.html());
             else
-                t.$editor.html(t.$e.val());
+                t.$ed.html(t.$ta.val());
 
             if(t.o.autogrow){
-                t.height = t.$editor.height();
-                if(t.height != t.$e.css('height')){
-                    t.$e.css({ height: t.height });
-                    t.$creator.trigger('tbwresize');
+                t.height = t.$ed.height();
+                if(t.height != t.$ta.css('height')){
+                    t.$ta.css({ height: t.height });
+                    t.$c.trigger('tbwresize');
                 }
             }
         },
@@ -836,7 +835,7 @@
 
                 if(full){
                     // Wrap text nodes in p
-                    t.$editor.contents()
+                    t.$ed.contents()
                     .filter(function(){
                         // Only non-empty text nodes
                         return this.nodeType === 3 && $.trim(this.nodeValue).length > 0;
@@ -848,13 +847,13 @@
                     t.semanticTag('div', 'p');
                 }
 
-                t.$e.val(t.$editor.html());
+                t.$ta.val(t.$ed.html());
 
                 t.restoreSelection();
             }
         },
         semanticTag: function(oldTag, newTag){
-            $(oldTag, this.$editor).each(function(){
+            $(oldTag, this.$ed).each(function(){
                 $(this).replaceWith(function(){
                     return '<'+newTag+'>' + $(this).html() + '</'+newTag+'>';
                 });
@@ -919,7 +918,7 @@
         execCmd: function(cmd, param){
             var t = this;
             if(cmd != 'dropdown')
-                t.$editor.focus();
+                t.$ed.focus();
 
             try {
                 t[cmd](param);
@@ -942,29 +941,29 @@
         // Open a modal box
         openModal: function(title, content){
             var t = this,
-                pfx = t.o.prefix;
+                prefix = t.o.prefix;
 
             // No open a modal box when exist other modal box
-            if($('.' + pfx + 'modal-box', t.$box).size() > 0)
+            if($('.' + prefix + 'modal-box', t.$box).length > 0)
                 return false;
 
             t.saveSelection();
             t.showOverlay();
 
             // Disable all btnPane btns
-            t.$btnPane.addClass(pfx + 'disable');
+            t.$btnPane.addClass(prefix + 'disable');
 
             // Build out of ModalBox, it's the mask for animations
             var $modal = $('<div/>', {
-                'class': pfx + 'modal ' + pfx + 'fixed-top'
+                'class': prefix + 'modal ' + prefix + 'fixed-top'
             }).css({
-                top: (parseInt(t.$btnPane.height()) + 1) + 'px'
+                top: (t.$btnPane.height() + 1) + 'px'
             }).appendTo(t.$box);
 
             // Click on overflay close modal by cancelling them
-            t.$overlay.one('click', function(e){
-                e.preventDefault();
-                $modal.trigger(pfx + 'cancel');
+            t.$overlay.one('click', function(){
+                $modal.trigger(prefix + 'cancel');
+                return false;
             });
 
             // Build the form
@@ -972,23 +971,23 @@
                 action: '',
                 html: content
             })
-            .on('submit', function(e){
-                e.preventDefault();
-                $modal.trigger(pfx + 'confirm');
+            .on('submit', function(){
+                $modal.trigger(prefix + 'confirm');
+                return false;
             })
-            .on('reset', function(e){
-                e.preventDefault();
-                $modal.trigger(pfx + 'cancel');
+            .on('reset', function(){
+                $modal.trigger(prefix + 'cancel');
+                return false;
             });
 
 
             // Build ModalBox and animate to show them
             var $box = $('<div/>', {
-                'class': pfx + 'modal-box',
+                'class': prefix + 'modal-box',
                 html: $form
             })
             .css({
-                top: '-' + parseInt(t.$btnPane.outerHeight()) + 'px',
+                top: '-' + t.$btnPane.outerHeight() + 'px',
                 opacity: 0
             })
             .appendTo($modal)
@@ -1001,7 +1000,7 @@
             // Append title
             $('<span/>', {
                 text: title,
-                'class': pfx + 'modal-title'
+                'class': prefix + 'modal-title'
             }).prependTo($box);
 
 
@@ -1021,10 +1020,10 @@
         // @param n is name of modal
         buildModalBtn: function(n, $modal){
             var t = this,
-                pfx = t.o.prefix;
+                prefix = t.o.prefix;
 
             return $('<button/>', {
-                'class': pfx + 'modal-button ' + pfx + 'modal-' + n,
+                'class': prefix + 'modal-button ' + prefix + 'modal-' + n,
                 type: n,
                 text: t.lang[n] || n
             }).appendTo($('form', $modal));
@@ -1032,17 +1031,18 @@
         // close current modal box
         closeModal: function(){
             var t = this,
-                pfx = t.o.prefix;
+                prefix = t.o.prefix;
 
-            t.$btnPane.removeClass(pfx + 'disable');
+            t.$btnPane.removeClass(prefix + 'disable');
             t.$overlay.off();
 
-            var $modalBox = $('.' + pfx + 'modal-box', t.$box);
+            // Find the modal box
+            var $mb = $('.' + prefix + 'modal-box', t.$box);
 
-            $modalBox.animate({
-                top: '-' + $modalBox.height()
+            $mb.animate({
+                top: '-' + $mb.height()
             }, 100, function(){
-                $(this).parent().remove();
+                $mb.parent().remove();
                 t.hideOverlay();
             });
             
@@ -1051,22 +1051,22 @@
         // Preformated build and management modal
         openModalInsert: function(title, fields, cmd){
             var t = this,
-                pfx  = t.o.prefix,
+                prefix  = t.o.prefix,
                 lg = t.lang,
                 html = '';
 
             for(var f in fields){
                 var fd = fields[f], // field definition
-                    label = (!fd.label) ? (lg[f] ? lg[f] : f) : (lg[fd.label] ? lg[fd.label] : fd.label);
+                    l = fd.label,
+                    n = (fd.name) ? fd.name : f;
 
-                if(!fd.name)
-                    fd.name = f;
-
-                html += '<label><input type="'+(fd.type || 'text')+'" name="'+fd.name+'" value="'+(fd.value || '')+'"><span class="'+pfx+'input-infos"><span>'+label+'</span></span></label>';
+                html += '<label><input type="'+(fd.type || 'text')+'" name="'+n+'" value="'+(fd.value || '')+'"><span class="'+prefix+'input-infos"><span>'+
+                            ((!l) ? (lg[f] ? lg[f] : f) : (lg[l] ? lg[l] : l))+
+                            '</span></span></label>';
             }
 
             return t.openModal(title, html)
-            .on(pfx + 'confirm', function(){
+            .on(prefix + 'confirm', function(){
                 var $form = $('form', $(this)),
                     valid = true,
                     v = {}; // values
@@ -1092,30 +1092,30 @@
                     if(cmd(v, fields)){
                         t.syncCode();
                         t.closeModal();
-                        $(this).off(pfx + 'confirm');
+                        $(this).off(prefix + 'confirm');
                     }
                 }
             })
-            .one(pfx + 'cancel', function(){
-                $(this).off(pfx + 'confirm');
+            .one(prefix + 'cancel', function(){
+                $(this).off(prefix + 'confirm');
                 t.closeModal();
             });
         },
         addErrorOnModalField: function($field, err){
-            var pfx = this.o.prefix,
+            var prefix = this.o.prefix,
                 $label = $field.parent();
 
             $field
             .on('change keyup', function(){
-                $label.removeClass(pfx + 'input-error');
+                $label.removeClass(prefix + 'input-error');
             });
 
             $label
-            .addClass(pfx + 'input-error')
+            .addClass(prefix + 'input-error')
             .find('input+span')
             .append(
                 $('<span/>', {
-                    'class': pfx +'msg-error',
+                    'class': prefix +'msg-error',
                     text: err
                 })
             );
