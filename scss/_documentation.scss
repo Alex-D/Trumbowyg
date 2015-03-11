@@ -12,3 +12,90 @@
 	    border: 1px solid #ccc;
 	}
 }
+
+.documentation-summary {
+	background: $header-dark;
+	padding: 30px 0;
+
+	ul {
+		list-style: none;
+		padding: 0;
+
+		a {
+			color: #fff;
+			text-decoration: none;
+
+			transition: all 0.15s;
+		}
+	}
+	& > ul {
+		width: 100%;
+
+		& > li {
+			float: left;
+			width: 25%;
+
+			& > a {
+				display: block;
+				font-size: 26px;
+				border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+				margin-right: 30px;
+				padding-bottom: 10px;
+
+				&:hover,
+				&:focus {
+					color: $main-color;
+				}
+			}
+			& > ul {
+				margin: 15px 0 0;
+				padding: 0;
+
+				li {
+					margin-bottom: 3px;
+				}
+
+				a {
+					display: block;
+
+					&:hover,
+					&:focus {
+						text-indent: 10px;
+						border-left: 5px solid $main-color;
+					}
+				}
+			}
+		}
+	}
+
+
+	& + .section {
+		margin-top: 0;
+
+		.section-title {
+			border-top: none;
+		}
+	}
+	& ~ .section {
+		h3 {
+			position: relative;
+			margin-top: 50px;
+			font-size: 30px;
+
+			&::before {
+				content: " ";
+				display: block;
+				position: absolute;
+				top: 52%;
+				left: -100%;
+				margin-left: -15px;
+				height: 1px;
+				width: 100%;
+				background: #ccc;
+			}
+		}
+		h4 {
+			font-size: 25px;
+		}
+	}
+}

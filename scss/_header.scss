@@ -310,3 +310,48 @@ a.cross-projects-item-moda11yze:focus {
 	text-align: center;
 	padding: 35px 0;
 }
+
+
+
+.header-documentation {
+	border-top: 1px solid $header-dark;
+	.header-top {
+		height: 100px;
+
+		.header-logo-container {
+			width: 100px;
+
+			img {
+				width: 100%;
+			}
+
+			&::before {
+				right: 100px;
+				width: 500%;
+			}
+		}
+
+		.header-name {
+			height: 100px;
+			width: auto;
+
+			&-title {
+				padding: 3px 0 0 50px;
+				font-size: 50px;
+				text-align: left;
+				width: auto;
+				float: left;
+				opacity: 0.8;
+			}
+			&-subtitle {
+				float: left;
+				font-size: 50px;
+				padding: 14px 20px;
+
+				&::before {
+					content: " / ";
+				}
+			}
+		}
+	}
+}
