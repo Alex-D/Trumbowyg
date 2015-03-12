@@ -114,6 +114,13 @@
 .feature {
     position: relative;
 
+    &[data-added]:not([data-added="1.0.0"]) {
+        h3 {
+            &::before {
+                background: #76b30b;
+            }
+        }
+    }
     &[data-removed] {
         h3 {
             &::before {
