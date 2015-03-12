@@ -97,9 +97,16 @@
     background: #f39c12;
 }
 
+.removed-info,
+.deprecated-info {
+    padding: 7px 15px;
+}
+.removed-info {
+    background: #f2d4d4;
+    border: 1px solid #c40d0d;
+}
 .deprecated-info {
     background: #f2dfc1;
-    padding: 7px 15px;
     border: 1px solid #d6ac6a;
 }
 
@@ -183,7 +190,8 @@
         }
     }
 
-    &:hover {
+    &:hover,
+    &[data-added]:hover {
         h3 {
             &::before {
                 background: $main-color;

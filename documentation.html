@@ -88,6 +88,7 @@
                             <li><a href="#fullscreen">Fullscreen</a></li>
                             <li><a href="#semantic">Semantic</a></li>
                             <li><a href="#reset-css">Reset CSS</a></li>
+                            <li><a href="#remove-format-pasted">Remove format pasted</a></li>
                             <li><a href="#auto-adjust-height">Auto grow</a></li>
                             <li><a href="#button-pane">Button pane</a></li>
                         </ul>
@@ -98,6 +99,7 @@
                             <li><a href="#add-localization">Add a localization</a></li>
                             <!-- TODO
                             <li><a href="#custom-buttons">Custom buttons</a></li>
+                            <li><a href="#keyboard-shortcuts">Keyboard shortcuts</a></li>
                             <li><a href="#add-button-type">Add button type</a></li>
                             <li><a href="#create-plugin">Create a plugin</a></li>
                             -->
@@ -198,6 +200,11 @@ $('textarea').trumbowyg({
                 <div class="feature" data-added="1.0.0" data-removed="2.0.0">
                     <h3 id="animation-duration">Animation duration</h3>
                     <p class="removed-feature">Removed since 2.0.0</p>
+
+                    <p class="removed-info">
+                        Since 2.0.0, this parameter is not customisable without rebuild Trumbowyg from source.
+                    </p>
+
                     <p>
                         Lot of elements have animations, their duration is configurable via the <code class="javascript">duration</code> option: 
                         <pre><code class="javascript">
@@ -291,6 +298,11 @@ $('.editor-modern-ui').trumbowyg({
                 <div class="feature" data-added="1.0.0" data-removed="2.0.0">
                     <h3 id="mobile-tablet">Mobile &amp; Tablet</h3>
                     <p class="removed-feature">Removed since 2.0.0</p>
+
+                    <p class="removed-info">
+                        Since 2.0.0, prefer use an external library for that like <a href="http://wicky.nillia.ms/enquire.js/" target="_blank">enquire.js</a>
+                    </p>
+
                     <p>
                         Trumbowyg is compatible with mobiles devices, but you can deactive support for mobile and tablet with the following:
                     </p>
@@ -357,14 +369,17 @@ $('.trumbowyg.closable').trumbowyg({
                     </p>
                     <pre><code class="javascript">
 $('.trumbowyg').trumbowyg({
-    semantic: true
+    semantic: false
 });
                     </code></pre>
                     <p>
                         This option deactivates the <em>underline</em> button by default because they do not convey any real semantic. If you want to reactivate them, you have to do it explicitly, see <a href="#button-pane">Button pane</a>.
                     </p>
                     <p class="note">
-                        This option is set to <code>false</code> by default.
+                        This option is set to <code>true</code> by default since <span class="version-tag">2.0.0</span>.
+                    </p>
+                    <p class="note">
+                        This option was set to <code>false</code> by default in <span class="version-tag">1.0.0</span>.
                     </p>
                 </div>
 
@@ -383,6 +398,25 @@ $('.trumbowyg').trumbowyg({
                     </code></pre>
                     <p class="note">
                         This option is set to <code>false</code> by default. The reset only applies to the editor, not to the generated HTML code.
+                    </p>
+                </div>
+
+
+
+
+                <div class="feature" data-added="2.0.0">
+                    <h3 id="remove-format-pasted">Remove format pasted</h3>
+                    <p class="added-feature">Added in 2.0.0</p>
+                    <p>
+                        If you don't want styles pasted from clipboard (from Word or other webpage for example), pass the <code>removeformatPasted</code> option to <code>true</code>.
+                    </p>
+                    <pre><code class="javascript">
+$('.trumbowyg').trumbowyg({
+    removeformatPasted: true
+});
+                    </code></pre>
+                    <p class="note">
+                        Remove format pasted is not active by default (set to <code>false</code>).
                     </p>
                 </div>
 
@@ -667,6 +701,7 @@ $('#editor').trumbowyg('destroy');
                         <li>Change in editor: <code>tbwchange</code> <span class="version-tag">2.0.0</span></li>
                         <li>Resize the editor on autogrow: <code>tbwresize</code> <span class="version-tag">2.0.0</span></li>
                         <li>Paste something in the editor: <code>tbwpaste</code> <span class="version-tag">2.0.0</span></li>
+                        <li>Close the editor: <code>tbwclose</code> <span class="version-tag">2.0.0</span></li>
                     </ul>
                     <pre><code class="javascript">
 $('#editor')
