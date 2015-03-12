@@ -319,15 +319,26 @@ a.cross-projects-item-moda11yze:focus {
 		height: 100px;
 
 		.header-logo-container {
-			width: 100px;
+			width: 101px;
 
 			img {
 				width: 100%;
+				display: block;
 			}
 
 			&::before {
 				right: 100px;
 				width: 500%;
+			}
+
+			a {
+				display: block;
+				transition: background 0.15s;
+
+				&:hover,
+				&:focus {
+					background: #fff;
+				}
 			}
 		}
 
