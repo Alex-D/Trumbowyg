@@ -268,7 +268,9 @@
             }
         }, o);
 
-        if(t.o.semantic && !o.btns)
+        if(o.btns)
+            t.o.btns = o.btns;
+        else if(t.o.semantic)
             t.o.btns[4] = 'btnGrp-semantic';
 
         // Keyboard shortcuts are load in this array

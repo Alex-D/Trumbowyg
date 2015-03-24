@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="dist/plugins/colors/ui/trumbowyg.colors.css">
     </head>
     <body>
-        <div id="main" role="main" class="trumbowyg-black">
+        <div id="main" role="main">
             <header>
                 <h1>Examples of use Trumbowyg</h1>
 
@@ -19,7 +19,7 @@
             </header>
 
             <form action="#">
-                <div id="simple-editor">
+                <div id="default-editor">
                     <h2>This editor is the default build of Trumbowyg.</h2>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident optio nam reiciendis eius beatae quibusdam!
@@ -28,7 +28,19 @@
                         The text is derived from Cicero's De Finibus Bonorum et Malorum (On the Ends of Goods and Evils, or alternatively [About] The Purposes of Good and Evil ). The original passage began: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit (Translation: &quot;Neither is there anyone who loves grief itself since it is grief and thus wants to obtain it&quot;).
                     </p>
                     <code><pre>
-$('#simple-editor').trumbowyg();
+$('#default-editor').trumbowyg();
+                    </pre></code>
+                </div>
+
+                <div id="simple-editor">
+                    <h2>This is a minimalist demo of Trumbowyg.</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident optio nam reiciendis eius beatae quibusdam!
+                    </p>
+                    <code><pre>
+$('#simple-editor').trumbowyg({
+    btns: [jQuery.trumbowyg.btnsGrps.semantic]
+});
                     </pre></code>
                 </div>
 
@@ -120,8 +132,18 @@ $('#form-content').trumbowyg({
         <script src="dist/plugins/colors/trumbowyg.colors.js"></script>
         <script>
             /** Default editor configuration **/
-            $('#simple-editor')
+            $('#default-editor')
             .trumbowyg()
+            .on('dblclick', function(){
+                $(this).trumbowyg();
+            });
+
+
+            /** Default editor configuration **/
+            $('#simple-editor')
+            .trumbowyg({
+                btns: ['btnGrp-semantic']
+            })
             .on('dblclick', function(){
                 $(this).trumbowyg();
             });
