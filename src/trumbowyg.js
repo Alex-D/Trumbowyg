@@ -380,6 +380,8 @@
                 return false;
             })
             .on('keydown', function(e){
+                t._composition = (e.keyCode === 229);
+
                 if(e.ctrlKey){
                     t._ctrl = true;
                     var k = t.keys[String.fromCharCode(e.which).toUpperCase()];
@@ -392,7 +394,8 @@
             })
             .on('keyup', function(e){
                 if(!t._ctrl && e.which !== 17){
-                    t.semanticCode(false, e.which === 13);
+                    if(!t._composition)
+                        t.semanticCode(false, e.which === 13);
                     t.$c.trigger('tbwchange');
                 }
 
@@ -1047,7 +1050,7 @@
                 $mb.parent().remove();
                 t.hideOverlay();
             });
-            
+
             t.restoreSelection();
         },
         // Preformated build and management modal
