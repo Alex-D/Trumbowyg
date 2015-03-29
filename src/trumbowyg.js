@@ -386,7 +386,7 @@
                 return false;
             })
             .on('keydown', function(e){
-                t._composition = (e.keyCode === 229);
+                t._composition = (e.which === 229);
 
                 if(e.ctrlKey){
                     t._ctrl = true;
@@ -399,9 +399,8 @@
                 }
             })
             .on('keyup', function(e){
-                if(!t._ctrl && e.which !== 17){
-                    if(!t._composition)
-                        t.semanticCode(false, e.which === 13);
+                if(!t._ctrl && e.which !== 17 && !t._composition){
+                    t.semanticCode(false, e.which === 13);
                     t.$c.trigger('tbwchange');
                 }
 
