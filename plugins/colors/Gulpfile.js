@@ -102,6 +102,6 @@ gulp.task('watch', function(){
 
 
 
-gulp.task('build', ['styles']);
+gulp.task('build', ['sprites', 'styles']);
 
 gulp.task('default', ['build', 'watch']);
