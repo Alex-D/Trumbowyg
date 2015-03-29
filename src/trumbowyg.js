@@ -303,54 +303,60 @@
 
             // $ta = Textarea
             // $ed = Editor
-            t.isTextarea = true;
-            if(t.$ta.is('textarea'))
-                t.$ed = $('<div/>');
-            else {
-                t.$ed = t.$ta;
-                t.$ta = t.buildTextarea().val(t.$ta.val());
-                t.isTextarea = false;
-            }
-
-            if(t.$c.is('[placeholder]'))
-                t.$ed.attr('placeholder', t.$c.attr('placeholder'));
-
-            t.$ta.addClass(prefix + 'textarea');
-
-
+            t.isTextarea = t.$ta.is('textarea');
             if(t.isTextarea){
                 html = t.$ta.val();
-                t.$box.insertAfter(t.$ta)
-                         .append(t.$ed)
-                         .append(t.$ta);
+                t.$ed = $('<div/>');
+                t.$box
+                    .insertAfter(t.$ta)
+                    .append(t.$ed, t.$ta);
             } else {
+                t.$ed = t.$ta;
                 html = t.$ed.html();
-                t.$box.insertAfter(t.$ed)
-                         .append(t.$ta)
-                         .append(t.$ed);
+
+                t.$ta = $('<textarea/>', {
+                    name: t.$ta.attr('id'),
+                    height: t.height
+                }).val(html);
+
+                t.$box
+                    .insertAfter(t.$ed)
+                    .append(t.$ta, t.$ed);
                 t.syncCode();
             }
 
-            t.$ed.addClass(prefix + 'editor')
-                        .attr('contenteditable', true)
-                        .attr('dir', t.lang._dir || t.o.dir)
-                        .html(html);
+            t.$ta
+                .addClass(prefix + 'textarea')
+                .attr('tabindex', -1)
+            ;
 
-            if(t.o.resetCss)
+            t.$ed
+                .addClass(prefix + 'editor')
+                .attr({
+                    'contenteditable': true,
+                    'dir': t.lang._dir || t.o.dir
+                })
+                .html(html)
+            ;
+
+            if(t.$c.is('[placeholder]')){
+                t.$ed.attr('placeholder', t.$c.attr('placeholder'));
+            }
+
+            if(t.o.resetCss){
                 t.$ed.addClass(prefix + 'reset-css');
+            }
 
-            if(!t.o.autogrow)
-                $.each([t.$ta, t.$ed], function(i, $el){
-                    $el.css({
-                        height: t.height,
-                        overflow: 'auto'
-                    });
+            if(!t.o.autogrow){
+                t.$ta.add(t.$ed).css({
+                    height: t.height,
+                    overflow: 'auto'
                 });
+            }
 
             if(t.o.semantic){
                 t.$ed.html(
-                    t.$ed.html()
-                        .replace('<br>', '</p><p>')
+                    html.replace('<br>', '</p><p>')
                         .replace('&nbsp;', ' ')
                 );
                 t.semanticCode();
@@ -368,7 +374,7 @@
                         required: true
                     },
                     alt: {
-                        label: 'description',
+                        label: t.lang.description,
                         value: $img.attr('alt')
                     }
                 }, function(v){
@@ -436,15 +442,6 @@
                     t.closeModal();
                     return false;
                 }
-            });
-        },
-
-
-        // Build the Textarea which contain HTML generated code
-        buildTextarea: function(){
-            return $('<textarea/>', {
-                name: this.$ta.attr('id'),
-                height: this.height
             });
         },
 
@@ -555,6 +552,7 @@
                     'class': prefix + n +'-button' + (btn.ico ? ' '+ prefix + btn.ico +'-button' : ''),
                     text: btn.text || btn.title || textDef,
                     title: btn.title || btn.text || textDef + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
+                    tabindex: -1,
                     mousedown: function(){
                         if(!d || $('.'+n+'-'+prefix + 'dropdown', t.$box).is(':hidden'))
                             $('body', t.doc).trigger('mousedown');
@@ -595,11 +593,12 @@
             var t = this,
                 b = t.o.btnsDef[n];
 
-            if(b.key)
+            if(b.key){
                 t.keys[b.key] = {
                     func: b.func || n,
                     param: b.param || n
                 };
+            }
 
             return $('<button/>', {
                 type: 'button',
@@ -625,7 +624,8 @@
                 type: 'button',
                 'class': this.o.prefix + n + '-button',
                 title: l,
-                text: l
+                text: l,
+                tabindex: -1
             });
         },
         // Check if button is supported
@@ -761,6 +761,10 @@
             t.$box.toggleClass(prefix + 'editor-hidden ' + prefix + 'editor-visible');
             t.$btnPane.toggleClass(prefix + 'disable');
             $('.'+prefix + 'viewHTML-button', t.$btnPane).toggleClass(prefix + 'active');
+            if(t.$box.hasClass(prefix + 'editor-visible'))
+                t.$ta.attr('tabindex', -1);
+            else
+                t.$ta.removeAttr('tabindex');
         },
 
         // Open dropdown when click on a button which open that

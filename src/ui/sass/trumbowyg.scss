@@ -59,7 +59,7 @@ $dark-color: #222;
         height: 1px !important;
         width: 25%;
         min-height: 0 !important;
-        padding: 0;
+        padding: 0 !important;
         background: none;
     }
 }
@@ -91,6 +91,7 @@ $dark-color: #222;
         display: inline-block;
         text-align: center;
         overflow: hidden;
+        padding: 0 !important;
 
         &.trumbowyg-separator {
             width: 1px;
@@ -111,6 +112,7 @@ $dark-color: #222;
     }
 
     li button {
+        padding: 1px 6px !important;
         // At bottom of this stylesheet
     }
 
