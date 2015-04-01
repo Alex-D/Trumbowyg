@@ -2,15 +2,14 @@
 
 Trumbowyg is a simple and lightweight WYSIWYG editor, is only 15kB for faster page loading.
 
+[![Trumbowyg logo](banner.png)](http://alex-d.github.io/Trumbowyg/)
 
-# Website
-
-http://alex-d.github.io/Trumbowyg/
+Visit prestantion page : http://alex-d.github.io/Trumbowyg/
 
 
 # Documentation
 
-http://alex-d.github.io/Trumbowyg/documentation.html
+All you need to know about Trumbowyg is here : http://alex-d.github.io/Trumbowyg/documentation.html (or [on the home](http://alex-d.github.io/Trumbowyg/))
 
 
 # Contribute
@@ -38,4 +37,4 @@ danbettles, who has contribute to this README.
 
 # License
 
-This project is under MIT license. See LICENSE file for details.
+This project is under MIT license. See [LICENSE](LICENSE) file for details.
