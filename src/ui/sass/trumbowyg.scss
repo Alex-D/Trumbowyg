@@ -187,8 +187,9 @@ $dark-color: #222;
     left: 50%;
     margin-left: -260px;
     width: 520px;
-    height: 290px;
+    height: 350px;
     overflow: hidden;
+    backface-visibility: hidden;
 }
 .trumbowyg-modal-box {
     position: absolute;
@@ -196,7 +197,7 @@ $dark-color: #222;
     left: 50%;
     margin-left: -250px;
     width: 500px;
-    height: 275px;
+    padding-bottom: 45px;
     z-index: 1;
     background-color: #FFF;
     text-align: center;

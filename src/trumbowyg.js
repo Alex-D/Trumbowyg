@@ -45,7 +45,8 @@
             required:       "Required",
             description:    "Description",
             title:          "Title",
-            text:           "Text"
+            text:           "Text",
+            target:         "Target"
         }
     },
 
@@ -879,12 +880,14 @@
                     required: true
                 },
                 title: {
-                    label: t.lang.title,
-                    value: t.getSelectedText()
+                    label: t.lang.title
                 },
                 text: {
                     label: t.lang.text,
                     value: t.getSelectedText()
+                },
+                target: {
+                    label: t.lang.target
                 }
             }, function(v){ // v is value
                 t.execCmd('createLink', v.url);
@@ -894,6 +897,13 @@
 
                 if(v.title.length > 0)
                     l.attr('title', v.title);
+                else
+                    l.removeAttr('title');
+
+                if(v.target.length > 0)
+                    l.attr('target', v.target);
+                else
+                    l.removeAttr('target');
 
                 return true;
             });
@@ -968,7 +978,7 @@
                 top: (t.$btnPane.height() + 1) + 'px'
             }).appendTo(t.$box);
 
-            // Click on overflay close modal by cancelling them
+            // Click on overlay close modal by cancelling them
             t.$overlay.one('click', function(){
                 $modal.trigger(prefix + 'cancel');
                 return false;
@@ -1010,6 +1020,8 @@
                 text: title,
                 'class': prefix + 'modal-title'
             }).prependTo($box);
+
+            $modal.height($box.outerHeight() + 10);
 
 
             // Focus in modal box
