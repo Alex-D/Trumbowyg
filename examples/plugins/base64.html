@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>base64 plugin | Trumbowyg by Alex-D</title>
+        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="../../dist/ui/trumbowyg.css">
+    </head>
+    <body>
+        <div id="main" role="main">
+            <header>
+                <h1>Base64 plugin for Trumbowyg</h1>
+
+                <p>
+                    You can insert an image in <em>base64</em> in src attribute of <code>img</code> tag.
+                </p>
+            </header>
+
+
+
+            <div id="editor">
+                <h2>Insert your base64 image!</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident optio nam reiciendis eius beatae quibusdam!
+                </p>
+                <p>
+                    The text is derived from Cicero's De Finibus Bonorum et Malorum (On the Ends of Goods and Evils, or alternatively [About] The Purposes of Good and Evil ). The original passage began: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit (Translation: &quot;Neither is there anyone who loves grief itself since it is grief and thus wants to obtain it&quot;).
+                </p>
+            </div>
+
+            <h2>The code</h2>
+            <code><pre>
+$('#editor')
+.trumbowyg({
+    btnsAdd: ['base64']
+});
+            </pre></code>
+
+
+            <hr>
+
+
+            <div id="editor-dropdown">
+                <h2>Insert your base64 image through image dropdown!</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident optio nam reiciendis eius beatae quibusdam!
+                </p>
+                <p>
+                    The text is derived from Cicero's De Finibus Bonorum et Malorum (On the Ends of Goods and Evils, or alternatively [About] The Purposes of Good and Evil ). The original passage began: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit (Translation: &quot;Neither is there anyone who loves grief itself since it is grief and thus wants to obtain it&quot;).
+                </p>
+            </div>
+
+            <h2>The code</h2>
+            <code><pre>
+$('#editor-dropdown')
+.trumbowyg({
+    btnsDef: {
+        // Create a new dropdown
+        image: {
+            dropdown: ['insertImage', 'base64'],
+            ico: 'insertImage'
+        }
+    },
+    // Redefine the button pane
+    btns: ['viewHTML',
+            '|', 'formatting',
+            '|', 'btnGrp-semantic',
+            '|', 'link',
+            '|', 'image',
+            '|', 'btnGrp-justify',
+            '|', 'btnGrp-lists',
+            '|', 'horizontalRule']
+});
+            </pre></code>
+        </div>
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="../../dist/trumbowyg.js"></script>
+        <script src="../../dist/plugins/base64/trumbowyg.base64.js"></script>
+        <script>
+            $('#editor')
+            .trumbowyg({
+                btnsAdd: ['base64']
+            });
+
+
+
+            $('#editor-dropdown')
+            .trumbowyg({
+                btnsDef: {
+                    // Create a new dropdown
+                    image: {
+                        dropdown: ['insertImage', 'base64'],
+                        ico: 'insertImage'
+                    }
+                },
+                // Redefine the button pane
+                btns: ['viewHTML',
+                        '|', 'formatting',
+                        '|', 'btnGrp-semantic',
+                        '|', 'link',
+                        '|', 'image',
+                        '|', 'btnGrp-justify',
+                        '|', 'btnGrp-lists',
+                        '|', 'horizontalRule']
+            });
+        </script>
+    </body>
+</html>

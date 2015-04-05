@@ -1,0 +1,36 @@
+{
+  "name": "trumbowyg",
+  "version": "2.0.0-beta.2",
+  "homepage": "https://github.com/Alex-D/Trumbowyg",
+  "authors": [
+    {
+      "name": "Alexandre Demode (Alex-D)",
+      "email": "contact@alex-d.fr",
+      "homepage": "http://alex-d.fr"
+    }
+  ],
+  "description": "A lightweight WYSIWYG editor",
+  "main": "dist/trumbowyg.js",
+  "keywords": [
+    "editor",
+    "wysiwyg",
+    "javascript",
+    "richtext"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "node_modules",
+    "plugins",
+    "!dist/plugins",
+    "test",
+    "tests",
+    "src",
+    "Gulpfile.js",
+    "package.json"
+  ],
+  "dependencies": {
+    "jquery": ">=1.7"
+  }
+}

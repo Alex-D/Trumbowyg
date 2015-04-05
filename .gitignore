@@ -1,9 +1,13 @@
 # Others
 ~$*
-.sass-cache/
-uploaded-files/
-screenshot.jpg
-compass_app_log.txt
+/.sass-cache
+/uploaded-files
+/node_modules
+/bower_components
+/dist
+/src/ui/sass/_sprite*
+/plugins/**/ui/sass/_sprite*
+
 
 # Windows image file caches
 Thumbs.db
