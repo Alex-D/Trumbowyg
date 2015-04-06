@@ -412,7 +412,6 @@
                 t.$c.trigger('tbwfocus');
             })
             .on('blur', function(){
-                t.syncCode();
                 t.$c.trigger('tbwblur');
             })
             .on('paste', function(e){
@@ -437,6 +436,7 @@
                         t.execCmd('insertText', (e.originalEvent || e).clipboardData.getData('text/plain'));
                     }
                 }
+                t.syncCode();
             });
 
             $(t.doc).on('keydown', function(e){
@@ -867,6 +867,7 @@
                 $(this).replaceWith(function(){
                     return '<'+newTag+'>' + $(this).html() + '</'+newTag+'>';
                 });
+
             });
         },
 
@@ -1155,8 +1156,9 @@
                 var s = window.getSelection();
                 if(s.getRangeAt && s.rangeCount)
                     t.selection = s.getRangeAt(0);
-            } else if(ds && ds.createRange)
+            } else if(ds && ds.createRange) {
                 t.selection = ds.createRange();
+            }
         },
         restoreSelection: function(){
             var t = this,
