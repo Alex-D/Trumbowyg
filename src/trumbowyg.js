@@ -855,14 +855,12 @@
                 }
 
                 t.$ta.val(t.$ed.html());
-
-                t.restoreSelection();
             }
         },
         semanticTag: function(oldTag, newTag){
             $(oldTag, this.$ed).each(function(){
                 $(this).replaceWith(function(){
-                    return '<'+newTag+'>' + $(this).html() + '</'+newTag+'>';
+                    return ['<', newTag, '>', $(this).html(), '</', newTag, '>'].join('');
                 });
             });
         },
