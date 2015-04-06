@@ -429,13 +429,16 @@
                             // IE 11
                             t.doc.getSelection().getRangeAt(0).insertNode(document.createTextNode(text));
                         }
-                    } catch(err) {
+                    } catch(err){
                         // Not IE
                         t.execCmd('insertText', (e.originalEvent || e).clipboardData.getData('text/plain'));
                     }
                 }
 
                 t.syncCode();
+            });
+            t.$ta.on('keyup paste', function(){
+                t.$c.trigger('tbwchange');
             });
 
             $(t.doc).on('keydown', function(e){
@@ -812,10 +815,12 @@
         },
         syncCode: function(force){
             var t = this;
-            if(!force && t.$ed.is(':visible'))
+            if(!force && t.$ed.is(':visible')){
                 t.$ta.val(t.$ed.html());
-            else
+                t.$c.trigger('tbwchange');
+            } else {
                 t.$ed.html(t.$ta.val());
+            }
 
             if(t.o.autogrow){
                 t.height = t.$ed.height();
@@ -948,7 +953,9 @@
                     t.doc.execCommand(cmd, false, param);
                 }
             }
-            t.syncCode();
+
+            if(cmd != 'dropdown')
+                t.syncCode();
         },
 
 
