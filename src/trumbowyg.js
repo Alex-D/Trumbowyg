@@ -360,7 +360,7 @@
                     html.replace('<br>', '</p><p>')
                         .replace('&nbsp;', ' ')
                 );
-                t.semanticCode();
+                t.syncCode();
             }
 
 
@@ -401,8 +401,7 @@
             })
             .on('keyup', function(e){
                 if(!t._ctrl && e.which !== 17 && !t._composition){
-                    t.semanticCode(false, e.which === 13);
-                    t.$c.trigger('tbwchange');
+                    t.syncCode(false);
                 }
 
                 setTimeout(function(){
@@ -413,7 +412,6 @@
                 t.$c.trigger('tbwfocus');
             })
             .on('blur', function(){
-                t.syncCode();
                 t.$c.trigger('tbwblur');
             })
             .on('paste', function(e){
@@ -438,6 +436,7 @@
                         t.execCmd('insertText', (e.originalEvent || e).clipboardData.getData('text/plain'));
                     }
                 }
+                t.syncCode();
             });
 
             $(t.doc).on('keydown', function(e){
@@ -760,7 +759,7 @@
         toggle: function(){
             var t = this,
                 prefix = t.o.prefix;
-            t.semanticCode(false, true);
+            t.syncCode(false, true);
             t.$box.toggleClass(prefix + 'editor-hidden ' + prefix + 'editor-visible');
             t.$btnPane.toggleClass(prefix + 'disable');
             $('.'+prefix + 'viewHTML-button', t.$btnPane).toggleClass(prefix + 'active');
@@ -826,6 +825,10 @@
                     t.$c.trigger('tbwresize');
                 }
             }
+            if(t.o.semantic){
+                t.semanticCode(force);
+            }
+            t.$c.trigger('tbwchange');
         },
 
         // Analyse and update to semantic code
@@ -833,7 +836,6 @@
         // @param full  : wrap text nodes in <p>
         semanticCode: function(force, full){
             var t = this;
-            t.syncCode(force);
 
             if(t.o.semantic){
                 t.saveSelection();
@@ -857,7 +859,6 @@
                 }
 
                 t.$ta.val(t.$ed.html());
-
                 t.restoreSelection();
             }
         },
@@ -866,6 +867,7 @@
                 $(this).replaceWith(function(){
                     return '<'+newTag+'>' + $(this).html() + '</'+newTag+'>';
                 });
+
             });
         },
 
@@ -1154,8 +1156,9 @@
                 var s = window.getSelection();
                 if(s.getRangeAt && s.rangeCount)
                     t.selection = s.getRangeAt(0);
-            } else if(ds && ds.createRange)
+            } else if(ds && ds.createRange) {
                 t.selection = ds.createRange();
+            }
         },
         restoreSelection: function(){
             var t = this,
