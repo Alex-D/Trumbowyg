@@ -409,12 +409,8 @@
                     t._ctrl = false;
                 }, 200);
             })
-            .on('focus', function(){
-                t.$c.trigger('tbwfocus');
-            })
-            .on('blur', function(){
-                t.syncCode();
-                t.$c.trigger('tbwblur');
+            .on('focus blur', function(e){
+                t.$c.trigger('tbw' + e.type);
             })
             .on('paste', function(e){
                 t.$c.trigger('tbwpaste', e);
@@ -438,6 +434,8 @@
                         t.execCmd('insertText', (e.originalEvent || e).clipboardData.getData('text/plain'));
                     }
                 }
+
+                t.syncCode();
             });
 
             $(t.doc).on('keydown', function(e){
