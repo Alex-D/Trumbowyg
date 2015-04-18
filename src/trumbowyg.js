@@ -1,4 +1,4 @@
-﻿jQuery.trumbowyg = {
+jQuery.trumbowyg = {
     langs: {
         en: {
             viewHTML:       "View HTML",
@@ -891,21 +891,32 @@
                     label: t.lang.target
                 }
             }, function(v){ // v is value
-                t.execCmd('createLink', v.url);
-                var l = $('a[href="'+v.url+'"]:not([title])', t.$box);
-                if(v.text.length > 0)
-                    l.text(v.text);
+                var browser=navigator.userAgent.toLowerCase();
+                if (browser.indexOf('firefox') !== -1) {
+                    var a = $(['<a href="',v.url ,'">',v.text,'</a>'].join(''));
+                    if (v.title.length > 0)
+                        a.attr('title',v.title);
+                    if (v.target.length > 0)
+                        a.attr('target',v.target);
+                    t.selection.deleteContents();
+                    t.selection.insertNode(a.get(0));
+                    t.restoreSelection();
+                } else {
+                    t.execCmd('createLink', v.url);
+                    var l = $('a[href="'+v.url+'"]:not([title])', t.$box);
+                    if(v.text.length > 0)
+                        l.text(v.text);
 
-                if(v.title.length > 0)
-                    l.attr('title', v.title);
-                else
-                    l.removeAttr('title');
+                    if(v.title.length > 0)
+                        l.attr('title', v.title);
+                    else
+                        l.removeAttr('title');
 
-                if(v.target.length > 0)
-                    l.attr('target', v.target);
-                else
-                    l.removeAttr('target');
-
+                    if(v.target.length > 0)
+                        l.attr('target', v.target);
+                    else
+                        l.removeAttr('target');
+                }
                 return true;
             });
         },
