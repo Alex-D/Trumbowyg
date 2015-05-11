@@ -29,6 +29,11 @@
                 upload: "Envoi",
                 file:   "Fichier",
                 uploadError: "Erreur"
+            },
+            cs: {
+                upload: "Nahrát obrázek",
+                file:   "Soubor",
+                uploadError: "Chyba"
             }
         },
 
