@@ -13,6 +13,10 @@
 
     $.extend(true, $.trumbowyg, {
         langs: {
+            cs: {
+                foreColor: "Barva textu",
+                backColor: "Barva pozadí"
+            },
             en: {
                 foreColor: "Text color",
                 backColor: "Background color"
