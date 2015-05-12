@@ -266,7 +266,10 @@ jQuery.trumbowyg = {
                 link: {
                     dropdown: ['createLink', 'unlink']
                 }
-            }
+            },
+
+            blockLevelElements: ['br', 'p', 'div', 'ul', 'ol', 'table', 'img', 'address', 'article', 'aside', 'audio', 'blockquote', 'canvas', 'dl', 'fieldset', 'figcaption', 'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'hgroup', 'hr', 'main', 'nav', 'noscript', 'output', 'pre', 'section', 'tfoot', 'video']
+
         }, o);
 
         if(o.btns)
@@ -356,10 +359,6 @@ jQuery.trumbowyg = {
             }
 
             if(t.o.semantic){
-                t.$ed.html(
-                    html.replace('<br>', '</p><p>')
-                        .replace('&nbsp;', ' ')
-                );
                 t.semanticCode();
             }
 
@@ -413,8 +412,6 @@ jQuery.trumbowyg = {
                 t.$c.trigger('tbw' + e.type);
             })
             .on('paste', function(e){
-                t.$c.trigger('tbwpaste', e);
-
                 if(t.o.removeformatPasted){
                     e.preventDefault();
 
@@ -435,7 +432,15 @@ jQuery.trumbowyg = {
                     }
                 }
 
-                t.syncCode();
+                setTimeout(function() {
+                    if(t.o.semantic) {
+                        t.semanticCode(false, true);
+                    } else {
+                        t.syncCode();
+                    }
+                    t.$c.trigger('tbwpaste', e);
+                }, 0);
+
             });
             t.$ta.on('keyup paste', function(){
                 t.$c.trigger('tbwchange');
@@ -802,7 +807,6 @@ jQuery.trumbowyg = {
 
 
 
-
         // HTML Code management
         html: function(html){
             var t = this;
@@ -837,39 +841,74 @@ jQuery.trumbowyg = {
         semanticCode: function(force, full){
             var t = this;
             t.syncCode(force);
+            t.saveSelection();
 
             if(t.o.semantic){
-                t.saveSelection();
-
                 t.semanticTag('b', 'strong');
                 t.semanticTag('i', 'em');
                 t.semanticTag('strike', 'del');
 
                 if(full){
-                    // Wrap text nodes in p
-                    t.$ed.contents()
-                    .filter(function(){
-                        // Only non-empty text nodes
+                    var blockElementsSelector = t.o.blockLevelElements.join(', '),
+                        inlineElementsSelector = ':not(' + blockElementsSelector + ')';
+
+                    // Wrap text nodes in span for easier processing
+                    t.$ed.contents().filter(function() {
                         return this.nodeType === 3 && $.trim(this.nodeValue).length > 0;
-                    }).wrap('<p></p>').end()
+                    }).wrap('<span data-trumbowyg-textnode/>');
 
-                    // Remove all br
-                    .filter('br').remove();
+                    // Wrap groups of inline elements in paragraphs (recursive)
+                    var wrapInlinesInParagraphsFrom = function($from) {
+                        if ($from.length !== 0) {
+                            var $finalParagraph = $from.nextUntil(blockElementsSelector + ', br').andSelf()
+                                .wrapAll('<p/>').parent();
 
-                    t.semanticTag('div', 'p');
+                            $finalParagraph.next('br').remove();
+
+                            var $nextElement = $finalParagraph.nextAll(inlineElementsSelector).first();
+                            if ($nextElement.length) {
+                                wrapInlinesInParagraphsFrom($nextElement);
+                            }
+                        }
+                    };
+                    wrapInlinesInParagraphsFrom(t.$ed.children(inlineElementsSelector).first());
+
+                    t.semanticTag('div', 'p', true);
+
+                    // Unwrap paragraphs content, containing nothing usefull
+                    t.$ed.find('p').filter(function() {
+                        if (t.selection && this === t.selection.startContainer) {
+                            // Don't remove currently being edited element
+                            return false;
+                        }
+                        return $(this).text().trim().length === 0 && $(this).children().not('br, span').length === 0;
+                    }).contents().unwrap();
+
+                    // Get rid of temporial span's
+                    $('[data-trumbowyg-textnode]', t.$ed).contents().unwrap();
+
+                    // Replace empty <p> with <br> (IE loves adding empty <p>)
+                    t.$ed.find('p:empty').replaceWith('<br/>');
                 }
+
+                t.restoreSelection();
 
                 t.$ta.val(t.$ed.html());
             }
         },
-        semanticTag: function(oldTag, newTag){
-            $(oldTag, this.$ed).each(function(){
-                $(this).replaceWith(function(){
-                    return ['<', newTag, '>', $(this).html(), '</', newTag, '>'].join('');
-                });
+
+        semanticTag: function(oldTag, newTag, copyAttributes){
+            $(oldTag, this.$ed).each(function() {
+                var $oldTag = $(this);
+                $oldTag.wrap('<' + newTag + '/>');
+                if (copyAttributes) {
+                    $.each($oldTag.prop('attributes'), function() {
+                        $oldTag.parent().attr(this.name, this.value);
+                    });
+                }
+                $oldTag.contents().unwrap();
             });
         },
-
 
         // Function call when user click on "Insert Link"
         createLink: function(){
