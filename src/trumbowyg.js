@@ -266,7 +266,10 @@ jQuery.trumbowyg = {
                 link: {
                     dropdown: ['createLink', 'unlink']
                 }
-            }
+            },
+
+            blockLevelElements: ['br', 'p', 'ul', 'ol', 'table', 'img', 'address', 'article', 'aside', 'audio', 'blockquote', 'canvas', 'dl', 'fieldset', 'figcaption', 'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'hgroup', 'hr', 'main', 'nav', 'noscript', 'output', 'pre', 'section', 'tfoot', 'video']
+
         }, o);
 
         if(o.btns)
@@ -356,10 +359,6 @@ jQuery.trumbowyg = {
             }
 
             if(t.o.semantic){
-                t.$ed.html(
-                    html.replace('<br>', '</p><p>')
-                        .replace('&nbsp;', ' ')
-                );
                 t.semanticCode();
             }
 
@@ -413,7 +412,6 @@ jQuery.trumbowyg = {
                 t.$c.trigger('tbw' + e.type);
             })
             .on('paste', function(e){
-                t.$c.trigger('tbwpaste', e);
 
                 if(t.o.removeformatPasted){
                     e.preventDefault();
@@ -435,7 +433,15 @@ jQuery.trumbowyg = {
                     }
                 }
 
-                t.syncCode();
+                setTimeout(function() {
+                    if(t.o.semantic) {
+                        t.semanticCode(false, true);
+                    } else {
+                        t.syncCode()
+                    }
+                    t.$c.trigger('tbwpaste', e);
+                }, 0)
+
             });
             t.$ta.on('keyup paste', function(){
                 t.$c.trigger('tbwchange');
@@ -802,7 +808,6 @@ jQuery.trumbowyg = {
 
 
 
-
         // HTML Code management
         html: function(html){
             var t = this;
@@ -839,37 +844,56 @@ jQuery.trumbowyg = {
             t.syncCode(force);
 
             if(t.o.semantic){
-                t.saveSelection();
 
                 t.semanticTag('b', 'strong');
                 t.semanticTag('i', 'em');
                 t.semanticTag('strike', 'del');
 
                 if(full){
-                    // Wrap text nodes in p
+                    var blockElementsWithoutPSelector = t.o.blockLevelElements.concat('p').join(', ')
+
+                    // Wrap non-empty child text nodes in p
                     t.$ed.contents()
                     .filter(function(){
-                        // Only non-empty text nodes
                         return this.nodeType === 3 && $.trim(this.nodeValue).length > 0;
-                    }).wrap('<p></p>').end()
+                    })
+                        .wrap('<p/>').parent()
+                        .next('br').remove();
 
-                    // Remove all br
-                    .filter('br').remove();
+                    t.semanticTag('div', 'p', true);
 
-                    t.semanticTag('div', 'p');
+                    // Wrap inline children followed with <br> in p
+                    t.$ed.children(':not(' + blockElementsWithoutPSelector + ') + br').prev()
+                        .wrap('<p/>').parent()
+                        .next('br').remove();
+
+                    // Unwrap content of paragraphs, containing nothing but <br>s
+                    t.$ed.find('p').filter(function() {
+                        return $(this).text().length === 0 && $(this).children(':not(br)').length === 0;
+                    }).contents().unwrap();
+
+                    // Replace empty <p> with <br> (IE loves adding empty <p>)
+                    t.$ed.find('p:empty').replaceWith('<br/>');
+
                 }
 
                 t.$ta.val(t.$ed.html());
+
             }
         },
-        semanticTag: function(oldTag, newTag){
-            $(oldTag, this.$ed).each(function(){
-                $(this).replaceWith(function(){
-                    return ['<', newTag, '>', $(this).html(), '</', newTag, '>'].join('');
-                });
+
+        semanticTag: function(oldTag, newTag, copyAttributes){
+            $(oldTag, this.$ed).each(function() {
+                var $oldTag = $(this);
+                $oldTag.wrap('<' + newTag + '/>');
+                if (copyAttributes) {
+                    $.each($oldTag.prop('attributes'), function() {
+                        $oldTag.parent().attr(this.name, this.value)
+                    });
+                }
+                $oldTag.contents().unwrap();
             });
         },
-
 
         // Function call when user click on "Insert Link"
         createLink: function(){
