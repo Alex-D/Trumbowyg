@@ -268,7 +268,7 @@ jQuery.trumbowyg = {
                 }
             },
 
-            blockLevelElements: ['br', 'p', 'ul', 'ol', 'table', 'img', 'address', 'article', 'aside', 'audio', 'blockquote', 'canvas', 'dl', 'fieldset', 'figcaption', 'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'hgroup', 'hr', 'main', 'nav', 'noscript', 'output', 'pre', 'section', 'tfoot', 'video']
+            blockLevelElements: ['br', 'p', 'div', 'ul', 'ol', 'table', 'img', 'address', 'article', 'aside', 'audio', 'blockquote', 'canvas', 'dl', 'fieldset', 'figcaption', 'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'hgroup', 'hr', 'main', 'nav', 'noscript', 'output', 'pre', 'section', 'tfoot', 'video']
 
         }, o);
 
@@ -842,6 +842,7 @@ jQuery.trumbowyg = {
         semanticCode: function(force, full){
             var t = this;
             t.syncCode(force);
+            t.saveSelection();
 
             if(t.o.semantic){
 
@@ -850,32 +851,50 @@ jQuery.trumbowyg = {
                 t.semanticTag('strike', 'del');
 
                 if(full){
-                    var blockElementsWithoutPSelector = t.o.blockLevelElements.concat('p').join(', ')
+                    var blockElementsSelector = t.o.blockLevelElements.join(', ');
+                    var inlineElementsSelector = ':not(' + t.o.blockLevelElements.join(', ') + ')';
 
-                    // Wrap non-empty child text nodes in p
-                    t.$ed.contents()
-                    .filter(function(){
+                    // Wrap text nodes in span for easier processing
+                    t.$ed.contents().filter(function() {
                         return this.nodeType === 3 && $.trim(this.nodeValue).length > 0;
-                    })
-                        .wrap('<p/>').parent()
-                        .next('br').remove();
+                    }).wrap('<span data-trumbowyg-textnode/>');
+
+                    // Wrap groups of inline elements in paragraphs (recursive)
+                    var wrapInlinesInParagraphsFrom = function($from) {
+                        if ($from.length === 0) { return; }
+
+                        var $finalParagraph = $from.nextUntil(blockElementsSelector + ', br').andSelf()
+                            .wrapAll('<p/>').parent();
+
+                        $finalParagraph.next('br').remove();
+
+                        var $nextElement = $finalParagraph.nextAll(inlineElementsSelector).first();
+                        if ($nextElement.length) {
+                            wrapInlinesInParagraphsFrom($nextElement);
+                        }
+                    };
+                    wrapInlinesInParagraphsFrom(t.$ed.children(inlineElementsSelector).first());
 
                     t.semanticTag('div', 'p', true);
 
-                    // Wrap inline children followed with <br> in p
-                    t.$ed.children(':not(' + blockElementsWithoutPSelector + ') + br').prev()
-                        .wrap('<p/>').parent()
-                        .next('br').remove();
-
-                    // Unwrap content of paragraphs, containing nothing but <br>s
+                    // Unwrap paragraphs content, containing nothing usefull
                     t.$ed.find('p').filter(function() {
-                        return $(this).text().length === 0 && $(this).children(':not(br)').length === 0;
+                        if (this === t.selection.startContainer) {
+                            // Don't remove currently being edited element
+                            return false
+                        }
+                        return $(this).text().trim().length === 0 && $(this).children().not('br, span').length === 0;
                     }).contents().unwrap();
+
+                    // Get rid of temporial span's
+                    $('[data-trumbowyg-textnode]', t.$ed).contents().unwrap();
 
                     // Replace empty <p> with <br> (IE loves adding empty <p>)
                     t.$ed.find('p:empty').replaceWith('<br/>');
 
                 }
+
+                t.restoreSelection();
 
                 t.$ta.val(t.$ed.html());
 
