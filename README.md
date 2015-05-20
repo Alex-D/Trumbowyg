@@ -4,7 +4,7 @@ Trumbowyg is a simple and lightweight WYSIWYG editor, is only 15kB for faster pa
 
 [![Trumbowyg logo](banner.png)](http://alex-d.github.io/Trumbowyg/)
 
-Visit prestantion page : http://alex-d.github.io/Trumbowyg/
+Visit presentation page : http://alex-d.github.io/Trumbowyg/
 
 
 # Documentation
@@ -31,8 +31,8 @@ Thanks to `node` and `gulp`, you can improve core script, style or icons easily.
 
 # Thanks
 
-Vinz, who has make some icons for default design.
-danbettles, who has contribute to this README.
+Vinz, who has made some icons for default design.
+danbettles, who has contributed to this README.
 
 
 # License
