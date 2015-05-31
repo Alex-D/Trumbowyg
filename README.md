@@ -29,12 +29,6 @@ Thanks to `node` and `gulp`, you can improve core script, style or icons easily.
 `gulp` command launch default Gulp task watcher and rebuild on the fly.
 
 
-# Thanks
-
-Vinz, who has made some icons for default design.
-danbettles, who has contributed to this README.
-
-
 # License
 
 This project is under MIT license. See [LICENSE](LICENSE) file for details.
