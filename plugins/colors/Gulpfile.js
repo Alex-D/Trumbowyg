@@ -77,7 +77,7 @@ function makeSprite(color, resolution){
 
 
 
-gulp.task("styles", function(){
+gulp.task("styles", ["sprites"], function(){
   return gulp.src(paths.mainStyle)
     .pipe($.sass({
       sass: paths.styles.sass,
@@ -97,7 +97,7 @@ gulp.task("styles", function(){
 
 
 gulp.task('watch', function(){
-    gulp.watch(paths.mainStyle, ['sprites', 'styles']);
+    gulp.watch(paths.mainStyle, ['styles']);
 });
 
 
