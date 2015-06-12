@@ -54,5 +54,5 @@ jQuery.trumbowyg.langs.hu = {
     title:          "Cím",
     text:           "Szöveg",
 
-    removeFormat:   "Formázás eltávolítása"
+    removeformat:   "Formázás eltávolítása"
 };
