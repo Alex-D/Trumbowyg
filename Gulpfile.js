@@ -72,7 +72,7 @@ gulp.task('scripts', ['test-scripts'], function(){
         .pipe($.concat('trumbowyg.js', { newLine: '\r\n\r\n' }))
         .pipe(gulp.dest('dist/'))
         .pipe($.size({ title: 'trumbowyg.js' }))
-        .pipe($.rename({ suffix: ".min" }))
+        .pipe($.rename({ suffix: '.min' }))
         .pipe($.uglify())
         .pipe($.header(bannerLight, { pkg: pkg }))
         .pipe(gulp.dest('dist/'))
@@ -81,7 +81,7 @@ gulp.task('scripts', ['test-scripts'], function(){
 
 gulp.task('langs', ['test-langs'], function(){
     return gulp.src(paths.langs)
-        .pipe($.rename({ suffix: ".min" }))
+        .pipe($.rename({ suffix: '.min' }))
         .pipe($.uglify({
             preserveComments: 'all'
         }))
@@ -91,7 +91,7 @@ gulp.task('langs', ['test-langs'], function(){
 gulp.task('plugins', ['test-plugins'], function(){
     return gulp.src(paths.plugins)
         .pipe(gulp.dest('dist/plugins/'))
-        .pipe($.rename({ suffix: ".min" }))
+        .pipe($.rename({ suffix: '.min' }))
         .pipe($.uglify())
         .pipe(gulp.dest('dist/plugins/'))
 });
@@ -102,7 +102,7 @@ gulp.task('sprites', function(){
     return makeSprite('white') && makeSprite('white', '-2x') && makeSprite('black') && makeSprite('black', '-2x');
 });
 function makeSprite(color, resolution){
-    var suffix =  '-' + color + ((resolution) ? resolution : '');
+    var suffix =  '-' + color + (resolution ? resolution : '');
     var sprite = gulp.src(paths.sprites['icons' + suffix])
         .pipe(spritesmith({
             imgName: 'icons' + suffix + '.png',
@@ -130,20 +130,28 @@ function makeSprite(color, resolution){
 
 
 
-gulp.task("styles", function(){
-  return gulp.src(paths.mainStyle)
-    .pipe($.sass({
-      sass: paths.styles.sass
-    }))
-    .pipe($.autoprefixer(["last 1 version", "> 1%", "ff >= 20", "ie >= 8", "opera >= 12", "Android >= 2.2"], { cascade: true }))
-    .pipe($.header(banner, { pkg: pkg, description: "Default stylesheet for Trumbowyg editor" }))
-    .pipe(gulp.dest("dist/ui/"))
-    .pipe($.size({ title: "trumbowyg.css" }))
-    .pipe($.rename({ suffix: ".min" })) // génère une version minimifié
-    .pipe($.minifyCss())
-    .pipe($.header(bannerLight, { pkg: pkg }))
-    .pipe(gulp.dest("dist/ui/"))
-    .pipe($.size({ title: "trumbowyg.min.css" }));
+gulp.task('styles', function(){
+    return gulp.src(paths.mainStyle)
+        .pipe($.sass({
+            sass: paths.styles.sass
+        }))
+        .pipe($.autoprefixer(['last 1 version', '> 1%', 'ff >= 20', 'ie >= 8', 'opera >= 12', 'Android >= 2.2'], { cascade: true }))
+        .pipe($.header(banner, { pkg: pkg, description: 'Default stylesheet for Trumbowyg editor' }))
+        .pipe(gulp.dest('dist/ui/'))
+        .pipe($.size({ title: 'trumbowyg.css' }))
+        .pipe($.rename({ suffix: '.min' }))
+        .pipe($.minifyCss())
+        .pipe($.header(bannerLight, { pkg: pkg }))
+        .pipe(gulp.dest('dist/ui/'))
+        .pipe($.size({ title: 'trumbowyg.min.css' }));
+});
+
+
+
+gulp.task('sass-dist', function(){
+    return gulp.src('src/ui/sass/**/*.scss')
+        .pipe($.header(banner, { pkg: pkg, description: 'Default stylesheet for Trumbowyg editor' }))
+        .pipe(gulp.dest('dist/ui/sass'))
 });
 
 
@@ -161,6 +169,6 @@ gulp.task('watch', function(){
     $.livereload.listen();
 });
 
-gulp.task('build', ['scripts', 'langs', 'plugins', 'sprites', 'styles']);
+gulp.task('build', ['scripts', 'langs', 'plugins', 'sprites', 'styles', 'sass-dist']);
 
 gulp.task('default', ['build', 'watch']);

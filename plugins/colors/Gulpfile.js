@@ -96,12 +96,20 @@ gulp.task("styles", function(){
 
 
 
+gulp.task('sass-dist', function(){
+    return gulp.src('ui/sass/**/*.scss')
+        .pipe($.header(banner, { pkg: pkg, description: 'Colors plugin stylesheet for Trumbowyg editor' }))
+        .pipe(gulp.dest('../../dist/plugins/colors/ui/sass/'))
+});
+
+
+
 gulp.task('watch', function(){
     gulp.watch(paths.mainStyle, ['sprites', 'styles']);
 });
 
 
 
-gulp.task('build', ['sprites', 'styles']);
+gulp.task('build', ['sprites', 'styles', 'sass-dist']);
 
 gulp.task('default', ['build', 'watch']);
