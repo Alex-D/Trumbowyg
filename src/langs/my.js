@@ -30,7 +30,7 @@ jQuery.trumbowyg.langs.id = {
     insertImage:    "Masukkan imej",
     insertVideo:    "Masukkan video",
     link:           "Pautan",
-    createLink:     "Masukkan pautan",
+    createLink:     "Cipta pautan",
     unlink:         "Hapus pautan",
 
     justifyLeft:    "Mengimbangkan ke kiri",
