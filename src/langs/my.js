@@ -3,10 +3,7 @@
  * Malaysian translation for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
- * Author : John Pozy (pampersdry)
- *          Twitter : @pampersdry
- *          Website : http://pampersdry.info
- *          Github : https://github.com/JohnPozy
+ * Author : JohnPozy
  */
 
 jQuery.trumbowyg.langs.id = {
