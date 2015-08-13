@@ -33,10 +33,10 @@ jQuery.trumbowyg.langs.id = {
     createLink:     "Masukkan pautan",
     unlink:         "Hapus pautan",
 
-    justifyLeft:    "Mewajarkan kiri",
-    justifyCenter:  "Mewajarkan tengah",
-    justifyRight:   "Mewajarkan kanan",
-    justifyFull:    "Mewajarkan kiri dan kanan",
+    justifyLeft:    "Mengimbangkan ke kiri",
+    justifyCenter:  "Mengimbangkan ke tengah",
+    justifyRight:   "Mengimbangkan ke kanan",
+    justifyFull:    "Mengimbangkan ke kiri dan kanan",
 
     horizontalRule: "Masukkan garis mendatar",
 
