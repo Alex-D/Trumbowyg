@@ -343,6 +343,10 @@ jQuery.trumbowyg = {
                 .html(html)
             ;
 
+            if(t.o.tabindex){
+                t.$ed.attr('tabindex', t.o.tabindex);
+            }
+
             if(t.$c.is('[placeholder]')){
                 t.$ed.attr('placeholder', t.$c.attr('placeholder'));
             }
