@@ -38,7 +38,11 @@
         },
 
         upload: {
-            serverPath: './src/plugins/upload/trumbowyg.upload.php'
+            serverPath: './src/plugins/upload/trumbowyg.upload.php',
+            fileFieldName: 'fileToUpload',
+            data: [],
+            success: undefined,
+            error: undefined
         },
 
         opts: {
@@ -66,7 +70,11 @@
                             // Callback
                             function(){
                                 var data = new FormData();
-                                data.append('fileToUpload', file);
+                                data.append($.trumbowyg.upload.fileFieldName, file);
+
+                                $.trumbowyg.upload.data.map(function(cur) {
+                                    data.append(cur.name, cur.value);
+                                });
 
                                 if($('.' + pfx +'progress', $modal).length === 0)
                                     $('.' + pfx + 'modal-title', $modal)
@@ -96,7 +104,7 @@
                                         }, 200);
                                     },
 
-                                    success: function(data){
+                                    success: $.trumbowyg.upload.success || function(data){
                                         if(data.message == "uploadSuccess") {
                                             tbw.execCmd('insertImage', data.file);
                                             setTimeout(function(){
@@ -109,7 +117,7 @@
                                             );
                                         }
                                     },
-                                    error: function(){
+                                    error: $.trumbowyg.upload.error || function(){
                                         tbw.addErrorOnModalField(
                                             $('input[type=file]', $modal),
                                             tbw.lang.uploadError
