@@ -46,7 +46,9 @@
         },
     });
     
-    
+    /*
+     * GetSelectionParentElement
+    */
     function getSelectionParentElement() {
         var parentEl = null, sel;
         if (window.getSelection) {
@@ -63,14 +65,21 @@
         return parentEl;
     }
 
-
+    /*
+     * Strip
+     * returns a text without HTML tags
+    */
     function strip(html) {
        var tmp = document.createElement("DIV");
        tmp.innerHTML = html;
        return tmp.textContent || tmp.innerText || "";
     }
-
-
+    
+    /*
+     * UnwrapCode
+     * ADD/FIX: to improve, works but can be better
+     * 'paranoic' solution
+    */
     function unwrapCode() {
         var container = null;
         if (document.selection) //for IE
@@ -80,7 +89,6 @@
             if (select.rangeCount > 0)
                 container = select.getRangeAt(0).startContainer.parentNode;
         }
-
         //"paranoic" unwrap
         var ispre  = $(container).contents().closest("pre").length;
         var iscode = $(container).contents().closest("code").length;
