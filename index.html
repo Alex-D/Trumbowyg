@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="examples/css/main.css">
         <link rel="stylesheet" href="dist/ui/trumbowyg.css">
         <link rel="stylesheet" href="dist/plugins/colors/ui/trumbowyg.colors.css">
+        <link rel="stylesheet" href="dist/plugins/preformatted/ui/trumbowyg.preformatted.css">
     </head>
     <body>
         <div id="main" role="main">
@@ -91,7 +92,8 @@ $('#customized-buttonpane').trumbowyg({
         '|', 'btnGrp-test',
         '|', 'align',
         '|', 'btnGrp-lists',
-        '|', 'image']
+        '|', 'image',
+        '|', 'preformatted']
 });
                     </pre></code>
                 </div>
@@ -130,6 +132,8 @@ $('#form-content').trumbowyg({
         <script src="dist/plugins/upload/trumbowyg.upload.js"></script>
         <script src="dist/plugins/base64/trumbowyg.base64.js"></script>
         <script src="dist/plugins/colors/trumbowyg.colors.js"></script>
+        <script src="dist/plugins/colors/trumbowyg.colors.js"></script>
+        <script src="dist/plugins/preformatted/trumbowyg.preformatted.js"></script>
         <script>
             /** Default editor configuration **/
             $('#default-editor')
@@ -191,7 +195,8 @@ $('#form-content').trumbowyg({
                     '|', 'align',
                     '|', 'btnGrp-lists',
                     '|', 'image',
-                    '|', 'foreColor', 'backColor']
+                    '|', 'foreColor', 'backColor',
+                    '|', 'preformatted']
             };
             $('#customized-buttonpane')
             .trumbowyg(customizedButtonPaneTbwOptions)
