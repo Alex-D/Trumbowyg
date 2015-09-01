@@ -1,6 +1,6 @@
 /* ===========================================================
- * en.js
- * English translation for Trumbowyg
+ * el.js
+ * Greek translation for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
  * Author : Merianos Nikos
