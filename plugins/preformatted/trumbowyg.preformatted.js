@@ -19,7 +19,7 @@
                 preformatted: "Exemple de code",
             },
             it: {
-              preformatted: "Codice <pre>",
+                preformatted: "Codice <pre>",
             }
         },
         opts: {
@@ -90,14 +90,14 @@
                 container = select.getRangeAt(0).startContainer.parentNode;
         }
         //"paranoic" unwrap
-        var ispre = $(container).contents().closest("pre").length;
-        var iscode = $(container).contents().closest("code").length;
+        var ispre = $(container).contents().closest('pre').length;
+        var iscode = $(container).contents().closest('code').length;
         if(ispre && iscode) {
-            $(container).contents().unwrap('code').unwrap("pre");
+            $(container).contents().unwrap('code').unwrap('pre');
         } else if(ispre) {
-            $(container).contents().unwrap("pre");
+            $(container).contents().unwrap('pre');
         } else if(iscode) {
-            $(container).contents().unwrap("code");
+            $(container).contents().unwrap('code');
         }  
     }
 
