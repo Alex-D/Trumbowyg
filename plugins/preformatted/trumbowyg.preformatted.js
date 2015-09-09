@@ -25,9 +25,8 @@
         opts: {
             btnsDef: {
                 preformatted: {
-                    func: function(params, btw) {
-                        var t = btw;
-                        var text = String(t.doc.getSelection());
+                    func: function(params, tbw) {
+                        var text = String(tbw.doc.getSelection());
                         if(text.replace(/\s/g, '') !== '') {
                             try {
                                 var curtag = getSelectionParentElement().tagName.toLowerCase();
@@ -35,7 +34,7 @@
                                     return unwrapCode();
                                 }
                                 else {
-                                    btw.execCmd('insertHTML', "<pre><code>"+ strip(text) +"</code></pre>");
+                                    tbw.execCmd('insertHTML', "<pre><code>"+ strip(text) +"</code></pre>");
                                 }
                             } catch(e) { }
                         }
@@ -50,7 +49,8 @@
      * GetSelectionParentElement
     */
     function getSelectionParentElement() {
-        var parentEl = null, sel;
+        var parentEl = null, 
+            sel;
         if (window.getSelection) {
             sel = window.getSelection();
             if (sel.rangeCount) {
@@ -90,7 +90,7 @@
                 container = select.getRangeAt(0).startContainer.parentNode;
         }
         //"paranoic" unwrap
-        var ispre  = $(container).contents().closest("pre").length;
+        var ispre = $(container).contents().closest("pre").length;
         var iscode = $(container).contents().closest("code").length;
         if(ispre && iscode) {
             $(container).contents().unwrap('code').unwrap("pre");
