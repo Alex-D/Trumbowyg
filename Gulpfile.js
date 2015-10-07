@@ -130,7 +130,7 @@ function makeSprite(color, resolution){
 
 
 
-gulp.task('styles', function(){
+gulp.task('styles', ['sprites'], function(){
     return gulp.src(paths.mainStyle)
         .pipe($.sass({
             sass: paths.styles.sass
@@ -169,6 +169,6 @@ gulp.task('watch', function(){
     $.livereload.listen();
 });
 
-gulp.task('build', ['scripts', 'langs', 'plugins', 'sprites', 'styles', 'sass-dist']);
+gulp.task('build', ['scripts', 'langs', 'plugins', 'styles', 'sass-dist']);
 
 gulp.task('default', ['build', 'watch']);
