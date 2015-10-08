@@ -1,6 +1,6 @@
 /* ===========================================================
- * trumbowyg.oembed.js v1.0
- * oEmbed plugin for Trumbowyg
+ * trumbowyg.noembed.js v1.0
+ * noEmbed plugin for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
  * Author : Jake Johns (jakejohns)
@@ -12,22 +12,22 @@
     $.extend(true, $.trumbowyg, {
         langs: {
             en: {
-                oembed: "oEmbed",
-                oembedError: "Error"
+                noembed: "noEmbed",
+                noembedError: "Error"
             },
             sk: {
-                oembedError: "Chyba"
+                noembedError: "Chyba"
             },
             fr: {
-                oembedError: "Erreur"
+                noembedError: "Erreur"
             },
             cs: {
-                oembedError: "Chyba"
+                noembedError: "Chyba"
             }
         },
 
-        oembed: {
-            proxy: 'https://noembed.com/embed',
+        noembed: {
+            proxy: 'https://nnoembed.com/embed',
             urlFiled: 'url',
             data: [],
             success: undefined,
@@ -36,12 +36,12 @@
 
         opts: {
             btnsDef: {
-                oembed: {
+                noembed: {
                     func: function(params, tbw){
 
                         var $modal = tbw.openModalInsert(
                             // Title
-                            tbw.lang.oembed,
+                            tbw.lang.noembed,
 
                             // Fields
                             {
@@ -54,13 +54,13 @@
                             function(data){
 
                                 $.ajax({
-                                    url:            $.trumbowyg.oembed.proxy,
+                                    url:            $.trumbowyg.noembed.proxy,
                                     type:           'GET',
                                     data:           data,
                                     cache:          false,
                                     dataType:       'json',
 
-                                    success: $.trumbowyg.oembed.success || function(data){
+                                    success: $.trumbowyg.noembed.success || function(data){
                                         if(data.html) {
                                             tbw.execCmd('insertHTML', data.html);
                                             setTimeout(function(){
@@ -73,10 +73,10 @@
                                             );
                                         }
                                     },
-                                    error: $.trumbowyg.oembed.error || function(){
+                                    error: $.trumbowyg.noembed.error || function(){
                                         tbw.addErrorOnModalField(
                                             $('input[type=text]', $modal),
-                                            tbw.lang.oembedError
+                                            tbw.lang.noembedError
                                         );
                                     }
                                 });
