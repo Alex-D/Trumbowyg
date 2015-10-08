@@ -27,9 +27,14 @@
       btnsDef: {
         editLink: {
           func: function (params, tbw) {
-            var t = tbw, url = '', title = '', target = '_blank', node = '', edit = false;
+            var t = tbw,
+              url = '',
+              title = '',
+              target = '_blank',
+              node = '',
+              edit = false;
 
-            var sel = window.getSelection();
+            var sel = t.doc.getSelection();
             var range = new Range();
             if (sel.type === 'Caret') { //if range is not selected, select whole <a> element
               range.selectNode(sel.baseNode);
@@ -78,16 +83,19 @@
               t.execCmd('createLink', v.url);
               if (!edit) return true;
               var l = $('a[href="' + v.url + '"]:not([title])', t.$box);
-              if (v.text.length > 0)
+              if (v.text.length > 0) {
                 l.text(v.text);
-              if (v.title.length > 0)
+              }
+              if (v.title.length > 0) {
                 l.attr('title', v.title);
-              else
+              } else {
                 l.removeAttr('title');
-              if (v.target.length > 0)
+              }
+              if (v.target.length > 0) {
                 l.attr('target', v.target);
-              else
+              } else {
                 l.removeAttr('target');
+              }
               return true;
             });
           }
@@ -98,6 +106,5 @@
       }
     }
   });
-
 
 })(jQuery);
