@@ -5,7 +5,6 @@
  * ===========================================================
  * Author : Emrah Bilbay (munzur)
  *          Github : https://github.com/munzur
- *          Website: http://kafe.in/
  */
 
 jQuery.trumbowyg.langs.tr = {
