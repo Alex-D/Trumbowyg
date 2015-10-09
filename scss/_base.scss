@@ -207,6 +207,12 @@ hr.clearfix {
     background: $header-dark;
     color: $main-color;
 }
+.big-button-simple {
+    display: block;
+    padding: 10px 15px;
+    border: none;
+    margin: 20px auto 25px;
+}
 
 
 
@@ -221,6 +227,12 @@ hr.clearfix {
     float: left;
     margin-bottom: 70px;
     padding: 0 30px;
+}
+
+
+
+.dn {
+    display: none;
 }
 
 

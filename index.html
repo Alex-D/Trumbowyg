@@ -10,8 +10,8 @@
         <meta name="google-site-verification" content="ECeSHLIckOv9unlORi9lLtDUy7rk_CI5-AF9AU3upJE">
 
         <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="//rawgit.com/Alex-D/Trumbowyg/2.0.0-beta.4/dist/ui/trumbowyg.min.css">
-        <link rel="stylesheet" href="//rawgit.com/Alex-D/Trumbowyg/2.0.0-beta.4/dist/plugins/colors/ui/trumbowyg.colors.min.css">
+        <link rel="stylesheet" href="//rawgit.com/Alex-D/Trumbowyg/2.0.0-beta.5/dist/ui/trumbowyg.min.css">
+        <link rel="stylesheet" href="//rawgit.com/Alex-D/Trumbowyg/2.0.0-beta.5/dist/plugins/colors/ui/trumbowyg.colors.min.css">
 
         <script src="js/vendor/modernizr-2.6.4-respond-1.1.0.min.js"></script>
     </head>
@@ -64,11 +64,12 @@
                         <h2 class="header-name-subtitle">A lightweight WYSIWYG editor</h2>
                     </div>
                     <div class="header-install">
-                        <a href="https://github.com/Alex-D/Trumbowyg/archive/2.0.0-beta.4.zip" class="header-install-download big-button">
+                        <a href="https://github.com/Alex-D/Trumbowyg/archive/2.0.0-beta.5.zip" class="header-install-download big-button">
                             Download v2.0.0-beta
                         </a>
                         <span class="header-install-or">or</span>
                         <code class="header-install-command">bower install trumbowyg</code>
+                        <code class="header-install-command">npm install trumbowyg</code>
                     </div>
                 </div>
             </div>
@@ -215,11 +216,19 @@ $('#trumbowyg-demo').trumbowyg({
             </section>
 
 
-            <section class="section wrapper text-center">
-                <h2 class="section-title">25+ Localizations</h2>
+            <section class="section wrapper">
+                <h2 class="section-title">30+ Localizations</h2>
                 <h3 class="section-subtitle">Get Trumbowyg in your language</h3>
 
-                <table>
+                <p id="lang-list-light">
+                    Arabic, Catalan, Czech, Danish, German, Greek, English, Spanish, Spanish (Argentina), Persian, Finnish, French, Hebrew, Hungarian, Indonesian, Italian, Japanese, Korean, Malaysian, Dutch, Polish, Portuguese, Romanian, Serbian (Cyrlic), Serbian (Latin), Russian, Slovak, Swedish, Turkish, Ukrainian, Vietnamese, Simplified Chinese, Traditional Chinese.
+
+                    <button type="button" id="lang-list-view-full" class="big-button big-button-simple">
+                        View detail of all languages
+                    </button>
+                </p>
+
+                <table id="lang-list-full" class="dn">
                     <thead>
                         <tr>
                             <th>Code</th>
@@ -233,7 +242,7 @@ $('#trumbowyg-demo').trumbowyg({
                                 ar
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/ar.min.js">Arabic</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/ar.min.js">Arabic</a>
                             </td>
                             <td>
                                 <a href="https://github.com/abomokhahmed">abomokhahmed / Abo Mokh ahmed</a>
@@ -244,7 +253,7 @@ $('#trumbowyg-demo').trumbowyg({
                                 ca
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/ca.min.js">Catalan</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/ca.min.js">Catalan</a>
                             </td>
                             <td>
                                 <a href="https://github.com/alsanan">alsanan / Àlfons Sánchez</a>
@@ -255,7 +264,7 @@ $('#trumbowyg-demo').trumbowyg({
                                 cs
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/cs.min.js">Czech</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/cs.min.js">Czech</a>
                             </td>
                             <td>
                                 <a href="https://github.com/svoboda-jan">svoboda-jan / Jan Svoboda</a>
@@ -266,7 +275,7 @@ $('#trumbowyg-demo').trumbowyg({
                                 da
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/da.min.js">Danish</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/da.min.js">Danish</a>
                             </td>
                             <td>
                                 <a href="https://github.com/chripede">chripede / Christian Pedersen</a>
@@ -277,10 +286,21 @@ $('#trumbowyg-demo').trumbowyg({
                                 de
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/de.min.js">German</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/de.min.js">German</a>
                             </td>
                             <td>
                                 <a href="https://github.com/Manfred62">Manfred62 / Manfred Timm</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                el
+                            </td>
+                            <td>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/el.min.js">Greek</a>
+                            </td>
+                            <td>
+                                <a href="https://github.com/merianos">merianos / Merianos Nikos</a>
                             </td>
                         </tr>
                         <tr>
@@ -299,7 +319,7 @@ $('#trumbowyg-demo').trumbowyg({
                                 es
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/es.min.js">Spanish</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/es.min.js">Spanish</a>
                             </td>
                             <td>
                                 Moisés Márquez
@@ -310,7 +330,7 @@ $('#trumbowyg-demo').trumbowyg({
                                 es_ar
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/es_ar.min.js">Spanish (Argentina)</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/es_ar.min.js">Spanish (Argentina)</a>
                             </td>
                             <td>
                                 Félix Vera
@@ -321,7 +341,7 @@ $('#trumbowyg-demo').trumbowyg({
                                 fa
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/fa.min.js">Persian</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/fa.min.js">Persian</a>
                             </td>
                             <td>
                                 <a href="https://github.com/kiyarash">kiyarash / Kiarash Soleimanzadeh</a>
@@ -332,7 +352,7 @@ $('#trumbowyg-demo').trumbowyg({
                                 fi
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/fi.min.js">Finnish</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/fi.min.js">Finnish</a>
                             </td>
                             <td>
                                 <a href="https://github.com/teppokoivula">teppokoivula / Teppo Koivula</a>
@@ -343,7 +363,7 @@ $('#trumbowyg-demo').trumbowyg({
                                 fr
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/fr.min.js">French</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/fr.min.js">French</a>
                             </td>
                             <td></td>
                         </tr>
@@ -352,7 +372,7 @@ $('#trumbowyg-demo').trumbowyg({
                                 he
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/he.min.js">Hebrew</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/he.min.js">Hebrew</a>
                             </td>
                             <td>
                                 <a href="https://github.com/udidoron">udidoron / Udi Doron</a>
@@ -360,10 +380,21 @@ $('#trumbowyg-demo').trumbowyg({
                         </tr>
                         <tr>
                             <td>
+                                hu
+                            </td>
+                            <td>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/hu.min.js">Hungarian</a>
+                            </td>
+                            <td>
+                                <a href="https://github.com/matopeter">matopeter / Peter Mato</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 id
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/id.min.js">Indonesian</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/id.min.js">Indonesian</a>
                             </td>
                             <td>
                                 <a href="https://github.com/kimiamania">kimiamania / Rezha Julio</a>
@@ -374,7 +405,7 @@ $('#trumbowyg-demo').trumbowyg({
                                 it
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/it.min.js">Italian</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/it.min.js">Italian</a>
                             </td>
                             <td>
                                 Mirko Buffoni
@@ -385,7 +416,7 @@ $('#trumbowyg-demo').trumbowyg({
                                 ja
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/ja.min.js">Japanese</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/ja.min.js">Japanese</a>
                             </td>
                             <td>
                                 <a href="https://github.com/foo9">foo9 / Kouta Fukuhara</a>
@@ -396,7 +427,7 @@ $('#trumbowyg-demo').trumbowyg({
                                 ko
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/ko.min.js">Korean</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/ko.min.js">Korean</a>
                             </td>
                             <td>
                                 <a href="https://github.com/dorajistyle">dorajistyle / JoongSeob Vito Kim</a>
@@ -404,10 +435,21 @@ $('#trumbowyg-demo').trumbowyg({
                         </tr>
                         <tr>
                             <td>
+                                my
+                            </td>
+                            <td>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/my.min.js">Malaysian</a>
+                            </td>
+                            <td>
+                                <a href="https://github.com/JohnPozy">John Pozy</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 nl
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/nl.min.js">Dutch</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/nl.min.js">Dutch</a>
                             </td>
                             <td>
                                 <a href="https://github.com/dhiemstra">dhiemstra / Danny Hiemstra</a>
@@ -418,7 +460,7 @@ $('#trumbowyg-demo').trumbowyg({
                                 pl
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/pl.min.js">Polish</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/pl.min.js">Polish</a>
                             </td>
                             <td>
                                 <a href="https://github.com/pawelabrams">pawelabrams / Paweł Abramowicz</a>
@@ -429,7 +471,7 @@ $('#trumbowyg-demo').trumbowyg({
                                 pt
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/pt.min.js">Portuguese</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/pt.min.js">Portuguese</a>
                             </td>
                             <td>
                                 <a href="https://github.com/ramirovjr">ramirovjr / Ramiro Varandas Jr</a>
@@ -440,7 +482,7 @@ $('#trumbowyg-demo').trumbowyg({
                                 ro
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/ro.min.js">Romanian</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/ro.min.js">Romanian</a>
                             </td>
                             <td>
                                 <a href="https://github.com/pacMakaveli">pacMakaveli / Vladut Radulescu</a>
@@ -451,7 +493,7 @@ $('#trumbowyg-demo').trumbowyg({
                                 rs
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/rs.min.js">Serbian (Cyrlic)</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/rs.min.js">Serbian (Cyrlic)</a>
                             </td>
                             <td>
                                 <a href="https://github.com/johonunu">johonunu / Nikola Trifunovic</a>
@@ -462,7 +504,7 @@ $('#trumbowyg-demo').trumbowyg({
                                 rs_latin
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/rs_latin.min.js">Serbian (Latin)</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/rs_latin.min.js">Serbian (Latin)</a>
                             </td>
                             <td>
                                 <a href="https://github.com/johonunu">johonunu / Nikola Trifunovic</a>
@@ -473,7 +515,7 @@ $('#trumbowyg-demo').trumbowyg({
                                 ru
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/ru.min.js">Russian</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/ru.min.js">Russian</a>
                             </td>
                             <td>
                                 Yuri Lya
@@ -484,7 +526,7 @@ $('#trumbowyg-demo').trumbowyg({
                                 sk
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/sk.min.js">Slovak</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/sk.min.js">Slovak</a>
                             </td>
                             <td>
                                 <a href="https://github.com/VeeeneX">VeeeneX</a>
@@ -492,10 +534,21 @@ $('#trumbowyg-demo').trumbowyg({
                         </tr>
                         <tr>
                             <td>
+                                sv
+                            </td>
+                            <td>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/sv.min.js">Swedish</a>
+                            </td>
+                            <td>
+                                <a href="https://github.com/timint">timint / T. Almroth</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 tr
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/tr.min.js">Turkish</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/tr.min.js">Turkish</a>
                             </td>
                             <td>
                                 <a href="https://github.com/munzur">munzur / Emrah Bilbay</a>
@@ -503,22 +556,55 @@ $('#trumbowyg-demo').trumbowyg({
                         </tr>
                         <tr>
                             <td>
+                                ua
+                            </td>
+                            <td>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/ua.min.js">Ukrainian</a>
+                            </td>
+                            <td>
+                                <a href="https://github.com/ripdamage">ripdamage / Igor Buksha</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                vi
+                            </td>
+                            <td>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/vi.min.js">Vietnamese</a>
+                            </td>
+                            <td>
+                                <a href="https://github.com/heocoi">heocoi</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 zh_cn
                             </td>
                             <td>
-                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.4/dist/langs/zh_cn.min.js">Simplified Chinese</a>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/zh_cn.min.js">Simplified Chinese</a>
                             </td>
                             <td>
                                 <a href="https://github.com/akai">Liu Kai / akai</a>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                zh_tw
+                            </td>
+                            <td>
+                                <a href="https://github.com/Alex-D/Trumbowyg/blob/2.0.0-beta.5/dist/langs/zh_tw.min.js">Traditional Chinese</a>
+                            </td>
+                            <td>
+                                <a href="https://github.com/PeterDaveHello">PeterDaveHello</a>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
 
-                <p>
+                <p class="text-center">
                     <a href="./documentation.html#localization">See the documentation to apply a localization.</a>
                 </p>
-                <p>
+                <p class="text-center">
                     <a href="./documentation.html#add-localization">You can create your own localization file</a> and submit it in a pull request :)
                 </p>
             </section>
@@ -530,7 +616,7 @@ $('#trumbowyg-demo').trumbowyg({
                     <h3 class="section-subtitle">Extends Trumbowyg</h3>
 
                     <p>
-                        You can create your own plugins for Trumbowyg and propose them via pull requests on the Github repository. Currently, <a href="https://github.com/Alex-D/Trumbowyg/tree/2.0.0-beta.4/plugins">there is 3 plugins</a>.
+                        You can create your own plugins for Trumbowyg and propose them via pull requests on the Github repository. Currently, <a href="https://github.com/Alex-D/Trumbowyg/tree/2.0.0-beta.5/plugins">there is 5 plugins</a>.
                     </p>
 
                     <table>
@@ -543,13 +629,7 @@ $('#trumbowyg-demo').trumbowyg({
                         <tbody>
                             <tr>
                                 <td>
-                                    <a href="https://github.com/Alex-D/Trumbowyg/tree/2.0.0-beta.4/plugins/upload">Upload</a>
-                                </td>
-                                <td>Alex-D</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="https://github.com/Alex-D/Trumbowyg/tree/2.0.0-beta.4/plugins/base64">base64</a>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/tree/2.0.0-beta.5/dist/plugins/base64">base64</a>
                                 </td>
                                 <td>
                                     <a href="https://github.com/lizardK">lizardK</a>
@@ -557,7 +637,29 @@ $('#trumbowyg-demo').trumbowyg({
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="https://github.com/Alex-D/Trumbowyg/tree/2.0.0-beta.4/plugins/colors">Colors</a>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/tree/2.0.0-beta.5/dist/plugins/colors">Colors</a>
+                                </td>
+                                <td>Alex-D</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/tree/master/plugins/editlink">Link edition</a>
+                                </td>
+                                <td>
+                                    <a href="https://github.com/ra100">ra100 / Rastislav Švarba</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/tree/master/plugins/preformatted">Preformatted</a>
+                                </td>
+                                <td>
+                                    <a href="https://github.com/Civile">Civile / Edoardo</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/tree/2.0.0-beta.5/dist/plugins/upload">Upload</a>
                                 </td>
                                 <td>Alex-D</td>
                             </tr>
@@ -566,10 +668,10 @@ $('#trumbowyg-demo').trumbowyg({
                 </section>
                 <section class="section col-6">
                     <h2 class="section-title">Packages</h2>
-                    <h3 class="section-subtitle">Ready to use packages for Web frameworks and CMS</h3>
+                    <h3 class="section-subtitle">Ready for use Web frameworks and CMS packages</h3>
 
                     <p>
-                        You can create your own package for Trumbowyg or use a ready to use, the full list of know packages using Trumbowyg is right below.
+                        You can create your own package for Trumbowyg or use a ready for use, the full list of know packages using Trumbowyg is right below.
                     </p>
 
                     <table>
@@ -582,7 +684,7 @@ $('#trumbowyg-demo').trumbowyg({
                         <tbody>
                             <tr>
                                 <td>
-                                    <a href="https://github.com/TikiTDO/trumbowyg_rails">RubyGem</a>
+                                    <a href="https://github.com/TikiTDO/trumbowyg_rails">Ruby on Rails</a>
                                 </td>
                                 <td>
                                     <a href="https://github.com/TikiTDO">TikiTDO</a>
@@ -606,7 +708,7 @@ $('#trumbowyg-demo').trumbowyg({
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="https://bitbucket.org/fogstream/django-fs-trumbowyg/">Django FS Trumbowyg</a>
+                                    <a href="https://bitbucket.org/fogstream/django-fs-trumbowyg/">Django widget</a>
                                 </td>
                                 <td>
                                     Yuri Lya
@@ -630,7 +732,7 @@ $('#trumbowyg-demo').trumbowyg({
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="https://github.com/lizardK/trumbowyg-ng">trumbowyg-ng</a>
+                                    <a href="https://github.com/lizardK/trumbowyg-ng">AngularJS directive</a>
                                 </td>
                                 <td>
                                     <a href="https://github.com/lizardK">lizardK</a>
@@ -718,10 +820,10 @@ $('#trumbowyg-demo').trumbowyg({
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
 
-        <script src="//rawgit.com/Alex-D/Trumbowyg/2.0.0-beta.4/dist/trumbowyg.min.js"></script>
-        <script src="//rawgit.com/Alex-D/Trumbowyg/2.0.0-beta.4/dist/plugins/base64/trumbowyg.base64.min.js"></script>
-        <script src="//rawgit.com/Alex-D/Trumbowyg/2.0.0-beta.4/dist/plugins/colors/trumbowyg.colors.min.js"></script>
-        <script src="//rawgit.com/Alex-D/Trumbowyg/2.0.0-beta.4/dist/plugins/upload/trumbowyg.upload.min.js"></script>
+        <script src="//rawgit.com/Alex-D/Trumbowyg/2.0.0-beta.5/dist/trumbowyg.min.js"></script>
+        <script src="//rawgit.com/Alex-D/Trumbowyg/2.0.0-beta.5/dist/plugins/base64/trumbowyg.base64.min.js"></script>
+        <script src="//rawgit.com/Alex-D/Trumbowyg/2.0.0-beta.5/dist/plugins/colors/trumbowyg.colors.min.js"></script>
+        <script src="//rawgit.com/Alex-D/Trumbowyg/2.0.0-beta.5/dist/plugins/upload/trumbowyg.upload.min.js"></script>
         <script type="text/javascript">
             $('#trumbowyg-demo').trumbowyg({
                 btnsDef: {
