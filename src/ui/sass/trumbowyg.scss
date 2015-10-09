@@ -198,6 +198,7 @@ $dark-color: #222;
     margin-left: -260px;
     width: 520px;
     height: 350px;
+    z-index: 11;
     overflow: hidden;
     backface-visibility: hidden;
 }
@@ -365,6 +366,7 @@ $dark-color: #222;
     width: 100%;
     left: 0;
     display: none;
+    z-index: 10;
 }
 
 
