@@ -1189,8 +1189,8 @@ jQuery.trumbowyg = {
                 ds = t.doc.selection;
 
             t.selection = null;
-            if(window.getSelection){
-                var s = window.getSelection();
+            if(t.doc.getSelection){
+                var s = t.doc.getSelection();
                 if(s.getRangeAt && s.rangeCount)
                     t.selection = s.getRangeAt(0);
             } else if(ds && ds.createRange)
@@ -1201,8 +1201,8 @@ jQuery.trumbowyg = {
                 range = t.selection;
 
             if(range){
-                if(window.getSelection){
-                    var s = window.getSelection();
+                if(t.doc.getSelection){
+                    var s = t.doc.getSelection();
                     s.removeAllRanges();
                     s.addRange(range);
                 } else if(t.doc.selection && range.select)
