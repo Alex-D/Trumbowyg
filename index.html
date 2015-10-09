@@ -119,6 +119,8 @@ $('#form-content').trumbowyg({
                     </pre></code>
                 </textarea>
 
+                <textarea id="empty-textarea" cols="30" rows="10" required></textarea>
+
                 <div id="dynamic-iframe-example"></div>
 
                 <textarea id="placeholder-editor" cols="30" rows="10" placeholder="This is a placeholder..." required></textarea>
@@ -136,7 +138,7 @@ $('#form-content').trumbowyg({
         <script src="dist/plugins/editlink/trumbowyg.editlink.js"></script>
         <script>
             /** Default editor configuration **/
-            $('#default-editor')
+            $('#default-editor, #empty-textarea')
             .trumbowyg()
             .on('dblclick', function(){
                 $(this).trumbowyg();
