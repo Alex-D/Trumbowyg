@@ -548,7 +548,7 @@ body.trumbowyg-body-fullscreen {
 
         button {
             background: $dark-color;
-            color: #fff;
+            color: #fff !important;
 
             &:hover,
             &:focus {
