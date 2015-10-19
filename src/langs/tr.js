@@ -18,14 +18,14 @@ jQuery.trumbowyg.langs.tr = {
 
     bold:           "Kalın",
     italic:         "İtalik",
-    strikethrough:  "Orta çizgi",
-    underline:      "Alt çigzi",
+    strikethrough:  "Üzeri çizgili",
+    underline:      "Altı çizgili",
 
     strong:         "Koyu",
     em:             "Vurgulu",
-    del:            "Üstü çizilmiş",
+    del:            "Üzeri çizgili",
 
-    unorderedList:  "Numarasız liste",
+    unorderedList:  "Simgeli liste",
     orderedList:    "Numaralı liste",
 
     insertImage:    "Resim yerleştir",
@@ -39,7 +39,7 @@ jQuery.trumbowyg.langs.tr = {
     justifyRight:   "Sağa hizala",
     justifyFull:    "Yasla",
 
-    horizontalRule: "Yatay çizgi ekle",
+    horizontalRule: "Yatay satır ekle",
 
     fullscreen:     "Tam ekran",
 
