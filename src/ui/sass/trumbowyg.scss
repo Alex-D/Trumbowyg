@@ -65,7 +65,7 @@ $dark-color: #222;
 .trumbowyg-box.trumbowyg-editor-visible {
     .trumbowyg-textarea {
         position: absolute;
-        top: 37px;
+        top: 36px;
         height: 1px !important;
         width: 25%;
         min-height: 0 !important;
@@ -90,6 +90,7 @@ $dark-color: #222;
 .trumbowyg-button-pane {
     position: relative;
     width: 100%;
+    min-height: 37px;
     background: $light-color;
     border-bottom: 1px solid darken($light-color, 7%);
     margin: 0;
@@ -99,7 +100,8 @@ $dark-color: #222;
     backface-visibility: hidden;
 
     li {
-        display: inline-block;
+        display: block;
+        float: left;
         text-align: center;
         overflow: hidden;
         padding: 0 !important;
