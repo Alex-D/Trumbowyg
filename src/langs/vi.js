@@ -28,11 +28,11 @@ jQuery.trumbowyg.langs.vi = {
     unorderedList:  "Danh sách không thứ tự",
     orderedList:    "Danh sách có thứ tự",
 
-    insertImage:    "Thêm hình ảnh",
-    insertVideo:    "Thêm video",
+    insertImage:    "Chèn hình ảnh",
+    insertVideo:    "Chèn video",
     link:           "Đường dẫn",
     createLink:     "Tạo đường dẫn",
-    unlink:         "Xóa đường dẫn",
+    unlink:         "Hủy đường dẫn",
 
     justifyLeft:    "Canh lề trái",
     justifyCenter:  "Canh giữa",
@@ -45,11 +45,11 @@ jQuery.trumbowyg.langs.vi = {
 
     close:          "Đóng",
 
-    submit:         "Đăng ký",
-    reset:          "Cài lại",
+    submit:         "Đồng ý",
+    reset:          "Hủy bỏ",
 
     required:       "Bắt buộc",
-    description:    "Thuyết minh",
-    title:          "Tựa đề",
-    text:           "Văn bản"
+    description:    "Mô tả",
+    title:          "Tiêu đề",
+    text:           "Nội dung"
 };
