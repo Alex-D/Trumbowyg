@@ -67,24 +67,24 @@ jQuery.trumbowyg = {
 
     // @param : o are options
     // @param : p are params
-    $.fn.trumbowyg = function (o, p) {
-        if (o === Object(o) || !o) {
+    $.fn.trumbowyg = function (options, params) {
+        if (options === Object(options) || !options) {
             return this.each(function () {
                 if (!$(this).data('trumbowyg'))
-                    $(this).data('trumbowyg', new Trumbowyg(this, o));
+                    $(this).data('trumbowyg', new Trumbowyg(this, options));
             });
         }
         if (this.length === 1) {
             try {
                 var t = $(this).data('trumbowyg');
-                switch (o) {
+                switch (options) {
                     // Modal box
                     case 'openModal':
-                        return t.openModal(p.title, p.content);
+                        return t.openModal(params.title, params.content);
                     case 'closeModal':
                         return t.closeModal();
                     case 'openModalInsert':
-                        return t.openModalInsert(p.title, p.fields, p.callback);
+                        return t.openModalInsert(params.title, params.fields, params.callback);
 
                     // Selection
                     case 'saveSelection':
@@ -110,7 +110,7 @@ jQuery.trumbowyg = {
 
                     // HTML
                     case 'html':
-                        return t.html(p);
+                        return t.html(params);
                 }
             } catch (e) {
             }
