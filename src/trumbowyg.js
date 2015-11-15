@@ -1200,7 +1200,10 @@ jQuery.trumbowyg = {
             if (range) {
                 if (t.doc.getSelection) {
                     var s = t.doc.getSelection();
-                    s.removeAllRanges();
+                    try {
+                        s.removeAllRanges();
+                    } catch (e) {
+                    }
                     s.addRange(range);
                 } else if (t.doc.selection && range.select)
                     range.select();
