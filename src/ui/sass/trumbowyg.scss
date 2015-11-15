@@ -11,6 +11,8 @@ $dark-color: #222;
 
 
 .trumbowyg-box {
+    padding-top: 37px;
+    
     *,
     *::before,
     *::after {
@@ -88,7 +90,9 @@ $dark-color: #222;
 }
 
 .trumbowyg-button-pane {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     min-height: 37px;
     background: $light-color;
