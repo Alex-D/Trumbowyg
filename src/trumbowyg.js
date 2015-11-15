@@ -268,8 +268,7 @@ jQuery.trumbowyg = {
                 }
             },
 
-            blockLevelElements: ['br', 'p', 'div', 'ul', 'ol', 'table', 'img', 'address', 'article', 'aside', 'audio', 'blockquote', 'canvas', 'dl', 'fieldset', 'figcaption', 'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'hgroup', 'hr', 'main', 'nav', 'noscript', 'output', 'pre', 'section', 'tfoot', 'video']
-
+            inlineElementsSelector: 'a, abbr, acronym, b, caption, cite, code, col, dfn, dir, dt, dd, em, font, hr, i, kbd, li, q, span, strikeout, strong, sub, sup, u'
         }, o);
 
         if (o.btns)
@@ -735,25 +734,26 @@ jQuery.trumbowyg = {
         destroy: function () {
             var t = this,
                 prefix = t.o.prefix,
-                height = t.height,
-                html = t.html();
+                height = t.height;
 
-            if (t.isTextarea)
+            if (t.isTextarea) {
                 t.$box.after(
-                    t.$ta.css({height: height})
-                        .val(html)
+                    t.$ta
+                        .css({height: height})
+                        .val(t.html())
                         .removeClass(prefix + 'textarea')
                         .show()
                 );
-            else
+            } else {
                 t.$box.after(
                     t.$ed
                         .css({height: height})
                         .removeClass(prefix + 'editor')
                         .removeAttr('contenteditable')
-                        .html(html)
+                        .html(t.html())
                         .show()
                 );
+            }
 
             t.$box.remove();
             t.$c.removeData('trumbowyg');
@@ -853,8 +853,8 @@ jQuery.trumbowyg = {
                 t.semanticTag('strike', 'del');
 
                 if (full) {
-                    var blockElementsSelector = t.o.blockLevelElements.join(', '),
-                        inlineElementsSelector = ':not(' + blockElementsSelector + ')';
+                    var inlineElementsSelector = t.o.inlineElementsSelector,
+                        blockElementsSelector = ':not(' + t.o.inlineElementsSelector + ')';
 
                     // Wrap text nodes in span for easier processing
                     t.$ed.contents().filter(function () {
@@ -864,7 +864,7 @@ jQuery.trumbowyg = {
                     // Wrap groups of inline elements in paragraphs (recursive)
                     var wrapInlinesInParagraphsFrom = function ($from) {
                         if ($from.length !== 0) {
-                            var $finalParagraph = $from.nextUntil(blockElementsSelector + ', br').andSelf()
+                            var $finalParagraph = $from.nextUntil(blockElementsSelector).andSelf()
                                 .wrapAll('<p/>').parent();
 
                             $finalParagraph.next('br').remove();
@@ -983,7 +983,7 @@ jQuery.trumbowyg = {
                 } catch (e2) {
                     if (cmd == 'insertHorizontalRule')
                         param = null;
-                    else if (cmd == 'formatBlock' && (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0))
+                    else if (cmd == 'formatBlock' && (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') !== -1))
                         param = '<' + param + '>';
 
                     t.doc.execCommand(cmd, false, param);
@@ -1114,15 +1114,14 @@ jQuery.trumbowyg = {
                 lg = t.lang,
                 html = '';
 
-            for (var f in fields) {
-                var fd = fields[f], // field definition
-                    l = fd.label,
-                    n = (fd.name) ? fd.name : f;
+            $.each(fields, function (fieldName, field) {
+                var l = field.label,
+                    n = field.name || fieldName;
 
-                html += '<label><input type="' + (fd.type || 'text') + '" name="' + n + '" value="' + (fd.value || '') + '"><span class="' + prefix + 'input-infos"><span>' +
-                    ((!l) ? (lg[f] ? lg[f] : f) : (lg[l] ? lg[l] : l)) +
+                html += '<label><input type="' + (field.type || 'text') + '" name="' + n + '" value="' + (field.value || '') + '"><span class="' + prefix + 'input-infos"><span>' +
+                    ((!l) ? (lg[fieldName] ? lg[fieldName] : fieldName) : (lg[l] ? lg[l] : l)) +
                     '</span></span></label>';
-            }
+            });
 
             return t.openModal(title, html)
                 .on(prefix + 'confirm', function () {
@@ -1130,20 +1129,20 @@ jQuery.trumbowyg = {
                         valid = true,
                         v = {}; // values
 
-                    for (var f in fields) {
-                        var $field = $('input[name="' + f + '"]', $form);
+                    $.each(fields, function (fieldName, field) {
+                        var $field = $('input[name="' + fieldName + '"]', $form);
 
-                        v[f] = $.trim($field.val());
+                        v[fieldName] = $.trim($field.val());
 
                         // Validate value
-                        if (fields[f].required && v[f] === '') {
+                        if (field.required && v[fieldName] === '') {
                             valid = false;
                             t.addErrorOnModalField($field, t.lang.required);
-                        } else if (fields[f].pattern && !fields[f].pattern.test(v[f])) {
+                        } else if (field.pattern && !field.pattern.test(v[fieldName])) {
                             valid = false;
-                            t.addErrorOnModalField($field, fields[f].patternError);
+                            t.addErrorOnModalField($field, field.patternError);
                         }
-                    }
+                    });
 
                     if (valid) {
                         t.restoreSelection();
