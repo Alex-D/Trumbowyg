@@ -159,6 +159,7 @@ jQuery.trumbowyg = {
             semantic: true,
             resetCss: false,
             removeformatPasted: false,
+            tagsToRemove: [],
 
             btns: [
                 'viewHTML',
@@ -361,9 +362,7 @@ jQuery.trumbowyg = {
                 });
             }
 
-            if (t.o.semantic) {
-                t.semanticCode();
-            }
+            t.semanticCode();
 
 
             t._ctrl = false;
@@ -772,13 +771,15 @@ jQuery.trumbowyg = {
             var t = this,
                 prefix = t.o.prefix;
             t.semanticCode(false, true);
-            t.$box.toggleClass(prefix + 'editor-hidden ' + prefix + 'editor-visible');
-            t.$btnPane.toggleClass(prefix + 'disable');
-            $('.' + prefix + 'viewHTML-button', t.$btnPane).toggleClass(prefix + 'active');
-            if (t.$box.hasClass(prefix + 'editor-visible'))
-                t.$ta.attr('tabindex', -1);
-            else
-                t.$ta.removeAttr('tabindex');
+            setTimeout(function () {
+                t.$box.toggleClass(prefix + 'editor-hidden ' + prefix + 'editor-visible');
+                t.$btnPane.toggleClass(prefix + 'disable');
+                $('.' + prefix + 'viewHTML-button', t.$btnPane).toggleClass(prefix + 'active');
+                if (t.$box.hasClass(prefix + 'editor-visible'))
+                    t.$ta.attr('tabindex', -1);
+                else
+                    t.$ta.removeAttr('tabindex');
+            }, 0);
         },
 
         // Open dropdown when click on a button which open that
@@ -818,8 +819,8 @@ jQuery.trumbowyg = {
                 t.$ta.val(html);
                 t.syncCode(true);
                 return t;
-            } else
-                return t.$ta.val();
+            }
+            return t.$ta.val();
         },
         syncCode: function (force) {
             var t = this;
@@ -846,6 +847,10 @@ jQuery.trumbowyg = {
             var t = this;
             t.syncCode(force);
             t.saveSelection();
+
+            if (t.o.tagsToRemove.length > 0) {
+                $(t.o.tagsToRemove.join(', '), t.$ed).remove();
+            }
 
             if (t.o.semantic) {
                 t.semanticTag('b', 'strong');
