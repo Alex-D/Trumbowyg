@@ -1,16 +1,14 @@
-.main pre {
-    .filename {
-        background: #ccc;
-        padding: 3px 15px;
-        font-size: 16px;
-        font-family: $font;
-    }
-    code {
-        padding: 0 25px;
-        font-size: 14px;
-        background-color: #fcfcfc;
-        border: 1px solid #ccc;
-    }
+$removed-color: #c40d0d;
+$added-color: #76b30b;
+$deprecated-color: #f39c12;
+
+
+
+.main pre code {
+    padding: 0 25px;
+    font-size: 14px;
+    background-color: #fcfcfc;
+    border: 1px solid #ccc;
 }
 
 .documentation-summary {
@@ -56,12 +54,64 @@
                 }
 
                 a {
-                    display: block;
+                    display: inline-block;
+                    position: relative;
+
+                    &[data-removed],
+                    &[data-deprecated] {
+                        &::after {
+                            content: "•";
+                            display: block;
+                            position: absolute;
+                            top: -7px;
+                            right: -12px;
+                            font-size: 22px;
+                            text-indent: 0;
+                        }
+                    }
+                    &[data-removed] {
+                        &::after {
+                            color: $removed-color;
+                        }
+                    }
+                    &[data-deprecated] {
+                        &::after {
+                            color: $deprecated-color;
+                        }
+                    }
 
                     &:hover,
                     &:focus {
                         text-indent: 10px;
                         border-left: 5px solid $main-color;
+                        opacity: 1;
+
+                        &[data-removed],
+                        &[data-deprecated] {
+                            &::after {
+                                display: inline-block;
+                                top: -9px;
+                                right: -100px;
+                                width: 90px;
+                                font-size: 14px;
+                                text-align: left;
+                                line-height: 16px;
+                                color: #fff;
+                                padding: 5px;
+                            }
+                        }
+                        &[data-removed] {
+                            &::after {
+                                content: "Removed since v" attr(data-removed);
+                                background: $removed-color;
+                            }
+                        }
+                        &[data-deprecated] {
+                            &::after {
+                                content: "Deprecated since v" attr(data-deprecated);
+                                background: darken($deprecated-color, 15%);
+                            }
+                        }
                     }
                 }
             }
@@ -73,11 +123,10 @@
         margin-top: 0;
 
         .section-title {
-            border-top: none;
+            display: none;
         }
     }
 }
-
 
 .removed-feature,
 .added-feature,
@@ -88,13 +137,13 @@
     color: #FFF;
 }
 .removed-feature {
-    background: #c40d0d;
+    background: $removed-color;
 }
 .added-feature {
-    background: #76b30b;
+    background: $added-color;
 }
 .deprecated-feature {
-    background: #f39c12;
+    background: $deprecated-color;
 }
 
 .removed-info,
@@ -116,6 +165,10 @@
     background: #76b30b;
     color: #FFF;
     font-size: 12px;
+    font-style: normal;
+}
+.note .version-tag {
+    transform: translateY(-1px);
 }
 
 .feature {
