@@ -150,6 +150,7 @@ hr.clearfix {
     display: block;
     position: relative;
     background: $main-color;
+    border: none;
     margin: 0 auto;
     font-weight: 100;
     text-decoration: none;
@@ -209,10 +210,39 @@ hr.clearfix {
 .big-button-simple {
     display: block;
     padding: 10px 15px;
-    border: none;
     margin: 20px auto 25px;
 }
+.big-button-switch {
+    display: inline-block;
+    padding: 10px 15px;
 
+    &:not(.current) {
+        background: $header-dark;
+        opacity: 0.5;
+
+        &:hover,
+        &:focus {
+            opacity: 1;
+        }
+    }
+    &.current {
+        &::before,
+        &::after {
+            display: none;
+        }
+        &:hover,
+        &:focus {
+            cursor: default;
+            background: $main-color;
+            color: #fff;
+        }
+    }
+}
+
+
+.switch-demo {
+    margin: -20px 0 30px;
+}
 
 
 .text-center {
