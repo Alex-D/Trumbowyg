@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="//rawgit.com/Alex-D/Trumbowyg/2.0.0-beta.6/dist/ui/trumbowyg.min.css">
         <link rel="stylesheet" href="//rawgit.com/Alex-D/Trumbowyg/2.0.0-beta.6/dist/plugins/colors/ui/trumbowyg.colors.min.css">
+        <link rel="stylesheet" href="//rawgit.com/Alex-D/Trumbowyg/2.0.0-beta.6/dist/plugins/preformatted/ui/trumbowyg.preformatted.min.css">
     </head>
     <body>
         <div class="cross-projects">
@@ -823,20 +824,34 @@ $('#trumbowyg-demo').trumbowyg({
         <script src="//rawgit.com/Alex-D/Trumbowyg/2.0.0-beta.6/dist/trumbowyg.min.js"></script>
         <script src="//rawgit.com/Alex-D/Trumbowyg/2.0.0-beta.6/dist/plugins/base64/trumbowyg.base64.min.js"></script>
         <script src="//rawgit.com/Alex-D/Trumbowyg/2.0.0-beta.6/dist/plugins/colors/trumbowyg.colors.min.js"></script>
+        <script src="//rawgit.com/Alex-D/Trumbowyg/2.0.0-beta.6/dist/plugins/editlink/trumbowyg.editlink.min.js"></script>
+        <script src="//rawgit.com/Alex-D/Trumbowyg/2.0.0-beta.6/dist/plugins/preformatted/trumbowyg.preformatted.min.js"></script>
         <script src="//rawgit.com/Alex-D/Trumbowyg/2.0.0-beta.6/dist/plugins/upload/trumbowyg.upload.min.js"></script>
         <script type="text/javascript">
+            /* Add imagur parameters to upload plugin */
+            $.extend(true, $.trumbowyg.upload, {
+                serverPath: 'https://api.imgur.com/3/image',
+                fileFieldName: 'image',
+                headers: {'Authorization': 'Client-ID 9e57cb1c4791cea'},
+                urlPropertyName: 'data.link'
+            });
+
             $('#trumbowyg-demo').trumbowyg({
                 btnsDef: {
                     // Customizables dropdowns
                     image: {
                         dropdown: ['insertImage', 'upload', 'base64'],
                         ico: 'insertImage'
+                    },
+                    linkImproved: {
+                        dropdown: ['createLink', 'editLink', 'unlink'],
+                        ico: 'link'
                     }
                 },
                 btns: ['viewHTML',
                     '|', 'formatting',
                     '|', 'btnGrp-design',
-                    '|', 'link',
+                    '|', 'linkImproved',
                     '|', 'image',
                     '|', 'btnGrp-justify',
                     '|', 'btnGrp-lists',
