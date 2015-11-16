@@ -407,15 +407,11 @@ body.trumbowyg-body-fullscreen {
     }
 }
 
-/*
- * Reset for resetCss option
- */
 .trumbowyg-editor {
     object,
     embed,
     video,
     img {
-        width: auto;
         max-width: 100%;
     }
     video,
@@ -426,6 +422,9 @@ body.trumbowyg-body-fullscreen {
         cursor: move;
     }
 
+    /*
+     * Reset for resetCss option
+     */
     &.trumbowyg-reset-css {
         background: #FEFEFE !important;
         font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif !important;
