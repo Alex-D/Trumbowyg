@@ -6,39 +6,39 @@
  * Author : Cyril Biencourt (lizardK)
  */
 
-(function($){
+(function ($) {
     'use strict';
-    
+
     $.extend(true, $.trumbowyg, {
         langs: {
             en: {
-                base64: "Image as base64",
-                file:   "File",
-                errFileReaderNotSupported: "FileReader is not supported by your browser."
+                base64: 'Image as base64',
+                file: 'File',
+                errFileReaderNotSupported: 'FileReader is not supported by your browser.'
             },
             fr: {
-                base64: "Image en base64",
-                file:   "Fichier"
+                base64: 'Image en base64',
+                file: 'Fichier'
             },
             cs: {
-              base64: "Vložit obrázek",
-              file: "Soubor"
+                base64: 'Vložit obrázek',
+                file: 'Soubor'
             }
         },
 
         opts: {
             btnsDef: {
                 base64: {
-                    isSupported: function(){
-                        if(typeof FileReader === "undefined"){
+                    isSupported: function () {
+                        if (typeof FileReader === 'undefined') {
                             if (window.console !== undefined) {
-                              console.err('[Trumbowyg - Plugin base64] FileReader is not supported by your browser.');
+                                console.err('[Trumbowyg - Plugin base64] FileReader is not supported by your browser.');
                             }
                             return false;
                         }
                         return true;
                     },
-                    func: function(params, tbw){
+                    func: function (params, tbw) {
                         var file;
                         tbw.openModalInsert(
                             // Title
@@ -56,10 +56,10 @@
                             },
 
                             // Callback
-                            function(values){
+                            function (values) {
                                 var fReader = new FileReader();
 
-                                fReader.onloadend = function(){
+                                fReader.onloadend = function () {
                                     tbw.execCmd('insertImage', fReader.result);
                                     $(['img[src="', fReader.result, '"]:not([alt])'].join(''), tbw.$box).attr('alt', values.alt);
                                     tbw.closeModal();
@@ -69,7 +69,7 @@
                             }
                         );
 
-                        $('input[type=file]').on('change', function(e){
+                        $('input[type=file]').on('change', function (e) {
                             file = e.target.files[0];
                         });
                     },

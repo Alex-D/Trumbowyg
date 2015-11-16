@@ -16,6 +16,9 @@
             en: {
                 editLink: 'Edit Link'
             },
+            fr: {
+                editLink: 'Editer un lien'
+            },
             cs: {
                 editLink: 'Upravit odkaz'
             },

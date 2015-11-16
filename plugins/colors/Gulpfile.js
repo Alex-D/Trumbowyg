@@ -77,21 +77,21 @@ function makeSprite(color, resolution){
 
 
 
-gulp.task("styles", function(){
+gulp.task('styles', ['sprites'], function(){
   return gulp.src(paths.mainStyle)
     .pipe($.sass({
       sass: paths.styles.sass,
       includePaths: paths.styles.includePaths
     }))
-    .pipe($.autoprefixer(["last 1 version", "> 1%", "ff >= 20", "ie >= 8", "opera >= 12", "Android >= 2.2"], { cascade: true }))
-    .pipe($.header(banner, { pkg: pkg, description: "Colors plugin stylesheet for Trumbowyg editor" }))
-    .pipe(gulp.dest("../../dist/plugins/colors/ui/"))
-    .pipe($.size({ title: "trumbowyg.colors.css" }))
-    .pipe($.rename({ suffix: ".min" })) // génère une version minimifié
+    .pipe($.autoprefixer(['last 1 version', '> 1%', 'ff >= 20', 'ie >= 8', 'opera >= 12', 'Android >= 2.2'], { cascade: true }))
+    .pipe($.header(banner, { pkg: pkg, description: 'Colors plugin stylesheet for Trumbowyg editor' }))
+    .pipe(gulp.dest('../../dist/plugins/colors/ui/'))
+    .pipe($.size({ title: 'trumbowyg.colors.css' }))
+    .pipe($.rename({ suffix: '.min' })) // génère une version minimifié
     .pipe($.minifyCss())
     .pipe($.header(bannerLight, { pkg: pkg }))
-    .pipe(gulp.dest("../../dist/plugins/colors/ui/"))
-    .pipe($.size({ title: "trumbowyg.colors.min.css" }));
+    .pipe(gulp.dest('../../dist/plugins/colors/ui/'))
+    .pipe($.size({ title: 'trumbowyg.colors.min.css' }));
 });
 
 
@@ -105,7 +105,7 @@ gulp.task('sass-dist', function(){
 
 
 gulp.task('watch', function(){
-    gulp.watch(paths.mainStyle, ['sprites', 'styles']);
+    gulp.watch(paths.mainStyle, ['styles']);
 });
 
 

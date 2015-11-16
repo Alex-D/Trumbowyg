@@ -7,36 +7,37 @@
  */
 
 
-(function($){
+(function ($) {
     'use strict';
-    
+
     $.extend(true, $.trumbowyg, {
         langs: {
             en: {
-                preformatted: "Code sample <pre>",
+                preformatted: 'Code sample <pre>'
             },
             fr: {
-                preformatted: "Exemple de code",
+                preformatted: 'Exemple de code'
             },
             it: {
-                preformatted: "Codice <pre>",
+                preformatted: 'Codice <pre>'
             }
         },
         opts: {
             btnsDef: {
                 preformatted: {
-                    func: function(params, tbw) {
+                    func: function (params, tbw) {
                         var text = String(tbw.doc.getSelection());
-                        if(text.replace(/\s/g, '') !== '') {
+                        if (text.replace(/\s/g, '') !== '') {
                             try {
                                 var curtag = getSelectionParentElement().tagName.toLowerCase();
-                                if(curtag == "code" || curtag == "pre") {
+                                if (curtag == 'code' || curtag == 'pre') {
                                     return unwrapCode();
                                 }
                                 else {
-                                    tbw.execCmd('insertHTML', "<pre><code>"+ strip(text) +"</code></pre>");
+                                    tbw.execCmd('insertHTML', '<pre><code>' + strip(text) + '</code></pre>');
                                 }
-                            } catch(e) { }
+                            } catch (e) {
+                            }
                         }
                     },
                     ico: 'insertCode'
@@ -44,12 +45,12 @@
             }
         },
     });
-    
+
     /*
      * GetSelectionParentElement
-    */
+     */
     function getSelectionParentElement() {
-        var parentEl = null, 
+        var parentEl = null,
             sel;
         if (window.getSelection) {
             sel = window.getSelection();
@@ -59,7 +60,7 @@
                     parentEl = parentEl.parentNode;
                 }
             }
-        } else if ( (sel = document.selection) && sel.type != "Control") {
+        } else if ((sel = document.selection) && sel.type != 'Control') {
             parentEl = sel.createRange().parentElement();
         }
         return parentEl;
@@ -68,18 +69,18 @@
     /*
      * Strip
      * returns a text without HTML tags
-    */
+     */
     function strip(html) {
-       var tmp = document.createElement("DIV");
-       tmp.innerHTML = html;
-       return tmp.textContent || tmp.innerText || "";
+        var tmp = document.createElement('DIV');
+        tmp.innerHTML = html;
+        return tmp.textContent || tmp.innerText || '';
     }
-    
+
     /*
      * UnwrapCode
      * ADD/FIX: to improve, works but can be better
-     * 'paranoic' solution
-    */
+     * "paranoic" solution
+     */
     function unwrapCode() {
         var container = null;
         if (document.selection) //for IE
@@ -89,16 +90,16 @@
             if (select.rangeCount > 0)
                 container = select.getRangeAt(0).startContainer.parentNode;
         }
-        //"paranoic" unwrap
+        //'paranoic' unwrap
         var ispre = $(container).contents().closest('pre').length;
         var iscode = $(container).contents().closest('code').length;
-        if(ispre && iscode) {
+        if (ispre && iscode) {
             $(container).contents().unwrap('code').unwrap('pre');
-        } else if(ispre) {
+        } else if (ispre) {
             $(container).contents().unwrap('pre');
-        } else if(iscode) {
+        } else if (iscode) {
             $(container).contents().unwrap('code');
-        }  
+        }
     }
 
 

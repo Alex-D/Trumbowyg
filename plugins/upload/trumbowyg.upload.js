@@ -1,5 +1,5 @@
 /* ===========================================================
- * trumbowyg.upload.js v1.0
+ * trumbowyg.upload.js v1.1
  * Upload plugin for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
@@ -32,24 +32,24 @@
     $.extend(true, $.trumbowyg, {
         langs: {
             en: {
-                upload: "Upload",
-                file: "File",
-                uploadError: "Error"
+                upload: 'Upload',
+                file: 'File',
+                uploadError: 'Error'
             },
             sk: {
-                upload: "Nahrať",
-                file: "Súbor",
-                uploadError: "Chyba"
+                upload: 'Nahrať',
+                file: 'Súbor',
+                uploadError: 'Chyba'
             },
             fr: {
-                upload: "Envoi",
-                file: "Fichier",
-                uploadError: "Erreur"
+                upload: 'Envoi',
+                file: 'Fichier',
+                uploadError: 'Erreur'
             },
             cs: {
-                upload: "Nahrát obrázek",
-                file: "Soubor",
-                uploadError: "Chyba"
+                upload: 'Nahrát obrázek',
+                file: 'Soubor',
+                uploadError: 'Chyba'
             }
         },
 
@@ -173,8 +173,8 @@
                 xhr: function () {
                     var req = originalXhr(),
                         that = this;
-                    if (req && typeof req.upload == "object" && that.progressUpload !== undefined)
-                        req.upload.addEventListener("progress", function (e) {
+                    if (req && typeof req.upload == 'object' && that.progressUpload !== undefined)
+                        req.upload.addEventListener('progress', function (e) {
                             that.progressUpload(e);
                         }, false);
 

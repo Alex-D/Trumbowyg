@@ -39,28 +39,28 @@ var bannerLight = ['/** <%= pkg.title %> v<%= pkg.version %> - <%= pkg.descripti
     '\n'].join('');
 
 
-gulp.task('clean', function(){
+gulp.task('clean', function () {
     return gulp.src(['ui/sass/_sprite*.scss'])
         .pipe(vinylPaths(del));
 });
 
 
-gulp.task('sprites', function(){
+gulp.task('sprites', function () {
     return makeSprite('white') && makeSprite('white', '-2x') && makeSprite('black') && makeSprite('black', '-2x');
 });
-function makeSprite(color, resolution){
-    var suffix =  '-' + color + ((resolution) ? resolution : '');
+function makeSprite(color, resolution) {
+    var suffix = '-' + color + ((resolution) ? resolution : '');
     var sprite = gulp.src(paths.sprites['icons' + suffix])
         .pipe(spritesmith({
             imgName: 'icons' + suffix + '.png',
             cssName: '_sprite' + suffix + '.scss',
-            cssTemplate: function(params){
+            cssTemplate: function (params) {
                 var output = '', e;
-                for(var i in params.items){
+                for (var i in params.items) {
                     e = params.items[i];
                     output += '$' + e.name + suffix + ': ' + e.px.offset_x + ' ' + e.px.offset_y + ';\n';
                 }
-                if(params.items.length > 0){
+                if (params.items.length > 0) {
                     output += '\n\n';
                     output += '$sprite-height' + suffix + ': ' + params.items[0].px.total_height + ';\n';
                     output += '$sprite-width' + suffix + ': ' + params.items[0].px.total_width + ';\n';
@@ -76,38 +76,34 @@ function makeSprite(color, resolution){
 }
 
 
-
-gulp.task("styles", function(){
-  return gulp.src(paths.mainStyle)
-    .pipe($.sass({
-      sass: paths.styles.sass,
-      includePaths: paths.styles.includePaths
-    }))
-    .pipe($.autoprefixer(["last 1 version", "> 1%", "ff >= 20", "ie >= 8", "opera >= 12", "Android >= 2.2"], { cascade: true }))
-    .pipe($.header(banner, { pkg: pkg, description: "Preformatted text supplier" }))
-    .pipe(gulp.dest("../../dist/plugins/preformatted/ui/"))
-    .pipe($.size({ title: "trumbowyg.preformatted.css" }))
-    .pipe($.rename({ suffix: ".min" })) // génère une version minimifié
-    .pipe($.minifyCss())
-    .pipe($.header(bannerLight, { pkg: pkg }))
-    .pipe(gulp.dest("../../dist/plugins/preformatted/ui/"))
-    .pipe($.size({ title: "trumbowyg.preformatted.min.css" }));
+gulp.task('styles', ['sprites'], function () {
+    return gulp.src(paths.mainStyle)
+        .pipe($.sass({
+            sass: paths.styles.sass,
+            includePaths: paths.styles.includePaths
+        }))
+        .pipe($.autoprefixer(['last 1 version', '> 1%', 'ff >= 20', 'ie >= 8', 'opera >= 12', 'Android >= 2.2'], {cascade: true}))
+        .pipe($.header(banner, {pkg: pkg, description: 'Preformatted text supplier'}))
+        .pipe(gulp.dest('../../dist/plugins/preformatted/ui/'))
+        .pipe($.size({title: 'trumbowyg.preformatted.css'}))
+        .pipe($.rename({suffix: '.min'})) // génère une version minimifié
+        .pipe($.minifyCss())
+        .pipe($.header(bannerLight, {pkg: pkg}))
+        .pipe(gulp.dest('../../dist/plugins/preformatted/ui/'))
+        .pipe($.size({title: 'trumbowyg.preformatted.min.css'}));
 });
 
 
-
-gulp.task('sass-dist', function(){
+gulp.task('sass-dist', function () {
     return gulp.src('ui/sass/**/*.scss')
-        .pipe($.header(banner, { pkg: pkg, description: 'Preformatted text supplier' }))
+        .pipe($.header(banner, {pkg: pkg, description: 'Preformatted text supplier'}))
         .pipe(gulp.dest('../../dist/plugins/preformatted/ui/sass/'))
 });
 
 
-
-gulp.task('watch', function(){
-    gulp.watch(paths.mainStyle, ['sprites', 'styles']);
+gulp.task('watch', function () {
+    gulp.watch(paths.mainStyle, ['styles']);
 });
-
 
 
 gulp.task('build', ['sprites', 'styles', 'sass-dist']);
