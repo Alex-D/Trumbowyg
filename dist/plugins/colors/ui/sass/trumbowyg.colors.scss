@@ -1,0 +1,105 @@
+/**
+ * Trumbowyg v2.0.0-beta.5 - A lightweight WYSIWYG editor
+ * Colors plugin stylesheet for Trumbowyg editor
+ * ------------------------
+ * @link http://alex-d.github.io/Trumbowyg
+ * @license MIT
+ * @author Alexandre Demode (Alex-D)
+ *         Twitter : @AlexandreDemode
+ *         Website : alex-d.fr
+ */
+
+@import "sprite-black";
+@import "sprite-black-2x";
+@import "sprite-white";
+@import "sprite-white-2x";
+
+@import "sprite-pos";
+
+.foreColor-trumbowyg-dropdown,
+.backColor-trumbowyg-dropdown {
+    width: 276px;
+    padding: 7px 5px;
+
+    button {
+        display: block;
+        position: relative;
+        float: left;
+        text-indent: -9999px;
+        height: 20px;
+        width: 20px;
+        border: 1px solid #333;
+        padding: 0;
+        margin: 2px;
+
+        &:hover,
+        &:focus {
+            &::after {
+                content: " ";
+                display: block;
+                height: 27px;
+                width: 27px;
+                background: inherit;
+                position: absolute;
+                top: -5px;
+                left: -5px;
+                border: 1px solid #FFF;
+                box-shadow: #000 0 0 2px;
+                z-index: 10;
+            }
+        }
+    }
+}
+
+
+
+/*
+ * Buttons icons
+ */
+.trumbowyg-button-pane li button {
+    &.trumbowyg-foreColor-button,
+    &.trumbowyg-backColor-button {
+        background-image: url($icons-black);
+    }
+
+    &.trumbowyg-foreColor-button { @include sprite-pos($forecolor-black); }
+    &.trumbowyg-backColor-button { @include sprite-pos($backcolor-black); }
+}
+
+.trumbowyg-black {
+    .trumbowyg-button-pane li button {
+        &.trumbowyg-foreColor-button,
+        &.trumbowyg-backColor-button {
+            background-image: url($icons-white);
+        }
+
+        &.trumbowyg-foreColor-button { @include sprite-pos($forecolor-white); }
+        &.trumbowyg-backColor-button { @include sprite-pos($backcolor-white); }
+    }
+}
+
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 4/3), only screen and (min-device-pixel-ratio: 1.3), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx){
+    .trumbowyg-button-pane li button {
+        &.trumbowyg-foreColor-button,
+        &.trumbowyg-backColor-button {
+            background-image: url($icons-black-2x) !important;
+            background-size: round($sprite-width-black-2x / 2) round($sprite-height-black-2x / 2) !important;
+        }
+
+        &.trumbowyg-foreColor-button { @include sprite-pos($forecolor-black-2x, true); }
+        &.trumbowyg-backColor-button { @include sprite-pos($backcolor-black-2x, true); }
+    }
+
+    .trumbowyg-black {
+        .trumbowyg-button-pane li button {
+            &.trumbowyg-foreColor-button,
+            &.trumbowyg-backColor-button {
+                background-image: url($icons-white-2x) !important;
+            }
+
+            &.trumbowyg-foreColor-button { @include sprite-pos($forecolor-white-2x, true); }
+            &.trumbowyg-backColor-button { @include sprite-pos($backcolor-white-2x, true); }
+        }
+    }
+}
