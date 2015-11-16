@@ -169,6 +169,14 @@ $('#form-content').trumbowyg({
              */
             $.trumbowyg.btnsGrps.test = ['bold', 'link'];
 
+            /* Add imagur parameters to upload plugin */
+            $.extend(true, $.trumbowyg.upload, {
+                serverPath: 'https://api.imgur.com/3/image',
+                fileFieldName: 'image',
+                headers: {'Authorization': 'Client-ID 9e57cb1c4791cea'},
+                urlPropertyName: 'data.link'
+            });
+
             /* Add new words for customs btnsDef just below */
             $.extend(true, $.trumbowyg.langs, {
                 fr: {

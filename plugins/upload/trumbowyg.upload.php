@@ -28,7 +28,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
     if(move_uploaded_file($file['tmp_name'], UPLOADDIR . basename($file['name']))) {
         $file = dirname($_SERVER['PHP_SELF']) . str_replace('./', '/', UPLOADDIR) . $file['name'];
         $data = array(
-            'message' => 'uploadSuccess',
+            'success' => true,
             'file'    => $file,
         );
     } else {

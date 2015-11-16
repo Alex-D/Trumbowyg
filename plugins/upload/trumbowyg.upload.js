@@ -8,8 +8,24 @@
  *          Website : alex-d.fr
  */
 
-(function($){
+(function ($) {
     'use strict';
+
+    function getDeep(object, propertyParts) {
+        var mainProperty = propertyParts.shift(),
+            otherProperties = propertyParts;
+
+        if (object !== null) {
+            if (otherProperties.length === 0) {
+                return object[mainProperty];
+            }
+
+            if (typeof object === 'object') {
+                return getDeep(object[mainProperty], otherProperties);
+            }
+        }
+        return object;
+    }
 
     addXhrProgressEvent();
 
@@ -17,22 +33,22 @@
         langs: {
             en: {
                 upload: "Upload",
-                file:   "File",
+                file: "File",
                 uploadError: "Error"
             },
             sk: {
                 upload: "Nahrať",
-                file:   "Súbor",
+                file: "Súbor",
                 uploadError: "Chyba"
             },
             fr: {
                 upload: "Envoi",
-                file:   "Fichier",
+                file: "Fichier",
                 uploadError: "Erreur"
             },
             cs: {
                 upload: "Nahrát obrázek",
-                file:   "Soubor",
+                file: "Soubor",
                 uploadError: "Chyba"
             }
         },
@@ -41,6 +57,9 @@
             serverPath: './src/plugins/upload/trumbowyg.upload.php',
             fileFieldName: 'fileToUpload',
             data: [],
+            headers: {},
+            urlPropertyName: 'file',
+            statusPropertyName: 'success',
             success: undefined,
             error: undefined
         },
@@ -48,9 +67,9 @@
         opts: {
             btnsDef: {
                 upload: {
-                    func: function(params, tbw){
+                    func: function (params, tbw) {
                         var file,
-                            pfx = tbw.o.prefix;
+                            prefix = tbw.o.prefix;
 
                         var $modal = tbw.openModalInsert(
                             // Title
@@ -68,46 +87,49 @@
                             },
 
                             // Callback
-                            function(){
+                            function (values) {
                                 var data = new FormData();
                                 data.append($.trumbowyg.upload.fileFieldName, file);
 
-                                $.trumbowyg.upload.data.map(function(cur) {
+                                $.trumbowyg.upload.data.map(function (cur) {
                                     data.append(cur.name, cur.value);
                                 });
 
-                                if($('.' + pfx +'progress', $modal).length === 0)
-                                    $('.' + pfx + 'modal-title', $modal)
-                                    .after(
-                                        $('<div/>', {
-                                            'class': pfx +'progress'
-                                        })
-                                        .append(
+                                if ($('.' + prefix + 'progress', $modal).length === 0) {
+                                    $('.' + prefix + 'modal-title', $modal)
+                                        .after(
                                             $('<div/>', {
-                                                'class': pfx +'progress-bar'
-                                            })
-                                        )
-                                    );
+                                                'class': prefix + 'progress'
+                                            }).append(
+                                                $('<div/>', {
+                                                    'class': prefix + 'progress-bar'
+                                                })
+                                            )
+                                        );
+                                }
 
                                 $.ajax({
-                                    url:            $.trumbowyg.upload.serverPath,
-                                    type:           'POST',
-                                    data:           data,
-                                    cache:          false,
-                                    dataType:       'json',
-                                    processData:    false,
-                                    contentType:    false,
+                                    url: $.trumbowyg.upload.serverPath,
+                                    headers: $.trumbowyg.upload.headers,
+                                    type: 'POST',
+                                    data: data,
+                                    cache: false,
+                                    dataType: 'json',
+                                    processData: false,
+                                    contentType: false,
 
-                                    progressUpload: function(e){
-                                        $('.' + pfx + 'progress-bar').stop().animate({
+                                    progressUpload: function (e) {
+                                        $('.' + prefix + 'progress-bar').stop().animate({
                                             width: Math.round(e.loaded * 100 / e.total) + '%'
                                         }, 200);
                                     },
 
-                                    success: $.trumbowyg.upload.success || function(data){
-                                        if(data.message == "uploadSuccess") {
-                                            tbw.execCmd('insertImage', data.file);
-                                            setTimeout(function(){
+                                    success: $.trumbowyg.upload.success || function (data) {
+                                        if (!!getDeep(data, $.trumbowyg.upload.statusPropertyName.split('.'))) {
+                                            var url = getDeep(data, $.trumbowyg.upload.urlPropertyName.split('.'));
+                                            tbw.execCmd('insertImage', url);
+                                            $('img[src="' + url + '"]:not([alt])', tbw.$box).attr('alt', values.alt);
+                                            setTimeout(function () {
                                                 tbw.closeModal();
                                             }, 250);
                                         } else {
@@ -117,7 +139,7 @@
                                             );
                                         }
                                     },
-                                    error: $.trumbowyg.upload.error || function(){
+                                    error: $.trumbowyg.upload.error || function () {
                                         tbw.addErrorOnModalField(
                                             $('input[type=file]', $modal),
                                             tbw.lang.uploadError
@@ -127,7 +149,7 @@
                             }
                         );
 
-                        $('input[type=file]').on('change', function(e){
+                        $('input[type=file]').on('change', function (e) {
                             try {
                                 // If multiple files allowed, we just get the first.
                                 file = e.target.files[0];
@@ -144,15 +166,15 @@
     });
 
 
-    function addXhrProgressEvent(){
+    function addXhrProgressEvent() {
         if (!$.trumbowyg && !$.trumbowyg.addedXhrProgressEvent) {   // Avoid adding progress event multiple times
             var originalXhr = $.ajaxSettings.xhr;
             $.ajaxSetup({
-                xhr: function() {
-                    var req  = originalXhr(),
+                xhr: function () {
+                    var req = originalXhr(),
                         that = this;
-                    if(req && typeof req.upload == "object" && that.progressUpload !== undefined)
-                        req.upload.addEventListener("progress", function(e){
+                    if (req && typeof req.upload == "object" && that.progressUpload !== undefined)
+                        req.upload.addEventListener("progress", function (e) {
                             that.progressUpload(e);
                         }, false);
 

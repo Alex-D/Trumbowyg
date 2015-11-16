@@ -1132,18 +1132,18 @@ jQuery.trumbowyg = {
                 .on(prefix + 'confirm', function () {
                     var $form = $('form', $(this)),
                         valid = true,
-                        v = {}; // values
+                        values = {};
 
                     $.each(fields, function (fieldName, field) {
                         var $field = $('input[name="' + fieldName + '"]', $form);
 
-                        v[fieldName] = $.trim($field.val());
+                        values[fieldName] = $.trim($field.val());
 
                         // Validate value
-                        if (field.required && v[fieldName] === '') {
+                        if (field.required && values[fieldName] === '') {
                             valid = false;
                             t.addErrorOnModalField($field, t.lang.required);
-                        } else if (field.pattern && !field.pattern.test(v[fieldName])) {
+                        } else if (field.pattern && !field.pattern.test(values[fieldName])) {
                             valid = false;
                             t.addErrorOnModalField($field, field.patternError);
                         }
@@ -1152,7 +1152,7 @@ jQuery.trumbowyg = {
                     if (valid) {
                         t.restoreSelection();
 
-                        if (cmd(v, fields)) {
+                        if (cmd(values, fields)) {
                             t.syncCode();
                             t.closeModal();
                             $(this).off(prefix + 'confirm');
