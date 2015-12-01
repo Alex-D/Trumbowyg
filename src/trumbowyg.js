@@ -357,8 +357,7 @@ jQuery.trumbowyg = {
 
             if (!t.o.autogrow) {
                 t.$ta.add(t.$ed).css({
-                    height: t.height,
-                    overflow: 'auto'
+                    height: t.height
                 });
             }
 
@@ -509,24 +508,7 @@ jQuery.trumbowyg = {
                         .on('click', function () {
                             var cssClass = prefix + 'fullscreen';
                             t.$box.toggleClass(cssClass);
-
-                            if (t.$box.hasClass(cssClass)) {
-                                $('body').addClass(prefix + 'body-fullscreen');
-                                $.each([t.$ta, t.$ed], function () {
-                                    $(this).css({
-                                        height: 'calc(100% - 35px)',
-                                        overflow: 'auto'
-                                    });
-                                });
-                                t.$btnPane.css('width', '100%');
-                            } else {
-                                $('body').removeClass(prefix + 'body-fullscreen');
-                                t.$box.removeAttr('style');
-                                if (!t.o.autogrow)
-                                    $.each([t.$ta, t.$ed], function () {
-                                        $(this).css('height', t.height);
-                                    });
-                            }
+                            $('body').toggleClass(prefix + 'body-fullscreen', t.$box.hasClass(cssClass));
                             $(window).trigger('scroll');
                         })
                 );
@@ -537,8 +519,7 @@ jQuery.trumbowyg = {
                     .append(
                         t.buildRightBtn('close')
                             .on('click', function () {
-                                if (t.$box.hasClass(prefix + 'fullscreen'))
-                                    $('body').css('overflow', 'auto');
+                                t.$box.removeClass(prefix + 'fullscreen');
                                 t.destroy();
                                 t.$c.trigger('tbwclose');
                             })
@@ -574,8 +555,7 @@ jQuery.trumbowyg = {
                         if (t.$btnPane.hasClass(prefix + 'disable') && !$(this).hasClass(prefix + 'active') && !$(this).parent().hasClass(prefix + 'not-disable'))
                             return false;
 
-                        t.execCmd((d ? 'dropdown' : false) || btn.func || n,
-                            btn.param || n);
+                        t.execCmd((d ? 'dropdown' : false) || btn.func || n, btn.param || n);
 
                         return false;
                     }

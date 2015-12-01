@@ -45,6 +45,7 @@ $dark-color: #222;
     border-style: none;
     resize: none;
     outline: none;
+    overflow: auto;
 }
 
 .trumbowyg-box-blur .trumbowyg-editor {
@@ -401,6 +402,12 @@ body.trumbowyg-body-fullscreen {
     &.trumbowyg-box,
     .trumbowyg-editor {
         border: none;
+    }
+    .trumbowyg-editor,
+    .trumbowyg-textarea {
+        height: calc(100% - 37px) !important;
+        overflow: auto;
+        margin-top: 37px;
     }
     .trumbowyg-overlay {
         height: 100% !important;
