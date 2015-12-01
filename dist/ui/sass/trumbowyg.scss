@@ -1,0 +1,1017 @@
+/**
+ * Trumbowyg v2.0.0-beta.7 - A lightweight WYSIWYG editor
+ * Default stylesheet for Trumbowyg editor
+ * ------------------------
+ * @link http://alex-d.github.io/Trumbowyg
+ * @license MIT
+ * @author Alexandre Demode (Alex-D)
+ *         Twitter : @AlexandreDemode
+ *         Website : alex-d.fr
+ */
+
+@import "sprite-black";
+@import "sprite-black-2x";
+@import "sprite-white";
+@import "sprite-white-2x";
+@import "mixins/sprite-pos";
+
+$light-color: #ecf0f1;
+$dark-color: #222;
+
+.trumbowyg-box {
+    padding-top: 37px;
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+}
+
+.trumbowyg-box,
+.trumbowyg-editor {
+    display: block;
+    position: relative;
+    border: 1px solid #DDD;
+    width: 96%;
+    min-height: 300px;
+    margin: 17px auto;
+}
+
+.trumbowyg-box .trumbowyg-editor {
+    margin: 0 auto;
+}
+
+.trumbowyg-box.trumbowyg-fullscreen {
+    background: #FEFEFE;
+}
+
+.trumbowyg-editor,
+.trumbowyg-textarea {
+    position: relative;
+    box-sizing: border-box;
+    padding: 1% 2%;
+    min-height: 300px;
+    width: 100%;
+    border-style: none;
+    resize: none;
+    outline: none;
+    overflow: auto;
+}
+
+.trumbowyg-box-blur .trumbowyg-editor {
+    * {
+        color: transparent !important;
+        text-shadow: 0 0 7px #333;
+    }
+    img {
+        opacity: .2;
+    }
+}
+
+.trumbowyg-textarea {
+    position: relative;
+    display: block;
+    overflow: auto;
+    border: none;
+    white-space: normal;
+    font-size: 14px;
+    font-family: "Inconsolata", "Consolas", "Courier", "Courier New", sans-serif;
+    line-height: 18px;
+}
+
+.trumbowyg-box.trumbowyg-editor-visible {
+    .trumbowyg-textarea {
+        position: absolute;
+        top: 36px;
+        height: 1px !important;
+        width: 25%;
+        min-height: 0 !important;
+        padding: 0 !important;
+        background: none;
+        opacity: 0;
+    }
+}
+
+.trumbowyg-box.trumbowyg-editor-hidden {
+    .trumbowyg-textarea {
+        display: block;
+    }
+    .trumbowyg-editor {
+        display: none;
+    }
+}
+
+.trumbowyg-editor[contenteditable=true]:empty:before {
+    content: attr(placeholder);
+    color: #999;
+}
+
+.trumbowyg-button-pane {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 37px;
+    background: $light-color;
+    border-bottom: 1px solid darken($light-color, 7%);
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    line-height: 10px;
+    backface-visibility: hidden;
+
+    li {
+        display: block;
+        float: left;
+        text-align: center;
+        overflow: hidden;
+        padding: 0 !important;
+
+        &.trumbowyg-separator {
+            width: 1px;
+            background: darken($light-color, 7%);
+            margin: 0 5px;
+            height: 35px;
+        }
+    }
+
+    &.trumbowyg-disable {
+        li:not(.trumbowyg-not-disable) button:not(.trumbowyg-active) {
+            opacity: .2;
+            cursor: default;
+        }
+        li.trumbowyg-separator {
+            background: darken($light-color, 3%);
+        }
+    }
+
+    li button {
+        padding: 1px 6px !important;
+        // At bottom of this stylesheet
+    }
+
+    &:not(.trumbowyg-disable) li button:hover,
+    &:not(.trumbowyg-disable) li button:focus,
+    li button.trumbowyg-active,
+    li.trumbowyg-not-disable button:hover,
+    li.trumbowyg-not-disable button:focus {
+        background-color: #FFF;
+        outline: none;
+    }
+
+    li .trumbowyg-open-dropdown:after {
+        display: block;
+        content: " ";
+        position: absolute;
+        top: 25px;
+        right: 3px;
+        height: 0;
+        width: 0;
+        border: 3px solid transparent;
+        border-top-color: #555;
+    }
+
+    .trumbowyg-buttons-right {
+        float: right;
+        width: auto;
+
+        button {
+            float: left;
+        }
+    }
+}
+
+.trumbowyg-dropdown {
+    width: 200px;
+    border: 1px solid $light-color;
+    padding: 5px 0;
+    border-top: none;
+    background: #FFF;
+    margin-left: -1px;
+    box-shadow: rgba(0, 0, 0, .1) 0 2px 3px;
+
+    button {
+        display: block;
+        width: 100%;
+        height: 35px;
+        line-height: 35px;
+        text-decoration: none;
+        background: #FFF;
+        padding: 0 14px;
+        color: #333 !important;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        font-size: 15px;
+        transition: all .15s;
+
+        &:hover,
+        &:focus {
+            background: $light-color;
+        }
+    }
+}
+
+/* Modal box */
+.trumbowyg-modal {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -260px;
+    width: 520px;
+    height: 350px;
+    z-index: 11;
+    overflow: hidden;
+    backface-visibility: hidden;
+}
+
+.trumbowyg-modal-box {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -250px;
+    width: 500px;
+    padding-bottom: 45px;
+    z-index: 1;
+    background-color: #FFF;
+    text-align: center;
+    font-size: 14px;
+    box-shadow: rgba(0, 0, 0, .2) 0 2px 3px;
+    backface-visibility: hidden;
+
+    .trumbowyg-modal-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin: 0 0 20px;
+        padding: 15px 0 13px;
+        display: block;
+        border-bottom: 1px solid #EEE;
+        color: #333;
+        background: lighten($light-color, 5%);
+    }
+
+    .trumbowyg-progress {
+        width: 100%;
+        background: #F00;
+        height: 3px;
+        position: absolute;
+        top: 58px;
+
+        .trumbowyg-progress-bar {
+            background: #2BC06A;
+            height: 100%;
+            transition: width .15s linear;
+        }
+    }
+
+    label {
+        display: block;
+        position: relative;
+        margin: 15px 12px;
+        height: 27px;
+        line-height: 27px;
+        overflow: hidden;
+
+        .trumbowyg-input-infos {
+            display: block;
+            text-align: left;
+            height: 25px;
+            line-height: 25px;
+            transition: all .15;
+
+            span {
+                display: block;
+                color: darken($light-color, 45%);
+                background-color: lighten($light-color, 5%);
+                border: 1px solid #DEDEDE;
+                padding: 0 7px;
+                width: 137px;
+            }
+            span.trumbowyg-msg-error {
+                color: #e74c3c;
+            }
+        }
+
+        &.trumbowyg-input-error {
+            input,
+            textarea {
+                border: 1px solid #e74c3c;
+            }
+
+            .trumbowyg-input-infos {
+                margin-top: -27px;
+            }
+        }
+
+        input {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 27px;
+            line-height: 27px;
+            border: 1px solid #DEDEDE;
+            background: transparent;
+            font-size: 14px;
+            width: 340px;
+            padding: 0 7px;
+            transition: all .15s;
+
+            &:hover,
+            &:focus {
+                outline: none;
+                border: 1px solid #95a5a6;
+            }
+            &:focus {
+                background: rgba(230, 230, 255, .1);
+            }
+        }
+    }
+
+    .error {
+        margin-top: 25px;
+        display: block;
+        color: red;
+    }
+
+    .trumbowyg-modal-button {
+        position: absolute;
+        bottom: 10px;
+        right: 0;
+        text-decoration: none;
+        color: #FFF;
+        display: block;
+        width: 100px;
+        height: 35px;
+        line-height: 33px;
+        margin: 0 10px;
+        background-color: #333;
+        border: none;
+        cursor: pointer;
+        font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif;
+        font-size: 16px;
+        transition: all .15s;
+
+        $modal-submit-color: #2ecc71;
+        &.trumbowyg-modal-submit {
+            right: 110px;
+            background: darken($modal-submit-color, 3%);
+
+            &:hover,
+            &:focus {
+                background: lighten($modal-submit-color, 5%);
+                outline: none;
+            }
+            &:active {
+                background: darken($modal-submit-color, 10%);
+            }
+        }
+
+        $modal-reset-color: #EEE;
+        &.trumbowyg-modal-reset {
+            color: #555;
+            background: darken($modal-reset-color, 3%);
+
+            &:hover,
+            &:focus {
+                background: lighten($modal-reset-color, 5%);
+                outline: none;
+            }
+            &:active {
+                background: darken($modal-reset-color, 10%);
+            }
+        }
+    }
+}
+
+.trumbowyg-overlay {
+    position: absolute;
+    background-color: rgba(255, 255, 255, .5);
+    width: 100%;
+    left: 0;
+    display: none;
+    z-index: 10;
+}
+
+/**
+ * Fullscreen
+ */
+body.trumbowyg-body-fullscreen {
+    overflow: hidden;
+}
+
+.trumbowyg-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    z-index: 99999;
+
+    &.trumbowyg-box,
+    .trumbowyg-editor {
+        border: none;
+    }
+    .trumbowyg-editor,
+    .trumbowyg-textarea {
+        height: calc(100% - 37px) !important;
+        overflow: auto;
+        margin-top: 37px;
+    }
+    .trumbowyg-overlay {
+        height: 100% !important;
+    }
+}
+
+.trumbowyg-editor {
+    object,
+    embed,
+    video,
+    img {
+        max-width: 100%;
+    }
+    video,
+    img {
+        height: auto;
+    }
+    img {
+        cursor: move;
+    }
+
+    /*
+     * Reset for resetCss option
+     */
+    &.trumbowyg-reset-css {
+        background: #FEFEFE !important;
+        font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif !important;
+        font-size: 14px !important;
+        line-height: 1.45em !important;
+        white-space: normal !important;
+        color: #333;
+
+        a {
+            color: #15c !important;
+            text-decoration: underline !important;
+        }
+
+        div,
+        p,
+        ul,
+        ol,
+        blockquote {
+            box-shadow: none !important;
+            background: none !important;
+            margin: 0 !important;
+            margin-bottom: 15px !important;
+            line-height: 1.4em !important;
+            font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif !important;
+            font-size: 14px !important;
+            border: none;
+        }
+        iframe,
+        object,
+        hr {
+            margin-bottom: 15px !important;
+        }
+        blockquote {
+            margin-left: 32px !important;
+            font-style: italic !important;
+            color: #555;
+        }
+        ul,
+        ol {
+            padding-left: 20px !important;
+        }
+        ul ul,
+        ol ol,
+        ul ol,
+        ol ul {
+            border: none;
+            margin: 2px !important;
+            padding: 0 !important;
+            padding-left: 24px !important;
+        }
+        hr {
+            display: block;
+            height: 1px;
+            border: none;
+            border-top: 1px solid #CCC;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: #111;
+            background: none;
+            margin: 0 !important;
+            padding: 0 !important;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 32px !important;
+            line-height: 38px !important;
+            margin-bottom: 20px !important;
+        }
+        h2 {
+            font-size: 26px !important;
+            line-height: 34px !important;
+            margin-bottom: 15px !important;
+        }
+        h3 {
+            font-size: 22px !important;
+            line-height: 28px !important;
+            margin-bottom: 7px !important;
+        }
+        h4 {
+            font-size: 16px !important;
+            line-height: 22px !important;
+            margin-bottom: 7px !important;
+        }
+    }
+}
+
+/*
+ * Black theme
+ */
+.trumbowyg-black {
+    .trumbowyg-button-pane {
+        background-color: $dark-color;
+        border-bottom-color: lighten($dark-color, 7%);
+
+        li {
+            &.trumbowyg-separator {
+                background-color: lighten($dark-color, 7%);
+            }
+        }
+
+        &.trumbowyg-disable {
+            li.trumbowyg-separator {
+                background-color: lighten($dark-color, 3%);
+            }
+        }
+
+        li button {
+            // At bottom of this stylesheet
+        }
+
+        &:not(.trumbowyg-disable) li button:hover,
+        &:not(.trumbowyg-disable) li button:focus,
+        li button.trumbowyg-active,
+        li.trumbowyg-not-disable button:hover,
+        li.trumbowyg-not-disable button:focus {
+            background-color: #555;
+        }
+
+        li .trumbowyg-open-dropdown:after {
+            border-top-color: #fff;
+        }
+    }
+    .trumbowyg-dropdown {
+        border-color: $dark-color;
+        background: $dark-color;
+
+        button {
+            background: $dark-color;
+            color: #fff !important;
+
+            &:hover,
+            &:focus {
+                background: #555;
+            }
+        }
+    }
+
+    // Modal box
+    .trumbowyg-modal-box {
+        background-color: $dark-color;
+
+        .trumbowyg-modal-title {
+            border-bottom: 1px solid #555;
+            color: #fff;
+            background: lighten($dark-color, 10%);
+        }
+
+        label {
+            display: block;
+            position: relative;
+            margin: 15px 12px;
+            height: 27px;
+            line-height: 27px;
+            overflow: hidden;
+
+            .trumbowyg-input-infos {
+                span {
+                    color: #eee;
+                    background-color: lighten($dark-color, 5%);
+                    border-color: $dark-color;
+                }
+                span.trumbowyg-msg-error {
+                    color: #e74c3c;
+                }
+            }
+
+            &.trumbowyg-input-error {
+                input,
+                textarea {
+                    border-color: #e74c3c;
+                }
+            }
+
+            input {
+                border-color: $dark-color;
+                color: #eee;
+                background: #333;
+
+                &:hover,
+                &:focus {
+                    border-color: #95a5a6;
+                }
+                &:focus {
+                    background-color: rgba(230, 230, 255, .1);
+                }
+            }
+        }
+    }
+    .trumbowyg-overlay {
+        background-color: rgba(0, 0, 0, .5);
+    }
+}
+
+/*
+ * Buttons icons
+ */
+.trumbowyg-button-pane li button {
+    display: block;
+    position: relative;
+    text-indent: -9999px;
+    width: 35px;
+    height: 35px;
+    overflow: hidden;
+    background: transparent url($icons-black) no-repeat;
+    border: none;
+    cursor: pointer;
+    transition: background-color .15s, background-image .15s, opacity .15s;
+
+    &.trumbowyg-viewHTML-button {
+        @include sprite-pos($view-html-black);
+    }
+    &.trumbowyg-formatting-button {
+        @include sprite-pos($formatting-black);
+    }
+
+    /* English and others */
+    &.trumbowyg-bold-button, &.trumbowyg-strong-button {
+        @include sprite-pos($bold-black);
+    }
+    &.trumbowyg-italic-button, &.trumbowyg-em-button {
+        @include sprite-pos($italic-black);
+    }
+    &.trumbowyg-underline-button {
+        @include sprite-pos($underline-black);
+    }
+    &.trumbowyg-strikethrough-button, &.trumbowyg-del-button {
+        @include sprite-pos($strikethrough-black);
+    }
+
+    &.trumbowyg-link-button {
+        @include sprite-pos($link-black);
+    }
+
+    &.trumbowyg-insertImage-button {
+        @include sprite-pos($image-black);
+    }
+
+    &.trumbowyg-justifyLeft-button {
+        @include sprite-pos($left-align-black);
+    }
+    &.trumbowyg-justifyCenter-button {
+        @include sprite-pos($center-align-black);
+    }
+    &.trumbowyg-justifyRight-button {
+        @include sprite-pos($right-align-black);
+    }
+    &.trumbowyg-justifyFull-button {
+        @include sprite-pos($justify-align-black);
+    }
+
+    &.trumbowyg-unorderedList-button {
+        @include sprite-pos($unordered-list-black);
+    }
+    &.trumbowyg-orderedList-button {
+        @include sprite-pos($ordered-list-black);
+    }
+
+    &.trumbowyg-horizontalRule-button {
+        @include sprite-pos($horizontal-rule-black);
+    }
+
+    &.trumbowyg-removeformat-button {
+        @include sprite-pos($removeformat-black);
+    }
+
+    &.trumbowyg-fullscreen-button {
+        @include sprite-pos($fullscreen-black);
+    }
+    &.trumbowyg-close-button {
+        @include sprite-pos($close-black);
+    }
+}
+
+.trumbowyg-fullscreen .trumbowyg-button-pane li button.trumbowyg-fullscreen-button {
+    @include sprite-pos($fullscreen-exit-black);
+}
+
+.trumbowyg-button-pane li {
+    &:first-child button {
+        margin-left: 6px;
+    }
+    &:last-child button {
+        margin-right: 6px;
+    }
+}
+
+/* French */
+.trumbowyg-fr .trumbowyg-button-pane li button {
+    &.trumbowyg-bold-button, &.trumbowyg-strong-button {
+        @include sprite-pos($gras-black);
+    }
+    &.trumbowyg-underline-button {
+        @include sprite-pos($souligne-black);
+    }
+    &.trumbowyg-strikethrough-button, &.trumbowyg-del-button {
+        @include sprite-pos($barre-black);
+    }
+}
+
+.trumbowyg-black {
+    .trumbowyg-button-pane li button {
+        background-image: url($icons-white);
+
+        &.trumbowyg-viewHTML-button {
+            @include sprite-pos($view-html-white);
+        }
+        &.trumbowyg-formatting-button {
+            @include sprite-pos($formatting-white);
+        }
+
+        /* English and others */
+        &.trumbowyg-bold-button, &.trumbowyg-strong-button {
+            @include sprite-pos($bold-white);
+        }
+        &.trumbowyg-italic-button, &.trumbowyg-em-button {
+            @include sprite-pos($italic-white);
+        }
+        &.trumbowyg-underline-button {
+            @include sprite-pos($underline-white);
+        }
+        &.trumbowyg-strikethrough-button, &.trumbowyg-del-button {
+            @include sprite-pos($strikethrough-white);
+        }
+
+        &.trumbowyg-link-button {
+            @include sprite-pos($link-white);
+        }
+
+        &.trumbowyg-insertImage-button {
+            @include sprite-pos($image-white);
+        }
+
+        &.trumbowyg-justifyLeft-button {
+            @include sprite-pos($left-align-white);
+        }
+        &.trumbowyg-justifyCenter-button {
+            @include sprite-pos($center-align-white);
+        }
+        &.trumbowyg-justifyRight-button {
+            @include sprite-pos($right-align-white);
+        }
+        &.trumbowyg-justifyFull-button {
+            @include sprite-pos($justify-align-white);
+        }
+
+        &.trumbowyg-unorderedList-button {
+            @include sprite-pos($unordered-list-white);
+        }
+        &.trumbowyg-orderedList-button {
+            @include sprite-pos($ordered-list-white);
+        }
+
+        &.trumbowyg-horizontalRule-button {
+            @include sprite-pos($horizontal-rule-white);
+        }
+
+        &.trumbowyg-removeformat-button {
+            @include sprite-pos($removeformat-white);
+        }
+
+        &.trumbowyg-fullscreen-button {
+            @include sprite-pos($fullscreen-white);
+        }
+        &.trumbowyg-close-button {
+            @include sprite-pos($close-white);
+        }
+    }
+    .trumbowyg-fullscreen .trumbowyg-button-pane li button.trumbowyg-fullscreen-button {
+        @include sprite-pos($fullscreen-exit-white);
+    }
+    .trumbowyg-button-pane li {
+        &:first-child button {
+            margin-left: 6px;
+        }
+        &:last-child button {
+            margin-right: 6px;
+        }
+    }
+
+    /* French */
+    .trumbowyg-fr .trumbowyg-button-pane li button {
+        &.trumbowyg-bold-button, &.trumbowyg-strong-button {
+            @include sprite-pos($gras-white);
+        }
+        &.trumbowyg-underline-button {
+            @include sprite-pos($souligne-white);
+        }
+        &.trumbowyg-strikethrough-button, &.trumbowyg-del-button {
+            @include sprite-pos($barre-white);
+        }
+    }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 4/3), only screen and (min-device-pixel-ratio: 1.3), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+    .trumbowyg-button-pane li button {
+        background-size: round($sprite-width-black-2x / 2) round($sprite-height-black-2x / 2) !important;
+        background-image: url($icons-black-2x) !important;
+
+        &.trumbowyg-viewHTML-button {
+            @include sprite-pos($view-html-black-2x, true);
+        }
+        &.trumbowyg-formatting-button {
+            @include sprite-pos($formatting-black-2x, true);
+        }
+
+        /* English and others */
+        &.trumbowyg-bold-button, &.trumbowyg-strong-button {
+            @include sprite-pos($bold-black-2x, true);
+        }
+        &.trumbowyg-italic-button, &.trumbowyg-em-button {
+            @include sprite-pos($italic-black-2x, true);
+        }
+        &.trumbowyg-underline-button {
+            @include sprite-pos($underline-black-2x, true);
+        }
+        &.trumbowyg-strikethrough-button, &.trumbowyg-del-button {
+            @include sprite-pos($strikethrough-black-2x, true);
+        }
+
+        &.trumbowyg-link-button {
+            @include sprite-pos($link-black-2x, true);
+        }
+
+        &.trumbowyg-insertImage-button {
+            @include sprite-pos($image-black-2x, true);
+        }
+
+        &.trumbowyg-justifyLeft-button {
+            @include sprite-pos($left-align-black-2x, true);
+        }
+        &.trumbowyg-justifyCenter-button {
+            @include sprite-pos($center-align-black-2x, true);
+        }
+        &.trumbowyg-justifyRight-button {
+            @include sprite-pos($right-align-black-2x, true);
+        }
+        &.trumbowyg-justifyFull-button {
+            @include sprite-pos($justify-align-black-2x, true);
+        }
+
+        &.trumbowyg-unorderedList-button {
+            @include sprite-pos($unordered-list-black-2x, true);
+        }
+        &.trumbowyg-orderedList-button {
+            @include sprite-pos($ordered-list-black-2x, true);
+        }
+
+        &.trumbowyg-horizontalRule-button {
+            @include sprite-pos($horizontal-rule-black-2x, true);
+        }
+
+        &.trumbowyg-removeformat-button {
+            @include sprite-pos($removeformat-black-2x, true);
+        }
+
+        &.trumbowyg-fullscreen-button {
+            @include sprite-pos($fullscreen-black-2x, true);
+        }
+        &.trumbowyg-close-button {
+            @include sprite-pos($close-black-2x, true);
+        }
+    }
+    .trumbowyg-fullscreen .trumbowyg-button-pane li a.trumbowyg-fullscreen-button {
+        @include sprite-pos($fullscreen-exit-black-2x, true);
+    }
+
+    /* French */
+    .trumbowyg-fr .trumbowyg-button-pane li button {
+        &.trumbowyg-bold-button, &.trumbowyg-strong-button {
+            @include sprite-pos($gras-black-2x, true);
+        }
+        &.trumbowyg-underline-button {
+            @include sprite-pos($souligne-black-2x, true);
+        }
+        &.trumbowyg-strikethrough-button, &.trumbowyg-del-button {
+            @include sprite-pos($barre-black-2x, true);
+        }
+    }
+
+    /* Black theme */
+    .trumbowyg-black {
+        .trumbowyg-button-pane li button {
+            background-size: round($sprite-width-white-2x / 2) round($sprite-height-white-2x / 2) !important;
+            background-image: url($icons-white-2x) !important;
+
+            &.trumbowyg-viewHTML-button {
+                @include sprite-pos($view-html-white-2x, true);
+            }
+            &.trumbowyg-formatting-button {
+                @include sprite-pos($formatting-white-2x, true);
+            }
+
+            /* English and others */
+            &.trumbowyg-bold-button, &.trumbowyg-strong-button {
+                @include sprite-pos($bold-white-2x, true);
+            }
+            &.trumbowyg-italic-button, &.trumbowyg-em-button {
+                @include sprite-pos($italic-white-2x, true);
+            }
+            &.trumbowyg-underline-button {
+                @include sprite-pos($underline-white-2x, true);
+            }
+            &.trumbowyg-strikethrough-button, &.trumbowyg-del-button {
+                @include sprite-pos($strikethrough-white-2x, true);
+            }
+
+            &.trumbowyg-link-button {
+                @include sprite-pos($link-white-2x, true);
+            }
+
+            &.trumbowyg-insertImage-button {
+                @include sprite-pos($image-white-2x, true);
+            }
+
+            &.trumbowyg-justifyLeft-button {
+                @include sprite-pos($left-align-white-2x, true);
+            }
+            &.trumbowyg-justifyCenter-button {
+                @include sprite-pos($center-align-white-2x, true);
+            }
+            &.trumbowyg-justifyRight-button {
+                @include sprite-pos($right-align-white-2x, true);
+            }
+            &.trumbowyg-justifyFull-button {
+                @include sprite-pos($justify-align-white-2x, true);
+            }
+
+            &.trumbowyg-unorderedList-button {
+                @include sprite-pos($unordered-list-white-2x, true);
+            }
+            &.trumbowyg-orderedList-button {
+                @include sprite-pos($ordered-list-white-2x, true);
+            }
+
+            &.trumbowyg-horizontalRule-button {
+                @include sprite-pos($horizontal-rule-white-2x, true);
+            }
+
+            &.trumbowyg-removeformat-button {
+                @include sprite-pos($removeformat-white-2x, true);
+            }
+
+            &.trumbowyg-fullscreen-button {
+                @include sprite-pos($fullscreen-white-2x, true);
+            }
+            &.trumbowyg-close-button {
+                @include sprite-pos($close-white-2x, true);
+            }
+        }
+        .trumbowyg-fullscreen .trumbowyg-button-pane li a.trumbowyg-fullscreen-button {
+            @include sprite-pos($fullscreen-exit-white-2x, true);
+        }
+
+        /* French */
+        .trumbowyg-fr .trumbowyg-button-pane li button {
+            &.trumbowyg-bold-button, &.trumbowyg-strong-button {
+                @include sprite-pos($gras-white-2x, true);
+            }
+            &.trumbowyg-underline-button {
+                @include sprite-pos($souligne-white-2x, true);
+            }
+            &.trumbowyg-strikethrough-button, &.trumbowyg-del-button {
+                @include sprite-pos($barre-white-2x, true);
+            }
+        }
+    }
+}

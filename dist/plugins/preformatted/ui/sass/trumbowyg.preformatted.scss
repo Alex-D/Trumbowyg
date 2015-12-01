@@ -1,0 +1,56 @@
+/**
+ * Trumbowyg v2.0.0-beta.7 - A lightweight WYSIWYG editor
+ * Preformatted text supplier
+ * ------------------------
+ * @link http://alex-d.github.io/Trumbowyg
+ * @license MIT
+ * @author Alexandre Demode (Alex-D)
+ *         Twitter : @AlexandreDemode
+ *         Website : alex-d.fr
+ */
+
+@import "sprite-black";
+@import "sprite-black-2x";
+@import "sprite-white";
+@import "sprite-white-2x";
+
+@import "sprite-pos";
+
+/*
+ * Buttons icons
+ */
+.trumbowyg-button-pane li button {
+    &.trumbowyg-preformatted-button {
+        background-image: url($icons-black);
+    }
+    &.trumbowyg-preformatted-button { @include sprite-pos($preformatted-black); }
+}
+
+.trumbowyg-black {
+    .trumbowyg-button-pane li button {
+        &.trumbowyg-preformatted-button {
+            background-image: url($icons-white);
+        }
+        &.trumbowyg-preformatted-button { @include sprite-pos($preformatted-white); }
+    }
+}
+
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 4/3), only screen and (min-device-pixel-ratio: 1.3), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx){
+    .trumbowyg-button-pane li button {
+        &.trumbowyg-preformatted-button {
+            background-image: url($icons-black-2x) !important;
+            background-size: round($sprite-width-black-2x / 2) round($sprite-height-black-2x / 2) !important;
+        }
+        &.trumbowyg-preformatted-button { @include sprite-pos($preformatted-black-2x, true); }
+    }
+
+    .trumbowyg-black {
+        .trumbowyg-button-pane li button {
+            &.trumbowyg-preformatted-button {
+                background-image: url($icons-white-2x) !important;
+            }
+            &.trumbowyg-preformatted-button { @include sprite-pos($preformatted-white-2x, true); }
+        }
+    }
+}
