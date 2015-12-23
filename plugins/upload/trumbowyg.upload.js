@@ -58,6 +58,7 @@
             fileFieldName: 'fileToUpload',
             data: [],
             headers: {},
+            xhrFields: {},
             urlPropertyName: 'file',
             statusPropertyName: 'success',
             success: undefined,
@@ -111,6 +112,7 @@
                                 $.ajax({
                                     url: $.trumbowyg.upload.serverPath,
                                     headers: $.trumbowyg.upload.headers,
+                                    xhrFields: $.trumbowyg.upload.xhrFields,
                                     type: 'POST',
                                     data: data,
                                     cache: false,
