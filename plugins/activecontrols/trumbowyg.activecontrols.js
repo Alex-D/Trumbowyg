@@ -1,0 +1,78 @@
+/* ===========================================================
+ * trumbowyg.editlink.js v1.0
+ * Plugin to display active formattig buttons in buttons pane
+ * http://alex-d.github.com/Trumbowyg
+ * ===========================================================
+ * Author : Rastislav Švarba (ra100)
+ *          Twitter : @ra100
+ *          Website : ra100.net
+ */
+
+(function ($) {
+    'use strict';
+    $.extend(true, $.trumbowyg, {
+        opts: {
+            on: {
+                activecontrols: {
+                    events: 'mouseup keydown',
+                    handler: function (event, t) {
+                        t.saveSelection();
+                        if (t.selection !== null) {
+                            t.o.controlButtonActivate(t.selection.commonAncestorContainer.parentNode, t);
+                        }
+                    }
+                }
+            },
+            activeTags: [],
+            // Active tags
+            controlButtonActivate: function (element, t) {
+                var tagToButton = {
+                        'strong': 'strong',
+                        'b': 'strong',
+                        'em': 'em',
+                        'i': 'em',
+                        'p': 'p',
+                        'center': 'justifyCenter',
+                        'left': 'justifyLeft',
+                        'right': 'justifyRight',
+                        'justify': 'justifyFull',
+                        'ol': 'orderedList',
+                        'ul': 'unorderedList',
+                        'a': 'link',
+                        'img': 'insertImage',
+                        'u': 'underline',
+                        'strike': 'strikethrough',
+                        'del': 'del'
+                    },
+                    tags = [],
+                    newTags = [];
+                t.o.getTagsRecursive(element, tags);
+                newTags = t.o.activeTags.filter(function (val) {
+                    if (tags.indexOf(val) < 0) {
+                        t.$btnPane.find('.' + t.o.prefix + tagToButton[val.toLowerCase()] + '-button').removeClass('active');
+                        return false;
+                    }
+                });
+                for (var i in tags) {
+                    var tag = tags[i];
+                    if (newTags.indexOf(tag) < 0) {
+                        t.$btnPane.find('.' + t.o.prefix + tagToButton[tag.toLowerCase()] + '-button').addClass('active');
+                    }
+                }
+                t.o.activeTags = tags;
+            },
+            getTagsRecursive: function (element, tags) {
+                var tag = element.tagName;
+                if (tag === 'DIV')
+                    return;
+                if (tag === 'P') {
+                    if (element.style.textAlign !== "") {
+                        tags.push(element.style.textAlign);
+                    }
+                }
+                tags.push(tag);
+                this.getTagsRecursive(element.parentNode, tags);
+            }
+        }
+    });
+})(jQuery);
