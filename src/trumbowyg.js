@@ -541,12 +541,15 @@ jQuery.trumbowyg = {
                 btn = t.o.btnsDef[n],
                 d = btn.dropdown,
                 textDef = t.lang[n] || n,
+                classDef = ((btn.class !== undefined) ? ' ' + btn.class : '' ),
+                btnText = ((btn.text !== undefined) ? btn.txt : ((btn.title !== undefined) ? btn.title : textDef)),
+                btnTitle = ((btn.title !== undefined) ? btn.title : ((btn.text !== undefined) ? btn.text : textDef + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''))),
 
                 $btn = $('<button/>', {
                     type: 'button',
-                    'class': prefix + n + '-button' + (btn.ico ? ' ' + prefix + btn.ico + '-button' : ''),
-                    text: btn.text || btn.title || textDef,
-                    title: btn.title || btn.text || textDef + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
+                    'class': prefix + n + '-button' + (btn.ico ? ' ' + prefix + btn.ico + '-button' : '') + classDef,
+                    text: btnText, // btn.text || btn.title || textDef,
+                    title: btnTitle, // btn.title || btn.text || textDef + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
                     tabindex: -1,
                     mousedown: function () {
                         if (!d || $('.' + n + '-' + prefix + 'dropdown', t.$box).is(':hidden'))
