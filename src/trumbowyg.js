@@ -1,52 +1,52 @@
 jQuery.trumbowyg = {
     langs: {
         en: {
-            viewHTML: "View HTML",
+            viewHTML: 'View HTML',
 
-            formatting: "Formatting",
-            p: "Paragraph",
-            blockquote: "Quote",
-            code: "Code",
-            header: "Header",
+            formatting: 'Formatting',
+            p: 'Paragraph',
+            blockquote: 'Quote',
+            code: 'Code',
+            header: 'Header',
 
-            bold: "Bold",
-            italic: "Italic",
-            strikethrough: "Stroke",
-            underline: "Underline",
+            bold: 'Bold',
+            italic: 'Italic',
+            strikethrough: 'Stroke',
+            underline: 'Underline',
 
-            strong: "Strong",
-            em: "Emphasis",
-            del: "Deleted",
+            strong: 'Strong',
+            em: 'Emphasis',
+            del: 'Deleted',
 
-            unorderedList: "Unordered list",
-            orderedList: "Ordered list",
+            unorderedList: 'Unordered list',
+            orderedList: 'Ordered list',
 
-            insertImage: "Insert Image",
-            insertVideo: "Insert Video",
-            link: "Link",
-            createLink: "Insert link",
-            unlink: "Remove link",
+            insertImage: 'Insert Image',
+            insertVideo: 'Insert Video',
+            link: 'Link',
+            createLink: 'Insert link',
+            unlink: 'Remove link',
 
-            justifyLeft: "Align Left",
-            justifyCenter: "Align Center",
-            justifyRight: "Align Right",
-            justifyFull: "Align Justify",
+            justifyLeft: 'Align Left',
+            justifyCenter: 'Align Center',
+            justifyRight: 'Align Right',
+            justifyFull: 'Align Justify',
 
-            horizontalRule: "Insert horizontal rule",
-            removeformat: "Remove format",
+            horizontalRule: 'Insert horizontal rule',
+            removeformat: 'Remove format',
 
-            fullscreen: "fullscreen",
+            fullscreen: 'fullscreen',
 
-            close: "Close",
+            close: 'Close',
 
-            submit: "Confirm",
-            reset: "Cancel",
+            submit: 'Confirm',
+            reset: 'Cancel',
 
-            required: "Required",
-            description: "Description",
-            title: "Title",
-            text: "Text",
-            target: "Target"
+            required: 'Required',
+            description: 'Description',
+            title: 'Title',
+            text: 'Text',
+            target: 'Target'
         }
     },
 
@@ -419,7 +419,7 @@ jQuery.trumbowyg = {
 
                         try {
                             // IE
-                            var text = window.clipboardData.getData("Text");
+                            var text = window.clipboardData.getData('Text');
 
                             try {
                                 // <= IE10

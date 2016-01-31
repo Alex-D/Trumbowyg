@@ -2,7 +2,7 @@
     "expr": true,
     "noarg": true,
     "onevar": true,
-    "quotmark": "simple",
+    "quotmark": "single",
     "undef": true,
     "unused": true,
 
