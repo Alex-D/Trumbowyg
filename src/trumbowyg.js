@@ -544,7 +544,7 @@ jQuery.trumbowyg = {
 
                 $btn = $('<button/>', {
                     type: 'button',
-                    'class': prefix + n + '-button' + (btn.ico ? ' ' + prefix + btn.ico + '-button' : ''),
+                    'class': prefix + n + '-button' + (btn.ico ? ' ' + prefix + btn.ico + '-button' : '') + (btn.class || ''),
                     text: btn.text || btn.title || textDef,
                     title: btn.title || btn.text || textDef + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
                     tabindex: -1,
