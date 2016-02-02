@@ -23,6 +23,10 @@
             cs: {
                 base64: 'Vložit obrázek',
                 file: 'Soubor'
+            },
+            zh_cn: {
+              base64: '图片（Base64编码）',
+              file: '文件'
             }
         },
 

@@ -24,6 +24,9 @@
             },
             sk: {
                 editLink: 'Upraviť odkaz'
+            },
+            zh_cn: {
+                editLink: '编辑链接'
             }
         },
         opts: {

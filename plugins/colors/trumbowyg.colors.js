@@ -28,6 +28,10 @@
             sk: {
                 foreColor: 'Farba textu',
                 backColor: 'Farba pozadia'
+            },
+            zh_cn: {
+              foreColor: '文字颜色',
+              backColor: '背景颜色'
             }
         }
     });
