@@ -20,6 +20,9 @@
             },
             it: {
                 preformatted: 'Codice <pre>'
+            },
+            zh_cn: {
+                preformatted: '代码示例 <pre>'
             }
         },
         opts: {

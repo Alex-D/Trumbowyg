@@ -50,6 +50,11 @@
                 upload: 'Nahrát obrázek',
                 file: 'Soubor',
                 uploadError: 'Chyba'
+            },
+            zh_cn: {
+                upload: '上传',
+                file: '文件',
+                uploadError: '错误'
             }
         },
 
