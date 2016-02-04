@@ -31,6 +31,7 @@
 
     $.extend(true, $.trumbowyg, {
         langs: {
+            // jshint camelcase:false
             en: {
                 upload: 'Upload',
                 file: 'File',
@@ -57,6 +58,7 @@
                 uploadError: '错误'
             }
         },
+        // jshint camelcase:true
 
         upload: {
             serverPath: './src/plugins/upload/trumbowyg.upload.php',

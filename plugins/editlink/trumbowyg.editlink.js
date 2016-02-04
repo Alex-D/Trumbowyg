@@ -12,6 +12,7 @@
     'use strict';
 
     $.extend(true, $.trumbowyg, {
+        // jshint camelcase:false
         langs: {
             en: {
                 editLink: 'Edit Link'
@@ -29,6 +30,8 @@
                 editLink: '编辑链接'
             }
         },
+        // jshint camelcase:true
+
         opts: {
             btnsDef: {
                 editLink: {

@@ -13,6 +13,7 @@
 
     $.extend(true, $.trumbowyg, {
         langs: {
+            // jshint camelcase:false
             cs: {
                 foreColor: 'Barva textu',
                 backColor: 'Barva pozadí'
@@ -35,6 +36,7 @@
             }
         }
     });
+    // jshint camelcase:true
 
     // Create btnsDef entry
     $.extend(true, $.trumbowyg, {

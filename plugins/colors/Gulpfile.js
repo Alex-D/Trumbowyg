@@ -80,6 +80,7 @@ function makeSprite(color, resolution) {
     sprite.css.pipe(gulp.dest(paths.styles.sass));
     return sprite.css;
 }
+// jshint camelcase:true
 
 
 gulp.task('styles', ['sprites'], function () {

@@ -120,7 +120,7 @@ function makeSprite(color, resolution) {
                     output += '\n\n';
                     output += '$sprite-height' + suffix + ': ' + params.items[0].px.total_height + ';\n';
                     output += '$sprite-width' + suffix + ': ' + params.items[0].px.total_width + ';\n';
-                    output += '$icons' + suffix + ': "./images/icons' + suffix + '.png";';
+                    output += '$icons' + suffix + ': $icons-path + "icons' + suffix + '.png";';
                 }
 
                 return output;
@@ -130,6 +130,7 @@ function makeSprite(color, resolution) {
     sprite.css.pipe(gulp.dest(paths.styles.sass));
     return sprite.css;
 }
+// jshint camelcase:true
 
 
 gulp.task('styles', ['sprites'], function () {
@@ -153,14 +154,6 @@ gulp.task('sass-dist', ['styles'], function () {
     return gulp.src('src/ui/sass/**/*.scss')
         .pipe($.header(banner, {pkg: pkg, description: 'Default stylesheet for Trumbowyg editor'}))
         .pipe(gulp.dest('dist/ui/sass'));
-});
-
-
-gulp.task('lint', function () {
-    var jshint = require('gulp-jshint');
-    return gulp.src(['./src/*.js', './src/**/*.js', './plugins/**/*.js'])
-        .pipe(jshint())
-        .pipe(jshint.reporter('jshint-stylish'));
 });
 
 

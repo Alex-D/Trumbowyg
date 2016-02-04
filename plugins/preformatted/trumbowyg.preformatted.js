@@ -12,6 +12,7 @@
 
     $.extend(true, $.trumbowyg, {
         langs: {
+            // jshint camelcase:false
             en: {
                 preformatted: 'Code sample <pre>'
             },
@@ -25,6 +26,8 @@
                 preformatted: '代码示例 <pre>'
             }
         },
+        // jshint camelcase:true
+
         opts: {
             btnsDef: {
                 preformatted: {

@@ -11,6 +11,7 @@
 
     $.extend(true, $.trumbowyg, {
         langs: {
+            // jshint camelcase:false
             en: {
                 base64: 'Image as base64',
                 file: 'File',
@@ -29,6 +30,7 @@
               file: '文件'
             }
         },
+        // jshint camelcase:true
 
         opts: {
             btnsDef: {
