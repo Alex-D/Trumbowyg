@@ -34,13 +34,7 @@
             btnsDef: {
                 base64: {
                     isSupported: function () {
-                        if (typeof FileReader === 'undefined') {
-                            if (window.console !== undefined) {
-                                console.err('[Trumbowyg - Plugin base64] FileReader is not supported by your browser.');
-                            }
-                            return false;
-                        }
-                        return true;
+                        return typeof FileReader !== 'undefined';
                     },
                     func: function (params, tbw) {
                         var file;

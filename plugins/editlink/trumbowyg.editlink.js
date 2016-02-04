@@ -87,7 +87,10 @@
                             }
                         }, function (v) { // v is value
                             t.execCmd('createLink', v.url);
-                            if (!edit) return true;
+                            if (!edit) {
+                                return true;
+                            }
+
                             var l = $('a[href="' + v.url + '"]:not([title])', t.$box);
                             if (v.text.length > 0) {
                                 l.text(v.text);

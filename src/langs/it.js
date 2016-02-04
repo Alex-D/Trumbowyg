@@ -7,48 +7,48 @@
  */
 
 jQuery.trumbowyg.langs.it = {
-    viewHTML:       "Mostra HTML",
+    viewHTML: 'Mostra HTML',
 
-    formatting:     "Formattazione",
-    p:              "Paragrafo",
-    blockquote:     "Citazione",
-    code:           "Codice",
-    header:         "Intestazione",
+    formatting: 'Formattazione',
+    p: 'Paragrafo',
+    blockquote: 'Citazione',
+    code: 'Codice',
+    header: 'Intestazione',
 
-    bold:           "Grassetto",
-    italic:         "Italico",
-    strikethrough:  "Barrato",
-    underline:      "Sottolineato",
+    bold: 'Grassetto',
+    italic: 'Italico',
+    strikethrough: 'Barrato',
+    underline: 'Sottolineato',
 
-    strong:         "Rafforza",
-    em:             "Enfatizza",
-    del:            "Cancella",
+    strong: 'Rafforza',
+    em: 'Enfatizza',
+    del: 'Cancella',
 
-    unorderedList:  "Elenco puntato",
-    orderedList:    "Elenco numerato",
+    unorderedList: 'Elenco puntato',
+    orderedList: 'Elenco numerato',
 
-    insertImage:    "Inserisci immagine",
-    insertVideo:    "Inserisci video",
-    link:           "Collegamento",
-    createLink:     "Crea un collegamento",
-    unlink:         "Elimina collegamento",
+    insertImage: 'Inserisci immagine',
+    insertVideo: 'Inserisci video',
+    link: 'Collegamento',
+    createLink: 'Crea un collegamento',
+    unlink: 'Elimina collegamento',
 
-    justifyLeft:    "Allinea a sinistra",
-    justifyCenter:  "Centra",
-    justifyRight:   "Allinea a destra",
-    justifyFull:    "Giustifica",
+    justifyLeft: 'Allinea a sinistra',
+    justifyCenter: 'Centra',
+    justifyRight: 'Allinea a destra',
+    justifyFull: 'Giustifica',
 
-    horizontalRule: "Inserisci un separatore orizzontale",
+    horizontalRule: 'Inserisci un separatore orizzontale',
 
-    fullscreen:     "Schermo intero",
+    fullscreen: 'Schermo intero',
 
-    close:          "Chiudi",
+    close: 'Chiudi',
 
-    submit:         "Invia",
-    reset:          "Annulla",
+    submit: 'Invia',
+    reset: 'Annulla',
 
-    required:       "Obbligatorio",
-    description:    "Descrizione",
-    title:          "Titolo",
-    text:           "Testo"
+    required: 'Obbligatorio',
+    description: 'Descrizione',
+    title: 'Titolo',
+    text: 'Testo'
 };

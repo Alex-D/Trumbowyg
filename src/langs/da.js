@@ -8,48 +8,48 @@
  */
 
 jQuery.trumbowyg.langs.da = {
-    viewHTML:       "Vis HTML",
+    viewHTML: 'Vis HTML',
 
-    formatting:     "Formatter",
-    p:              "Afsnit",
-    blockquote:     "Citat",
-    code:           "Kode",
-    header:         "Overskrift",
+    formatting: 'Formatter',
+    p: 'Afsnit',
+    blockquote: 'Citat',
+    code: 'Kode',
+    header: 'Overskrift',
 
-    bold:           "Fed",
-    italic:         "Kursiv",
-    strikethrough:  "Gennemstreg",
-    underline:      "Understreg",
+    bold: 'Fed',
+    italic: 'Kursiv',
+    strikethrough: 'Gennemstreg',
+    underline: 'Understreg',
 
-    strong:         "Vigtig",
-    em:             "Fremhæv",
-    del:            "Slettet",
+    strong: 'Vigtig',
+    em: 'Fremhæv',
+    del: 'Slettet',
 
-    unorderedList:  "Uordnet liste",
-    orderedList:    "Ordnet liste",
+    unorderedList: 'Uordnet liste',
+    orderedList: 'Ordnet liste',
 
-    insertImage:    "Indsæt billede",
-    insertVideo:    "Indsæt video",
-    link:           "Link",
-    createLink:     "Indsæt link",
-    unlink:         "Fjern link",
+    insertImage: 'Indsæt billede',
+    insertVideo: 'Indsæt video',
+    link: 'Link',
+    createLink: 'Indsæt link',
+    unlink: 'Fjern link',
 
-    justifyLeft:    "Venstrestil",
-    justifyCenter:  "Centrer",
-    justifyRight:   "Højrestil",
-    justifyFull:    "Lige margener",
+    justifyLeft: 'Venstrestil',
+    justifyCenter: 'Centrer',
+    justifyRight: 'Højrestil',
+    justifyFull: 'Lige margener',
 
-    horizontalRule: "Horisontal linie",
+    horizontalRule: 'Horisontal linie',
 
-    fullscreen:     "Fuld skærm",
+    fullscreen: 'Fuld skærm',
 
-    close:          "Luk",
+    close: 'Luk',
 
-    submit:         "Bekræft",
-    reset:          "Annuller",
+    submit: 'Bekræft',
+    reset: 'Annuller',
 
-    required:       "Påkrævet",
-    description:    "Beskrivelse",
-    title:          "Titel",
-    text:           "Tekst"
+    required: 'Påkrævet',
+    description: 'Beskrivelse',
+    title: 'Titel',
+    text: 'Tekst'
 };

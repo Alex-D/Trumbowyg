@@ -8,48 +8,48 @@
  */
 
 jQuery.trumbowyg.langs.pl = {
-    viewHTML:       "Pokaż HTML",
+    viewHTML: 'Pokaż HTML',
 
-    formatting:     "Format",
-    p:              "Akapit",
-    blockquote:     "Cytat",
-    code:           "Kod",
-    header:         "Nagłówek",
+    formatting: 'Format',
+    p: 'Akapit',
+    blockquote: 'Cytat',
+    code: 'Kod',
+    header: 'Nagłówek',
 
-    bold:           "Pogrubienie",
-    italic:         "Pochylenie",
-    strikethrough:  "Przekreślenie",
-    underline:      "Podkreślenie",
+    bold: 'Pogrubienie',
+    italic: 'Pochylenie',
+    strikethrough: 'Przekreślenie',
+    underline: 'Podkreślenie',
 
-    strong:         "Wytłuszczenie",
-    em:             "Uwydatnienie",
-    del:            "Usunięte",
+    strong: 'Wytłuszczenie',
+    em: 'Uwydatnienie',
+    del: 'Usunięte',
 
-    unorderedList:  "Lista nieuporządkowana",
-    orderedList:    "Lista uporządkowana",
+    unorderedList: 'Lista nieuporządkowana',
+    orderedList: 'Lista uporządkowana',
 
-    insertImage:    "Wstaw obraz",
-    insertVideo:    "Wstaw film",
-    link:           "Link",
-    createLink:     "Wstaw link",
-    unlink:         "Usuń link",
+    insertImage: 'Wstaw obraz',
+    insertVideo: 'Wstaw film',
+    link: 'Link',
+    createLink: 'Wstaw link',
+    unlink: 'Usuń link',
 
-    justifyLeft:    "Wyrównaj do lewej",
-    justifyCenter:  "Wyśrodkuj",
-    justifyRight:   "Wyrównaj do prawej",
-    justifyFull:    "Wyjustuj",
+    justifyLeft: 'Wyrównaj do lewej',
+    justifyCenter: 'Wyśrodkuj',
+    justifyRight: 'Wyrównaj do prawej',
+    justifyFull: 'Wyjustuj',
 
-    horizontalRule: "Odkreśl linią",
+    horizontalRule: 'Odkreśl linią',
 
-    fullscreen:     "Pełny ekran",
+    fullscreen: 'Pełny ekran',
 
-    close:          "Zamknij",
+    close: 'Zamknij',
 
-    submit:         "Zastosuj",
-    reset:          "Przywróć",
+    submit: 'Zastosuj',
+    reset: 'Przywróć',
 
-    required:       "Wymagane",
-    description:    "Opis",
-    title:          "Tytuł",
-    text:           "Tekst"
+    required: 'Wymagane',
+    description: 'Opis',
+    title: 'Tytuł',
+    text: 'Tekst'
 };

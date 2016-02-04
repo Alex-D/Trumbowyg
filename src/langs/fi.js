@@ -8,48 +8,48 @@
  */
 
 jQuery.trumbowyg.langs.fi = {
-    viewHTML:       "Näytä HTML",
+    viewHTML: 'Näytä HTML',
 
-    formatting:     "Muotoilu",
-    p:              "Kappale",
-    blockquote:     "Lainaus",
-    code:           "Koodi",
-    header:         "Otsikko",
+    formatting: 'Muotoilu',
+    p: 'Kappale',
+    blockquote: 'Lainaus',
+    code: 'Koodi',
+    header: 'Otsikko',
 
-    bold:           "Lihavointi",
-    italic:         "Kursivointi",
-    strikethrough:  "Yliviivaus",
-    underline:      "Allevivaus",
+    bold: 'Lihavointi',
+    italic: 'Kursivointi',
+    strikethrough: 'Yliviivaus',
+    underline: 'Allevivaus',
 
-    strong:         "Vahvennus",
-    em:             "Painotus",
-    del:            "Poistettu",
+    strong: 'Vahvennus',
+    em: 'Painotus',
+    del: 'Poistettu',
 
-    unorderedList:  "Numeroimaton lista",
-    orderedList:    "Numeroitu lista",
+    unorderedList: 'Numeroimaton lista',
+    orderedList: 'Numeroitu lista',
 
-    insertImage:    "Lisää kuva",
-    insertVideo:    "Lisää video",
-    link:           "Linkki",
-    createLink:     "Luo linkki",
-    unlink:         "Poista linkki",
+    insertImage: 'Lisää kuva',
+    insertVideo: 'Lisää video',
+    link: 'Linkki',
+    createLink: 'Luo linkki',
+    unlink: 'Poista linkki',
 
-    justifyLeft:    "Asemoi vasemmalle",
-    justifyCenter:  "Keskitä",
-    justifyRight:   "Asemoi oikealle",
-    justifyFull:    "Tasaa",
+    justifyLeft: 'Asemoi vasemmalle',
+    justifyCenter: 'Keskitä',
+    justifyRight: 'Asemoi oikealle',
+    justifyFull: 'Tasaa',
 
-    horizontalRule: "Vaakaviiva",
+    horizontalRule: 'Vaakaviiva',
 
-    fullscreen:     "Kokoruutu",
+    fullscreen: 'Kokoruutu',
 
-    close:          "Sulje",
+    close: 'Sulje',
 
-    submit:         "Lähetä",
-    reset:          "Palauta",
+    submit: 'Lähetä',
+    reset: 'Palauta',
 
-    required:       "Pakollinen",
-    description:    "Kuvaus",
-    title:          "Otsikko",
-    text:           "Teksti"
+    required: 'Pakollinen',
+    description: 'Kuvaus',
+    title: 'Otsikko',
+    text: 'Teksti'
 };

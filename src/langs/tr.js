@@ -8,48 +8,48 @@
  */
 
 jQuery.trumbowyg.langs.tr = {
-    viewHTML:       "HTML Kodu",
+    viewHTML: 'HTML Kodu',
 
-    formatting:     "Biçimlendirme",
-    p:              "Paragraf",
-    blockquote:     "Alıntı",
-    code:           "Kod",
-    header:         "Başlık",
+    formatting: 'Biçimlendirme',
+    p: 'Paragraf',
+    blockquote: 'Alıntı',
+    code: 'Kod',
+    header: 'Başlık',
 
-    bold:           "Kalın",
-    italic:         "İtalik",
-    strikethrough:  "Üzeri çizgili",
-    underline:      "Altı çizgili",
+    bold: 'Kalın',
+    italic: 'İtalik',
+    strikethrough: 'Üzeri çizgili',
+    underline: 'Altı çizgili',
 
-    strong:         "Koyu",
-    em:             "Vurgulu",
-    del:            "Üzeri çizgili",
+    strong: 'Koyu',
+    em: 'Vurgulu',
+    del: 'Üzeri çizgili',
 
-    unorderedList:  "Simgeli liste",
-    orderedList:    "Numaralı liste",
+    unorderedList: 'Simgeli liste',
+    orderedList: 'Numaralı liste',
 
-    insertImage:    "Resim yerleştir",
-    insertVideo:    "Video yerleştir",
-    link:           "Link",
-    createLink:     "Link yerleştir",
-    unlink:         "Linki sil",
+    insertImage: 'Resim yerleştir',
+    insertVideo: 'Video yerleştir',
+    link: 'Link',
+    createLink: 'Link yerleştir',
+    unlink: 'Linki sil',
 
-    justifyLeft:    "Sola hizala",
-    justifyCenter:  "Ortaya hizala",
-    justifyRight:   "Sağa hizala",
-    justifyFull:    "Yasla",
+    justifyLeft: 'Sola hizala',
+    justifyCenter: 'Ortaya hizala',
+    justifyRight: 'Sağa hizala',
+    justifyFull: 'Yasla',
 
-    horizontalRule: "Yatay satır ekle",
+    horizontalRule: 'Yatay satır ekle',
 
-    fullscreen:     "Tam ekran",
+    fullscreen: 'Tam ekran',
 
-    close:          "Kapat",
+    close: 'Kapat',
 
-    submit:         "Onayla",
-    reset:          "Sıfırla",
+    submit: 'Onayla',
+    reset: 'Sıfırla',
 
-    required:       "Gerekli",
-    description:    "Açıklama",
-    title:          "Başlık",
-    text:           "Metin"
+    required: 'Gerekli',
+    description: 'Açıklama',
+    title: 'Başlık',
+    text: 'Metin'
 };

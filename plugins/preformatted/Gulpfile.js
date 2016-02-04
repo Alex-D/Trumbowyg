@@ -1,3 +1,6 @@
+// jshint node:true
+'use strict';
+
 var gulp = require('gulp'),
     del = require('del'),
     vinylPaths = require('vinyl-paths'),
@@ -49,6 +52,7 @@ gulp.task('sprites', function () {
     return makeSprite('white') && makeSprite('white', '-2x') && makeSprite('black') && makeSprite('black', '-2x');
 });
 function makeSprite(color, resolution) {
+    // jshint camelcase:false
     var suffix = '-' + color + ((resolution) ? resolution : '');
     var sprite = gulp.src(paths.sprites['icons' + suffix])
         .pipe(spritesmith({
@@ -57,8 +61,10 @@ function makeSprite(color, resolution) {
             cssTemplate: function (params) {
                 var output = '', e;
                 for (var i in params.items) {
-                    e = params.items[i];
-                    output += '$' + e.name + suffix + ': ' + e.px.offset_x + ' ' + e.px.offset_y + ';\n';
+                    if (params.items.hasOwnProperty(i)) {
+                        e = params.items[i];
+                        output += '$' + e.name + suffix + ': ' + e.px.offset_x + ' ' + e.px.offset_y + ';\n';
+                    }
                 }
                 if (params.items.length > 0) {
                     output += '\n\n';
@@ -97,7 +103,7 @@ gulp.task('styles', ['sprites'], function () {
 gulp.task('sass-dist', function () {
     return gulp.src('ui/sass/**/*.scss')
         .pipe($.header(banner, {pkg: pkg, description: 'Preformatted text supplier'}))
-        .pipe(gulp.dest('../../dist/plugins/preformatted/ui/sass/'))
+        .pipe(gulp.dest('../../dist/plugins/preformatted/ui/sass/'));
 });
 
 

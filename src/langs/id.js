@@ -10,48 +10,48 @@
  */
 
 jQuery.trumbowyg.langs.id = {
-    viewHTML:       "Lihat HTML",
+    viewHTML: 'Lihat HTML',
 
-    formatting:     "Penyusunan",
-    p:              "Paragraf",
-    blockquote:     "Kutipan",
-    code:           "Kode",
-    header:         "Kepala",
+    formatting: 'Penyusunan',
+    p: 'Paragraf',
+    blockquote: 'Kutipan',
+    code: 'Kode',
+    header: 'Kepala',
 
-    bold:           "Tebal",
-    italic:         "Miring",
-    strikethrough:  "Coret",
-    underline:      "Garis bawah",
+    bold: 'Tebal',
+    italic: 'Miring',
+    strikethrough: 'Coret',
+    underline: 'Garis bawah',
 
-    strong:         "Tebal",
-    em:             "Miring",
-    del:            "Dicoret",
+    strong: 'Tebal',
+    em: 'Miring',
+    del: 'Dicoret',
 
-    unorderedList:  "Daftar tak teratur",
-    orderedList:    "Daftar teratur",
+    unorderedList: 'Daftar tak teratur',
+    orderedList: 'Daftar teratur',
 
-    insertImage:    "Sisipkan gambar",
-    insertVideo:    "Sisipkan video",
-    link:           "Tautan",
-    createLink:     "Sisipkan Tautan",
-    unlink:         "Singkirkan tautan",
+    insertImage: 'Sisipkan gambar',
+    insertVideo: 'Sisipkan video',
+    link: 'Tautan',
+    createLink: 'Sisipkan Tautan',
+    unlink: 'Singkirkan tautan',
 
-    justifyLeft:    "Rata kiri",
-    justifyCenter:  "Rata Tengah",
-    justifyRight:   "Rata kanan",
-    justifyFull:    "Rata kiri dan kanan",
+    justifyLeft: 'Rata kiri',
+    justifyCenter: 'Rata Tengah',
+    justifyRight: 'Rata kanan',
+    justifyFull: 'Rata kiri dan kanan',
 
-    horizontalRule: "Sisipkan garis mendatar",
+    horizontalRule: 'Sisipkan garis mendatar',
 
-    fullscreen:     "Layar penuh",
+    fullscreen: 'Layar penuh',
 
-    close:          "Tutup",
+    close: 'Tutup',
 
-    submit:         "Setuju",
-    reset:          "Batal",
+    submit: 'Setuju',
+    reset: 'Batal',
 
-    required:       "Diperlukan",
-    description:    "Deskripsi",
-    title:          "Judul",
-    text:           "Teks"
+    required: 'Diperlukan',
+    description: 'Deskripsi',
+    title: 'Judul',
+    text: 'Teks'
 };

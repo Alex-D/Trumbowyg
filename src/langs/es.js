@@ -8,48 +8,48 @@
  */
 
 jQuery.trumbowyg.langs.es = {
-    viewHTML:       "Ver HTML",
+    viewHTML: 'Ver HTML',
 
-    formatting:     "Formato",
-    p:              "Párrafo",
-    blockquote:     "Cita",
-    code:           "Código",
-    header:         "Título",
+    formatting: 'Formato',
+    p: 'Párrafo',
+    blockquote: 'Cita',
+    code: 'Código',
+    header: 'Título',
 
-    bold:           "Negrita",
-    italic:         "Cursiva",
-    strikethrough:  "Tachado",
-    underline:      "Subrayado",
+    bold: 'Negrita',
+    italic: 'Cursiva',
+    strikethrough: 'Tachado',
+    underline: 'Subrayado',
 
-    strong:         "Negrita",
-    em:             "Énfasis",
-    del:            "Borrar",
+    strong: 'Negrita',
+    em: 'Énfasis',
+    del: 'Borrar',
 
-    unorderedList:  "Lista Desordenada",
-    orderedList:    "Lista Ordenada",
+    unorderedList: 'Lista Desordenada',
+    orderedList: 'Lista Ordenada',
 
-    insertImage:    "Insertar una imagen",
-    insertVideo:    "Insertar un vídeo",
-    link:           "Enlace",
-    createLink:     "Insertar un enlace",
-    unlink:         "Suprimir un enlace",
+    insertImage: 'Insertar una imagen',
+    insertVideo: 'Insertar un vídeo',
+    link: 'Enlace',
+    createLink: 'Insertar un enlace',
+    unlink: 'Suprimir un enlace',
 
-    justifyLeft:    "Izquierda",
-    justifyCenter:  "Centrar",
-    justifyRight:   "Derecha",
-    justifyFull:    "Justificado",
+    justifyLeft: 'Izquierda',
+    justifyCenter: 'Centrar',
+    justifyRight: 'Derecha',
+    justifyFull: 'Justificado',
 
-    horizontalRule: "Insertar separador horizontal",
+    horizontalRule: 'Insertar separador horizontal',
 
-    fullscreen:     "Pantalla completa",
+    fullscreen: 'Pantalla completa',
 
-    close:          "Cerrar",
+    close: 'Cerrar',
 
-    submit:         "Enviar",
-    reset:          "Cancelar",
+    submit: 'Enviar',
+    reset: 'Cancelar',
 
-    required:       "Obligatorio",
-    description:    "Descripción",
-    title:          "Título",
-    text:           "Texto"
+    required: 'Obligatorio',
+    description: 'Descripción',
+    title: 'Título',
+    text: 'Texto'
 };

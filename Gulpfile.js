@@ -1,3 +1,6 @@
+// jshint node:true
+'use strict';
+
 var gulp = require('gulp'),
     del = require('del'),
     vinylPaths = require('vinyl-paths'),
@@ -41,79 +44,79 @@ var bannerLight = ['/** <%= pkg.title %> v<%= pkg.version %> - <%= pkg.descripti
     '\n'].join('');
 
 
-
-
-gulp.task('clean', function(){
+gulp.task('clean', function () {
     return gulp.src(['dist/*', 'src/ui/sass/_sprite*.scss'])
         .pipe(vinylPaths(del));
 });
 
 gulp.task('test', ['test-scripts', 'test-langs', 'test-plugins']);
-gulp.task('test-scripts', function(){
+gulp.task('test-scripts', function () {
     return gulp.src(paths.scripts)
         .pipe($.jshint())
         .pipe($.jshint.reporter('jshint-stylish'));
 });
-gulp.task('test-langs', function(){
+gulp.task('test-langs', function () {
     return gulp.src(paths.langs)
         .pipe($.jshint())
         .pipe($.jshint.reporter('jshint-stylish'));
 });
-gulp.task('test-plugins', function(){
+gulp.task('test-plugins', function () {
     return gulp.src(paths.plugins)
         .pipe($.jshint())
         .pipe($.jshint.reporter('jshint-stylish'));
 });
 
-gulp.task('scripts', ['test-scripts'], function(){
+gulp.task('scripts', ['test-scripts'], function () {
     return gulp.src(paths.scripts)
-        .pipe($.header(banner, { pkg: pkg, description: 'Trumbowyg core file' }))
+        .pipe($.header(banner, {pkg: pkg, description: 'Trumbowyg core file'}))
         .pipe($.newer('dist/trumbowyg.js'))
-        .pipe($.concat('trumbowyg.js', { newLine: '\r\n\r\n' }))
+        .pipe($.concat('trumbowyg.js', {newLine: '\r\n\r\n'}))
         .pipe(gulp.dest('dist/'))
-        .pipe($.size({ title: 'trumbowyg.js' }))
-        .pipe($.rename({ suffix: '.min' }))
+        .pipe($.size({title: 'trumbowyg.js'}))
+        .pipe($.rename({suffix: '.min'}))
         .pipe($.uglify())
-        .pipe($.header(bannerLight, { pkg: pkg }))
+        .pipe($.header(bannerLight, {pkg: pkg}))
         .pipe(gulp.dest('dist/'))
-        .pipe($.size({ title: 'trumbowyg.min.js' }))
+        .pipe($.size({title: 'trumbowyg.min.js'}));
 });
 
-gulp.task('langs', ['test-langs'], function(){
+gulp.task('langs', ['test-langs'], function () {
     return gulp.src(paths.langs)
-        .pipe($.rename({ suffix: '.min' }))
+        .pipe($.rename({suffix: '.min'}))
         .pipe($.uglify({
             preserveComments: 'all'
         }))
-        .pipe(gulp.dest('dist/langs/'))
+        .pipe(gulp.dest('dist/langs/'));
 });
 
-gulp.task('plugins', ['test-plugins'], function(){
+gulp.task('plugins', ['test-plugins'], function () {
     return gulp.src(paths.plugins)
         .pipe(gulp.dest('dist/plugins/'))
-        .pipe($.rename({ suffix: '.min' }))
+        .pipe($.rename({suffix: '.min'}))
         .pipe($.uglify())
-        .pipe(gulp.dest('dist/plugins/'))
+        .pipe(gulp.dest('dist/plugins/'));
 });
 
 
-
-gulp.task('sprites', function(){
+gulp.task('sprites', function () {
     return makeSprite('white') && makeSprite('white', '-2x') && makeSprite('black') && makeSprite('black', '-2x');
 });
-function makeSprite(color, resolution){
-    var suffix =  '-' + color + (resolution ? resolution : '');
+function makeSprite(color, resolution) {
+    //jshint camelcase:false
+    var suffix = '-' + color + (resolution ? resolution : '');
     var sprite = gulp.src(paths.sprites['icons' + suffix])
         .pipe(spritesmith({
             imgName: 'icons' + suffix + '.png',
             cssName: '_sprite' + suffix + '.scss',
-            cssTemplate: function(params){
+            cssTemplate: function (params) {
                 var output = '', e;
-                for(var i in params.items){
-                    e = params.items[i];
-                    output += '$' + e.name + suffix + ': ' + e.px.offset_x + ' ' + e.px.offset_y + ';\n';
+                for (var i in params.items) {
+                    if (params.items.hasOwnProperty(i)) {
+                        e = params.items[i];
+                        output += '$' + e.name + suffix + ': ' + e.px.offset_x + ' ' + e.px.offset_y + ';\n';
+                    }
                 }
-                if(params.items.length > 0){
+                if (params.items.length > 0) {
                     output += '\n\n';
                     output += '$sprite-height' + suffix + ': ' + params.items[0].px.total_height + ';\n';
                     output += '$sprite-width' + suffix + ': ' + params.items[0].px.total_width + ';\n';
@@ -129,40 +132,45 @@ function makeSprite(color, resolution){
 }
 
 
-
-gulp.task('styles', ['sprites'], function(){
+gulp.task('styles', ['sprites'], function () {
     return gulp.src(paths.mainStyle)
         .pipe($.sass({
             sass: paths.styles.sass
         }))
-        .pipe($.autoprefixer(['last 1 version', '> 1%', 'ff >= 20', 'ie >= 8', 'opera >= 12', 'Android >= 2.2'], { cascade: true }))
-        .pipe($.header(banner, { pkg: pkg, description: 'Default stylesheet for Trumbowyg editor' }))
+        .pipe($.autoprefixer(['last 1 version', '> 1%', 'ff >= 20', 'ie >= 8', 'opera >= 12', 'Android >= 2.2'], {cascade: true}))
+        .pipe($.header(banner, {pkg: pkg, description: 'Default stylesheet for Trumbowyg editor'}))
         .pipe(gulp.dest('dist/ui/'))
-        .pipe($.size({ title: 'trumbowyg.css' }))
-        .pipe($.rename({ suffix: '.min' }))
+        .pipe($.size({title: 'trumbowyg.css'}))
+        .pipe($.rename({suffix: '.min'}))
         .pipe($.minifyCss())
-        .pipe($.header(bannerLight, { pkg: pkg }))
+        .pipe($.header(bannerLight, {pkg: pkg}))
         .pipe(gulp.dest('dist/ui/'))
-        .pipe($.size({ title: 'trumbowyg.min.css' }));
+        .pipe($.size({title: 'trumbowyg.min.css'}));
 });
 
 
-
-gulp.task('sass-dist', ['styles'], function(){
+gulp.task('sass-dist', ['styles'], function () {
     return gulp.src('src/ui/sass/**/*.scss')
-        .pipe($.header(banner, { pkg: pkg, description: 'Default stylesheet for Trumbowyg editor' }))
-        .pipe(gulp.dest('dist/ui/sass'))
+        .pipe($.header(banner, {pkg: pkg, description: 'Default stylesheet for Trumbowyg editor'}))
+        .pipe(gulp.dest('dist/ui/sass'));
 });
 
 
+gulp.task('lint', function () {
+    var jshint = require('gulp-jshint');
+    return gulp.src(['./src/*.js', './src/**/*.js', './plugins/**/*.js'])
+        .pipe(jshint())
+        .pipe(jshint.reporter('jshint-stylish'));
+});
 
-gulp.task('watch', function(){
+
+gulp.task('watch', function () {
     gulp.watch(paths.scripts, ['scripts']);
     gulp.watch(paths.langs, ['langs']);
     gulp.watch(paths.plugins, ['plugins']);
     gulp.watch(paths.mainStyle, ['styles']);
 
-    gulp.watch(['dist/**', 'dist/*/**'], function(file){
+    gulp.watch(['dist/**', 'dist/*/**'], function (file) {
         $.livereload.changed(file);
     });
 

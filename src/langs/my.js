@@ -7,48 +7,48 @@
  */
 
 jQuery.trumbowyg.langs.id = {
-    viewHTML:       "Lihat HTML",
+    viewHTML: 'Lihat HTML',
 
-    formatting:     "Pemformatan",
-    p:              "Perenggan",
-    blockquote:     "Blockquote",
-    code:           "Kod",
-    header:         "Pengepala",
+    formatting: 'Pemformatan',
+    p: 'Perenggan',
+    blockquote: 'Blockquote',
+    code: 'Kod',
+    header: 'Pengepala',
 
-    bold:           "Tebal",
-    italic:         "Condong",
-    strikethrough:  "Garis batal",
-    underline:      "Garis bawah",
+    bold: 'Tebal',
+    italic: 'Condong',
+    strikethrough: 'Garis batal',
+    underline: 'Garis bawah',
 
-    strong:         "Kuat",
-    em:             "Condong",
-    del:            "Hapus",
+    strong: 'Kuat',
+    em: 'Condong',
+    del: 'Hapus',
 
-    unorderedList:  "Senarai tidak tertib",
-    orderedList:    "Senarai tertib",
+    unorderedList: 'Senarai tidak tertib',
+    orderedList: 'Senarai tertib',
 
-    insertImage:    "Masukkan imej",
-    insertVideo:    "Masukkan video",
-    link:           "Pautan",
-    createLink:     "Cipta pautan",
-    unlink:         "Hapus pautan",
+    insertImage: 'Masukkan imej',
+    insertVideo: 'Masukkan video',
+    link: 'Pautan',
+    createLink: 'Cipta pautan',
+    unlink: 'Hapus pautan',
 
-    justifyLeft:    "Mengimbangkan ke kiri",
-    justifyCenter:  "Mengimbangkan ke tengah",
-    justifyRight:   "Mengimbangkan ke kanan",
-    justifyFull:    "Mengimbangkan ke kiri dan kanan",
+    justifyLeft: 'Mengimbangkan ke kiri',
+    justifyCenter: 'Mengimbangkan ke tengah',
+    justifyRight: 'Mengimbangkan ke kanan',
+    justifyFull: 'Mengimbangkan ke kiri dan kanan',
 
-    horizontalRule: "Masukkan garis mendatar",
+    horizontalRule: 'Masukkan garis mendatar',
 
-    fullscreen:     "Skrin penuh",
+    fullscreen: 'Skrin penuh',
 
-    close:          "Tutup",
+    close: 'Tutup',
 
-    submit:         "Hantar",
-    reset:          "Batal",
+    submit: 'Hantar',
+    reset: 'Batal',
 
-    required:       "Diperlukan",
-    description:    "Perihal",
-    title:          "Tajuk",
-    text:           "Teks"
+    required: 'Diperlukan',
+    description: 'Perihal',
+    title: 'Tajuk',
+    text: 'Teks'
 };

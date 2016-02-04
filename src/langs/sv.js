@@ -8,48 +8,48 @@
  */
 
 jQuery.trumbowyg.langs.sv = {
-    viewHTML:       "Visa HTML",
+    viewHTML: 'Visa HTML',
 
-    formatting:     "Formatera",
-    p:              "Avsnitt",
-    blockquote:     "Citat",
-    code:           "Kod",
-    header:         "Överskrift",
+    formatting: 'Formatera',
+    p: 'Avsnitt',
+    blockquote: 'Citat',
+    code: 'Kod',
+    header: 'Överskrift',
 
-    bold:           "Fet",
-    italic:         "Kursiv",
-    strikethrough:  "Genomstruken",
-    underline:      "Understreck",
+    bold: 'Fet',
+    italic: 'Kursiv',
+    strikethrough: 'Genomstruken',
+    underline: 'Understreck',
 
-    strong:         "Viktig",
-    em:             "Framhäv",
-    del:            "Rensa formatering",
+    strong: 'Viktig',
+    em: 'Framhäv',
+    del: 'Rensa formatering',
 
-    unorderedList:  "Lista",
-    orderedList:    "Numrerad lista",
+    unorderedList: 'Lista',
+    orderedList: 'Numrerad lista',
 
-    insertImage:    "Infoga bild",
-    insertVideo:    "Infoga video",
-    link:           "Länk",
-    createLink:     "Infoga länk",
-    unlink:         "Ta bort länk",
+    insertImage: 'Infoga bild',
+    insertVideo: 'Infoga video',
+    link: 'Länk',
+    createLink: 'Infoga länk',
+    unlink: 'Ta bort länk',
 
-    justifyLeft:    "Vänsterjustera",
-    justifyCenter:  "Centrera",
-    justifyRight:   "Högerjustera",
-    justifyFull:    "Marginaljustera",
+    justifyLeft: 'Vänsterjustera',
+    justifyCenter: 'Centrera',
+    justifyRight: 'Högerjustera',
+    justifyFull: 'Marginaljustera',
 
-    horizontalRule: "Horisontell linje",
+    horizontalRule: 'Horisontell linje',
 
-    fullscreen:     "Fullskärm",
+    fullscreen: 'Fullskärm',
 
-    close:          "Stäng",
+    close: 'Stäng',
 
-    submit:         "Bekräfta",
-    reset:          "Återställ",
+    submit: 'Bekräfta',
+    reset: 'Återställ',
 
-    required:       "Obligatorisk",
-    description:    "Beskrivning",
-    title:          "Titel",
-    text:           "Text"
+    required: 'Obligatorisk',
+    description: 'Beskrivning',
+    title: 'Titel',
+    text: 'Text'
 };

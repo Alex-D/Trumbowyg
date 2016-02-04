@@ -8,49 +8,49 @@
  */
 
 jQuery.trumbowyg.langs.nl = {
-    viewHTML:       "HTML bekijken",
+    viewHTML: 'HTML bekijken',
 
-    formatting:     "Opmaak",
-    p:              "Paragraaf",
-    blockquote:     "Citaat",
-    code:           "Code",
-    header:         "Kop",
+    formatting: 'Opmaak',
+    p: 'Paragraaf',
+    blockquote: 'Citaat',
+    code: 'Code',
+    header: 'Kop',
 
-    bold:           "Vet",
-    italic:         "Cursief",
-    strikethrough:  "Doorhalen",
-    underline:      "Onderlijnen",
+    bold: 'Vet',
+    italic: 'Cursief',
+    strikethrough: 'Doorhalen',
+    underline: 'Onderlijnen',
 
-    strong:         "Sterk",
-    em:             "Nadruk",
-    del:            "Verwijderd",
+    strong: 'Sterk',
+    em: 'Nadruk',
+    del: 'Verwijderd',
 
-    unorderedList:  "Ongenummerde lijst",
-    orderedList:    "Genummerde lijst",
+    unorderedList: 'Ongenummerde lijst',
+    orderedList: 'Genummerde lijst',
 
-    insertImage:    "Afbeelding invoegen",
-    insertVideo:    "Video invoegen",
-    link:           "Link",
-    createLink:     "Link maken",
-    unlink:         "Link verwijderen",
+    insertImage: 'Afbeelding invoegen',
+    insertVideo: 'Video invoegen',
+    link: 'Link',
+    createLink: 'Link maken',
+    unlink: 'Link verwijderen',
 
-    justifyLeft:    "Links uitlijnen",
-    justifyCenter:  "Centreren",
-    justifyRight:   "Rechts uitlijnen",
-    justifyFull:    "Uitvullen",
+    justifyLeft: 'Links uitlijnen',
+    justifyCenter: 'Centreren',
+    justifyRight: 'Rechts uitlijnen',
+    justifyFull: 'Uitvullen',
 
-    horizontalRule: "Horizontale lijn",
-    removeFormat:   "Opmaak verwijderen",
+    horizontalRule: 'Horizontale lijn',
+    removeFormat: 'Opmaak verwijderen',
 
-    fullscreen:     "Volledig scherm",
+    fullscreen: 'Volledig scherm',
 
-    close:          "Sluiten",
+    close: 'Sluiten',
 
-    submit:         "Verzenden",
-    reset:          "Herstellen",
+    submit: 'Verzenden',
+    reset: 'Herstellen',
 
-    required:       "Verplicht",
-    description:    "Omschrijving",
-    title:          "Titel",
-    text:           "Tekst"
+    required: 'Verplicht',
+    description: 'Omschrijving',
+    title: 'Titel',
+    text: 'Tekst'
 };

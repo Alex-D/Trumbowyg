@@ -7,48 +7,48 @@
  */
 
 jQuery.trumbowyg.langs.cs = {
-    viewHTML:       "Zobrazit HTML",
+    viewHTML: 'Zobrazit HTML',
 
-    formatting:     "Formátování",
-    p:              "Odstavec",
-    blockquote:     "Citace",
-    code:           "Kód",
-    header:         "Nadpis",
+    formatting: 'Formátování',
+    p: 'Odstavec',
+    blockquote: 'Citace',
+    code: 'Kód',
+    header: 'Nadpis',
 
-    bold:           "Tučné",
-    italic:         "Kurzíva",
-    strikethrough:  "Přeškrtnuté",
-    underline:      "Podtržené",
+    bold: 'Tučné',
+    italic: 'Kurzíva',
+    strikethrough: 'Přeškrtnuté',
+    underline: 'Podtržené',
 
-    strong:         "Tučné",
-    em:             "Zvýraznit",
-    del:            "Smazat",
+    strong: 'Tučné',
+    em: 'Zvýraznit',
+    del: 'Smazat',
 
-    unorderedList:  "Netříděný seznam",
-    orderedList:    "Tříděný seznam",
+    unorderedList: 'Netříděný seznam',
+    orderedList: 'Tříděný seznam',
 
-    insertImage:    "Vložit obrázek",
-    insertVideo:    "Vložit video",
-    link:           "Odkaz",
-    createLink:     "Vložit odkaz",
-    unlink:         "Smazat odkaz",
+    insertImage: 'Vložit obrázek',
+    insertVideo: 'Vložit video',
+    link: 'Odkaz',
+    createLink: 'Vložit odkaz',
+    unlink: 'Smazat odkaz',
 
-    justifyLeft:    "Zarovnat doleva",
-    justifyCenter:  "Zarovnat na střed",
-    justifyRight:   "Zarovnat doprava",
-    justifyFull:    "Zarovnat do bloku",
+    justifyLeft: 'Zarovnat doleva',
+    justifyCenter: 'Zarovnat na střed',
+    justifyRight: 'Zarovnat doprava',
+    justifyFull: 'Zarovnat do bloku',
 
-    horizontalRule: "Vložit vodorovnou čáru",
+    horizontalRule: 'Vložit vodorovnou čáru',
 
-    fullscreen:     "Režim celé obrazovky",
+    fullscreen: 'Režim celé obrazovky',
 
-    close:          "Zavřít",
+    close: 'Zavřít',
 
-    submit:         "Potvrdit",
-    reset:          "Zrušit",
+    submit: 'Potvrdit',
+    reset: 'Zrušit',
 
-    required:       "Povinné",
-    description:    "Popis",
-    title:          "Nadpis",
-    text:           "Text"
+    required: 'Povinné',
+    description: 'Popis',
+    title: 'Nadpis',
+    text: 'Text'
 };

@@ -7,48 +7,48 @@
  */
 
 jQuery.trumbowyg.langs.ua = {
-    viewHTML:"Подивитись HTML",
+    viewHTML: 'Подивитись HTML',
 
-    formatting:"Форматування",
-    p:"Звичайний",
-    blockquote:"Витяг",
-    code:"Код",
-    header:"Заголовок",
+    formatting: 'Форматування',
+    p: 'Звичайний',
+    blockquote: 'Витяг',
+    code: 'Код',
+    header: 'Заголовок',
 
-    bold:"Напівжирний",
-    italic:"Курсив",
-    strikethrough:"Закреслений",
-    underline:"Підкреслений",
+    bold: 'Напівжирний',
+    italic: 'Курсив',
+    strikethrough: 'Закреслений',
+    underline: 'Підкреслений',
 
-    strong:"Напівжирний",
-    em:"Курсив",
-    del:"Закреслений",
+    strong: 'Напівжирний',
+    em: 'Курсив',
+    del: 'Закреслений',
 
-    unorderedList:"Звичайний список",
-    orderedList:"Нумерований список",
+    unorderedList: 'Звичайний список',
+    orderedList: 'Нумерований список',
 
-    insertImage:"Вставити зображення",
-    insertVideo:"Вставити відео",
-    link:"Посилання",
-    createLink:"Вставити посилання",
-    unlink:"Видалити посилання",
+    insertImage: 'Вставити зображення',
+    insertVideo: 'Вставити відео',
+    link: 'Посилання',
+    createLink: 'Вставити посилання',
+    unlink: 'Видалити посилання',
 
-    justifyLeft:"По лівому краю",
-    justifyCenter:"В центрі",
-    justifyRight:"По правому краю",
-    justifyFull:"По ширині",
+    justifyLeft: 'По лівому краю',
+    justifyCenter: 'В центрі',
+    justifyRight: 'По правому краю',
+    justifyFull: 'По ширині',
 
-    horizontalRule:"Горизонтальна лінія",
+    horizontalRule: 'Горизонтальна лінія',
 
-    fullscreen:"На весь екран",
+    fullscreen: 'На весь екран',
 
-    close:"Закрити",
+    close: 'Закрити',
 
-    submit:"Вставити",
-    reset:"Скасувати",
+    submit: 'Вставити',
+    reset: 'Скасувати',
 
-    required:"Обов'язкове",
-    description:"Опис",
-    title:"Підказка",
-    text:"Текст"
+    required: 'Обов\'язкове',
+    description: 'Опис',
+    title: 'Підказка',
+    text: 'Текст'
 };

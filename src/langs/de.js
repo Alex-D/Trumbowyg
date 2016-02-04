@@ -8,48 +8,48 @@
  */
 
 jQuery.trumbowyg.langs.de = {
-    viewHTML:       "HTML anzeigen",
+    viewHTML: 'HTML anzeigen',
 
-    formatting:     "Formatieren",
-    p:              "Absatz",
-    blockquote:     "Zitat",
-    code:           "Code",
-    header:         "Überschrift",
+    formatting: 'Formatieren',
+    p: 'Absatz',
+    blockquote: 'Zitat',
+    code: 'Code',
+    header: 'Überschrift',
 
-    bold:           "Fett",
-    italic:         "Kursiv",
-    strikethrough:  "Durchgestrichen",
-    underline:      "Unterstrichen",
+    bold: 'Fett',
+    italic: 'Kursiv',
+    strikethrough: 'Durchgestrichen',
+    underline: 'Unterstrichen',
 
-    strong:         "Wichtig",
-    em:             "Betont",
-    del:            "Gelöscht",
+    strong: 'Wichtig',
+    em: 'Betont',
+    del: 'Gelöscht',
 
-    unorderedList:  "Ungeordnete Liste",
-    orderedList:    "Geordnete Liste",
+    unorderedList: 'Ungeordnete Liste',
+    orderedList: 'Geordnete Liste',
 
-    insertImage:    "Bild einfügen",
-    insertVideo:    "Video einfügen",
-    link:           "Link",
-    createLink:     "Link einfügen",
-    unlink:         "Link entfernen",
+    insertImage: 'Bild einfügen',
+    insertVideo: 'Video einfügen',
+    link: 'Link',
+    createLink: 'Link einfügen',
+    unlink: 'Link entfernen',
 
-    justifyLeft:    "Links ausrichten",
-    justifyCenter:  "Zentrieren",
-    justifyRight:   "Rechts ausrichten",
-    justifyFull:    "Blocksatz",
+    justifyLeft: 'Links ausrichten',
+    justifyCenter: 'Zentrieren',
+    justifyRight: 'Rechts ausrichten',
+    justifyFull: 'Blocksatz',
 
-    horizontalRule: "Horizontale Linie einfügen",
+    horizontalRule: 'Horizontale Linie einfügen',
 
-    fullscreen:     "Vollbild",
+    fullscreen: 'Vollbild',
 
-    close:          "Schliessen",
+    close: 'Schliessen',
 
-    submit:         "Bestätigen",
-    reset:          "Rücksetzen",
+    submit: 'Bestätigen',
+    reset: 'Rücksetzen',
 
-    required:       "Erforderlich",
-    description:    "Beschreibung",
-    title:          "Titel",
-    text:           "Text"
+    required: 'Erforderlich',
+    description: 'Beschreibung',
+    title: 'Titel',
+    text: 'Text'
 };

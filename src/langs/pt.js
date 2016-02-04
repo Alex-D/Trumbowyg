@@ -10,48 +10,48 @@
  */
 
 jQuery.trumbowyg.langs.pt = {
-    viewHTML:       "Ver HTML",
+    viewHTML: 'Ver HTML',
 
-    formatting:     "Formatar",
-    p:              "Paragráfo",
-    blockquote:     "Citação",
-    code:           "Código",
-    header:         "Título",
+    formatting: 'Formatar',
+    p: 'Paragráfo',
+    blockquote: 'Citação',
+    code: 'Código',
+    header: 'Título',
 
-    bold:           "Negrito",
-    italic:         "Itálico",
-    strikethrough:  "Suprimir",
-    underline:      "Sublinhado",
+    bold: 'Negrito',
+    italic: 'Itálico',
+    strikethrough: 'Suprimir',
+    underline: 'Sublinhado',
 
-    strong:         "Forte",
-    em:             "Ênfase",
-    del:            "Apagar",
+    strong: 'Forte',
+    em: 'Ênfase',
+    del: 'Apagar',
 
-    unorderedList:  "Lista não ordenada",
-    orderedList:    "Liste ordenada",
+    unorderedList: 'Lista não ordenada',
+    orderedList: 'Liste ordenada',
 
-    insertImage:    "Inserir imagem",
-    insertVideo:    "Inserir vídeo",
-    link:           "Link",
-    createLink:     "Criar um link",
-    unlink:         "Remover link",
+    insertImage: 'Inserir imagem',
+    insertVideo: 'Inserir vídeo',
+    link: 'Link',
+    createLink: 'Criar um link',
+    unlink: 'Remover link',
 
-    justifyLeft:    "Alinhar a esquerda",
-    justifyCenter:  "Centralizar",
-    justifyRight:   "Alinhar a direita",
-    justifyFull:    "Justificar",
+    justifyLeft: 'Alinhar a esquerda',
+    justifyCenter: 'Centralizar',
+    justifyRight: 'Alinhar a direita',
+    justifyFull: 'Justificar',
 
-    horizontalRule: "Inserir separador horizontal",
+    horizontalRule: 'Inserir separador horizontal',
 
-    fullscreen:     "Tela cheia",
+    fullscreen: 'Tela cheia',
 
-    close:          "Fechar",
+    close: 'Fechar',
 
-    submit:         "Enviar",
-    reset:          "Limpar",
+    submit: 'Enviar',
+    reset: 'Limpar',
 
-    required:       "Obrigatório",
-    description:    "Descrição",
-    title:          "Título",
-    text:           "Texto"
+    required: 'Obrigatório',
+    description: 'Descrição',
+    title: 'Título',
+    text: 'Texto'
 };

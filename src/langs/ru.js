@@ -7,48 +7,48 @@
  */
 
 jQuery.trumbowyg.langs.ru = {
-    viewHTML:       "Посмотреть HTML",
+    viewHTML: 'Посмотреть HTML',
 
-    formatting:     "Форматирование",
-    p:              "Обычный",
-    blockquote:     "Цитата",
-    code:           "Код",
-    header:         "Заголовок",
+    formatting: 'Форматирование',
+    p: 'Обычный',
+    blockquote: 'Цитата',
+    code: 'Код',
+    header: 'Заголовок',
 
-    bold:           "Полужирный",
-    italic:         "Курсив",
-    strikethrough:  "Зачеркнутый",
-    underline:      "Подчеркнутый",
+    bold: 'Полужирный',
+    italic: 'Курсив',
+    strikethrough: 'Зачеркнутый',
+    underline: 'Подчеркнутый',
 
-    strong:         "Полужирный",
-    em:             "Курсив",
-    del:            "Зачеркнутый",
+    strong: 'Полужирный',
+    em: 'Курсив',
+    del: 'Зачеркнутый',
 
-    unorderedList:  "Обычный список",
-    orderedList:    "Нумерованный список",
+    unorderedList: 'Обычный список',
+    orderedList: 'Нумерованный список',
 
-    insertImage:    "Вставить изображение",
-    insertVideo:    "Вставить видео",
-    link:           "Ссылка",
-    createLink:     "Вставить ссылку",
-    unlink:         "Удалить ссылку",
+    insertImage: 'Вставить изображение',
+    insertVideo: 'Вставить видео',
+    link: 'Ссылка',
+    createLink: 'Вставить ссылку',
+    unlink: 'Удалить ссылку',
 
-    justifyLeft:    "По левому краю",
-    justifyCenter:  "По центру",
-    justifyRight:   "По правому краю",
-    justifyFull:    "По ширине",
+    justifyLeft: 'По левому краю',
+    justifyCenter: 'По центру',
+    justifyRight: 'По правому краю',
+    justifyFull: 'По ширине',
 
-    horizontalRule: "Горизонтальная линия",
+    horizontalRule: 'Горизонтальная линия',
 
-    fullscreen:     "Во весь экран",
+    fullscreen: 'Во весь экран',
 
-    close:          "Закрыть",
+    close: 'Закрыть',
 
-    submit:         "Вставить",
-    reset:          "Отменить",
+    submit: 'Вставить',
+    reset: 'Отменить',
 
-    required:       "Обязательное",
-    description:    "Описание",
-    title:          "Подсказка",
-    text:           "Текст"
+    required: 'Обязательное',
+    description: 'Описание',
+    title: 'Подсказка',
+    text: 'Текст'
 };
