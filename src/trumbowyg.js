@@ -1127,7 +1127,7 @@ jQuery.trumbowyg = {
                 var l = field.label,
                     n = field.name || fieldName;
 
-                html += '<label><input type="' + (field.type || 'text') + '" name="' + n + '" value="' + (field.value || '') + '"><span class="' + prefix + 'input-infos"><span>' +
+                html += '<label><input type="' + (field.type || 'text') + '" name="' + n + '" value="' + (field.value || '').replace(/"/g, '&quot;') + '"><span class="' + prefix + 'input-infos"><span>' +
                     ((!l) ? (lg[fieldName] ? lg[fieldName] : fieldName) : (lg[l] ? lg[l] : l)) +
                     '</span></span></label>';
             });
