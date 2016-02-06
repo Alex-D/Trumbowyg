@@ -6,28 +6,29 @@
  * Author : Jake Johns (jakejohns)
  */
 
-(function($){
+(function ($) {
     'use strict';
 
     $.extend(true, $.trumbowyg, {
         langs: {
             en: {
-                noembed: "noEmbed",
-                noembedError: "Error"
+                noembed: 'noEmbed',
+                noembedError: 'Error'
             },
             sk: {
-                noembedError: "Chyba"
+                noembedError: 'Chyba'
             },
             fr: {
-                noembedError: "Erreur"
+                noembed: 'noEmbed',
+                noembedError: 'Erreur'
             },
             cs: {
-                noembedError: "Chyba"
+                noembedError: 'Chyba'
             }
         },
 
         noembed: {
-            proxy: 'https://nnoembed.com/embed',
+            proxy: 'https://noembed.com/embed?nowrap=on',
             urlFiled: 'url',
             data: [],
             success: undefined,
@@ -37,8 +38,7 @@
         opts: {
             btnsDef: {
                 noembed: {
-                    func: function(params, tbw){
-
+                    func: function (params, tbw) {
                         var $modal = tbw.openModalInsert(
                             // Title
                             tbw.lang.noembed,
@@ -46,24 +46,24 @@
                             // Fields
                             {
                                 url: {
+                                    label: 'URL',
                                     required: true
                                 }
                             },
 
                             // Callback
-                            function(data){
-
+                            function (data) {
                                 $.ajax({
-                                    url:            $.trumbowyg.noembed.proxy,
-                                    type:           'GET',
-                                    data:           data,
-                                    cache:          false,
-                                    dataType:       'json',
+                                    url: $.trumbowyg.noembed.proxy,
+                                    type: 'GET',
+                                    data: data,
+                                    cache: false,
+                                    dataType: 'json',
 
-                                    success: $.trumbowyg.noembed.success || function(data){
-                                        if(data.html) {
-                                            tbw.execCmd('insertHTML', data.html);
-                                            setTimeout(function(){
+                                    success: $.trumbowyg.noembed.success || function (data) {
+                                        if (data.html) {
+                                            tbw.execCmd('insertHTML', $(data.html).unwrap().html());
+                                            setTimeout(function () {
                                                 tbw.closeModal();
                                             }, 250);
                                         } else {
@@ -73,7 +73,7 @@
                                             );
                                         }
                                     },
-                                    error: $.trumbowyg.noembed.error || function(){
+                                    error: $.trumbowyg.noembed.error || function () {
                                         tbw.addErrorOnModalField(
                                             $('input[type=text]', $modal),
                                             tbw.lang.noembedError
