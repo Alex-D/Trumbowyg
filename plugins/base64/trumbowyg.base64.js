@@ -38,7 +38,7 @@
                     isSupported: function () {
                         return typeof FileReader !== 'undefined';
                     },
-                    func: function (params, tbw) {
+                    fn: function (params, tbw) {
                         var file;
                         tbw.openModalInsert(
                             // Title

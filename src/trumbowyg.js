@@ -35,7 +35,7 @@ jQuery.trumbowyg = {
             horizontalRule: 'Insert horizontal rule',
             removeformat: 'Remove format',
 
-            fullscreen: 'fullscreen',
+            fullscreen: 'Fullscreen',
 
             close: 'Close',
 
@@ -68,16 +68,17 @@ jQuery.trumbowyg = {
     // @param : o are options
     // @param : p are params
     $.fn.trumbowyg = function (options, params) {
+        var trumbowygDataName = 'trumbowyg';
         if (options === Object(options) || !options) {
             return this.each(function () {
-                if (!$(this).data('trumbowyg')) {
-                    $(this).data('trumbowyg', new Trumbowyg(this, options));
+                if (!$(this).data(trumbowygDataName)) {
+                    $(this).data(trumbowygDataName, new Trumbowyg(this, options));
                 }
             });
         }
         if (this.length === 1) {
             try {
-                var t = $(this).data('trumbowyg');
+                var t = $(this).data(trumbowygDataName);
                 switch (options) {
                     // Modal box
                     case 'openModal':
@@ -135,10 +136,10 @@ jQuery.trumbowyg = {
         o = $.extend(true, {}, o, $.trumbowyg.opts);
 
         // Localization management
-        if (typeof o.lang === 'undefined' || typeof $.trumbowyg.langs[o.lang] === 'undefined') {
-            t.lang = $.trumbowyg.langs.en;
-        } else {
+        if (o.lang != null || $.trumbowyg.langs[o.lang] != null) {
             t.lang = $.extend(true, {}, $.trumbowyg.langs.en, $.trumbowyg.langs[o.lang]);
+        } else {
+            t.lang = $.trumbowyg.langs.en;
         }
 
         // Header translation
@@ -147,7 +148,6 @@ jQuery.trumbowyg = {
         // Defaults Options
         t.o = $.extend(true, {}, {
             lang: 'en',
-            dir: 'ltr',
 
             closable: false,
             fullscreenable: true,
@@ -178,41 +178,41 @@ jQuery.trumbowyg = {
 
             /**
              * When the button is associated to a empty object
-             * func and title attributs are defined from the button key value
+             * fn and title attributs are defined from the button key value
              *
              * For example
              *      foo: {}
              * is equivalent to :
              *      foo: {
-             *          func: 'foo',
+             *          fn: 'foo',
              *          title: this.lang.foo
              *      }
              */
             btnsDef: {
                 viewHTML: {
-                    func: 'toggle'
+                    fn: 'toggle'
                 },
 
                 p: {
-                    func: 'formatBlock'
+                    fn: 'formatBlock'
                 },
                 blockquote: {
-                    func: 'formatBlock'
+                    fn: 'formatBlock'
                 },
                 h1: {
-                    func: 'formatBlock',
+                    fn: 'formatBlock',
                     title: h + ' 1'
                 },
                 h2: {
-                    func: 'formatBlock',
+                    fn: 'formatBlock',
                     title: h + ' 2'
                 },
                 h3: {
-                    func: 'formatBlock',
+                    fn: 'formatBlock',
                     title: h + ' 3'
                 },
                 h4: {
-                    func: 'formatBlock',
+                    fn: 'formatBlock',
                     title: h + ' 4'
                 },
 
@@ -226,15 +226,15 @@ jQuery.trumbowyg = {
                 strikethrough: {},
 
                 strong: {
-                    func: 'bold',
+                    fn: 'bold',
                     key: 'B'
                 },
                 em: {
-                    func: 'italic',
+                    fn: 'italic',
                     key: 'I'
                 },
                 del: {
-                    func: 'strikethrough'
+                    fn: 'strikethrough'
                 },
 
                 createLink: {
@@ -250,14 +250,14 @@ jQuery.trumbowyg = {
                 justifyFull: {},
 
                 unorderedList: {
-                    func: 'insertUnorderedList'
+                    fn: 'insertUnorderedList'
                 },
                 orderedList: {
-                    func: 'insertOrderedList'
+                    fn: 'insertOrderedList'
                 },
 
                 horizontalRule: {
-                    func: 'insertHorizontalRule'
+                    fn: 'insertHorizontalRule'
                 },
 
                 removeformat: {},
@@ -271,7 +271,7 @@ jQuery.trumbowyg = {
                 }
             },
 
-            inlineElementsSelector: 'a, abbr, acronym, b, caption, cite, code, col, dfn, dir, dt, dd, em, font, hr, i, kbd, li, q, span, strikeout, strong, sub, sup, u'
+            inlineElementsSelector: 'a,abbr,acronym,b,caption,cite,code,col,dfn,dir,dt,dd,em,font,hr,i,kbd,li,q,span,strikeout,strong,sub,sup,u'
         }, o);
 
         if (o.btns) {
@@ -305,7 +305,7 @@ jQuery.trumbowyg = {
                 html = '';
 
             t.$box = $('<div/>', {
-                'class': prefix + 'box ' + prefix + 'editor-visible ' + prefix + t.o.lang + ' trumbowyg'
+                class: prefix + 'box ' + prefix + 'editor-visible ' + prefix + t.o.lang + ' trumbowyg'
             });
 
             // $ta = Textarea
@@ -340,8 +340,8 @@ jQuery.trumbowyg = {
             t.$ed
                 .addClass(prefix + 'editor')
                 .attr({
-                    'contenteditable': true,
-                    'dir': t.lang._dir || t.o.dir
+                    contenteditable: true,
+                    dir: t.lang._dir || 'ltr'
                 })
                 .html(html)
             ;
@@ -397,13 +397,17 @@ jQuery.trumbowyg = {
                         var k = t.keys[String.fromCharCode(e.which).toUpperCase()];
 
                         try {
-                            t.execCmd(k.func, k.param);
+                            t.execCmd(k.fn, k.param);
                             return false;
                         } catch (c) {
                         }
                     }
                 })
                 .on('keyup', function (e) {
+                    if (e.which >= 37 && e.which <= 40) {
+                        return;
+                    }
+
                     if (!t._ctrl && e.which !== 17 && !t._composition) {
                         t.semanticCode(false, e.which === 13);
                         t.$c.trigger('tbwchange');
@@ -427,11 +431,11 @@ jQuery.trumbowyg = {
                             try {
                                 // <= IE10
                                 t.doc.selection.createRange().pasteHTML(text);
-                            } catch (err) {
+                            } catch (c) {
                                 // IE 11
-                                t.doc.getSelection().getRangeAt(0).insertNode(document.createTextNode(text));
+                                t.doc.getSelection().getRangeAt(0).insertNode(t.doc.createTextNode(text));
                             }
-                        } catch (err) {
+                        } catch (d) {
                             // Not IE
                             t.execCmd('insertText', (e.originalEvent || e).clipboardData.getData('text/plain'));
                         }
@@ -445,7 +449,6 @@ jQuery.trumbowyg = {
                         }
                         t.$c.trigger('tbwpaste', e);
                     }, 0);
-
                 });
             t.$ta.on('keyup paste', function () {
                 t.$c.trigger('tbwchange');
@@ -469,15 +472,15 @@ jQuery.trumbowyg = {
                 return;
             }
 
-            t.$btnPane = $('<ul/>', {
-                'class': prefix + 'button-pane'
+            var $btnPane = t.$btnPane = $('<ul/>', {
+                class: prefix + 'button-pane'
             });
 
             $.each(t.o.btns.concat(t.o.btnsAdd), function (i, btn) {
                 // Managment of group of buttons
                 try {
                     var b = btn.split('btnGrp-');
-                    if (b[1] !== undefined) {
+                    if (b[1] != null) {
                         btn = $.trumbowyg.btnsGrps[b[1]];
                     }
                 } catch (c) {
@@ -497,7 +500,7 @@ jQuery.trumbowyg = {
                             $li.append(t.buildBtn(b));
                         }
 
-                        t.$btnPane.append($li);
+                        $btnPane.append($li);
                     } catch (c) {
                     }
                 });
@@ -505,17 +508,17 @@ jQuery.trumbowyg = {
 
             // Build right li for fullscreen and close buttons
             var $liRight = $('<li/>', {
-                'class': prefix + 'not-disable ' + prefix + 'buttons-right'
+                class: prefix + 'not-disable ' + prefix + 'buttons-right'
             });
 
             // Add the fullscreen button
+            var fullscreenCssClass = prefix + 'fullscreen';
             if (t.o.fullscreenable) {
                 $liRight.append(
                     t.buildRightBtn('fullscreen')
                         .on('click', function () {
-                            var cssClass = prefix + 'fullscreen';
-                            t.$box.toggleClass(cssClass);
-                            $('body').toggleClass(prefix + 'body-fullscreen', t.$box.hasClass(cssClass));
+                            t.$box.toggleClass(fullscreenCssClass);
+                            $('body').toggleClass(prefix + 'body-fullscreen', t.$box.hasClass(fullscreenCssClass));
                             $(window).trigger('scroll');
                         })
                 );
@@ -527,7 +530,7 @@ jQuery.trumbowyg = {
                     .append(
                         t.buildRightBtn('close')
                             .on('click', function () {
-                                t.$box.removeClass(prefix + 'fullscreen');
+                                t.$box.removeClass(fullscreenCssClass);
                                 t.destroy();
                                 t.$c.trigger('tbwclose');
                             })
@@ -537,29 +540,29 @@ jQuery.trumbowyg = {
 
             // Add right li only if isn't empty
             if ($liRight.not(':empty')) {
-                t.$btnPane.append($liRight);
+                $btnPane.append($liRight);
             }
 
-            t.$box.prepend(t.$btnPane);
+            t.$box.prepend($btnPane);
         },
 
 
         // Build a button and his action
-        buildBtn: function (n) { // n is name of the button
+        buildBtn: function (btnName) { // btnName is name of the button
             var t = this,
                 prefix = t.o.prefix,
-                btn = t.o.btnsDef[n],
+                btn = t.o.btnsDef[btnName],
                 d = btn.dropdown,
-                textDef = t.lang[n] || n,
+                textDef = t.lang[btnName] || btnName,
 
                 $btn = $('<button/>', {
                     type: 'button',
-                    'class': prefix + n + '-button' + (btn.ico ? ' ' + prefix + btn.ico + '-button' : '') + (btn.class || ''),
+                    class: prefix + btnName + '-button' + (btn.ico ? ' ' + prefix + btn.ico + '-button' : '') + (btn.class || ''),
                     text: btn.text || btn.title || textDef,
-                    title: btn.title || btn.text || textDef + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
+                    title: (btn.title || btn.text || textDef) + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
                     tabindex: -1,
                     mousedown: function () {
-                        if (!d || $('.' + n + '-' + prefix + 'dropdown', t.$box).is(':hidden')) {
+                        if (!d || $('.' + btnName + '-' + prefix + 'dropdown', t.$box).is(':hidden')) {
                             $('body', t.doc).trigger('mousedown');
                         }
 
@@ -567,7 +570,7 @@ jQuery.trumbowyg = {
                             return false;
                         }
 
-                        t.execCmd((d ? 'dropdown' : false) || btn.func || n, btn.param || n);
+                        t.execCmd((d ? 'dropdown' : false) || btn.fn || btnName, btn.param || btnName);
 
                         return false;
                     }
@@ -577,7 +580,7 @@ jQuery.trumbowyg = {
                 $btn.addClass(prefix + 'open-dropdown');
                 var c = prefix + 'dropdown',
                     dd = $('<div/>', { // the dropdown
-                        'class': n + '-' + c + ' ' + c + ' ' + prefix + 'fixed-top'
+                        class: btnName + '-' + c + ' ' + c + ' ' + prefix + 'fixed-top'
                     });
                 $.each(d, function (i, def) {
                     if (t.o.btnsDef[def] && t.isSupportedBtn(def)) {
@@ -587,8 +590,8 @@ jQuery.trumbowyg = {
                 t.$box.append(dd.hide());
             } else if (btn.key) {
                 t.keys[btn.key] = {
-                    func: btn.func || n,
-                    param: btn.param || n
+                    fn: btn.fn || btnName,
+                    param: btn.param || btnName
                 };
             }
 
@@ -598,26 +601,26 @@ jQuery.trumbowyg = {
         // @param n : name of the subbutton
         buildSubBtn: function (n) {
             var t = this,
+                prefix = t.o.prefix,
                 b = t.o.btnsDef[n];
 
             if (b.key) {
                 t.keys[b.key] = {
-                    func: b.func || n,
+                    fn: b.fn || n,
                     param: b.param || n
                 };
             }
 
             return $('<button/>', {
                 type: 'button',
-                'class': t.o.prefix + n + '-dropdown-button' + (b.ico ? ' ' + t.o.prefix + b.ico + '-button' : ''),
+                class: prefix + n + '-dropdown-button' + (b.ico ? ' ' + prefix + b.ico + '-button' : ''),
                 text: b.text || b.title || t.lang[n] || n,
                 title: ((b.key) ? ' (Ctrl + ' + b.key + ')' : null),
                 style: b.style || null,
                 mousedown: function () {
                     $('body', t.doc).trigger('mousedown');
 
-                    t.execCmd(b.func || n,
-                        b.param || n);
+                    t.execCmd(b.fn || n, b.param || n);
 
                     return false;
                 }
@@ -626,12 +629,10 @@ jQuery.trumbowyg = {
         // Build a button for right li
         // @param n : name of the right button
         buildRightBtn: function (n) {
-            var l = this.lang[n];
             return $('<button/>', {
                 type: 'button',
-                'class': this.o.prefix + n + '-button',
-                title: l,
-                text: l,
+                class: this.o.prefix + n + '-button',
+                title: this.lang[n],
                 tabindex: -1
             });
         },
@@ -648,7 +649,7 @@ jQuery.trumbowyg = {
         buildOverlay: function () {
             var t = this;
             t.$overlay = $('<div/>', {
-                'class': t.o.prefix + 'overlay'
+                class: t.o.prefix + 'overlay'
             }).css({
                 top: t.$btnPane.outerHeight(),
                 height: (t.$ed.outerHeight() + 1) + 'px'
@@ -824,7 +825,6 @@ jQuery.trumbowyg = {
             var t = this;
             if (!force && t.$ed.is(':visible')) {
                 t.$ta.val(t.$ed.html());
-                t.$c.trigger('tbwchange');
             } else {
                 t.$ed.html(t.$ta.val());
             }
@@ -862,7 +862,7 @@ jQuery.trumbowyg = {
                     // Wrap text nodes in span for easier processing
                     t.$ed.contents().filter(function () {
                         return this.nodeType === 3 && $.trim(this.nodeValue).length > 0;
-                    }).wrap('<span data-trumbowyg-textnode/>');
+                    }).wrap('<span data-tbw/>');
 
                     // Wrap groups of inline elements in paragraphs (recursive)
                     var wrapInlinesInParagraphsFrom = function ($from) {
@@ -888,11 +888,11 @@ jQuery.trumbowyg = {
                             // Don't remove currently being edited element
                             return false;
                         }
-                        return $(this).text().trim().length === 0 && $(this).children().not('br, span').length === 0;
+                        return $(this).text().trim().length === 0 && $(this).children().not('br,span').length === 0;
                     }).contents().unwrap();
 
                     // Get rid of temporial span's
-                    $('[data-trumbowyg-textnode]', t.$ed).contents().unwrap();
+                    $('[data-tbw]', t.$ed).contents().unwrap();
 
                     // Replace empty <p> with <br> (IE loves adding empty <p>)
                     t.$ed.find('p:empty').replaceWith('<br/>');
@@ -999,6 +999,8 @@ jQuery.trumbowyg = {
 
             if (cmd !== 'dropdown') {
                 t.syncCode();
+                t.semanticCode(false, true);
+                t.$c.trigger('tbwchange');
             }
         },
 
@@ -1021,14 +1023,14 @@ jQuery.trumbowyg = {
 
             // Build out of ModalBox, it's the mask for animations
             var $modal = $('<div/>', {
-                'class': prefix + 'modal ' + prefix + 'fixed-top'
+                class: prefix + 'modal ' + prefix + 'fixed-top'
             }).css({
                 top: (t.$btnPane.height() + 1) + 'px'
             }).appendTo(t.$box);
 
             // Click on overlay close modal by cancelling them
             t.$overlay.one('click', function () {
-                $modal.trigger(prefix + 'cancel');
+                $modal.trigger('tbwcancel');
                 return false;
             });
 
@@ -1038,18 +1040,18 @@ jQuery.trumbowyg = {
                 html: content
             })
                 .on('submit', function () {
-                    $modal.trigger(prefix + 'confirm');
+                    $modal.trigger('tbwconfirm');
                     return false;
                 })
                 .on('reset', function () {
-                    $modal.trigger(prefix + 'cancel');
+                    $modal.trigger('tbwcancel');
                     return false;
                 });
 
 
             // Build ModalBox and animate to show them
             var $box = $('<div/>', {
-                'class': prefix + 'modal-box',
+                class: prefix + 'modal-box',
                 html: $form
             })
                 .css({
@@ -1066,7 +1068,7 @@ jQuery.trumbowyg = {
             // Append title
             $('<span/>', {
                 text: title,
-                'class': prefix + 'modal-title'
+                class: prefix + 'modal-title'
             }).prependTo($box);
 
             $modal.height($box.outerHeight() + 10);
@@ -1091,7 +1093,7 @@ jQuery.trumbowyg = {
                 prefix = t.o.prefix;
 
             return $('<button/>', {
-                'class': prefix + 'modal-button ' + prefix + 'modal-' + n,
+                class: prefix + 'modal-button ' + prefix + 'modal-' + n,
                 type: n,
                 text: t.lang[n] || n
             }).appendTo($('form', $modal));
@@ -1121,7 +1123,8 @@ jQuery.trumbowyg = {
             var t = this,
                 prefix = t.o.prefix,
                 lg = t.lang,
-                html = '';
+                html = '',
+                CONFIRM_EVENT = 'tbwconfirm';
 
             $.each(fields, function (fieldName, field) {
                 var l = field.label,
@@ -1133,7 +1136,7 @@ jQuery.trumbowyg = {
             });
 
             return t.openModal(title, html)
-                .on(prefix + 'confirm', function () {
+                .on(CONFIRM_EVENT, function () {
                     var $form = $('form', $(this)),
                         valid = true,
                         values = {};
@@ -1159,12 +1162,12 @@ jQuery.trumbowyg = {
                         if (cmd(values, fields)) {
                             t.syncCode();
                             t.closeModal();
-                            $(this).off(prefix + 'confirm');
+                            $(this).off(CONFIRM_EVENT);
                         }
                     }
                 })
-                .one(prefix + 'cancel', function () {
-                    $(this).off(prefix + 'confirm');
+                .one('tbwcancel', function () {
+                    $(this).off(CONFIRM_EVENT);
                     t.closeModal();
                 });
         },
@@ -1182,7 +1185,7 @@ jQuery.trumbowyg = {
                 .find('input+span')
                 .append(
                     $('<span/>', {
-                        'class': prefix + 'msg-error',
+                        class: prefix + 'msg-error',
                         text: err
                     })
                 );
@@ -1192,38 +1195,72 @@ jQuery.trumbowyg = {
         // Selection management
         saveSelection: function () {
             var t = this,
-                ds = t.doc.selection;
+                documentSelection = t.doc.getSelection();
 
             t.selection = null;
-            if (t.doc.getSelection) {
-                var s = t.doc.getSelection();
-                if (s.getRangeAt && s.rangeCount) {
-                    t.selection = s.getRangeAt(0);
-                }
-            } else if (ds && ds.createRange) {
-                t.selection = ds.createRange();
+
+            if (documentSelection.rangeCount) {
+                var savedSelection = t.selection = documentSelection.getRangeAt(0),
+                    range = t.doc.createRange(),
+                    rangeStart;
+                range.selectNodeContents(t.$ed[0]);
+                range.setEnd(savedSelection.startContainer, savedSelection.startOffset);
+                rangeStart = (range + '').length;
+                t.metaSelection = {
+                    start: rangeStart,
+                    end: rangeStart + (savedSelection + '').length
+                };
             }
         },
         restoreSelection: function () {
             var t = this,
-                range = t.selection;
+                metaSelection = t.metaSelection,
+                savedSelection = t.selection,
+                documentSelection = t.doc.getSelection(),
+                range;
 
-            if (range) {
-                if (t.doc.getSelection) {
-                    var s = t.doc.getSelection();
-                    try {
-                        s.removeAllRanges();
-                    } catch (c) {
+            if (!savedSelection) {
+                return;
+            }
+
+            if (metaSelection && metaSelection.start !== metaSelection.end) { // Algorithm from http://jsfiddle.net/WeWy7/3/
+                var charIndex = 0,
+                    nodeStack = [t.$ed[0]],
+                    node,
+                    foundStart = false,
+                    stop = false;
+
+                range = t.doc.createRange();
+
+                while (!stop && (node = nodeStack.pop())) {
+                    if (node.nodeType === 3) {
+                        var nextCharIndex = charIndex + node.length;
+                        if (!foundStart && metaSelection.start >= charIndex && metaSelection.start <= nextCharIndex) {
+                            range.setStart(node, metaSelection.start - charIndex);
+                            foundStart = true;
+                        }
+                        if (foundStart && metaSelection.end >= charIndex && metaSelection.end <= nextCharIndex) {
+                            range.setEnd(node, metaSelection.end - charIndex);
+                            stop = true;
+                        }
+                        charIndex = nextCharIndex;
+                    } else {
+                        var cn = node.childNodes,
+                            i = cn.length;
+
+                        while (i > 0) {
+                            i -= 1;
+                            nodeStack.push(cn[i]);
+                        }
                     }
-                    s.addRange(range);
-                } else if (t.doc.selection && range.select) {
-                    range.select();
                 }
             }
+
+            documentSelection.removeAllRanges();
+            documentSelection.addRange(range || savedSelection);
         },
         getSelectedText: function () {
-            var s = this.selection;
-            return (s.text !== undefined) ? s.text : s + '';
+            return this.selection + '';
         }
     };
 })(navigator, window, document, jQuery);

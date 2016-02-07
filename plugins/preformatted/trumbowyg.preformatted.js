@@ -31,7 +31,7 @@
         opts: {
             btnsDef: {
                 preformatted: {
-                    func: function (params, tbw) {
+                    fn: function (params, tbw) {
                         var text = String(tbw.doc.getSelection());
                         if (text.replace(/\s/g, '') !== '') {
                             try {

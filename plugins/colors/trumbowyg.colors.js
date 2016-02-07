@@ -65,21 +65,21 @@
     });
 
 
-    function buildDropdown(func) {
+    function buildDropdown(fn) {
         var dropdown = [];
 
         $.each($.trumbowyg.opts.colors, function (i, color) {
-            var btn = '_' + func + color;
+            var btn = '_' + fn + color;
             $.trumbowyg.opts.btnsDef[btn] = {
-                func: func,
+                fn: fn,
                 param: '#' + color,
                 style: 'background-color: #' + color + ';'
             };
             dropdown.push(btn);
         });
-        var btn = '_' + func + 'transparent';
+        var btn = '_' + fn + 'transparent';
         $.trumbowyg.opts.btnsDef[btn] = {
-            func: func,
+            fn: fn,
             param: 'transparent',
             style: 'background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAG0lEQVQIW2NkQAAfEJMRmwBYhoGBYQtMBYoAADziAp0jtJTgAAAAAElFTkSuQmCC);'
         };

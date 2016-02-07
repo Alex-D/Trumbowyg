@@ -38,7 +38,7 @@
         opts: {
             btnsDef: {
                 noembed: {
-                    func: function (params, tbw) {
+                    fn: function (params, tbw) {
                         var $modal = tbw.openModalInsert(
                             // Title
                             tbw.lang.noembed,

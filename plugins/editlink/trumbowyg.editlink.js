@@ -35,7 +35,7 @@
         opts: {
             btnsDef: {
                 editLink: {
-                    func: function (params, tbw) {
+                    fn: function (params, tbw) {
                         var t = tbw,
                             url = '',
                             title = '',
