@@ -1,6 +1,6 @@
 /* ===========================================================
  * trumbowyg.activecontrols.js v1.0
- * Plugin to display active formattig buttons in buttons pane
+ * Plugin to display active formatting buttons in buttons pane
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
  * Author : Rastislav Švarba (ra100)
@@ -12,29 +12,29 @@
     'use strict';
 
     $.trumbowyg.tagToButton = {
-        'strong': 'strong',
-        'b': 'strong',
-        'em': 'em',
-        'i': 'em',
-        'p': 'p',
-        'center': 'justifyCenter',
-        'left': 'justifyLeft',
-        'right': 'justifyRight',
-        'justify': 'justifyFull',
-        'ol': 'orderedList',
-        'ul': 'unorderedList',
-        'a': 'link',
-        'img': 'insertImage',
-        'u': 'underline',
-        'strike': 'strikethrough',
-        'del': 'del',
-        'h1': 'h1',
-        'h2': 'h2',
-        'h3': 'h3',
-        'h4': 'h4',
-        'h5': 'h5',
-        'h6': 'h6',
-        'blockquote': 'blockquote'
+        'strong': ['strong'],
+        'b': ['strong'],
+        'em': ['em'],
+        'i': ['em'],
+        'p': ['p-dropdown', 'formatting'],
+        'center': ['justifyCenter'],
+        'left': ['justifyLeft'],
+        'right': ['justifyRight'],
+        'justify': ['justifyFull'],
+        'ol': ['orderedList'],
+        'ul': ['unorderedList'],
+        'a': ['link'],
+        'img': ['insertImage'],
+        'u': ['underline'],
+        'strike': ['strikethrough'],
+        'del': ['del'],
+        'h1': ['h1-dropdown', 'formatting'],
+        'h2': ['h2-dropdown', 'formatting'],
+        'h3': ['h3-dropdown', 'formatting'],
+        'h4': ['h4-dropdown', 'formatting'],
+        'h5': ['h5-dropdown', 'formatting'],
+        'h6': ['h6-dropdown', 'formatting'],
+        'blockquote': ['blockquote-dropdown', 'formatting']
     };
 
     $.extend(true, $.trumbowyg, {
@@ -59,14 +59,18 @@
                 t.o.getTagsRecursive(element, tags);
                 newTags = t.o.activeTags.filter(function (val) {
                     if (tags.indexOf(val) < 0) {
-                        t.$btnPane.find('.' + t.o.prefix + t.tagToButton[val.toLowerCase()] + '-button').removeClass('active');
+                        $.each($.trumbowyg.tagToButton[val.toLowerCase()], function(i, cls) {
+                            t.$box.find('.' + t.o.prefix + cls + '-button').removeClass('active');
+                        });
                         return false;
                     }
                 });
                 for (var i in tags) {
                     var tag = tags[i];
                     if (newTags.indexOf(tag) < 0) {
-                        t.$btnPane.find('.' + t.o.prefix + t.tagToButton[tag.toLowerCase()] + '-button').addClass('active');
+                        $.each($.trumbowyg.tagToButton[tag.toLowerCase()], function(i, cls) {
+                            t.$box.find('.' + t.o.prefix + cls + '-button').addClass('active');
+                        });
                     }
                 }
                 t.o.activeTags = tags;
