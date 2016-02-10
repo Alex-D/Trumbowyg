@@ -72,10 +72,8 @@
                 var tag = element.tagName;
                 if (tag === 'DIV')
                     return;
-                if (tag === 'P') {
-                    if (element.style.textAlign !== "") {
-                        tags.push(element.style.textAlign);
-                    }
+                if (tag === 'P' && element.style.textAlign !== "") {
+                    tags.push(element.style.textAlign);
                 }
                 tags.push(tag);
                 this.getTagsRecursive(element.parentNode, tags);
