@@ -59,14 +59,14 @@
                 t.o.getTagsRecursive(element, tags);
                 newTags = t.o.activeTags.filter(function (val) {
                     if (tags.indexOf(val) < 0) {
-                        t.$btnPane.find('.' + t.o.prefix + t.tagToButton[val.toLowerCase()] + '-button').removeClass('active');
+                        t.$btnPane.find('.' + t.o.prefix + $.trumbowyg.tagToButton[val.toLowerCase()] + '-button').removeClass('active');
                         return false;
                     }
                 });
                 for (var i in tags) {
                     var tag = tags[i];
                     if (newTags.indexOf(tag) < 0) {
-                        t.$btnPane.find('.' + t.o.prefix + t.tagToButton[tag.toLowerCase()] + '-button').addClass('active');
+                        t.$btnPane.find('.' + t.o.prefix + $.trumbowyg.tagToButton[tag.toLowerCase()] + '-button').addClass('active');
                     }
                 }
                 t.o.activeTags = tags;
