@@ -1,5 +1,5 @@
 /* ===========================================================
- * trumbowyg.editlink.js v1.0
+ * trumbowyg.activecontrols.js v1.0
  * Plugin to display active formattig buttons in buttons pane
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
@@ -42,7 +42,14 @@
                         'img': 'insertImage',
                         'u': 'underline',
                         'strike': 'strikethrough',
-                        'del': 'del'
+                        'del': 'del',
+                        'h1': 'h1',
+                        'h2': 'h2',
+                        'h3': 'h3',
+                        'h4': 'h4',
+                        'h5': 'h5',
+                        'h6': 'h6',
+                        'blockquote': 'blockquote'
                     },
                     tags = [],
                     newTags = [];

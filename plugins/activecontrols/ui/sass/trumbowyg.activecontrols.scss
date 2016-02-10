@@ -1,0 +1,14 @@
+$bg-color: #B5B5B5;
+$bg-color-black: invert(#636363);
+
+.trumbowyg {
+  .active {
+    background-color: $bg-color;
+  }
+}
+
+.trumbowyg-black {
+  .active {
+    background-color: $bg-color-black;
+  }
+}
