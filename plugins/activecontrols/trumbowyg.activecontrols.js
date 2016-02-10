@@ -10,6 +10,33 @@
 
 (function ($) {
     'use strict';
+
+    $.trumbowyg.tagToButton = {
+        'strong': 'strong',
+        'b': 'strong',
+        'em': 'em',
+        'i': 'em',
+        'p': 'p',
+        'center': 'justifyCenter',
+        'left': 'justifyLeft',
+        'right': 'justifyRight',
+        'justify': 'justifyFull',
+        'ol': 'orderedList',
+        'ul': 'unorderedList',
+        'a': 'link',
+        'img': 'insertImage',
+        'u': 'underline',
+        'strike': 'strikethrough',
+        'del': 'del',
+        'h1': 'h1',
+        'h2': 'h2',
+        'h3': 'h3',
+        'h4': 'h4',
+        'h5': 'h5',
+        'h6': 'h6',
+        'blockquote': 'blockquote'
+    };
+
     $.extend(true, $.trumbowyg, {
         opts: {
             on: {
@@ -24,46 +51,22 @@
                 }
             },
             activeTags: [],
+
             // Active tags
             controlButtonActivate: function (element, t) {
-                var tagToButton = {
-                        'strong': 'strong',
-                        'b': 'strong',
-                        'em': 'em',
-                        'i': 'em',
-                        'p': 'p',
-                        'center': 'justifyCenter',
-                        'left': 'justifyLeft',
-                        'right': 'justifyRight',
-                        'justify': 'justifyFull',
-                        'ol': 'orderedList',
-                        'ul': 'unorderedList',
-                        'a': 'link',
-                        'img': 'insertImage',
-                        'u': 'underline',
-                        'strike': 'strikethrough',
-                        'del': 'del',
-                        'h1': 'h1',
-                        'h2': 'h2',
-                        'h3': 'h3',
-                        'h4': 'h4',
-                        'h5': 'h5',
-                        'h6': 'h6',
-                        'blockquote': 'blockquote'
-                    },
-                    tags = [],
+                var tags = [],
                     newTags = [];
                 t.o.getTagsRecursive(element, tags);
                 newTags = t.o.activeTags.filter(function (val) {
                     if (tags.indexOf(val) < 0) {
-                        t.$btnPane.find('.' + t.o.prefix + tagToButton[val.toLowerCase()] + '-button').removeClass('active');
+                        t.$btnPane.find('.' + t.o.prefix + t.tagToButton[val.toLowerCase()] + '-button').removeClass('active');
                         return false;
                     }
                 });
                 for (var i in tags) {
                     var tag = tags[i];
                     if (newTags.indexOf(tag) < 0) {
-                        t.$btnPane.find('.' + t.o.prefix + tagToButton[tag.toLowerCase()] + '-button').addClass('active');
+                        t.$btnPane.find('.' + t.o.prefix + t.tagToButton[tag.toLowerCase()] + '-button').addClass('active');
                     }
                 }
                 t.o.activeTags = tags;
