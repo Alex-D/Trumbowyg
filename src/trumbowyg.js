@@ -271,7 +271,10 @@ jQuery.trumbowyg = {
                 }
             },
 
-            inlineElementsSelector: 'a,abbr,acronym,b,caption,cite,code,col,dfn,dir,dt,dd,em,font,hr,i,kbd,li,q,span,strikeout,strong,sub,sup,u'
+            inlineElementsSelector: 'a,abbr,acronym,b,caption,cite,code,col,dfn,dir,dt,dd,em,font,hr,i,kbd,li,q,span,strikeout,strong,sub,sup,u',
+
+            pasteHandler: function () {
+            }
         }, o);
 
         if (o.btns) {
@@ -440,6 +443,8 @@ jQuery.trumbowyg = {
                             t.execCmd('insertText', (e.originalEvent || e).clipboardData.getData('text/plain'));
                         }
                     }
+
+                    t.o.pasteHandler(e, t);
 
                     setTimeout(function () {
                         if (t.o.semantic) {
@@ -975,14 +980,16 @@ jQuery.trumbowyg = {
          * else try to call anonymous function
          * and finaly native execCommand
          */
-        execCmd: function (cmd, param) {
+        execCmd: function (cmd, param, force) {
             var t = this;
+            force = !!force || '';
+
             if (cmd !== 'dropdown') {
                 t.$ed.focus();
             }
 
             try {
-                t[cmd](param);
+                t[cmd + force](param);
             } catch (c) {
                 try {
                     cmd(param, t);
@@ -996,7 +1003,6 @@ jQuery.trumbowyg = {
                     t.doc.execCommand(cmd, false, param);
                 }
             }
-
             if (cmd !== 'dropdown') {
                 t.syncCode();
                 t.semanticCode(false, true);
