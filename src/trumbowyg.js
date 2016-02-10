@@ -62,7 +62,7 @@ jQuery.trumbowyg = {
 };
 
 
-(function (navigator, window, document, $, undefined) {
+(function (navigator, window, document, $) {
     'use strict';
 
     // @param : o are options
@@ -950,7 +950,7 @@ jQuery.trumbowyg = {
                     link.attr('target', v.target);
                 }
                 t.selection.deleteContents();
-                t.selection.insertNode(link.get(0));
+                t.selection.insertNode(link[0]);
                 t.restoreSelection();
                 return true;
             });
@@ -1002,11 +1002,12 @@ jQuery.trumbowyg = {
 
                     t.doc.execCommand(cmd, false, param);
                 }
-            }
-            if (cmd !== 'dropdown') {
-                t.syncCode();
-                t.semanticCode(false, true);
-                t.$c.trigger('tbwchange');
+
+                if (cmd !== 'dropdown') {
+                    t.syncCode();
+                    t.semanticCode(false, true);
+                    t.$c.trigger('tbwchange');
+                }
             }
         },
 
@@ -1167,6 +1168,7 @@ jQuery.trumbowyg = {
 
                         if (cmd(values, fields)) {
                             t.syncCode();
+                            t.$c.trigger('tbwchange');
                             t.closeModal();
                             $(this).off(CONFIRM_EVENT);
                         }
@@ -1217,6 +1219,7 @@ jQuery.trumbowyg = {
                     end: rangeStart + (savedSelection + '').length
                 };
             }
+
         },
         restoreSelection: function () {
             var t = this,
