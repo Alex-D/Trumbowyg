@@ -12,63 +12,40 @@
     'use strict';
 
     $.extend(true, $.trumbowyg, {
-        // jshint camelcase:false
-        langs: {
-            en: {
-                editLink: 'Edit Link'
-            },
-            fr: {
-                editLink: 'Editer un lien'
-            },
-            cs: {
-                editLink: 'Upravit odkaz'
-            },
-            sk: {
-                editLink: 'Upraviť odkaz'
-            },
-            zh_cn: {
-                editLink: '编辑链接'
-            }
-        },
         // jshint camelcase:true
 
         opts: {
             btnsDef: {
-                editLink: {
+                createLink: {
                     fn: function (params, tbw) {
                         var t = tbw,
                             url = '',
                             title = '',
                             target = '_blank',
                             node = '',
-                            edit = false;
+                            edit = false,
+                            meta = null,
+                            sele = null;
 
                         var sel = t.doc.getSelection();
-                        var range = new Range();
-                        if (sel.type === 'Caret') { //if range is not selected, select whole <a> element
-                            range.selectNode(sel.baseNode);
-                            sel.addRange(range);
-                            t.saveSelection();
-                            node = t.selection.commonAncestorContainer;
-                        } else {
-                            if ((sel.anchorOffset + sel.focusOffset) === sel.focusNode.length) { //if selection is large as whole <a>
-                                range.selectNode(sel.focusNode);
-                                sel.addRange(range);
-                                t.saveSelection();
-                                node = t.selection.commonAncestorContainer;
-                            } else {
-                                t.saveSelection();
-                                node = t.selection.commonAncestorContainer.parentNode;
-                            }
+                        var node = sel.extentNode;
+                        while (node.nodeName != 'A' && node.nodeName != 'DIV') {
+                            node = node.parentNode;
                         }
 
-                        if (node !== '' && $(node).prop('tagName') === 'A') {
+                        if (node != null && node.nodeName == 'A') {
                             var $a = $(node);
                             url = $a.attr('href');
                             title = ($a.attr('title') !== undefined) ? $a.attr('title') : $a.text();
                             target = ($a.attr('target') !== undefined) ? $a.attr('target') : target;
                             edit = true;
+                            var range = t.doc.createRange();
+                            range.selectNode(node);
+                            sel.addRange(range);
                         }
+                        t.saveSelection();
+                        sele = t.selection;
+                        meta = t.metaSelection;
 
                         t.openModalInsert(t.lang.editLink, {
                             url: {
@@ -89,31 +66,46 @@
                                 value: target
                             }
                         }, function (v) { // v is value
-                            t.execCmd('createLink', v.url);
-                            if (!edit) {
-                                return true;
-                            }
+                            // TODO fix the need to restore selection
+                            t.selection = sele;
+                            t.metaSelection = meta;
 
-                            var l = $('a[href="' + v.url + '"]:not([title])', t.$box);
-                            if (v.text.length > 0) {
-                                l.text(v.text);
-                            }
+                            var link = $('<a href="' + v.url + '">' + v.text + '</a>');
                             if (v.title.length > 0) {
-                                l.attr('title', v.title);
-                            } else {
-                                l.removeAttr('title');
+                                link.attr('title', v.title);
                             }
                             if (v.target.length > 0) {
-                                l.attr('target', v.target);
-                            } else {
-                                l.removeAttr('target');
+                                link.attr('target', v.target);
                             }
+                            t.selection.deleteContents();
+                            t.selection.insertNode(link[0]);
+                            t.restoreSelection();
                             return true;
                         });
                     }
                 },
+                unlink: {
+                    fn: function (params, tbw) {
+                        var t = tbw;
+
+                        var sel = t.doc.getSelection();
+                        if (sel.type == "Caret") {
+                            var node = sel.extentNode;
+                            while (node.nodeName != 'A' && node.nodeName != 'DIV') {
+                                node = node.parentNode;
+                            }
+
+                            if (node != null && node.nodeName == 'A') {
+                                var range = t.doc.createRange();
+                                range.selectNode(node);
+                                sel.addRange(range);
+                            }
+                        }
+                        t.execCmd('unlink');
+                    }
+                },
                 link: {
-                    dropdown: ['createLink', 'editLink', 'unlink']
+                    dropdown: ['createLink', 'unlink']
                 }
             }
         }
