@@ -411,7 +411,9 @@ jQuery.trumbowyg = {
                         return;
                     }
 
-                    if (!t._ctrl && e.which !== 17 && !t._composition) {
+                    if (e.ctrlKey && (e.which === 89 || e.which === 90)) {
+                        t.$c.trigger('tbwchange');
+                    } else if (!t._ctrl && e.which !== 17 && !t._composition) {
                         t.semanticCode(false, e.which === 13);
                         t.$c.trigger('tbwchange');
                     }
@@ -422,6 +424,9 @@ jQuery.trumbowyg = {
                 })
                 .on('focus blur', function (e) {
                     t.$c.trigger('tbw' + e.type);
+                })
+                .on('cut', function () {
+                    t.$c.trigger('tbwchange');
                 })
                 .on('paste', function (e) {
                     if (t.o.removeformatPasted) {
