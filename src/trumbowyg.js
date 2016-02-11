@@ -848,8 +848,8 @@ jQuery.trumbowyg = {
         // @param full  : wrap text nodes in <p>
         semanticCode: function (force, full) {
             var t = this;
-            t.syncCode(force);
             t.saveSelection();
+            t.syncCode(force);
 
             if (t.o.tagsToRemove.length > 0) {
                 $(t.o.tagsToRemove.join(', '), t.$ed).remove();
@@ -924,22 +924,46 @@ jQuery.trumbowyg = {
 
         // Function call when user click on "Insert Link"
         createLink: function () {
-            var t = this;
+            var t = this,
+                documentSelection = t.doc.getSelection(),
+                node = documentSelection.extentNode,
+                url,
+                title,
+                target;
+
+            while (['A', 'DIV'].indexOf(node.nodeName) < 0) {
+                node = node.parentNode;
+            }
+
+            if (node && node.nodeName === 'A') {
+                var $a = $(node);
+                url = $a.attr('href');
+                title = $a.attr('title');
+                target = $a.attr('target');
+                var range = t.doc.createRange();
+                range.selectNode(node);
+                documentSelection.addRange(range);
+            }
+
             t.saveSelection();
+
             t.openModalInsert(t.lang.createLink, {
                 url: {
                     label: 'URL',
-                    required: true
+                    required: true,
+                    value: url
                 },
                 title: {
-                    label: t.lang.title
+                    label: t.lang.title,
+                    value: title
                 },
                 text: {
                     label: t.lang.text,
                     value: t.getSelectedText()
                 },
                 target: {
-                    label: t.lang.target
+                    label: t.lang.target,
+                    value: target
                 }
             }, function (v) { // v is value
                 var link = $(['<a href="', v.url, '">', v.text, '</a>'].join(''));
@@ -951,9 +975,26 @@ jQuery.trumbowyg = {
                 }
                 t.selection.deleteContents();
                 t.selection.insertNode(link[0]);
-                t.restoreSelection();
                 return true;
             });
+        },
+        unlink: function () {
+            var t = this,
+                documentSelection = t.doc.getSelection(),
+                node = documentSelection.extentNode;
+
+            if (documentSelection.type === 'Caret') {
+                while (['A', 'DIV'].indexOf(node.nodeName) < 0) {
+                    node = node.parentNode;
+                }
+
+                if (node && node.nodeName === 'A') {
+                    var range = t.doc.createRange();
+                    range.selectNode(node);
+                    documentSelection.addRange(range);
+                }
+            }
+            t.execCmd('unlink', undefined, true);
         },
         insertImage: function () {
             var t = this;
@@ -1001,11 +1042,12 @@ jQuery.trumbowyg = {
                     }
 
                     t.doc.execCommand(cmd, false, param);
+
+                    t.syncCode();
+                    t.semanticCode(false, true);
                 }
 
                 if (cmd !== 'dropdown') {
-                    t.syncCode();
-                    t.semanticCode(false, true);
                     t.$c.trigger('tbwchange');
                 }
             }
