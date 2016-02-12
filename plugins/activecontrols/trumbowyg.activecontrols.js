@@ -65,21 +65,19 @@
                         return false;
                     }
                 });
-                for (var i in tags) {
-                    var tag = tags[i];
+                $.each(tags, function(i, tag) {
                     if (newTags.indexOf(tag) < 0) {
                         $.each($.trumbowyg.tagToButton[tag.toLowerCase()], function(i, cls) {
                             t.$box.find('.' + t.o.prefix + cls + '-button').addClass('active');
                         });
                     }
-                }
+                });
                 t.o.activeTags = tags;
             },
             getTagsRecursive: function (element, tags) {
                 var tag = element.tagName;
-                if (tag === 'DIV')
-                    return;
-                if (tag === 'P' && element.style.textAlign !== "") {
+                if (tag === 'DIV') { return; }
+                if (tag === 'P' && element.style.textAlign !== '') {
                     tags.push(element.style.textAlign);
                 }
                 tags.push(tag);
