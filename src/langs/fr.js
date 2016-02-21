@@ -26,6 +26,9 @@ jQuery.trumbowyg.langs.fr = {
     em: 'Emphase',
     del: 'Supprimé',
 
+    superscript: 'Exposant',
+    subscript: 'Indice',
+
     unorderedList: 'Liste à puces',
     orderedList: 'Liste ordonnée',
 

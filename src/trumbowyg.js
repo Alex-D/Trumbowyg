@@ -18,6 +18,9 @@ jQuery.trumbowyg = {
             em: 'Emphasis',
             del: 'Deleted',
 
+            superscript: 'Superscript',
+            subscript: 'Subscript',
+
             unorderedList: 'Unordered list',
             orderedList: 'Ordered list',
 
@@ -167,6 +170,7 @@ jQuery.trumbowyg = {
                 'viewHTML',
                 '|', 'formatting',
                 '|', 'btnGrp-design',
+                '|', 'superscript', 'subscript',
                 '|', 'link',
                 '|', 'insertImage',
                 '|', 'btnGrp-justify',
@@ -215,6 +219,8 @@ jQuery.trumbowyg = {
                     fn: 'formatBlock',
                     title: h + ' 4'
                 },
+                subscript: {},
+                superscript: {},
 
                 bold: {
                     key: 'B'
@@ -264,7 +270,7 @@ jQuery.trumbowyg = {
 
                 // Dropdowns
                 formatting: {
-                    dropdown: ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4']
+                    dropdown: ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4', 'subscript', 'superscript']
                 },
                 link: {
                     dropdown: ['createLink', 'unlink']
