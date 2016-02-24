@@ -6,7 +6,6 @@
         <link rel="stylesheet" href="examples/css/main.css">
         <link rel="stylesheet" href="dist/ui/trumbowyg.css">
         <link rel="stylesheet" href="dist/plugins/colors/ui/trumbowyg.colors.css">
-        <link rel="stylesheet" href="dist/plugins/preformatted/ui/trumbowyg.preformatted.css">
     </head>
     <body>
         <div id="main" role="main">
@@ -35,6 +34,18 @@ $('#default-editor').trumbowyg();
 
                 <div id="simple-editor">
                     <h2>This is a minimalist demo of Trumbowyg.</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident optio nam reiciendis eius beatae quibusdam!
+                    </p>
+                    <code><pre>
+$('#simple-editor').trumbowyg({
+    btns: [jQuery.trumbowyg.btnsGrps.semantic]
+});
+                    </pre></code>
+                </div>
+
+                <div id="flat-buttonpane">
+                    <h2>All buttons of Trumbowyg are here.</h2>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident optio nam reiciendis eius beatae quibusdam!
                     </p>
@@ -157,6 +168,27 @@ $('#form-content').trumbowyg({
                 $(this).trumbowyg();
             });
 
+
+            /** Full flat button pane **/
+            $('#flat-buttonpane')
+            .trumbowyg({
+                btns: [
+                    'viewHTML',
+                    '|', 'p', 'blockquote', 'h1', 'h2', 'h3', 'h4',
+                    '|', 'bold', 'italic', 'underline', 'strikethrough',
+                    '|', 'superscript', 'subscript',
+                    '|', 'createLink', 'unlink',
+                    '|', 'insertImage',
+                    '|', 'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull',
+                    '|', 'unorderedList', 'orderedList',
+                    '|', 'horizontalRule',
+                    '|', 'removeformat',
+
+                    '|', 'upload', 'base64',
+                    '|', 'foreColor', 'backColor',
+                    '|', 'preformatted'
+                ]
+            });
 
 
             /********************************************************

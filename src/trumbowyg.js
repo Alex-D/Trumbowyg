@@ -25,7 +25,6 @@ jQuery.trumbowyg = {
             orderedList: 'Ordered list',
 
             insertImage: 'Insert Image',
-            insertVideo: 'Insert Video',
             link: 'Link',
             createLink: 'Insert link',
             unlink: 'Remove link',
@@ -145,6 +144,38 @@ jQuery.trumbowyg = {
             t.lang = $.trumbowyg.langs.en;
         }
 
+        // SVG path
+        var trumbowygIconsId = 'trumbowyg-icons';
+        if ($('#' + trumbowygIconsId, t.doc).length === 0) {
+            var svgPath = o.svgPath;
+            if (svgPath == null) {
+                try {
+                    throw new Error();
+                } catch (e) {
+                    var stackLines = e.stack.split('\n');
+
+                    for (var i in stackLines) {
+                        if (!stackLines[i].match(/http[s]?:\/\//)) {
+                            continue;
+                        }
+                        svgPath = stackLines[Number(i)].match(/((http[s]?:\/\/.+\/)([^\/]+\.js)):/)[1].split('/');
+                        svgPath.pop();
+                        svgPath = svgPath.join('/') + '/ui/icons.svg';
+                        break;
+                    }
+                }
+            }
+
+            var div = t.doc.createElement('div');
+            div.id = trumbowygIconsId;
+            t.doc.body.insertBefore(div, t.doc.body.childNodes[0]);
+
+            $.get(svgPath, function (data) {
+                div.innerHTML = new XMLSerializer().serializeToString(data.documentElement);
+            });
+        }
+
+
         // Header translation
         var h = t.lang.header;
 
@@ -160,7 +191,6 @@ jQuery.trumbowyg = {
 
             prefix: 'trumbowyg-',
 
-            // WYSIWYG only
             semantic: true,
             resetCss: false,
             removeformatPasted: false,
@@ -270,10 +300,12 @@ jQuery.trumbowyg = {
 
                 // Dropdowns
                 formatting: {
-                    dropdown: ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4', 'subscript', 'superscript']
+                    dropdown: ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4'],
+                    ico: 'p'
                 },
                 link: {
-                    dropdown: ['createLink', 'unlink']
+                    dropdown: ['createLink', 'unlink'],
+                    ico: 'createLink'
                 }
             },
 
@@ -542,15 +574,14 @@ jQuery.trumbowyg = {
 
             // Build and add close button
             if (t.o.closable) {
-                $liRight
-                    .append(
-                        t.buildRightBtn('close')
-                            .on('click', function () {
-                                t.$box.removeClass(fullscreenCssClass);
-                                t.destroy();
-                                t.$c.trigger('tbwclose');
-                            })
-                    );
+                $liRight.append(
+                    t.buildRightBtn('close')
+                        .on('click', function () {
+                            t.$box.removeClass(fullscreenCssClass);
+                            t.destroy();
+                            t.$c.trigger('tbwclose');
+                        })
+                );
             }
 
 
@@ -573,8 +604,8 @@ jQuery.trumbowyg = {
 
                 $btn = $('<button/>', {
                     type: 'button',
-                    class: prefix + btnName + '-button' + (btn.ico ? ' ' + prefix + btn.ico + '-button' : '') + (btn.class || ''),
-                    text: btn.text || btn.title || textDef,
+                    class: prefix + btnName + '-button' + (btn.class || ''),
+                    html: '<svg><use xlink:href="#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>',
                     title: (btn.title || btn.text || textDef) + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
                     tabindex: -1,
                     mousedown: function () {
@@ -648,6 +679,7 @@ jQuery.trumbowyg = {
             return $('<button/>', {
                 type: 'button',
                 class: this.o.prefix + n + '-button',
+                html: '<svg><use xlink:href="#' + this.o.prefix + n + '"/></svg>',
                 title: this.lang[n],
                 tabindex: -1
             });

@@ -2,18 +2,9 @@
 'use strict';
 
 var gulp = require('gulp'),
-    del = require('del'),
-    vinylPaths = require('vinyl-paths'),
-    $ = require('gulp-load-plugins')(),
-    spritesmith = require('gulp.spritesmith');
+    $ = require('gulp-load-plugins')();
 
 var paths = {
-    sprites: {
-        'icons-white': 'ui/images/icons-white/**.png',
-        'icons-white-2x': 'ui/images/icons-white-2x/**.png',
-        'icons-black': 'ui/images/icons-black/**.png',
-        'icons-black-2x': 'ui/images/icons-black-2x/**.png'
-    },
     mainStyle: 'ui/sass/trumbowyg.colors.scss',
     styles: {
         sass: 'ui/sass',
@@ -42,48 +33,8 @@ var bannerLight = ['/** <%= pkg.title %> v<%= pkg.version %> - <%= pkg.descripti
     '\n'].join('');
 
 
-gulp.task('clean', function () {
-    return gulp.src(['ui/sass/_sprite*.scss'])
-        .pipe(vinylPaths(del));
-});
 
-
-gulp.task('sprites', function () {
-    return makeSprite('white') && makeSprite('white', '-2x') && makeSprite('black') && makeSprite('black', '-2x');
-});
-function makeSprite(color, resolution) {
-    // jshint camelcase:false
-    var suffix = '-' + color + ((resolution) ? resolution : '');
-    var sprite = gulp.src(paths.sprites['icons' + suffix])
-        .pipe(spritesmith({
-            imgName: 'icons' + suffix + '.png',
-            cssName: '_sprite' + suffix + '.scss',
-            cssTemplate: function (params) {
-                var output = '', e;
-                for (var i in params.items) {
-                    if (params.items.hasOwnProperty(i)) {
-                        e = params.items[i];
-                        output += '$' + e.name + suffix + ': ' + e.px.offset_x + ' ' + e.px.offset_y + ';\n';
-                    }
-                }
-                if (params.items.length > 0) {
-                    output += '\n\n';
-                    output += '$sprite-height' + suffix + ': ' + params.items[0].px.total_height + ';\n';
-                    output += '$sprite-width' + suffix + ': ' + params.items[0].px.total_width + ';\n';
-                    output += '$icons' + suffix + ': "./images/icons' + suffix + '.png";';
-                }
-
-                return output;
-            }
-        }));
-    sprite.img.pipe(gulp.dest('../../dist/plugins/colors/ui/images/'));
-    sprite.css.pipe(gulp.dest(paths.styles.sass));
-    return sprite.css;
-}
-// jshint camelcase:true
-
-
-gulp.task('styles', ['sprites'], function () {
+gulp.task('styles', function () {
     return gulp.src(paths.mainStyle)
         .pipe($.sass({
             sass: paths.styles.sass,
@@ -113,6 +64,6 @@ gulp.task('watch', function () {
 });
 
 
-gulp.task('build', ['sprites', 'styles', 'sass-dist']);
+gulp.task('build', ['styles', 'sass-dist']);
 
 gulp.task('default', ['build', 'watch']);

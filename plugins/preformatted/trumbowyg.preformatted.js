@@ -45,8 +45,7 @@
                             } catch (e) {
                             }
                         }
-                    },
-                    ico: 'insertCode'
+                    }
                 }
             }
         }
