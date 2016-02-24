@@ -1,12 +1,7 @@
-$icons-path: "./images/" !default;
-@import "sprite-black";
-@import "sprite-black-2x";
-@import "sprite-white";
-@import "sprite-white-2x";
-@import "mixins/sprite-pos";
-
 $light-color: #ecf0f1;
 $dark-color: #222;
+
+$transition-duration: 150ms;
 
 .trumbowyg-box {
     padding-top: 37px;
@@ -55,7 +50,7 @@ $dark-color: #222;
         text-shadow: 0 0 7px #333;
     }
     img {
-        opacity: .2;
+        opacity: 0.2;
     }
 }
 
@@ -128,7 +123,7 @@ $dark-color: #222;
 
     &.trumbowyg-disable {
         li:not(.trumbowyg-not-disable) button:not(.trumbowyg-active) {
-            opacity: .2;
+            opacity: 0.2;
             cursor: default;
         }
         li.trumbowyg-separator {
@@ -194,7 +189,7 @@ $dark-color: #222;
         cursor: pointer;
         text-align: left;
         font-size: 15px;
-        transition: all .15s;
+        transition: all $transition-duration;
 
         &:hover,
         &:focus {
@@ -251,7 +246,7 @@ $dark-color: #222;
         .trumbowyg-progress-bar {
             background: #2BC06A;
             height: 100%;
-            transition: width .15s linear;
+            transition: width $transition-duration linear;
         }
     }
 
@@ -268,7 +263,7 @@ $dark-color: #222;
             text-align: left;
             height: 25px;
             line-height: 25px;
-            transition: all .15;
+            transition: all 150ms;
 
             span {
                 display: block;
@@ -305,7 +300,7 @@ $dark-color: #222;
             font-size: 14px;
             width: 340px;
             padding: 0 7px;
-            transition: all .15s;
+            transition: all $transition-duration;
 
             &:hover,
             &:focus {
@@ -340,7 +335,7 @@ $dark-color: #222;
         cursor: pointer;
         font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif;
         font-size: 16px;
-        transition: all .15s;
+        transition: all $transition-duration;
 
         $modal-submit-color: #2ecc71;
         &.trumbowyg-modal-submit {
@@ -641,78 +636,9 @@ body.trumbowyg-body-fullscreen {
     width: 35px;
     height: 35px;
     overflow: hidden;
-    background: transparent url($icons-black) no-repeat;
     border: none;
     cursor: pointer;
-    transition: background-color .15s, background-image .15s, opacity .15s;
-
-    &.trumbowyg-viewHTML-button {
-        @include sprite-pos($view-html-black);
-    }
-    &.trumbowyg-formatting-button {
-        @include sprite-pos($formatting-black);
-    }
-
-    /* English and others */
-    &.trumbowyg-bold-button, &.trumbowyg-strong-button {
-        @include sprite-pos($bold-black);
-    }
-    &.trumbowyg-italic-button, &.trumbowyg-em-button {
-        @include sprite-pos($italic-black);
-    }
-    &.trumbowyg-underline-button {
-        @include sprite-pos($underline-black);
-    }
-    &.trumbowyg-strikethrough-button, &.trumbowyg-del-button {
-        @include sprite-pos($strikethrough-black);
-    }
-
-    &.trumbowyg-link-button {
-        @include sprite-pos($link-black);
-    }
-
-    &.trumbowyg-insertImage-button {
-        @include sprite-pos($image-black);
-    }
-
-    &.trumbowyg-justifyLeft-button {
-        @include sprite-pos($left-align-black);
-    }
-    &.trumbowyg-justifyCenter-button {
-        @include sprite-pos($center-align-black);
-    }
-    &.trumbowyg-justifyRight-button {
-        @include sprite-pos($right-align-black);
-    }
-    &.trumbowyg-justifyFull-button {
-        @include sprite-pos($justify-align-black);
-    }
-
-    &.trumbowyg-unorderedList-button {
-        @include sprite-pos($unordered-list-black);
-    }
-    &.trumbowyg-orderedList-button {
-        @include sprite-pos($ordered-list-black);
-    }
-
-    &.trumbowyg-horizontalRule-button {
-        @include sprite-pos($horizontal-rule-black);
-    }
-
-    &.trumbowyg-removeformat-button {
-        @include sprite-pos($removeformat-black);
-    }
-
-    &.trumbowyg-fullscreen-button {
-        @include sprite-pos($fullscreen-black);
-    }
-    &.trumbowyg-close-button {
-        @include sprite-pos($close-black);
-    }
-}
-
-.trumbowyg-fullscreen .trumbowyg-button-pane li button.trumbowyg-fullscreen-button {
-    @include sprite-pos($fullscreen-exit-black);
+    transition: background-color $transition-duration, opacity $transition-duration;
 }
 
 .trumbowyg-button-pane li {
@@ -721,287 +647,5 @@ body.trumbowyg-body-fullscreen {
     }
     &:last-child button {
         margin-right: 6px;
-    }
-}
-
-/* French */
-.trumbowyg-fr .trumbowyg-button-pane li button {
-    &.trumbowyg-bold-button, &.trumbowyg-strong-button {
-        @include sprite-pos($gras-black);
-    }
-    &.trumbowyg-underline-button {
-        @include sprite-pos($souligne-black);
-    }
-    &.trumbowyg-strikethrough-button, &.trumbowyg-del-button {
-        @include sprite-pos($barre-black);
-    }
-}
-
-.trumbowyg-black {
-    .trumbowyg-button-pane li button {
-        background-image: url($icons-white);
-
-        &.trumbowyg-viewHTML-button {
-            @include sprite-pos($view-html-white);
-        }
-        &.trumbowyg-formatting-button {
-            @include sprite-pos($formatting-white);
-        }
-
-        /* English and others */
-        &.trumbowyg-bold-button, &.trumbowyg-strong-button {
-            @include sprite-pos($bold-white);
-        }
-        &.trumbowyg-italic-button, &.trumbowyg-em-button {
-            @include sprite-pos($italic-white);
-        }
-        &.trumbowyg-underline-button {
-            @include sprite-pos($underline-white);
-        }
-        &.trumbowyg-strikethrough-button, &.trumbowyg-del-button {
-            @include sprite-pos($strikethrough-white);
-        }
-
-        &.trumbowyg-link-button {
-            @include sprite-pos($link-white);
-        }
-
-        &.trumbowyg-insertImage-button {
-            @include sprite-pos($image-white);
-        }
-
-        &.trumbowyg-justifyLeft-button {
-            @include sprite-pos($left-align-white);
-        }
-        &.trumbowyg-justifyCenter-button {
-            @include sprite-pos($center-align-white);
-        }
-        &.trumbowyg-justifyRight-button {
-            @include sprite-pos($right-align-white);
-        }
-        &.trumbowyg-justifyFull-button {
-            @include sprite-pos($justify-align-white);
-        }
-
-        &.trumbowyg-unorderedList-button {
-            @include sprite-pos($unordered-list-white);
-        }
-        &.trumbowyg-orderedList-button {
-            @include sprite-pos($ordered-list-white);
-        }
-
-        &.trumbowyg-horizontalRule-button {
-            @include sprite-pos($horizontal-rule-white);
-        }
-
-        &.trumbowyg-removeformat-button {
-            @include sprite-pos($removeformat-white);
-        }
-
-        &.trumbowyg-fullscreen-button {
-            @include sprite-pos($fullscreen-white);
-        }
-        &.trumbowyg-close-button {
-            @include sprite-pos($close-white);
-        }
-    }
-    .trumbowyg-fullscreen .trumbowyg-button-pane li button.trumbowyg-fullscreen-button {
-        @include sprite-pos($fullscreen-exit-white);
-    }
-    .trumbowyg-button-pane li {
-        &:first-child button {
-            margin-left: 6px;
-        }
-        &:last-child button {
-            margin-right: 6px;
-        }
-    }
-
-    /* French */
-    .trumbowyg-fr .trumbowyg-button-pane li button {
-        &.trumbowyg-bold-button, &.trumbowyg-strong-button {
-            @include sprite-pos($gras-white);
-        }
-        &.trumbowyg-underline-button {
-            @include sprite-pos($souligne-white);
-        }
-        &.trumbowyg-strikethrough-button, &.trumbowyg-del-button {
-            @include sprite-pos($barre-white);
-        }
-    }
-}
-
-@media only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 4/3), only screen and (min-device-pixel-ratio: 1.3), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
-    .trumbowyg-button-pane li button {
-        background-size: round($sprite-width-black-2x / 2) round($sprite-height-black-2x / 2) !important;
-        background-image: url($icons-black-2x) !important;
-
-        &.trumbowyg-viewHTML-button {
-            @include sprite-pos($view-html-black-2x, true);
-        }
-        &.trumbowyg-formatting-button {
-            @include sprite-pos($formatting-black-2x, true);
-        }
-
-        /* English and others */
-        &.trumbowyg-bold-button, &.trumbowyg-strong-button {
-            @include sprite-pos($bold-black-2x, true);
-        }
-        &.trumbowyg-italic-button, &.trumbowyg-em-button {
-            @include sprite-pos($italic-black-2x, true);
-        }
-        &.trumbowyg-underline-button {
-            @include sprite-pos($underline-black-2x, true);
-        }
-        &.trumbowyg-strikethrough-button, &.trumbowyg-del-button {
-            @include sprite-pos($strikethrough-black-2x, true);
-        }
-
-        &.trumbowyg-link-button {
-            @include sprite-pos($link-black-2x, true);
-        }
-
-        &.trumbowyg-insertImage-button {
-            @include sprite-pos($image-black-2x, true);
-        }
-
-        &.trumbowyg-justifyLeft-button {
-            @include sprite-pos($left-align-black-2x, true);
-        }
-        &.trumbowyg-justifyCenter-button {
-            @include sprite-pos($center-align-black-2x, true);
-        }
-        &.trumbowyg-justifyRight-button {
-            @include sprite-pos($right-align-black-2x, true);
-        }
-        &.trumbowyg-justifyFull-button {
-            @include sprite-pos($justify-align-black-2x, true);
-        }
-
-        &.trumbowyg-unorderedList-button {
-            @include sprite-pos($unordered-list-black-2x, true);
-        }
-        &.trumbowyg-orderedList-button {
-            @include sprite-pos($ordered-list-black-2x, true);
-        }
-
-        &.trumbowyg-horizontalRule-button {
-            @include sprite-pos($horizontal-rule-black-2x, true);
-        }
-
-        &.trumbowyg-removeformat-button {
-            @include sprite-pos($removeformat-black-2x, true);
-        }
-
-        &.trumbowyg-fullscreen-button {
-            @include sprite-pos($fullscreen-black-2x, true);
-        }
-        &.trumbowyg-close-button {
-            @include sprite-pos($close-black-2x, true);
-        }
-    }
-    .trumbowyg-fullscreen .trumbowyg-button-pane li a.trumbowyg-fullscreen-button {
-        @include sprite-pos($fullscreen-exit-black-2x, true);
-    }
-
-    /* French */
-    .trumbowyg-fr .trumbowyg-button-pane li button {
-        &.trumbowyg-bold-button, &.trumbowyg-strong-button {
-            @include sprite-pos($gras-black-2x, true);
-        }
-        &.trumbowyg-underline-button {
-            @include sprite-pos($souligne-black-2x, true);
-        }
-        &.trumbowyg-strikethrough-button, &.trumbowyg-del-button {
-            @include sprite-pos($barre-black-2x, true);
-        }
-    }
-
-    /* Black theme */
-    .trumbowyg-black {
-        .trumbowyg-button-pane li button {
-            background-size: round($sprite-width-white-2x / 2) round($sprite-height-white-2x / 2) !important;
-            background-image: url($icons-white-2x) !important;
-
-            &.trumbowyg-viewHTML-button {
-                @include sprite-pos($view-html-white-2x, true);
-            }
-            &.trumbowyg-formatting-button {
-                @include sprite-pos($formatting-white-2x, true);
-            }
-
-            /* English and others */
-            &.trumbowyg-bold-button, &.trumbowyg-strong-button {
-                @include sprite-pos($bold-white-2x, true);
-            }
-            &.trumbowyg-italic-button, &.trumbowyg-em-button {
-                @include sprite-pos($italic-white-2x, true);
-            }
-            &.trumbowyg-underline-button {
-                @include sprite-pos($underline-white-2x, true);
-            }
-            &.trumbowyg-strikethrough-button, &.trumbowyg-del-button {
-                @include sprite-pos($strikethrough-white-2x, true);
-            }
-
-            &.trumbowyg-link-button {
-                @include sprite-pos($link-white-2x, true);
-            }
-
-            &.trumbowyg-insertImage-button {
-                @include sprite-pos($image-white-2x, true);
-            }
-
-            &.trumbowyg-justifyLeft-button {
-                @include sprite-pos($left-align-white-2x, true);
-            }
-            &.trumbowyg-justifyCenter-button {
-                @include sprite-pos($center-align-white-2x, true);
-            }
-            &.trumbowyg-justifyRight-button {
-                @include sprite-pos($right-align-white-2x, true);
-            }
-            &.trumbowyg-justifyFull-button {
-                @include sprite-pos($justify-align-white-2x, true);
-            }
-
-            &.trumbowyg-unorderedList-button {
-                @include sprite-pos($unordered-list-white-2x, true);
-            }
-            &.trumbowyg-orderedList-button {
-                @include sprite-pos($ordered-list-white-2x, true);
-            }
-
-            &.trumbowyg-horizontalRule-button {
-                @include sprite-pos($horizontal-rule-white-2x, true);
-            }
-
-            &.trumbowyg-removeformat-button {
-                @include sprite-pos($removeformat-white-2x, true);
-            }
-
-            &.trumbowyg-fullscreen-button {
-                @include sprite-pos($fullscreen-white-2x, true);
-            }
-            &.trumbowyg-close-button {
-                @include sprite-pos($close-white-2x, true);
-            }
-        }
-        .trumbowyg-fullscreen .trumbowyg-button-pane li a.trumbowyg-fullscreen-button {
-            @include sprite-pos($fullscreen-exit-white-2x, true);
-        }
-
-        /* French */
-        .trumbowyg-fr .trumbowyg-button-pane li button {
-            &.trumbowyg-bold-button, &.trumbowyg-strong-button {
-                @include sprite-pos($gras-white-2x, true);
-            }
-            &.trumbowyg-underline-button {
-                @include sprite-pos($souligne-white-2x, true);
-            }
-            &.trumbowyg-strikethrough-button, &.trumbowyg-del-button {
-                @include sprite-pos($barre-white-2x, true);
-            }
-        }
     }
 }

@@ -25,7 +25,6 @@ jQuery.trumbowyg = {
             orderedList: 'Ordered list',
 
             insertImage: 'Insert Image',
-            insertVideo: 'Insert Video',
             link: 'Link',
             createLink: 'Insert link',
             unlink: 'Remove link',
@@ -145,6 +144,38 @@ jQuery.trumbowyg = {
             t.lang = $.trumbowyg.langs.en;
         }
 
+        // SVG path
+        var trumbowygIconsId = 'trumbowyg-icons';
+        if ($('#' + trumbowygIconsId).length === 0) {
+            var svgPath = o.svgPath;
+            if (svgPath == null) {
+                try {
+                    throw new Error();
+                } catch (e) {
+                    var stackLines = e.stack.split('\n');
+
+                    for (var i in stackLines) {
+                        if (!stackLines[i].match(/http[s]?:\/\//)) {
+                            continue;
+                        }
+                        svgPath = stackLines[Number(i)].match(/((http[s]?:\/\/.+\/)([^\/]+\.js)):/)[1].split('/');
+                        svgPath.pop();
+                        svgPath = svgPath.join('/') + '/ui/icons.svg';
+                        break;
+                    }
+                }
+            }
+
+            var div = document.createElement('div');
+            div.id = trumbowygIconsId;
+            document.body.insertBefore(div, document.body.childNodes[0]);
+
+            $.get(svgPath, function (data) {
+                div.innerHTML = new XMLSerializer().serializeToString(data.documentElement);
+            });
+        }
+
+
         // Header translation
         var h = t.lang.header;
 
@@ -160,7 +191,6 @@ jQuery.trumbowyg = {
 
             prefix: 'trumbowyg-',
 
-            // WYSIWYG only
             semantic: true,
             resetCss: false,
             removeformatPasted: false,
@@ -270,7 +300,7 @@ jQuery.trumbowyg = {
 
                 // Dropdowns
                 formatting: {
-                    dropdown: ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4', 'subscript', 'superscript']
+                    dropdown: ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4']
                 },
                 link: {
                     dropdown: ['createLink', 'unlink']
