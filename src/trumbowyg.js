@@ -860,7 +860,7 @@ jQuery.trumbowyg = {
         // HTML Code management
         html: function (html) {
             var t = this;
-            if (html) {
+            if (typeof html !== 'undefined') {
                 t.$ta.val(html);
                 t.syncCode(true);
                 return t;
