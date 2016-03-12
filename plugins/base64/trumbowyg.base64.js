@@ -72,8 +72,7 @@
                         $('input[type=file]').on('change', function (e) {
                             file = e.target.files[0];
                         });
-                    },
-                    ico: 'insertImage'
+                    }
                 }
             }
         }

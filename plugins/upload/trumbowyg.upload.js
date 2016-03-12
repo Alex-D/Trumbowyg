@@ -167,8 +167,7 @@
                                 file = e.target.value;
                             }
                         });
-                    },
-                    ico: 'insertImage'
+                    }
                 }
             }
         }

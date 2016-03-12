@@ -304,8 +304,7 @@ jQuery.trumbowyg = {
                     ico: 'p'
                 },
                 link: {
-                    dropdown: ['createLink', 'unlink'],
-                    ico: 'createLink'
+                    dropdown: ['createLink', 'unlink']
                 }
             },
 
