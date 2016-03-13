@@ -545,27 +545,25 @@ body.trumbowyg-body-fullscreen {
         background-color: $dark-color;
         border-bottom-color: lighten($dark-color, 7%);
 
-        li {
-            &.trumbowyg-separator {
-                background-color: lighten($dark-color, 7%);
-            }
+        .trumbowyg-separator {
+            background-color: lighten($dark-color, 7%);
         }
 
         &.trumbowyg-disable {
-            li.trumbowyg-separator {
+            .trumbowyg-separator {
                 background-color: lighten($dark-color, 3%);
             }
         }
 
-        &:not(.trumbowyg-disable) li button:hover,
-        &:not(.trumbowyg-disable) li button:focus,
-        li button.trumbowyg-active,
-        li.trumbowyg-not-disable button:hover,
-        li.trumbowyg-not-disable button:focus {
+        &:not(.trumbowyg-disable) button:hover,
+        &:not(.trumbowyg-disable) button:focus,
+        .trumbowyg-active,
+        .trumbowyg-not-disable button:hover,
+        .trumbowyg-not-disable button:focus {
             background-color: #555;
         }
 
-        li .trumbowyg-open-dropdown:after {
+        .trumbowyg-open-dropdown:after {
             border-top-color: #fff;
         }
     }

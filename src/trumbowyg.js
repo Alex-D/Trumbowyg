@@ -249,8 +249,12 @@ jQuery.trumbowyg = {
                     fn: 'formatBlock',
                     title: h + ' 4'
                 },
-                subscript: {},
-                superscript: {},
+                subscript: {
+                    tag: 'sub'
+                },
+                superscript: {
+                    tag: 'sup'
+                },
 
                 bold: {
                     key: 'B'
@@ -259,7 +263,9 @@ jQuery.trumbowyg = {
                     key: 'I'
                 },
                 underline: {},
-                strikethrough: {},
+                strikethrough: {
+                    tag: 'strike'
+                },
 
                 strong: {
                     fn: 'bold',
@@ -274,22 +280,33 @@ jQuery.trumbowyg = {
                 },
 
                 createLink: {
-                    key: 'K'
+                    key: 'K',
+                    tag: 'a'
                 },
                 unlink: {},
 
                 insertImage: {},
 
-                justifyLeft: {},
-                justifyCenter: {},
-                justifyRight: {},
-                justifyFull: {},
+                justifyLeft: {
+                    tag: 'left'
+                },
+                justifyCenter: {
+                    tag: 'center'
+                },
+                justifyRight: {
+                    tag: 'right'
+                },
+                justifyFull: {
+                    tag: 'jusitfy'
+                },
 
                 unorderedList: {
-                    fn: 'insertUnorderedList'
+                    fn: 'insertUnorderedList',
+                    tag: 'ul'
                 },
                 orderedList: {
-                    fn: 'insertOrderedList'
+                    fn: 'insertOrderedList',
+                    tag: 'ol'
                 },
 
                 horizontalRule: {
@@ -351,6 +368,9 @@ jQuery.trumbowyg = {
 
         // Keyboard shortcuts are load in this array
         t.keys = [];
+
+        // Tag to button dynamically hydrated
+        t.tagToButton = {};
 
         t.init();
     };
@@ -471,8 +491,14 @@ jQuery.trumbowyg = {
                         t._ctrl = false;
                     }, 200);
                 })
+                .on('mouseup keydown', function () {
+                    t.updateButtonPaneStatus();
+                })
                 .on('focus blur', function (e) {
                     t.$c.trigger('tbw' + e.type);
+                    if (e.type === 'blur') {
+                        $('.' + prefix + 'active-button', t.$btnPane).removeClass(prefix + 'active-button ' + prefix + 'active');
+                    }
                 })
                 .on('cut', function () {
                     t.$c.trigger('tbwchange');
@@ -576,7 +602,7 @@ jQuery.trumbowyg = {
             var t = this,
                 prefix = t.o.prefix,
                 btn = t.o.btnsDef[btnName],
-                d = btn.dropdown,
+                isDropdown = btn.dropdown,
                 textDef = t.lang[btnName] || btnName,
 
                 $btn = $('<button/>', {
@@ -586,7 +612,7 @@ jQuery.trumbowyg = {
                     title: (btn.title || btn.text || textDef) + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
                     tabindex: -1,
                     mousedown: function () {
-                        if (!d || $('.' + btnName + '-' + prefix + 'dropdown', t.$box).is(':hidden')) {
+                        if (!isDropdown || $('.' + btnName + '-' + prefix + 'dropdown', t.$box).is(':hidden')) {
                             $('body', t.doc).trigger('mousedown');
                         }
 
@@ -594,24 +620,25 @@ jQuery.trumbowyg = {
                             return false;
                         }
 
-                        t.execCmd((d ? 'dropdown' : false) || btn.fn || btnName, btn.param || btnName);
+                        t.execCmd((isDropdown ? 'dropdown' : false) || btn.fn || btnName, btn.param || btnName);
 
                         return false;
                     }
                 });
 
-            if (d) {
+            if (isDropdown) {
                 $btn.addClass(prefix + 'open-dropdown');
-                var c = prefix + 'dropdown',
-                    dd = $('<div/>', { // the dropdown
-                        class: btnName + '-' + c + ' ' + c + ' ' + prefix + 'fixed-top'
+                var dropdownPrefix = prefix + 'dropdown',
+                    $dropdown = $('<div/>', { // the dropdown
+                        class: dropdownPrefix + '-' + btnName + ' ' + dropdownPrefix + ' ' + prefix + 'fixed-top',
+                        'data-dropdown': btnName
                     });
-                $.each(d, function (i, def) {
+                $.each(isDropdown, function (i, def) {
                     if (t.o.btnsDef[def] && t.isSupportedBtn(def)) {
-                        dd.append(t.buildSubBtn(def));
+                        $dropdown.append(t.buildSubBtn(def));
                     }
                 });
-                t.$box.append(dd.hide());
+                t.$box.append($dropdown.hide());
             } else if (btn.key) {
                 t.keys[btn.key] = {
                     fn: btn.fn || btnName,
@@ -619,32 +646,38 @@ jQuery.trumbowyg = {
                 };
             }
 
+            if (!isDropdown) {
+                t.tagToButton[btn.tag || btnName] = btnName;
+            }
+
             return $btn;
         },
         // Build a button for dropdown menu
         // @param n : name of the subbutton
-        buildSubBtn: function (n) {
+        buildSubBtn: function (btnName) {
             var t = this,
                 prefix = t.o.prefix,
-                b = t.o.btnsDef[n];
+                btn = t.o.btnsDef[btnName];
 
-            if (b.key) {
-                t.keys[b.key] = {
-                    fn: b.fn || n,
-                    param: b.param || n
+            if (btn.key) {
+                t.keys[btn.key] = {
+                    fn: btn.fn || btnName,
+                    param: btn.param || btnName
                 };
             }
 
+            t.tagToButton[btn.tag || btnName] = btnName;
+
             return $('<button/>', {
                 type: 'button',
-                class: prefix + n + '-dropdown-button' + (b.ico ? ' ' + prefix + b.ico + '-button' : ''),
-                text: b.text || b.title || t.lang[n] || n,
-                title: ((b.key) ? ' (Ctrl + ' + b.key + ')' : null),
-                style: b.style || null,
+                class: prefix + btnName + '-dropdown-button' + (btn.ico ? ' ' + prefix + btn.ico + '-button' : ''),
+                text: btn.text || btn.title || t.lang[btnName] || btnName,
+                title: ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : null),
+                style: btn.style || null,
                 mousedown: function () {
                     $('body', t.doc).trigger('mousedown');
 
-                    t.execCmd(b.fn || n, b.param || n);
+                    t.execCmd(btn.fn || btnName, btn.param || btnName);
 
                     return false;
                 }
@@ -800,14 +833,17 @@ jQuery.trumbowyg = {
             var t = this,
                 d = t.doc,
                 prefix = t.o.prefix,
-                $dd = $('.' + name + '-' + prefix + 'dropdown', t.$box),
-                $btn = $('.' + prefix + name + '-button', t.$btnPane);
+                $dropdown = $('[data-dropdown=' + name + ']', t.$box),
+                $btn = $('.' + prefix + name + '-button', t.$btnPane),
+                show = $dropdown.is(':hidden');
 
-            if ($dd.is(':hidden')) {
+            $('body', d).trigger('mousedown');
+
+            if (show) {
                 var o = $btn.offset().left;
                 $btn.addClass(prefix + 'active');
 
-                $dd.css({
+                $dropdown.css({
                     position: 'absolute',
                     top: $btn.offset().top - t.$btnPane.offset().top + $btn.outerHeight(), //t.$btnPane.outerHeight(),
                     left: (t.o.fixedFullWidth && t.isFixed) ? o + 'px' : (o - t.$btnPane.offset().left) + 'px'
@@ -820,8 +856,6 @@ jQuery.trumbowyg = {
                     $('.' + prefix + 'active', d).removeClass(prefix + 'active');
                     $('body', d).off('mousedown');
                 });
-            } else {
-                $('body', d).trigger('mousedown');
             }
         },
 
@@ -1070,6 +1104,7 @@ jQuery.trumbowyg = {
                 }
 
                 if (cmd !== 'dropdown') {
+                    t.updateButtonPaneStatus();
                     t.$c.trigger('tbwchange');
                 }
             }
@@ -1334,6 +1369,46 @@ jQuery.trumbowyg = {
         },
         getSelectedText: function () {
             return this.selection + '';
+        },
+
+        updateButtonPaneStatus: function () {
+            var t = this,
+                prefix = t.o.prefix,
+                tags = t.getTagsRecursive(t.doc.getSelection().focusNode.parentNode),
+                activeClasses = prefix + 'active-button ' + prefix + 'active';
+
+            $('.' + prefix + 'active-button', t.$btnPane).removeClass(activeClasses);
+            $.each(tags, function (i, tag) {
+                var btnName = t.tagToButton[tag.toLowerCase()],
+                    $btn = $('.' + prefix + btnName + '-button', t.$btnPane);
+
+                if ($btn.length > 0) {
+                    $btn.addClass(activeClasses);
+                } else {
+                    try {
+                        $btn = $('.' + prefix + 'dropdown .' + prefix + btnName + '-dropdown-button', t.$box);
+                        var dropdownBtnName = $btn.parent().data('dropdown');
+                        $('.' + prefix + dropdownBtnName + '-button').addClass(activeClasses);
+                    } catch (e) {
+                    }
+                }
+            });
+        },
+        getTagsRecursive: function (element, tags) {
+            tags = tags || [];
+
+            var tag = element.tagName;
+            if (tag === 'DIV') {
+                return tags;
+            }
+            if (tag === 'P' && element.style.textAlign !== '') {
+                tags.push(element.style.textAlign);
+            }
+            tags.push(tag);
+
+            tags.concat(this.getTagsRecursive(element.parentNode, tags));
+
+            return tags;
         }
     };
 })(navigator, window, document, jQuery);
