@@ -85,7 +85,6 @@ $.extend(true, $.trumbowyg.langs, {
 });
 $('#customized-buttonpane').trumbowyg({
     lang: 'fr',
-    closable: true,
     fixedBtnPane: true,
     btnsDef: {
         // Customizables dropdowns
@@ -104,7 +103,8 @@ $('#customized-buttonpane').trumbowyg({
         '|', 'align',
         '|', 'btnGrp-lists',
         '|', 'image',
-        '|', 'preformatted']
+        '|', 'preformatted',
+        'fullscreen', 'close']
 });
                     </pre></code>
                 </div>
@@ -118,14 +118,14 @@ $('#customized-buttonpane').trumbowyg({
                     <code><pre>
 $('#form-content').trumbowyg({
     lang: 'fr',
-    closable: true,
     mobile: true,
     fixedBtnPane: true,
     fixedFullWidth: true,
     semantic: true,
     resetCss: true,
     autoAjustHeight: true,
-    autogrow: true
+    autogrow: true,
+    btnsAdd: ['close']
 });
                     </pre></code>
                 </textarea>
@@ -186,7 +186,8 @@ $('#form-content').trumbowyg({
 
                     '|', 'upload', 'base64',
                     '|', 'foreColor', 'backColor',
-                    '|', 'preformatted'
+                    '|', 'preformatted',
+                    'fullscreen', 'close'
                 ]
             });
 
@@ -218,7 +219,6 @@ $('#form-content').trumbowyg({
             });
             var customizedButtonPaneTbwOptions = {
                 lang: 'fr',
-                closable: true,
                 fixedBtnPane: true,
                 btnsDef: {
                     // Customizables dropdowns
@@ -238,7 +238,8 @@ $('#form-content').trumbowyg({
                     '|', 'btnGrp-lists',
                     '|', 'image',
                     '|', 'foreColor', 'backColor',
-                    '|', 'preformatted']
+                    '|', 'preformatted',
+                    'fullscreen', 'close']
             };
             $('#customized-buttonpane')
             .trumbowyg(customizedButtonPaneTbwOptions)
@@ -251,7 +252,6 @@ $('#form-content').trumbowyg({
             /** Simple customization with current options **/
             var formTbwOptions = {
                 lang: 'fr',
-                closable: true,
                 mobile: true,
                 fixedBtnPane: true,
                 fixedFullWidth: true,
@@ -267,7 +267,8 @@ $('#form-content').trumbowyg({
                         func: 'bold',
                         key: 'G'
                     }
-                }
+                },
+                btnsAdd: ['close']
             };
             $('#form-content')
             .trumbowyg(formTbwOptions)
@@ -294,11 +295,7 @@ $('#form-content').trumbowyg({
                     + 'tempor pulvinar ac ultricies, placerat in, elementum,'
                     + 'adipiscing pid, mid augue pulvinar eros nisi! In magn'
                     + 'magnis. Porttitor platea turpis nisi. Pulvinar massa,'
-                    + ' habitasse <strong>a nunc rhoncus adipiscing</strong></p>'),
-                optionTbwIframe = {
-                    closable: true,
-                    fullscreenable: false
-                };
+                    + ' habitasse <strong>a nunc rhoncus adipiscing</strong></p>');
 
             setTimeout(function(){
                 var contextIframe = $iframe.contents()[0];
@@ -311,9 +308,9 @@ $('#form-content').trumbowyg({
                 $('body', contextIframe).append($editor);
 
                 $editor
-                .trumbowyg(optionTbwIframe)
+                .trumbowyg()
                 .on('dblclick', function(){
-                    $(this).trumbowyg(optionTbwIframe);
+                    $(this).trumbowyg();
                 });
             }, 500);
 

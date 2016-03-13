@@ -75,7 +75,7 @@
         opts: {
             btnsDef: {
                 upload: {
-                    func: function (params, tbw) {
+                    fn: function (params, tbw) {
                         var file,
                             prefix = tbw.o.prefix;
 

@@ -183,8 +183,6 @@ jQuery.trumbowyg = {
         t.o = $.extend(true, {}, {
             lang: 'en',
 
-            closable: false,
-            fullscreenable: true,
             fixedBtnPane: false,
             fixedFullWidth: false,
             autogrow: false,
@@ -206,7 +204,9 @@ jQuery.trumbowyg = {
                 '|', 'btnGrp-justify',
                 '|', 'btnGrp-lists',
                 '|', 'horizontalRule',
-                '|', 'removeformat'
+                '|', 'removeformat',
+
+                'fullscreen'
             ],
             btnsAdd: [],
 
@@ -298,6 +298,14 @@ jQuery.trumbowyg = {
 
                 removeformat: {},
 
+                fullscreen: {
+                    class: 'trumbowyg-right trumbowyg-not-disable'
+                },
+                close: {
+                    fn: 'destroy',
+                    class: 'trumbowyg-not-disable'
+                },
+
                 // Dropdowns
                 formatting: {
                     dropdown: ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4'],
@@ -311,6 +319,27 @@ jQuery.trumbowyg = {
             inlineElementsSelector: 'a,abbr,acronym,b,caption,cite,code,col,dfn,dir,dt,dd,em,font,hr,i,kbd,li,q,span,strikeout,strong,sub,sup,u',
 
             pasteHandler: function () {
+            },
+
+            imgDblclick: function () {
+                var $img = $(this);
+                t.openModalInsert(t.lang.insertImage, {
+                    url: {
+                        label: 'URL',
+                        value: $img.attr('src'),
+                        required: true
+                    },
+                    alt: {
+                        label: t.lang.description,
+                        value: $img.attr('alt')
+                    }
+                }, function (v) {
+                    return $img.attr({
+                        src: v.url,
+                        alt: v.alt
+                    });
+                });
+                return false;
             }
         }, o);
 
@@ -337,6 +366,8 @@ jQuery.trumbowyg = {
             t.fixedBtnPaneEvents();
 
             t.buildOverlay();
+
+            t.$c.trigger('tbwinit');
         },
 
         buildEditor: function () {
@@ -409,26 +440,7 @@ jQuery.trumbowyg = {
 
             t._ctrl = false;
             t.$ed
-                .on('dblclick', 'img', function () {
-                    var $img = $(this);
-                    t.openModalInsert(t.lang.insertImage, {
-                        url: {
-                            label: 'URL',
-                            value: $img.attr('src'),
-                            required: true
-                        },
-                        alt: {
-                            label: t.lang.description,
-                            value: $img.attr('alt')
-                        }
-                    }, function (v) {
-                        return $img.attr({
-                            src: v.url,
-                            alt: v.alt
-                        });
-                    });
-                    return false;
-                })
+                .on('dblclick', 'img', t.o.imgDblclick)
                 .on('keydown', function (e) {
                     t._composition = (e.which === 229);
 
@@ -519,7 +531,7 @@ jQuery.trumbowyg = {
                 return;
             }
 
-            var $btnPane = t.$btnPane = $('<ul/>', {
+            var $btnPane = t.$btnPane = $('<div/>', {
                 class: prefix + 'button-pane'
             });
 
@@ -539,55 +551,21 @@ jQuery.trumbowyg = {
 
                 $.each(btn, function (i, b) {
                     try { // Prevent buildBtn error
-                        var $li = $('<li/>');
+                        var $item;
 
                         if (b === '|') { // It's a separator
-                            $li.addClass(prefix + 'separator');
+                            $item = $('<div/>', {
+                                class: prefix + 'separator'
+                            });
                         } else if (t.isSupportedBtn(b)) { // It's a supported button
-                            $li.append(t.buildBtn(b));
+                            $item = t.buildBtn(b);
                         }
 
-                        $btnPane.append($li);
+                        $btnPane.append($item);
                     } catch (c) {
                     }
                 });
             });
-
-            // Build right li for fullscreen and close buttons
-            var $liRight = $('<li/>', {
-                class: prefix + 'not-disable ' + prefix + 'buttons-right'
-            });
-
-            // Add the fullscreen button
-            var fullscreenCssClass = prefix + 'fullscreen';
-            if (t.o.fullscreenable) {
-                $liRight.append(
-                    t.buildRightBtn('fullscreen')
-                        .on('click', function () {
-                            t.$box.toggleClass(fullscreenCssClass);
-                            $('body').toggleClass(prefix + 'body-fullscreen', t.$box.hasClass(fullscreenCssClass));
-                            $(window).trigger('scroll');
-                        })
-                );
-            }
-
-            // Build and add close button
-            if (t.o.closable) {
-                $liRight.append(
-                    t.buildRightBtn('close')
-                        .on('click', function () {
-                            t.$box.removeClass(fullscreenCssClass);
-                            t.destroy();
-                            t.$c.trigger('tbwclose');
-                        })
-                );
-            }
-
-
-            // Add right li only if isn't empty
-            if ($liRight.not(':empty')) {
-                $btnPane.append($liRight);
-            }
 
             t.$box.prepend($btnPane);
         },
@@ -603,7 +581,7 @@ jQuery.trumbowyg = {
 
                 $btn = $('<button/>', {
                     type: 'button',
-                    class: prefix + btnName + '-button' + (btn.class || ''),
+                    class: prefix + btnName + '-button ' + (btn.class || ''),
                     html: '<svg><use xlink:href="#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>',
                     title: (btn.title || btn.text || textDef) + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
                     tabindex: -1,
@@ -612,7 +590,7 @@ jQuery.trumbowyg = {
                             $('body', t.doc).trigger('mousedown');
                         }
 
-                        if (t.$btnPane.hasClass(prefix + 'disable') && !$(this).hasClass(prefix + 'active') && !$(this).parent().hasClass(prefix + 'not-disable')) {
+                        if (t.$btnPane.hasClass(prefix + 'disable') && !$(this).hasClass(prefix + 'active') && !$(this).hasClass(prefix + 'not-disable')) {
                             return false;
                         }
 
@@ -670,17 +648,6 @@ jQuery.trumbowyg = {
 
                     return false;
                 }
-            });
-        },
-        // Build a button for right li
-        // @param n : name of the right button
-        buildRightBtn: function (n) {
-            return $('<button/>', {
-                type: 'button',
-                class: this.o.prefix + n + '-button',
-                html: '<svg><use xlink:href="#' + this.o.prefix + n + '"/></svg>',
-                title: this.lang[n],
-                tabindex: -1
             });
         },
         // Check if button is supported
@@ -800,6 +767,7 @@ jQuery.trumbowyg = {
 
             t.$box.remove();
             t.$c.removeData('trumbowyg');
+            $('body').removeClass(prefix + 'body-fullscreen');
         },
 
 
@@ -841,7 +809,7 @@ jQuery.trumbowyg = {
 
                 $dd.css({
                     position: 'absolute',
-                    top: t.$btnPane.outerHeight(),
+                    top: $btn.offset().top - t.$btnPane.offset().top + $btn.outerHeight(), //t.$btnPane.outerHeight(),
                     left: (t.o.fixedFullWidth && t.isFixed) ? o + 'px' : (o - t.$btnPane.offset().left) + 'px'
                 }).show();
 
@@ -1056,6 +1024,18 @@ jQuery.trumbowyg = {
                 return true;
             });
         },
+        fullscreen: function () {
+            var t = this,
+                prefix = t.o.prefix,
+                fullscreenCssClass = prefix + 'fullscreen',
+                isFullscreen;
+
+            t.$box.toggleClass(fullscreenCssClass);
+            isFullscreen = t.$box.hasClass(fullscreenCssClass);
+            $('body').toggleClass(prefix + 'body-fullscreen', isFullscreen);
+            $(window).trigger('scroll');
+            t.$c.trigger('tbw' + (isFullscreen ? 'open' : 'close') + 'fullscreen');
+        },
 
 
         /*
@@ -1116,7 +1096,7 @@ jQuery.trumbowyg = {
             var $modal = $('<div/>', {
                 class: prefix + 'modal ' + prefix + 'fixed-top'
             }).css({
-                top: (t.$btnPane.height() + 1) + 'px'
+                top: t.$btnPane.height()
             }).appendTo(t.$box);
 
             // Click on overlay close modal by cancelling them

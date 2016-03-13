@@ -16,8 +16,6 @@ $transition-duration: 150ms;
 }
 
 .trumbowyg-box {
-    padding-top: 37px;
-
     *,
     *::before,
     *::after {
@@ -79,8 +77,6 @@ $transition-duration: 150ms;
 
 .trumbowyg-box.trumbowyg-editor-visible {
     .trumbowyg-textarea {
-        position: absolute;
-        top: 36px;
         height: 1px !important;
         width: 25%;
         min-height: 0 !important;
@@ -105,25 +101,23 @@ $transition-duration: 150ms;
 }
 
 .trumbowyg-button-pane {
-    position: absolute;
-    top: 0;
-    left: 0;
+    display: flex;
+    flex-flow: row wrap;
     width: 100%;
-    min-height: 37px;
-    background: $light-color;
-    border-bottom: 1px solid darken($light-color, 7%);
+    min-height: 36px;
+    background: $light-color repeating-linear-gradient(transparent, transparent 35px, darken($light-color, 7%) 35px, darken($light-color, 7%), transparent 36px);
     margin: 0;
     padding: 0;
     list-style-type: none;
     line-height: 10px;
     backface-visibility: hidden;
 
-    li {
+    > * {
         display: block;
-        float: left;
         text-align: center;
         overflow: hidden;
         padding: 0 !important;
+        margin-bottom: 1px;
 
         &:first-child button {
             margin-left: 6px;
@@ -138,46 +132,44 @@ $transition-duration: 150ms;
             margin: 0 5px;
             height: 35px;
         }
+    }
 
-        button {
-            display: block;
-            position: relative;
-            width: 35px;
-            height: 35px;
-            padding: 1px 6px !important;
-            overflow: hidden;
-            border: none;
-            cursor: pointer;
-            background: none;
-            transition: background-color $transition-duration, opacity $transition-duration;
+    button {
+        display: block;
+        position: relative;
+        width: 35px;
+        height: 35px;
+        padding: 1px 6px !important;
+        overflow: hidden;
+        border: none;
+        cursor: pointer;
+        background: none;
+        transition: background-color $transition-duration, opacity $transition-duration;
 
-            svg {
-                width: 75%;
-                height: 100%;
-            }
+        svg {
+            width: 75%;
+            height: 100%;
         }
     }
 
     &.trumbowyg-disable {
-        li:not(.trumbowyg-not-disable) button:not(.trumbowyg-active) {
+        button:not(.trumbowyg-not-disable):not(.trumbowyg-active) {
             opacity: 0.2;
             cursor: default;
         }
-        li.trumbowyg-separator {
+        .trumbowyg-separator {
             background: darken($light-color, 3%);
         }
     }
 
-    &:not(.trumbowyg-disable) li button:hover,
-    &:not(.trumbowyg-disable) li button:focus,
-    li button.trumbowyg-active,
-    li.trumbowyg-not-disable button:hover,
-    li.trumbowyg-not-disable button:focus {
+    button:not(.trumbowyg-disable):hover,
+    button:not(.trumbowyg-disable):focus,
+    button.trumbowyg-active {
         background-color: #FFF;
         outline: none;
     }
 
-    li .trumbowyg-open-dropdown:after {
+    .trumbowyg-open-dropdown:after {
         display: block;
         content: " ";
         position: absolute;
@@ -189,13 +181,8 @@ $transition-duration: 150ms;
         border-top-color: #555;
     }
 
-    .trumbowyg-buttons-right {
-        float: right;
-        width: auto;
-
-        button {
-            float: left;
-        }
+    .trumbowyg-right {
+        margin-left: auto;
     }
 }
 
@@ -435,7 +422,6 @@ body.trumbowyg-body-fullscreen {
     .trumbowyg-textarea {
         height: calc(100% - 37px) !important;
         overflow: auto;
-        margin-top: 37px;
     }
     .trumbowyg-overlay {
         height: 100% !important;
