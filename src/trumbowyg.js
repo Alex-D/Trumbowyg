@@ -60,7 +60,9 @@ jQuery.trumbowyg = {
         semantic: ['strong', 'em', 'del'],
         justify: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
         lists: ['unorderedList', 'orderedList']
-    }
+    },
+
+    pluginTagHandlers: []
 };
 
 
@@ -339,7 +341,7 @@ jQuery.trumbowyg = {
             pasteHandler: function () {
             },
 
-            imgDblclick: function () {
+            imgDblClickHandler: function () {
                 var $img = $(this);
                 t.openModalInsert(t.lang.insertImage, {
                     url: {
@@ -461,7 +463,7 @@ jQuery.trumbowyg = {
 
             t._ctrl = false;
             t.$ed
-                .on('dblclick', 'img', t.o.imgDblclick)
+                .on('dblclick', 'img', t.o.imgDblClickHandler)
                 .on('keydown', function (e) {
                     t._composition = (e.which === 229);
 
@@ -492,7 +494,7 @@ jQuery.trumbowyg = {
                         t._ctrl = false;
                     }, 200);
                 })
-                .on('mouseup keydown', function () {
+                .on('mouseup keydown keyup', function () {
                     t.updateButtonPaneStatus();
                 })
                 .on('focus blur', function (e) {
@@ -648,7 +650,7 @@ jQuery.trumbowyg = {
             }
 
             if (!isDropdown) {
-                t.tagToButton[btn.tag || btnName] = btnName;
+                t.tagToButton[(btn.tag || btnName).toLowerCase()] = btnName;
             }
 
             return $btn;
@@ -667,7 +669,7 @@ jQuery.trumbowyg = {
                 };
             }
 
-            t.tagToButton[btn.tag || btnName] = btnName;
+            t.tagToButton[(btn.tag || btnName).toLowerCase()] = btnName;
 
             return $('<button/>', {
                 type: 'button',
@@ -1407,11 +1409,14 @@ jQuery.trumbowyg = {
             if (tag === 'P' && element.style.textAlign !== '') {
                 tags.push(element.style.textAlign);
             }
+
+            $.each($.trumbowyg.pluginTagHandlers, function (i, pluginTagHandler) {
+                tags = tags.concat(pluginTagHandler(element));
+            });
+
             tags.push(tag);
 
-            tags.concat(this.getTagsRecursive(element.parentNode, tags));
-
-            return tags;
+            return this.getTagsRecursive(element.parentNode, tags);
         }
     };
 })(navigator, window, document, jQuery);

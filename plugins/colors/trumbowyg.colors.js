@@ -31,19 +31,12 @@
                 backColor: 'Farba pozadia'
             },
             zh_cn: {
-              foreColor: '文字颜色',
-              backColor: '背景颜色'
+                foreColor: '文字颜色',
+                backColor: '背景颜色'
             }
         }
     });
     // jshint camelcase:true
-
-    // Create btnsDef entry
-    $.extend(true, $.trumbowyg, {
-        opts: {
-            btnsDef: {}
-        }
-    });
 
     // Set default colors
     if (!$.trumbowyg.opts.colors) {
@@ -65,11 +58,41 @@
     });
 
 
+    function hex(x) {
+        return ('0' + parseInt(x).toString(16)).slice(-2);
+    }
+
+    function colorToHex(rgb) {
+        if (rgb.search('rgb') === -1) {
+            return rgb.replace('#', '');
+        } else if (rgb === 'rgba(0, 0, 0, 0)') {
+            return 'transparent';
+        } else {
+            rgb = rgb.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+))?\)$/);
+            return hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+        }
+    }
+
+    $.trumbowyg.pluginTagHandlers.push(function colorPluginTagHandler(element) {
+        var tags = [];
+
+        if (element.style.backgroundColor !== '') {
+            tags.push('backColor' + colorToHex(element.style.backgroundColor));
+        }
+        if (element.style.color !== '') {
+            tags.push('foreColor' + colorToHex(element.style.color));
+        } else if (element.hasAttribute('color')) {
+            tags.push('foreColor' + colorToHex(element.getAttribute('color')));
+        }
+
+        return tags;
+    });
+
     function buildDropdown(fn) {
         var dropdown = [];
 
         $.each($.trumbowyg.opts.colors, function (i, color) {
-            var btn = '_' + fn + color;
+            var btn = fn + color;
             $.trumbowyg.opts.btnsDef[btn] = {
                 fn: fn,
                 param: '#' + color,
@@ -77,7 +100,7 @@
             };
             dropdown.push(btn);
         });
-        var btn = '_' + fn + 'transparent';
+        var btn = fn + 'transparent';
         $.trumbowyg.opts.btnsDef[btn] = {
             fn: fn,
             param: 'transparent',
