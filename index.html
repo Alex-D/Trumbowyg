@@ -134,7 +134,9 @@ $('#form-content').trumbowyg({
 
                 <div id="dynamic-iframe-example"></div>
 
-                <textarea id="placeholder-editor" cols="30" rows="10" placeholder="This is a placeholder..." required></textarea>
+                <div class="trumbowyg-black">
+                    <textarea id="placeholder-editor" cols="30" rows="10" placeholder="This is a placeholder..." required></textarea>
+                </div>
 
                 <button type="submit">Submit</button>
             </form>
@@ -175,7 +177,7 @@ $('#form-content').trumbowyg({
                 btns: [
                     'viewHTML',
                     '|', 'p', 'blockquote', 'h1', 'h2', 'h3', 'h4',
-                    '|', 'bold', 'italic', 'underline', 'strikethrough',
+                    '|', 'strong', 'em', 'underline', 'del',
                     '|', 'superscript', 'subscript',
                     '|', 'createLink', 'unlink',
                     '|', 'insertImage',

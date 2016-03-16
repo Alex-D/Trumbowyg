@@ -197,7 +197,7 @@ jQuery.trumbowyg = {
             btns: [
                 'viewHTML',
                 '|', 'formatting',
-                '|', 'btnGrp-design',
+                '|', 'btnGrp-semantic',
                 '|', 'superscript', 'subscript',
                 '|', 'link',
                 '|', 'insertImage',
@@ -262,7 +262,9 @@ jQuery.trumbowyg = {
                 italic: {
                     key: 'I'
                 },
-                underline: {},
+                underline: {
+                    tag: 'u'
+                },
                 strikethrough: {
                     tag: 'strike'
                 },
@@ -362,8 +364,8 @@ jQuery.trumbowyg = {
 
         if (o.btns) {
             t.o.btns = o.btns;
-        } else if (t.o.semantic) {
-            t.o.btns[4] = 'btnGrp-semantic';
+        } else if (!t.o.semantic) {
+            t.o.btns[4] = 'btnGrp-design';
         }
 
         // Keyboard shortcuts are load in this array
@@ -1388,7 +1390,7 @@ jQuery.trumbowyg = {
                     try {
                         $btn = $('.' + prefix + 'dropdown .' + prefix + btnName + '-dropdown-button', t.$box);
                         var dropdownBtnName = $btn.parent().data('dropdown');
-                        $('.' + prefix + dropdownBtnName + '-button').addClass(activeClasses);
+                        $('.' + prefix + dropdownBtnName + '-button', t.$box).addClass(activeClasses);
                     } catch (e) {
                     }
                 }

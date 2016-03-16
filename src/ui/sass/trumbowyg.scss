@@ -126,11 +126,18 @@ $transition-duration: 150ms;
             margin-right: 6px;
         }
 
+        svg {
+            fill: $dark-color;
+        }
+
         &.trumbowyg-separator {
             width: 1px;
             background: darken($light-color, 7%);
             margin: 0 5px;
             height: 35px;
+        }
+        &.trumbowyg-fullscreen-button svg {
+            color: transparent;
         }
     }
 
@@ -426,6 +433,10 @@ body.trumbowyg-body-fullscreen {
     .trumbowyg-overlay {
         height: 100% !important;
     }
+    .trumbowyg-fullscreen-button svg {
+        color: $dark-color;
+        fill: transparent;
+    }
 }
 
 .trumbowyg-editor {
@@ -545,6 +556,14 @@ body.trumbowyg-body-fullscreen {
         background-color: $dark-color;
         border-bottom-color: lighten($dark-color, 7%);
 
+        > * svg {
+            fill: $light-color;
+            color: $light-color;
+        }
+        .trumbowyg-fullscreen-button svg {
+            color: transparent;
+        }
+
         .trumbowyg-separator {
             background-color: lighten($dark-color, 7%);
         }
@@ -567,6 +586,13 @@ body.trumbowyg-body-fullscreen {
             border-top-color: #fff;
         }
     }
+    .trumbowyg-fullscreen {
+        .trumbowyg-fullscreen-button svg {
+            color: $light-color;
+            fill: transparent;
+        }
+    }
+
     .trumbowyg-dropdown {
         border-color: $dark-color;
         background: $dark-color;
