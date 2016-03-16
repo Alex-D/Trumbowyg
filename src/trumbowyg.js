@@ -205,7 +205,6 @@ jQuery.trumbowyg = {
                 '|', 'btnGrp-lists',
                 '|', 'horizontalRule',
                 '|', 'removeformat',
-
                 'fullscreen'
             ],
             btnsAdd: [],
@@ -299,7 +298,7 @@ jQuery.trumbowyg = {
                     tag: 'right'
                 },
                 justifyFull: {
-                    tag: 'jusitfy'
+                    tag: 'justify'
                 },
 
                 unorderedList: {
@@ -799,6 +798,8 @@ jQuery.trumbowyg = {
                         .show()
                 );
             }
+
+            t.$ed.off('dblclick', 'img');
 
             t.$box.remove();
             t.$c.removeData('trumbowyg');
