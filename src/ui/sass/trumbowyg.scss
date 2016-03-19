@@ -58,6 +58,13 @@ $transition-duration: 150ms;
     * {
         color: transparent !important;
         text-shadow: 0 0 7px #333;
+
+        @media screen and (min-width:0\0) {
+            color: rgba(200, 200, 200, 0.6) !important;
+        }
+        @supports (-ms-accelerator:true) {
+            color: rgba(200, 200, 200, 0.6) !important;
+        }
     }
     img {
         opacity: 0.2;
@@ -105,12 +112,25 @@ $transition-duration: 150ms;
     flex-flow: row wrap;
     width: 100%;
     min-height: 36px;
-    background: $light-color repeating-linear-gradient(transparent, transparent 35px, darken($light-color, 7%) 35px, darken($light-color, 7%), transparent 36px);
+    background: $light-color;
+    border-bottom: 1px solid darken($light-color, 7%);
     margin: 0;
     padding: 0;
     list-style-type: none;
     line-height: 10px;
     backface-visibility: hidden;
+
+    &::after {
+        content: " ";
+        display: block;
+        position: absolute;
+        top: 36px;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 1px;
+        background: darken($light-color, 7%);
+    }
 
     > * {
         display: block;
@@ -119,10 +139,10 @@ $transition-duration: 150ms;
         padding: 0 !important;
         margin-bottom: 1px;
 
-        &:first-child button {
+        &:first-child {
             margin-left: 6px;
         }
-        &:last-child button {
+        &:last-child {
             margin-right: 6px;
         }
 
@@ -154,7 +174,7 @@ $transition-duration: 150ms;
         transition: background-color $transition-duration, opacity $transition-duration;
 
         svg {
-            width: 75%;
+            width: 17px;
             height: 100%;
         }
     }
@@ -455,7 +475,7 @@ body.trumbowyg-body-fullscreen {
     }
 
     /*
-     * Reset for resetCss option
+     * lset for resetCss option
      */
     &.trumbowyg-reset-css {
         background: #FEFEFE !important;

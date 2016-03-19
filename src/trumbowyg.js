@@ -132,6 +132,10 @@ jQuery.trumbowyg = {
         // Get the document of the element. It use to makes the plugin
         // compatible on iframes.
         t.doc = editorElem.ownerDocument || document;
+
+        // Disable image resize in Firefox
+        t.doc.execCommand('enableObjectResizing', false, false);
+
         // jQuery object of the editor
         t.$ta = $(editorElem); // $ta : Textarea
         t.$c = $(editorElem); // $c : creator
