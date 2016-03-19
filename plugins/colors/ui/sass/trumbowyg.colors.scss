@@ -1,5 +1,5 @@
-.foreColor-trumbowyg-dropdown,
-.backColor-trumbowyg-dropdown {
+.trumbowyg-dropdown-foreColor,
+.trumbowyg-dropdown-backColor {
     width: 276px;
     padding: 7px 5px;
 
@@ -19,12 +19,12 @@
             &::after {
                 content: " ";
                 display: block;
-                height: 27px;
-                width: 27px;
-                background: inherit;
                 position: absolute;
                 top: -5px;
                 left: -5px;
+                height: 27px;
+                width: 27px;
+                background: inherit;
                 border: 1px solid #FFF;
                 box-shadow: #000 0 0 2px;
                 z-index: 10;
