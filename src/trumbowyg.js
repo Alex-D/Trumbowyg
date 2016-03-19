@@ -291,16 +291,20 @@ jQuery.trumbowyg = {
                 insertImage: {},
 
                 justifyLeft: {
-                    tag: 'left'
+                    tag: 'left',
+                    forceCss: true
                 },
                 justifyCenter: {
-                    tag: 'center'
+                    tag: 'center',
+                    forceCss: true
                 },
                 justifyRight: {
-                    tag: 'right'
+                    tag: 'right',
+                    forceCss: true
                 },
                 justifyFull: {
-                    tag: 'justify'
+                    tag: 'justify',
+                    forceCss: true
                 },
 
                 unorderedList: {
@@ -623,7 +627,7 @@ jQuery.trumbowyg = {
                             return false;
                         }
 
-                        t.execCmd((isDropdown ? 'dropdown' : false) || btn.fn || btnName, btn.param || btnName);
+                        t.execCmd((isDropdown ? 'dropdown' : false) || btn.fn || btnName, btn.param || btnName, btn.forceCss || false);
 
                         return false;
                     }
@@ -680,7 +684,7 @@ jQuery.trumbowyg = {
                 mousedown: function () {
                     $('body', t.doc).trigger('mousedown');
 
-                    t.execCmd(btn.fn || btnName, btn.param || btnName);
+                    t.execCmd(btn.fn || btnName, btn.param || btnName, btn.forceCss || false);
 
                     return false;
                 }
@@ -1043,7 +1047,7 @@ jQuery.trumbowyg = {
                     documentSelection.addRange(range);
                 }
             }
-            t.execCmd('unlink', undefined, true);
+            t.execCmd('unlink', undefined, undefined, true);
         },
         insertImage: function () {
             var t = this;
@@ -1082,16 +1086,18 @@ jQuery.trumbowyg = {
          * else try to call anonymous function
          * and finaly native execCommand
          */
-        execCmd: function (cmd, param, force) {
+        execCmd: function (cmd, param, forceCss, skipTrumbowyg) {
             var t = this;
-            force = !!force || '';
+            skipTrumbowyg = !!skipTrumbowyg || '';
 
             if (cmd !== 'dropdown') {
                 t.$ed.focus();
             }
 
+            t.doc.execCommand('styleWithCSS', false, forceCss || false);
+
             try {
-                t[cmd + force](param);
+                t[cmd + skipTrumbowyg](param);
             } catch (c) {
                 try {
                     cmd(param, t);

@@ -73,16 +73,32 @@
         }
     }
 
-    $.trumbowyg.pluginTagHandlers.push(function colorPluginTagHandler(element) {
+    $.trumbowyg.pluginTagHandlers.push(function (element) {
         var tags = [];
 
+        // background color
         if (element.style.backgroundColor !== '') {
-            tags.push('backColor' + colorToHex(element.style.backgroundColor));
+            var backColor = colorToHex(element.style.backgroundColor);
+            if ($.trumbowyg.opts.colors.indexOf(backColor) >= 0) {
+                tags.push('backColor' + backColor);
+            } else {
+                tags.push('backColorFree');
+            }
         }
+
+        // text color
+        var foreColor;
         if (element.style.color !== '') {
-            tags.push('foreColor' + colorToHex(element.style.color));
+            foreColor = colorToHex(element.style.color);
         } else if (element.hasAttribute('color')) {
-            tags.push('foreColor' + colorToHex(element.getAttribute('color')));
+            foreColor = colorToHex(element.getAttribute('color'));
+        }
+        if (foreColor) {
+            if ($.trumbowyg.opts.colors.indexOf(foreColor) >= 0) {
+                tags.push('foreColor' + foreColor);
+            } else {
+                tags.push('foreColorFree');
+            }
         }
 
         return tags;
@@ -95,18 +111,45 @@
             var btn = fn + color;
             $.trumbowyg.opts.btnsDef[btn] = {
                 fn: fn,
+                forceCss: true,
                 param: '#' + color,
                 style: 'background-color: #' + color + ';'
             };
             dropdown.push(btn);
         });
-        var btn = fn + 'transparent';
-        $.trumbowyg.opts.btnsDef[btn] = {
-            fn: fn,
-            param: 'transparent',
+
+        var removeColorButtonName = fn + 'Remove';
+        $.trumbowyg.opts.btnsDef[removeColorButtonName] = {
+            fn: 'removeFormat',
+            param: fn,
             style: 'background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAG0lEQVQIW2NkQAAfEJMRmwBYhoGBYQtMBYoAADziAp0jtJTgAAAAAElFTkSuQmCC);'
         };
-        dropdown.push(btn);
+        dropdown.push(removeColorButtonName);
+
+        // add free color btn
+        var freeColorButtonName = fn + 'Free';
+        $.trumbowyg.opts.btnsDef[freeColorButtonName] = {
+            fn: function (params, tbw) {
+                tbw.openModalInsert(tbw.lang[fn],
+                    {
+                        color: {
+                            label: fn,
+                            value: '#FFFFFF'
+                        }
+                    },
+                    // callback
+                    function (values) {
+                        tbw.execCmd(fn, values.color);
+                        return true;
+                    }
+                );
+            },
+            text: '#',
+            // style adjust for displaying the text
+            style: 'text-indent: 0;line-height: 20px;padding: 0 5px;'
+        };
+        dropdown.push(freeColorButtonName);
+
         return dropdown;
     }
 })(jQuery);
