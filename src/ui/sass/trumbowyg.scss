@@ -648,15 +648,16 @@ body.trumbowyg-body-fullscreen {
 
     .trumbowyg-dropdown {
         border-color: $dark-color;
-        background: $dark-color;
+        background: #333;
+        box-shadow: rgba(0, 0, 0, .3) 0 2px 3px;
 
         button {
-            background: $dark-color;
+            background: #333;
             color: #fff !important;
 
             &:hover,
             &:focus {
-                background: #333;
+                background: $dark-color;
             }
         }
     }
