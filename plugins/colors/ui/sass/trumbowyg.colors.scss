@@ -3,6 +3,10 @@
     width: 276px;
     padding: 7px 5px;
 
+    svg {
+        display: none !important;
+    }
+
     button {
         display: block;
         position: relative;

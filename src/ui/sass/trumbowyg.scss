@@ -24,6 +24,12 @@ $transition-duration: 150ms;
     *::after {
         box-sizing: border-box;
     }
+
+    svg {
+        width: 17px;
+        height: 100%;
+        fill: $dark-color;
+    }
 }
 
 .trumbowyg-box,
@@ -143,17 +149,6 @@ $transition-duration: 150ms;
         display: flex;
         flex-flow: row wrap;
 
-        button {
-            display: block;
-            text-align: center;
-            overflow: hidden;
-            padding: 0 !important;
-            margin-bottom: 1px;
-
-            svg {
-                fill: $dark-color;
-            }
-        }
         .trumbowyg-fullscreen-button svg {
             color: transparent;
         }
@@ -174,16 +169,12 @@ $transition-duration: 150ms;
         width: 35px;
         height: 35px;
         padding: 1px 6px !important;
+        margin-bottom: 1px;
         overflow: hidden;
         border: none;
         cursor: pointer;
         background: none;
         transition: background-color $transition-duration, opacity $transition-duration;
-
-        svg {
-            width: 17px;
-            height: 100%;
-        }
     }
 
     &.trumbowyg-disable {
@@ -240,7 +231,7 @@ $transition-duration: 150ms;
         line-height: 35px;
         text-decoration: none;
         background: #FFF;
-        padding: 0 14px;
+        padding: 0 10px;
         color: #333 !important;
         border: none;
         cursor: pointer;
@@ -251,6 +242,11 @@ $transition-duration: 150ms;
         &:hover,
         &:focus {
             background: $light-color;
+        }
+
+        svg {
+            float: left;
+            margin-right: 14px;
         }
     }
 }
@@ -604,6 +600,11 @@ body.trumbowyg-body-fullscreen {
                 }
             }
         }
+
+        svg {
+            fill: $light-color;
+            color: $light-color;
+        }
     }
     .trumbowyg-button-pane {
         background-color: $dark-color;
@@ -616,10 +617,6 @@ body.trumbowyg-body-fullscreen {
         .trumbowyg-button-group {
             &::before {
                 background-color: lighten($dark-color, 7%);
-            }
-            button svg {
-                fill: $light-color;
-                color: $light-color;
             }
             .trumbowyg-fullscreen-button svg {
                 color: transparent;

@@ -682,7 +682,7 @@ jQuery.trumbowyg = {
             return $('<button/>', {
                 type: 'button',
                 class: prefix + btnName + '-dropdown-button' + (btn.ico ? ' ' + prefix + btn.ico + '-button' : ''),
-                text: btn.text || btn.title || t.lang[btnName] || btnName,
+                html: '<svg><use xlink:href="#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' + (btn.text || btn.title || t.lang[btnName] || btnName),
                 title: ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : null),
                 style: btn.style || null,
                 mousedown: function () {
@@ -730,7 +730,7 @@ jQuery.trumbowyg = {
         fixedBtnPaneEvents: function () {
             var t = this,
                 fixedFullWidth = t.o.fixedFullWidth,
-                box = t.$box;
+                $box = t.$box;
 
             if (!t.o.fixedBtnPane) {
                 return;
@@ -740,16 +740,16 @@ jQuery.trumbowyg = {
 
             $(window)
                 .on('scroll resize', function () {
-                    if (!box) {
+                    if (!$box) {
                         return;
                     }
 
                     t.syncCode();
 
                     var scrollTop = $(window).scrollTop(),
-                        offset = box.offset().top + 1,
+                        offset = $box.offset().top + 1,
                         bp = t.$btnPane,
-                        oh = bp.outerHeight();
+                        oh = bp.outerHeight() - 2;
 
                     if ((scrollTop - offset > 0) && ((scrollTop - offset - t.height) < 0)) {
                         if (!t.isFixed) {
@@ -763,10 +763,10 @@ jQuery.trumbowyg = {
                             $([t.$ta, t.$ed]).css({marginTop: bp.height()});
                         }
                         bp.css({
-                            width: fixedFullWidth ? '100%' : ((box.width() - 1) + 'px')
+                            width: fixedFullWidth ? '100%' : (($box.width() - 1) + 'px')
                         });
 
-                        $('.' + t.o.prefix + 'fixed-top', box).css({
+                        $('.' + t.o.prefix + 'fixed-top', $box).css({
                             position: fixedFullWidth ? 'fixed' : 'absolute',
                             top: fixedFullWidth ? oh : oh + (scrollTop - offset) + 'px',
                             zIndex: 15
@@ -775,7 +775,7 @@ jQuery.trumbowyg = {
                         t.isFixed = false;
                         bp.removeAttr('style');
                         $([t.$ta, t.$ed]).css({marginTop: 0});
-                        $('.' + t.o.prefix + 'fixed-top', box).css({
+                        $('.' + t.o.prefix + 'fixed-top', $box).css({
                             position: 'absolute',
                             top: oh
                         });
@@ -858,7 +858,7 @@ jQuery.trumbowyg = {
 
                 $dropdown.css({
                     position: 'absolute',
-                    top: $btn.offset().top - t.$btnPane.offset().top + $btn.outerHeight(), //t.$btnPane.outerHeight(),
+                    top: $btn.offset().top - t.$btnPane.offset().top + $btn.outerHeight(),
                     left: (t.o.fixedFullWidth && t.isFixed) ? o + 'px' : (o - t.$btnPane.offset().left) + 'px'
                 }).show();
 
