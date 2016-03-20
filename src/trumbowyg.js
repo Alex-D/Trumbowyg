@@ -60,8 +60,6 @@ jQuery.trumbowyg = {
 (function (navigator, window, document, $) {
     'use strict';
 
-    // @param : o are options
-    // @param : p are params
     $.fn.trumbowyg = function (options, params) {
         var trumbowygDataName = 'trumbowyg';
         if (options === Object(options) || !options) {
@@ -105,10 +103,6 @@ jQuery.trumbowyg = {
                     case 'empty':
                         return t.empty();
 
-                    // Public options
-                    case 'lang':
-                        return t.lang;
-
                     // HTML
                     case 'html':
                         return t.html(params);
@@ -120,9 +114,8 @@ jQuery.trumbowyg = {
         return false;
     };
 
-    // @param : editorElem is the DOM element
-    // @param : o are options
-    var Trumbowyg = function (editorElem, o) {
+    // @param: editorElem is the DOM element
+    var Trumbowyg = function (editorElem, options) {
         var t = this;
         // Get the document of the element. It use to makes the plugin
         // compatible on iframes.
@@ -133,11 +126,11 @@ jQuery.trumbowyg = {
         t.$c = $(editorElem); // $c : creator
 
         // Extend with options
-        o = $.extend(true, {}, o, $.trumbowyg.opts);
+        options = $.extend(true, {}, options, $.trumbowyg.opts);
 
         // Localization management
-        if (o.lang != null || $.trumbowyg.langs[o.lang] != null) {
-            t.lang = $.extend(true, {}, $.trumbowyg.langs.en, $.trumbowyg.langs[o.lang]);
+        if (options.lang != null || $.trumbowyg.langs[options.lang] != null) {
+            t.lang = $.extend(true, {}, $.trumbowyg.langs.en, $.trumbowyg.langs[options.lang]);
         } else {
             t.lang = $.trumbowyg.langs.en;
         }
@@ -145,7 +138,7 @@ jQuery.trumbowyg = {
         // SVG path
         var trumbowygIconsId = 'trumbowyg-icons';
         if ($('#' + trumbowygIconsId, t.doc).length === 0) {
-            var svgPath = o.svgPath;
+            var svgPath = options.svgPath;
             if (svgPath == null) {
                 try {
                     throw new Error();
@@ -369,10 +362,10 @@ jQuery.trumbowyg = {
             },
 
             pluginTagHandlers: {}
-        }, o);
+        }, options);
 
-        if (o.btns) {
-            t.o.btns = o.btns;
+        if (options.btns) {
+            t.o.btns = options.btns;
         } else if (!t.o.semantic) {
             t.o.btns[4] = 'btnGrp-design';
         }
