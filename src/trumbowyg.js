@@ -133,9 +133,6 @@ jQuery.trumbowyg = {
         // compatible on iframes.
         t.doc = editorElem.ownerDocument || document;
 
-        // Disable image resize in Firefox
-        t.doc.execCommand('enableObjectResizing', false, false);
-
         // jQuery object of the editor
         t.$ta = $(editorElem); // $ta : Textarea
         t.$c = $(editorElem); // $c : creator
@@ -390,6 +387,10 @@ jQuery.trumbowyg = {
         init: function () {
             var t = this;
             t.height = t.$ta.height();
+
+            // Disable image resize in Firefox
+            t.doc.execCommand('enableObjectResizing', false, false);
+            t.doc.execCommand('defaultParagraphSeparator', false, 'p');
 
             t.buildEditor();
             t.buildBtnPane();
@@ -956,8 +957,8 @@ jQuery.trumbowyg = {
                     // Get rid of temporial span's
                     $('[data-tbw]', t.$ed).contents().unwrap();
 
-                    // Replace empty <p> with <br> (IE loves adding empty <p>)
-                    t.$ed.find('p:empty').replaceWith('<br/>');
+                    // Remove empty <p>
+                    t.$ed.find('p:empty').remove();
                 }
 
                 t.restoreSelection();

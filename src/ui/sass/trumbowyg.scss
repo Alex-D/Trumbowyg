@@ -1,6 +1,9 @@
 $light-color: #ecf0f1;
 $dark-color: #222;
 
+$modal-submit-color: #2ecc71;
+$modal-reset-color: #EEE;
+
 $transition-duration: 150ms;
 
 #trumbowyg-icons {
@@ -39,13 +42,14 @@ $transition-duration: 150ms;
 
 .trumbowyg-box.trumbowyg-fullscreen {
     background: #FEFEFE;
+    border: none !important;
 }
 
 .trumbowyg-editor,
 .trumbowyg-textarea {
     position: relative;
     box-sizing: border-box;
-    padding: 1% 2%;
+    padding: 20px;
     min-height: 300px;
     width: 100%;
     border-style: none;
@@ -55,18 +59,20 @@ $transition-duration: 150ms;
 }
 
 .trumbowyg-box-blur .trumbowyg-editor {
-    * {
+    *,
+    &::before {
         color: transparent !important;
         text-shadow: 0 0 7px #333;
 
-        @media screen and (min-width:0\0) {
+        @media screen and (min-width: 0\0) {
             color: rgba(200, 200, 200, 0.6) !important;
         }
         @supports (-ms-accelerator:true) {
             color: rgba(200, 200, 200, 0.6) !important;
         }
     }
-    img {
+    img,
+    hr {
         opacity: 0.2;
     }
 }
@@ -102,9 +108,10 @@ $transition-duration: 150ms;
     }
 }
 
-.trumbowyg-editor[contenteditable=true]:empty:before {
+.trumbowyg-editor[contenteditable=true]:empty::before {
     content: attr(placeholder);
     color: #999;
+    pointer-events: none;
 }
 
 .trumbowyg-button-pane {
@@ -196,7 +203,7 @@ $transition-duration: 150ms;
         outline: none;
     }
 
-    .trumbowyg-open-dropdown:after {
+    .trumbowyg-open-dropdown::after {
         display: block;
         content: " ";
         position: absolute;
@@ -383,7 +390,6 @@ $transition-duration: 150ms;
         font-size: 16px;
         transition: all $transition-duration;
 
-        $modal-submit-color: #2ecc71;
         &.trumbowyg-modal-submit {
             right: 110px;
             background: darken($modal-submit-color, 3%);
@@ -398,7 +404,6 @@ $transition-duration: 150ms;
             }
         }
 
-        $modal-reset-color: #EEE;
         &.trumbowyg-modal-reset {
             color: #555;
             background: darken($modal-reset-color, 3%);
@@ -417,7 +422,7 @@ $transition-duration: 150ms;
 
 .trumbowyg-overlay {
     position: absolute;
-    background-color: rgba(255, 255, 255, .5);
+    background-color: rgba(255, 255, 255, 0.5);
     width: 100%;
     left: 0;
     display: none;
@@ -569,12 +574,40 @@ body.trumbowyg-body-fullscreen {
 }
 
 /*
- * Black theme
+ * Dark theme
  */
-.trumbowyg-black {
+.trumbowyg-dark {
+    .trumbowyg-textarea {
+        background: #111;
+        color: #ddd;
+    }
+    .trumbowyg-box {
+        border: 1px solid lighten($dark-color, 7%);
+
+        &.trumbowyg-fullscreen {
+            background: #111;
+        }
+        &.trumbowyg-box-blur .trumbowyg-editor {
+            *,
+            &::before {
+                text-shadow: 0 0 7px #ccc;
+
+                @media screen and (min-width: 0\0) {
+                    color: rgba(20, 20, 20, 0.6) !important;
+                }
+                @supports (-ms-accelerator:true) {
+                    color: rgba(20, 20, 20, 0.6) !important;
+                }
+            }
+        }
+    }
     .trumbowyg-button-pane {
         background-color: $dark-color;
         border-bottom-color: lighten($dark-color, 7%);
+
+        &::after {
+            background: lighten($dark-color, 7%);
+        }
 
         > * svg {
             fill: $light-color;
@@ -594,15 +627,13 @@ body.trumbowyg-body-fullscreen {
             }
         }
 
-        &:not(.trumbowyg-disable) button:hover,
-        &:not(.trumbowyg-disable) button:focus,
-        .trumbowyg-active,
-        .trumbowyg-not-disable button:hover,
-        .trumbowyg-not-disable button:focus {
-            background-color: #555;
+        button:not(.trumbowyg-disable):hover,
+        button:not(.trumbowyg-disable):focus,
+        button.trumbowyg-active {
+            background-color: #333;
         }
 
-        .trumbowyg-open-dropdown:after {
+        .trumbowyg-open-dropdown::after {
             border-top-color: #fff;
         }
     }
@@ -623,7 +654,7 @@ body.trumbowyg-body-fullscreen {
 
             &:hover,
             &:focus {
-                background: #555;
+                background: #333;
             }
         }
     }
@@ -671,15 +702,41 @@ body.trumbowyg-body-fullscreen {
 
                 &:hover,
                 &:focus {
-                    border-color: #95a5a6;
+                    border-color: lighten($dark-color, 25%);
                 }
                 &:focus {
                     background-color: rgba(230, 230, 255, .1);
                 }
             }
         }
+
+        .trumbowyg-modal-button {
+            &.trumbowyg-modal-submit {
+                background: darken($modal-submit-color, 20%);
+
+                &:hover,
+                &:focus {
+                    background: darken($modal-submit-color, 10%);
+                }
+                &:active {
+                    background: darken($modal-submit-color, 25%);
+                }
+            }
+            &.trumbowyg-modal-reset {
+                background: #333;
+                color: #ccc;
+
+                &:hover,
+                &:focus {
+                    background: #444;
+                }
+                &:active {
+                    background: #111;
+                }
+            }
+        }
     }
     .trumbowyg-overlay {
-        background-color: rgba(0, 0, 0, .5);
+        background-color: rgba(15, 15, 15, 0.6);
     }
 }
