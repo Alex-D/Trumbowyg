@@ -92,12 +92,12 @@ btnsDef: {
     }
 },
 btns: ['viewHTML',
-    '|', 'formatting',
-    '|', 'btnGrp-test',
-    '|', 'align',
-    '|', 'btnGrp-lists',
-    '|', 'image',
-    '|', 'preformatted',
+    ['formatting'],
+    ['btnGrp-test'],
+    ['align'],
+    ['btnGrp-lists'],
+    ['image'],
+    ['preformatted'],
     'fullscreen', 'close']
 });
                 </pre></code>
@@ -184,21 +184,21 @@ btnsAdd: ['close']
             $('#flat-buttonpane')
             .trumbowyg({
                 btns: [
-                    'viewHTML',
-                    '|', 'p', 'blockquote', 'h1', 'h2', 'h3', 'h4',
-                    '|', 'strong', 'em', 'underline', 'del',
-                    '|', 'superscript', 'subscript',
-                    '|', 'createLink', 'unlink',
-                    '|', 'insertImage',
-                    '|', 'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull',
-                    '|', 'unorderedList', 'orderedList',
-                    '|', 'horizontalRule',
-                    '|', 'removeformat',
+                    ['viewHTML'],
+                    ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4'],
+                    ['strong', 'em', 'underline', 'del'],
+                    ['superscript', 'subscript'],
+                    ['createLink', 'unlink'],
+                    ['insertImage'],
+                    ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                    ['unorderedList', 'orderedList'],
+                    ['horizontalRule'],
+                    ['removeformat'],
 
-                    '|', 'upload', 'base64',
-                    '|', 'foreColor', 'backColor',
-                    '|', 'preformatted',
-                    'fullscreen', 'close'
+                    ['upload', 'base64'],
+                    ['foreColor', 'backColor'],
+                    ['preformatted'],
+                    ['fullscreen', 'close']
                 ]
             });
 
@@ -232,15 +232,17 @@ btnsAdd: ['close']
                         ico: 'insertImage'
                     }
                 },
-                btns: ['viewHTML',
-                    '|', 'formatting',
-                    '|', 'btnGrp-test',
-                    '|', 'align',
-                    '|', 'btnGrp-lists',
-                    '|', 'image',
-                    '|', 'foreColor', 'backColor',
-                    '|', 'preformatted',
-                    'fullscreen', 'close']
+                btns: [
+                    ['viewHTML'],
+                    ['formatting'],
+                    ['btnGrp-test'],
+                    ['align'],
+                    ['btnGrp-lists'],
+                    ['image'],
+                    ['foreColor', 'backColor'],
+                    ['preformatted'],
+                    ['fullscreen', 'close']
+                ]
             };
             $('#customized-buttonpane')
             .trumbowyg(customizedButtonPaneTbwOptions)

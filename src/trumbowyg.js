@@ -195,17 +195,17 @@ jQuery.trumbowyg = {
                 lists: ['unorderedList', 'orderedList']
             },
             btns: [
-                'viewHTML',
-                '|', 'formatting',
-                '|', 'btnGrp-semantic',
-                '|', 'superscript', 'subscript',
-                '|', 'link',
-                '|', 'insertImage',
-                '|', 'btnGrp-justify',
-                '|', 'btnGrp-lists',
-                '|', 'horizontalRule',
-                '|', 'removeformat',
-                'fullscreen'
+                ['viewHTML'],
+                ['formatting'],
+                'btnGrp-semantic',
+                ['superscript', 'subscript'],
+                ['link'],
+                ['insertImage'],
+                'btnGrp-justify',
+                'btnGrp-lists',
+                ['horizontalRule'],
+                ['removeformat'],
+                ['fullscreen']
             ],
             btnsAdd: [],
 
@@ -321,7 +321,7 @@ jQuery.trumbowyg = {
                 removeformat: {},
 
                 fullscreen: {
-                    class: 'trumbowyg-right trumbowyg-not-disable'
+                    class: 'trumbowyg-not-disable'
                 },
                 close: {
                     fn: 'destroy',
@@ -572,36 +572,36 @@ jQuery.trumbowyg = {
                 class: prefix + 'button-pane'
             });
 
-            $.each(t.o.btns.concat(t.o.btnsAdd), function (i, btn) {
+            $.each(t.o.btns.concat(t.o.btnsAdd), function (i, btnGrps) {
                 // Managment of group of buttons
                 try {
-                    var b = btn.split('btnGrp-');
+                    var b = btnGrps.split('btnGrp-');
                     if (b[1] != null) {
-                        btn = t.o.btnsGrps[b[1]];
+                        btnGrps = t.o.btnsGrps[b[1]];
                     }
                 } catch (c) {
                 }
 
-                if (!$.isArray(btn)) {
-                    btn = [btn];
+                if (!$.isArray(btnGrps)) {
+                    btnGrps = [btnGrps];
                 }
 
-                $.each(btn, function (i, b) {
+                var $btnGroup = $('<div/>', {
+                    class: prefix + 'button-group ' + ((btnGrps.indexOf('fullscreen') >= 0) ? prefix + 'right' : '')
+                });
+                $.each(btnGrps, function (i, btn) {
                     try { // Prevent buildBtn error
                         var $item;
 
-                        if (b === '|') { // It's a separator
-                            $item = $('<div/>', {
-                                class: prefix + 'separator'
-                            });
-                        } else if (t.isSupportedBtn(b)) { // It's a supported button
-                            $item = t.buildBtn(b);
+                        if (t.isSupportedBtn(btn)) { // It's a supported button
+                            $item = t.buildBtn(btn);
                         }
 
-                        $btnPane.append($item);
+                        $btnGroup.append($item);
                     } catch (c) {
                     }
                 });
+                $btnPane.append($btnGroup);
             });
 
             t.$box.prepend($btnPane);
