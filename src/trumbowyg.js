@@ -75,6 +75,10 @@ jQuery.trumbowyg = {
             try {
                 var t = $(this).data(trumbowygDataName);
                 switch (options) {
+                    // Exec command
+                    case 'execCmd':
+                        return t.execCmd(params.cmd, params.param, params.forceCss);
+
                     // Modal box
                     case 'openModal':
                         return t.openModal(params.title, params.content);
