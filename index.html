@@ -70,11 +70,6 @@ btns: [jQuery.trumbowyg.btnsGrps.semantic]
                     It is not known exactly when the text acquired its current standard form; it may have been as late as the 1960s. The passage was discovered by Richard McClintock, a Latin scholar who is the publications director at Hampden-Sydney College in Virginia, by searching for citings of the rarely used word 'consectetur' in classical literature.
                 </p>
                 <code><pre>
-/*
-* Add your own groups of button
-*/
-$.trumbowyg.btnsGrps.test = ['bold', 'link'];
-
 /* Add new words for customs btnsDef just below */
 $.extend(true, $.trumbowyg.langs, {
 fr: {
@@ -177,6 +172,14 @@ btnsAdd: ['close']
             });
 
 
+            /* Add imagur parameters to upload plugin */
+            $.extend(true, $.trumbowyg.opts.upload, {
+                serverPath: 'https://api.imgur.com/3/image',
+                fileFieldName: 'image',
+                headers: {'Authorization': 'Client-ID 9e57cb1c4791cea'},
+                urlPropertyName: 'data.link'
+            });
+
             /** Full flat button pane **/
             $('#flat-buttonpane')
             .trumbowyg({
@@ -205,19 +208,6 @@ btnsAdd: ['close']
              * Use upload and base64 plugins
              *******************************************************/
 
-            /*
-             * Add your own groups of button
-             */
-            $.trumbowyg.btnsGrps.test = ['bold', 'link'];
-
-            /* Add imagur parameters to upload plugin */
-            $.extend(true, $.trumbowyg.upload, {
-                serverPath: 'https://api.imgur.com/3/image',
-                fileFieldName: 'image',
-                headers: {'Authorization': 'Client-ID 9e57cb1c4791cea'},
-                urlPropertyName: 'data.link'
-            });
-
             /* Add new words for customs btnsDef just below */
             $.extend(true, $.trumbowyg.langs, {
                 fr: {
@@ -228,6 +218,9 @@ btnsAdd: ['close']
             var customizedButtonPaneTbwOptions = {
                 lang: 'fr',
                 fixedBtnPane: true,
+                btnsGrps: {
+                    test: ['strong', 'em'] // Custom nammed group
+                },
                 btnsDef: {
                     // Customizables dropdowns
                     align: {

@@ -27,15 +27,14 @@
             }
         },
 
-        noembed: {
-            proxy: 'https://noembed.com/embed?nowrap=on',
-            urlFiled: 'url',
-            data: [],
-            success: undefined,
-            error: undefined
-        },
-
         opts: {
+            noembed: {
+                proxy: 'https://noembed.com/embed?nowrap=on',
+                urlFiled: 'url',
+                data: [],
+                success: undefined,
+                error: undefined
+            },
             btnsDef: {
                 noembed: {
                     fn: function (params, tbw) {
@@ -54,13 +53,13 @@
                             // Callback
                             function (data) {
                                 $.ajax({
-                                    url: $.trumbowyg.noembed.proxy,
+                                    url: tbw.o.noembed.proxy,
                                     type: 'GET',
                                     data: data,
                                     cache: false,
                                     dataType: 'json',
 
-                                    success: $.trumbowyg.noembed.success || function (data) {
+                                    success: tbw.o.noembed.success || function (data) {
                                         if (data.html) {
                                             tbw.execCmd('insertHTML', $(data.html).unwrap().html());
                                             setTimeout(function () {
@@ -73,7 +72,7 @@
                                             );
                                         }
                                     },
-                                    error: $.trumbowyg.noembed.error || function () {
+                                    error: tbw.o.noembed.error || function () {
                                         tbw.addErrorOnModalField(
                                             $('input[type=text]', $modal),
                                             tbw.lang.noembedError

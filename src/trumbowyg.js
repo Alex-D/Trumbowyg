@@ -53,14 +53,7 @@ jQuery.trumbowyg = {
     },
 
     // User default options
-    opts: {},
-
-    btnsGrps: {
-        design: ['bold', 'italic', 'underline', 'strikethrough'],
-        semantic: ['strong', 'em', 'del'],
-        justify: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
-        lists: ['unorderedList', 'orderedList']
-    }
+    opts: {}
 };
 
 
@@ -195,6 +188,12 @@ jQuery.trumbowyg = {
             removeformatPasted: false,
             tagsToRemove: [],
 
+            btnsGrps: {
+                design: ['bold', 'italic', 'underline', 'strikethrough'],
+                semantic: ['strong', 'em', 'del'],
+                justify: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                lists: ['unorderedList', 'orderedList']
+            },
             btns: [
                 'viewHTML',
                 '|', 'formatting',
@@ -578,7 +577,7 @@ jQuery.trumbowyg = {
                 try {
                     var b = btn.split('btnGrp-');
                     if (b[1] != null) {
-                        btn = $.trumbowyg.btnsGrps[b[1]];
+                        btn = t.o.btnsGrps[b[1]];
                     }
                 } catch (c) {
                 }

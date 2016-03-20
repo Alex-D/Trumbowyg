@@ -60,19 +60,18 @@
         },
         // jshint camelcase:true
 
-        upload: {
-            serverPath: './src/plugins/upload/trumbowyg.upload.php',
-            fileFieldName: 'fileToUpload',
-            data: [],
-            headers: {},
-            xhrFields: {},
-            urlPropertyName: 'file',
-            statusPropertyName: 'success',
-            success: undefined,
-            error: undefined
-        },
-
         opts: {
+            upload: {
+                serverPath: './src/plugins/upload/trumbowyg.upload.php',
+                fileFieldName: 'fileToUpload',
+                data: [],
+                headers: {},
+                xhrFields: {},
+                urlPropertyName: 'file',
+                statusPropertyName: 'success',
+                success: undefined,
+                error: undefined
+            },
             btnsDef: {
                 upload: {
                     fn: function (params, tbw) {
@@ -97,9 +96,9 @@
                             // Callback
                             function (values) {
                                 var data = new FormData();
-                                data.append($.trumbowyg.upload.fileFieldName, file);
+                                data.append(tbw.o.upload.fileFieldName, file);
 
-                                $.trumbowyg.upload.data.map(function (cur) {
+                                tbw.o.upload.data.map(function (cur) {
                                     data.append(cur.name, cur.value);
                                 });
 
@@ -117,9 +116,9 @@
                                 }
 
                                 $.ajax({
-                                    url: $.trumbowyg.upload.serverPath,
-                                    headers: $.trumbowyg.upload.headers,
-                                    xhrFields: $.trumbowyg.upload.xhrFields,
+                                    url: tbw.o.upload.serverPath,
+                                    headers: tbw.o.upload.headers,
+                                    xhrFields: tbw.o.upload.xhrFields,
                                     type: 'POST',
                                     data: data,
                                     cache: false,
@@ -133,9 +132,9 @@
                                         }, 200);
                                     },
 
-                                    success: $.trumbowyg.upload.success || function (data) {
-                                        if (!!getDeep(data, $.trumbowyg.upload.statusPropertyName.split('.'))) {
-                                            var url = getDeep(data, $.trumbowyg.upload.urlPropertyName.split('.'));
+                                    success: tbw.o.upload.success || function (data) {
+                                        if (!!getDeep(data, tbw.o.upload.statusPropertyName.split('.'))) {
+                                            var url = getDeep(data, tbw.o.upload.urlPropertyName.split('.'));
                                             tbw.execCmd('insertImage', url);
                                             $('img[src="' + url + '"]:not([alt])', tbw.$box).attr('alt', values.alt);
                                             setTimeout(function () {
@@ -148,7 +147,7 @@
                                             );
                                         }
                                     },
-                                    error: $.trumbowyg.upload.error || function () {
+                                    error: tbw.o.upload.error || function () {
                                         tbw.addErrorOnModalField(
                                             $('input[type=file]', $modal),
                                             tbw.lang.uploadError
