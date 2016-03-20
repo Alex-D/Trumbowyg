@@ -157,7 +157,7 @@ btnsAdd: ['close']
             .on('dblclick', function(){
                 $(this).trumbowyg();
             })
-            .on('tbwfocus tbwblur tbwchange tbwresize tbwpaste tbwclose', function(e){
+            .on('tbwinit tbwfocus tbwblur tbwchange tbwresize tbwpaste tbwopenfullscreen tbwclosefullscreen tbwclose', function(e){
                 console.log(e.type);
             });
 
