@@ -60,9 +60,7 @@ jQuery.trumbowyg = {
         semantic: ['strong', 'em', 'del'],
         justify: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
         lists: ['unorderedList', 'orderedList']
-    },
-
-    pluginTagHandlers: []
+    }
 };
 
 
@@ -365,7 +363,9 @@ jQuery.trumbowyg = {
                     });
                 });
                 return false;
-            }
+            },
+
+            pluginTagHandlers: {}
         }, o);
 
         if (o.btns) {
@@ -1421,7 +1421,7 @@ jQuery.trumbowyg = {
                 tags.push(element.style.textAlign);
             }
 
-            $.each($.trumbowyg.pluginTagHandlers, function (i, pluginTagHandler) {
+            $.each(this.o.pluginTagHandlers, function (i, pluginTagHandler) {
                 tags = tags.concat(pluginTagHandler(element));
             });
 
