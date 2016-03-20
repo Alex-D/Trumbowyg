@@ -89,7 +89,8 @@
                                     required: true
                                 },
                                 alt: {
-                                    label: 'description'
+                                    label: 'description',
+                                    value: tbw.getRangeText()
                                 }
                             },
 

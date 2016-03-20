@@ -83,15 +83,15 @@ jQuery.trumbowyg = {
                     case 'openModalInsert':
                         return t.openModalInsert(params.title, params.fields, params.callback);
 
-                    // Selection
-                    case 'saveSelection':
-                        return t.saveSelection();
-                    case 'getSelection':
-                        return t.selection;
-                    case 'getSelectedText':
-                        return t.getSelectedText();
-                    case 'restoreSelection':
-                        return t.restoreSelection();
+                    // Range
+                    case 'saveRange':
+                        return t.saveRange();
+                    case 'getRange':
+                        return t.range;
+                    case 'getRangeText':
+                        return t.getRangeText();
+                    case 'restoreRange':
+                        return t.restoreRange();
 
                     // Destroy
                     case 'destroy':
@@ -905,7 +905,7 @@ jQuery.trumbowyg = {
         // @param full  : wrap text nodes in <p>
         semanticCode: function (force, full) {
             var t = this;
-            t.saveSelection();
+            t.saveRange();
             t.syncCode(force);
 
             if (t.o.tagsToRemove.length > 0) {
@@ -946,7 +946,7 @@ jQuery.trumbowyg = {
 
                     // Unwrap paragraphs content, containing nothing usefull
                     t.$ed.find('p').filter(function () {
-                        if (t.selection && this === t.selection.startContainer) {
+                        if (t.range && this === t.range.startContainer) {
                             // Don't remove currently being edited element
                             return false;
                         }
@@ -960,7 +960,7 @@ jQuery.trumbowyg = {
                     t.$ed.find('p:empty').remove();
                 }
 
-                t.restoreSelection();
+                t.restoreRange();
 
                 t.$ta.val(t.$ed.html());
             }
@@ -1002,7 +1002,7 @@ jQuery.trumbowyg = {
                 documentSelection.addRange(range);
             }
 
-            t.saveSelection();
+            t.saveRange();
 
             t.openModalInsert(t.lang.createLink, {
                 url: {
@@ -1016,7 +1016,7 @@ jQuery.trumbowyg = {
                 },
                 text: {
                     label: t.lang.text,
-                    value: t.getSelectedText()
+                    value: t.getRangeText()
                 },
                 target: {
                     label: t.lang.target,
@@ -1030,8 +1030,8 @@ jQuery.trumbowyg = {
                 if (v.target.length > 0) {
                     link.attr('target', v.target);
                 }
-                t.selection.deleteContents();
-                t.selection.insertNode(link[0]);
+                t.range.deleteContents();
+                t.range.insertNode(link[0]);
                 return true;
             });
         },
@@ -1055,7 +1055,7 @@ jQuery.trumbowyg = {
         },
         insertImage: function () {
             var t = this;
-            t.saveSelection();
+            t.saveRange();
             t.openModalInsert(t.lang.insertImage, {
                 url: {
                     label: 'URL',
@@ -1063,7 +1063,7 @@ jQuery.trumbowyg = {
                 },
                 alt: {
                     label: t.lang.description,
-                    value: t.getSelectedText()
+                    value: t.getRangeText()
                 }
             }, function (v) { // v are values
                 t.execCmd('insertImage', v.url);
@@ -1136,7 +1136,7 @@ jQuery.trumbowyg = {
                 return false;
             }
 
-            t.saveSelection();
+            t.saveRange();
             t.showOverlay();
 
             // Disable all btnPane btns
@@ -1237,7 +1237,7 @@ jQuery.trumbowyg = {
                 t.hideOverlay();
             });
 
-            t.restoreSelection();
+            t.restoreRange();
         },
         // Preformated build and management modal
         openModalInsert: function (title, fields, cmd) {
@@ -1278,7 +1278,7 @@ jQuery.trumbowyg = {
                     });
 
                     if (valid) {
-                        t.restoreSelection();
+                        t.restoreRange();
 
                         if (cmd(values, fields)) {
                             t.syncCode();
@@ -1314,39 +1314,38 @@ jQuery.trumbowyg = {
         },
 
 
-        // Selection management
-        saveSelection: function () {
+        // Range management
+        saveRange: function () {
             var t = this,
                 documentSelection = t.doc.getSelection();
 
-            t.selection = null;
+            t.range = null;
 
             if (documentSelection.rangeCount) {
-                var savedSelection = t.selection = documentSelection.getRangeAt(0),
+                var savedRange = t.range = documentSelection.getRangeAt(0),
                     range = t.doc.createRange(),
                     rangeStart;
                 range.selectNodeContents(t.$ed[0]);
-                range.setEnd(savedSelection.startContainer, savedSelection.startOffset);
+                range.setEnd(savedRange.startContainer, savedRange.startOffset);
                 rangeStart = (range + '').length;
-                t.metaSelection = {
+                t.metaRange = {
                     start: rangeStart,
-                    end: rangeStart + (savedSelection + '').length
+                    end: rangeStart + (savedRange + '').length
                 };
             }
-
         },
-        restoreSelection: function () {
+        restoreRange: function () {
             var t = this,
-                metaSelection = t.metaSelection,
-                savedSelection = t.selection,
+                metaRange = t.metaRange,
+                savedRange = t.range,
                 documentSelection = t.doc.getSelection(),
                 range;
 
-            if (!savedSelection) {
+            if (!savedRange) {
                 return;
             }
 
-            if (metaSelection && metaSelection.start !== metaSelection.end) { // Algorithm from http://jsfiddle.net/WeWy7/3/
+            if (metaRange && metaRange.start !== metaRange.end) { // Algorithm from http://jsfiddle.net/WeWy7/3/
                 var charIndex = 0,
                     nodeStack = [t.$ed[0]],
                     node,
@@ -1358,12 +1357,12 @@ jQuery.trumbowyg = {
                 while (!stop && (node = nodeStack.pop())) {
                     if (node.nodeType === 3) {
                         var nextCharIndex = charIndex + node.length;
-                        if (!foundStart && metaSelection.start >= charIndex && metaSelection.start <= nextCharIndex) {
-                            range.setStart(node, metaSelection.start - charIndex);
+                        if (!foundStart && metaRange.start >= charIndex && metaRange.start <= nextCharIndex) {
+                            range.setStart(node, metaRange.start - charIndex);
                             foundStart = true;
                         }
-                        if (foundStart && metaSelection.end >= charIndex && metaSelection.end <= nextCharIndex) {
-                            range.setEnd(node, metaSelection.end - charIndex);
+                        if (foundStart && metaRange.end >= charIndex && metaRange.end <= nextCharIndex) {
+                            range.setEnd(node, metaRange.end - charIndex);
                             stop = true;
                         }
                         charIndex = nextCharIndex;
@@ -1380,10 +1379,10 @@ jQuery.trumbowyg = {
             }
 
             documentSelection.removeAllRanges();
-            documentSelection.addRange(range || savedSelection);
+            documentSelection.addRange(range || savedRange);
         },
-        getSelectedText: function () {
-            return this.selection + '';
+        getRangeText: function () {
+            return this.range + '';
         },
 
         updateButtonPaneStatus: function () {
