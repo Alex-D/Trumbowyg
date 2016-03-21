@@ -331,6 +331,8 @@ jQuery.trumbowyg = {
                 ['removeformat'],
                 ['fullscreen']
             ],
+            // For custom button definitions
+            btnsDef: {},
 
             inlineElementsSelector: 'a,abbr,acronym,b,caption,cite,code,col,dfn,dir,dt,dd,em,font,hr,i,kbd,li,q,span,strikeout,strong,sub,sup,u',
 
@@ -377,6 +379,10 @@ jQuery.trumbowyg = {
         } else if (!t.o.semantic) {
             t.o.btns[4] = 'btnGrp-design';
         }
+
+        $.each(t.o.btnsDef, function (btnName, btnDef) {
+            t.addBtnDef(btnName, btnDef);
+        });
 
         // Keyboard shortcuts are load in this array
         t.keys = [];
