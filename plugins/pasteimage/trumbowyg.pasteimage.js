@@ -12,22 +12,26 @@
     'use strict';
 
     $.extend(true, $.trumbowyg, {
-        opts: {
-            pasteHandler: function (pasteEvent, tbw) {
-                try {
-                    var items = (pasteEvent.originalEvent || pasteEvent).clipboardData.items,
-                        reader;
+        plugins: {
+            pasteImage: {
+                init: function (trumbowyg) {
+                    trumbowyg.pasteHandlers.push(function (pasteEvent) {
+                        try {
+                            var items = (pasteEvent.originalEvent || pasteEvent).clipboardData.items,
+                                reader;
 
-                    if (items[0].type.match(/^image\//)) {
-                        reader = new FileReader();
-                        /* jshint -W083 */
-                        reader.onloadend = function (event) {
-                            tbw.execCmd('insertImage', event.target.result, true);
-                        };
-                        /* jshint +W083 */
-                        reader.readAsDataURL(items[0].getAsFile());
-                    }
-                } catch (c) {
+                            if (items[0].type.match(/^image\//)) {
+                                reader = new FileReader();
+                                /* jshint -W083 */
+                                reader.onloadend = function (event) {
+                                    trumbowyg.execCmd('insertImage', event.target.result, undefined, true);
+                                };
+                                /* jshint +W083 */
+                                reader.readAsDataURL(items[0].getAsFile());
+                            }
+                        } catch (c) {
+                        }
+                    });
                 }
             }
         }

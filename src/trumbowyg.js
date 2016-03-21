@@ -52,8 +52,8 @@ jQuery.trumbowyg = {
         }
     },
 
-    // User default options
-    opts: {}
+    // Plugins
+    plugins: {}
 };
 
 
@@ -116,7 +116,9 @@ jQuery.trumbowyg = {
 
     // @param: editorElem is the DOM element
     var Trumbowyg = function (editorElem, options) {
-        var t = this;
+        var t = this,
+            trumbowygIconsId = 'trumbowyg-icons';
+
         // Get the document of the element. It use to makes the plugin
         // compatible on iframes.
         t.doc = editorElem.ownerDocument || document;
@@ -125,8 +127,7 @@ jQuery.trumbowyg = {
         t.$ta = $(editorElem); // $ta : Textarea
         t.$c = $(editorElem); // $c : creator
 
-        // Extend with options
-        options = $.extend(true, {}, options, $.trumbowyg.opts);
+        options = options || {};
 
         // Localization management
         if (options.lang != null || $.trumbowyg.langs[options.lang] != null) {
@@ -136,7 +137,6 @@ jQuery.trumbowyg = {
         }
 
         // SVG path
-        var trumbowygIconsId = 'trumbowyg-icons';
         if ($('#' + trumbowygIconsId, t.doc).length === 0) {
             var svgPath = options.svgPath;
             if (svgPath == null) {
@@ -167,8 +167,135 @@ jQuery.trumbowyg = {
         }
 
 
-        // Header translation
-        var h = t.lang.header;
+        /**
+         * When the button is associated to a empty object
+         * fn and title attributs are defined from the button key value
+         *
+         * For example
+         *      foo: {}
+         * is equivalent to :
+         *      foo: {
+             *          fn: 'foo',
+             *          title: this.lang.foo
+             *      }
+         */
+        var h = t.lang.header; // Header translation
+        t.btnsDef = {
+            viewHTML: {
+                fn: 'toggle'
+            },
+
+            p: {
+                fn: 'formatBlock'
+            },
+            blockquote: {
+                fn: 'formatBlock'
+            },
+            h1: {
+                fn: 'formatBlock',
+                title: h + ' 1'
+            },
+            h2: {
+                fn: 'formatBlock',
+                title: h + ' 2'
+            },
+            h3: {
+                fn: 'formatBlock',
+                title: h + ' 3'
+            },
+            h4: {
+                fn: 'formatBlock',
+                title: h + ' 4'
+            },
+            subscript: {
+                tag: 'sub'
+            },
+            superscript: {
+                tag: 'sup'
+            },
+
+            bold: {
+                key: 'B'
+            },
+            italic: {
+                key: 'I'
+            },
+            underline: {
+                tag: 'u'
+            },
+            strikethrough: {
+                tag: 'strike'
+            },
+
+            strong: {
+                fn: 'bold',
+                key: 'B'
+            },
+            em: {
+                fn: 'italic',
+                key: 'I'
+            },
+            del: {
+                fn: 'strikethrough'
+            },
+
+            createLink: {
+                key: 'K',
+                tag: 'a'
+            },
+            unlink: {},
+
+            insertImage: {},
+
+            justifyLeft: {
+                tag: 'left',
+                forceCss: true
+            },
+            justifyCenter: {
+                tag: 'center',
+                forceCss: true
+            },
+            justifyRight: {
+                tag: 'right',
+                forceCss: true
+            },
+            justifyFull: {
+                tag: 'justify',
+                forceCss: true
+            },
+
+            unorderedList: {
+                fn: 'insertUnorderedList',
+                tag: 'ul'
+            },
+            orderedList: {
+                fn: 'insertOrderedList',
+                tag: 'ol'
+            },
+
+            horizontalRule: {
+                fn: 'insertHorizontalRule'
+            },
+
+            removeformat: {},
+
+            fullscreen: {
+                class: 'trumbowyg-not-disable'
+            },
+            close: {
+                fn: 'destroy',
+                class: 'trumbowyg-not-disable'
+            },
+
+            // Dropdowns
+            formatting: {
+                dropdown: ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4'],
+                ico: 'p'
+            },
+            link: {
+                dropdown: ['createLink', 'unlink']
+            }
+        };
 
         // Defaults Options
         t.o = $.extend(true, {}, {
@@ -204,141 +331,10 @@ jQuery.trumbowyg = {
                 ['removeformat'],
                 ['fullscreen']
             ],
-            btnsAdd: [],
-
-            /**
-             * When the button is associated to a empty object
-             * fn and title attributs are defined from the button key value
-             *
-             * For example
-             *      foo: {}
-             * is equivalent to :
-             *      foo: {
-             *          fn: 'foo',
-             *          title: this.lang.foo
-             *      }
-             */
-            btnsDef: {
-                viewHTML: {
-                    fn: 'toggle'
-                },
-
-                p: {
-                    fn: 'formatBlock'
-                },
-                blockquote: {
-                    fn: 'formatBlock'
-                },
-                h1: {
-                    fn: 'formatBlock',
-                    title: h + ' 1'
-                },
-                h2: {
-                    fn: 'formatBlock',
-                    title: h + ' 2'
-                },
-                h3: {
-                    fn: 'formatBlock',
-                    title: h + ' 3'
-                },
-                h4: {
-                    fn: 'formatBlock',
-                    title: h + ' 4'
-                },
-                subscript: {
-                    tag: 'sub'
-                },
-                superscript: {
-                    tag: 'sup'
-                },
-
-                bold: {
-                    key: 'B'
-                },
-                italic: {
-                    key: 'I'
-                },
-                underline: {
-                    tag: 'u'
-                },
-                strikethrough: {
-                    tag: 'strike'
-                },
-
-                strong: {
-                    fn: 'bold',
-                    key: 'B'
-                },
-                em: {
-                    fn: 'italic',
-                    key: 'I'
-                },
-                del: {
-                    fn: 'strikethrough'
-                },
-
-                createLink: {
-                    key: 'K',
-                    tag: 'a'
-                },
-                unlink: {},
-
-                insertImage: {},
-
-                justifyLeft: {
-                    tag: 'left',
-                    forceCss: true
-                },
-                justifyCenter: {
-                    tag: 'center',
-                    forceCss: true
-                },
-                justifyRight: {
-                    tag: 'right',
-                    forceCss: true
-                },
-                justifyFull: {
-                    tag: 'justify',
-                    forceCss: true
-                },
-
-                unorderedList: {
-                    fn: 'insertUnorderedList',
-                    tag: 'ul'
-                },
-                orderedList: {
-                    fn: 'insertOrderedList',
-                    tag: 'ol'
-                },
-
-                horizontalRule: {
-                    fn: 'insertHorizontalRule'
-                },
-
-                removeformat: {},
-
-                fullscreen: {
-                    class: 'trumbowyg-not-disable'
-                },
-                close: {
-                    fn: 'destroy',
-                    class: 'trumbowyg-not-disable'
-                },
-
-                // Dropdowns
-                formatting: {
-                    dropdown: ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4'],
-                    ico: 'p'
-                },
-                link: {
-                    dropdown: ['createLink', 'unlink']
-                }
-            },
 
             inlineElementsSelector: 'a,abbr,acronym,b,caption,cite,code,col,dfn,dir,dt,dd,em,font,hr,i,kbd,li,q,span,strikeout,strong,sub,sup,u',
 
-            pasteHandler: function () {
-            },
+            pasteHandlers: [],
 
             imgDblClickHandler: function () {
                 var $img = $(this);
@@ -361,7 +357,7 @@ jQuery.trumbowyg = {
                 return false;
             },
 
-            pluginTagHandlers: {}
+            plugins: {}
         }, options);
 
         if (options.btns) {
@@ -375,6 +371,10 @@ jQuery.trumbowyg = {
 
         // Tag to button dynamically hydrated
         t.tagToButton = {};
+        t.tagHandlers = [];
+
+        // Admit multiple paste handlers
+        t.pasteHandlers = [].concat(t.o.pasteHandlers);
 
         t.init();
     };
@@ -383,6 +383,8 @@ jQuery.trumbowyg = {
         init: function () {
             var t = this;
             t.height = t.$ta.height();
+
+            t.initPlugins();
 
             // Disable image resize in Firefox
             t.doc.execCommand('enableObjectResizing', false, false);
@@ -396,6 +398,10 @@ jQuery.trumbowyg = {
             t.buildOverlay();
 
             t.$c.trigger('tbwinit');
+        },
+
+        addBtnDef: function (btnName, btnDef) {
+            this.btnsDef[btnName] = btnDef;
         },
 
         buildEditor: function () {
@@ -532,7 +538,10 @@ jQuery.trumbowyg = {
                         }
                     }
 
-                    t.o.pasteHandler(e, t);
+                    // Call pasteHandlers
+                    $.each(t.pasteHandlers, function (i, pasteHandler) {
+                        pasteHandler(e);
+                    });
 
                     setTimeout(function () {
                         if (t.o.semantic) {
@@ -556,7 +565,7 @@ jQuery.trumbowyg = {
         },
 
 
-        // Build button pane, use o.btns and o.btnsAdd options
+        // Build button pane, use o.btns option
         buildBtnPane: function () {
             var t = this,
                 prefix = t.o.prefix;
@@ -569,7 +578,7 @@ jQuery.trumbowyg = {
                 class: prefix + 'button-pane'
             });
 
-            $.each(t.o.btns.concat(t.o.btnsAdd), function (i, btnGrps) {
+            $.each(t.o.btns, function (i, btnGrps) {
                 // Managment of group of buttons
                 try {
                     var b = btnGrps.split('btnGrp-');
@@ -609,7 +618,7 @@ jQuery.trumbowyg = {
         buildBtn: function (btnName) { // btnName is name of the button
             var t = this,
                 prefix = t.o.prefix,
-                btn = t.o.btnsDef[btnName],
+                btn = t.btnsDef[btnName],
                 isDropdown = btn.dropdown,
                 textDef = t.lang[btnName] || btnName,
 
@@ -642,7 +651,7 @@ jQuery.trumbowyg = {
                         'data-dropdown': btnName
                     });
                 $.each(isDropdown, function (i, def) {
-                    if (t.o.btnsDef[def] && t.isSupportedBtn(def)) {
+                    if (t.btnsDef[def] && t.isSupportedBtn(def)) {
                         $dropdown.append(t.buildSubBtn(def));
                     }
                 });
@@ -665,7 +674,7 @@ jQuery.trumbowyg = {
         buildSubBtn: function (btnName) {
             var t = this,
                 prefix = t.o.prefix,
-                btn = t.o.btnsDef[btnName];
+                btn = t.btnsDef[btnName];
 
             if (btn.key) {
                 t.keys[btn.key] = {
@@ -807,6 +816,8 @@ jQuery.trumbowyg = {
             }
 
             t.$ed.off('dblclick', 'img');
+
+            t.destroyPlugins();
 
             t.$box.remove();
             t.$c.removeData('trumbowyg');
@@ -1101,7 +1112,7 @@ jQuery.trumbowyg = {
                 t[cmd + skipTrumbowyg](param);
             } catch (c) {
                 try {
-                    cmd(param, t);
+                    cmd(param);
                 } catch (e2) {
                     if (cmd === 'insertHorizontalRule') {
                         param = null;
@@ -1406,6 +1417,7 @@ jQuery.trumbowyg = {
             });
         },
         getTagsRecursive: function (element, tags) {
+            var t = this;
             tags = tags || [];
 
             var tag = element.tagName;
@@ -1416,13 +1428,33 @@ jQuery.trumbowyg = {
                 tags.push(element.style.textAlign);
             }
 
-            $.each(this.o.pluginTagHandlers, function (i, pluginTagHandler) {
-                tags = tags.concat(pluginTagHandler(element));
+            $.each(t.tagHandlers, function (i, tagHandler) {
+                tags = tags.concat(tagHandler(element, t));
             });
 
             tags.push(tag);
 
-            return this.getTagsRecursive(element.parentNode, tags);
+            return t.getTagsRecursive(element.parentNode, tags);
+        },
+
+        // Plugins
+        initPlugins: function () {
+            var t = this;
+            t.loadedPlugins = [];
+            $.each($.trumbowyg.plugins, function (name, plugin) {
+                if (!plugin.shouldInit || plugin.shouldInit(t)) {
+                    plugin.init(t);
+                    if (plugin.tagHandler) {
+                        t.tagHandlers.push(plugin.tagHandler);
+                    }
+                    t.loadedPlugins.push(plugin);
+                }
+            });
+        },
+        destroyPlugins: function () {
+            $.each(this.loadedPlugins, function (i, plugin) {
+                plugin.destroy();
+            });
         }
     };
 })(navigator, window, document, jQuery);

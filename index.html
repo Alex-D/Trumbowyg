@@ -145,11 +145,12 @@ btnsAdd: ['close']
         <script src="bower_components/jquery/dist/jquery.min.js"></script>
         <script src="dist/trumbowyg.js"></script>
         <script src="dist/langs/fr.min.js"></script>
-        <script src="dist/plugins/upload/trumbowyg.upload.js"></script>
         <script src="dist/plugins/base64/trumbowyg.base64.js"></script>
         <script src="dist/plugins/colors/trumbowyg.colors.js"></script>
+        <script src="dist/plugins/noembed/trumbowyg.noembed.js"></script>
         <script src="dist/plugins/pasteimage/trumbowyg.pasteimage.js"></script>
         <script src="dist/plugins/preformatted/trumbowyg.preformatted.js"></script>
+        <script src="dist/plugins/upload/trumbowyg.upload.js"></script>
         <script>
             /** Default editor configuration **/
             $('#default-editor, #empty-textarea')
@@ -173,12 +174,12 @@ btnsAdd: ['close']
 
 
             /* Add imagur parameters to upload plugin */
-            $.extend(true, $.trumbowyg.opts.upload, {
+            var uploadOptions = {
                 serverPath: 'https://api.imgur.com/3/image',
                 fileFieldName: 'image',
                 headers: {'Authorization': 'Client-ID 9e57cb1c4791cea'},
                 urlPropertyName: 'data.link'
-            });
+            };
 
             /** Full flat button pane **/
             $('#flat-buttonpane')
@@ -195,11 +196,14 @@ btnsAdd: ['close']
                     ['horizontalRule'],
                     ['removeformat'],
 
-                    ['upload', 'base64'],
+                    ['upload', 'base64', 'noembed'],
                     ['foreColor', 'backColor'],
                     ['preformatted'],
                     ['fullscreen', 'close']
-                ]
+                ],
+                plugins: {
+                    upload: uploadOptions
+                }
             });
 
 

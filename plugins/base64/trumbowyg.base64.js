@@ -9,6 +9,10 @@
 (function ($) {
     'use strict';
 
+    var isSupported = function () {
+        return typeof FileReader !== 'undefined';
+    };
+
     $.extend(true, $.trumbowyg, {
         langs: {
             // jshint camelcase:false
@@ -26,54 +30,59 @@
                 file: 'Soubor'
             },
             zh_cn: {
-              base64: '图片（Base64编码）',
-              file: '文件'
+                base64: '图片（Base64编码）',
+                file: '文件'
             }
         },
         // jshint camelcase:true
 
-        opts: {
-            btnsDef: {
-                base64: {
-                    isSupported: function () {
-                        return typeof FileReader !== 'undefined';
-                    },
-                    fn: function (params, tbw) {
-                        var file;
-                        tbw.openModalInsert(
-                            // Title
-                            tbw.lang.base64,
+        plugins: {
+            base64: {
+                shouldInit: isSupported,
+                init: function (trumbowyg) {
+                    var btnDef = {
+                        isSupported: isSupported,
+                        fn: function () {
+                            trumbowyg.saveRange();
+                            
+                            var file;
+                            trumbowyg.openModalInsert(
+                                // Title
+                                trumbowyg.lang.base64,
 
-                            // Fields
-                            {
-                                file: {
-                                    type: 'file',
-                                    required: true
+                                // Fields
+                                {
+                                    file: {
+                                        type: 'file',
+                                        required: true
+                                    },
+                                    alt: {
+                                        label: 'description',
+                                        value: trumbowyg.getRangeText()
+                                    }
                                 },
-                                alt: {
-                                    label: 'description',
-                                    value: tbw.getRangeText()
+
+                                // Callback
+                                function (values) {
+                                    var fReader = new FileReader();
+
+                                    fReader.onloadend = function () {
+                                        trumbowyg.execCmd('insertImage', fReader.result);
+                                        $(['img[src="', fReader.result, '"]:not([alt])'].join(''), trumbowyg.$box).attr('alt', values.alt);
+                                        trumbowyg.closeModal();
+                                    };
+
+                                    fReader.readAsDataURL(file);
                                 }
-                            },
+                            );
 
-                            // Callback
-                            function (values) {
-                                var fReader = new FileReader();
+                            $('input[type=file]').on('change', function (e) {
+                                file = e.target.files[0];
+                            });
+                        }
+                    };
 
-                                fReader.onloadend = function () {
-                                    tbw.execCmd('insertImage', fReader.result);
-                                    $(['img[src="', fReader.result, '"]:not([alt])'].join(''), tbw.$box).attr('alt', values.alt);
-                                    tbw.closeModal();
-                                };
-
-                                fReader.readAsDataURL(file);
-                            }
-                        );
-
-                        $('input[type=file]').on('change', function (e) {
-                            file = e.target.files[0];
-                        });
-                    }
+                    trumbowyg.addBtnDef('base64', btnDef);
                 }
             }
         }

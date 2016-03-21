@@ -28,26 +28,30 @@
         },
         // jshint camelcase:true
 
-        opts: {
-            btnsDef: {
-                preformatted: {
-                    fn: function (params, tbw) {
-                        tbw.saveRange();
-                        var text = tbw.getRangeText();
-                        if (text.replace(/\s/g, '') !== '') {
-                            try {
-                                var curtag = getSelectionParentElement().tagName.toLowerCase();
-                                if (curtag === 'code' || curtag === 'pre') {
-                                    return unwrapCode();
+        plugins: {
+            preformatted: {
+                init: function (trumbowyg) {
+                    var btnDef = {
+                        fn: function () {
+                            trumbowyg.saveRange();
+                            var text = trumbowyg.getRangeText();
+                            if (text.replace(/\s/g, '') !== '') {
+                                try {
+                                    var curtag = getSelectionParentElement().tagName.toLowerCase();
+                                    if (curtag === 'code' || curtag === 'pre') {
+                                        return unwrapCode();
+                                    }
+                                    else {
+                                        trumbowyg.execCmd('insertHTML', '<pre><code>' + strip(text) + '</code></pre>');
+                                    }
+                                } catch (e) {
                                 }
-                                else {
-                                    tbw.execCmd('insertHTML', '<pre><code>' + strip(text) + '</code></pre>');
-                                }
-                            } catch (e) {
                             }
-                        }
-                    },
-                    tag: 'pre'
+                        },
+                        tag: 'pre'
+                    };
+
+                    trumbowyg.addBtnDef('preformatted', btnDef);
                 }
             }
         }

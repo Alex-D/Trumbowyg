@@ -11,6 +11,18 @@
 (function ($) {
     'use strict';
 
+    var defaultOptions = {
+        serverPath: './src/plugins/upload/trumbowyg.upload.php',
+        fileFieldName: 'fileToUpload',
+        data: [],
+        headers: {},
+        xhrFields: {},
+        urlPropertyName: 'file',
+        statusPropertyName: 'success',
+        success: undefined,
+        error: undefined
+    };
+
     function getDeep(object, propertyParts) {
         var mainProperty = propertyParts.shift(),
             otherProperties = propertyParts;
@@ -60,114 +72,110 @@
         },
         // jshint camelcase:true
 
-        opts: {
+        plugins: {
             upload: {
-                serverPath: './src/plugins/upload/trumbowyg.upload.php',
-                fileFieldName: 'fileToUpload',
-                data: [],
-                headers: {},
-                xhrFields: {},
-                urlPropertyName: 'file',
-                statusPropertyName: 'success',
-                success: undefined,
-                error: undefined
-            },
-            btnsDef: {
-                upload: {
-                    fn: function (params, tbw) {
-                        var file,
-                            prefix = tbw.o.prefix;
+                init: function (trumbowyg) {
+                    trumbowyg.o.plugins.upload = $.extend(true, {}, defaultOptions, trumbowyg.o.plugins.upload || {});
+                    var btnDef = {
+                            fn: function () {
+                                trumbowyg.saveRange();
 
-                        var $modal = tbw.openModalInsert(
-                            // Title
-                            tbw.lang.upload,
+                                var file,
+                                    prefix = trumbowyg.o.prefix;
 
-                            // Fields
-                            {
-                                file: {
-                                    type: 'file',
-                                    required: true
-                                },
-                                alt: {
-                                    label: 'description',
-                                    value: tbw.getRangeText()
-                                }
-                            },
+                                var $modal = trumbowyg.openModalInsert(
+                                    // Title
+                                    trumbowyg.lang.upload,
 
-                            // Callback
-                            function (values) {
-                                var data = new FormData();
-                                data.append(tbw.o.upload.fileFieldName, file);
-
-                                tbw.o.upload.data.map(function (cur) {
-                                    data.append(cur.name, cur.value);
-                                });
-
-                                if ($('.' + prefix + 'progress', $modal).length === 0) {
-                                    $('.' + prefix + 'modal-title', $modal)
-                                        .after(
-                                            $('<div/>', {
-                                                'class': prefix + 'progress'
-                                            }).append(
-                                                $('<div/>', {
-                                                    'class': prefix + 'progress-bar'
-                                                })
-                                            )
-                                        );
-                                }
-
-                                $.ajax({
-                                    url: tbw.o.upload.serverPath,
-                                    headers: tbw.o.upload.headers,
-                                    xhrFields: tbw.o.upload.xhrFields,
-                                    type: 'POST',
-                                    data: data,
-                                    cache: false,
-                                    dataType: 'json',
-                                    processData: false,
-                                    contentType: false,
-
-                                    progressUpload: function (e) {
-                                        $('.' + prefix + 'progress-bar').stop().animate({
-                                            width: Math.round(e.loaded * 100 / e.total) + '%'
-                                        }, 200);
-                                    },
-
-                                    success: tbw.o.upload.success || function (data) {
-                                        if (!!getDeep(data, tbw.o.upload.statusPropertyName.split('.'))) {
-                                            var url = getDeep(data, tbw.o.upload.urlPropertyName.split('.'));
-                                            tbw.execCmd('insertImage', url);
-                                            $('img[src="' + url + '"]:not([alt])', tbw.$box).attr('alt', values.alt);
-                                            setTimeout(function () {
-                                                tbw.closeModal();
-                                            }, 250);
-                                        } else {
-                                            tbw.addErrorOnModalField(
-                                                $('input[type=file]', $modal),
-                                                tbw.lang[data.message]
-                                            );
+                                    // Fields
+                                    {
+                                        file: {
+                                            type: 'file',
+                                            required: true
+                                        },
+                                        alt: {
+                                            label: 'description',
+                                            value: trumbowyg.getRangeText()
                                         }
                                     },
-                                    error: tbw.o.upload.error || function () {
-                                        tbw.addErrorOnModalField(
-                                            $('input[type=file]', $modal),
-                                            tbw.lang.uploadError
-                                        );
+
+                                    // Callback
+                                    function (values) {
+                                        var data = new FormData();
+                                        data.append(trumbowyg.o.plugins.upload.fileFieldName, file);
+
+                                        trumbowyg.o.plugins.upload.data.map(function (cur) {
+                                            data.append(cur.name, cur.value);
+                                        });
+
+                                        if ($('.' + prefix + 'progress', $modal).length === 0) {
+                                            $('.' + prefix + 'modal-title', $modal)
+                                                .after(
+                                                    $('<div/>', {
+                                                        'class': prefix + 'progress'
+                                                    }).append(
+                                                        $('<div/>', {
+                                                            'class': prefix + 'progress-bar'
+                                                        })
+                                                    )
+                                                );
+                                        }
+
+                                        $.ajax({
+                                            url: trumbowyg.o.plugins.upload.serverPath,
+                                            headers: trumbowyg.o.plugins.upload.headers,
+                                            xhrFields: trumbowyg.o.plugins.upload.xhrFields,
+                                            type: 'POST',
+                                            data: data,
+                                            cache: false,
+                                            dataType: 'json',
+                                            processData: false,
+                                            contentType: false,
+
+                                            progressUpload: function (e) {
+                                                $('.' + prefix + 'progress-bar').stop().animate({
+                                                    width: Math.round(e.loaded * 100 / e.total) + '%'
+                                                }, 200);
+                                            },
+
+                                            success: trumbowyg.o.plugins.upload.success || function (data) {
+                                                if (!!getDeep(data, trumbowyg.o.plugins.upload.statusPropertyName.split('.'))) {
+                                                    var url = getDeep(data, trumbowyg.o.plugins.upload.urlPropertyName.split('.'));
+                                                    trumbowyg.execCmd('insertImage', url);
+                                                    $('img[src="' + url + '"]:not([alt])', trumbowyg.$box).attr('alt', values.alt);
+                                                    setTimeout(function () {
+                                                        trumbowyg.closeModal();
+                                                    }, 250);
+                                                } else {
+                                                    trumbowyg.addErrorOnModalField(
+                                                        $('input[type=file]', $modal),
+                                                        trumbowyg.lang[data.message]
+                                                    );
+                                                }
+                                            },
+                                            error: trumbowyg.o.plugins.upload.error || function () {
+                                                trumbowyg.addErrorOnModalField(
+                                                    $('input[type=file]', $modal),
+                                                    trumbowyg.lang.uploadError
+                                                );
+                                            }
+                                        });
+                                    }
+                                );
+
+                                $('input[type=file]').on('change', function (e) {
+                                    try {
+                                        // If multiple files allowed, we just get the first.
+                                        file = e.target.files[0];
+                                    } catch (err) {
+                                        // In IE8, multiple files not allowed
+                                        file = e.target.value;
                                     }
                                 });
                             }
-                        );
+                        };
 
-                        $('input[type=file]').on('change', function (e) {
-                            try {
-                                // If multiple files allowed, we just get the first.
-                                file = e.target.files[0];
-                            } catch (err) {
-                                // In IE8, multiple files not allowed
-                                file = e.target.value;
-                            }
-                        });
-                    }
+                    trumbowyg.addBtnDef('upload', btnDef);
                 }
             }
         }

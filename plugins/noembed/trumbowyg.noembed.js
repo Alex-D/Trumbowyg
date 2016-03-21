@@ -9,6 +9,14 @@
 (function ($) {
     'use strict';
 
+    var defaultOptions = {
+        proxy: 'https://noembed.com/embed?nowrap=on',
+        urlFiled: 'url',
+        data: [],
+        success: undefined,
+        error: undefined
+    };
+
     $.extend(true, $.trumbowyg, {
         langs: {
             en: {
@@ -27,62 +35,61 @@
             }
         },
 
-        opts: {
+        plugins: {
             noembed: {
-                proxy: 'https://noembed.com/embed?nowrap=on',
-                urlFiled: 'url',
-                data: [],
-                success: undefined,
-                error: undefined
-            },
-            btnsDef: {
-                noembed: {
-                    fn: function (params, tbw) {
-                        var $modal = tbw.openModalInsert(
-                            // Title
-                            tbw.lang.noembed,
+                init: function (trumbowyg) {
+                    trumbowyg.o.plugins.noembed = $.extend(true, {}, defaultOptions, trumbowyg.o.plugins.noembed || {});
 
-                            // Fields
-                            {
-                                url: {
-                                    label: 'URL',
-                                    required: true
-                                }
-                            },
+                    var btnDef = {
+                        fn: function () {
+                            var $modal = trumbowyg.openModalInsert(
+                                // Title
+                                trumbowyg.lang.noembed,
 
-                            // Callback
-                            function (data) {
-                                $.ajax({
-                                    url: tbw.o.noembed.proxy,
-                                    type: 'GET',
-                                    data: data,
-                                    cache: false,
-                                    dataType: 'json',
+                                // Fields
+                                {
+                                    url: {
+                                        label: 'URL',
+                                        required: true
+                                    }
+                                },
 
-                                    success: tbw.o.noembed.success || function (data) {
-                                        if (data.html) {
-                                            tbw.execCmd('insertHTML', $(data.html).unwrap().html());
-                                            setTimeout(function () {
-                                                tbw.closeModal();
-                                            }, 250);
-                                        } else {
-                                            tbw.addErrorOnModalField(
+                                // Callback
+                                function (data) {
+                                    $.ajax({
+                                        url: trumbowyg.o.plugins.noembed.proxy,
+                                        type: 'GET',
+                                        data: data,
+                                        cache: false,
+                                        dataType: 'json',
+
+                                        success: trumbowyg.o.plugins.noembed.success || function (data) {
+                                            if (data.html) {
+                                                trumbowyg.execCmd('insertHTML', $(data.html).unwrap().html());
+                                                setTimeout(function () {
+                                                    trumbowyg.closeModal();
+                                                }, 250);
+                                            } else {
+                                                trumbowyg.addErrorOnModalField(
+                                                    $('input[type=text]', $modal),
+                                                    data.error
+                                                );
+                                            }
+                                        },
+                                        error: trumbowyg.o.plugins.noembed.error || function () {
+                                            trumbowyg.addErrorOnModalField(
                                                 $('input[type=text]', $modal),
-                                                data.error
+                                                trumbowyg.lang.noembedError
                                             );
                                         }
-                                    },
-                                    error: tbw.o.noembed.error || function () {
-                                        tbw.addErrorOnModalField(
-                                            $('input[type=text]', $modal),
-                                            tbw.lang.noembedError
-                                        );
-                                    }
-                                });
-                            }
-                        );
-                    },
-                    ico: 'insertImage'
+                                    });
+                                }
+                            );
+                        },
+                        ico: 'insertImage'
+                    };
+
+                    trumbowyg.addBtnDef('noembed', btnDef);
                 }
             }
         }
