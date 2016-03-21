@@ -337,11 +337,18 @@ jQuery.trumbowyg = {
             pasteHandlers: [],
 
             imgDblClickHandler: function () {
-                var $img = $(this);
+                var $img = $(this),
+                    src = $img.attr('src'),
+                    base64 = '(Base64)';
+
+                if (src.indexOf('data:image') === 0) {
+                    src = base64;
+                }
+
                 t.openModalInsert(t.lang.insertImage, {
                     url: {
                         label: 'URL',
-                        value: $img.attr('src'),
+                        value: src,
                         required: true
                     },
                     alt: {
@@ -349,10 +356,15 @@ jQuery.trumbowyg = {
                         value: $img.attr('alt')
                     }
                 }, function (v) {
-                    return $img.attr({
-                        src: v.url,
+                    if (v.src !== base64) {
+                        $img.attr({
+                            src: v.src
+                        });
+                    }
+                    $img.attr({
                         alt: v.alt
                     });
+                    return true;
                 });
                 return false;
             },
