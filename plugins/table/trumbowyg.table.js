@@ -1,5 +1,5 @@
 /* ===========================================================
- * trumbowyg.table.js v1.0
+ * trumbowyg.table.js v1.1
  * Upload plugin for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
@@ -10,31 +10,37 @@
 (function($) {
     'use strict';
 
+    var defaultOptions = {
+        rows: 0,
+        columns: 0,
+        styler: ''
+    };
+
     $.extend(true, $.trumbowyg, {
         langs: {
             en: {
-                createTable: 'Create Table',
+                table: 'Create Table',
                 rows: 'Rows',
                 columns: 'Columns',
                 styler: 'Table Class',
                 error: 'Error'
             },
             sk: {
-                createTable: 'Vytvoriť tabuľky',
+                table: 'Vytvoriť tabuľky',
                 rows: 'Riadky',
                 columns: 'Stĺpce',
                 styler: 'Tabuľku triedy',
                 error: 'Chyba'
             },
             fr: {
-                createTable: 'Créez Table',
+                table: 'Créez Table',
                 rows: 'Lignes',
                 columns: 'Colonnes',
                 styler: 'Classe de table',
                 error: 'Erreur'
             },
             cs: {
-                createTable: 'Vytvořit příkaz Table',
+                table: 'Vytvořit příkaz Table',
                 rows: 'Řádky',
                 columns: 'Sloupce',
                 styler: 'Tabulku třída',
@@ -45,12 +51,15 @@
         plugins: {
             table: {
                 init: function (trumbowyg) {
+                    trumbowyg.o.plugins.table = $.extend(true, {}, defaultOptions, trumbowyg.o.plugins.table || {});
+
                     var btnDef = {
                         fn: function () {
-                        trumbowyg.saveSelection();
+                        trumbowyg.saveRange();
                         trumbowyg.openModalInsert(
+
                             // Title
-                            trumbowyg.lang.createTable,
+                           trumbowyg.lang.table,
 
                             // Fields
                             {
@@ -68,21 +77,20 @@
                                 }
                             },
                             function(v) { // v is value
-                                var table = $('<table></table>');
+                                var tabler = $('<table></table>');
                                 if (v.styler.length !== 0) {
-                                    table.addClass(v.styler);
+                                    tabler.addClass(v.styler);
                                 }
 
                                 for (var i = 0; i < v.rows; i += 1) {
-                                    var row = $('<tr></tr>').appendTo(table);
+                                    var row = $('<tr></tr>').appendTo(tabler);
                                     for (var j = 0; j < v.columns; j += 1) {
                                         $('<td></td>').appendTo(row);
                                     }
 
                                 }
-                                trumbowyg.selection.deleteContents();
-                                trumbowyg.selection.insertNode(table.get(0));
-                                trumbowyg.restoreSelection();
+                                trumbowyg.range.deleteContents();
+                                trumbowyg.range.insertNode(tabler[0]);
                                 return true;
                             });
                         }
