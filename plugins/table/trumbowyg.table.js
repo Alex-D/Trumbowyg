@@ -45,6 +45,8 @@
         plugins: {
             table: {
                 init: function (trumbowyg) {
+                    var btnDef = {
+                        fn: function () {
                         trumbowyg.saveSelection();
                         trumbowyg.openModalInsert(
                             // Title
@@ -68,13 +70,12 @@
                             function(v) { // v is value
                                 var table = $('<table></table>');
                                 if (v.styler.length !== 0) {
-                                    table.addClass(styler);
+                                    table.addClass(v.styler);
                                 }
 
-                                var tr = [];
-                                for (var i = 0; i < v.rows; i++) {
+                                for (var i = 0; i < v.rows; i += 1) {
                                     var row = $('<tr></tr>').appendTo(table);
-                                    for (var j = 0; j < v.columns; j++) {
+                                    for (var j = 0; j < v.columns; j += 1) {
                                         $('<td></td>').appendTo(row);
                                     }
 
@@ -84,9 +85,10 @@
                                 trumbowyg.restoreSelection();
                                 return true;
                             });
-                    }
-                },
-                trumbowyg.addBtnDef('table', btnDef);
+                        }
+                    };
+                    trumbowyg.addBtnDef('table', btnDef);
+                }
             }
         }
     });
