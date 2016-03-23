@@ -42,15 +42,13 @@
             }
         },
 
-        opts: {
-            btnsDef: {
-                createTable: {
-                    func: function(params, tbw) {
-                        var t = tbw;
-                        t.saveSelection();
-                        t.openModalInsert(
+        plugins: {
+            table: {
+                init: function (trumbowyg) {
+                        trumbowyg.saveSelection();
+                        trumbowyg.openModalInsert(
                             // Title
-                            tbw.lang.createTable,
+                            trumbowyg.lang.createTable,
 
                             // Fields
                             {
@@ -63,7 +61,7 @@
                                     required: true
                                 },
                                 styler: {
-                                    label: t.lang.styler,
+                                    label: trumbowyg.lang.styler,
                                     type: 'text'
                                 }
                             },
@@ -81,14 +79,14 @@
                                     }
 
                                 }
-                                t.selection.deleteContents();
-                                t.selection.insertNode(table.get(0));
-                                t.restoreSelection();
+                                trumbowyg.selection.deleteContents();
+                                trumbowyg.selection.insertNode(table.get(0));
+                                trumbowyg.restoreSelection();
                                 return true;
                             });
                     }
                 },
-                ico: 'createTable'
+                trumbowyg.addBtnDef('table', btnDef);
             }
         }
     });
