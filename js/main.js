@@ -1,6 +1,8 @@
+'use strict';
+
 hljs.initHighlightingOnLoad();
 
-(function ($, undefined) {
+(function ($) {
     if ($.trumbowyg) {
         // Add imagur parameters to upload plugin
         $.extend(true, $.trumbowyg.upload, {

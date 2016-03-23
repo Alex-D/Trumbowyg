@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp = require('gulp'),
     del = require('del'),
     vinylPaths = require('vinyl-paths'),
@@ -13,15 +15,15 @@ gulp.task('clean', function(){
         .pipe(vinylPaths(del));
 });
 
-gulp.task("styles", function(){
+gulp.task('styles', function(){
   return gulp.src(mainStyle)
     .pipe($.sass({
       sass: 'sass',
       includePaths: ['sass']
     }))
-    .pipe($.autoprefixer(["last 1 version", "> 1%", "ff >= 20", "ie >= 8", "opera >= 12", "Android >= 2.2"], { cascade: true }))
+    .pipe($.autoprefixer(['last 1 version', '> 1%', 'ff >= 20', 'ie >= 8', 'opera >= 12', 'Android >= 2.2'], { cascade: true }))
     .pipe($.minifyCss())
-    .pipe(gulp.dest("css/"))
+    .pipe(gulp.dest('css/'))
 });
 
 
