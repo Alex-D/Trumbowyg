@@ -303,7 +303,7 @@ $('textarea').trumbowyg({
                     </p>
                     <pre><code class="javascript">
 $('.simple-editor').trumbowyg({
-    btns: ['bold', 'italic', '|', 'link']
+    btns: [['bold', 'italic'], ['link']]
 });
                     </code></pre>
                     <div class="note">
@@ -312,14 +312,19 @@ $('.simple-editor').trumbowyg({
                         </p>
                         <pre><code class="javascript">
 $('.simple-editor').trumbowyg({
-    btns: ['viewHTML',
-      '|', 'formatting',
-      '|', 'btnGrp-design',
-      '|', 'link',
-      '|', 'insertImage',
-      '|', 'btnGrp-justify',
-      '|', 'btnGrp-lists',
-      '|', 'horizontalRule']
+    btns: [
+        ['viewHTML'],
+        ['formatting'],
+        'btnGrp-semantic',
+        ['superscript', 'subscript'],
+        ['link'],
+        ['insertImage'],
+        'btnGrp-justify',
+        'btnGrp-lists',
+        ['horizontalRule'],
+        ['removeformat'],
+        ['fullscreen']
+    ]
 });
 
 /** WTF are btnGrp-* buttons? There are just arrays of strings :)
@@ -331,6 +336,10 @@ $('.simple-editor').trumbowyg({
 *  };
 */
                         </code></pre>
+                    </div>
+
+                    <div class="removed-info">
+                        <code>btnsAdd</code> option does not exist since 2.0.0
                     </div>
                     <p>
                         If you want keep the default button pane but just add some buttons at the end, you can use the <code>btnsAdd</code> option.
