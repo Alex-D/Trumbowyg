@@ -84,12 +84,12 @@
                         <a href="#basic-options">Basic Options</a>
                         <ul>
                             <li><a href="#button-pane">Button pane</a></li>
-                            <li><a href="#close-button">Close button</a></li>
-                            <li><a href="#fullscreen">Fullscreen</a></li>
                             <li><a href="#semantic">Semantic</a></li>
                             <li><a href="#reset-css">Reset CSS</a></li>
                             <li><a href="#remove-format-pasted">Remove format pasted</a></li>
                             <li><a href="#auto-adjust-height">Auto grow</a></li>
+                            <li><a href="#close-button" data-removed="2.0.0">Close button</a></li>
+                            <li><a href="#fullscreen" data-removed="2.0.0">Fullscreen</a></li>
                             <li><a href="#mobile-tablet" data-removed="2.0.0">Mobile &amp; Tablet</a></li>
                         </ul>
                     </li>
@@ -346,45 +346,6 @@ $('.editor-with-colors-plugin').trumbowyg({
 
 
                 <div class="feature" data-added="1.0.0">
-                    <h3 id="close-button">Close button</h3>
-                    <p>
-                        To have a close button in the top left corner, set closable to true.
-                    </p>
-                    <pre><code class="javascript">
-$('.trumbowyg.closable').trumbowyg({
-    closable: true
-});
-                    </code></pre>
-                    <p class="note">
-                        By default, a Trumbowyg editor is not closable.
-                    </p>
-                </div>
-
-
-
-
-                <div class="feature" data-added="1.0.0">
-                    <h3 id="fullscreen">Fullscreen</h3>
-                    <p>
-                        To disable the fullscreen button:
-                    </p>
-                    <pre><code class="javascript">
-$('.trumbowyg.closable').trumbowyg({
-    fullscreenable: false
-});
-                    </code></pre>
-                    <p>
-                        This code desactives the possibility for user to edit content in fullscreen. Note that fullscreen mode is not really fullscreen (like with a press on <em>F11</em>), it just expands the editor to the whole current page.
-                    </p>
-                    <p class="note">
-                        Fullscreen default value is to <code>true</code>.
-                    </p>
-                </div>
-
-
-
-
-                <div class="feature" data-added="1.0.0">
                     <h3 id="semantic">Semantic</h3>
                     <p>
                         Generates a better, more semantic oriented HTML (i.e. <code>&lt;em&gt;</code> instead of <code>&lt;i&gt;</code>,  <code>&lt;strong&gt;</code> intsead of <code>&lt;b&gt;</code>, etc.). It's just a boolean:
@@ -457,6 +418,57 @@ $('.trumbowyg').trumbowyg({
                     </code></pre>
                     <p class="note">
                         Autogrow is not active by default (set to <code>false</code>).
+                    </p>
+                </div>
+
+
+
+
+                <div class="feature" data-added="1.0.0" data-removed="2.0.0">
+                    <h3 id="close-button">Close button</h3>
+                    <p class="removed-feature">Removed since 2.0.0</p>
+
+                    <p class="removed-info">
+                        Since 2.0.0, 'close' is a button like others. You can add/remove it from <a href="#button-pane">button pane configuration</a>
+                    </p>
+
+                    <p>
+                        To have a close button in the top left corner, set closable to true.
+                    </p>
+                    <pre><code class="javascript">
+                        $('.trumbowyg.closable').trumbowyg({
+                        closable: true
+                        });
+                    </code></pre>
+                    <p class="note">
+                        By default, a Trumbowyg editor is not closable.
+                    </p>
+                </div>
+
+
+
+
+                <div class="feature" data-added="1.0.0" data-removed="2.0.0">
+                    <h3 id="fullscreen">Fullscreen</h3>
+                    <p class="removed-feature">Removed since 2.0.0</p>
+
+                    <p class="removed-info">
+                        Since 2.0.0, 'fullscreen' is a button like others. You can add/remove it from <a href="#button-pane">button pane configuration</a>
+                    </p>
+
+                    <p>
+                        To disable the fullscreen button:
+                    </p>
+                    <pre><code class="javascript">
+                        $('.trumbowyg.closable').trumbowyg({
+                        fullscreenable: false
+                        });
+                    </code></pre>
+                    <p>
+                        This code desactives the possibility for user to edit content in fullscreen. Note that fullscreen mode is not really fullscreen (like with a press on <em>F11</em>), it just expands the editor to the whole current page.
+                    </p>
+                    <p class="note">
+                        Fullscreen default value is to <code>true</code>.
                     </p>
                 </div>
 
