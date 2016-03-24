@@ -109,11 +109,12 @@
                         <a href="#api">API</a>
                         <ul>
                             <li><a href="#modal-box">Modal box</a></li>
-                            <li><a href="#selection">Selection</a></li>
+                            <li><a href="#range">Range</a></li>
                             <li><a href="#manage-content">Manage content</a></li>
                             <li><a href="#empty">Empty</a></li>
                             <li><a href="#destroy-editor">Destroy editor</a></li>
                             <li><a href="#events">Events</a></li>
+                            <li><a href="#selection" data-removed="2.0.0">Selection</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -634,30 +635,37 @@ $("#editor").trumbowyg("openModalInsert", {
 
 
 
-                <div class="feature" data-added="1.0.0">
-                    <h3 id="selection">Selection</h3>
-                    <p>
-                        Managing correctly text selection, is not so trivial. Trumbowyg has a system to save and restore selection which does not involves typical getter/setter.
+                <div class="feature" data-added="2.0.0">
+                    <h3 id="range">Range</h3>
+                    <p class="added-feature">Added in 2.0.0</p>
+
+                    <p class="note">
+                        Range is the new <a href="#selection">selection</a> for v2.
                     </p>
 
-                    <h4>Save and get current selection</h4>
-                    <pre><code class="javascript">
-// Save current selection
-$('#editor').trumbowyg('saveSelection');
+                    <p>
+                        Managing correctly text range, is not so trivial. Trumbowyg has a system to save and restore
+                        selection range which does not involves typical getter/setter.
+                    </p>
 
-// Restore last saved selection
-$('#editor').trumbowyg('restoreSelection');
+                    <h4>Save and get current range</h4>
+                    <pre><code class="javascript">
+                        // Save current range
+                        $('#editor').trumbowyg('saveRange');
+
+                        // Restore last saved range
+                        $('#editor').trumbowyg('restoreRange');
                     </code></pre>
 
                     <h4>Get selection range</h4>
                     <pre><code class="javascript">
-// sel contains a JavaScript range
-var sel = $('#editor').trumbowyg('getSelection');
+                        // range contains a JavaScript range
+                        var range = $('#editor').trumbowyg('getRange');
                     </code></pre>
 
-                    <h4>Get selection value</h4>
+                    <h4>Get last saved range text</h4>
                     <pre><code class="javascript">
-var text = $('#editor').trumbowyg('getSelectedText');
+                        var text = $('#editor').trumbowyg('getRangeText');
                     </code></pre>
                 </div>
 
@@ -729,6 +737,42 @@ $('#editor')
 .trumbowyg() // Build Trumbowyg on the #editor element
 .on('tbwfocus', function(){ console.log('Focus!'); }); // Listen for `tbwfocus` event
 .on('tbwblur', function(){ console.log('Blur!'); }); // Listen for `tbwblur` event
+                    </code></pre>
+                </div>
+
+
+
+
+                <div class="feature" data-added="1.0.0" data-removed="2.0.0">
+                    <h3 id="selection">Selection</h3>
+                    <p class="removed-feature">Removed since 2.0.0</p>
+
+                    <p class="removed-info">
+                        Since 2.0.0, use <a href="#range">Range</a>
+                    </p>
+
+                    <p>
+                        Managing correctly text selection, is not so trivial. Trumbowyg has a system to save and restore selection which does not involves typical getter/setter.
+                    </p>
+
+                    <h4>Save and get current selection</h4>
+                    <pre><code class="javascript">
+                        // Save current selection
+                        $('#editor').trumbowyg('saveSelection');
+
+                        // Restore last saved selection
+                        $('#editor').trumbowyg('restoreSelection');
+                    </code></pre>
+
+                    <h4>Get selection range</h4>
+                    <pre><code class="javascript">
+                        // sel contains a JavaScript range
+                        var sel = $('#editor').trumbowyg('getSelection');
+                    </code></pre>
+
+                    <h4>Get selection value</h4>
+                    <pre><code class="javascript">
+                        var text = $('#editor').trumbowyg('getSelectedText');
                     </code></pre>
                 </div>
             </section>
