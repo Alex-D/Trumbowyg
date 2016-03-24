@@ -513,7 +513,7 @@ jQuery.trumbowyg.langs.fr = {
 };
                     </code></pre>
                     <p>
-                        Some localizations are added each day, you can find them <a href="https://github.com/Alex-D/Trumbowyg/tree/2.0.0-beta.7/dist/langs">here</a>.
+                        Some localizations are added each day, you can find them <a href="https://github.com/Alex-D/Trumbowyg/tree/master/dist/langs">here</a>.
                     </p>
                     <p>
                         You can submit a new localization file by creating a new pull request on the Github repository.
@@ -565,12 +565,9 @@ $("#editor").trumbowyg("closeModal");
                         Modal boxes in Trumbowy come with two buttons: "Confirm" and "Cancel". An event is associated to each button:
                     </p>
                     <ul>
-                        <li><code>{prefix}submit</code>: Trigged when form is submit</li>
-                        <li><code>{prefix}reset</code>: Trigged when user cancel operation</li>
+                        <li><code>tbwsubmit</code>: Trigged when form is submit</li>
+                        <li><code>tbwreset</code>: Trigged when user cancel operation</li>
                     </ul>
-                    <p class="note">
-                        <code>{prefix}</code> is the <code>prefix</code> option value.
-                    </p>
                     <pre><code class="javascript">
 // Open a modal box
 var $modal = $("#editor").trumbowyg("openModal", {
@@ -702,14 +699,17 @@ $('#editor').trumbowyg('destroy');
                     <h3 id="events">Events</h3>
                     <p class="added-feature">Added in 1.1.0 & 2.0.0</p>
                     <p>
-                        Some events are avaibles on the jQuery element which is used to build the editor.
+                        Some events are fired on the jQuery element which is used to build the editor.
                     </p>
                     <ul>
                         <li>Focus on editor: <code>tbwfocus</code></li>
                         <li>Blur on editor: <code>tbwblur</code></li>
+                        <li>Editor is initialized: <code>tbwinit</code> <span class="version-tag">2.0.0</span></li>
                         <li>Change in editor: <code>tbwchange</code> <span class="version-tag">2.0.0</span></li>
                         <li>Resize the editor on autogrow: <code>tbwresize</code> <span class="version-tag">2.0.0</span></li>
                         <li>Paste something in the editor: <code>tbwpaste</code> <span class="version-tag">2.0.0</span></li>
+                        <li>Switch to fullscreen mode: <code>tbwopenfullscreen</code> <span class="version-tag">2.0.0</span></li>
+                        <li>Leave editor's fullscreen mode: <code>tbwclosefullscreen</code> <span class="version-tag">2.0.0</span></li>
                         <li>Close the editor: <code>tbwclose</code> <span class="version-tag">2.0.0</span></li>
                     </ul>
                     <pre><code class="javascript">
