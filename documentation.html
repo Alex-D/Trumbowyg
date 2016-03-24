@@ -461,9 +461,9 @@ $('.trumbowyg').trumbowyg({
                         To disable the fullscreen button:
                     </p>
                     <pre><code class="javascript">
-                        $('.trumbowyg.closable').trumbowyg({
-                        fullscreenable: false
-                        });
+$('.trumbowyg.closable').trumbowyg({
+    fullscreenable: false
+});
                     </code></pre>
                     <p>
                         This code desactives the possibility for user to edit content in fullscreen. Note that fullscreen mode is not really fullscreen (like with a press on <em>F11</em>), it just expands the editor to the whole current page.
@@ -650,22 +650,22 @@ $("#editor").trumbowyg("openModalInsert", {
 
                     <h4>Save and get current range</h4>
                     <pre><code class="javascript">
-                        // Save current range
-                        $('#editor').trumbowyg('saveRange');
+// Save current range
+$('#editor').trumbowyg('saveRange');
 
-                        // Restore last saved range
-                        $('#editor').trumbowyg('restoreRange');
+// Restore last saved range
+$('#editor').trumbowyg('restoreRange');
                     </code></pre>
 
                     <h4>Get selection range</h4>
                     <pre><code class="javascript">
-                        // range contains a JavaScript range
-                        var range = $('#editor').trumbowyg('getRange');
+// range contains a JavaScript range
+var range = $('#editor').trumbowyg('getRange');
                     </code></pre>
 
                     <h4>Get last saved range text</h4>
                     <pre><code class="javascript">
-                        var text = $('#editor').trumbowyg('getRangeText');
+var text = $('#editor').trumbowyg('getRangeText');
                     </code></pre>
                 </div>
 
