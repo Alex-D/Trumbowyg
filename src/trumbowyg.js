@@ -1133,7 +1133,7 @@ jQuery.trumbowyg = {
                     cmd(param);
                 } catch (e2) {
                     if (cmd === 'insertHorizontalRule') {
-                        param = null;
+                        param = undefined;
                     } else if (cmd === 'formatBlock' && (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') !== -1)) {
                         param = '<' + param + '>';
                     }
