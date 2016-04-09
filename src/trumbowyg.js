@@ -415,7 +415,9 @@ jQuery.trumbowyg = {
 
             t.buildOverlay();
 
-            t.$c.trigger('tbwinit');
+            setTimeout(function () {
+                t.$c.trigger('tbwinit');
+            });
         },
 
         addBtnDef: function (btnName, btnDef) {
