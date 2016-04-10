@@ -4,36 +4,37 @@ hljs.initHighlightingOnLoad();
 
 (function ($) {
     if ($.trumbowyg) {
-        // Add imagur parameters to upload plugin
-        $.extend(true, $.trumbowyg.upload, {
-            serverPath: 'https://api.imgur.com/3/image',
-            fileFieldName: 'image',
-            headers: {'Authorization': 'Client-ID 9e57cb1c4791cea'},
-            urlPropertyName: 'data.link'
-        });
-
         var fullOptions = {
             btnsDef: {
                 // Customizables dropdowns
                 image: {
-                    dropdown: ['insertImage', 'upload', 'base64'],
+                    dropdown: ['insertImage', 'upload', 'base64', 'noEmbed'],
                     ico: 'insertImage'
-                },
-                linkImproved: {
-                    dropdown: ['createLink', 'editLink', 'unlink'],
-                    ico: 'link'
                 }
             },
-            btns: ['viewHTML',
-                '|', 'formatting',
-                '|', 'btnGrp-design',
-                '|', 'linkImproved',
-                '|', 'image',
-                '|', 'btnGrp-justify',
-                '|', 'btnGrp-lists',
-                '|', 'foreColor', 'backColor',
-                '|', 'preformatted',
-                '|', 'horizontalRule']
+            btns: [
+                ['viewHTML'],
+                ['undo', 'redo'],
+                ['formatting'],
+                'btnGrp-design',
+                ['link'],
+                ['image'],
+                'btnGrp-justify',
+                'btnGrp-lists',
+                ['foreColor', 'backColor'],
+                ['preformatted'],
+                ['horizontalRule'],
+                ['fullscreen']
+            ],
+            plugins: {
+                // Add imagur parameters to upload plugin
+                upload: {
+                    serverPath: 'https://api.imgur.com/3/image',
+                    fileFieldName: 'image',
+                    headers: {'Authorization': 'Client-ID 9e57cb1c4791cea'},
+                    urlPropertyName: 'data.link'
+                }
+            }
         };
 
         // Demo switch
