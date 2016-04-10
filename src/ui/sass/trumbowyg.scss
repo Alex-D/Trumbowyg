@@ -616,7 +616,7 @@ body.trumbowyg-body-fullscreen {
             background: lighten($dark-color, 7%);
         }
 
-        .trumbowyg-button-group {
+        .trumbowyg-button-group:not(:empty) {
             &::before {
                 background-color: lighten($dark-color, 7%);
             }
