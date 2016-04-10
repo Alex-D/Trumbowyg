@@ -1489,7 +1489,9 @@ jQuery.trumbowyg = {
         },
         destroyPlugins: function () {
             $.each(this.loadedPlugins, function (i, plugin) {
-                plugin.destroy();
+                if (plugin.destroy) {
+                    plugin.destroy();
+                }
             });
         }
     };
