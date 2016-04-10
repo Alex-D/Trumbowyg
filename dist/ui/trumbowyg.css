@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.0.0-beta.8 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.0.0 - A lightweight WYSIWYG editor
  * Default stylesheet for Trumbowyg editor
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -137,7 +137,7 @@
             flex-flow: row wrap; }
     .trumbowyg-button-pane .trumbowyg-button-group .trumbowyg-fullscreen-button svg {
       color: transparent; }
-    .trumbowyg-button-pane .trumbowyg-button-group + .trumbowyg-button-group::before {
+    .trumbowyg-button-pane .trumbowyg-button-group:not(:empty) + .trumbowyg-button-group::before {
       content: " ";
       display: block;
       width: 1px;
@@ -216,8 +216,10 @@
   position: absolute;
   top: 0;
   left: 50%;
-  margin-left: -260px;
-  width: 520px;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  max-width: 520px;
+  width: 100%;
   height: 350px;
   z-index: 11;
   overflow: hidden;
@@ -228,8 +230,10 @@
   position: absolute;
   top: 0;
   left: 50%;
-  margin-left: -250px;
-  width: 500px;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  max-width: 500px;
+  width: calc(100% - 20px);
   padding-bottom: 45px;
   z-index: 1;
   background-color: #FFF;
@@ -249,7 +253,6 @@
     background: #fbfcfc; }
   .trumbowyg-modal-box .trumbowyg-progress {
     width: 100%;
-    background: #F00;
     height: 3px;
     position: absolute;
     top: 58px; }
@@ -278,7 +281,7 @@
         background-color: #fbfcfc;
         border: 1px solid #DEDEDE;
         padding: 0 7px;
-        width: 137px; }
+        width: 150px; }
       .trumbowyg-modal-box label .trumbowyg-input-infos span.trumbowyg-msg-error {
         color: #e74c3c; }
     .trumbowyg-modal-box label.trumbowyg-input-error input,
@@ -293,9 +296,10 @@
       height: 27px;
       line-height: 27px;
       border: 1px solid #DEDEDE;
-      background: transparent;
+      background: #fff;
       font-size: 14px;
-      width: 340px;
+      max-width: 330px;
+      width: 70%;
       padding: 0 7px;
       -webkit-transition: all 150ms;
               transition: all 150ms; }
@@ -303,7 +307,7 @@
         outline: none;
         border: 1px solid #95a5a6; }
       .trumbowyg-modal-box label input:focus {
-        background: rgba(230, 230, 255, 0.1); }
+        background: #fbfcfc; }
   .trumbowyg-modal-box .error {
     margin-top: 25px;
     display: block;
@@ -494,9 +498,9 @@ body.trumbowyg-body-fullscreen {
   border-bottom-color: #343434; }
   .trumbowyg-dark .trumbowyg-button-pane::after {
     background: #343434; }
-  .trumbowyg-dark .trumbowyg-button-pane .trumbowyg-button-group::before {
+  .trumbowyg-dark .trumbowyg-button-pane .trumbowyg-button-group:not(:empty)::before {
     background-color: #343434; }
-  .trumbowyg-dark .trumbowyg-button-pane .trumbowyg-button-group .trumbowyg-fullscreen-button svg {
+  .trumbowyg-dark .trumbowyg-button-pane .trumbowyg-button-group:not(:empty) .trumbowyg-fullscreen-button svg {
     color: transparent; }
   .trumbowyg-dark .trumbowyg-button-pane.trumbowyg-disable .trumbowyg-button-group::before {
     background-color: #2a2a2a; }
@@ -550,7 +554,7 @@ body.trumbowyg-body-fullscreen {
       .trumbowyg-dark .trumbowyg-modal-box label input:hover, .trumbowyg-dark .trumbowyg-modal-box label input:focus {
         border-color: #626262; }
       .trumbowyg-dark .trumbowyg-modal-box label input:focus {
-        background-color: rgba(230, 230, 255, 0.1); }
+        background-color: #2f2f2f; }
   .trumbowyg-dark .trumbowyg-modal-box .trumbowyg-modal-button.trumbowyg-modal-submit {
     background: #1b7943; }
     .trumbowyg-dark .trumbowyg-modal-box .trumbowyg-modal-button.trumbowyg-modal-submit:hover, .trumbowyg-dark .trumbowyg-modal-box .trumbowyg-modal-button.trumbowyg-modal-submit:focus {

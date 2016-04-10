@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.0.0-beta.8 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.0.0 - A lightweight WYSIWYG editor
  * Default stylesheet for Trumbowyg editor
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -164,7 +164,7 @@ $transition-duration: 150ms;
             color: transparent;
         }
 
-        & + .trumbowyg-button-group::before {
+        &:not(:empty) + .trumbowyg-button-group::before {
             content: " ";
             display: block;
             width: 1px;
@@ -267,8 +267,9 @@ $transition-duration: 150ms;
     position: absolute;
     top: 0;
     left: 50%;
-    margin-left: -260px;
-    width: 520px;
+    transform: translateX(-50%);
+    max-width: 520px;
+    width: 100%;
     height: 350px;
     z-index: 11;
     overflow: hidden;
@@ -279,8 +280,9 @@ $transition-duration: 150ms;
     position: absolute;
     top: 0;
     left: 50%;
-    margin-left: -250px;
-    width: 500px;
+    transform: translateX(-50%);
+    max-width: 500px;
+    width: calc(100% - 20px);
     padding-bottom: 45px;
     z-index: 1;
     background-color: #FFF;
@@ -302,7 +304,6 @@ $transition-duration: 150ms;
 
     .trumbowyg-progress {
         width: 100%;
-        background: #F00;
         height: 3px;
         position: absolute;
         top: 58px;
@@ -335,7 +336,7 @@ $transition-duration: 150ms;
                 background-color: lighten($light-color, 5%);
                 border: 1px solid #DEDEDE;
                 padding: 0 7px;
-                width: 137px;
+                width: 150px;
             }
             span.trumbowyg-msg-error {
                 color: #e74c3c;
@@ -360,9 +361,10 @@ $transition-duration: 150ms;
             height: 27px;
             line-height: 27px;
             border: 1px solid #DEDEDE;
-            background: transparent;
+            background: #fff;
             font-size: 14px;
-            width: 340px;
+            max-width: 330px;
+            width: 70%;
             padding: 0 7px;
             transition: all $transition-duration;
 
@@ -372,7 +374,7 @@ $transition-duration: 150ms;
                 border: 1px solid #95a5a6;
             }
             &:focus {
-                background: rgba(230, 230, 255, .1);
+                background: lighten($light-color, 5%);
             }
         }
     }
@@ -625,7 +627,7 @@ body.trumbowyg-body-fullscreen {
             background: lighten($dark-color, 7%);
         }
 
-        .trumbowyg-button-group {
+        .trumbowyg-button-group:not(:empty) {
             &::before {
                 background-color: lighten($dark-color, 7%);
             }
@@ -719,7 +721,7 @@ body.trumbowyg-body-fullscreen {
                     border-color: lighten($dark-color, 25%);
                 }
                 &:focus {
-                    background-color: rgba(230, 230, 255, .1);
+                    background-color: lighten($dark-color, 5%);
                 }
             }
         }

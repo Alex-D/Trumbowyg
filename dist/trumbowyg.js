@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.0.0-beta.8 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.0.0 - A lightweight WYSIWYG editor
  * Trumbowyg core file
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -13,6 +13,9 @@ jQuery.trumbowyg = {
     langs: {
         en: {
             viewHTML: 'View HTML',
+
+            undo: 'Undo',
+            redo: 'Redo',
 
             formatting: 'Formatting',
             p: 'Paragraph',
@@ -190,10 +193,22 @@ jQuery.trumbowyg = {
              *          title: this.lang.foo
              *      }
          */
-        var h = t.lang.header; // Header translation
+        var h = t.lang.header, // Header translation
+            isBlinkFunction = function () {
+                return (window.chrome || (window.Intl && Intl.v8BreakIterator)) && 'CSS' in window;
+            };
         t.btnsDef = {
             viewHTML: {
                 fn: 'toggle'
+            },
+
+            undo: {
+                isSupported: isBlinkFunction,
+                key: 'Z'
+            },
+            redo: {
+                isSupported: isBlinkFunction,
+                key: 'Y'
             },
 
             p: {
@@ -331,6 +346,7 @@ jQuery.trumbowyg = {
             },
             btns: [
                 ['viewHTML'],
+                ['undo', 'redo'],
                 ['formatting'],
                 'btnGrp-semantic',
                 ['superscript', 'subscript'],
@@ -426,7 +442,9 @@ jQuery.trumbowyg = {
 
             t.buildOverlay();
 
-            t.$c.trigger('tbwinit');
+            setTimeout(function () {
+                t.$c.trigger('tbwinit');
+            });
         },
 
         addBtnDef: function (btnName, btnDef) {
@@ -732,7 +750,7 @@ jQuery.trumbowyg = {
         // Check if button is supported
         isSupportedBtn: function (b) {
             try {
-                return this.o.btnsDef[b].isSupported();
+                return this.btnsDef[b].isSupported();
             } catch (c) {
             }
             return true;
@@ -1144,7 +1162,7 @@ jQuery.trumbowyg = {
                     cmd(param);
                 } catch (e2) {
                     if (cmd === 'insertHorizontalRule') {
-                        param = null;
+                        param = undefined;
                     } else if (cmd === 'formatBlock' && (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') !== -1)) {
                         param = '<' + param + '>';
                     }
