@@ -1,10 +1,10 @@
 # Trumbowyg WYSIWYG Editor
 
-Trumbowyg is a simple and lightweight WYSIWYG editor, is only 15kB for faster page loading.
+Trumbowyg is a simple and lightweight WYSIWYG editor, is only 20kB for faster page loading.
 
 [![Trumbowyg logo](banner.png)](http://alex-d.github.io/Trumbowyg/)
 
-Visit presentation page : http://alex-d.github.io/Trumbowyg/
+Visit presentation page: http://alex-d.github.io/Trumbowyg/
 
 
 # Documentation
