@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.0.0 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.0.5 - A lightweight WYSIWYG editor
  * Trumbowyg core file
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -1500,7 +1500,9 @@ jQuery.trumbowyg = {
         },
         destroyPlugins: function () {
             $.each(this.loadedPlugins, function (i, plugin) {
-                plugin.destroy();
+                if (plugin.destroy) {
+                    plugin.destroy();
+                }
             });
         }
     };
