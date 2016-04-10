@@ -137,8 +137,8 @@
         // add free color btn
         var freeColorButtonName = fn + 'Free',
             freeColorBtnDef = {
-                fn: function (params, tbw) {
-                    tbw.openModalInsert(tbw.lang[fn],
+                fn: function () {
+                    trumbowyg.openModalInsert(trumbowyg.lang[fn],
                         {
                             color: {
                                 label: fn,
@@ -147,7 +147,7 @@
                         },
                         // callback
                         function (values) {
-                            tbw.execCmd(fn, values.color);
+                            trumbowyg.execCmd(fn, values.color);
                             return true;
                         }
                     );

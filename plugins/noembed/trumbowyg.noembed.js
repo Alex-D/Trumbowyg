@@ -85,8 +85,7 @@
                                     });
                                 }
                             );
-                        },
-                        ico: 'insertImage'
+                        }
                     };
 
                     trumbowyg.addBtnDef('noembed', btnDef);
