@@ -11,6 +11,9 @@
 jQuery.trumbowyg.langs.fr = {
     viewHTML: 'Voir le HTML',
 
+    undo: 'Annuler',
+    redo: 'Refaire',
+
     formatting: 'Format',
     p: 'Paragraphe',
     blockquote: 'Citation',
