@@ -661,7 +661,7 @@ jQuery.trumbowyg = {
                 $btn = $('<button/>', {
                     type: 'button',
                     class: prefix + btnName + '-button ' + (btn.class || ''),
-                    html: '<svg><use xlink:href="#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>',
+                    html: '<svg><use xlink:href="' + window.location.href.split('#').shift()+ '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>',
                     title: (btn.title || btn.text || textDef) + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
                     tabindex: -1,
                     mousedown: function () {
@@ -724,7 +724,7 @@ jQuery.trumbowyg = {
             return $('<button/>', {
                 type: 'button',
                 class: prefix + btnName + '-dropdown-button' + (btn.ico ? ' ' + prefix + btn.ico + '-button' : ''),
-                html: '<svg><use xlink:href="#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' + (btn.text || btn.title || t.lang[btnName] || btnName),
+                html: '<svg><use xlink:href="' + window.location.href.split('#').shift()+ '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' + (btn.text || btn.title || t.lang[btnName] || btnName),
                 title: ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : null),
                 style: btn.style || null,
                 mousedown: function () {
