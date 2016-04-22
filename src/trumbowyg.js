@@ -140,7 +140,7 @@ jQuery.trumbowyg = {
         }
 
         // SVG path
-        if ($('#' + trumbowygIconsId, t.doc).length === 0) {
+        if ($('#' + trumbowygIconsId, t.doc).length === 0 && options.svgPath !== false) {
             var svgPath = options.svgPath;
             if (svgPath == null) {
                 try {
