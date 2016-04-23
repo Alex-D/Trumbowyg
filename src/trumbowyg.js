@@ -27,6 +27,7 @@ jQuery.trumbowyg = {
             unorderedList: 'Unordered list',
             orderedList: 'Ordered list',
 
+            insertAudio: 'Insert Audio',
             insertImage: 'Insert Image',
             link: 'Link',
             createLink: 'Insert link',
@@ -260,6 +261,8 @@ jQuery.trumbowyg = {
             },
             unlink: {},
 
+            insertAudio: {},
+            
             insertImage: {},
 
             justifyLeft: {
@@ -340,6 +343,7 @@ jQuery.trumbowyg = {
                 'btnGrp-semantic',
                 ['superscript', 'subscript'],
                 ['link'],
+                ['insertAudio'],
                 ['insertImage'],
                 'btnGrp-justify',
                 'btnGrp-lists',
@@ -1115,6 +1119,59 @@ jQuery.trumbowyg = {
                 return true;
             });
         },
+        insertAudio: function() {
+            var t = this;
+            t.saveRange();
+            var insertAudioOptions = {
+                src: {
+                    label: 'URL',
+                    required: true
+                },
+                autoplay: {
+                    label: 'AutoPlay',
+                    required: false,
+                    type: 'checkbox'
+                },
+                controls: {
+                    label: 'Show Controls',
+                    required: false,
+                    type: 'checkbox'
+                },
+                muted: {
+                    label: 'Muted',
+                    required: false,
+                    type: 'checkbox'
+                },
+                preload: {
+                    label: 'preload options',
+                    required: false
+                }
+            };
+            var insertAudioCallback =  function(v) {
+                    var html = '<audio';
+                    if (v.src) {
+                        html += ' src=\'' + v.src + '\''; 
+                    }
+                    if (v.autoplay) {
+                        html += ' autoplay';
+                    }
+                    if (v.controls) {
+                        html += ' controls';
+                    }
+                    if (v.muted) {
+                        html += ' muted';
+                    }
+                    if (v.preload) {
+                        html += ' preload=\''+ v + '\'';
+                    }
+                    html += '></audio>';
+                    var node = $(html)[0];
+                    t.range.deleteContents();
+                    t.range.insertNode(node);
+                    return true;
+                };
+            t.openModalInsert(t.lang.insertAudio, insertAudioOptions, insertAudioCallback);
+        },
         fullscreen: function () {
             var t = this,
                 prefix = t.o.prefix,
@@ -1143,7 +1200,6 @@ jQuery.trumbowyg = {
             }
 
             t.doc.execCommand('styleWithCSS', false, forceCss || false);
-
             try {
                 t[cmd + skipTrumbowyg](param);
             } catch (c) {
@@ -1308,9 +1364,13 @@ jQuery.trumbowyg = {
 
                     $.each(fields, function (fieldName, field) {
                         var $field = $('input[name="' + fieldName + '"]', $form);
-
-                        values[fieldName] = $.trim($field.val());
-
+                        var inputType = $field.attr('type') || ''; 
+                        if (inputType.toLowerCase() === 'checkbox') {
+                            values[fieldName] = $field.is(':checked');
+                        }
+                        else {
+                            values[fieldName] = $.trim($field.val());
+                        }
                         // Validate value
                         if (field.required && values[fieldName] === '') {
                             valid = false;
