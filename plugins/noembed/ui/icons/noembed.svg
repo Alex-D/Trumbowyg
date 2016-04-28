@@ -3,6 +3,8 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 72 72" enable-background="new 0 0 72 72" xml:space="preserve">
-<polygon points="57,20.5 51.6,15.1 36.1,30.6 20.5,15.1 15.1,20.5 30.7,36 15.1,51.5 20.5,56.9 36.1,41.4 51.6,56.9 57,51.5 
-	41.5,36 "/>
+<polygon points="31.5,33.6 31.5,25 42.5,36 31.5,47 31.5,38.2 "/>
+<g>
+	<path d="M64,17v38H8V17H64 M72,9H0v54h72V9L72,9z"/>
+</g>
 </svg>
