@@ -140,6 +140,8 @@ jQuery.trumbowyg = {
         }
 
         // SVG path
+        t.hasSvg = options.svgPath !== false;
+        t.svgPath = !!t.doc.querySelector('base') ? window.location : '';
         if ($('#' + trumbowygIconsId, t.doc).length === 0 && options.svgPath !== false) {
             var svgPath = options.svgPath;
             if (svgPath == null) {
@@ -661,7 +663,7 @@ jQuery.trumbowyg = {
                 $btn = $('<button/>', {
                     type: 'button',
                     class: prefix + btnName + '-button ' + (btn.class || ''),
-                    html: '<svg><use xlink:href="#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>',
+                    html: t.hasSvg ? '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' : '',
                     title: (btn.title || btn.text || textDef) + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
                     tabindex: -1,
                     mousedown: function () {
@@ -724,7 +726,7 @@ jQuery.trumbowyg = {
             return $('<button/>', {
                 type: 'button',
                 class: prefix + btnName + '-dropdown-button' + (btn.ico ? ' ' + prefix + btn.ico + '-button' : ''),
-                html: '<svg><use xlink:href="#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' + (btn.text || btn.title || t.lang[btnName] || btnName),
+                html: t.hasSvg ? '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' + (btn.text || btn.title || t.lang[btnName] || btnName) : '',
                 title: ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : null),
                 style: btn.style || null,
                 mousedown: function () {
