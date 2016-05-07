@@ -56,7 +56,10 @@ jQuery.trumbowyg = {
     },
 
     // Plugins
-    plugins: {}
+    plugins: {},
+
+    // SVG Path globally
+    svgPath: null
 };
 
 
@@ -146,11 +149,11 @@ jQuery.trumbowyg = {
         }
 
         // SVG path
-        t.hasSvg = options.svgPath !== false;
+        var svgPathOption = $.trumbowyg.svgPath != null ? $.trumbowyg.svgPath : options.svgPath;
+        t.hasSvg = svgPathOption !== false;
         t.svgPath = !!t.doc.querySelector('base') ? window.location : '';
-        if ($('#' + trumbowygIconsId, t.doc).length === 0 && options.svgPath !== false) {
-            var svgPath = options.svgPath;
-            if (svgPath == null) {
+        if ($('#' + trumbowygIconsId, t.doc).length === 0 && svgPathOption !== false) {
+            if (svgPathOption == null) {
                 try {
                     throw new Error();
                 } catch (e) {
@@ -160,9 +163,9 @@ jQuery.trumbowyg = {
                         if (!stackLines[i].match(/http[s]?:\/\//)) {
                             continue;
                         }
-                        svgPath = stackLines[Number(i)].match(/((http[s]?:\/\/.+\/)([^\/]+\.js)):/)[1].split('/');
-                        svgPath.pop();
-                        svgPath = svgPath.join('/') + '/ui/icons.svg';
+                        svgPathOption = stackLines[Number(i)].match(/((http[s]?:\/\/.+\/)([^\/]+\.js)):/)[1].split('/');
+                        svgPathOption.pop();
+                        svgPathOption = svgPathOption.join('/') + '/ui/icons.svg';
                         break;
                     }
                 }
@@ -171,8 +174,7 @@ jQuery.trumbowyg = {
             var div = t.doc.createElement('div');
             div.id = trumbowygIconsId;
             t.doc.body.insertBefore(div, t.doc.body.childNodes[0]);
-
-            $.get(svgPath, function (data) {
+            $.get(svgPathOption, function (data) {
                 div.innerHTML = new XMLSerializer().serializeToString(data.documentElement);
             });
         }
