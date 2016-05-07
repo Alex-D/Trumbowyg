@@ -70,7 +70,8 @@ $transition-duration: 150ms;
         color: transparent !important;
         text-shadow: 0 0 7px #333;
 
-        @media screen and (min-width: 0\0) {
+        @media screen and (min-width: 0 \0
+        ) {
             color: rgba(200, 200, 200, 0.6) !important;
         }
         @supports (-ms-accelerator:true) {
@@ -101,7 +102,7 @@ $transition-duration: 150ms;
         min-height: 0 !important;
         padding: 0 !important;
         background: none;
-        opacity: 0;
+        opacity: 0 !important;
     }
 }
 
@@ -111,6 +112,13 @@ $transition-duration: 150ms;
     }
     .trumbowyg-editor {
         display: none;
+    }
+}
+
+.trumbowyg-box.trumbowyg-disabled {
+    .trumbowyg-textarea {
+        opacity: 0.8;
+        background: none;
     }
 }
 
@@ -177,11 +185,13 @@ $transition-duration: 150ms;
         transition: background-color $transition-duration, opacity $transition-duration;
     }
 
-    &.trumbowyg-disable {
-        button:not(.trumbowyg-not-disable):not(.trumbowyg-active) {
-            opacity: 0.2;
-            cursor: default;
-        }
+    &.trumbowyg-disable button:not(.trumbowyg-not-disable):not(.trumbowyg-active),
+    .trumbowyg-disabled & button:not(.trumbowyg-not-disable):not(.trumbowyg-viewHTML-button) {
+        opacity: 0.2;
+        cursor: default;
+    }
+    &.trumbowyg-disable,
+    .trumbowyg-disabled & {
         .trumbowyg-button-group::before {
             background: darken($light-color, 3%);
         }
@@ -594,7 +604,8 @@ body.trumbowyg-body-fullscreen {
             &::before {
                 text-shadow: 0 0 7px #ccc;
 
-                @media screen and (min-width: 0\0) {
+                @media screen and (min-width: 0 \0
+                ) {
                     color: rgba(20, 20, 20, 0.6) !important;
                 }
                 @supports (-ms-accelerator:true) {

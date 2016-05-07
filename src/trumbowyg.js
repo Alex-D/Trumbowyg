@@ -98,6 +98,12 @@ jQuery.trumbowyg = {
                     case 'restoreRange':
                         return t.restoreRange();
 
+                    // Enable/disable
+                    case 'enable':
+                        return t.toggleDisable(false);
+                    case 'disable':
+                        return t.toggleDisable(true);
+
                     // Destroy
                     case 'destroy':
                         return t.destroy();
@@ -392,6 +398,8 @@ jQuery.trumbowyg = {
             plugins: {}
         }, options);
 
+        t.disabled = t.o.disabled || (editorElem.type === 'textarea' && editorElem.disabled);
+
         if (options.btns) {
             t.o.btns = options.btns;
         } else if (!t.o.semantic) {
@@ -434,6 +442,9 @@ jQuery.trumbowyg = {
             t.buildOverlay();
 
             setTimeout(function () {
+                if (t.disabled) {
+                    t.toggleDisable(true);
+                }
                 t.$c.trigger('tbwinit');
             });
         },
@@ -827,6 +838,21 @@ jQuery.trumbowyg = {
                 });
         },
 
+        // Disable editor
+        toggleDisable: function (disable) {
+            var t = this,
+                prefix = t.o.prefix;
+
+            t.disabled = disable;
+
+            if (disable) {
+                t.$ta.attr('disabled', true);
+            } else {
+                t.$ta.removeAttr('disabled');
+            }
+            t.$box.toggleClass(prefix + 'disabled', disable);
+            t.$ed.attr('contenteditable', !disable);
+        },
 
         // Destroy the editor
         destroy: function () {
@@ -876,6 +902,7 @@ jQuery.trumbowyg = {
                 prefix = t.o.prefix;
             t.semanticCode(false, true);
             setTimeout(function () {
+                t.doc.activeElement.blur();
                 t.$box.toggleClass(prefix + 'editor-hidden ' + prefix + 'editor-visible');
                 t.$btnPane.toggleClass(prefix + 'disable');
                 $('.' + prefix + 'viewHTML-button', t.$btnPane).toggleClass(prefix + 'active');

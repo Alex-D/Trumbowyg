@@ -128,6 +128,12 @@ btnsAdd: ['close']
 
             <textarea id="empty-textarea" cols="30" rows="10" required></textarea>
 
+            <textarea id="disabled-textarea" cols="30" rows="10" disabled>
+                Disabled textarea
+            </textarea>
+            <button id="enable-disabled-textarea">Enable</button>
+            <button id="disable-disabled-textarea">Disable</button>
+
             <div id="dynamic-iframe-example"></div>
         </div>
 
@@ -157,13 +163,20 @@ btnsAdd: ['close']
 
 
             /** Default editor configuration **/
-            $('#default-editor, #empty-textarea')
+            $('#default-editor, #empty-textarea, #disabled-textarea')
             .trumbowyg()
             .on('dblclick', function(){
                 $(this).trumbowyg();
             })
             .on('tbwinit tbwfocus tbwblur tbwchange tbwresize tbwpaste tbwopenfullscreen tbwclosefullscreen tbwclose', function(e){
                 console.log(e.type);
+            });
+
+            $('#enable-disabled-textarea').click(function () {
+                $('#disabled-textarea').trumbowyg('enable');
+            });
+            $('#disable-disabled-textarea').click(function () {
+                $('#disabled-textarea').trumbowyg('disable');
             });
 
 
@@ -328,7 +341,9 @@ btnsAdd: ['close']
 
             /** Editor with placeholder **/
             $('#placeholder-editor')
-            .trumbowyg()
+            .trumbowyg({
+                disabled: true
+            })
             .on('dblclick', function(){
                 $(this).trumbowyg();
             })
