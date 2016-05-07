@@ -958,10 +958,14 @@ jQuery.trumbowyg = {
             }
             return t.$ta.val();
         },
+        syncTextarea: function () {
+            var t = this;
+            t.$ta.val(t.$ed.text().trim().length > 0 || t.$ed.find('hr,img,embed,input').length > 0 ? t.$ed.html() : '');
+        },
         syncCode: function (force) {
             var t = this;
             if (!force && t.$ed.is(':visible')) {
-                t.$ta.val(t.$ed.html());
+                t.syncTextarea();
             } else {
                 t.$ed.html(t.$ta.val());
             }
@@ -1037,7 +1041,7 @@ jQuery.trumbowyg = {
 
                 t.restoreRange();
 
-                t.$ta.val(t.$ed.html());
+                t.syncTextarea();
             }
         },
 
