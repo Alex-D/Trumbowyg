@@ -3,10 +3,11 @@
     <head>
         <meta charset="UTF-8">
         <title>Trumbowyg by Alex-D</title>
+        <base href="/test/base/url/">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link rel="stylesheet" href="examples/css/main.css">
-        <link rel="stylesheet" href="dist/ui/trumbowyg.css">
-        <link rel="stylesheet" href="dist/plugins/colors/ui/trumbowyg.colors.css">
+        <link rel="stylesheet" href="/examples/css/main.css">
+        <link rel="stylesheet" href="/dist/ui/trumbowyg.css">
+        <link rel="stylesheet" href="/dist/plugins/colors/ui/trumbowyg.colors.css">
     </head>
     <body>
         <div class="container">
@@ -127,6 +128,12 @@ btnsAdd: ['close']
 
             <textarea id="empty-textarea" cols="30" rows="10" required></textarea>
 
+            <textarea id="disabled-textarea" cols="30" rows="10" disabled>
+                Disabled textarea
+            </textarea>
+            <button id="enable-disabled-textarea">Enable</button>
+            <button id="disable-disabled-textarea">Disable</button>
+
             <div id="dynamic-iframe-example"></div>
         </div>
 
@@ -143,24 +150,33 @@ btnsAdd: ['close']
                 </form>
             </div>
         </div>
-        <script src="bower_components/jquery/dist/jquery.min.js"></script>
-        <script src="dist/trumbowyg.js"></script>
-        <script src="dist/langs/fr.min.js"></script>
-        <script src="dist/plugins/base64/trumbowyg.base64.js"></script>
-        <script src="dist/plugins/colors/trumbowyg.colors.js"></script>
-        <script src="dist/plugins/noembed/trumbowyg.noembed.js"></script>
-        <script src="dist/plugins/pasteimage/trumbowyg.pasteimage.js"></script>
-        <script src="dist/plugins/preformatted/trumbowyg.preformatted.js"></script>
-        <script src="dist/plugins/upload/trumbowyg.upload.js"></script>
+        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="/dist/trumbowyg.js"></script>
+        <script src="/dist/langs/fr.min.js"></script>
+        <script src="/dist/plugins/base64/trumbowyg.base64.js"></script>
+        <script src="/dist/plugins/colors/trumbowyg.colors.js"></script>
+        <script src="/dist/plugins/noembed/trumbowyg.noembed.js"></script>
+        <script src="/dist/plugins/pasteimage/trumbowyg.pasteimage.js"></script>
+        <script src="/dist/plugins/preformatted/trumbowyg.preformatted.js"></script>
+        <script src="/dist/plugins/upload/trumbowyg.upload.js"></script>
         <script>
+
+
             /** Default editor configuration **/
-            $('#default-editor, #empty-textarea')
+            $('#default-editor, #empty-textarea, #disabled-textarea')
             .trumbowyg()
             .on('dblclick', function(){
                 $(this).trumbowyg();
             })
             .on('tbwinit tbwfocus tbwblur tbwchange tbwresize tbwpaste tbwopenfullscreen tbwclosefullscreen tbwclose', function(e){
                 console.log(e.type);
+            });
+
+            $('#enable-disabled-textarea').click(function () {
+                $('#disabled-textarea').trumbowyg('enable');
+            });
+            $('#disable-disabled-textarea').click(function () {
+                $('#disabled-textarea').trumbowyg('disable');
             });
 
 
@@ -309,7 +325,7 @@ btnsAdd: ['close']
                 var contextIframe = $iframe.contents()[0];
                 // Set the style on the head of the iframe.
                 $('head', contextIframe).append($('<link>', {
-                    href: 'dist/ui/trumbowyg.css',
+                    href: '/dist/ui/trumbowyg.css',
                     rel: 'stylesheet'
                 }));
                 // Set the content to be editable.

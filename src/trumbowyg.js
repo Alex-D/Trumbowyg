@@ -56,7 +56,10 @@ jQuery.trumbowyg = {
     },
 
     // Plugins
-    plugins: {}
+    plugins: {},
+
+    // SVG Path globally
+    svgPath: null
 };
 
 
@@ -97,6 +100,12 @@ jQuery.trumbowyg = {
                         return t.getRangeText();
                     case 'restoreRange':
                         return t.restoreRange();
+
+                    // Enable/disable
+                    case 'enable':
+                        return t.toggleDisable(false);
+                    case 'disable':
+                        return t.toggleDisable(true);
 
                     // Destroy
                     case 'destroy':
@@ -140,9 +149,11 @@ jQuery.trumbowyg = {
         }
 
         // SVG path
-        if ($('#' + trumbowygIconsId, t.doc).length === 0) {
-            var svgPath = options.svgPath;
-            if (svgPath == null) {
+        var svgPathOption = $.trumbowyg.svgPath != null ? $.trumbowyg.svgPath : options.svgPath;
+        t.hasSvg = svgPathOption !== false;
+        t.svgPath = !!t.doc.querySelector('base') ? window.location : '';
+        if ($('#' + trumbowygIconsId, t.doc).length === 0 && svgPathOption !== false) {
+            if (svgPathOption == null) {
                 try {
                     throw new Error();
                 } catch (e) {
@@ -152,9 +163,9 @@ jQuery.trumbowyg = {
                         if (!stackLines[i].match(/http[s]?:\/\//)) {
                             continue;
                         }
-                        svgPath = stackLines[Number(i)].match(/((http[s]?:\/\/.+\/)([^\/]+\.js)):/)[1].split('/');
-                        svgPath.pop();
-                        svgPath = svgPath.join('/') + '/ui/icons.svg';
+                        svgPathOption = stackLines[Number(i)].match(/((http[s]?:\/\/.+\/)([^\/]+\.js)):/)[1].split('/');
+                        svgPathOption.pop();
+                        svgPathOption = svgPathOption.join('/') + '/ui/icons.svg';
                         break;
                     }
                 }
@@ -163,8 +174,7 @@ jQuery.trumbowyg = {
             var div = t.doc.createElement('div');
             div.id = trumbowygIconsId;
             t.doc.body.insertBefore(div, t.doc.body.childNodes[0]);
-
-            $.get(svgPath, function (data) {
+            $.get(svgPathOption, function (data) {
                 div.innerHTML = new XMLSerializer().serializeToString(data.documentElement);
             });
         }
@@ -390,6 +400,8 @@ jQuery.trumbowyg = {
             plugins: {}
         }, options);
 
+        t.disabled = t.o.disabled || (editorElem.nodeName === 'TEXTAREA' && editorElem.disabled);
+
         if (options.btns) {
             t.o.btns = options.btns;
         } else if (!t.o.semantic) {
@@ -432,6 +444,9 @@ jQuery.trumbowyg = {
             t.buildOverlay();
 
             setTimeout(function () {
+                if (t.disabled) {
+                    t.toggleDisable(true);
+                }
                 t.$c.trigger('tbwinit');
             });
         },
@@ -606,10 +621,6 @@ jQuery.trumbowyg = {
             var t = this,
                 prefix = t.o.prefix;
 
-            if (t.o.btns === false) {
-                return;
-            }
-
             var $btnPane = t.$btnPane = $('<div/>', {
                 class: prefix + 'button-pane'
             });
@@ -661,7 +672,7 @@ jQuery.trumbowyg = {
                 $btn = $('<button/>', {
                     type: 'button',
                     class: prefix + btnName + '-button ' + (btn.class || ''),
-                    html: '<svg><use xlink:href="#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>',
+                    html: t.hasSvg ? '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' : '',
                     title: (btn.title || btn.text || textDef) + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
                     tabindex: -1,
                     mousedown: function () {
@@ -724,7 +735,7 @@ jQuery.trumbowyg = {
             return $('<button/>', {
                 type: 'button',
                 class: prefix + btnName + '-dropdown-button' + (btn.ico ? ' ' + prefix + btn.ico + '-button' : ''),
-                html: '<svg><use xlink:href="#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' + (btn.text || btn.title || t.lang[btnName] || btnName),
+                html: t.hasSvg ? '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' + (btn.text || btn.title || t.lang[btnName] || btnName) : '',
                 title: ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : null),
                 style: btn.style || null,
                 mousedown: function () {
@@ -825,6 +836,21 @@ jQuery.trumbowyg = {
                 });
         },
 
+        // Disable editor
+        toggleDisable: function (disable) {
+            var t = this,
+                prefix = t.o.prefix;
+
+            t.disabled = disable;
+
+            if (disable) {
+                t.$ta.attr('disabled', true);
+            } else {
+                t.$ta.removeAttr('disabled');
+            }
+            t.$box.toggleClass(prefix + 'disabled', disable);
+            t.$ed.attr('contenteditable', !disable);
+        },
 
         // Destroy the editor
         destroy: function () {
@@ -874,6 +900,7 @@ jQuery.trumbowyg = {
                 prefix = t.o.prefix;
             t.semanticCode(false, true);
             setTimeout(function () {
+                t.doc.activeElement.blur();
                 t.$box.toggleClass(prefix + 'editor-hidden ' + prefix + 'editor-visible');
                 t.$btnPane.toggleClass(prefix + 'disable');
                 $('.' + prefix + 'viewHTML-button', t.$btnPane).toggleClass(prefix + 'active');
@@ -927,10 +954,14 @@ jQuery.trumbowyg = {
             }
             return t.$ta.val();
         },
+        syncTextarea: function () {
+            var t = this;
+            t.$ta.val(t.$ed.text().trim().length > 0 || t.$ed.find('hr,img,embed,input').length > 0 ? t.$ed.html() : '');
+        },
         syncCode: function (force) {
             var t = this;
             if (!force && t.$ed.is(':visible')) {
-                t.$ta.val(t.$ed.html());
+                t.syncTextarea();
             } else {
                 t.$ed.html(t.$ta.val());
             }
@@ -952,9 +983,7 @@ jQuery.trumbowyg = {
             t.saveRange();
             t.syncCode(force);
 
-            if (t.o.tagsToRemove.length > 0) {
-                $(t.o.tagsToRemove.join(', '), t.$ed).remove();
-            }
+            $(t.o.tagsToRemove.join(','), t.$ed).remove();
 
             if (t.o.semantic) {
                 t.semanticTag('b', 'strong');
@@ -963,25 +992,20 @@ jQuery.trumbowyg = {
 
                 if (full) {
                     var inlineElementsSelector = t.o.inlineElementsSelector,
-                        blockElementsSelector = ':not(' + t.o.inlineElementsSelector + ')';
+                        blockElementsSelector = ':not(' + inlineElementsSelector + ')';
 
                     // Wrap text nodes in span for easier processing
                     t.$ed.contents().filter(function () {
-                        return this.nodeType === 3 && $.trim(this.nodeValue).length > 0;
+                        return this.nodeType === 3 && this.nodeValue.trim().length > 0;
                     }).wrap('<span data-tbw/>');
 
                     // Wrap groups of inline elements in paragraphs (recursive)
                     var wrapInlinesInParagraphsFrom = function ($from) {
                         if ($from.length !== 0) {
-                            var $finalParagraph = $from.nextUntil(blockElementsSelector).andSelf()
-                                .wrapAll('<p/>').parent();
-
+                            var $finalParagraph = $from.nextUntil(blockElementsSelector).andSelf().wrapAll('<p/>').parent(),
+                                $nextElement = $finalParagraph.nextAll(inlineElementsSelector).first();
                             $finalParagraph.next('br').remove();
-
-                            var $nextElement = $finalParagraph.nextAll(inlineElementsSelector).first();
-                            if ($nextElement.length) {
-                                wrapInlinesInParagraphsFrom($nextElement);
-                            }
+                            wrapInlinesInParagraphsFrom($nextElement);
                         }
                     };
                     wrapInlinesInParagraphsFrom(t.$ed.children(inlineElementsSelector).first());
@@ -990,8 +1014,8 @@ jQuery.trumbowyg = {
 
                     // Unwrap paragraphs content, containing nothing usefull
                     t.$ed.find('p').filter(function () {
+                        // Don't remove currently being edited element
                         if (t.range && this === t.range.startContainer) {
-                            // Don't remove currently being edited element
                             return false;
                         }
                         return $(this).text().trim().length === 0 && $(this).children().not('br,span').length === 0;
@@ -1006,7 +1030,7 @@ jQuery.trumbowyg = {
 
                 t.restoreRange();
 
-                t.$ta.val(t.$ed.html());
+                t.syncTextarea();
             }
         },
 
