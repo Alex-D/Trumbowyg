@@ -400,7 +400,7 @@ jQuery.trumbowyg = {
             plugins: {}
         }, options);
 
-        t.disabled = t.o.disabled || (editorElem.type === 'textarea' && editorElem.disabled);
+        t.disabled = t.o.disabled || (editorElem.nodeName === 'TEXTAREA' && editorElem.disabled);
 
         if (options.btns) {
             t.o.btns = options.btns;
@@ -620,10 +620,6 @@ jQuery.trumbowyg = {
         buildBtnPane: function () {
             var t = this,
                 prefix = t.o.prefix;
-
-            if (t.o.btns === false) {
-                return;
-            }
 
             var $btnPane = t.$btnPane = $('<div/>', {
                 class: prefix + 'button-pane'
@@ -987,9 +983,7 @@ jQuery.trumbowyg = {
             t.saveRange();
             t.syncCode(force);
 
-            if (t.o.tagsToRemove.length > 0) {
-                $(t.o.tagsToRemove.join(', '), t.$ed).remove();
-            }
+            $(t.o.tagsToRemove.join(','), t.$ed).remove();
 
             if (t.o.semantic) {
                 t.semanticTag('b', 'strong');
@@ -998,25 +992,20 @@ jQuery.trumbowyg = {
 
                 if (full) {
                     var inlineElementsSelector = t.o.inlineElementsSelector,
-                        blockElementsSelector = ':not(' + t.o.inlineElementsSelector + ')';
+                        blockElementsSelector = ':not(' + inlineElementsSelector + ')';
 
                     // Wrap text nodes in span for easier processing
                     t.$ed.contents().filter(function () {
-                        return this.nodeType === 3 && $.trim(this.nodeValue).length > 0;
+                        return this.nodeType === 3 && this.nodeValue.trim().length > 0;
                     }).wrap('<span data-tbw/>');
 
                     // Wrap groups of inline elements in paragraphs (recursive)
                     var wrapInlinesInParagraphsFrom = function ($from) {
                         if ($from.length !== 0) {
-                            var $finalParagraph = $from.nextUntil(blockElementsSelector).andSelf()
-                                .wrapAll('<p/>').parent();
-
+                            var $finalParagraph = $from.nextUntil(blockElementsSelector).andSelf().wrapAll('<p/>').parent(),
+                                $nextElement = $finalParagraph.nextAll(inlineElementsSelector).first();
                             $finalParagraph.next('br').remove();
-
-                            var $nextElement = $finalParagraph.nextAll(inlineElementsSelector).first();
-                            if ($nextElement.length) {
-                                wrapInlinesInParagraphsFrom($nextElement);
-                            }
+                            wrapInlinesInParagraphsFrom($nextElement);
                         }
                     };
                     wrapInlinesInParagraphsFrom(t.$ed.children(inlineElementsSelector).first());
@@ -1025,8 +1014,8 @@ jQuery.trumbowyg = {
 
                     // Unwrap paragraphs content, containing nothing usefull
                     t.$ed.find('p').filter(function () {
+                        // Don't remove currently being edited element
                         if (t.range && this === t.range.startContainer) {
-                            // Don't remove currently being edited element
                             return false;
                         }
                         return $(this).text().trim().length === 0 && $(this).children().not('br,span').length === 0;
