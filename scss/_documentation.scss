@@ -255,3 +255,35 @@ $deprecated-color: #f39c12;
         }
     }
 }
+
+body:not(.show-removed) *[data-removed] {
+    display: none !important;
+}
+body:not(.show-removed) .hide-removed-label {
+    display: none;
+}
+body.show-removed .show-removed-label {
+    display: none;
+}
+.header-show-removed {
+    float: right;
+    padding: 28px 30px;
+
+    button {
+        display: block;
+        background: none;
+        border: none;
+        color: #fff;
+        text-align: center;
+        line-height: 1.2;
+        opacity: 0.7;
+        transition: opacity 150ms;
+
+        &:hover {
+            opacity: 1;
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+}

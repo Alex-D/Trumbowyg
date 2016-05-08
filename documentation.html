@@ -61,6 +61,15 @@
                         <h1 class="header-name-title">Trumbowyg</h1>
                         <h2 class="header-name-subtitle">Documentation</h2>
                     </div>
+                    <div class="header-show-removed">
+                        <button id="show-removed" type="button">
+                            <span class="show-removed-label">Show</span>
+                            <span class="hide-removed-label">Hide</span>
+                            doc of
+                            <br>
+                            older versions
+                        </button>
+                    </div>
                 </div>
             </div>
         </header>
@@ -393,18 +402,20 @@ $('.simple-editor').trumbowyg({
                         </code></pre>
                     </div>
 
-                    <div class="removed-info">
-                        <code>btnsAdd</code> option does not exist since 2.0.0
-                    </div>
-                    <p>
-                        If you want keep the default button pane but just add some buttons at the end, you can use the <code>btnsAdd</code> option.
-                        It could be usefull to add plugin buttons like <a href="/#plugins">colors</a> or <a href="/#plugins">preformatted</a> at the end of your button pane.
-                    </p>
-                    <pre><code class="javascript">
+                    <div data-removed="2.0.0">
+                        <div class="removed-info">
+                            <code>btnsAdd</code> option does not exist since 2.0.0
+                        </div>
+                        <p>
+                            If you want keep the default button pane but just add some buttons at the end, you can use the <code>btnsAdd</code> option.
+                            It could be usefull to add plugin buttons like <a href="/#plugins">colors</a> or <a href="/#plugins">preformatted</a> at the end of your button pane.
+                        </p>
+                        <pre><code class="javascript">
 $('.editor-with-colors-plugin').trumbowyg({
     btnsAdd: ['|', 'foreColor', 'backColor']
 });
-                    </code></pre>
+                        </code></pre>
+                    </div>
                 </div>
 
 
@@ -501,9 +512,9 @@ $('.trumbowyg').trumbowyg({
                         To have a close button in the top left corner, set closable to true.
                     </p>
                     <pre><code class="javascript">
-                        $('.trumbowyg.closable').trumbowyg({
-                        closable: true
-                        });
+$('.trumbowyg.closable').trumbowyg({
+    closable: true
+});
                     </code></pre>
                     <p class="note">
                         By default, a Trumbowyg editor is not closable.
@@ -837,22 +848,22 @@ $('#editor')
 
                     <h4>Save and get current selection</h4>
                     <pre><code class="javascript">
-                        // Save current selection
-                        $('#editor').trumbowyg('saveSelection');
+// Save current selection
+$('#editor').trumbowyg('saveSelection');
 
-                        // Restore last saved selection
-                        $('#editor').trumbowyg('restoreSelection');
+// Restore last saved selection
+$('#editor').trumbowyg('restoreSelection');
                     </code></pre>
 
                     <h4>Get selection range</h4>
                     <pre><code class="javascript">
-                        // sel contains a JavaScript range
-                        var sel = $('#editor').trumbowyg('getSelection');
+// sel contains a JavaScript range
+var sel = $('#editor').trumbowyg('getSelection');
                     </code></pre>
 
                     <h4>Get selection value</h4>
                     <pre><code class="javascript">
-                        var text = $('#editor').trumbowyg('getSelectedText');
+var text = $('#editor').trumbowyg('getSelectedText');
                     </code></pre>
                 </div>
             </section>

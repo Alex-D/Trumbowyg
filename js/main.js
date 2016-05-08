@@ -68,4 +68,9 @@ hljs.initHighlightingOnLoad();
             title: 'Permalink to ' + $(this).text()
         }));
     });
+
+    // Toggle class on body to show/hide removed features
+    $('#show-removed').click(function () {
+        $('body').toggleClass('show-removed');
+    });
 })(jQuery);
