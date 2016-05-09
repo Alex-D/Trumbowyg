@@ -1,24 +1,23 @@
 .section {
-	margin-top: 100px;
-}
-.section-title,
-.section-subtitle {
-	text-align: center;
+	position: relative;
+	padding-bottom: 100px;
+
+	&-grey {
+		background: #f4f7fa;
+	}
+
+	h4 {
+		font-weight: bold;
+		color: $text-color;
+		font-size: 28px;
+		padding-top: 80px;
+	}
 }
 .section-title {
-	font-size: 48px;
-	color: $header-dark;
-	padding-top: 50px;
-	border-top: 1px solid #ccc;
-}
-.section-subtitle {
-	font-size: 24px;
-	color: $header;
-	margin-bottom: 50px;
-}
-
-.section-part-title {
-	margin-top: 50px;
-	font-size: 28px;
-	color: $header;
+	text-align: center;
+	font-family: $panton;
+	font-size: 90px;
+	color: $primary-color;
+	padding-top: 100px;
+	padding-bottom: 30px;
 }

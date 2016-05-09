@@ -1,56 +1,40 @@
 .section-introduction {
-	margin-top: 50px;
+    margin-top: 50px;
+    padding-bottom: 70px;
 
-	&,
-	& + .section {
-		.section-title {
-			padding-top: 0;
-			border: none;
-		}
-	}
-}
+    .introduction-section {
+        height: 300px;
+    }
+    .introduction-section-col {
+        position: relative;
+        float: left;
+        width: 30%;
+        margin-right: 5%;
 
-.introduction-section {
-	height: 460px;
-	background: $main-color;
-	margin: 175px 0 100px;
-	color: #FFF;
-}
-.introduction-section-col {
-	position: relative;
-	float: left;
-	width: 33.33%;
-}
-.introduction-section-col-content {
-	position: relative;
-	min-height: 500px;
-}
-.introduction-section-col-illu {
-	display: block;
-	margin: -106px 0 35px 100px;
-	width: 234px;
-	height: 210px;
-}
-.introduction-section-col-title {
-	text-align: center;
-	font-size: 36px;
-	font-weight: 100;
-}
-.introduction-section-col-description {
-	font-size: 24px;
-	line-height: 28px;
-	margin-top: 40px;
-	padding: 0 20px;
-	font-weight: 100;
-	text-align: justify;
-}
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+    .introduction-section-col-title {
+        font-size: 28px;
+        font-weight: 100;
+        margin-bottom: 0;
+        padding-top: 50px;
 
-.introduction-section-col:nth-child(2)::before {
-	content: " ";
-	display: block;
-	position: absolute;
-	top: -150px;
-	height: 165%;
-	width: 100%;
-	background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, .04) 10%, rgba(0, 0, 0, .04) 90%, rgba(0, 0, 0, 0));
+        img {
+            height: 40px;
+            margin-right: 8px;
+            transform: translateY(-3px);
+
+            &.illu-lightweight {
+                transform: translateY(0px);
+            }
+        }
+    }
+    .introduction-section-col-description {
+        font-size: 18px;
+        line-height: 28px;
+        font-weight: 100;
+        margin-top: 10px;
+    }
 }

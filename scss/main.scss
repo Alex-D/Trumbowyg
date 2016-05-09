@@ -1,23 +1,26 @@
-$main-color: #3498db;
-$header: #3d3d3f;
-$header-dark: #222;
-$header-cross: #313132;
+$primary-color: #ff974a;
+$primary-color-light: #ffb864;
+$primary-color-dark: #b65207;
+$secondary-color: #ffc85b;
+$text-color: #392813;
+$white: #fff;
 
-$cookies-main-color: #f39c12;
-$moda11yze-main-color: #2ecc71;
+$panton: "Panton", sans-serif;
+$font: "Open Sans", sans-serif;
 
-$font: "WeblySleek UI", sans-serif;
+$transition-duration: 150ms;
 
 
 
 @import "normalize";
 @import "font";
 @import "base";
+@import "buttons";
 @import "header";
 @import "section";
 @import "introduction";
-@import "donate-form";
-@import "footer";
+// @import "donate-form";
+// @import "footer";
 
 @import "highlightjs-github";
-@import "documentation";
+// @import "documentation";
