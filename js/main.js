@@ -67,10 +67,8 @@ hljs.initHighlightingOnLoad();
     $continentNames.click(function () {
         if (!$(this).parent().hasClass('open')) {
             var $oldOpen = $('#languages').find('.open');
-            $oldOpen.find('> ul').slideUp(150);
             $oldOpen.removeClass('open');
             $(this).parent().addClass('open');
-            $(this).next().slideDown(150);
         }
     }).next().hide();
     $continentNames.last().parent().addClass('open');

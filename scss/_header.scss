@@ -11,6 +11,7 @@
     width: 100%;
     margin: 0;
     padding: 25px 40px 0;
+    font-weight: 400;
 
     li {
         list-style: none;
@@ -53,7 +54,7 @@
 
 .header-logo-container {
     margin: 0 auto;
-    padding-top: calc(50px + 4%);
+    padding-top: calc(80px + 4%);
     text-align: center;
 
     .header-logo {
@@ -72,6 +73,7 @@
     font-size: 18px;
     line-height: 1.6;
     padding: 0 20px;
+    font-weight: 300;
 }
 
 .header-buttons {
@@ -79,13 +81,19 @@
 }
 
 .header-install {
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 18px;
+    line-height: 1.6;
+    font-weight: 300;
 }
 
 #demonstration {
     padding-bottom: 0;
     margin-bottom: 80px;
+
+    .trumbowyg-editor,
+    .trumbowyg-textarea {
+        padding: 25px;
+    }
 }
 #demonstration .trumbowyg:not(.trumbowyg-fullscreen),
 #trumbowyg-demo:not(.trumbowyg-textarea) {
@@ -136,7 +144,7 @@
         width: 50%;
         background: none;
         color: $text-color;
-        font-weight: 400;
+        font-weight: 300;
         transition: color $transition-duration, text-indent $transition-duration;
 
         &:first-child {
