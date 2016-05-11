@@ -2,7 +2,18 @@
 	position: relative;
 	padding-bottom: 100px;
 
-	&-grey {
+	&-primary {
+		color: $primary-color-dark;
+		background: linear-gradient(to bottom left, $primary-color, $primary-color-light);
+
+		.section-title {
+			color: $white;
+		}
+		a {
+			color: $white;
+		}
+	}
+	&-secondary {
 		background: #f4f7fa;
 	}
 
@@ -16,7 +27,7 @@
 .section-title {
 	text-align: center;
 	font-family: $panton;
-	font-size: 90px;
+	font-size: 100px;
 	color: $primary-color;
 	padding-top: 100px;
 	padding-bottom: 30px;

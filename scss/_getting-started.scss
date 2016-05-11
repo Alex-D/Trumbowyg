@@ -1,0 +1,52 @@
+.installation-first-step {
+    height: 200px;
+    color: $text-color;
+    text-align: center;
+    padding-top: 10px;
+
+    .installation-download,
+    .installation-package-managers {
+        width: 48%;
+        float: left;
+    }
+    .installation-col-title {
+        font-size: 22px;
+        padding: 30px 0;
+        color: $text-color;
+    }
+
+    .installation-download {
+        .button {
+            display: block;
+            color: $white;
+            box-shadow: 0 0 84px rgba($primary-color, 0.4);
+
+            &:hover {
+                text-decoration: none;
+                color: $primary-color;
+            }
+        }
+    }
+    .installation-or {
+        font-weight: bold;
+        text-transform: uppercase;
+        width: 4%;
+        float: left;
+        font-size: 22px;
+        padding: 80px 0;
+    }
+    .installation-package-managers {
+        color: #888;
+        font-size: 18px;
+
+        code {
+            display: block;
+            padding-top: 5px;
+            line-height: 1.6;
+
+            & + code {
+                padding-top: 0;
+            }
+        }
+    }
+}

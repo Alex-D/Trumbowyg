@@ -130,22 +130,26 @@
     </section>
 
 
-    <section class="section section-grey" id="get-started">
+    <section class="section section-secondary" id="get-started">
         <div class="wrapper">
             <h2 class="section-title">Getting Started</h2>
 
             <div class="installation-first-step">
                 <div class="installation-download">
-                    Download the package
+                    <div class="installation-col-title">
+                        Download the package
+                    </div>
                     <a href="https://github.com/Alex-D/Trumbowyg/archive/master.zip" class="button button-secondary">Download</a>
                 </div>
                 <div class="installation-or">
                     or
                 </div>
                 <div class="installation-package-managers">
-                    Via a package manager <br>
-                    bower install trumbowyg <br>
-                    npm install trumbowyg
+                    <div class="installation-col-title">
+                        Via a package manager
+                    </div>
+                    <code>bower install trumbowyg</code>
+                    <code>npm install trumbowyg</code>
                 </div>
             </div>
 
@@ -169,14 +173,9 @@
             <pre><code class="html">
 &lt;script src="bower_components/trumbowyg/dist/trumbowyg.min.js">&lt;/script>
             </code></pre>
-            <p class="note">
-                You can install Trumbowyg using <strong>Bower</strong> which makes easier updates. <br>
-                <code class="console">bower install trumbowyg</code>
-            </p>
 
             <p>
-                Don't forget to load Trumbowyg CSS in the &lt;head&gt;, or load your own style for the editor. You need to
-                keep two sprites images in an <code class="console">image</code> subfolder.
+                Don't forget to load Trumbowyg CSS in the &lt;head&gt;, or load your own style for the editor.
             </p>
             <pre><code class="html">
 &lt;link rel="stylesheet" href="bower_components/trumbowyg/dist/ui/trumbowyg.min.css">
@@ -208,405 +207,257 @@ $('#trumbowyg-demo').trumbowyg({
     </section>
 
 
-    <section class="section wrapper">
-        <h2 class="section-title">30+ Localizations</h2>
-        <h3 class="section-subtitle">Get Trumbowyg in your language</h3>
+    <section class="section section-primary languages" id="languages">
+        <div class="wrapper">
+            <h2 class="section-title">30+ Languages</h2>
 
-        <p id="lang-list-light">
-            Arabic, Catalan, Czech, Danish, German, Greek, English, Spanish, Spanish (Argentina), Persian, Finnish,
-            French, Hebrew, Hungarian, Indonesian, Italian, Japanese, Korean, Malaysian, Dutch, Polish, Portuguese,
-            Romanian, Serbian (Cyrlic), Serbian (Latin), Russian, Slovak, Swedish, Turkish, Ukrainian, Vietnamese,
-            Simplified Chinese, Traditional Chinese.
+            <p>
+                <a href="./documentation.html#localization">Read the documentation to apply a localization.</a>
+            </p>
+            <p>
+                <a href="./documentation.html#add-localization">You can create your own localization file</a> and submit
+                it in a pull request :)
+            </p>
 
-            <button type="button" id="lang-list-view-full" class="big-button big-button-simple">
-                View detail of all languages
-            </button>
-        </p>
+            <div class="languages-columns">
+                <div class="col-globe">
+                    <img src="img/globe.svg" alt="" class="globe">
+                </div>
+                <div class="col-list">
+                    <ul>
+                        <li>
+                            <button class="continent-name" type="button">
+                                Africa
+                            </button>
+                            <ul>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/ar.min.js">
+                                        <span class="lang-code">ar</span>
+                                        <span class="lang-name">Arabic</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/tr.min.js">
+                                        <span class="lang-code">tr</span>
+                                        <span class="lang-name">Turkish</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
-        <table id="lang-list-full" class="dn">
-            <thead>
-            <tr>
-                <th>Code</th>
-                <th>Language</th>
-                <th>Author</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    ar
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/ar.min.js">Arabic</a>
-                </td>
-                <td>
-                    <a href="https://github.com/abomokhahmed">abomokhahmed / Abo Mokh ahmed</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    ca
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/ca.min.js">Catalan</a>
-                </td>
-                <td>
-                    <a href="https://github.com/alsanan">alsanan / Àlfons Sánchez</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    cs
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/cs.min.js">Czech</a>
-                </td>
-                <td>
-                    <a href="https://github.com/svoboda-jan">svoboda-jan / Jan Svoboda</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    da
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/da.min.js">Danish</a>
-                </td>
-                <td>
-                    <a href="https://github.com/chripede">chripede / Christian Pedersen</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    de
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/de.min.js">German</a>
-                </td>
-                <td>
-                    <a href="https://github.com/Manfred62">Manfred62 / Manfred Timm</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    el
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/el.min.js">Greek</a>
-                </td>
-                <td>
-                    <a href="https://github.com/merianos">merianos / Merianos Nikos</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    en
-                </td>
-                <td>
-                    English</li>
-                </td>
-                <td>
-                    (default)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    es
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/es.min.js">Spanish</a>
-                </td>
-                <td>
-                    Moisés Márquez
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    es_ar
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/es_ar.min.js">Spanish
-                        (Argentina)</a>
-                </td>
-                <td>
-                    Félix Vera
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    fa
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/fa.min.js">Persian</a>
-                </td>
-                <td>
-                    <a href="https://github.com/kiyarash">kiyarash / Kiarash Soleimanzadeh</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    fi
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/fi.min.js">Finnish</a>
-                </td>
-                <td>
-                    <a href="https://github.com/teppokoivula">teppokoivula / Teppo Koivula</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    fr
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/fr.min.js">French</a>
-                </td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>
-                    he
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/he.min.js">Hebrew</a>
-                </td>
-                <td>
-                    <a href="https://github.com/udidoron">udidoron / Udi Doron</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    hu
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/hu.min.js">Hungarian</a>
-                </td>
-                <td>
-                    <a href="https://github.com/matopeter">matopeter / Peter Mato</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    id
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/id.min.js">Indonesian</a>
-                </td>
-                <td>
-                    <a href="https://github.com/kimiamania">kimiamania / Rezha Julio</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    it
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/it.min.js">Italian</a>
-                </td>
-                <td>
-                    Mirko Buffoni
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    ja
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/ja.min.js">Japanese</a>
-                </td>
-                <td>
-                    <a href="https://github.com/foo9">foo9 / Kouta Fukuhara</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    ko
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/ko.min.js">Korean</a>
-                </td>
-                <td>
-                    <a href="https://github.com/dorajistyle">dorajistyle / JoongSeob Vito Kim</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    my
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/my.min.js">Malaysian</a>
-                </td>
-                <td>
-                    <a href="https://github.com/JohnPozy">John Pozy</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    nl
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/nl.min.js">Dutch</a>
-                </td>
-                <td>
-                    <a href="https://github.com/dhiemstra">dhiemstra / Danny Hiemstra</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    pl
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/pl.min.js">Polish</a>
-                </td>
-                <td>
-                    <a href="https://github.com/pawelabrams">pawelabrams / Paweł Abramowicz</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    pt
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/pt.min.js">Portuguese</a>
-                </td>
-                <td>
-                    <a href="https://github.com/ramirovjr">ramirovjr / Ramiro Varandas Jr</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    ro
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/ro.min.js">Romanian</a>
-                </td>
-                <td>
-                    <a href="https://github.com/pacMakaveli">pacMakaveli / Vladut Radulescu</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    rs
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/rs.min.js">Serbian (Cyrlic)</a>
-                </td>
-                <td>
-                    <a href="https://github.com/johonunu">johonunu / Nikola Trifunovic</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    rs_latin
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/rs_latin.min.js">Serbian
-                        (Latin)</a>
-                </td>
-                <td>
-                    <a href="https://github.com/johonunu">johonunu / Nikola Trifunovic</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    ru
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/ru.min.js">Russian</a>
-                </td>
-                <td>
-                    Yuri Lya
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    sk
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/sk.min.js">Slovak</a>
-                </td>
-                <td>
-                    <a href="https://github.com/VeeeneX">VeeeneX</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    sv
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/sv.min.js">Swedish</a>
-                </td>
-                <td>
-                    <a href="https://github.com/timint">timint / T. Almroth</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    tr
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/tr.min.js">Turkish</a>
-                </td>
-                <td>
-                    <a href="https://github.com/munzur">munzur / Emrah Bilbay</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    ua
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/ua.min.js">Ukrainian</a>
-                </td>
-                <td>
-                    <a href="https://github.com/ripdamage">ripdamage / Igor Buksha</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    vi
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/vi.min.js">Vietnamese</a>
-                </td>
-                <td>
-                    <a href="https://github.com/heocoi">heocoi</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    zh_cn
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/zh_cn.min.js">Simplified
-                        Chinese</a>
-                </td>
-                <td>
-                    <a href="https://github.com/akai">Liu Kai / akai</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    zh_tw
-                </td>
-                <td>
-                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/zh_tw.min.js">Traditional
-                        Chinese</a>
-                </td>
-                <td>
-                    <a href="https://github.com/PeterDaveHello">PeterDaveHello</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                        <li>
+                            <button class="continent-name" type="button">
+                                America
+                            </button>
+                            <ul>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/es_ar.min.js">
+                                        <span class="lang-code">es_ar</span>
+                                        <span class="lang-name">Spanish (Argentina)</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
-        <p class="text-center">
-            <a href="./documentation.html#localization">See the documentation to apply a localization.</a>
-        </p>
-        <p class="text-center">
-            <a href="./documentation.html#add-localization">You can create your own localization file</a> and submit it
-            in a pull request :)
-        </p>
+                        <li>
+                            <button class="continent-name" type="button">
+                                Asia
+                            </button>
+                            <ul>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/fa.min.js">
+                                        <span class="lang-code">fa</span>
+                                        <span class="lang-name">Persian</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/he.min.js">
+                                        <span class="lang-code">he</span>
+                                        <span class="lang-name">Hebrew</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/id.min.js">
+                                        <span class="lang-code">id</span>
+                                        <span class="lang-name">Indonesian</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/ja.min.js">
+                                        <span class="lang-code">ja</span>
+                                        <span class="lang-name">Japanese</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/ko.min.js">
+                                        <span class="lang-code">ko</span>
+                                        <span class="lang-name">Korean</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/my.min.js">
+                                        <span class="lang-code">my</span>
+                                        <span class="lang-name">Malaysian</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/ru.min.js">
+                                        <span class="lang-code">ru</span>
+                                        <span class="lang-name">Russian</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/vi.min.js">
+                                        <span class="lang-code">vi</span>
+                                        <span class="lang-name">Vietnamese</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/zh_cn.min.js">
+                                        <span class="lang-code">zh_cn</span>
+                                        <span class="lang-name">Simplified Chinese</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/zh_tw.min.js">
+                                        <span class="lang-code">zh_tw</span>
+                                        <span class="lang-name">Traditional Chinese</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <button class="continent-name" type="button">
+                                Europe
+                            </button>
+                            <ul>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/ca.min.js">
+                                        <span class="lang-code">ca</span>
+                                        <span class="lang-name">Catalan</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/cs.min.js">
+                                        <span class="lang-code">cs</span>
+                                        <span class="lang-name">Czech</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/da.min.js">
+                                        <span class="lang-code">da</span>
+                                        <span class="lang-name">Danish</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/de.min.js">
+                                        <span class="lang-code">de</span>
+                                        <span class="lang-name">German</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/el.min.js">
+                                        <span class="lang-code">el</span>
+                                        <span class="lang-name">Greek</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/en.min.js">
+                                        <span class="lang-code">en</span>
+                                        <span class="lang-name">English</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/es.min.js">
+                                        <span class="lang-code">es</span>
+                                        <span class="lang-name">Spanish</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/fi.min.js">
+                                        <span class="lang-code">fi</span>
+                                        <span class="lang-name">Finnish</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/fr.min.js">
+                                        <span class="lang-code">fr</span>
+                                        <span class="lang-name">French</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/hu.min.js">
+                                        <span class="lang-code">hu</span>
+                                        <span class="lang-name">Hungarian</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/it.min.js">
+                                        <span class="lang-code">it</span>
+                                        <span class="lang-name">Italian</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/nl.min.js">
+                                        <span class="lang-code">nl</span>
+                                        <span class="lang-name">Dutch</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/pl.min.js">
+                                        <span class="lang-code">pl</span>
+                                        <span class="lang-name">Polish</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/pt.min.js">
+                                        <span class="lang-code">pt</span>
+                                        <span class="lang-name">Portuguese</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/ro.min.js">
+                                        <span class="lang-code">ro</span>
+                                        <span class="lang-name">Romanian</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/rs.min.js">
+                                        <span class="lang-code">rs</span>
+                                        <span class="lang-name">Serbian (Cyrlic)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/rs_latin.min.js">
+                                        <span class="lang-code">rs_latin</span>
+                                        <span class="lang-name">Serbian (Latin)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/sk.min.js">
+                                        <span class="lang-code">sk</span>
+                                        <span class="lang-name">Slovak</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/sv.min.js">
+                                        <span class="lang-code">sv</span>
+                                        <span class="lang-name">Swedish</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.1.0/dist/langs/ua.min.js">
+                                        <span class="lang-code">ua</span>
+                                        <span class="lang-name">Ukrainian</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </section>
 
 
