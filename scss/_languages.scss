@@ -23,11 +23,12 @@
         flex: 0.93;
         padding-top: 80px;
         line-height: 1.6;
+        font-weight: 400;
 
         .continent-name {
             color: $white;
             font-size: 22px;
-            font-weight: 600;
+            font-weight: 400;
             background: none;
             border: none;
             padding: 0;
@@ -35,6 +36,26 @@
 
             &:focus {
                 outline: none;
+            }
+
+            &::after {
+                content: "";
+                display: inline-block;
+                height: 0;
+                width: 0;
+                border: 6px solid transparent;
+                border-left-color: $white;
+                transform: translateX(5px) translateY(-1px);
+            }
+        }
+
+        li[style] {
+            .continent-name {
+                &::after {
+                    border-left-color: transparent;
+                    border-top-color: $white;
+                    transform: translateX(2px) translateY(2px);
+                }
             }
         }
 
@@ -73,10 +94,17 @@
             list-style: none;
         }
 
-        ul {
+        > ul {
             padding-right: 50px;
 
-            li {
+            > li {
+                overflow: hidden;
+                transition: height $transition-duration linear;
+
+                &[data-height] {
+                    height: 30px;
+                }
+
                 ul {
                     padding: 15px 0;
                     columns: 2;

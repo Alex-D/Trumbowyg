@@ -64,15 +64,19 @@ hljs.initHighlightingOnLoad();
 
     // Languages continent switch
     var $continentNames = $('.continent-name');
+    $continentNames.each(function() {
+        $(this).parent().attr('data-height', $(this).parent().height());
+    });
     $continentNames.click(function () {
-        if (!$(this).parent().hasClass('open')) {
-            var $oldOpen = $('#languages').find('.open');
-            $oldOpen.removeClass('open');
-            $(this).parent().addClass('open');
-        }
-    }).next().hide();
-    $continentNames.last().parent().addClass('open');
-    $continentNames.last().next().show();
+        var $oldOpen = $('#languages').find('.col-list ul li[style]');
+        $oldOpen.removeAttr('style');
+        $(this).parent().css({
+            height: $(this).parent().attr('data-height') + 'px'
+        });
+    });
+    $continentNames.last().parent().css({
+        height: $continentNames.last().parent().attr('data-height') + 'px'
+    });
 
     // Add anchors
     $('.feature h3[id]').each(function () {
