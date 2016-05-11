@@ -1,28 +1,31 @@
 .footer {
 	margin-top: 100px;
 	text-align: center;
-	color: #999;
-	background: $header-dark;
-	border-top: 3px solid $main-color;
+	color: $white;
+	background: linear-gradient(to bottom left, $primary-color, $primary-color-light);
 	clear: both;
 
 	.footer-text,
 	.footer-link {
 		display: inline-block;
-		padding: 15px;
-		text-shadow: #000 2px 2px 0;
+		padding: 40px;
 	}
 	.footer-text {
 		padding-bottom: 0;
+
+		.hearts {
+			font-size: 18px;
+			color: $primary-color-dark;
+		}
 	}
 	.footer-link {
 		text-decoration: none;
-		color: #fff;
+		color: $white;
 		transition: color 0.15s;
 
 		&:hover,
 		&:focus {
-			color: $main-color;
+			color: $primary-color-dark;
 		}
 	}
 }
