@@ -598,26 +598,31 @@ $('#trumbowyg-demo').trumbowyg({
 
     <section class="section wrapper">
         <h2 class="section-title">Buy me a beer</h2>
-        <h3 class="section-subtitle">Support the project!</h3>
 
-        <p class="text-center">
+        <p class="donate-description">
             Making a donation will motivate me to keep this project going and allow for further development.
         </p>
 
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
             <div class="donate-form">
-                <input type="number" name="amount" id="amount" value="5.00" step="any" min="0" autocomplete="off"
-                       required>
-                <label for="amount">Amount</label>
+                <label for="amount" class="donate-label">Amount</label>
+                <div class="donate-amout-container">
+                    <input type="number" name="amount" id="amount" value="5.00" step="any" min="0" autocomplete="off"
+                           required class="donate-amount">
 
-                <input type="option" value="EUR" name="currency_code" id="currency_code_eur">
-                <label for="currency_code_eur">€</label>
-                <input type="option" value="USD" name="currency_code" id="currency_code_usd">
-                <label for="currency_code_usd">€</label>
+                    <input type="radio" value="EUR" name="currency_code" id="currency_code_eur"
+                           class="donate-currency-input" checked="checked">
+                    <label for="currency_code_eur" class="donate-currency-label">€</label>
+                    <input type="radio" value="USD" name="currency_code" id="currency_code_usd"
+                           class="donate-currency-input">
+                    <label for="currency_code_usd" class="donate-currency-label">$</label>
+                </div>
 
                 <button type="submit" name="submit" class="button button-secondary">Support the project</button>
 
                 <span class="via-paypal">Via PayPal</span>
+
+                <img src="img/beer.svg" alt="" class="donate-beer">
             </div>
             <input type="hidden" name="cmd" value="_xclick">
             <input type="hidden" name="business" value="demodealex@gmail.com">

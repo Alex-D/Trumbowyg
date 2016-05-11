@@ -15,7 +15,6 @@
     transition: color $transition-duration, background-color $transition-duration;
 
     &-secondary {
-        color: $primary-color-dark;
         background: $secondary-color;
     }
     &-ghost {
