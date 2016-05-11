@@ -3,6 +3,32 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 210.3 195" enable-background="new 0 0 210.3 195" xml:space="preserve">
+	<style>
+		@keyframes slideCloudTop {
+			0%,
+			100% {
+				transform: translateX(0);
+			}
+			50% {
+				transform: translateX(50px);
+			}
+		}
+		@keyframes slideCloudBottom {
+			0%,
+			100% {
+				transform: translateX(0);
+			}
+			50% {
+				transform: translateX(-30px);
+			}
+		}
+		.cloud-top {
+			animation: slideCloudTop 30s linear infinite;
+		}
+		.cloud-bottom {
+			animation: slideCloudBottom 32s linear infinite;
+		}
+	</style>
 <g>
 	<rect x="105.6" y="163.8" fill="#F49037" width="8.6" height="23.7"/>
 	<path fill="#F49037" d="M176.6,156.6L176.6,156.6c-2.6,2.2-6.6,1.8-8.7-0.8L47.9,10.5c-2.2-2.6-1.8-6.6,0.8-8.7l0,0
@@ -68,7 +94,7 @@
 	<path fill="#C96E23" d="M105.5,165.7c0,0,4.4,0.5,8.7,0.2c0,2.2,0,2.2,0,2.2s-2.1,0.5-8.6-0.1C105.6,166.9,105.5,165.7,105.5,165.7
 		z"/>
 </g>
-<g>
+<g class="cloud-top">
 	<path fill="#FFFFFF" d="M79.1,24H19c-2.5,0-4.8,1.8-5,4.3c-0.3,2.9,2,5.3,4.8,5.3h10c2.4,0,4.4,2,4.4,4.4v0c0,2.4-2,4.4-4.4,4.4
 		H7.3c-2.7,0-4.8,2.2-4.8,4.8v0c0,2.7,2.2,4.8,4.8,4.8h61.5c2.7,0,4.8-2.2,4.8-4.8v0c0-2.7-2.2-4.8-4.8-4.8h-8.7
 		c-2.4,0-4.4-2-4.4-4.4v0c0-2.4,2-4.4,4.4-4.4h18.8c2.5,0,4.8-1.8,5-4.3C84.2,26.4,81.9,24,79.1,24z"/>
@@ -78,7 +104,7 @@
 	<path fill="#FFEBCC" d="M63.1,30.7h13.5c2.2,0,4.3-1.4,4.9-3.6c0.2-0.8,0.2-1.7,0-2.4c0,0,0,0,0,0c1.6,1,2.6,2.8,2.3,4.8
 		c-0.3,2.4-2.6,4.1-5,4.1H60.1c-1.2,0-2.3,0.5-3.1,1.3l2.9-2.9C60.7,31.2,61.9,30.7,63.1,30.7z"/>
 </g>
-<g>
+<g class="cloud-bottom">
 	<path fill="#FFFFFF" d="M204.9,112.7h-60c-2.5,0-4.8,1.8-5,4.3c-0.3,2.9,2,5.3,4.8,5.3h10c2.4,0,4.4,2,4.4,4.4v0
 		c0,2.4-2,4.4-4.4,4.4h-21.6c-2.7,0-4.8,2.2-4.8,4.8l0,0c0,2.7,2.2,4.8,4.8,4.8h61.5c2.7,0,4.8-2.2,4.8-4.8v0c0-2.7-2.2-4.8-4.8-4.8
 		h-8.7c-2.4,0-4.4-2-4.4-4.4v0c0-2.4,2-4.4,4.4-4.4h18.8c2.5,0,4.8-1.8,5-4.3C210,115.2,207.7,112.7,204.9,112.7z"/>
