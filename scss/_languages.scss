@@ -2,7 +2,12 @@
     p {
         text-align: center;
         margin: 0 0 5px;
-        font-size: 22px;
+        font-size: 18px;
+        color: $white;
+
+        a {
+            color: $primary-color-dark;
+        }
     }
 
     .languages-columns {
