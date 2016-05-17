@@ -24,6 +24,7 @@ jQuery.trumbowyg.langs.fa = {
 
     strong: 'برجسته',
     em: 'مورب',
+    ins: 'اضافه شده',
     del: 'حذف شده',
 
     unorderedList: 'لیست نامرتب',

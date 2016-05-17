@@ -113,5 +113,4 @@
             $(container).contents().unwrap('code');
         }
     }
-
 })(jQuery);

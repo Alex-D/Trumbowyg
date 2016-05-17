@@ -19,6 +19,7 @@ jQuery.trumbowyg = {
 
             strong: 'Strong',
             em: 'Emphasis',
+            ins: 'Inserted',
             del: 'Deleted',
 
             superscript: 'Superscript',
@@ -188,9 +189,9 @@ jQuery.trumbowyg = {
          *      foo: {}
          * is equivalent to :
          *      foo: {
-             *          fn: 'foo',
-             *          title: this.lang.foo
-             *      }
+         *          fn: 'foo',
+         *          title: this.lang.foo
+         *      }
          */
         var h = t.lang.header, // Header translation
             isBlinkFunction = function () {
@@ -232,12 +233,6 @@ jQuery.trumbowyg = {
                 fn: 'formatBlock',
                 title: h + ' 4'
             },
-            subscript: {
-                tag: 'sub'
-            },
-            superscript: {
-                tag: 'sup'
-            },
 
             bold: {
                 key: 'B'
@@ -260,8 +255,18 @@ jQuery.trumbowyg = {
                 fn: 'italic',
                 key: 'I'
             },
+            ins: {
+                fn: 'underline'
+            },
             del: {
                 fn: 'strikethrough'
+            },
+
+            subscript: {
+                tag: 'sub'
+            },
+            superscript: {
+                tag: 'sup'
             },
 
             createLink: {
@@ -339,7 +344,7 @@ jQuery.trumbowyg = {
 
             btnsGrps: {
                 design: ['bold', 'italic', 'underline', 'strikethrough'],
-                semantic: ['strong', 'em', 'del'],
+                semantic: ['strong', 'em', 'ins', 'del'],
                 justify: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
                 lists: ['unorderedList', 'orderedList']
             },
@@ -405,7 +410,7 @@ jQuery.trumbowyg = {
         if (options.btns) {
             t.o.btns = options.btns;
         } else if (!t.o.semantic) {
-            t.o.btns[4] = 'btnGrp-design';
+            t.o.btns[3] = 'btnGrp-design';
         }
 
         $.each(t.o.btnsDef, function (btnName, btnDef) {
@@ -490,8 +495,7 @@ jQuery.trumbowyg = {
 
             t.$ta
                 .addClass(prefix + 'textarea')
-                .attr('tabindex', -1)
-            ;
+                .attr('tabindex', -1);
 
             t.$ed
                 .addClass(prefix + 'editor')
@@ -499,8 +503,7 @@ jQuery.trumbowyg = {
                     contenteditable: true,
                     dir: t.lang._dir || 'ltr'
                 })
-                .html(html)
-            ;
+                .html(html);
 
             if (t.o.tabindex) {
                 t.$ed.attr('tabindex', t.o.tabindex);
@@ -521,7 +524,6 @@ jQuery.trumbowyg = {
             }
 
             t.semanticCode();
-
 
             t._ctrl = false;
             t.$ed
@@ -659,7 +661,6 @@ jQuery.trumbowyg = {
 
             t.$box.prepend($btnPane);
         },
-
 
         // Build a button and his action
         buildBtn: function (btnName) { // btnName is name of the button
@@ -886,13 +887,11 @@ jQuery.trumbowyg = {
             $('body').removeClass(prefix + 'body-fullscreen');
         },
 
-
         // Empty the editor
         empty: function () {
             this.$ta.val('');
             this.syncCode(true);
         },
-
 
         // Function call when click on viewHTML button
         toggle: function () {
@@ -943,7 +942,6 @@ jQuery.trumbowyg = {
             }
         },
 
-
         // HTML Code management
         html: function (html) {
             var t = this;
@@ -988,6 +986,7 @@ jQuery.trumbowyg = {
             if (t.o.semantic) {
                 t.semanticTag('b', 'strong');
                 t.semanticTag('i', 'em');
+                t.semanticTag('u', 'ins');
                 t.semanticTag('strike', 'del');
 
                 if (full) {
@@ -1152,7 +1151,6 @@ jQuery.trumbowyg = {
             t.$c.trigger('tbw' + (isFullscreen ? 'open' : 'close') + 'fullscreen');
         },
 
-
         /*
          * Call method of trumbowyg if exist
          * else try to call anonymous function
@@ -1192,7 +1190,6 @@ jQuery.trumbowyg = {
                 }
             }
         },
-
 
         // Open a modal box
         openModal: function (title, content) {
@@ -1237,7 +1234,6 @@ jQuery.trumbowyg = {
                     return false;
                 });
 
-
             // Build ModalBox and animate to show them
             var $box = $('<div/>', {
                 class: prefix + 'modal-box',
@@ -1253,7 +1249,6 @@ jQuery.trumbowyg = {
                     opacity: 1
                 }, 100);
 
-
             // Append title
             $('<span/>', {
                 text: title,
@@ -1262,15 +1257,12 @@ jQuery.trumbowyg = {
 
             $modal.height($box.outerHeight() + 10);
 
-
             // Focus in modal box
             $('input:first', $box).focus();
-
 
             // Append Confirm and Cancel buttons
             t.buildModalBtn('submit', $box);
             t.buildModalBtn('reset', $box);
-
 
             $(window).trigger('scroll');
 
@@ -1380,7 +1372,6 @@ jQuery.trumbowyg = {
                     })
                 );
         },
-
 
         // Range management
         saveRange: function () {
