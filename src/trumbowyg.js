@@ -448,12 +448,11 @@ jQuery.trumbowyg = {
 
             t.buildOverlay();
 
-            setTimeout(function () {
-                if (t.disabled) {
-                    t.toggleDisable(true);
-                }
-                t.$c.trigger('tbwinit');
-            });
+            if (t.disabled) {
+                t.toggleDisable(true);
+            }
+
+            t.$c.trigger('tbwinit');
         },
 
         addBtnDef: function (btnName, btnDef) {
@@ -490,6 +489,7 @@ jQuery.trumbowyg = {
                 t.$box
                     .insertAfter(t.$ed)
                     .append(t.$ta, t.$ed);
+
                 t.syncCode();
             }
 
@@ -596,14 +596,13 @@ jQuery.trumbowyg = {
                         pasteHandler(e);
                     });
 
-                    setTimeout(function () {
-                        if (t.o.semantic) {
-                            t.semanticCode(false, true);
-                        } else {
-                            t.syncCode();
-                        }
-                        t.$c.trigger('tbwpaste', e);
-                    }, 0);
+                    if (t.o.semantic) {
+                        t.semanticCode(false, true);
+                    } else {
+                        t.syncCode();
+                    }
+
+                    t.$c.trigger('tbwpaste', e);
                 });
             t.$ta.on('keyup paste', function () {
                 t.$c.trigger('tbwchange');
@@ -897,18 +896,18 @@ jQuery.trumbowyg = {
         toggle: function () {
             var t = this,
                 prefix = t.o.prefix;
+
             t.semanticCode(false, true);
-            setTimeout(function () {
-                t.doc.activeElement.blur();
-                t.$box.toggleClass(prefix + 'editor-hidden ' + prefix + 'editor-visible');
-                t.$btnPane.toggleClass(prefix + 'disable');
-                $('.' + prefix + 'viewHTML-button', t.$btnPane).toggleClass(prefix + 'active');
-                if (t.$box.hasClass(prefix + 'editor-visible')) {
-                    t.$ta.attr('tabindex', -1);
-                } else {
-                    t.$ta.removeAttr('tabindex');
-                }
-            }, 0);
+
+            t.doc.activeElement.blur();
+            t.$box.toggleClass(prefix + 'editor-hidden ' + prefix + 'editor-visible');
+            t.$btnPane.toggleClass(prefix + 'disable');
+            $('.' + prefix + 'viewHTML-button', t.$btnPane).toggleClass(prefix + 'active');
+            if (t.$box.hasClass(prefix + 'editor-visible')) {
+                t.$ta.attr('tabindex', -1);
+            } else {
+                t.$ta.removeAttr('tabindex');
+            }
         },
 
         // Open dropdown when click on a button which open that
@@ -978,6 +977,7 @@ jQuery.trumbowyg = {
         // @param full  : wrap text nodes in <p>
         semanticCode: function (force, full) {
             var t = this;
+
             t.saveRange();
             t.syncCode(force);
 
@@ -1180,7 +1180,6 @@ jQuery.trumbowyg = {
 
                     t.doc.execCommand(cmd, false, param);
 
-                    t.syncCode();
                     t.semanticCode(false, true);
                 }
 
