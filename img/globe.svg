@@ -10,7 +10,7 @@
 				transform: translateX(0);
 			}
 			50% {
-				transform: translateX(50px);
+				transform: translateX(20px);
 			}
 		}
 		@keyframes slideCloudBottom {
@@ -19,14 +19,14 @@
 				transform: translateX(0);
 			}
 			50% {
-				transform: translateX(-30px);
+				transform: translateX(-10px);
 			}
 		}
 		.cloud-top {
-			animation: slideCloudTop 30s linear infinite;
+			animation: slideCloudTop 20s linear infinite;
 		}
 		.cloud-bottom {
-			animation: slideCloudBottom 32s linear infinite;
+			animation: slideCloudBottom 13s linear infinite;
 		}
 	</style>
 <g>
