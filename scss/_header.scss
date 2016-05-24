@@ -1,6 +1,6 @@
 .header-landing {
     position: relative;
-    background: linear-gradient(to bottom left, $primary-color, $primary-color-light);
+    background: $primary-color linear-gradient(to bottom left, $primary-color, $primary-color-light);
     text-align: center;
     color: $white;
     padding-bottom: 200px;

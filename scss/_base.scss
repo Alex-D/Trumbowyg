@@ -103,6 +103,13 @@ textarea {
         padding: 3px 0 3px 15px;
         border-left: 3px solid $primary-color-light;
         margin-right: 30px;
+
+        > :first-child {
+            margin-top: 0;
+        }
+        > :last-child {
+            margin-bottom: 0;
+        }
     }
 }
 .section {
