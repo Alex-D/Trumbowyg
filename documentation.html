@@ -20,69 +20,71 @@
     </symbol>
 </svg>
 <div class="sidebar">
-    <header class="header-documentation">
-        <a href="./" class="documentation-logo-link">
-            <img src="./img/logo-doc.svg" alt="" class="documentation-logo">
-        </a>
-        <h1 class="documentation-title">
-            Documentation
-        </h1>
-    </header>
+    <div class="sidebar-inner">
+        <header class="header-documentation">
+            <a href="./" class="documentation-logo-link">
+                <img src="./img/logo-doc.svg" alt="" class="documentation-logo">
+            </a>
+            <h1 class="documentation-title">
+                Documentation
+            </h1>
+        </header>
 
-    <aside class="documentation-summary">
-        <ul>
-            <li>
-                <a href="#general">General</a>
-                <ul>
-                    <li><a href="#prefix">Prefix</a></li>
-                    <li><a href="#localization">Localization</a></li>
-                    <li><a href="#custom-skin">Custom skin</a></li>
-                    <li><a href="#svg-icons">SVG icons</a></li>
-                    <li><a href="#placeholder">Placeholder</a></li>
-                    <li><a href="#disabled">Disabled</a></li>
-                    <li><a href="#direction" data-removed="2.0.0">Direction</a></li>
-                    <li><a href="#animation-duration" data-removed="2.0.0">Animations duration</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#basic-options">Basic Options</a>
-                <ul>
-                    <li><a href="#button-pane">Button pane</a></li>
-                    <li><a href="#semantic">Semantic</a></li>
-                    <li><a href="#reset-css">Reset CSS</a></li>
-                    <li><a href="#remove-format-pasted">Remove format pasted</a></li>
-                    <li><a href="#auto-adjust-height">Auto grow</a></li>
-                    <li><a href="#close-button" data-removed="2.0.0">Close button</a></li>
-                    <li><a href="#fullscreen" data-removed="2.0.0">Fullscreen</a></li>
-                    <li><a href="#mobile-tablet" data-removed="2.0.0">Mobile &amp; Tablet</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#advanced-options">Advanced Options</a>
-                <ul>
-                    <li><a href="#add-localization">Add a localization</a></li>
-                    <!-- TODO
-                    <li><a href="#custom-buttons">Custom buttons</a></li>
-                    <li><a href="#keyboard-shortcuts">Keyboard shortcuts</a></li>
-                    <li><a href="#add-button-type">Add button type</a></li>
-                    <li><a href="#create-plugin">Create a plugin</a></li>
-                    -->
-                </ul>
-            </li>
-            <li>
-                <a href="#api">API</a>
-                <ul>
-                    <li><a href="#modal-box">Modal box</a></li>
-                    <li><a href="#range">Range</a></li>
-                    <li><a href="#manage-content">Manage content</a></li>
-                    <li><a href="#empty">Empty</a></li>
-                    <li><a href="#enable-disable-edition">Enable/disable edition</a></li>
-                    <li><a href="#destroy-editor">Destroy editor</a></li>
-                    <li><a href="#events">Events</a></li>
-                    <li><a href="#selection" data-removed="2.0.0">Selection</a></li>
-                </ul>
-            </li>
-        </ul>
+        <aside class="documentation-summary">
+            <ul>
+                <li>
+                    <a href="#general">General</a>
+                    <ul>
+                        <li><a href="#prefix">Prefix</a></li>
+                        <li><a href="#localization">Localization</a></li>
+                        <li><a href="#custom-skin">Custom skin</a></li>
+                        <li><a href="#svg-icons">SVG icons</a></li>
+                        <li><a href="#placeholder">Placeholder</a></li>
+                        <li><a href="#disabled">Disabled</a></li>
+                        <li><a href="#direction" data-removed="2.0.0">Direction</a></li>
+                        <li><a href="#animation-duration" data-removed="2.0.0">Animations duration</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#basic-options">Basic Options</a>
+                    <ul>
+                        <li><a href="#button-pane">Button pane</a></li>
+                        <li><a href="#semantic">Semantic</a></li>
+                        <li><a href="#reset-css">Reset CSS</a></li>
+                        <li><a href="#remove-format-pasted">Remove format pasted</a></li>
+                        <li><a href="#auto-adjust-height">Auto grow</a></li>
+                        <li><a href="#close-button" data-removed="2.0.0">Close button</a></li>
+                        <li><a href="#fullscreen" data-removed="2.0.0">Fullscreen</a></li>
+                        <li><a href="#mobile-tablet" data-removed="2.0.0">Mobile &amp; Tablet</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#advanced-options">Advanced Options</a>
+                    <ul>
+                        <li><a href="#add-localization">Add a localization</a></li>
+                        <!-- TODO
+                        <li><a href="#custom-buttons">Custom buttons</a></li>
+                        <li><a href="#keyboard-shortcuts">Keyboard shortcuts</a></li>
+                        <li><a href="#add-button-type">Add button type</a></li>
+                        <li><a href="#create-plugin">Create a plugin</a></li>
+                        -->
+                    </ul>
+                </li>
+                <li>
+                    <a href="#api">API</a>
+                    <ul>
+                        <li><a href="#modal-box">Modal box</a></li>
+                        <li><a href="#range">Range</a></li>
+                        <li><a href="#manage-content">Manage content</a></li>
+                        <li><a href="#empty">Empty</a></li>
+                        <li><a href="#enable-disable-edition">Enable/disable edition</a></li>
+                        <li><a href="#destroy-editor">Destroy editor</a></li>
+                        <li><a href="#events">Events</a></li>
+                        <li><a href="#selection" data-removed="2.0.0">Selection</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
 
         <div class="documentation-sidebar-switch">
             <button id="show-removed" type="button">
@@ -236,7 +238,7 @@ $.trumbowyg.svgPath = false:
                     need to apply the following style (replace <code>trumbowyg</code> by your prefix):
                 </p>
                 <pre><code class="css">
-.trumbowyg-editor[contenteditable=true]:empty:before{
+.trumbowyg-editor[contenteditable=true]:empty::before{
     content: attr(placeholder);
     color: #999;
 }

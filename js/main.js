@@ -96,7 +96,7 @@ hljs.initHighlightingOnLoad();
     $('.link-to-removed').click(function () {
         $('body').addClass('show-removed');
     });
-    if (window.location.hash.length > 1 && $(window.location.hash).not(':visible')) {
+    if (window.location.hash.length > 1 && !$(window.location.hash).is(':visible')) {
         $('body').addClass('show-removed');
     }
 })(jQuery);

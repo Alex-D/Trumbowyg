@@ -2,15 +2,18 @@ $removed-color: #d5491e;
 $added-color: #5ecb0e;
 $deprecated-color: #ff9a4d;
 
-$sidebar-width: 25%;
+$sidebar-width: 22%;
 $show-old-height: 60px;
 
 .documentation-body {
-    margin-left: $sidebar-width;
     background: $grey;
+    display: flex;
 
     .main {
         padding: 0 60px;
+        height: 100vh;
+        width: 100% - $sidebar-width;
+        overflow: auto;
     }
 
     .section-title {
@@ -38,11 +41,15 @@ $show-old-height: 60px;
         width: 17px;
     }
     ::-webkit-scrollbar-track {
-        background: $primary-color-light;
+        background: $grey;
     }
     ::-webkit-scrollbar-thumb {
-        background: $primary-color;
-        border: 2px solid $primary-color-light;
+        background: #cfd7de;
+        border: 2px solid $grey;
+
+        &:hover {
+            background: #616870;
+        }
     }
 }
 
@@ -65,33 +72,50 @@ $show-old-height: 60px;
         font-weight: 100;
         line-height: 1;
 
-        @media (max-width: 1200px) {
+        @media (max-width: 1290px) {
             font-size: 2.5vw;
         }
     }
 }
 
 .sidebar {
-    position: fixed;
-    overflow: auto;
+    position: relative;
     top: 0;
     left: 0;
-    bottom: $show-old-height;
-    padding-bottom: 100px;
+    height: 100vh;
     color: $white;
     background: $primary-color linear-gradient(to bottom left, $primary-color, $primary-color-light);
     width: $sidebar-width;
 
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: $primary-color-light;
+        border: 1px solid $primary-color-light;
+        border-right: none;
+
+        &:hover {
+            background: $white;
+        }
+    }
+
     &::after {
         content: "";
         display: block;
-        position: fixed;
+        position: absolute;
         left: 0;
         bottom: $show-old-height;
-        width: calc(#{$sidebar-width} - 17px);
+        width: calc(100% - 17px);
         height: 100px;
         background: linear-gradient(to bottom, transparent, $primary-color-light);
         pointer-events: none;
+    }
+
+    .sidebar-inner {
+        overflow: auto;
+        height: calc(100vh - #{$show-old-height});
+        padding-bottom: 100px;
     }
 
     ul,
@@ -180,7 +204,7 @@ $show-old-height: 60px;
 
             .switch-label {
                 display: block;
-                width: 236px;
+                max-width: 236px;
                 margin: 0 auto;
             }
             .switch-status {
@@ -205,12 +229,19 @@ $show-old-height: 60px;
                 }
             }
 
-            @media (max-width: 1600px) {
+            @media (max-width: 1750px) {
                 .switch-label {
                     font-size: 16px;
                 }
                 .switch-status {
                     right: 15px;
+                }
+            }
+            @media (max-width: 1290px) {
+                .switch-label {
+                    margin: 0;
+                    padding: 0 45px 0 15px;
+                    width: 190px;
                 }
             }
         }
