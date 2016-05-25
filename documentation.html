@@ -13,6 +13,12 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 </head>
 <body class="documentation-body">
+<svg xmlns="http://www.w3.org/2000/svg" style="overflow: hidden;visibility: hidden;height: 0;width: 0;">
+    <symbol id="trumbowyg-link" viewBox="0 0 72 72">
+        <path d="M30.9 49.1l-6.7 6.7c-.8.8-1.6.9-2.1.9s-1.4-.1-2.1-.9l-5.2-5.2c-1.1-1.1-1.1-3.1 0-4.2l6.1-6.1.2-.2 6.5-6.5c-1.2-.6-2.5-.9-3.8-.9-2.3 0-4.6.9-6.3 2.6L10.8 42c-3.5 3.5-3.5 9.2 0 12.7l5.2 5.2c1.7 1.7 4 2.6 6.3 2.6s4.6-.9 6.3-2.6l6.7-6.7C38 50.5 38.6 46.3 37 43l-6.1 6.1zM38.5 22.7l6.7-6.7c.8-.8 1.6-.9 2.1-.9s1.4.1 2.1.9l5.2 5.2c1.1 1.1 1.1 3.1 0 4.2l-6.1 6.1-.2.2-6.5 6.5c1.2.6 2.5.9 3.8.9 2.3 0 4.6-.9 6.3-2.6l6.7-6.7c3.5-3.5 3.5-9.2 0-12.7l-5.2-5.2c-1.7-1.7-4-2.6-6.3-2.6s-4.6.9-6.3 2.6l-6.7 6.7c-2.7 2.7-3.3 6.9-1.7 10.2l6.1-6.1z"/>
+        <path d="M44.1 30.7c.2-.2.4-.6.4-.9 0-.3-.1-.6-.4-.9l-2.3-2.3c-.2-.2-.6-.4-.9-.4-.3 0-.6.1-.9.4L25.8 40.8c-.2.2-.4.6-.4.9 0 .3.1.6.4.9l2.3 2.3c.2.2.6.4.9.4.3 0 .6-.1.9-.4l14.2-14.2z"/>
+    </symbol>
+</svg>
 <div class="sidebar">
     <header class="header-documentation">
         <a href="./" class="documentation-logo-link">
@@ -80,7 +86,12 @@
 
         <div class="documentation-sidebar-switch">
             <button id="show-removed" type="button">
-                Show doc of older versions
+                <span class="switch-label">
+                    Show doc of older versions
+                </span>
+                <span class="switch-status">
+                    <span class="switch-status-circle"></span>
+                </span>
             </button>
         </div>
     </aside>
@@ -249,7 +260,7 @@ $('.a-disabled-editor').trumbowyg({
 });
             </code></pre>
             <p class="note">
-                You can switch between disabled and enabled states by <a href="#enable-disable-edition">using API</a>.
+                You can switch between disabled and enabled states by <a href="#enable-disable-edition">using API</a>
             </p>
         </div>
 
@@ -259,7 +270,7 @@ $('.a-disabled-editor').trumbowyg({
             <p class="removed-feature">Removed since 2.0.0</p>
             <p class="removed-info">
                 Since 2.0.0, prefer use the <code>_dir</code> variable <a href="#add-localization">in the language
-                file</a>.
+                file</a>
             </p>
             <p>
                 If your language needs to be read from left to right, use the <code>dir</code> option:
@@ -383,13 +394,13 @@ $('.trumbowyg').trumbowyg({
             <p>
                 This option deactivates the <em>underline</em> button by default because they do not convey any real
                 semantic. If you want to reactivate them, you have to do it explicitly, see <a href="#button-pane">Button
-                pane</a>.
+                pane</a>
             </p>
             <p class="note">
-                This option is set to <code>true</code> by default since <span class="version-tag">2.0.0</span>.
+                This option is set to <code>true</code> by default since <span class="version-tag">2.0.0</span>
             </p>
             <p class="note">
-                This option was set to <code>false</code> by default in <span class="version-tag">1.0.0</span>.
+                This option was set to <code>false</code> by default in <span class="version-tag">1.0.0</span>
             </p>
         </div>
 
@@ -417,7 +428,7 @@ $('.trumbowyg').trumbowyg({
             <p class="added-feature">Added in 2.0.0</p>
             <p>
                 If you don't want styles pasted from clipboard (from Word or other webpage for example), pass the <code>removeformatPasted</code>
-                option to <code>true</code>.
+                option to <code>true</code>
             </p>
             <pre><code class="javascript">
 $('.trumbowyg').trumbowyg({
@@ -493,7 +504,7 @@ $('.trumbowyg.closable').trumbowyg({
                 current page.
             </p>
             <p class="note">
-                Fullscreen default value is to <code>true</code>.
+                Fullscreen default value is to <code>true</code>
             </p>
         </div>
 
@@ -521,7 +532,7 @@ $('.trumbowyg.allow-mobile').trumbowyg({
                 If you set false, Trumbowyg transforms the targeted element as a textarea.
             </p>
             <p class="note">
-                Defaults values are mobile to <code>false</code> and tablet to <code>true</code>.
+                Defaults values are mobile to <code>false</code> and tablet to <code>true</code>
             </p>
         </div>
     </section>
@@ -546,7 +557,7 @@ jQuery.trumbowyg.langs.fr = {
             </code></pre>
             <p>
                 Some localizations are added each day, you can find them <a
-                    href="https://github.com/Alex-D/Trumbowyg/tree/master/dist/langs">here</a>.
+                    href="https://github.com/Alex-D/Trumbowyg/tree/master/dist/langs">here</a>
             </p>
             <p>
                 You can submit a new localization file by creating a new pull request on the Github repository.
@@ -658,7 +669,7 @@ $("#editor").trumbowyg("openModalInsert", {
             <p class="added-feature">Added in 2.0.0</p>
 
             <p class="note">
-                Range is the new <a href="#selection">selection</a> for v2.
+                Range is the new <a href="#selection" class="link-to-removed">selection</a> for v2.
             </p>
 
             <p>
@@ -802,41 +813,6 @@ var text = $('#editor').trumbowyg('getSelectedText');
         </div>
     </section>
 </main>
-
-
-<footer class="footer">
-    <div class="wrapper">
-        <span class="footer-text">
-            Made with &hearts; by Alex-D
-        </span>
-    </div>
-    <div class="wrapper">
-        <a class="footer-link" href="http://alex-d.fr/" title="Discover the author's website">
-            Website
-        </a>
-        &bull;
-        <a class="footer-link" href="https://github.com/Alex-D" title="Alex-D's Github profile">
-            Github
-        </a>
-        &bull;
-        <a class="footer-link" href="https://twitter.com/AlexandreDemode" title="Alex-D's Twitter">
-            Twitter
-        </a>
-        &bull;
-        <a class="footer-link" href="https://www.facebook.com/Alex.D.fr" title="Alex-D's Facebook page">
-            Facebook
-        </a>
-        &bull;
-        <a class="footer-link" href="https://plus.google.com/+AlexandreDEMODEAlexD" title="Alex-D's Google+ page">
-            Google+
-        </a>
-        &bull;
-        <a class="footer-link" href="https://soundcloud.com/alexandre-demode"
-           title="Listen Alex-D's compositions on SoundCloud">
-            SoundCloud
-        </a>
-    </div>
-</footer>
 
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>

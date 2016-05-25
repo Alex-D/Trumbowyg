@@ -81,7 +81,7 @@ hljs.initHighlightingOnLoad();
     // Add anchors
     $('.feature h3[id]').each(function () {
         $(this).after($('<a/>', {
-            text: '§',
+            html: '<svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#trumbowyg-link"></use></svg>',
             'class': 'title-link',
             href: '#' + $(this).attr('id'),
             title: 'Permalink to ' + $(this).text()
@@ -92,6 +92,13 @@ hljs.initHighlightingOnLoad();
     $('#show-removed').click(function () {
         $('body').toggleClass('show-removed');
     });
+
+    $('.link-to-removed').click(function () {
+        $('body').addClass('show-removed');
+    });
+    if (window.location.hash.length > 1 && $(window.location.hash).not(':visible')) {
+        $('body').addClass('show-removed');
+    }
 })(jQuery);
 
 /* Google Analytics */

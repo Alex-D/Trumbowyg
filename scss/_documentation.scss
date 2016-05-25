@@ -3,10 +3,15 @@ $added-color: #5ecb0e;
 $deprecated-color: #ff9a4d;
 
 $sidebar-width: 25%;
+$show-old-height: 60px;
 
 .documentation-body {
     margin-left: $sidebar-width;
     background: $grey;
+
+    .main {
+        padding: 0 60px;
+    }
 
     .section-title {
         padding: 50px 0 0;
@@ -19,9 +24,18 @@ $sidebar-width: 25%;
     h4 {
         padding: 0;
     }
+    p {
+        code {
+            color: #616870;
+            background: #dfe5eb;
+            padding: 0 5px;
+            border: 1px solid #d0d9e1;
+            border-radius: 2px;
+        }
+    }
 
     ::-webkit-scrollbar {
-        width: 12px;
+        width: 17px;
     }
     ::-webkit-scrollbar-track {
         background: $primary-color-light;
@@ -50,14 +64,19 @@ $sidebar-width: 25%;
         font-family: $panton;
         font-weight: 100;
         line-height: 1;
+
+        @media (max-width: 1200px) {
+            font-size: 2.5vw;
+        }
     }
 }
+
 .sidebar {
     position: fixed;
     overflow: auto;
     top: 0;
     left: 0;
-    bottom: 50px;
+    bottom: $show-old-height;
     padding-bottom: 100px;
     color: $white;
     background: $primary-color linear-gradient(to bottom left, $primary-color, $primary-color-light);
@@ -68,17 +87,11 @@ $sidebar-width: 25%;
         display: block;
         position: fixed;
         left: 0;
-        bottom: 50px;
-        width: $sidebar-width;
+        bottom: $show-old-height;
+        width: calc(#{$sidebar-width} - 17px);
         height: 100px;
         background: linear-gradient(to bottom, transparent, $primary-color-light);
         pointer-events: none;
-    }
-
-    &:hover {
-        ::-webkit-scrollbar {
-            opacity: 1;
-        }
     }
 
     ul,
@@ -98,13 +111,18 @@ $sidebar-width: 25%;
         font-size: 18px;
 
         > ul {
-            width: 236px;
+            max-width: 266px;
             margin: 0 auto;
+            padding: 0 15px;
 
             a {
                 display: block;
                 height: 30px;
                 line-height: 30px;
+                text-overflow: ellipsis;
+                width: 100%;
+                white-space: nowrap;
+                overflow: hidden;
 
                 &[data-removed] {
                     text-decoration: line-through;
@@ -141,21 +159,69 @@ $sidebar-width: 25%;
         width: $sidebar-width;
         bottom: 0;
         left: 0;
-        background: $grey;
-        height: 50px;
+        background: $white;
+        height: $show-old-height;
 
         button {
+            position: relative;
             display: block;
-            height: 50px;
+            height: $show-old-height;
             width: 100%;
-            text-align: center;
+            text-align: left;
+            padding: 0 17px 0 0;
             background: none;
             border: none;
+            border-top: 1px solid #e9eef3;
+            color: #9ca4ac;
 
             &:focus {
                 outline: none;
             }
+
+            .switch-label {
+                display: block;
+                width: 236px;
+                margin: 0 auto;
+            }
+            .switch-status {
+                position: absolute;
+                top: 18px;
+                right: 40px;
+                width: 40px;
+                height: 24px;
+                display: block;
+                background: #cfd7de;
+                border-radius: 20px;
+                transition: background-color $transition-duration;
+
+                &-circle {
+                    display: block;
+                    margin: 3px;
+                    height: 18px;
+                    width: 18px;
+                    background: $white;
+                    border-radius: 20px;
+                    transition: margin-left $transition-duration;
+                }
+            }
+
+            @media (max-width: 1600px) {
+                .switch-label {
+                    font-size: 16px;
+                }
+                .switch-status {
+                    right: 15px;
+                }
+            }
         }
+    }
+}
+
+body.show-removed .switch-status {
+    background: $added-color !important;
+
+    &-circle {
+        margin-left: 19px !important;
     }
 }
 
@@ -170,12 +236,15 @@ $sidebar-width: 25%;
     border-radius: 50px;
     transform: translateX(10px) translateY(-4px);
 }
+
 .removed-feature {
     background: $removed-color;
 }
+
 .added-feature {
     background: $added-color;
 }
+
 .deprecated-feature {
     background: $deprecated-color;
 }
@@ -183,14 +252,25 @@ $sidebar-width: 25%;
 .removed-info,
 .deprecated-info {
     padding: 7px 15px;
+    border-radius: 2px;
 }
+
 .removed-info {
     background: #f2d4d4;
-    border: 1px solid #c40d0d;
+    border: 1px solid $removed-color;
+
+    a {
+        color: $removed-color;
+    }
 }
+
 .deprecated-info {
     background: #f2dfc1;
-    border: 1px solid #d6ac6a;
+    border: 1px solid $deprecated-color;
+
+    a {
+        color: $deprecated-color;
+    }
 }
 
 .version-tag {
@@ -202,6 +282,7 @@ $sidebar-width: 25%;
     font-style: normal;
     border-radius: 20px;
 }
+
 .note .version-tag {
     transform: translateY(-1px);
 }
@@ -220,26 +301,39 @@ $sidebar-width: 25%;
     }
 
     .title-link {
+        display: block;
         position: absolute;
-        top: 2px;
-        left: -50px;
-        line-height: 36px;
-        height: 40px;
-        width: 40px;
-        text-align: center;
-        font-size: 28px;
-        text-decoration: none;
+        top: 53px;
+        left: -45px;
+        height: 30px;
+        width: 30px;
         opacity: 0;
-        background: #eee;
-        border: 1px solid $primary-color;
+        text-align: center;
+        text-decoration: none;
+        background: $primary-color;
         border-radius: 50%;
-        transition: all 0.15s;
+        transition: opacity $transition-duration, background $transition-duration, color $transition-duration;
 
         &:hover,
         &:focus {
-            background: $primary-color;
-            color: #fff;
+            background: $white;
             text-decoration: none;
+
+            svg {
+                fill: $primary-color;
+            }
+        }
+
+        svg {
+            fill: $white;
+            width: 70%;
+            height: 100%;
+        }
+    }
+
+    &:hover {
+        .title-link {
+            opacity: 1;
         }
     }
 }
@@ -247,12 +341,15 @@ $sidebar-width: 25%;
 body:not(.show-removed) *[data-removed] {
     display: none !important;
 }
+
 body:not(.show-removed) .hide-removed-label {
     display: none;
 }
+
 body.show-removed .show-removed-label {
     display: none;
 }
+
 .header-show-removed {
     float: right;
     padding: 28px 30px;
