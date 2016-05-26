@@ -1,9 +1,9 @@
 /* ===========================================================
  * hr.js
- * Serbian (Latin) translation for Trumbowyg
- * https://www.github.com/johonunu
+ * Croatian translation for Trumbowyg
+ * https://www.github.com/Buda9
  * ===========================================================
- * Author : Nikola Trifunovic (https://www.github.com/johonunu)
+ * Author : Davor Budimir (https://www.github.com/Buda9)
  */
 
 // jshint camelcase:false
