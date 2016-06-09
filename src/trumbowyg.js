@@ -163,7 +163,7 @@ jQuery.trumbowyg = {
                         if (!stackLines[i].match(/http[s]?:\/\//)) {
                             continue;
                         }
-                        svgPathOption = stackLines[Number(i)].match(/((http[s]?:\/\/.+\/)([^\/]+\.js)):/)[1].split('/');
+                        svgPathOption = stackLines[Number(i)].match(/((http[s]?:\/\/.+\/)([^\/]+\.js))(\?.*)?:/)[1].split('/');
                         svgPathOption.pop();
                         svgPathOption = svgPathOption.join('/') + '/ui/icons.svg';
                         break;
