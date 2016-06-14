@@ -183,6 +183,17 @@ $transition-duration: 150ms;
         cursor: pointer;
         background: none;
         transition: background-color $transition-duration, opacity $transition-duration;
+
+        i {
+            font-size: 21px;
+            margin-top: 2px;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            vertical-align: middle;
+        }
     }
 
     &.trumbowyg-disable button:not(.trumbowyg-not-disable):not(.trumbowyg-active),

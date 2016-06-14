@@ -668,27 +668,36 @@ jQuery.trumbowyg = {
                 btn = t.btnsDef[btnName],
                 isDropdown = btn.dropdown,
                 textDef = t.lang[btnName] || btnName,
+                html = '';
 
-                $btn = $('<button/>', {
-                    type: 'button',
-                    class: prefix + btnName + '-button ' + (btn.class || ''),
-                    html: t.hasSvg ? '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' : '',
-                    title: (btn.title || btn.text || textDef) + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
-                    tabindex: -1,
-                    mousedown: function () {
-                        if (!isDropdown || $('.' + btnName + '-' + prefix + 'dropdown', t.$box).is(':hidden')) {
-                            $('body', t.doc).trigger('mousedown');
-                        }
+            if(btn.iconClass != undefined) {
+                html = '<i class="'+btn.iconClass+'">';
+            }else if(btn.iconUrl != undefined){
+                html = '<img src="'+btn.iconUrl+'">';
+            }else if(t.hasSvg){
+                html = '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' + (btn.text || btn.title || t.lang[btnName] || btnName);
+            }
 
-                        if (t.$btnPane.hasClass(prefix + 'disable') && !$(this).hasClass(prefix + 'active') && !$(this).hasClass(prefix + 'not-disable')) {
-                            return false;
-                        }
+            var $btn = $('<button/>', {
+                type: 'button',
+                class: prefix + btnName + '-button ' + (btn.class || ''),
+                html: html,
+                title: (btn.title || btn.text || textDef) + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
+                tabindex: -1,
+                mousedown: function () {
+                    if (!isDropdown || $('.' + btnName + '-' + prefix + 'dropdown', t.$box).is(':hidden')) {
+                        $('body', t.doc).trigger('mousedown');
+                    }
 
-                        t.execCmd((isDropdown ? 'dropdown' : false) || btn.fn || btnName, btn.param || btnName, btn.forceCss || false);
-
+                    if (t.$btnPane.hasClass(prefix + 'disable') && !$(this).hasClass(prefix + 'active') && !$(this).hasClass(prefix + 'not-disable')) {
                         return false;
                     }
-                });
+
+                    t.execCmd((isDropdown ? 'dropdown' : false) || btn.fn || btnName, btn.param || btnName, btn.forceCss || false);
+
+                    return false;
+                }
+            });
 
             if (isDropdown) {
                 $btn.addClass(prefix + 'open-dropdown');
@@ -721,7 +730,8 @@ jQuery.trumbowyg = {
         buildSubBtn: function (btnName) {
             var t = this,
                 prefix = t.o.prefix,
-                btn = t.btnsDef[btnName];
+                btn = t.btnsDef[btnName],
+                html = '';
 
             if (btn.key) {
                 t.keys[btn.key] = {
@@ -730,12 +740,20 @@ jQuery.trumbowyg = {
                 };
             }
 
+            if(btn.iconClass != undefined) {
+                html = '<i class="'+btn.iconClass+'">';
+            }else if(btn.iconUrl != undefined){
+                html = '<img src="'+btn.iconUrl+'">';
+            }else if(t.hasSvg){
+                html = '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' + (btn.text || btn.title || t.lang[btnName] || btnName);
+            }
+
             t.tagToButton[(btn.tag || btnName).toLowerCase()] = btnName;
 
             return $('<button/>', {
                 type: 'button',
                 class: prefix + btnName + '-dropdown-button' + (btn.ico ? ' ' + prefix + btn.ico + '-button' : ''),
-                html: t.hasSvg ? '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' + (btn.text || btn.title || t.lang[btnName] || btnName) : '',
+                html: html,
                 title: ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : null),
                 style: btn.style || null,
                 mousedown: function () {
