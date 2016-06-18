@@ -20,7 +20,9 @@
         urlPropertyName: 'file',
         statusPropertyName: 'success',
         success: undefined,
-        error: undefined
+        error: undefined,
+        onSuccess: function () {},
+        onError: function () {}
     };
 
     function getDeep(object, propertyParts) {
@@ -146,11 +148,13 @@
                                                     setTimeout(function () {
                                                         trumbowyg.closeModal();
                                                     }, 250);
+                                                    trumbowyg.o.plugins.upload.onSuccess(trumbowyg, data, url);
                                                 } else {
                                                     trumbowyg.addErrorOnModalField(
                                                         $('input[type=file]', $modal),
                                                         trumbowyg.lang[data.message]
                                                     );
+                                                    trumbowyg.o.plugins.upload.onError(trumbowyg, data);
                                                 }
                                             },
                                             error: trumbowyg.o.plugins.upload.error || function () {
@@ -158,6 +162,7 @@
                                                     $('input[type=file]', $modal),
                                                     trumbowyg.lang.uploadError
                                                 );
+                                                trumbowyg.o.plugins.upload.onError(trumbowyg);
                                             }
                                         });
                                     }
