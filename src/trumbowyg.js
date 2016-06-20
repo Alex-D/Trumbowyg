@@ -66,6 +66,10 @@ jQuery.trumbowyg = {
 (function (navigator, window, document, $) {
     'use strict';
 
+    // Browsers
+    var isIE = navigator.msPointerEnabled; // IE 10 and IE 11 only
+    var isEdge = !isIE && document.msElementsFromRect;
+
     $.fn.trumbowyg = function (options, params) {
         var trumbowygDataName = 'trumbowyg';
         if (options === Object(options) || !options) {
@@ -608,7 +612,30 @@ jQuery.trumbowyg = {
             });
 
             $(t.doc).on('keydown', function (e) {
-                if (e.which === 27) {
+                if (e.which === 13) {
+                    // Microsoft browsers need special handling for Enter
+                    if (isIE || isEdge) {
+                        // IE10 - Should be deprecated
+                        if (t.doc.selection) {
+                            var newRange = t.doc.selection.createRange();
+                            newRange.pasteHTML('<br>');
+                            newRange.select();
+                        } else {
+                            var selection = t.doc.getSelection();
+                            var range = selection.getRangeAt(0);
+                            var br = t.doc.createElement('br');
+                            range.deleteContents();
+                            range.insertNode(br);
+                            range.setEndAfter(br);
+                            range.setStartAfter(br);
+                            selection.removeAllRanges();
+                            selection.addRange(range);
+                        }
+
+                        e.preventDefault();
+                        return false;
+                    }
+                } else if (e.which === 27) {
                     t.closeModal();
                     return false;
                 }
