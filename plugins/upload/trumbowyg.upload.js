@@ -146,13 +146,13 @@
                                                     setTimeout(function () {
                                                         trumbowyg.closeModal();
                                                     }, 250);
-                                                    trumbowyg.$c.trigger('upload.success', [trumbowyg, data, url]);
+                                                    trumbowyg.$c.trigger('tbwuploadsuccess', [trumbowyg, data, url]);
                                                 } else {
                                                     trumbowyg.addErrorOnModalField(
                                                         $('input[type=file]', $modal),
                                                         trumbowyg.lang[data.message]
                                                     );
-                                                    trumbowyg.$c.trigger('upload.error', [trumbowyg, data]);
+                                                    trumbowyg.$c.trigger('tbwuploaderror', [trumbowyg, data]);
                                                 }
                                             },
                                             error: trumbowyg.o.plugins.upload.error || function () {
@@ -160,7 +160,7 @@
                                                     $('input[type=file]', $modal),
                                                     trumbowyg.lang.uploadError
                                                 );
-                                                trumbowyg.$c.trigger('upload.error', [trumbowyg]);
+                                                trumbowyg.$c.trigger('tbwuploaderror', [trumbowyg]);
                                             }
                                         });
                                     }
