@@ -146,11 +146,13 @@
                                                     setTimeout(function () {
                                                         trumbowyg.closeModal();
                                                     }, 250);
+                                                    trumbowyg.$c.trigger('upload.success', [trumbowyg, data, url]);
                                                 } else {
                                                     trumbowyg.addErrorOnModalField(
                                                         $('input[type=file]', $modal),
                                                         trumbowyg.lang[data.message]
                                                     );
+                                                    trumbowyg.$c.trigger('upload.error', [trumbowyg, data]);
                                                 }
                                             },
                                             error: trumbowyg.o.plugins.upload.error || function () {
@@ -158,6 +160,7 @@
                                                     $('input[type=file]', $modal),
                                                     trumbowyg.lang.uploadError
                                                 );
+                                                trumbowyg.$c.trigger('upload.error', [trumbowyg]);
                                             }
                                         });
                                     }
