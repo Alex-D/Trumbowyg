@@ -174,8 +174,18 @@ jQuery.trumbowyg = {
             var div = t.doc.createElement('div');
             div.id = trumbowygIconsId;
             t.doc.body.insertBefore(div, t.doc.body.childNodes[0]);
-            $.get(svgPathOption, function (data) {
-                div.innerHTML = new XMLSerializer().serializeToString(data.documentElement);
+            $.ajax({
+                async: true,
+                type: 'GET',
+                contentType: 'image/svg',
+                dataType: 'xml',
+                url: svgPathOption,
+                data: null,
+                beforeSend: null,
+                complete: null,
+                success: function (data) {
+                    div.innerHTML = new XMLSerializer().serializeToString(data.documentElement);
+                }
             });
         }
 
