@@ -66,6 +66,9 @@ jQuery.trumbowyg = {
 (function (navigator, window, document, $) {
     'use strict';
 
+    // Browsers
+    var isFirefox = typeof InstallTrigger !== 'undefined';
+
     $.fn.trumbowyg = function (options, params) {
         var trumbowygDataName = 'trumbowyg';
         if (options === Object(options) || !options) {
@@ -433,7 +436,10 @@ jQuery.trumbowyg = {
             t.initPlugins();
 
             // Disable image resize in Firefox
-            t.doc.execCommand('enableObjectResizing', false, false);
+            if (isFirefox) {
+                t.doc.execCommand('enableObjectResizing', false, false);
+            }
+
             t.doc.execCommand('defaultParagraphSeparator', false, 'p');
 
             t.buildEditor();
