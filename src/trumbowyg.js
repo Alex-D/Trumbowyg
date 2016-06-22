@@ -432,8 +432,11 @@ jQuery.trumbowyg = {
 
             t.initPlugins();
 
-            // Disable image resize in Firefox
-            t.doc.execCommand('enableObjectResizing', false, false);
+            try {
+                // Disable image resize, try-catch for old IE
+                t.doc.execCommand('enableObjectResizing', false, false);
+            } catch (e) {
+            }
             t.doc.execCommand('defaultParagraphSeparator', false, 'p');
 
             t.buildEditor();
