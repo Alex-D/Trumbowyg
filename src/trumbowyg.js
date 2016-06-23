@@ -685,7 +685,7 @@ jQuery.trumbowyg = {
                 $btn = $('<button/>', {
                     type: 'button',
                     class: prefix + btnName + '-button ' + (btn.class || ''),
-                    html: t.hasSvg ? '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' : '',
+                    html: t.hasSvg ? '<svg><use xlink:href="//' + t.svgPath.hostname + t.svgPath.pathname + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' : '',
                     title: (btn.title || btn.text || textDef) + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
                     tabindex: -1,
                     mousedown: function () {
