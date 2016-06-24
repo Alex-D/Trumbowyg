@@ -8,4 +8,3 @@ Before report an issue, be sure to put these informations. Thanks :)
 
 
 ### How to reproduce the bug?
-
