@@ -151,7 +151,7 @@ jQuery.trumbowyg = {
         // SVG path
         var svgPathOption = $.trumbowyg.svgPath != null ? $.trumbowyg.svgPath : options.svgPath;
         t.hasSvg = svgPathOption !== false;
-        t.svgPath = !!t.doc.querySelector('base') ? window.location : '';
+        t.svgPath = !!t.doc.querySelector('base') ? window.location.href.split('#')[0] : '';
         if ($('#' + trumbowygIconsId, t.doc).length === 0 && svgPathOption !== false) {
             if (svgPathOption == null) {
                 try {
@@ -685,7 +685,7 @@ jQuery.trumbowyg = {
                 $btn = $('<button/>', {
                     type: 'button',
                     class: prefix + btnName + '-button ' + (btn.class || ''),
-                    html: t.hasSvg ? '<svg><use xlink:href="//' + t.svgPath.hostname + t.svgPath.pathname + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' : '',
+                    html: t.hasSvg ? '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' : '',
                     title: (btn.title || btn.text || textDef) + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
                     tabindex: -1,
                     mousedown: function () {
