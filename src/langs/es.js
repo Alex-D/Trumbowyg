@@ -10,6 +10,9 @@
 jQuery.trumbowyg.langs.es = {
     viewHTML: 'Ver HTML',
 
+    undo: 'Desfazer',
+    redo: 'Refazer',
+
     formatting: 'Formato',
     p: 'Párrafo',
     blockquote: 'Cita',
@@ -24,6 +27,9 @@ jQuery.trumbowyg.langs.es = {
     strong: 'Negrita',
     em: 'Énfasis',
     del: 'Borrar',
+
+    superscript: 'Sobrescrito',
+    subscript: 'Subíndice',
 
     unorderedList: 'Lista Desordenada',
     orderedList: 'Lista Ordenada',
@@ -40,6 +46,7 @@ jQuery.trumbowyg.langs.es = {
     justifyFull: 'Justificado',
 
     horizontalRule: 'Insertar separador horizontal',
+    removeformat: 'Eliminar formato',
 
     fullscreen: 'Pantalla completa',
 
@@ -51,5 +58,6 @@ jQuery.trumbowyg.langs.es = {
     required: 'Obligatorio',
     description: 'Descripción',
     title: 'Título',
-    text: 'Texto'
+    text: 'Texto',
+    target: 'Target'
 };
