@@ -11,6 +11,9 @@
 
 jQuery.trumbowyg.langs.pt = {
     viewHTML: 'Ver HTML',
+    
+    undo: 'Desfazer',
+    redo: 'Refazer',
 
     formatting: 'Formatar',
     p: 'Paragráfo',
@@ -23,12 +26,15 @@ jQuery.trumbowyg.langs.pt = {
     strikethrough: 'Suprimir',
     underline: 'Sublinhado',
 
-    strong: 'Forte',
+    strong: 'Negrito',
     em: 'Ênfase',
     del: 'Apagar',
 
+    superscript: 'Sobrescrito',
+    subscript: 'Subscrito',
+            
     unorderedList: 'Lista não ordenada',
-    orderedList: 'Liste ordenada',
+    orderedList: 'Lista ordenada',
 
     insertImage: 'Inserir imagem',
     insertVideo: 'Inserir vídeo',
@@ -42,6 +48,7 @@ jQuery.trumbowyg.langs.pt = {
     justifyFull: 'Justificar',
 
     horizontalRule: 'Inserir separador horizontal',
+    removeformat: 'Remover formatação',
 
     fullscreen: 'Tela cheia',
 
@@ -53,5 +60,6 @@ jQuery.trumbowyg.langs.pt = {
     required: 'Obrigatório',
     description: 'Descrição',
     title: 'Título',
-    text: 'Texto'
+    text: 'Texto',
+    target: 'Target'
 };
