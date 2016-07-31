@@ -97,6 +97,10 @@
     padding-bottom: 0;
     margin-bottom: 80px;
 
+    .trumbowyg-editor {
+        height: 300px !important;
+    }
+
     .trumbowyg-editor,
     .trumbowyg-textarea {
         padding: 25px;
