@@ -13,9 +13,9 @@
 
     <link rel="stylesheet" href="css/main.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.1.1/dist/ui/trumbowyg.min.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.1.0/dist/ui/trumbowyg.min.css">
     <link rel="stylesheet"
-          href="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.1.1/dist/plugins/colors/ui/trumbowyg.colors.min.css">
+          href="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.1.0/dist/plugins/colors/ui/trumbowyg.colors.min.css">
 </head>
 <body>
 
@@ -176,11 +176,11 @@
                 First, if you don't already do it, load jQuery at bottom of <code>&lt;body&gt;</code> like so:
             </p>
             <pre><code class="html">
-&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">&lt;/script>
-&lt;script>window.jQuery || document.write('&lt;script src="js/vendor/jquery-1.11.3.min.js">&lt;\/script>')&lt;/script>
+&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js">&lt;/script>
+&lt;script>window.jQuery || document.write('&lt;script src="js/vendor/jquery-3.1.0.min.js">&lt;\/script>')&lt;/script>
             </code></pre>
             <p class="note">
-                Trumbowyg needs jQuery >= 1.7, because it uses .on() a new function appeared in version 1.7.
+                Trumbowyg require jQuery >= 1.7, because it uses the .on() function that appeared in version 1.7.
             </p>
 
             <p>
@@ -217,6 +217,17 @@ $('#trumbowyg-demo').trumbowyg({
             </code></pre>
             <p>
                 View all options on the <a href="./documentation.html">documentation page</a>.
+            </p>
+
+
+            <h4>SVG icons issue?</h4>
+
+            <p>
+                If icons are not visibles, check if you are in <code>http(s)</code> protocol.
+            </p>
+            <p>
+                If your problem is not solved by these tips, check the
+                <a href="//alex-d.github.io/Trumbowyg/documentation.html#svg-icons">SVG icons documentation section.</a>
             </p>
         </div>
     </section>
@@ -669,16 +680,16 @@ $('#trumbowyg-demo').trumbowyg({
 </footer>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
 
-<script src="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.1.1/dist/trumbowyg.min.js"></script>
-<script src="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.1.1/dist/plugins/base64/trumbowyg.base64.min.js"></script>
-<script src="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.1.1/dist/plugins/colors/trumbowyg.colors.min.js"></script>
-<script src="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.1.1/dist/plugins/noembed/trumbowyg.noembed.min.js"></script>
-<script src="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.1.1/dist/plugins/pasteimage/trumbowyg.pasteimage.min.js"></script>
-<script src="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.1.1/dist/plugins/preformatted/trumbowyg.preformatted.min.js"></script>
-<script src="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.1.1/dist/plugins/upload/trumbowyg.upload.min.js"></script>
+<script src="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.1.0/dist/trumbowyg.min.js"></script>
+<script src="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.1.0/dist/plugins/base64/trumbowyg.base64.min.js"></script>
+<script src="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.1.0/dist/plugins/colors/trumbowyg.colors.min.js"></script>
+<script src="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.1.0/dist/plugins/noembed/trumbowyg.noembed.min.js"></script>
+<script src="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.1.0/dist/plugins/pasteimage/trumbowyg.pasteimage.min.js"></script>
+<script src="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.1.0/dist/plugins/preformatted/trumbowyg.preformatted.min.js"></script>
+<script src="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.1.0/dist/plugins/upload/trumbowyg.upload.min.js"></script>
 
 <script src="js/vendor/highlight.js"></script>
 <script src="js/main.js"></script>
