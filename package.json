@@ -3,6 +3,7 @@
   "title": "Trumbowyg",
   "description": "Github page of Trumbowyg",
   "homepage": "http://alex-d.github.io/Trumbowyg",
+  "private": true,
   "author": {
     "name": "Alexandre Demode (Alex-D)",
     "email": "contact@alex-d.fr",
