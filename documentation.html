@@ -84,18 +84,18 @@
                     </ul>
                 </li>
             </ul>
-        </div>
+    </div>
 
-        <div class="documentation-sidebar-switch">
-            <button id="show-removed" type="button">
+    <div class="documentation-sidebar-switch">
+        <button id="show-removed" type="button">
                 <span class="switch-label">
                     Show doc of older versions
                 </span>
                 <span class="switch-status">
                     <span class="switch-status-circle"></span>
                 </span>
-            </button>
-        </div>
+        </button>
+    </div>
     </aside>
 </div>
 
@@ -196,17 +196,23 @@ $('.editor-modern-ui').trumbowyg({
             <h3 id="svg-icons">SVG icons</h3>
             <p class="added-feature">Added in 2.1.0</p>
             <p>
-                A pack of SVG icons is avaible and enabled by default. This file is loaded via XHR request
+                A pack of SVG icons is available and enabled by default. This file is loaded via XHR request
                 in JavaScript so it is possible the path is not matching with your assets file paths.
                 You can change the path of the SVG or disable this feature.
             </p>
 
+            <h4>Change SVG path globally</h4>
             <p>
                 To change SVG path, you need to set the path in global Trumbowyg configuration object:
             </p>
             <pre><code class="javascript">
 $.trumbowyg.svgPath = '/assets/my-custom-path/icons.svg';
             </code></pre>
+            <p class="note">
+                This global way needs to be done before initialize any Trumbowyg instance.
+            </p>
+
+            <h4>Disable SVG icons globally</h4>
             <p>
                 If you do not want SVG icons, you can set this option to false. Then, you can add your custom
                 icons by CSS or what you want.
@@ -215,7 +221,43 @@ $.trumbowyg.svgPath = '/assets/my-custom-path/icons.svg';
 $.trumbowyg.svgPath = false:
             </code></pre>
             <p class="note">
-                This configuration needs to be done before initialize any Trumbowyg instance.
+                This global way needs to be done before initialize any Trumbowyg instance.
+            </p>
+
+            <h4>Change SVG path or disable SVG icons locally</h4>
+            <p>
+                You can also apply <code>svgPath</code> option for an isolated editor only.
+            </p>
+            <pre><code class="javascript">
+$('.editor').trumbowyg({
+    svgPath: false // or a path like '/assets/my-custom-path/icons.svg'
+});
+            </code></pre>
+
+            <h4>Use SVG icons without XHR or via an another protocol that HTTP(S)</h4>
+            <p>
+                If you do not want use HTTP(S) protocol or use XHR to load icons, you can load icons in your HTML
+                by your own. You just need to include the
+                <a href="https://raw.githubusercontent.com/Alex-D/Trumbowyg/master/dist/ui/icons.svg">icons.svg file</a>
+                inline in your <code>&lt;body></code>:
+            </p>
+            <pre><code class="html">
+&lt;div id="trumbowyg-icons">
+    &lt;svg xmlns="http://www.w3.org/2000/svg">
+        &lt;symbol id="trumbowyg-blockquote" viewBox="0 0 72 72">&lt;path d="...">&lt;/path>&lt;/symbol>
+        &lt;symbol id="trumbowyg-bold" viewBox="0 0 72 72">&lt;path d="...">&lt;/path>&lt;/symbol>
+        &lt;symbol id="trumbowyg-close" viewBox="0 0 72 72">&lt;path d="...">&lt;/path>&lt;/symbol>
+        &lt;!-- ... all other icons here -->
+    &lt;/svg>
+&lt;/div>
+            </code></pre>
+            <p class="note">
+                You need to use this id: <code>&lt;prefix&gt;-icons</code>.
+            </p>
+            <p>
+                Trumbowyg check if a <code>#&lt;prefix&gt;-icons</code> exists. If not, it loads SVG icons file via
+                XHR and put it in a div with this id. Next editor on the page did not load icons again. By adding
+                this div in the page, you "hack" this mecanism to load it by your own.
             </p>
         </div>
 
@@ -446,7 +488,7 @@ $('.trumbowyg').trumbowyg({
         <div class="feature" data-added="1.0.0">
             <h3 id="auto-adjust-height">Auto grow</h3>
             <p>
-                The text editon zone can extend itself when writing a long text. To activate this feature, use the
+                The text editing zone can extend itself when writing a long text. To activate this feature, use the
                 autogrow option:
             </p>
             <pre><code class="javascript">

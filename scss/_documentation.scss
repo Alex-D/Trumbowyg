@@ -25,7 +25,7 @@ $show-old-height: 60px;
         font-size: 26px;
     }
     h4 {
-        padding: 0;
+        padding: 20px 0 0;
     }
     p {
         code {
@@ -320,6 +320,19 @@ body.show-removed .switch-status {
 
 .feature {
     position: relative;
+    padding-bottom: 60px;
+
+    &::after {
+        content: " ";
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 40%;
+        height: 0;
+        border-bottom: 1px solid $primary-color-light;
+        transform: translateX(-50%);
+    }
 
     h3 {
         position: relative;
@@ -328,7 +341,9 @@ body.show-removed .switch-status {
         padding-left: 15px;
     }
     h4 {
-        font-size: 25px;
+        position: relative;
+        font-size: 20px;
+        font-weight: bold;
     }
 
     .title-link {
