@@ -151,7 +151,7 @@ jQuery.trumbowyg = {
         // SVG path
         var svgPathOption = $.trumbowyg.svgPath != null ? $.trumbowyg.svgPath : options.svgPath;
         t.hasSvg = svgPathOption !== false;
-        t.svgPath = !!t.doc.querySelector('base') ? window.location : '';
+        t.svgPath = !!t.doc.querySelector('base') ? window.location.href.split('#')[0] : '';
         if ($('#' + trumbowygIconsId, t.doc).length === 0 && svgPathOption !== false) {
             if (svgPathOption == null) {
                 try {
@@ -163,7 +163,7 @@ jQuery.trumbowyg = {
                         if (!stackLines[i].match(/http[s]?:\/\//)) {
                             continue;
                         }
-                        svgPathOption = stackLines[Number(i)].match(/((http[s]?:\/\/.+\/)([^\/]+\.js)):/)[1].split('/');
+                        svgPathOption = stackLines[Number(i)].match(/((http[s]?:\/\/.+\/)([^\/]+\.js))(\?.*)?:/)[1].split('/');
                         svgPathOption.pop();
                         svgPathOption = svgPathOption.join('/') + '/ui/icons.svg';
                         break;
@@ -174,8 +174,18 @@ jQuery.trumbowyg = {
             var div = t.doc.createElement('div');
             div.id = trumbowygIconsId;
             t.doc.body.insertBefore(div, t.doc.body.childNodes[0]);
-            $.get(svgPathOption, function (data) {
-                div.innerHTML = new XMLSerializer().serializeToString(data.documentElement);
+            $.ajax({
+                async: true,
+                type: 'GET',
+                contentType: 'image/svg',
+                dataType: 'xml',
+                url: svgPathOption,
+                data: null,
+                beforeSend: null,
+                complete: null,
+                success: function (data) {
+                    div.innerHTML = new XMLSerializer().serializeToString(data.documentElement);
+                }
             });
         }
 
@@ -432,8 +442,11 @@ jQuery.trumbowyg = {
 
             t.initPlugins();
 
-            // Disable image resize in Firefox
-            t.doc.execCommand('enableObjectResizing', false, false);
+            try {
+                // Disable image resize, try-catch for old IE
+                t.doc.execCommand('enableObjectResizing', false, false);
+            } catch (e) {
+            }
             t.doc.execCommand('defaultParagraphSeparator', false, 'p');
 
             t.buildEditor();
@@ -1002,7 +1015,7 @@ jQuery.trumbowyg = {
                     // Wrap groups of inline elements in paragraphs (recursive)
                     var wrapInlinesInParagraphsFrom = function ($from) {
                         if ($from.length !== 0) {
-                            var $finalParagraph = $from.nextUntil(blockElementsSelector).andSelf().wrapAll('<p/>').parent(),
+                            var $finalParagraph = $from.nextUntil(blockElementsSelector).addBack().wrapAll('<p/>').parent(),
                                 $nextElement = $finalParagraph.nextAll(inlineElementsSelector).first();
                             $finalParagraph.next('br').remove();
                             wrapInlinesInParagraphsFrom($nextElement);
