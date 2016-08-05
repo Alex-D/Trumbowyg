@@ -105,12 +105,10 @@
 
 .trumbowyg-button-pane {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-flow: row wrap;
-      -ms-flex-flow: row wrap;
-          flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
   width: 100%;
   min-height: 36px;
   background: #ecf0f1;
@@ -133,12 +131,10 @@
     background: #d7e0e2; }
   .trumbowyg-button-pane .trumbowyg-button-group {
     display: -webkit-box;
-    display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    -webkit-flex-flow: row wrap;
-        -ms-flex-flow: row wrap;
-            flex-flow: row wrap; }
+    -ms-flex-flow: row wrap;
+        flex-flow: row wrap; }
     .trumbowyg-button-pane .trumbowyg-button-group .trumbowyg-fullscreen-button svg {
       color: transparent; }
     .trumbowyg-button-pane .trumbowyg-button-group:not(:empty) + .trumbowyg-button-group::before {
