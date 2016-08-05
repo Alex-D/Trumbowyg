@@ -173,7 +173,7 @@ jQuery.trumbowyg = {
 
             var div = t.doc.createElement('div');
             div.id = trumbowygIconsId;
-            t.doc.body.insertBefore(div, t.doc.body.childNodes[0]);
+            t.doc.body.appendChild(div);
             $.ajax({
                 async: true,
                 type: 'GET',
