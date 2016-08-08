@@ -536,14 +536,17 @@ jQuery.trumbowyg = {
             t.semanticCode();
 
 
-            t._ctrl = false;
+            var ctrl = false,
+                composition = false,
+                debounceButtonPaneStatus;
+
             t.$ed
                 .on('dblclick', 'img', t.o.imgDblClickHandler)
                 .on('keydown', function (e) {
-                    t._composition = (e.which === 229);
+                    composition = (e.which === 229);
 
                     if (e.ctrlKey) {
-                        t._ctrl = true;
+                        ctrl = true;
                         var k = t.keys[String.fromCharCode(e.which).toUpperCase()];
 
                         try {
@@ -560,17 +563,20 @@ jQuery.trumbowyg = {
 
                     if (e.ctrlKey && (e.which === 89 || e.which === 90)) {
                         t.$c.trigger('tbwchange');
-                    } else if (!t._ctrl && e.which !== 17 && !t._composition) {
+                    } else if (!ctrl && e.which !== 17 && !composition) {
                         t.semanticCode(false, e.which === 13);
                         t.$c.trigger('tbwchange');
                     }
 
                     setTimeout(function () {
-                        t._ctrl = false;
+                        ctrl = false;
                     }, 200);
                 })
                 .on('mouseup keydown keyup', function () {
-                    t.updateButtonPaneStatus();
+                    clearTimeout(debounceButtonPaneStatus);
+                    debounceButtonPaneStatus = setTimeout(function () {
+                        t.updateButtonPaneStatus();
+                    }, 50);
                 })
                 .on('focus blur', function (e) {
                     t.$c.trigger('tbw' + e.type);
