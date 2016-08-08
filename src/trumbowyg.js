@@ -585,6 +585,7 @@ jQuery.trumbowyg = {
                     }
                 })
                 .on('cut', function () {
+                    t.semanticCode(false, true);
                     t.$c.trigger('tbwchange');
                 })
                 .on('paste', function (e) {
@@ -614,11 +615,7 @@ jQuery.trumbowyg = {
                     });
 
                     setTimeout(function () {
-                        if (t.o.semantic) {
-                            t.semanticCode(false, true);
-                        } else {
-                            t.syncCode();
-                        }
+                        t.semanticCode(false, true);
                         t.$c.trigger('tbwpaste', e);
                     }, 0);
                 });
