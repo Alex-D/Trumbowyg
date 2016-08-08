@@ -1472,7 +1472,7 @@ jQuery.trumbowyg = {
         updateButtonPaneStatus: function () {
             var t = this,
                 prefix = t.o.prefix,
-                tags = t.getTagsRecursive(t.doc.getSelection().focusNode.parentNode),
+                tags = t.getTagsRecursive(t.doc.getSelection().focusNode),
                 activeClasses = prefix + 'active-button ' + prefix + 'active';
 
             $('.' + prefix + 'active-button', t.$btnPane).removeClass(activeClasses);
@@ -1496,6 +1496,12 @@ jQuery.trumbowyg = {
             var t = this;
             tags = tags || [];
 
+            if (element) {
+                element = element.parentNode;
+            } else {
+                return tags;
+            }
+
             var tag = element.tagName;
             if (tag === 'DIV') {
                 return tags;
@@ -1510,7 +1516,7 @@ jQuery.trumbowyg = {
 
             tags.push(tag);
 
-            return t.getTagsRecursive(element.parentNode, tags);
+            return t.getTagsRecursive(element, tags);
         },
 
         // Plugins
