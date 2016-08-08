@@ -900,6 +900,7 @@ jQuery.trumbowyg = {
             t.$box.remove();
             t.$c.removeData('trumbowyg');
             $('body').removeClass(prefix + 'body-fullscreen');
+            t.$c.trigger('tbwclose');
         },
 
 
