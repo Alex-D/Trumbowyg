@@ -1001,7 +1001,6 @@ jQuery.trumbowyg = {
             if (t.o.semantic) {
                 t.semanticTag('b', 'strong');
                 t.semanticTag('i', 'em');
-                t.semanticTag('strike', 'del');
 
                 if (full) {
                     var inlineElementsSelector = t.o.inlineElementsSelector,
