@@ -7,6 +7,7 @@
  *          Github : https://github.com/jsejakobsen
  */
 
+// jshint camelcase:false
 jQuery.trumbowyg.langs.no_nb = {
     viewHTML: 'Vis HTML',
 
