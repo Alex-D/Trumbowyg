@@ -536,14 +536,17 @@ jQuery.trumbowyg = {
             t.semanticCode();
 
 
-            t._ctrl = false;
+            var ctrl = false,
+                composition = false,
+                debounceButtonPaneStatus;
+
             t.$ed
                 .on('dblclick', 'img', t.o.imgDblClickHandler)
                 .on('keydown', function (e) {
-                    t._composition = (e.which === 229);
+                    composition = (e.which === 229);
 
                     if (e.ctrlKey) {
-                        t._ctrl = true;
+                        ctrl = true;
                         var k = t.keys[String.fromCharCode(e.which).toUpperCase()];
 
                         try {
@@ -553,24 +556,27 @@ jQuery.trumbowyg = {
                         }
                     }
                 })
-                .on('keyup', function (e) {
+                .on('keyup input', function (e) {
                     if (e.which >= 37 && e.which <= 40) {
                         return;
                     }
 
                     if (e.ctrlKey && (e.which === 89 || e.which === 90)) {
                         t.$c.trigger('tbwchange');
-                    } else if (!t._ctrl && e.which !== 17 && !t._composition) {
+                    } else if (!ctrl && e.which !== 17 && !composition) {
                         t.semanticCode(false, e.which === 13);
                         t.$c.trigger('tbwchange');
                     }
 
                     setTimeout(function () {
-                        t._ctrl = false;
+                        ctrl = false;
                     }, 200);
                 })
                 .on('mouseup keydown keyup', function () {
-                    t.updateButtonPaneStatus();
+                    clearTimeout(debounceButtonPaneStatus);
+                    debounceButtonPaneStatus = setTimeout(function () {
+                        t.updateButtonPaneStatus();
+                    }, 50);
                 })
                 .on('focus blur', function (e) {
                     t.$c.trigger('tbw' + e.type);
@@ -579,6 +585,7 @@ jQuery.trumbowyg = {
                     }
                 })
                 .on('cut', function () {
+                    t.semanticCode(false, true);
                     t.$c.trigger('tbwchange');
                 })
                 .on('paste', function (e) {
@@ -608,11 +615,7 @@ jQuery.trumbowyg = {
                     });
 
                     setTimeout(function () {
-                        if (t.o.semantic) {
-                            t.semanticCode(false, true);
-                        } else {
-                            t.syncCode();
-                        }
+                        t.semanticCode(false, true);
                         t.$c.trigger('tbwpaste', e);
                     }, 0);
                 });
@@ -897,6 +900,7 @@ jQuery.trumbowyg = {
             t.$box.remove();
             t.$c.removeData('trumbowyg');
             $('body').removeClass(prefix + 'body-fullscreen');
+            t.$c.trigger('tbwclose');
         },
 
 
@@ -969,7 +973,7 @@ jQuery.trumbowyg = {
         },
         syncTextarea: function () {
             var t = this;
-            t.$ta.val(t.$ed.text().trim().length > 0 || t.$ed.find('hr,img,embed,input').length > 0 ? t.$ed.html() : '');
+            t.$ta.val(t.$ed.text().trim().length > 0 || t.$ed.find('hr,img,embed,iframe,input').length > 0 ? t.$ed.html() : '');
         },
         syncCode: function (force) {
             var t = this;
@@ -1001,7 +1005,6 @@ jQuery.trumbowyg = {
             if (t.o.semantic) {
                 t.semanticTag('b', 'strong');
                 t.semanticTag('i', 'em');
-                t.semanticTag('strike', 'del');
 
                 if (full) {
                     var inlineElementsSelector = t.o.inlineElementsSelector,
@@ -1469,7 +1472,7 @@ jQuery.trumbowyg = {
         updateButtonPaneStatus: function () {
             var t = this,
                 prefix = t.o.prefix,
-                tags = t.getTagsRecursive(t.doc.getSelection().focusNode.parentNode),
+                tags = t.getTagsRecursive(t.doc.getSelection().focusNode),
                 activeClasses = prefix + 'active-button ' + prefix + 'active';
 
             $('.' + prefix + 'active-button', t.$btnPane).removeClass(activeClasses);
@@ -1493,6 +1496,12 @@ jQuery.trumbowyg = {
             var t = this;
             tags = tags || [];
 
+            if (element) {
+                element = element.parentNode;
+            } else {
+                return tags;
+            }
+
             var tag = element.tagName;
             if (tag === 'DIV') {
                 return tags;
@@ -1507,7 +1516,7 @@ jQuery.trumbowyg = {
 
             tags.push(tag);
 
-            return t.getTagsRecursive(element.parentNode, tags);
+            return t.getTagsRecursive(element, tags);
         },
 
         // Plugins
