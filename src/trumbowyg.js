@@ -584,7 +584,7 @@ jQuery.trumbowyg = {
                         $('.' + prefix + 'active-button', t.$btnPane).removeClass(prefix + 'active-button ' + prefix + 'active');
                     }
                 })
-                .on('cut', function () {
+                .bind('input propertychange', function() {
                     t.semanticCode(false, true);
                     t.$c.trigger('tbwchange');
                 })
