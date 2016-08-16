@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.1.2 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.1.3 - A lightweight WYSIWYG editor
  * Trumbowyg core file
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -596,8 +596,10 @@ jQuery.trumbowyg = {
                     }
                 })
                 .on('cut', function () {
-                    t.semanticCode(false, true);
-                    t.$c.trigger('tbwchange');
+                    setTimeout(function () {
+                        t.semanticCode(false, true);
+                        t.$c.trigger('tbwchange');
+                    }, 0);
                 })
                 .on('paste', function (e) {
                     if (t.o.removeformatPasted) {
@@ -634,8 +636,8 @@ jQuery.trumbowyg = {
                 t.$c.trigger('tbwchange');
             });
 
-            $(t.doc).on('keydown', function (e) {
-                if (e.which === 27) {
+            t.$box.on('keydown', function (e) {
+                if (e.which === 27 && $('.' + prefix + 'modal-box', t.$box).length === 1) {
                     t.closeModal();
                     return false;
                 }
@@ -1193,7 +1195,10 @@ jQuery.trumbowyg = {
                 t.$ed.focus();
             }
 
-            t.doc.execCommand('styleWithCSS', false, forceCss || false);
+            try {
+                t.doc.execCommand('styleWithCSS', false, forceCss || false);
+            } catch (c) {
+            }
 
             try {
                 t[cmd + skipTrumbowyg](param);
@@ -1323,12 +1328,12 @@ jQuery.trumbowyg = {
             t.$overlay.off();
 
             // Find the modal box
-            var $mb = $('.' + prefix + 'modal-box', t.$box);
+            var $modalBox = $('.' + prefix + 'modal-box', t.$box);
 
-            $mb.animate({
-                top: '-' + $mb.height()
+            $modalBox.animate({
+                top: '-' + $modalBox.height()
             }, 100, function () {
-                $mb.parent().remove();
+                $modalBox.parent().remove();
                 t.hideOverlay();
             });
 
