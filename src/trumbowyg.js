@@ -585,8 +585,10 @@ jQuery.trumbowyg = {
                     }
                 })
                 .on('cut', function () {
-                    t.semanticCode(false, true);
-                    t.$c.trigger('tbwchange');
+                    setTimeout(function () {
+                        t.semanticCode(false, true);
+                        t.$c.trigger('tbwchange');
+                    }, 0);
                 })
                 .on('paste', function (e) {
                     if (t.o.removeformatPasted) {
