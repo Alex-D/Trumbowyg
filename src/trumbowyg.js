@@ -1184,7 +1184,10 @@ jQuery.trumbowyg = {
                 t.$ed.focus();
             }
 
-            t.doc.execCommand('styleWithCSS', false, forceCss || false);
+            try {
+                t.doc.execCommand('styleWithCSS', false, forceCss || false);
+            } catch (c) {
+            }
 
             try {
                 t[cmd + skipTrumbowyg](param);
