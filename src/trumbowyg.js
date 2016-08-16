@@ -625,8 +625,8 @@ jQuery.trumbowyg = {
                 t.$c.trigger('tbwchange');
             });
 
-            $(t.doc).on('keydown', function (e) {
-                if (e.which === 27) {
+            t.$box.on('keydown', function (e) {
+                if (e.which === 27 && $('.' + prefix + 'modal-box', t.$box).length === 1) {
                     t.closeModal();
                     return false;
                 }
@@ -1317,12 +1317,12 @@ jQuery.trumbowyg = {
             t.$overlay.off();
 
             // Find the modal box
-            var $mb = $('.' + prefix + 'modal-box', t.$box);
+            var $modalBox = $('.' + prefix + 'modal-box', t.$box);
 
-            $mb.animate({
-                top: '-' + $mb.height()
+            $modalBox.animate({
+                top: '-' + $modalBox.height()
             }, 100, function () {
-                $mb.parent().remove();
+                $modalBox.parent().remove();
                 t.hideOverlay();
             });
 

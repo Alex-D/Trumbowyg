@@ -161,6 +161,12 @@ btnsAdd: ['close']
         <script src="/dist/plugins/upload/trumbowyg.upload.js"></script>
         <script>
 
+            $(document).on('keydown', function (e) {
+                if (e.which === 27) {
+                    console.log('ESCAPE');
+                }
+            });
+
 
             /** Default editor configuration **/
             $('#default-editor, #empty-textarea, #disabled-textarea')
