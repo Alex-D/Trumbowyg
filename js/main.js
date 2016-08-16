@@ -4,6 +4,7 @@ hljs.initHighlightingOnLoad();
 
 (function ($) {
     if ($.trumbowyg) {
+        $.trumbowyg.svgPath = 'https://cdn.rawgit.com/Alex-D/Trumbowyg/v2.1.1/dist/ui/icons.svg';
         var configurations = {
             core: {},
             plugins: {
@@ -44,7 +45,7 @@ hljs.initHighlightingOnLoad();
 
         // Demo switch
         var $demoTextarea = $('#trumbowyg-demo');
-        $demoTextarea.trumbowyg();
+        $demoTextarea.trumbowyg(configurations.core);
         $('.demo-switcher .button').on('click', function () {
             var $current = $('.demo-switcher .current');
             $(this).parent().removeClass('current-' + $current.data('config'));
