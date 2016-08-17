@@ -4,7 +4,6 @@ hljs.initHighlightingOnLoad();
 
 (function ($) {
     if ($.trumbowyg) {
-        $.trumbowyg.svgPath = 'https://cdn.rawgit.com/Alex-D/Trumbowyg/v2.1.1/dist/ui/icons.svg';
         var configurations = {
             core: {},
             plugins: {
