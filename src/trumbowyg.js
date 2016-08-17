@@ -177,7 +177,7 @@ jQuery.trumbowyg = {
             $.ajax({
                 async: true,
                 type: 'GET',
-                contentType: 'image/svg',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                 dataType: 'xml',
                 url: svgPathOption,
                 data: null,
