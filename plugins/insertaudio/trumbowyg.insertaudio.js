@@ -1,5 +1,5 @@
 ﻿/*/* ===========================================================
- * trumbowyg.base64.js v1.0
+ * trumbowyg.insertaudio.js v1.0
  * InsertAudio plugin for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
@@ -8,6 +8,7 @@
 
 (function ($) {
     'use strict';
+
     var insertAudioOptions = {
         src: {
             label: 'URL',
@@ -30,7 +31,6 @@
     };
 
 
-
     $.extend(true, $.trumbowyg, {
         langs: {
             en: {
@@ -39,14 +39,12 @@
         },
         plugins: {
             insertAudio: {
-                shouldInit: function() {return true; },
                 init: function (trumbowyg) {
                     var btnDef = {
-                        shouldInit: function () { return true; },
                         fn: function () {
                             var insertAudioCallback = function (v) {
-                                //controls should always be show otherwise the audio will
-                                //be invisible defeating the point of a wysiwyg
+                                // controls should always be show otherwise the audio will
+                                // be invisible defeating the point of a wysiwyg
                                 var html = '<audio controls';
                                 if (v.src) {
                                     html += ' src=\'' + v.src + '\'';
@@ -70,9 +68,9 @@
                             trumbowyg.openModalInsert(trumbowyg.lang.insertAudio, insertAudioOptions, insertAudioCallback);
                         }
                     };
+
                     trumbowyg.addBtnDef('insertAudio', btnDef);
                 }
-
             }
         }
     });

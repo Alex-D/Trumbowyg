@@ -7,7 +7,8 @@
  *          Twitter : @absalomedia
  *          Website : absalom.biz
  */
-(function($) {
+
+(function ($) {
     'use strict';
 
     var defaultOptions = {
@@ -19,36 +20,36 @@
     $.extend(true, $.trumbowyg, {
         langs: {
             en: {
-                table: 'Create Table',
-                addro: 'Add Rows',
-                addco: 'Add Columns',
+                table: 'Insert table',
+                tableAddRow: 'Add rows',
+                tableAddColumn: 'Add columns',
                 rows: 'Rows',
                 columns: 'Columns',
-                styler: 'Table Class',
+                styler: 'Table class',
                 error: 'Error'
             },
             sk: {
                 table: 'Vytvoriť tabuľky',
-                addro: 'Pridať riadok',
-                addco: 'Pridať stĺpec',               
+                tableAddRow: 'Pridať riadok',
+                tableAddColumn: 'Pridať stĺpec',
                 rows: 'Riadky',
                 columns: 'Stĺpce',
                 styler: 'Tabuľku triedy',
                 error: 'Chyba'
             },
             fr: {
-                table: 'Créez Table',
-                addro: 'Ajout de ligne',
-                addco: 'Ajouter colonnes',
+                table: 'Insérer un tableau',
+                tableAddRow: 'Ajouter des lignes',
+                tableAddColumn: 'Ajouter des colonnes',
                 rows: 'Lignes',
                 columns: 'Colonnes',
-                styler: 'Classe de table',
+                styler: 'Classes CSS sur la table',
                 error: 'Erreur'
             },
             cs: {
                 table: 'Vytvořit příkaz Table',
-                addro: 'Přidat řádek',
-                addco: 'Přidat sloupec',
+                tableAddRow: 'Přidat řádek',
+                tableAddColumn: 'Přidat sloupec',
                 rows: 'Řádky',
                 columns: 'Sloupce',
                 styler: 'Tabulku třída',
@@ -63,71 +64,71 @@
 
                     var tableBuild = {
                         fn: function () {
-                        trumbowyg.saveRange();
-                        trumbowyg.openModalInsert(
+                            trumbowyg.saveRange();
+                            trumbowyg.openModalInsert(
+                                // Title
+                                trumbowyg.lang.table,
 
-                            // Title
-                           trumbowyg.lang.table,
-
-                            // Fields
-                            {
-                                rows: {
-                                    type: 'number',
-                                    required: true
+                                // Fields
+                                {
+                                    rows: {
+                                        type: 'number',
+                                        required: true
+                                    },
+                                    columns: {
+                                        type: 'number',
+                                        required: true
+                                    },
+                                    styler: {
+                                        label: trumbowyg.lang.styler,
+                                        type: 'text'
+                                    }
                                 },
-                                columns: {
-                                    type: 'number',
-                                    required: true
-                                },
-                                styler: {
-                                    label: trumbowyg.lang.styler,
-                                    type: 'text'
-                                }
-                            },
-                            function(v) { // v is value
-                                var tabler = $('<table></table>');
-                                if (v.styler.length !== 0) {
-                                    tabler.addClass(v.styler);
-                                }
-
-                                for (var i = 0; i < v.rows; i += 1) {
-                                    var row = $('<tr></tr>').appendTo(tabler);
-                                    for (var j = 0; j < v.columns; j += 1) {
-                                        $('<td></td>').appendTo(row);
+                                function (v) { // v is value
+                                    var tabler = $('<table></table>');
+                                    if (v.styler.length !== 0) {
+                                        tabler.addClass(v.styler);
                                     }
 
-                                }
-                                trumbowyg.range.deleteContents();
-                                trumbowyg.range.insertNode(tabler[0]);
-                                return true;
-                            });
+                                    for (var i = 0; i < v.rows; i += 1) {
+                                        var row = $('<tr></tr>').appendTo(tabler);
+                                        for (var j = 0; j < v.columns; j += 1) {
+                                            $('<td></td>').appendTo(row);
+                                        }
+                                    }
+
+                                    trumbowyg.range.deleteContents();
+                                    trumbowyg.range.insertNode(tabler[0]);
+                                    return true;
+                                });
                         }
                     };
 
                     var addRow = {
                         fn: function () {
-                        trumbowyg.saveRange();
-                        var rower = $('<tr></tr>');
-                        trumbowyg.range.deleteContents();
-                        trumbowyg.range.insertNode(rower[0]);
-                        return true;
+                            trumbowyg.saveRange();
+                            var rower = $('<tr></tr>');
+                            trumbowyg.range.deleteContents();
+                            trumbowyg.range.insertNode(rower[0]);
+                            return true;
 
                         }
                     };
 
                     var addColumn = {
                         fn: function () {
-                        trumbowyg.saveRange();
-                        var columner = $('<td></td>');
-                        trumbowyg.range.deleteContents();
-                        trumbowyg.range.insertNode(columner[0]);
-                        return true;
+                            trumbowyg.saveRange();
+                            var columner = $('<td></td>');
+                            trumbowyg.range.deleteContents();
+                            trumbowyg.range.insertNode(columner[0]);
+                            return true;
 
                         }
                     };
+
                     trumbowyg.addBtnDef('table', tableBuild);
-                    trumbowyg.addBtnDef('addro', addRow);
-                    trumbowyg.addBtnDef('addco', addColumn);
+                    trumbowyg.addBtnDef('tableAddRow', addRow);
+                    trumbowyg.addBtnDef('tableAddColumn', addColumn);
                 }
             }
         }
