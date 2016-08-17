@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.1.3 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.1.6 - A lightweight WYSIWYG editor
  * Trumbowyg core file
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -188,7 +188,7 @@ jQuery.trumbowyg = {
             $.ajax({
                 async: true,
                 type: 'GET',
-                contentType: 'image/svg',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                 dataType: 'xml',
                 url: svgPathOption,
                 data: null,
