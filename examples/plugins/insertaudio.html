@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>insertAudio | plugin by AdamHess</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../../dist/ui/trumbowyg.css">
+</head>
+<body>
+    <div id="main" role="main">
+        <header>
+            <h1>Audio plugin for Trumbowyg</h1>
+
+            <p>
+                This plugin allow you to insert audio files into your page creating vibrante documents. 
+            </p>
+        </header>
+
+        <div id="editor">
+            <h2>You can make me come alive! Insert Audio</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident optio nam reiciendis eius beatae quibusdam!
+            </p>
+            <p>
+                The text is derived from Cicero's De Finibus Bonorum et Malorum (On the Ends of Goods and Evils, or alternatively [About] The Purposes of Good and Evil ). The original passage began: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit (Translation: &quot;Neither is there anyone who loves grief itself since it is grief and thus wants to obtain it&quot;).
+            </p>
+        </div>
+
+        <h2>The code</h2>
+        <code>
+            <pre>
+$('#editor')
+.trumbowyg({
+    btns: ['insertAudio']
+});
+            </pre>
+        </code>
+    </div>
+    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../dist/trumbowyg.js"></script>
+    <script src="../../dist/plugins/insertaudio/trumbowyg.insertaudio.js"></script>
+    <script>
+            $('#editor')
+            .trumbowyg({
+                btns: ['insertAudio']
+            });
+    </script>
+</body>
+</html>
