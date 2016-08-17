@@ -1,11 +1,14 @@
 /* ===========================================================
- * trumbowyg.upload.js v1.1
+ * trumbowyg.upload.js v1.2
  * Upload plugin for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
  * Author : Alexandre Demode (Alex-D)
  *          Twitter : @AlexandreDemode
  *          Website : alex-d.fr
+ * Mod by : Aleksandr-ru
+ *          Twitter : @Aleksandr_ru
+ *          Website : aleksandr.ru
  */
 
 (function ($) {
@@ -68,7 +71,12 @@
                 upload: '上传',
                 file: '文件',
                 uploadError: '错误'
-            }
+            },
+            ru : {
+                upload: 'Загрузка',
+                file: 'Файл',
+                uploadError: 'Ошибка'
+             }
         },
         // jshint camelcase:true
 
@@ -138,7 +146,8 @@
                                             }, 200);
                                         },
 
-                                        success: trumbowyg.o.plugins.upload.success || function (data) {
+                                        success: function(data) {
+                                        (trumbowyg.o.plugins.upload.success && trumbowyg.o.plugins.upload.success(data, trumbowyg, $modal, values)) || function (data) {
                                             if (!!getDeep(data, trumbowyg.o.plugins.upload.statusPropertyName.split('.'))) {
                                                 var url = getDeep(data, trumbowyg.o.plugins.upload.urlPropertyName.split('.'));
                                                 trumbowyg.execCmd('insertImage', url);
@@ -154,7 +163,8 @@
                                                 );
                                                 trumbowyg.$c.trigger('tbwuploaderror', [trumbowyg, data]);
                                             }
-                                        },
+                                        }},
+                                        
                                         error: trumbowyg.o.plugins.upload.error || function () {
                                             trumbowyg.addErrorOnModalField(
                                                 $('input[type=file]', $modal),
