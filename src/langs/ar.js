@@ -42,7 +42,7 @@ jQuery.trumbowyg.langs.ar = {
 
     horizontalRule:'إدراج خطّ أفقي',
 
-    fullscreen:"كامل الشاشة",
+    fullscreen:'كامل الشاشة',
 
     close: 'إغلاق',
 
