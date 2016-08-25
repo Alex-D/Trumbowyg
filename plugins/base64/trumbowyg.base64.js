@@ -54,7 +54,10 @@
                                 {
                                     file: {
                                         type: 'file',
-                                        required: true
+                                        required: true,
+                                        attributes: {
+                                            accept: 'image/*'
+                                        }
                                     },
                                     alt: {
                                         label: 'description',

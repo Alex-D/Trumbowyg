@@ -1338,9 +1338,14 @@ jQuery.trumbowyg = {
 
             $.each(fields, function (fieldName, field) {
                 var l = field.label,
-                    n = field.name || fieldName;
+                    n = field.name || fieldName,
+                    a = field.attributes || {};
 
-                html += '<label><input type="' + (field.type || 'text') + '" name="' + n + '" value="' + (field.value || '').replace(/"/g, '&quot;') + '"><span class="' + prefix + 'input-infos"><span>' +
+                var attr = Object.keys(a).map(function(prop){
+                    return prop + '="' + a[prop] + '"';
+                }).join(' ');
+
+                html += '<label><input type="' + (field.type || 'text') + '" name="' + n + '" value="' + (field.value || '').replace(/"/g, '&quot;') + '"' + attr + '><span class="' + prefix + 'input-infos"><span>' +
                     ((!l) ? (lg[fieldName] ? lg[fieldName] : fieldName) : (lg[l] ? lg[l] : l)) +
                     '</span></span></label>';
             });
