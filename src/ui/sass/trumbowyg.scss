@@ -1,10 +1,10 @@
-$light-color: #ecf0f1;
-$dark-color: #222;
+$light-color: #ecf0f1 !default;
+$dark-color: #222 !default;
 
-$modal-submit-color: #2ecc71;
-$modal-reset-color: #EEE;
+$modal-submit-color: #2ecc71 !default;
+$modal-reset-color: #EEE !default;
 
-$transition-duration: 150ms;
+$transition-duration: 150ms !default;
 
 #trumbowyg-icons {
     overflow: hidden;
