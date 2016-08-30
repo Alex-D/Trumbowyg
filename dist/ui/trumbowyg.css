@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.2.0 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.3.0 - A lightweight WYSIWYG editor
  * Default stylesheet for Trumbowyg editor
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -105,12 +105,10 @@
 
 .trumbowyg-button-pane {
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-flow: row wrap;
-      -ms-flex-flow: row wrap;
-          flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
   width: 100%;
   min-height: 36px;
   background: #ecf0f1;
@@ -133,12 +131,10 @@
     background: #d7e0e2; }
   .trumbowyg-button-pane .trumbowyg-button-group {
     display: -webkit-box;
-    display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    -webkit-flex-flow: row wrap;
-        -ms-flex-flow: row wrap;
-            flex-flow: row wrap; }
+    -ms-flex-flow: row wrap;
+        flex-flow: row wrap; }
     .trumbowyg-button-pane .trumbowyg-button-group .trumbowyg-fullscreen-button svg {
       color: transparent; }
     .trumbowyg-button-pane .trumbowyg-button-group:not(:empty) + .trumbowyg-button-group::before {
@@ -161,6 +157,9 @@
     background: none;
     -webkit-transition: background-color 150ms, opacity 150ms;
             transition: background-color 150ms, opacity 150ms; }
+    .trumbowyg-button-pane button.trumbowyg-textual-button {
+      width: auto;
+      line-height: 35px; }
   .trumbowyg-button-pane.trumbowyg-disable button:not(.trumbowyg-not-disable):not(.trumbowyg-active),
   .trumbowyg-disabled .trumbowyg-button-pane button:not(.trumbowyg-not-disable):not(.trumbowyg-viewHTML-button) {
     opacity: 0.2;
@@ -183,6 +182,12 @@
     width: 0;
     border: 3px solid transparent;
     border-top-color: #555; }
+  .trumbowyg-button-pane .trumbowyg-open-dropdown.trumbowyg-textual-button {
+    padding-left: 10px !important;
+    padding-right: 18px !important; }
+    .trumbowyg-button-pane .trumbowyg-open-dropdown.trumbowyg-textual-button::after {
+      top: 17px;
+      right: 7px; }
   .trumbowyg-button-pane .trumbowyg-right {
     margin-left: auto; }
     .trumbowyg-button-pane .trumbowyg-right::before {
