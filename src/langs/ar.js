@@ -13,16 +13,16 @@ jQuery.trumbowyg.langs.ar = {
     _dir: 'rtl',
 
     viewHTML: 'إعرض-HTML',
-    
+
     undo: 'تراجع',
     redo: 'إعادة',
-    
-    formatting:"تنسيق",
+
+    formatting: 'تنسيق',
 
     p: 'فقرة',
     blockquote: 'اقتباس',
     code: 'كود',
-    header:"رأس",
+    header: 'رأس',
 
     bold: 'عريض',
     italic: 'مائل',
@@ -32,15 +32,15 @@ jQuery.trumbowyg.langs.ar = {
     strong: 'بارز',
     em: 'تغميق',
     del: 'حذف',
-    
+
     superscript: 'الأس',
     subscript: 'أس سفلي',
-    
+
     unorderedList: 'قائمة غير مرتّبة',
     orderedList: 'قائمة مرتّبة',
-    
-    insertImage:"إدراج صورة",
-    insertVideo:"إدراج فيديو",
+
+    insertImage: 'إدراج صورة',
+    insertVideo: 'إدراج فيديو',
     link: 'رابط',
     createLink: 'انشاء رابط',
     unlink: 'حذف رابط',
@@ -50,14 +50,14 @@ jQuery.trumbowyg.langs.ar = {
     justifyRight: 'تصحيح لليمين',
     justifyFull: 'تصحيح لكلا الإتّجاهين',
 
-    horizontalRule:"إدراج خطّ أفقي",
+    horizontalRule: 'إدراج خطّ أفقي',
 
-    fullscreen:'ملء الشاشة',
+    fullscreen: 'ملء الشاشة',
 
     close: 'إغلاق',
 
     submit: 'إرسال',
-    reset:"إعادة تعيين",
+    reset: 'إعادة تعيين',
 
     required: 'إلزامي',
     description: 'وصف',
