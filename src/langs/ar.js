@@ -5,6 +5,8 @@
  * ===========================================================
  * Author : Abo Mokh ahmed (abomokhahmed)
  *          Github : https://github.com/abomokhahmed
+ * Reviewed by : Abdellah Chadidi (chadidi)
+ *          Github : https://github.com/chadidi
  */
 
 jQuery.trumbowyg.langs.ar = {
@@ -12,11 +14,12 @@ jQuery.trumbowyg.langs.ar = {
 
     viewHTML: 'إعرض-HTML',
 
-    formatting: 'تصميم',
+    formatting:"تنسيق",
+
     p: 'فقرة',
     blockquote: 'اقتباس',
     code: 'كود',
-    header: 'رئيسي',
+    header:"رأس",
 
     bold: 'عريض',
     italic: 'مائل',
@@ -29,25 +32,25 @@ jQuery.trumbowyg.langs.ar = {
 
     unorderedList: 'قائمة غير مرتّبة',
     orderedList: 'قائمة مرتّبة',
-    insertImage: 'إدخال صورة',
-    insertVideo: 'إدخال فيديو',
+    insertImage:"إدراج صورة",
+    insertVideo:"إدراج فيديو",
     link: 'رابط',
     createLink: 'انشاء رابط',
     unlink: 'حذف رابط',
 
     justifyLeft: 'تصحيح للشمال',
-    justifyCenter: 'تصحيح للمركز',
+    justifyCenter: 'توسيط',
     justifyRight: 'تصحيح لليمين',
     justifyFull: 'تصحيح لكلا الإتّجاهين',
 
-    horizontalRule: 'إدخال خطّ أفقي',
+    horizontalRule:"إدراج خطّ أفقي",
 
-    fullscreen: 'شاشة واسعة',
+    fullscreen:'ملء الشاشة',
 
     close: 'إغلاق',
 
-    submit: 'أرسل',
-    reset: 'تهيئة من حديد',
+    submit: 'إرسال',
+    reset:"إعادة تعيين",
 
     required: 'إلزامي',
     description: 'وصف',
