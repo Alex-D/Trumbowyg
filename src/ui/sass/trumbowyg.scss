@@ -183,6 +183,10 @@ $transition-duration: 150ms !default;
         cursor: pointer;
         background: none;
         transition: background-color $transition-duration, opacity $transition-duration;
+
+        &.trumbowyg-textual-button {
+            width: auto;
+        }
     }
 
     &.trumbowyg-disable button:not(.trumbowyg-not-disable):not(.trumbowyg-active),
@@ -204,16 +208,25 @@ $transition-duration: 150ms !default;
         outline: none;
     }
 
-    .trumbowyg-open-dropdown::after {
-        display: block;
-        content: " ";
-        position: absolute;
-        top: 25px;
-        right: 3px;
-        height: 0;
-        width: 0;
-        border: 3px solid transparent;
-        border-top-color: #555;
+    .trumbowyg-open-dropdown {
+        &::after {
+            display: block;
+            content: " ";
+            position: absolute;
+            top: 25px;
+            right: 3px;
+            height: 0;
+            width: 0;
+            border: 3px solid transparent;
+            border-top-color: #555;
+        }
+
+        &.trumbowyg-textual-button {
+            padding-right: 10px !important;
+            &::after {
+                top: 16px;
+            }
+        }
     }
 
     .trumbowyg-right {
