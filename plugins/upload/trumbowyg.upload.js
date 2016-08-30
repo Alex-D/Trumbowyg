@@ -72,11 +72,11 @@
                 file: '文件',
                 uploadError: '错误'
             },
-            ru : {
+            ru: {
                 upload: 'Загрузка',
                 file: 'Файл',
                 uploadError: 'Ошибка'
-             }
+            }
         },
         // jshint camelcase:true
 
@@ -149,25 +149,28 @@
                                             }, 200);
                                         },
 
-                                        success: function(data) {
-                                        (trumbowyg.o.plugins.upload.success && trumbowyg.o.plugins.upload.success(data, trumbowyg, $modal, values)) || function (data) {
-                                            if (!!getDeep(data, trumbowyg.o.plugins.upload.statusPropertyName.split('.'))) {
-                                                var url = getDeep(data, trumbowyg.o.plugins.upload.urlPropertyName.split('.'));
-                                                trumbowyg.execCmd('insertImage', url);
-                                                $('img[src="' + url + '"]:not([alt])', trumbowyg.$box).attr('alt', values.alt);
-                                                setTimeout(function () {
-                                                    trumbowyg.closeModal();
-                                                }, 250);
-                                                trumbowyg.$c.trigger('tbwuploadsuccess', [trumbowyg, data, url]);
+                                        success: function (data) {
+                                            if (trumbowyg.o.plugins.upload.success) {
+                                                trumbowyg.o.plugins.upload.success(data, trumbowyg, $modal, values);
                                             } else {
-                                                trumbowyg.addErrorOnModalField(
-                                                    $('input[type=file]', $modal),
-                                                    trumbowyg.lang[data.message]
-                                                );
-                                                trumbowyg.$c.trigger('tbwuploaderror', [trumbowyg, data]);
+                                                if (!!getDeep(data, trumbowyg.o.plugins.upload.statusPropertyName.split('.'))) {
+                                                    var url = getDeep(data, trumbowyg.o.plugins.upload.urlPropertyName.split('.'));
+                                                    trumbowyg.execCmd('insertImage', url);
+                                                    $('img[src="' + url + '"]:not([alt])', trumbowyg.$box).attr('alt', values.alt);
+                                                    setTimeout(function () {
+                                                        trumbowyg.closeModal();
+                                                    }, 250);
+                                                    trumbowyg.$c.trigger('tbwuploadsuccess', [trumbowyg, data, url]);
+                                                } else {
+                                                    trumbowyg.addErrorOnModalField(
+                                                        $('input[type=file]', $modal),
+                                                        trumbowyg.lang[data.message]
+                                                    );
+                                                    trumbowyg.$c.trigger('tbwuploaderror', [trumbowyg, data]);
+                                                }
                                             }
-                                        }},
-                                        
+                                        },
+
                                         error: trumbowyg.o.plugins.upload.error || function () {
                                             trumbowyg.addErrorOnModalField(
                                                 $('input[type=file]', $modal),
