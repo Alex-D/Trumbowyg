@@ -1,10 +1,10 @@
-$light-color: #ecf0f1;
-$dark-color: #222;
+$light-color: #ecf0f1 !default;
+$dark-color: #222 !default;
 
-$modal-submit-color: #2ecc71;
-$modal-reset-color: #EEE;
+$modal-submit-color: #2ecc71 !default;
+$modal-reset-color: #EEE !default;
 
-$transition-duration: 150ms;
+$transition-duration: 150ms !default;
 
 #trumbowyg-icons {
     overflow: hidden;
@@ -183,6 +183,10 @@ $transition-duration: 150ms;
         cursor: pointer;
         background: none;
         transition: background-color $transition-duration, opacity $transition-duration;
+
+        &.trumbowyg-textual-button {
+            width: auto;
+        }
     }
 
     &.trumbowyg-disable button:not(.trumbowyg-not-disable):not(.trumbowyg-active),
@@ -204,16 +208,25 @@ $transition-duration: 150ms;
         outline: none;
     }
 
-    .trumbowyg-open-dropdown::after {
-        display: block;
-        content: " ";
-        position: absolute;
-        top: 25px;
-        right: 3px;
-        height: 0;
-        width: 0;
-        border: 3px solid transparent;
-        border-top-color: #555;
+    .trumbowyg-open-dropdown {
+        &::after {
+            display: block;
+            content: " ";
+            position: absolute;
+            top: 25px;
+            right: 3px;
+            height: 0;
+            width: 0;
+            border: 3px solid transparent;
+            border-top-color: #555;
+        }
+
+        &.trumbowyg-textual-button {
+            padding-right: 10px !important;
+            &::after {
+                top: 16px;
+            }
+        }
     }
 
     .trumbowyg-right {
