@@ -53,21 +53,7 @@
                 hasIcon: false,
                 fn: function(){
                     trumbowyg.expandRange();
-                    trumbowyg.saveRange();
-                    try {
-                        var current = getSelectionParentElement();
-
-                        // If the parent element is the editor itself, wrap contents in a paragraph first.
-                        if ($(current).is(trumbowyg.$ed)) {
-                            var paragraph = document.createElement('p');
-                            paragraph.style.fontFamily = font.family;
-                            trumbowyg.range.surroundContents(paragraph);
-                        } else {
-                            current.style.fontFamily = font.family;
-                        }
-
-                    } catch (e) {
-                    }
+                    trumbowyg.execCmd('fontName', font.family, true);
                 }
             });
             dropdown.push('fontfamily_' + index);
