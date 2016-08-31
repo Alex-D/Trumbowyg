@@ -1484,6 +1484,37 @@ jQuery.trumbowyg = {
         getRangeText: function () {
             return this.range + '';
         },
+        expandRange: function () {
+            var t = this,
+                documentSelection = t.doc.getSelection();
+
+            if (documentSelection.rangeCount) {
+                var ranges = [];
+                for (var i=0; i<documentSelection.rangeCount; i+=1) {
+                    var range = documentSelection.getRangeAt(i);
+                    var ancestor = range.commonAncestorContainer;
+
+                    if (ancestor.nodeType === 1) {
+                        if (range.startContainer.parentNode !== ancestor && documentSelection.containsNode(range.startContainer.parentNode, true)) {
+                            range.setStartBefore(range.startContainer.parentNode);
+                        }
+                        if (range.endContainer.parentNode !== ancestor && documentSelection.containsNode(range.endContainer.parentNode, true)) {
+                            range.setEndAfter(range.endContainer.parentNode);
+                        }
+                    } else if (ancestor.nodeType === 3) {
+                        range.setStart(ancestor, 0);
+                        range.setEnd(ancestor, ancestor.length);
+                    }
+
+                    ranges.push(range);
+                }
+
+                documentSelection.removeAllRanges();
+                for(i=0; i<ranges.length; i+=1) {
+                    documentSelection.addRange(ranges[i]);
+                }
+            }
+        },
 
         updateButtonPaneStatus: function () {
             var t = this,
