@@ -250,10 +250,12 @@ jQuery.trumbowyg = {
             },
 
             bold: {
-                key: 'B'
+                key: 'B',
+                tag: 'b'
             },
             italic: {
-                key: 'I'
+                key: 'I',
+                tag: 'i'
             },
             underline: {
                 tag: 'u'
@@ -685,7 +687,7 @@ jQuery.trumbowyg = {
                 prefix = t.o.prefix,
                 btn = t.btnsDef[btnName],
                 isDropdown = btn.dropdown,
-                hasIcon = btn.hasOwnProperty('hasIcon') ? btn.hasIcon : true,
+                hasIcon = btn.hasIcon != null ? btn.hasIcon : true,
                 textDef = t.lang[btnName] || btnName,
 
                 $btn = $('<button/>', {
@@ -741,7 +743,7 @@ jQuery.trumbowyg = {
             var t = this,
                 prefix = t.o.prefix,
                 btn = t.btnsDef[btnName],
-                hasIcon = btn.hasOwnProperty('hasIcon') ? btn.hasIcon : true;
+                hasIcon = btn.hasIcon != null ? btn.hasIcon : true;
 
             if (btn.key) {
                 t.keys[btn.key] = {
@@ -1343,7 +1345,7 @@ jQuery.trumbowyg = {
                     n = field.name || fieldName,
                     a = field.attributes || {};
 
-                var attr = Object.keys(a).map(function(prop){
+                var attr = Object.keys(a).map(function (prop) {
                     return prop + '="' + a[prop] + '"';
                 }).join(' ');
 
@@ -1359,12 +1361,12 @@ jQuery.trumbowyg = {
                         values = {};
 
                     $.each(fields, function (fieldName, field) {
-                        var $field = $('input[name="' + fieldName + '"]', $form);                      
-                        var inputType = $field.attr('type');
+                        var $field = $('input[name="' + fieldName + '"]', $form),
+                            inputType = $field.attr('type');
+
                         if (inputType.toLowerCase() === 'checkbox') {
                             values[fieldName] = $field.is(':checked');
-                        }
-                        else {
+                        } else {
                             values[fieldName] = $.trim($field.val());
                         }
                         // Validate value

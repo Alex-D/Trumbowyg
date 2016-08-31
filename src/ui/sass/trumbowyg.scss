@@ -186,6 +186,7 @@ $transition-duration: 150ms !default;
 
         &.trumbowyg-textual-button {
             width: auto;
+            line-height: 35px;
         }
     }
 
@@ -222,9 +223,12 @@ $transition-duration: 150ms !default;
         }
 
         &.trumbowyg-textual-button {
-            padding-right: 14px !important;
+            padding-left: 10px !important;
+            padding-right: 18px !important;
+
             &::after {
-                top: 16px;
+                top: 17px;
+                right: 7px;
             }
         }
     }

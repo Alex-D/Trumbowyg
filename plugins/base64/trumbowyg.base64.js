@@ -86,7 +86,7 @@
                                         } else {
                                             trumbowyg.addErrorOnModalField(
                                                 $('input[type=file]', $modal),
-                                                trumbowyg.lang['errInvalidImage']
+                                                trumbowyg.lang.errInvalidImage
                                             );
                                         }
                                     };
