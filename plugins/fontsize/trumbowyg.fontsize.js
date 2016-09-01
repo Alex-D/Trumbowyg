@@ -5,7 +5,8 @@
         langs: {
             // jshint camelcase:false
             en: {
-                fontSize: {
+                fontsize: 'Font size',
+                fontsizes: {
                     'x-small': 'Extra Small',
                     'small': 'Small',
                     'medium': 'Regular',
@@ -14,7 +15,8 @@
                 }
             },
             nl: {
-                fontSize: {
+                fontsize: 'Lettergrootte',
+                fontsizes: {
                     'x-small': 'Extra Klein',
                     'small': 'Klein',
                     'medium': 'Normaal',
@@ -44,7 +46,7 @@
 
         $.each(sizes, function(index, size) {
             trumbowyg.addBtnDef('fontsize_' + size, {
-                text: '<span style="font-size: ' + size + ';">' + trumbowyg.lang.fontSize[size] + '</span>',
+                text: '<span style="font-size: ' + size + ';">' + trumbowyg.lang.fontsizes[size] + '</span>',
                 hasIcon: false,
                 fn: function(){
                     trumbowyg.expandRange();
