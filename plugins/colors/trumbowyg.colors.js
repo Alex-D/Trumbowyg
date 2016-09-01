@@ -26,6 +26,10 @@
                 foreColor: 'Couleur du texte',
                 backColor: 'Couleur de fond'
             },
+            nl: {
+                foreColor: 'Tekstkleur',
+                backColor: 'Achtergrondkleur'
+            },
             sk: {
                 foreColor: 'Farba textu',
                 backColor: 'Farba pozadia'
