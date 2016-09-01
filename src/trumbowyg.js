@@ -1493,17 +1493,20 @@ jQuery.trumbowyg = {
             if (documentSelection.rangeCount) {
                 var ranges = [];
                 for (var i=0; i<documentSelection.rangeCount; i+=1) {
-                    var range = documentSelection.getRangeAt(i);
-                    var ancestor = range.commonAncestorContainer;
+                    var range = documentSelection.getRangeAt(i),
+                        ancestor = range.commonAncestorContainer,
+                        nodeType = ancestor.nodeType;
 
-                    if (ancestor.nodeType === 1) {
-                        if (range.startContainer.parentNode !== ancestor && documentSelection.containsNode(range.startContainer.parentNode, true)) {
-                            range.setStartBefore(range.startContainer.parentNode);
+                    if (nodeType === 1) {
+                        var startParent = range.startContainer.parentNode;
+                        if (startParent !== ancestor && documentSelection.containsNode(startParent, true)) {
+                            range.setStartBefore(startParent);
                         }
-                        if (range.endContainer.parentNode !== ancestor && documentSelection.containsNode(range.endContainer.parentNode, true)) {
-                            range.setEndAfter(range.endContainer.parentNode);
+                        var endParent = range.endContainer.parentNode;
+                        if (endParent !== ancestor && documentSelection.containsNode(endParent, true)) {
+                            range.setEndAfter(endParent);
                         }
-                    } else if (ancestor.nodeType === 3) {
+                    } else if (nodeType === 3) {
                         range.setStart(ancestor, 0);
                         range.setEnd(ancestor, ancestor.length);
                     }
@@ -1512,7 +1515,7 @@ jQuery.trumbowyg = {
                 }
 
                 documentSelection.removeAllRanges();
-                for(i=0; i<ranges.length; i+=1) {
+                for (i=0; i<ranges.length; i+=1) {
                     documentSelection.addRange(ranges[i]);
                 }
             }
