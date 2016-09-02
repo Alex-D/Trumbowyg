@@ -344,11 +344,7 @@ jQuery.trumbowyg = {
 
             prefix: 'trumbowyg-',
 
-            semantic: {
-              'b': 'strong',
-              'i': 'em',
-              'div': 'p'
-            },
+            semantic: true,
             resetCss: false,
             removeformatPasted: false,
             tagsToRemove: [],
