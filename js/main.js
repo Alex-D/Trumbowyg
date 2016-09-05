@@ -10,7 +10,7 @@ hljs.initHighlightingOnLoad();
                 btnsDef: {
                     // Customizables dropdowns
                     image: {
-                        dropdown: ['insertImage', 'upload', 'base64', 'noEmbed'],
+                        dropdown: ['insertImage', 'upload', 'base64', 'noembed'],
                         ico: 'insertImage'
                     }
                 },
