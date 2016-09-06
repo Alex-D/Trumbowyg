@@ -917,6 +917,17 @@ jQuery.trumbowyg = {
         },
 
 
+        removeformat: function () {
+            var html = this.html();
+            
+            var tempDiv = document.createElement('DIV');
+            tempDiv.innerHTML = html;
+            
+            this.html(tempDiv.innerText.replace("\n", '<br />'));
+            this.semanticCode(false, true);
+        },
+
+
         // Function call when click on viewHTML button
         toggle: function () {
             var t = this,
