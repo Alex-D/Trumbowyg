@@ -424,6 +424,9 @@ jQuery.trumbowyg = {
             t.addBtnDef(btnName, btnDef);
         });
 
+        // put this here in the event it would be merged in with options
+        t.eventNamespace = 'trumbowyg-event';
+
         // Keyboard shortcuts are load in this array
         t.keys = [];
 
@@ -543,8 +546,8 @@ jQuery.trumbowyg = {
                 debounceButtonPaneStatus;
 
             t.$ed
-                .on('dblclick', 'img', t.o.imgDblClickHandler)
-                .on('keydown', function (e) {
+                .on('dblclick.'+t.eventNamespace, 'img', t.o.imgDblClickHandler)
+                .on('keydown.'+t.eventNamespace, function (e) {
                     composition = (e.which === 229);
 
                     if (e.ctrlKey) {
@@ -558,7 +561,7 @@ jQuery.trumbowyg = {
                         }
                     }
                 })
-                .on('keyup input', function (e) {
+                .on('keyup.'+t.eventNamespace+' input.'+t.eventNamespace, function (e) {
                     if (e.which >= 37 && e.which <= 40) {
                         return;
                     }
@@ -574,25 +577,25 @@ jQuery.trumbowyg = {
                         ctrl = false;
                     }, 200);
                 })
-                .on('mouseup keydown keyup', function () {
+                .on('mouseup.'+t.eventNamespace+' keydown.'+t.eventNamespace+' keyup.'+t.eventNamespace, function () {
                     clearTimeout(debounceButtonPaneStatus);
                     debounceButtonPaneStatus = setTimeout(function () {
                         t.updateButtonPaneStatus();
                     }, 50);
                 })
-                .on('focus blur', function (e) {
+                .on('focus.'+t.eventNamespace+' blur.'+t.eventNamespace, function (e) {
                     t.$c.trigger('tbw' + e.type);
                     if (e.type === 'blur') {
                         $('.' + prefix + 'active-button', t.$btnPane).removeClass(prefix + 'active-button ' + prefix + 'active');
                     }
                 })
-                .on('cut', function () {
+                .on('cut.'+t.eventNamespace, function () {
                     setTimeout(function () {
                         t.semanticCode(false, true);
                         t.$c.trigger('tbwchange');
                     }, 0);
                 })
-                .on('paste', function (e) {
+                .on('paste.'+t.eventNamespace, function (e) {
                     if (t.o.removeformatPasted) {
                         e.preventDefault();
 
@@ -623,11 +626,11 @@ jQuery.trumbowyg = {
                         t.$c.trigger('tbwpaste', e);
                     }, 0);
                 });
-            t.$ta.on('keyup paste', function () {
+            t.$ta.on('keyup.'+t.eventNamespace+' paste.'+t.eventNamespace, function () {
                 t.$c.trigger('tbwchange');
             });
 
-            t.$box.on('keydown', function (e) {
+            t.$box.on('keydown.'+t.eventNamespace, function (e) {
                 if (e.which === 27 && $('.' + prefix + 'modal-box', t.$box).length === 1) {
                     t.closeModal();
                     return false;
@@ -814,7 +817,7 @@ jQuery.trumbowyg = {
             t.isFixed = false;
 
             $(window)
-                .on('scroll resize', function () {
+                .on('scroll.'+t.eventNamespace+' resize.'+t.eventNamespace, function () {
                     if (!$box) {
                         return;
                     }
@@ -899,7 +902,7 @@ jQuery.trumbowyg = {
                 );
             }
 
-            t.$ed.off('dblclick', 'img');
+            t.$ed.off('dblclick.'+t.eventNamespace, 'img');
 
             t.destroyPlugins();
 
@@ -958,10 +961,10 @@ jQuery.trumbowyg = {
 
                 $(window).trigger('scroll');
 
-                $('body', d).on('mousedown', function () {
+                $('body', d).on('mousedown.'+t.eventNamespace, function () {
                     $('.' + prefix + 'dropdown', d).hide();
                     $('.' + prefix + 'active', d).removeClass(prefix + 'active');
-                    $('body', d).off('mousedown');
+                    $('body', d).off('mousedown.'+t.eventNamespace);
                 });
             }
         },
@@ -1243,7 +1246,7 @@ jQuery.trumbowyg = {
             }).appendTo(t.$box);
 
             // Click on overlay close modal by cancelling them
-            t.$overlay.one('click', function () {
+            t.$overlay.one('click.'+t.eventNamespace, function () {
                 $modal.trigger('tbwcancel');
                 return false;
             });
@@ -1253,11 +1256,11 @@ jQuery.trumbowyg = {
                 action: '',
                 html: content
             })
-                .on('submit', function () {
+                .on('submit.'+t.eventNamespace, function () {
                     $modal.trigger('tbwconfirm');
                     return false;
                 })
-                .on('reset', function () {
+                .on('reset.'+t.eventNamespace, function () {
                     $modal.trigger('tbwcancel');
                     return false;
                 });
@@ -1390,17 +1393,18 @@ jQuery.trumbowyg = {
                         }
                     }
                 })
-                .one('tbwcancel', function () {
+                .one('tbwcancel.'+t.eventNamespace, function () {
                     $(this).off(CONFIRM_EVENT);
                     t.closeModal();
                 });
         },
         addErrorOnModalField: function ($field, err) {
-            var prefix = this.o.prefix,
+            var t = this,
+                prefix = t.o.prefix,
                 $label = $field.parent();
 
             $field
-                .on('change keyup', function () {
+                .on('change.'+t.eventNamespace+' keyup.'+t.eventNamespace, function () {
                     $label.removeClass(prefix + 'input-error');
                 });
 
