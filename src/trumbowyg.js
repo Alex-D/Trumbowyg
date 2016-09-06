@@ -438,11 +438,6 @@ jQuery.trumbowyg = {
     };
 
     Trumbowyg.prototype = {
-        DEFAULT_SEMANTIC_MAP: {
-            'b': 'strong',
-            'i': 'em',
-            'div': 'p'
-        },
         init: function () {
             var t = this;
             t.height = t.$ta.height();
@@ -1014,8 +1009,8 @@ jQuery.trumbowyg = {
             $(t.o.tagsToRemove.join(','), t.$ed).remove();
 
             if (t.o.semantic) {
-                t.semanticTag('b');
-                t.semanticTag('i');
+                t.semanticTag('b', 'strong');
+                t.semanticTag('i', 'em');
 
                 if (full) {
                     var inlineElementsSelector = t.o.inlineElementsSelector,
@@ -1037,7 +1032,7 @@ jQuery.trumbowyg = {
                     };
                     wrapInlinesInParagraphsFrom(t.$ed.children(inlineElementsSelector).first());
 
-                    t.semanticTag('div', true);
+                    t.semanticTag('div', 'p', true);
 
                     // Unwrap paragraphs content, containing nothing usefull
                     t.$ed.find('p').filter(function () {
@@ -1061,27 +1056,17 @@ jQuery.trumbowyg = {
             }
         },
 
-        semanticTag: function (oldTag, copyAttributes) {
-            var newTag;
-
-            if(typeof this.o.semantic === 'object' && this.o.semantic.hasOwnProperty(oldTag)){
-                newTag = this.o.semantic[oldTag];
-            } else if(typeof this.o.semantic === 'boolean' && this.o.semantic && this.DEFAULT_SEMANTIC_MAP.hasOwnProperty(oldTag)){
-                newTag = this.DEFAULT_SEMANTIC_MAP[oldTag];
-            }
-
-            if(newTag){
-                $(oldTag, this.$ed).each(function () {
-                    var $oldTag = $(this);
-                    $oldTag.wrap('<' + newTag + '/>');
-                    if (copyAttributes) {
-                        $.each($oldTag.prop('attributes'), function () {
-                            $oldTag.parent().attr(this.name, this.value);
-                        });
-                    }
-                    $oldTag.contents().unwrap();
-                });
-            }
+        semanticTag: function (oldTag, newTag, copyAttributes) {
+            $(oldTag, this.$ed).each(function () {
+                var $oldTag = $(this);
+                $oldTag.wrap('<' + newTag + '/>');
+                if (copyAttributes) {
+                    $.each($oldTag.prop('attributes'), function () {
+                        $oldTag.parent().attr(this.name, this.value);
+                    });
+                }
+                $oldTag.contents().unwrap();
+            });
         },
 
         // Function call when user click on "Insert Link"
