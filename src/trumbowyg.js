@@ -546,8 +546,8 @@ jQuery.trumbowyg = {
                 debounceButtonPaneStatus;
 
             t.$ed
-                .on('dblclick.'+t.eventNamespace, 'img', t.o.imgDblClickHandler)
-                .on('keydown.'+t.eventNamespace, function (e) {
+                .on('dblclick', 'img', t.o.imgDblClickHandler)
+                .on('keydown', function (e) {
                     composition = (e.which === 229);
 
                     if (e.ctrlKey) {
@@ -561,7 +561,7 @@ jQuery.trumbowyg = {
                         }
                     }
                 })
-                .on('keyup.'+t.eventNamespace+' input.'+t.eventNamespace, function (e) {
+                .on('keyup input', function (e) {
                     if (e.which >= 37 && e.which <= 40) {
                         return;
                     }
@@ -577,25 +577,25 @@ jQuery.trumbowyg = {
                         ctrl = false;
                     }, 200);
                 })
-                .on('mouseup.'+t.eventNamespace+' keydown.'+t.eventNamespace+' keyup.'+t.eventNamespace, function () {
+                .on('mouseup keydown keyup', function () {
                     clearTimeout(debounceButtonPaneStatus);
                     debounceButtonPaneStatus = setTimeout(function () {
                         t.updateButtonPaneStatus();
                     }, 50);
                 })
-                .on('focus.'+t.eventNamespace+' blur.'+t.eventNamespace, function (e) {
+                .on('focus blur', function (e) {
                     t.$c.trigger('tbw' + e.type);
                     if (e.type === 'blur') {
                         $('.' + prefix + 'active-button', t.$btnPane).removeClass(prefix + 'active-button ' + prefix + 'active');
                     }
                 })
-                .on('cut.'+t.eventNamespace, function () {
+                .on('cut', function () {
                     setTimeout(function () {
                         t.semanticCode(false, true);
                         t.$c.trigger('tbwchange');
                     }, 0);
                 })
-                .on('paste.'+t.eventNamespace, function (e) {
+                .on('paste', function (e) {
                     if (t.o.removeformatPasted) {
                         e.preventDefault();
 
@@ -626,11 +626,11 @@ jQuery.trumbowyg = {
                         t.$c.trigger('tbwpaste', e);
                     }, 0);
                 });
-            t.$ta.on('keyup.'+t.eventNamespace+' paste.'+t.eventNamespace, function () {
+            t.$ta.on('keyup paste', function () {
                 t.$c.trigger('tbwchange');
             });
 
-            t.$box.on('keydown.'+t.eventNamespace, function (e) {
+            t.$box.on('keydown', function (e) {
                 if (e.which === 27 && $('.' + prefix + 'modal-box', t.$box).length === 1) {
                     t.closeModal();
                     return false;
@@ -902,7 +902,7 @@ jQuery.trumbowyg = {
                 );
             }
 
-            t.$ed.off('dblclick.'+t.eventNamespace, 'img');
+            t.$ed.off('dblclick', 'img');
 
             t.destroyPlugins();
 
@@ -910,6 +910,7 @@ jQuery.trumbowyg = {
             t.$c.removeData('trumbowyg');
             $('body').removeClass(prefix + 'body-fullscreen');
             t.$c.trigger('tbwclose');
+            $(window).off('scroll.'+t.eventNamespace+' resize.'+t.eventNamespace);
         },
 
 
@@ -1246,7 +1247,7 @@ jQuery.trumbowyg = {
             }).appendTo(t.$box);
 
             // Click on overlay close modal by cancelling them
-            t.$overlay.one('click.'+t.eventNamespace, function () {
+            t.$overlay.one('click', function () {
                 $modal.trigger('tbwcancel');
                 return false;
             });
@@ -1256,11 +1257,11 @@ jQuery.trumbowyg = {
                 action: '',
                 html: content
             })
-                .on('submit.'+t.eventNamespace, function () {
+                .on('submit', function () {
                     $modal.trigger('tbwconfirm');
                     return false;
                 })
-                .on('reset.'+t.eventNamespace, function () {
+                .on('reset', function () {
                     $modal.trigger('tbwcancel');
                     return false;
                 });
@@ -1393,7 +1394,7 @@ jQuery.trumbowyg = {
                         }
                     }
                 })
-                .one('tbwcancel.'+t.eventNamespace, function () {
+                .one('tbwcancel', function () {
                     $(this).off(CONFIRM_EVENT);
                     t.closeModal();
                 });
@@ -1404,7 +1405,7 @@ jQuery.trumbowyg = {
                 $label = $field.parent();
 
             $field
-                .on('change.'+t.eventNamespace+' keyup.'+t.eventNamespace, function () {
+                .on('change keyup', function () {
                     $label.removeClass(prefix + 'input-error');
                 });
 
@@ -1518,7 +1519,7 @@ jQuery.trumbowyg = {
             var t = this;
             tags = tags || [];
 
-            if (element) {
+            if (element && element.parentNode) {
                 element = element.parentNode;
             } else {
                 return tags;
