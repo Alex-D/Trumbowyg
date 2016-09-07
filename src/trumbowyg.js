@@ -1400,8 +1400,7 @@ jQuery.trumbowyg = {
                 });
         },
         addErrorOnModalField: function ($field, err) {
-            var t = this,
-                prefix = t.o.prefix,
+            var prefix = this.o.prefix,
                 $label = $field.parent();
 
             $field
