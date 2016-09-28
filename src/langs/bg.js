@@ -6,7 +6,7 @@
  * Author : Aleksandar Dimitrov
  */
 
-jQuery.trumbowyg.langs.ru = {
+jQuery.trumbowyg.langs.bg = {
     viewHTML: 'Прегледай HTML',
 
     formatting: 'Форматиране',
