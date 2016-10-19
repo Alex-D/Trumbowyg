@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.3.0 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.4.0 - A lightweight WYSIWYG editor
  * Trumbowyg core file
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -435,6 +435,9 @@ jQuery.trumbowyg = {
             t.addBtnDef(btnName, btnDef);
         });
 
+        // put this here in the event it would be merged in with options
+        t.eventNamespace = 'trumbowyg-event';
+
         // Keyboard shortcuts are load in this array
         t.keys = [];
 
@@ -825,7 +828,7 @@ jQuery.trumbowyg = {
             t.isFixed = false;
 
             $(window)
-                .on('scroll resize', function () {
+                .on('scroll.'+t.eventNamespace+' resize.'+t.eventNamespace, function () {
                     if (!$box) {
                         return;
                     }
@@ -918,6 +921,7 @@ jQuery.trumbowyg = {
             t.$c.removeData('trumbowyg');
             $('body').removeClass(prefix + 'body-fullscreen');
             t.$c.trigger('tbwclose');
+            $(window).off('scroll.'+t.eventNamespace+' resize.'+t.eventNamespace);
         },
 
 
@@ -969,10 +973,10 @@ jQuery.trumbowyg = {
 
                 $(window).trigger('scroll');
 
-                $('body', d).on('mousedown', function () {
+                $('body', d).on('mousedown.'+t.eventNamespace, function () {
                     $('.' + prefix + 'dropdown', d).hide();
                     $('.' + prefix + 'active', d).removeClass(prefix + 'active');
-                    $('body', d).off('mousedown');
+                    $('body', d).off('mousedown.'+t.eventNamespace);
                 });
             }
         },
@@ -1525,7 +1529,7 @@ jQuery.trumbowyg = {
             var t = this;
             tags = tags || [];
 
-            if (element) {
+            if (element && element.parentNode) {
                 element = element.parentNode;
             } else {
                 return tags;
