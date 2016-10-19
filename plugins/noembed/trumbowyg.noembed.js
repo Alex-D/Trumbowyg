@@ -65,7 +65,7 @@
 
                                         success: trumbowyg.o.plugins.noembed.success || function (data) {
                                             if (data.html) {
-                                                trumbowyg.execCmd('insertHTML', $(data.html).unwrap().html());
+                                                trumbowyg.execCmd('insertHTML', data.html);
                                                 setTimeout(function () {
                                                     trumbowyg.closeModal();
                                                 }, 250);

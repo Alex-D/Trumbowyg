@@ -1,5 +1,7 @@
 # Trumbowyg WYSIWYG Editor
 
+[![CDNJS](https://img.shields.io/cdnjs/v/Trumbowyg.svg)](https://cdnjs.com/libraries/Trumbowyg)
+
 Trumbowyg is a simple and lightweight WYSIWYG editor, is only 20kB for faster page loading.
 
 [![Trumbowyg logo](banner.png)](http://alex-d.github.io/Trumbowyg/)

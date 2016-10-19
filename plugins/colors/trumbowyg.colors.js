@@ -57,6 +57,10 @@
     function colorTagHandler(element, trumbowyg) {
         var tags = [];
 
+        if(!element.style){
+            return tags;
+        }
+
         // background color
         if (element.style.backgroundColor !== '') {
             var backColor = colorToHex(element.style.backgroundColor);

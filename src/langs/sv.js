@@ -5,27 +5,30 @@
  * ===========================================================
  * Author : T. Almroth
  * Github : https://github.com/timint
+ *
+ * Review : M Hagberg
+ * Github : https://github.com/pestbarn
  */
 
 jQuery.trumbowyg.langs.sv = {
     viewHTML: 'Visa HTML',
 
-    formatting: 'Formatera',
-    p: 'Avsnitt',
+    formatting: 'Formatering',
+    p: 'Paragraf',
     blockquote: 'Citat',
     code: 'Kod',
-    header: 'Överskrift',
+    header: 'Rubrik',
 
     bold: 'Fet',
     italic: 'Kursiv',
     strikethrough: 'Genomstruken',
-    underline: 'Understreck',
+    underline: 'Understruken',
 
-    strong: 'Viktig',
-    em: 'Framhäv',
+    strong: 'Fet',
+    em: 'Kursiv',
     del: 'Rensa formatering',
 
-    unorderedList: 'Lista',
+    unorderedList: 'Punktlista',
     orderedList: 'Numrerad lista',
 
     insertImage: 'Infoga bild',
