@@ -922,7 +922,7 @@
                 btnDef = {
                     param: emoji,
                     fn: function () {
-                        trumbowyg.execCmd('insertText ' + emoji + ' ');
+                        trumbowyg.execCmd('insertText', emoji);
                         return true;
                     }
                 };
