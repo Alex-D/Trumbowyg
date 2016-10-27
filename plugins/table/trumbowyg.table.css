@@ -1,0 +1,102 @@
+.trumbowyg-modal-box label div {
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 27px;
+	line-height: 27px;
+	border: 1px solid #DEDEDE;
+	background: #fff;
+	font-size: 20px;
+	max-width: 330px;
+	width: 70%;
+	padding: 0 7px;
+	-webkit-transition: all 150ms;
+	transition: all 150ms;
+	display:inline-block !important;
+	padding-right:5%;
+}
+      
+.trumbowyg-modal-box label input[type=radio] {
+	width: initial;
+	display: inline;
+	position: relative;
+	top: -2px;
+	margin-left: 12px;
+}            
+      
+.trumbowyg-table {
+	border: 2px solid #555;
+	border-radius: 3px;
+	padding: 2px;
+}
+		
+.trumbowyg-table > tbody > tr {
+	border: 1px solid #aaa;
+	padding: 2px;
+}
+		
+.trumbowyg-table > tbody > tr > th {
+	background-color: #999;
+	color: #fff;
+	border: 1px solid #aaa;
+	text-align: middle;
+	padding: 2px 5px 2px 5px
+}
+		
+.trumbowyg-table > tbody > tr > td {
+	border: 1px solid #aaa;
+	padding: 2px 5px 2px 5px;
+}
+		
+.trumbowyg-table-blue {
+	border: 2px solid #36F;
+	border-radius: 3px;
+	padding: 2px;
+}
+		
+.trumbowyg-table-blue > tbody > tr {
+	border: 1px solid #b6dbef;
+	padding: 2px;
+}
+		
+.trumbowyg-table-blue > tbody > tr > th {
+	background-color: #387cc8;
+	color: #fff;
+	border: 1px solid #44F;
+	text-align: middle;
+	padding: 2px 5px 2px 5px;
+	width:25px; 
+	height:25px
+}
+		
+.trumbowyg-table-blue > tbody > tr > td {
+	border: 1px solid #b6dbef;
+	padding: 2px 5px 2px 5px;
+	width:25px; 
+	height:25px
+}
+		
+.trumbowyg-table-green {
+	border: 2px solid #476E2F;
+	border-radius: 3px;
+	padding: 2px;
+}
+		
+.trumbowyg-table-green > tbody > tr {
+	border: 1px solid #a3c878;
+	padding: 2px;
+}
+		
+.trumbowyg-table-green > tbody > tr > th {
+	background-color: #537851;
+	color: #fff;
+	border: 1px solid #a3c878;
+	text-align: middle;
+	padding: 2px 5px 2px 5px
+}
+		
+.trumbowyg-table-green > tbody > tr > td {
+	border: 1px solid #a3c878;
+	padding: 2px 5px 2px 5px;
+}
+	

@@ -25,7 +25,8 @@
                 tableAddColumn: 'Add columns',
                 rows: 'Rows',
                 columns: 'Columns',
-                styler: 'Table class',
+                tableHeaderRow: 'Header{Top,Side,None}',
+                styler: 'Style{Default,Blue Sky,Green Forest}',
                 error: 'Error'
             },
             sk: {
@@ -34,6 +35,7 @@
                 tableAddColumn: 'Pridať stĺpec',
                 rows: 'Riadky',
                 columns: 'Stĺpce',
+                tableHeaderRow: 'Header{Top,Side,None}',
                 styler: 'Tabuľku triedy',
                 error: 'Chyba'
             },
@@ -43,6 +45,7 @@
                 tableAddColumn: 'Ajouter des colonnes',
                 rows: 'Lignes',
                 columns: 'Colonnes',
+                tableHeaderRow: 'Header{Top,Side,None}',
                 styler: 'Classes CSS sur la table',
                 error: 'Erreur'
             },
@@ -52,6 +55,7 @@
                 tableAddColumn: 'Přidat sloupec',
                 rows: 'Řádky',
                 columns: 'Sloupce',
+                tableHeaderRow: 'Header{Top,Side,None}',
                 styler: 'Tabulku třída',
                 error: 'Chyba'
             }
@@ -73,15 +77,23 @@
                                 {
                                     rows: {
                                         type: 'number',
+                                        data: '5',
                                         required: true
                                     },
                                     columns: {
                                         type: 'number',
+                                        data: '2',
+                                        required: true
+                                    },
+                                    tableHeaderRow: {
+                                        type: 'radio',
+                                        data: '{1,2,3}',
                                         required: true
                                     },
                                     styler: {
-                                        label: trumbowyg.lang.styler,
-                                        type: 'text'
+                                        type: 'select',
+                                        data: '{trumbowyg-table,trumbowyg-table-blue,trumbowyg-table-green}',
+                                        required: true
                                     }
                                 },
                                 function (v) { // v is value
@@ -89,18 +101,25 @@
                                     if (v.styler.length !== 0) {
                                         tabler.addClass(v.styler);
                                     }
-
+                                	
                                     for (var i = 0; i < v.rows; i += 1) {
                                         var row = $('<tr></tr>').appendTo(tabler);
                                         for (var j = 0; j < v.columns; j += 1) {
-                                            $('<td></td>').appendTo(row);
+                                        	var cellHtml;
+                                        	if ( (v.tableHeaderRow==1 && i==0) || (v.tableHeaderRow==2 && j==0) ) {
+                                        		cellHtml = '<th></th>';
+                                        	} else {
+                                        		cellHtml = '<td></td>';
+                                        	}
+                                            $(cellHtml).appendTo(row);
                                         }
                                     }
-
+                                    
                                     trumbowyg.range.deleteContents();
                                     trumbowyg.range.insertNode(tabler[0]);
                                     return true;
-                                });
+                                }
+                            );
                         }
                     };
 
