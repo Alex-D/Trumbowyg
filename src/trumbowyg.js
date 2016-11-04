@@ -452,7 +452,11 @@ jQuery.trumbowyg = {
                 t.doc.execCommand('enableObjectResizing', false, false);
             } catch (e) {
             }
-            t.doc.execCommand('defaultParagraphSeparator', false, 'p');
+            try {
+                // Disable for old IE (support from IE 11)
+                t.doc.execCommand('defaultParagraphSeparator', false, 'p');
+            } catch (e) {
+            }
 
             t.buildEditor();
             t.buildBtnPane();
