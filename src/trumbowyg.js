@@ -450,10 +450,6 @@ jQuery.trumbowyg = {
             try {
                 // Disable image resize, try-catch for old IE
                 t.doc.execCommand('enableObjectResizing', false, false);
-            } catch (e) {
-            }
-            try {
-                // Disable for old IE (support from IE 11)
                 t.doc.execCommand('defaultParagraphSeparator', false, 'p');
             } catch (e) {
             }
