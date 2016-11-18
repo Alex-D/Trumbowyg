@@ -899,6 +899,9 @@
             },
             fr: {
                 emoji: 'Ajouter un emoji'
+            },
+            zh_cn: {
+                emoji: '添加表情'
             }
         },
         plugins: {
