@@ -337,6 +337,7 @@ jQuery.trumbowyg = {
         // Defaults Options
         t.o = $.extend(true, {}, {
             lang: 'en',
+            useComposition: true,
 
             fixedBtnPane: false,
             fixedFullWidth: false,
@@ -548,7 +549,7 @@ jQuery.trumbowyg = {
             t.$ed
                 .on('dblclick', 'img', t.o.imgDblClickHandler)
                 .on('keydown', function (e) {
-                    composition = (e.which === 229);
+                    composition = t.o.useComposition && (e.which === 229);
 
                     if (e.ctrlKey) {
                         ctrl = true;
