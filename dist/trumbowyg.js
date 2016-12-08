@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.4.0 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.4.2 - A lightweight WYSIWYG editor
  * Trumbowyg core file
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -348,6 +348,7 @@ jQuery.trumbowyg = {
         // Defaults Options
         t.o = $.extend(true, {}, {
             lang: 'en',
+            useComposition: true,
 
             fixedBtnPane: false,
             fixedFullWidth: false,
@@ -461,9 +462,9 @@ jQuery.trumbowyg = {
             try {
                 // Disable image resize, try-catch for old IE
                 t.doc.execCommand('enableObjectResizing', false, false);
+                t.doc.execCommand('defaultParagraphSeparator', false, 'p');
             } catch (e) {
             }
-            t.doc.execCommand('defaultParagraphSeparator', false, 'p');
 
             t.buildEditor();
             t.buildBtnPane();
@@ -559,7 +560,7 @@ jQuery.trumbowyg = {
             t.$ed
                 .on('dblclick', 'img', t.o.imgDblClickHandler)
                 .on('keydown', function (e) {
-                    composition = (e.which === 229);
+                    composition = t.o.useComposition && (e.which === 229);
 
                     if (e.ctrlKey) {
                         ctrl = true;

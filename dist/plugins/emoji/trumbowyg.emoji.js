@@ -899,6 +899,9 @@
             },
             fr: {
                 emoji: 'Ajouter un emoji'
+            },
+            zh_cn: {
+                emoji: '添加表情'
             }
         },
         plugins: {
@@ -922,7 +925,7 @@
                 btnDef = {
                     param: emoji,
                     fn: function () {
-                        trumbowyg.execCmd('insertText ' + emoji + ' ');
+                        trumbowyg.execCmd('insertText', emoji);
                         return true;
                     }
                 };
