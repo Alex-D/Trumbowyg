@@ -569,7 +569,7 @@ jQuery.trumbowyg = {
                 })
                 .on('keyup', function (e) {
                     var kc = e.which;
-                    if (isCrazyMobile && (kc === 0 || kc === 229)) {
+                    if (isCrazyMobile && (!kc || kc === 229)) {
                         kc = this.textContent.charCodeAt(this.textContent.length - 1);
                     }
                 
