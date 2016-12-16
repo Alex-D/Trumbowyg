@@ -1354,9 +1354,23 @@ jQuery.trumbowyg = {
                     return prop + '="' + a[prop] + '"';
                 }).join(' ');
 
-                html += '<label><input type="' + (field.type || 'text') + '" name="' + n + '" value="' + (field.value || '').replace(/"/g, '&quot;') + '"' + attr + '><span class="' + prefix + 'input-infos"><span>' +
-                    ((!l) ? (lg[fieldName] ? lg[fieldName] : fieldName) : (lg[l] ? lg[l] : l)) +
-                    '</span></span></label>';
+                switch(field.type) {
+                    case "select":
+                        html += '<label>'+
+                        '<select name="'+n+'">' +
+                            Object.keys(field.options).map(function(opt){
+                                return '<option value="'+opt+'">'+field.options[opt]+'</option>';
+                            }).join("") +
+                        '</select>'+
+                        '<span class="' + prefix + 'input-infos"><span>' +
+                        ((!l) ? (lg[fieldName] ? lg[fieldName] : fieldName) : (lg[l] ? lg[l] : l)) +
+                        '</span></span></label>';
+                    break;
+                    default:
+                        html += '<label><input type="' + (field.type || 'text') + '" name="' + n + '" value="' + (field.value || '').replace(/"/g, '&quot;') + '"' + attr + '><span class="' + prefix + 'input-infos"><span>' +
+                        ((!l) ? (lg[fieldName] ? lg[fieldName] : fieldName) : (lg[l] ? lg[l] : l)) +
+                        '</span></span></label>';
+                }
             });
 
             return t.openModal(title, html)
@@ -1366,13 +1380,17 @@ jQuery.trumbowyg = {
                         values = {};
 
                     $.each(fields, function (fieldName, field) {
-                        var $field = $('input[name="' + fieldName + '"]', $form),
-                            inputType = $field.attr('type');
+                        var $field = $('[name="' + fieldName + '"]', $form);
 
-                        if (inputType.toLowerCase() === 'checkbox') {
-                            values[fieldName] = $field.is(':checked');
-                        } else {
+                        if($field.is("select")) {
                             values[fieldName] = $.trim($field.val());
+                        } else {
+                            inputType = $field.attr('type');
+                            if (inputType.toLowerCase() === 'checkbox') {
+                                values[fieldName] = $field.is(':checked');
+                            } else {
+                                values[fieldName] = $.trim($('option:selected', $field).val());
+                            }
                         }
                         // Validate value
                         if (field.required && values[fieldName] === '') {

@@ -370,7 +370,7 @@ $transition-duration: 150ms !default;
             }
         }
 
-        input {
+        input, select {
             position: absolute;
             top: 0;
             right: 0;
