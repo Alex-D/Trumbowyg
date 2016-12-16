@@ -963,10 +963,12 @@ jQuery.trumbowyg = {
 
                 $(window).trigger('scroll');
 
-                $('body', d).on('mousedown.'+t.eventNamespace, function () {
-                    $('.' + prefix + 'dropdown', d).hide();
-                    $('.' + prefix + 'active', d).removeClass(prefix + 'active');
-                    $('body', d).off('mousedown.'+t.eventNamespace);
+                $('body', d).on('mousedown.'+t.eventNamespace, function (e) {
+                    if (!$dropdown.is(e.target)) {
+                        $('.' + prefix + 'dropdown', d).hide();
+                        $('.' + prefix + 'active', d).removeClass(prefix + 'active');
+                        $('body', d).off('mousedown.'+t.eventNamespace);
+                    }
                 });
             }
         },
