@@ -9,6 +9,9 @@
 
 jQuery.trumbowyg.langs.fi = {
     viewHTML: 'Näytä HTML',
+    
+    undo: 'Kumoa',
+    redo: 'Tee uudelleen',
 
     formatting: 'Muotoilu',
     p: 'Kappale',
@@ -25,8 +28,8 @@ jQuery.trumbowyg.langs.fi = {
     em: 'Painotus',
     del: 'Poistettu',
 
-    unorderedList: 'Numeroimaton lista',
-    orderedList: 'Numeroitu lista',
+    unorderedList: 'Luettelo',
+    orderedList: 'Numeroitu luettelo',
 
     insertImage: 'Lisää kuva',
     insertVideo: 'Lisää video',
@@ -34,9 +37,9 @@ jQuery.trumbowyg.langs.fi = {
     createLink: 'Luo linkki',
     unlink: 'Poista linkki',
 
-    justifyLeft: 'Asemoi vasemmalle',
+    justifyLeft: 'Tasaa vasemmalle',
     justifyCenter: 'Keskitä',
-    justifyRight: 'Asemoi oikealle',
+    justifyRight: 'Tasaa oikealle',
     justifyFull: 'Tasaa',
 
     horizontalRule: 'Vaakaviiva',
@@ -45,7 +48,7 @@ jQuery.trumbowyg.langs.fi = {
 
     close: 'Sulje',
 
-    submit: 'Lähetä',
+    submit: 'Lisää',
     reset: 'Palauta',
 
     required: 'Pakollinen',
