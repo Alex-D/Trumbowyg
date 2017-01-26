@@ -569,10 +569,11 @@ jQuery.trumbowyg = {
 
                     if (e.ctrlKey && (e.which === 89 || e.which === 90)) {
                         t.$c.trigger('tbwchange');
-                    } else if (!ctrl && (e.which !== 17 && !composition)
-                        || (typeof e.which === 'undefined' && composition)) {
+                    } else if (!ctrl && e.which !== 17 && !composition) {
                         t.semanticCode(false, e.which === 13);
                         t.$c.trigger('tbwchange');
+                    } else if (typeof e.which === 'undefined'　&& composition) {
+                        t.semanticCode(false, false, true);
                     }
 
                     setTimeout(function () {
@@ -1009,7 +1010,8 @@ jQuery.trumbowyg = {
         // Analyse and update to semantic code
         // @param force : force to sync code from textarea
         // @param full  : wrap text nodes in <p>
-        semanticCode: function (force, full) {
+        // @param keepRange  : leave selection range as it is
+        semanticCode: function (force, full, keepRange) {
             var t = this;
             t.saveRange();
             t.syncCode(force);
@@ -1058,7 +1060,9 @@ jQuery.trumbowyg = {
                     t.$ed.find('p:empty').remove();
                 }
 
-                t.restoreRange();
+                if (!keepRange) {
+                    t.restoreRange();
+                }
 
                 t.syncTextarea();
             }
