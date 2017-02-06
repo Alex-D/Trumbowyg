@@ -566,7 +566,7 @@ jQuery.trumbowyg = {
                         }
                     }
                 })
-                .on('keyup input', function (e) {
+                .on('keyup', function (e) {
                     if (e.which >= 37 && e.which <= 40) {
                         return;
                     }
