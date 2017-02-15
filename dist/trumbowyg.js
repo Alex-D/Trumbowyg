@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.4.4 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.5.0 - A lightweight WYSIWYG editor
  * Trumbowyg core file
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -559,12 +559,13 @@ jQuery.trumbowyg = {
 
             var ctrl = false,
                 composition = false,
+                isCrazyMobile = !!navigator.userAgent.match(/Android/i),
                 debounceButtonPaneStatus;
 
             t.$ed
                 .on('dblclick', 'img', t.o.imgDblClickHandler)
                 .on('keydown', function (e) {
-                    composition = t.o.useComposition && (e.which === 229);
+                    composition = t.o.useComposition && !isCrazyMobile && (e.which === 229);
 
                     if (e.ctrlKey) {
                         ctrl = true;
@@ -577,15 +578,24 @@ jQuery.trumbowyg = {
                         }
                     }
                 })
-                .on('keyup input', function (e) {
-                    if (e.which >= 37 && e.which <= 40) {
+                .on('input', function(e) {
+                    t.semanticCode(false, true);
+                    t.$c.trigger('tbwchange');
+                })
+                .on('keyup', function (e) {
+                    var kc = e.which;
+                    if (isCrazyMobile && (!kc || kc === 229)) {
+                        kc = this.textContent.charCodeAt(this.textContent.length - 1);
+                    }
+                
+                    if (kc >= 37 && kc <= 40) {
                         return;
                     }
 
-                    if (e.ctrlKey && (e.which === 89 || e.which === 90)) {
+                    if (e.ctrlKey && (kc === 89 || kc === 90)) {
                         t.$c.trigger('tbwchange');
-                    } else if (!ctrl && e.which !== 17 && !composition) {
-                        t.semanticCode(false, e.which === 13);
+                    } else if (!ctrl && kc !== 17 && !composition) {
+                        t.semanticCode(false, kc === 13);
                         t.$c.trigger('tbwchange');
                     } else if (typeof e.which === 'undefined'　&& composition) {
                         t.semanticCode(false, false, true);
