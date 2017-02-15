@@ -7,6 +7,7 @@ jQuery.trumbowyg = {
             redo: 'Redo',
 
             formatting: 'Formatting',
+            div: 'Normal',
             p: 'Paragraph',
             blockquote: 'Quote',
             code: 'Code',
@@ -224,6 +225,9 @@ jQuery.trumbowyg = {
                 key: 'Y'
             },
 
+            div: {
+                fn: 'formatBlock'
+            },
             p: {
                 fn: 'formatBlock'
             },
@@ -330,7 +334,7 @@ jQuery.trumbowyg = {
 
             // Dropdowns
             formatting: {
-                dropdown: ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4'],
+                dropdown: ['div', 'p', 'blockquote', 'h1', 'h2', 'h3', 'h4'],
                 ico: 'p'
             },
             link: {
@@ -352,6 +356,7 @@ jQuery.trumbowyg = {
             semantic: true,
             resetCss: false,
             removeformatPasted: false,
+            textInParagraphs: true,
             tagsToRemove: [],
 
             btnsGrps: {
@@ -455,7 +460,7 @@ jQuery.trumbowyg = {
             try {
                 // Disable image resize, try-catch for old IE
                 t.doc.execCommand('enableObjectResizing', false, false);
-                t.doc.execCommand('defaultParagraphSeparator', false, 'p');
+                t.doc.execCommand('defaultParagraphSeparator', false, t.o.textInParagraphs ? 'p' : '');
             } catch (e) {
             }
 
@@ -586,7 +591,7 @@ jQuery.trumbowyg = {
                     } else if (!ctrl && kc !== 17 && !composition) {
                         t.semanticCode(false, kc === 13);
                         t.$c.trigger('tbwchange');
-                    } else if (typeof e.which === 'undefined'　&& composition) {
+                    } else if (typeof e.which === 'undefined' && composition) {
                         t.semanticCode(false, false, true);
                     }
 
@@ -714,8 +719,8 @@ jQuery.trumbowyg = {
                     type: 'button',
                     class: prefix + btnName + '-button ' + (btn.class || '') + (!hasIcon ? ' ' + prefix + 'textual-button' : ''),
                     html: t.hasSvg && hasIcon ?
-                      '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' :
-                      t.hideButtonTexts ? '' : (btn.text || btn.title || t.lang[btnName] || btnName),
+                        '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' :
+                        t.hideButtonTexts ? '' : (btn.text || btn.title || t.lang[btnName] || btnName),
                     title: (btn.title || btn.text || textDef) + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
                     tabindex: -1,
                     mousedown: function () {
@@ -836,7 +841,7 @@ jQuery.trumbowyg = {
             t.isFixed = false;
 
             $(window)
-                .on('scroll.'+t.eventNamespace+' resize.'+t.eventNamespace, function () {
+                .on('scroll.' + t.eventNamespace + ' resize.' + t.eventNamespace, function () {
                     if (!$box) {
                         return;
                     }
@@ -929,7 +934,7 @@ jQuery.trumbowyg = {
             t.$c.removeData('trumbowyg');
             $('body').removeClass(prefix + 'body-fullscreen');
             t.$c.trigger('tbwclose');
-            $(window).off('scroll.'+t.eventNamespace+' resize.'+t.eventNamespace);
+            $(window).off('scroll.' + t.eventNamespace + ' resize.' + t.eventNamespace);
         },
 
 
@@ -981,11 +986,11 @@ jQuery.trumbowyg = {
 
                 $(window).trigger('scroll');
 
-                $('body', d).on('mousedown.'+t.eventNamespace, function (e) {
+                $('body', d).on('mousedown.' + t.eventNamespace, function (e) {
                     if (!$dropdown.is(e.target)) {
                         $('.' + prefix + 'dropdown', d).hide();
                         $('.' + prefix + 'active', d).removeClass(prefix + 'active');
-                        $('body', d).off('mousedown.'+t.eventNamespace);
+                        $('body', d).off('mousedown.' + t.eventNamespace);
                     }
                 });
             }
@@ -1038,7 +1043,7 @@ jQuery.trumbowyg = {
                 t.semanticTag('b', 'strong');
                 t.semanticTag('i', 'em');
 
-                if (full) {
+                if (full && t.o.textInParagraphs) {
                     var inlineElementsSelector = t.o.inlineElementsSelector,
                         blockElementsSelector = ':not(' + inlineElementsSelector + ')';
 
