@@ -1,5 +1,5 @@
 /* ===========================================================
- * trumbowyg.colors.js v1.1
+ * trumbowyg.colors.js v1.2
  * Colors picker plugin for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
@@ -98,7 +98,7 @@
         plugins: {
             color: {
                 init: function (trumbowyg) {
-                    trumbowyg.o.plugins.colors = $.extend(true, {}, defaultOptions, trumbowyg.o.plugins.colors || {});
+                    trumbowyg.o.plugins.colors = trumbowyg.o.plugins.colors || defaultOptions;
                     var foreColorBtnDef = {
                             dropdown: buildDropdown('foreColor', trumbowyg)
                         },
