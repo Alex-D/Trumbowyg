@@ -1540,7 +1540,7 @@ jQuery.trumbowyg = {
         },
         getTagsRecursive: function (element, tags) {
             var t = this;
-            tags = tags || [];
+            tags = tags || (element && element.tagName ? [element.tagName] : []);
 
             if (element && element.parentNode) {
                 element = element.parentNode;
