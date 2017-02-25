@@ -341,7 +341,6 @@ jQuery.trumbowyg = {
         // Defaults Options
         t.o = $.extend(true, {}, {
             lang: 'en',
-            useComposition: true,
 
             fixedBtnPane: false,
             fixedFullWidth: false,
@@ -441,6 +440,9 @@ jQuery.trumbowyg = {
 
         // Admit multiple paste handlers
         t.pasteHandlers = [].concat(t.o.pasteHandlers);
+
+        // Check if browser is IE
+        t.isIE = (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') !== -1);
 
         t.init();
     };
@@ -548,45 +550,45 @@ jQuery.trumbowyg = {
 
             var ctrl = false,
                 composition = false,
-                isCrazyMobile = !!navigator.userAgent.match(/Android/i),
-                debounceButtonPaneStatus;
+                debounceButtonPaneStatus,
+                updateEventName = t.isIE ? 'keyup' : 'input';
 
             t.$ed
                 .on('dblclick', 'img', t.o.imgDblClickHandler)
                 .on('keydown', function (e) {
-                    composition = t.o.useComposition && !isCrazyMobile && (e.which === 229);
-
                     if (e.ctrlKey) {
                         ctrl = true;
-                        var k = t.keys[String.fromCharCode(e.which).toUpperCase()];
+                        var key = t.keys[String.fromCharCode(e.which).toUpperCase()];
 
                         try {
-                            t.execCmd(k.fn, k.param);
+                            t.execCmd(key.fn, key.param);
                             return false;
                         } catch (c) {
                         }
                     }
                 })
-                .on('input', function(e) {
-                    t.semanticCode(false, true);
-                    t.$c.trigger('tbwchange');
+                .on('compositionstart compositionupdate', function () {
+                    composition = true;
                 })
-                .on('keyup', function (e) {
-                    var kc = e.which;
-                    if (isCrazyMobile && (!kc || kc === 229)) {
-                        kc = this.textContent.charCodeAt(this.textContent.length - 1);
-                    }
-                
-                    if (kc >= 37 && kc <= 40) {
+                .on(updateEventName + ' compositionend', function (e) {
+                  if (e.type === 'compositionend') {
+                        composition = false;
+                    } else if(composition) {
                         return;
                     }
 
-                    if (e.ctrlKey && (kc === 89 || kc === 90)) {
+                    var keyCode = e.which;
+
+                    if (keyCode >= 37 && keyCode <= 40) {
+                        return;
+                    }
+
+                    if (e.ctrlKey && (keyCode === 89 || keyCode === 90)) {
                         t.$c.trigger('tbwchange');
-                    } else if (!ctrl && kc !== 17 && !composition) {
-                        t.semanticCode(false, kc === 13);
+                    } else if (!ctrl && keyCode !== 17) {
+                        t.semanticCode(false, keyCode === 13);
                         t.$c.trigger('tbwchange');
-                    } else if (typeof e.which === 'undefined'　&& composition) {
+                    } else if (typeof e.which === 'undefined') {
                         t.semanticCode(false, false, true);
                     }
 
@@ -644,7 +646,7 @@ jQuery.trumbowyg = {
                     }, 0);
                 });
             t.$ta.on('keyup paste', function () {
-                t.$c.trigger('tbwchange');
+              t.$c.trigger('tbwchange');
             });
 
             t.$box.on('keydown', function (e) {
@@ -1229,7 +1231,7 @@ jQuery.trumbowyg = {
                 } catch (e2) {
                     if (cmd === 'insertHorizontalRule') {
                         param = undefined;
-                    } else if (cmd === 'formatBlock' && (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') !== -1)) {
+                    } else if (cmd === 'formatBlock' && t.isIE) {
                         param = '<' + param + '>';
                     }
 
@@ -1540,7 +1542,7 @@ jQuery.trumbowyg = {
         },
         getTagsRecursive: function (element, tags) {
             var t = this;
-            tags = tags || [];
+            tags = tags || (element && element.tagName ? [element.tagName] : []);
 
             if (element && element.parentNode) {
                 element = element.parentNode;
