@@ -10,7 +10,7 @@
  *          Behance: https://www.behance.net/web_design_blog
  */
 
-jQuery.trumbowyg.langs.es = {
+jQuery.trumbowyg.langs.el = {
     viewHTML: 'Προβολή κώδικα HTML',
 
     formatting: 'Μορφοποίηση',
