@@ -43,6 +43,7 @@ jQuery.trumbowyg.langs.el = {
     justifyFull: 'Πλήρης στοίχιση',
 
     horizontalRule: 'Οριζόντια γραμμή',
+    removeformat: 'Καθαρισμός μορφοποίησης',
 
     fullscreen: 'Πλήρης οθόνη',
 
