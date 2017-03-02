@@ -13,13 +13,18 @@
         return typeof FileReader !== 'undefined';
     };
 
+    var isValidImage = function (type) {
+        return /^data:image\/[a-z]?/i.test(type);
+    };
+
     $.extend(true, $.trumbowyg, {
         langs: {
             // jshint camelcase:false
             en: {
                 base64: 'Image as base64',
                 file: 'File',
-                errFileReaderNotSupported: 'FileReader is not supported by your browser.'
+                errFileReaderNotSupported: 'FileReader is not supported by your browser.',
+                errInvalidImage: 'Invalid image file.'
             },
             fr: {
                 base64: 'Image en base64',
@@ -32,6 +37,10 @@
             zh_cn: {
                 base64: '图片（Base64编码）',
                 file: '文件'
+            },
+            nl: {
+                errFileReaderNotSupported: 'Uw browser ondersteunt deze functionaliteit niet.',
+                errInvalidImage: 'De gekozen afbeelding is ongeldig.'
             }
         },
         // jshint camelcase:true
@@ -44,9 +53,9 @@
                         isSupported: isSupported,
                         fn: function () {
                             trumbowyg.saveRange();
-                            
+
                             var file;
-                            trumbowyg.openModalInsert(
+                            var $modal = trumbowyg.openModalInsert(
                                 // Title
                                 trumbowyg.lang.base64,
 
@@ -54,7 +63,10 @@
                                 {
                                     file: {
                                         type: 'file',
-                                        required: true
+                                        required: true,
+                                        attributes: {
+                                            accept: 'image/*'
+                                        }
                                     },
                                     alt: {
                                         label: 'description',
@@ -66,10 +78,17 @@
                                 function (values) {
                                     var fReader = new FileReader();
 
-                                    fReader.onloadend = function () {
-                                        trumbowyg.execCmd('insertImage', fReader.result);
-                                        $(['img[src="', fReader.result, '"]:not([alt])'].join(''), trumbowyg.$box).attr('alt', values.alt);
-                                        trumbowyg.closeModal();
+                                    fReader.onloadend = function (e) {
+                                        if (isValidImage(e.target.result)) {
+                                            trumbowyg.execCmd('insertImage', fReader.result);
+                                            $(['img[src="', fReader.result, '"]:not([alt])'].join(''), trumbowyg.$box).attr('alt', values.alt);
+                                            trumbowyg.closeModal();
+                                        } else {
+                                            trumbowyg.addErrorOnModalField(
+                                                $('input[type=file]', $modal),
+                                                trumbowyg.lang.errInvalidImage
+                                            );
+                                        }
                                     };
 
                                     fReader.readAsDataURL(file);

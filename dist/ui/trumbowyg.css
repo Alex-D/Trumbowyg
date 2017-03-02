@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.1.1 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.5.1 - A lightweight WYSIWYG editor
  * Default stylesheet for Trumbowyg editor
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -98,7 +98,7 @@
   opacity: 0.8;
   background: none; }
 
-.trumbowyg-editor[contenteditable=true]:empty::before {
+.trumbowyg-editor[contenteditable=true]:empty:not(:focus)::before {
   content: attr(placeholder);
   color: #999;
   pointer-events: none; }
@@ -157,6 +157,9 @@
     background: none;
     -webkit-transition: background-color 150ms, opacity 150ms;
             transition: background-color 150ms, opacity 150ms; }
+    .trumbowyg-button-pane button.trumbowyg-textual-button {
+      width: auto;
+      line-height: 35px; }
   .trumbowyg-button-pane.trumbowyg-disable button:not(.trumbowyg-not-disable):not(.trumbowyg-active),
   .trumbowyg-disabled .trumbowyg-button-pane button:not(.trumbowyg-not-disable):not(.trumbowyg-viewHTML-button) {
     opacity: 0.2;
@@ -179,6 +182,12 @@
     width: 0;
     border: 3px solid transparent;
     border-top-color: #555; }
+  .trumbowyg-button-pane .trumbowyg-open-dropdown.trumbowyg-textual-button {
+    padding-left: 10px !important;
+    padding-right: 18px !important; }
+    .trumbowyg-button-pane .trumbowyg-open-dropdown.trumbowyg-textual-button::after {
+      top: 17px;
+      right: 7px; }
   .trumbowyg-button-pane .trumbowyg-right {
     margin-left: auto; }
     .trumbowyg-button-pane .trumbowyg-right::before {
@@ -267,8 +276,8 @@
     display: block;
     position: relative;
     margin: 15px 12px;
-    height: 27px;
-    line-height: 27px;
+    height: 29px;
+    line-height: 29px;
     overflow: hidden; }
     .trumbowyg-modal-box label .trumbowyg-input-infos {
       display: block;

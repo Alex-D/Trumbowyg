@@ -40,7 +40,7 @@ $('#default-editor').trumbowyg();
                 </p>
                 <code><pre>
 $('#simple-editor').trumbowyg({
-btns: [jQuery.trumbowyg.btnsGrps.semantic]
+    btns: [jQuery.trumbowyg.btnsGrps.semantic]
 });
                 </pre></code>
             </div>
@@ -52,7 +52,7 @@ btns: [jQuery.trumbowyg.btnsGrps.semantic]
                 </p>
                 <code><pre>
 $('#simple-editor').trumbowyg({
-btns: [jQuery.trumbowyg.btnsGrps.semantic]
+    btns: [jQuery.trumbowyg.btnsGrps.semantic]
 });
                 </pre></code>
             </div>
@@ -113,15 +113,15 @@ btns: ['viewHTML',
                 </p>
                 <code><pre>
 $('#form-content').trumbowyg({
-lang: 'fr',
-mobile: true,
-fixedBtnPane: true,
-fixedFullWidth: true,
-semantic: true,
-resetCss: true,
-autoAjustHeight: true,
-autogrow: true,
-btnsAdd: ['close']
+    lang: 'fr',
+    mobile: true,
+    fixedBtnPane: true,
+    fixedFullWidth: true,
+    semantic: true,
+    resetCss: true,
+    autoAjustHeight: true,
+    autogrow: true,
+    btnsAdd: ['close']
 });
                 </pre></code>
             </textarea>
@@ -160,6 +160,12 @@ btnsAdd: ['close']
         <script src="/dist/plugins/preformatted/trumbowyg.preformatted.js"></script>
         <script src="/dist/plugins/upload/trumbowyg.upload.js"></script>
         <script>
+
+            $(document).on('keydown', function (e) {
+                if (e.which === 27) {
+                    console.log('ESCAPE');
+                }
+            });
 
 
             /** Default editor configuration **/
