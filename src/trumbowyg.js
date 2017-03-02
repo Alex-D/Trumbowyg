@@ -177,7 +177,7 @@ jQuery.trumbowyg = {
 
             var div = t.doc.createElement('div');
             div.id = trumbowygIconsId;
-            t.doc.body.appendChild(div);
+            t.doc.body.insertBefore(div, t.doc.body.childNodes[0]);
             $.ajax({
                 async: true,
                 type: 'GET',
@@ -352,6 +352,8 @@ jQuery.trumbowyg = {
             resetCss: false,
             removeformatPasted: false,
             tagsToRemove: [],
+
+            forbiddenTags: [],
 
             btnsGrps: {
                 design: ['bold', 'italic', 'underline', 'strikethrough'],
@@ -556,6 +558,13 @@ jQuery.trumbowyg = {
             t.$ed
                 .on('dblclick', 'img', t.o.imgDblClickHandler)
                 .on('keydown', function (e) {
+                    if (!t.isValidAction(e)) {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        return false;
+                    }
+
                     if (e.ctrlKey) {
                         ctrl = true;
                         var key = t.keys[String.fromCharCode(e.which).toUpperCase()];
@@ -571,7 +580,7 @@ jQuery.trumbowyg = {
                     composition = true;
                 })
                 .on(updateEventName + ' compositionend', function (e) {
-                  if (e.type === 'compositionend') {
+                    if (e.type === 'compositionend') {
                         composition = false;
                     } else if(composition) {
                         return;
@@ -581,6 +590,13 @@ jQuery.trumbowyg = {
 
                     if (keyCode >= 37 && keyCode <= 40) {
                         return;
+                    }
+
+                    if (!t.isValidAction(e)) {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        return false;
                     }
 
                     if (e.ctrlKey && (keyCode === 89 || keyCode === 90)) {
@@ -645,6 +661,7 @@ jQuery.trumbowyg = {
                         t.$c.trigger('tbwpaste', e);
                     }, 0);
                 });
+
             t.$ta.on('keyup paste', function () {
               t.$c.trigger('tbwchange');
             });
@@ -657,6 +674,85 @@ jQuery.trumbowyg = {
             });
         },
 
+        // Check if action can be done
+        isValidAction: function(e) {
+            var t = this;
+            var s = document.getSelection();
+
+            // checks if modifications are done inside forbidden element
+            if (t.isForbiddenElement(s.anchorNode.parentElement)) {
+                return false;
+            }
+
+            if (t.isForbiddenElement(s.anchorNode)) {
+                return false;
+            }
+
+            if (s.anchorNode.nextSibling === s.anchorNode.previousSibling && t.isForbiddenElement(s.anchorNode.nextSibling)) {
+                return false;
+            }
+
+            var range = s.getRangeAt(0);
+
+            if (range.startOffset === range.endOffset) {
+                if (e.which === 46 && s.anchorNode.nodeType === 3) { // delete
+                    var lastChar = s.anchorNode.data.substring(s.anchorNode.length - 1, s.anchorNode.length);
+                    var lastCharIsSpace = (lastChar.trim().length === 0);
+                    var realLength = (lastCharIsSpace ? s.anchorNode.length - 1 : s.anchorNode.length);
+
+                    if (s.anchorOffset === realLength || (lastCharIsSpace && s.anchorOffset === s.anchorNode.length)) {
+                        if (t.isForbiddenElement(s.anchorNode.nextSibling)) {
+                            return false;
+                        }
+                    }
+                } else if (e.which === 8 && s.anchorNode.nodeType === 3) { // backspace
+                    var firstChar = s.anchorNode.data.substring(0, 1);
+                    var realOffset = (firstChar.trim().length === 0 ? s.anchorOffset - 1 : s.anchorOffset);
+
+                    if (realOffset <= 0 && t.isForbiddenElement(s.anchorNode.previousSibling)) {
+                        return false;
+                    }
+                } else if ((e.which === 46 || e.which === 8) && jQuery(s.anchorNode).hasClass(t.o.prefix + 'editor')) {
+                    return false;
+                }
+            } else if (s.type === 'Range') {
+                var contentNode = range.cloneContents();
+
+                if (t.containsForbiddenElements(contentNode)) {
+                    return false;
+                }
+            }
+
+            return true;
+        },
+
+        // Check if given node is forbidden element
+        isForbiddenElement: function(node) {
+            if (!this.o.forbiddenTags || !node || node.nodeType !== 1) {
+                return false;
+            }
+
+            for (var i = 0; i < this.o.forbiddenTags.length; i++) {
+                var selector = this.o.forbiddenTags[i];
+
+                if ($(node).is(selector)) {
+                    return true;
+                }
+            }
+
+            return false;
+        },
+
+        // Check if given node contains forbidden elements
+        containsForbiddenElements: function(node) {
+            for (var i = 0; i < node.children.length; i++) {
+                if (this.isForbiddenElement(node.children[i])) {
+                    return true;
+                }
+            }
+
+            return false;
+        },
 
         // Build button pane, use o.btns option
         buildBtnPane: function () {
@@ -1006,7 +1102,7 @@ jQuery.trumbowyg = {
         },
         syncTextarea: function () {
             var t = this;
-            t.$ta.val(t.$ed.text().trim().length > 0 || t.$ed.find('hr,img,embed,iframe,input').length > 0 ? t.$ed.html() : '');
+            t.$ta.val(t.$ed.html().trim().length > 0 || t.$ed.find('hr,img,embed,iframe,input').length > 0 ? t.$ed.html() : '');
         },
         syncCode: function (force) {
             var t = this;
@@ -1015,6 +1111,8 @@ jQuery.trumbowyg = {
             } else {
                 t.$ed.html(t.$ta.val());
             }
+
+            console.log(t.$ta.val());
 
             if (t.o.autogrow) {
                 t.height = t.$ed.height();
