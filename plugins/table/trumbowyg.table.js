@@ -54,6 +54,15 @@
                 columns: 'Sloupce',
                 styler: 'Tabulku třída',
                 error: 'Chyba'
+            },
+            ja: {
+                table: '表の挿入',
+                tableAddRow: '行の追加',
+                tableAddColumn: '列の追加',
+                rows: '行',
+                columns: '列',
+                styler: '表のクラス',
+                error: 'エラー'
             }
         },
 

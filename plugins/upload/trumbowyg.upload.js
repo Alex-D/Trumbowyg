@@ -76,6 +76,11 @@
                 upload: 'Загрузка',
                 file: 'Файл',
                 uploadError: 'Ошибка'
+            },
+            ja: {
+                upload: 'アップロード',
+                file: 'ファイル',
+                uploadError: 'エラー'
             }
         },
         // jshint camelcase:true
