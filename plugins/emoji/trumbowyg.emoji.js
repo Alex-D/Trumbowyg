@@ -903,6 +903,9 @@
             },
             zh_cn: {
                 emoji: '添加表情'
+            },
+            ja: {
+                emoji: '絵文字の挿入'
             }
         },
         // jshint camelcase:true

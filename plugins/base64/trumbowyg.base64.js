@@ -41,6 +41,12 @@
             nl: {
                 errFileReaderNotSupported: 'Uw browser ondersteunt deze functionaliteit niet.',
                 errInvalidImage: 'De gekozen afbeelding is ongeldig.'
+            },
+            ja: {
+                base64: '画像 (Base64形式)',
+                file: 'ファイル',
+                errFileReaderNotSupported: 'あなたのブラウザーはFileReaderをサポートしていません',
+                errInvalidImage: '画像形式が正しくありません'
             }
         },
         // jshint camelcase:true
