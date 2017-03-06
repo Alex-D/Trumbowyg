@@ -678,42 +678,53 @@ jQuery.trumbowyg = {
         isValidAction: function(e) {
             var t = this;
             var s = document.getSelection();
+            var node = s.anchorNode;
+            var offset = s.anchorOffset;
 
             // checks if modifications are done inside forbidden element
-            if (t.isForbiddenElement(s.anchorNode.parentElement)) {
+            if (t.isForbiddenElement(node.parentElement)) {
                 return false;
             }
 
-            if (t.isForbiddenElement(s.anchorNode)) {
+            if (t.isForbiddenElement(node)) {
                 return false;
             }
 
-            if (s.anchorNode.nextSibling === s.anchorNode.previousSibling && t.isForbiddenElement(s.anchorNode.nextSibling)) {
+            if (node.nextSibling === node.previousSibling && t.isForbiddenElement(node.nextSibling)) {
                 return false;
             }
 
             var range = s.getRangeAt(0);
 
             if (range.startOffset === range.endOffset) {
-                if (e.which === 46 && s.anchorNode.nodeType === 3) { // delete
-                    var lastChar = s.anchorNode.data.substring(s.anchorNode.length - 1, s.anchorNode.length);
+                if (e.which === 46 && node.nodeType === 3) { // delete
+                    var lastChar = node.data.substring(node.length - 1, node.length);
                     var lastCharIsSpace = (lastChar.trim().length === 0);
-                    var realLength = (lastCharIsSpace ? s.anchorNode.length - 1 : s.anchorNode.length);
+                    var realLength = (lastCharIsSpace ? node.length - 1 : node.length);
 
-                    if (s.anchorOffset === realLength || (lastCharIsSpace && s.anchorOffset === s.anchorNode.length)) {
-                        if (t.isForbiddenElement(s.anchorNode.nextSibling)) {
+                    if (s.anchorOffset === realLength || (lastCharIsSpace && offset === node.length)) {
+                        if (t.isForbiddenElement(node.nextSibling)) {
                             return false;
                         }
                     }
-                } else if (e.which === 8 && s.anchorNode.nodeType === 3) { // backspace
-                    var firstChar = s.anchorNode.data.substring(0, 1);
-                    var realOffset = (firstChar.trim().length === 0 ? s.anchorOffset - 1 : s.anchorOffset);
+                } else if (e.which === 8 && node.nodeType === 3) { // backspace
+                    var firstChar = node.data.substring(0, 1);
+                    var realOffset = (firstChar.trim().length === 0 ? offset - 1 : s.anchorOffset);
 
-                    if (realOffset <= 0 && t.isForbiddenElement(s.anchorNode.previousSibling)) {
+                    if (realOffset <= 0) {
+                        if (t.isForbiddenElement(node.previousSibling)) {
+                            return false;
+                        } else if (node.parentElement && t.isForbiddenElement(node.parentElement.previousSibling)) {
+                            return false;
+                        }
+                    }
+                } else if ((e.which === 46 || e.which === 8)) {
+                    if (jQuery(node).hasClass(t.o.prefix + 'editor')) {
                         return false;
                     }
-                } else if ((e.which === 46 || e.which === 8) && jQuery(s.anchorNode).hasClass(t.o.prefix + 'editor')) {
-                    return false;
+                    else if (offset === 0 && node.parentElement && t.isForbiddenElement(node.parentElement.previousSibling)) {
+                        return false;
+                    }
                 }
             } else if (s.type === 'Range') {
                 var contentNode = range.cloneContents();
@@ -1111,8 +1122,6 @@ jQuery.trumbowyg = {
             } else {
                 t.$ed.html(t.$ta.val());
             }
-
-            console.log(t.$ta.val());
 
             if (t.o.autogrow) {
                 t.height = t.$ed.height();
