@@ -630,6 +630,14 @@ jQuery.trumbowyg = {
                         t.$c.trigger('tbwchange');
                     }, 0);
                 })
+                .on('copy', function(e) {
+                    if (!t.isValidCopyAction(e)) {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        return false;
+                    }
+                })
                 .on('paste', function (e) {
                     if (t.o.removeformatPasted) {
                         e.preventDefault();
@@ -737,6 +745,22 @@ jQuery.trumbowyg = {
             return true;
         },
 
+        isValidCopyAction: function(e) {
+            var t = this;
+            var text = t.getHTMLSelection();
+
+            if (text.length > 0) {
+                var tmpNode = document.createElement('div');
+                tmpNode.innerHTML = text;
+
+                if (t.containsForbiddenElements(tmpNode)) {
+                    return false;
+                }
+            }
+
+            return true;
+        },
+
         // Check if given node is forbidden element
         isForbiddenElement: function(node) {
             if (!this.o.forbiddenTags || !node || node.nodeType !== 1) {
@@ -763,6 +787,32 @@ jQuery.trumbowyg = {
             }
 
             return false;
+        },
+
+        getHTMLSelection: function() {
+            var range;
+
+            if (document.selection && document.selection.createRange) {
+                range = document.selection.createRange();
+
+                return range.htmlText;
+            }
+            else if (window.getSelection) {
+                var selection = window.getSelection();
+
+                if (selection.rangeCount > 0) {
+                    range = selection.getRangeAt(0);
+
+                    var clonedSelection = range.cloneContents();
+                    var div = document.createElement('div');
+
+                    div.appendChild(clonedSelection);
+
+                    return div.innerHTML;
+                }
+            }
+
+            return '';
         },
 
         // Build button pane, use o.btns option
