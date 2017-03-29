@@ -737,12 +737,19 @@ jQuery.trumbowyg = {
             } else if (s.type === 'Range') {
                 var contentNode = range.cloneContents();
 
-                if (t.containsForbiddenElements(contentNode)) {
+                if (!t.isControlKey(e) && t.containsForbiddenElements(contentNode)) {
                     return false;
                 }
             }
 
             return true;
+        },
+
+        isControlKey: function(e) {
+            var key = e.which;
+            var controlKeys = [37, 38, 39, 40];
+
+            return (controlKeys.indexOf(key) >= 0);
         },
 
         isValidCopyAction: function(e) {
