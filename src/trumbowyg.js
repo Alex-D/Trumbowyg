@@ -349,6 +349,7 @@ jQuery.trumbowyg = {
             prefix: 'trumbowyg-',
 
             semantic: true,
+            forceBr: false,
             resetCss: false,
             removeformatPasted: false,
             tagsToRemove: [],
@@ -565,6 +566,16 @@ jQuery.trumbowyg = {
                         return false;
                     }
 
+                    var keyCode = e.which;
+
+                    if (keyCode === 13 && t.o.forceBr) {
+                        document.execCommand('insertHTML', false, '<br>');
+
+                        t.$c.trigger('tbwchange');
+
+                        return false;
+                    }
+
                     if (e.ctrlKey) {
                         ctrl = true;
                         var key = t.keys[String.fromCharCode(e.which).toUpperCase()];
@@ -602,7 +613,7 @@ jQuery.trumbowyg = {
                     if (e.ctrlKey && (keyCode === 89 || keyCode === 90)) {
                         t.$c.trigger('tbwchange');
                     } else if (!ctrl && keyCode !== 17) {
-                        t.semanticCode(false, keyCode === 13);
+                        t.semanticCode(false, (keyCode === 13));
                         t.$c.trigger('tbwchange');
                     } else if (typeof e.which === 'undefined') {
                         t.semanticCode(false, false, true);
@@ -703,9 +714,10 @@ jQuery.trumbowyg = {
             }
 
             var range = s.getRangeAt(0);
+            var keyCode = e.which;
 
             if (range.startOffset === range.endOffset) {
-                if (e.which === 46 && node.nodeType === 3) { // delete
+                if ((keyCode === 46 || keyCode === 13) && node.nodeType === 3) { // delete
                     var lastChar = node.data.substring(node.length - 1, node.length);
                     var lastCharIsSpace = (lastChar.trim().length === 0);
                     var realLength = (lastCharIsSpace ? node.length - 1 : node.length);
@@ -715,7 +727,7 @@ jQuery.trumbowyg = {
                             return false;
                         }
                     }
-                } else if (e.which === 8 && node.nodeType === 3) { // backspace
+                } else if (keyCode === 8 && node.nodeType === 3) { // backspace
                     var firstChar = node.data.substring(0, 1);
                     var realOffset = (firstChar.trim().length === 0 ? offset - 1 : s.anchorOffset);
 
@@ -726,7 +738,7 @@ jQuery.trumbowyg = {
                             return false;
                         }
                     }
-                } else if ((e.which === 46 || e.which === 8)) {
+                } else if ((keyCode === 46 || e.which === 8)) {
                     if (jQuery(node).hasClass(t.o.prefix + 'editor')) {
                         return false;
                     }
@@ -1200,7 +1212,7 @@ jQuery.trumbowyg = {
 
             $(t.o.tagsToRemove.join(','), t.$ed).remove();
 
-            if (t.o.semantic) {
+            if (t.o.semantic && !t.o.forceBr) {
                 t.semanticTag('b', 'strong');
                 t.semanticTag('i', 'em');
 
