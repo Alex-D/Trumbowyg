@@ -81,7 +81,12 @@
                 upload: 'アップロード',
                 file: 'ファイル',
                 uploadError: 'エラー'
-            }
+            },
+            pt_br: {
+                upload: 'Enviar do local',
+                file: 'Arquivo',
+                uploadError: 'Erro'
+            },
         },
         // jshint camelcase:true
 
