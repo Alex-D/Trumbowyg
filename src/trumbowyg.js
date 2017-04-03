@@ -799,9 +799,19 @@ jQuery.trumbowyg = {
 
         // Check if given node contains forbidden elements
         containsForbiddenElements: function(node) {
+            var t = this;
+            
             for (var i = 0; i < node.children.length; i++) {
-                if (this.isForbiddenElement(node.children[i])) {
+                var child = node.children[i];
+
+                if (t.isForbiddenElement(child)) {
                     return true;
+                }
+
+                if (child.nodeType === Node.ELEMENT_NODE && child.children.length > 0) {
+                    if (t.containsForbiddenElements(child)) {
+                        return true;
+                    }
                 }
             }
 
