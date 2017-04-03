@@ -45,6 +45,9 @@ jQuery.trumbowyg.langs.pl = {
 
     close: 'Zamknij',
 
+    information: 'Komunikat',
+    linkOperationNotPermitted: 'Nie możesz wstawić linku, który zawiera podgląd pluginu.',
+
     submit: 'Zastosuj',
     reset: 'Przywróć',
 

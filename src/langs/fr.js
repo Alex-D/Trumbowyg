@@ -53,6 +53,9 @@ jQuery.trumbowyg.langs.fr = {
 
     close: 'Fermer',
 
+    information: 'Information',
+    linkOperationNotPermitted: 'Vous ne pouvez pas ajouter de lien dans un texte contenant le plugin de textes dynamiques.',
+
     submit: 'Valider',
     reset: 'Annuler',
 

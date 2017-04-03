@@ -44,6 +44,9 @@ jQuery.trumbowyg = {
 
             close: 'Close',
 
+            information: 'Information',
+            linkOperationNotPermitted: 'You cannot insert a link with plugin\'s placeholder inside.',
+
             submit: 'Confirm',
             reset: 'Cancel',
 
@@ -681,6 +684,7 @@ jQuery.trumbowyg = {
                     }, 0);
                 });
 
+
             t.$ta.on('keyup paste', function () {
               t.$c.trigger('tbwchange');
             });
@@ -766,7 +770,7 @@ jQuery.trumbowyg = {
 
         isValidCopyAction: function(e) {
             var t = this;
-            var text = t.getHTMLSelection();
+            var text = t.getRangeHTML();
 
             if (text.length > 0) {
                 var tmpNode = document.createElement('div');
@@ -800,7 +804,7 @@ jQuery.trumbowyg = {
         // Check if given node contains forbidden elements
         containsForbiddenElements: function(node) {
             var t = this;
-            
+
             for (var i = 0; i < node.children.length; i++) {
                 var child = node.children[i];
 
@@ -816,32 +820,6 @@ jQuery.trumbowyg = {
             }
 
             return false;
-        },
-
-        getHTMLSelection: function() {
-            var range;
-
-            if (document.selection && document.selection.createRange) {
-                range = document.selection.createRange();
-
-                return range.htmlText;
-            }
-            else if (window.getSelection) {
-                var selection = window.getSelection();
-
-                if (selection.rangeCount > 0) {
-                    range = selection.getRangeAt(0);
-
-                    var clonedSelection = range.cloneContents();
-                    var div = document.createElement('div');
-
-                    div.appendChild(clonedSelection);
-
-                    return div.innerHTML;
-                }
-            }
-
-            return '';
         },
 
         // Build button pane, use o.btns option
@@ -1065,6 +1043,11 @@ jQuery.trumbowyg = {
                             top: oh
                         });
                     }
+                });
+
+            $(document)
+                .on('selectionchange', function() {
+                    console.log('selection change');
                 });
         },
 
@@ -1310,6 +1293,14 @@ jQuery.trumbowyg = {
 
             t.saveRange();
 
+            var selectionHTMLNode = t.getRangeHTML(t.range, true);
+
+            if (t.containsForbiddenElements(selectionHTMLNode)) {
+                t.openWarningModal(t.lang.linkOperationNotPermitted);
+
+                return;
+            }
+
             t.openModalInsert(t.lang.createLink, {
                 url: {
                     label: 'URL',
@@ -1548,6 +1539,20 @@ jQuery.trumbowyg = {
 
             t.restoreRange();
         },
+        openWarningModal: function(content) {
+            var t = this;
+            var prefix = t.o.prefix;
+            var $modal = t.openModal(t.lang.information, content);
+
+            $modal.find('.' + prefix + 'modal-reset').remove();
+            $modal.find('.' + prefix + 'modal-submit').html(t.lang.close);
+
+            $modal.on('tbwconfirm', function(e) {
+                t.closeModal();
+            });
+
+            return $modal;
+        },
         // Preformated build and management modal
         openModalInsert: function (title, fields, cmd) {
             var t = this,
@@ -1701,6 +1706,47 @@ jQuery.trumbowyg = {
         },
         getRangeText: function () {
             return this.range + '';
+        },
+        getRangeHTML: function(localRange, returnNode) {
+            var range;
+
+            if(localRange) {
+                var clonedSelection = localRange.cloneContents();
+                var div = document.createElement('div');
+
+                div.appendChild(clonedSelection);
+
+                return (returnNode ? div : div.innerHTML);
+            }
+            else if (document.selection && document.selection.createRange) {
+                range = document.selection.createRange();
+
+                if (returnNode) {
+                    var div = document.createElement('div');
+
+                    div.appendChild(range.htmlText);
+
+                    return div;
+                }
+
+                return range.htmlText;
+            }
+            else if (window.getSelection) {
+                var selection = window.getSelection();
+
+                if (selection.rangeCount > 0) {
+                    range = selection.getRangeAt(0);
+
+                    var clonedSelection = range.cloneContents();
+                    var div = document.createElement('div');
+
+                    div.appendChild(clonedSelection);
+
+                    return (returnNode ? div : div.innerHTML);
+                }
+            }
+
+            return '';
         },
 
         updateButtonPaneStatus: function () {
