@@ -759,7 +759,7 @@ jQuery.trumbowyg = {
 
         isControlKey: function(e) {
             var key = e.which;
-            var controlKeys = [37, 38, 39, 40];
+            var controlKeys = [33, 34, 35, 36, 37, 38, 39, 40];
 
             return (controlKeys.indexOf(key) >= 0);
         },
