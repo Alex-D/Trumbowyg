@@ -499,14 +499,14 @@ jQuery.trumbowyg = {
             // $ed = Editor
             t.isTextarea = t.$ta.is('textarea');
             if (t.isTextarea) {
-                html = t.$ta.val();
+                html = t.processHtml(t.$ta.val());
                 t.$ed = $('<div/>');
                 t.$box
                     .insertAfter(t.$ta)
                     .append(t.$ed, t.$ta);
             } else {
                 t.$ed = t.$ta;
-                html = t.$ed.html();
+                html = t.processHtml(t.$ed.html());
 
                 t.$ta = $('<textarea/>', {
                     name: t.$ta.attr('id'),
@@ -697,12 +697,48 @@ jQuery.trumbowyg = {
             });
         },
 
+        processHtml: function(html) {
+            var t = this;
+            var tmpNode = document.createElement('div');
+            tmpNode.innerHTML = html;
+
+            var forbiddenNodes = t.getForbiddenElements(tmpNode);
+
+            if (forbiddenNodes.length === 0) {
+                return html;
+            }
+
+            var outputHtml = '';
+            var firstChild = tmpNode.firstChild;
+            var childNode = firstChild;
+            var previousSibling = null;
+
+            while (childNode) {
+                if (childNode.nodeType === Node.TEXT_NODE) {
+                    outputHtml += childNode.textContent;
+                } else if (childNode.nodeType === Node.ELEMENT_NODE) {
+                    var outerHtml = childNode.outerHTML;
+
+                    outputHtml += outerHtml.trim() + ' ';
+                }
+
+                previousSibling = childNode;
+                childNode = childNode.nextSibling;
+            }
+
+            return outputHtml;
+        },
+
         // Check if action can be done
         isValidAction: function(e) {
             var t = this;
             var s = document.getSelection();
             var node = s.anchorNode;
             var offset = s.anchorOffset;
+
+            if (t.isControlKey(e)) {
+                return true;
+            }
 
             // checks if modifications are done inside forbidden element
             if (t.isForbiddenElement(node.parentElement)) {
@@ -753,7 +789,7 @@ jQuery.trumbowyg = {
             } else if (s.type === 'Range') {
                 var contentNode = range.cloneContents();
 
-                if (!t.isControlKey(e) && t.containsForbiddenElements(contentNode)) {
+                if (t.containsForbiddenElements(contentNode)) {
                     return false;
                 }
             }
@@ -820,6 +856,25 @@ jQuery.trumbowyg = {
             }
 
             return false;
+        },
+
+        getForbiddenElements: function(node) {
+            var t = this;
+            var forbiddenNodes = [];
+
+            for (var i = 0; i < node.children.length; i++) {
+                var child = node.children[i];
+
+                if (t.isForbiddenElement(child)) {
+                    forbiddenNodes.push(child);
+                }
+
+                if (child.nodeType === Node.ELEMENT_NODE && child.children.length > 0) {
+                    forbiddenNodes = forbiddenNodes.concat(getForbiddenElements(child));
+                }
+            }
+
+            return forbiddenNodes;
         },
 
         // Build button pane, use o.btns option
@@ -1167,11 +1222,11 @@ jQuery.trumbowyg = {
         html: function (html) {
             var t = this;
             if (html != null) {
-                t.$ta.val(html);
+                t.$ta.val(t.processHtml(html));
                 t.syncCode(true);
                 return t;
             }
-            return t.$ta.val();
+            return t.processHtml(t.$ta.val());
         },
         syncTextarea: function () {
             var t = this;
@@ -1182,7 +1237,7 @@ jQuery.trumbowyg = {
             if (!force && t.$ed.is(':visible')) {
                 t.syncTextarea();
             } else {
-                t.$ed.html(t.$ta.val());
+                t.$ed.html(t.processHtml(t.$ta.val()));
             }
 
             if (t.o.autogrow) {
