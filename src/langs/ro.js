@@ -10,7 +10,7 @@
  *          Github : https://github.com/pacMakaveli
  */
 
-jQuery.trumbowyg.langs.pt = {
+jQuery.trumbowyg.langs.ro = {
     viewHTML: 'Vizualizare HTML',
 
     formatting: 'Format',
