@@ -1076,7 +1076,8 @@ jQuery.trumbowyg = {
                 node = documentSelection.focusNode,
                 url,
                 title,
-                target;
+                target,
+                collapsed = documentSelection.isCollapsed;
 
             while (['A', 'DIV'].indexOf(node.nodeName) < 0) {
                 node = node.parentNode;
@@ -1094,7 +1095,7 @@ jQuery.trumbowyg = {
 
             t.saveRange();
 
-            t.openModalInsert(t.lang.createLink, {
+            var modalConfig = {
                 url: {
                     label: 'URL',
                     required: true,
@@ -1104,24 +1105,35 @@ jQuery.trumbowyg = {
                     label: t.lang.title,
                     value: title
                 },
-                text: {
-                    label: t.lang.text,
-                    value: t.getRangeText()
-                },
                 target: {
                     label: t.lang.target,
                     value: target
                 }
-            }, function (v) { // v is value
-                var link = $(['<a href="', v.url, '">', v.text, '</a>'].join(''));
+            };
+
+            if (collapsed) {
+                modalConfig.text = {
+                    label: t.lang.text,
+                    value: ''
+                };
+            }
+
+            t.openModalInsert(t.lang.createLink, modalConfig, function (v) { // v is value
+                var link = $('<a/>').attr('href', v.url);
                 if (v.title.length > 0) {
                     link.attr('title', v.title);
                 }
                 if (v.target.length > 0) {
                     link.attr('target', v.target);
                 }
-                t.range.deleteContents();
-                t.range.insertNode(link[0]);
+
+                if (collapsed) {
+                    link.html(v.text);
+                    t.range.deleteContents();
+                    t.range.insertNode(link[0]);
+                } else {
+                    t.range.surroundContents(link[0]);
+                }
                 return true;
             });
         },
