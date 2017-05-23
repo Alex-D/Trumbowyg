@@ -183,6 +183,7 @@ jQuery.trumbowyg = {
                 type: 'GET',
                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                 dataType: 'xml',
+                crossDomain : true,
                 url: svgPathOption,
                 data: null,
                 beforeSend: null,
