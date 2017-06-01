@@ -1236,6 +1236,13 @@ jQuery.trumbowyg = {
                         param = '<' + param + '>';
                     }
 
+                    // Workaround document.execCommand doesn't recognize <del> tag.
+                    if (t.o.semantic && cmd === 'strikethrough') {
+                        t.saveRange();
+                        t.semanticTag('del', 'strike');
+                        t.restoreRange();
+                    }
+
                     t.doc.execCommand(cmd, false, param);
 
                     t.syncCode();
