@@ -1039,8 +1039,6 @@ jQuery.trumbowyg = {
             t.saveRange();
             t.syncCode(force);
 
-            $(t.o.tagsToRemove.join(','), t.$ed).remove();
-
             if (t.o.semantic) {
                 t.semanticTag('b', 'strong');
                 t.semanticTag('i', 'em');
