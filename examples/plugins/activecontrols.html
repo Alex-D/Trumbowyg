@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Colors plugin | Trumbowyg by Alex-D</title>
+        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="../../dist/ui/trumbowyg.css">
+        <link rel="stylesheet" href="../../dist/plugins/activecontrols/ui/trumbowyg.activecontrols.css">
+    </head>
+    <body>
+        <div id="main" role="main">
+            <header>
+                <h1>Activecontrols plugin for Trumbowyg</h1>
+
+                <p>
+                    This plugin highlights buttons based on cursor position in textarea.
+                </p>
+            </header>
+
+            <div id="editor">
+                <h2>This is heading</h2>
+                <p>
+                    <strong>This is bold</strong> and this is <em>italics</em>
+                </p>
+                <p>
+                    And what about <a href="#">link and <strong>bold together with <em>italics</em></strong></a>
+                </p>
+            </div>
+
+            <h2>The code</h2>
+            <code><pre>
+$('#editor')
+.trumbowyg();
+            </pre></code>
+        </div>
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="../../dist/trumbowyg.js"></script>
+        <script src="../../dist/plugins/activecontrols/trumbowyg.activecontrols.js"></script>
+        <script>
+            $('#editor')
+            .trumbowyg();
+        </script>
+    </body>
+</html>

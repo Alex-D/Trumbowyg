@@ -656,6 +656,16 @@ jQuery.trumbowyg = {
                     return false;
                 }
             });
+
+            // add on hook
+            if (t.o.on !== undefined) {
+                $.each(t.o.on, function(i, ev) {
+                    t.$ed.on(
+                        ev.events,
+                        function(e) {ev.handler(e, t);}
+                    );
+                });
+            }
         },
 
 
