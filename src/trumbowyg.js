@@ -1014,7 +1014,11 @@ jQuery.trumbowyg = {
             if (!force && t.$ed.is(':visible')) {
                 t.syncTextarea();
             } else {
-                t.$ed.html(t.$ta.val());
+                // wrap the content in a div it's easier to get the innerhtml
+                var html = '<div>' + t.$ta.val() + '</div>';
+                //scrub the html before loading into the doc
+                html = $(t.o.tagsToRemove.join(','), html).remove().end().html();
+                t.$ed.html(html);
             }
 
             if (t.o.autogrow) {
@@ -1034,8 +1038,6 @@ jQuery.trumbowyg = {
             var t = this;
             t.saveRange();
             t.syncCode(force);
-
-            $(t.o.tagsToRemove.join(','), t.$ed).remove();
 
             if (t.o.semantic) {
                 t.semanticTag('b', 'strong');
