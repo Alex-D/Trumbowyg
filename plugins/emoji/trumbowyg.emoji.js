@@ -903,13 +903,16 @@
             },
             zh_cn: {
                 emoji: '添加表情'
+            },
+            ja: {
+                emoji: '絵文字の挿入'
             }
         },
         // jshint camelcase:true
         plugins: {
             emoji: {
                 init: function (trumbowyg) {
-                    trumbowyg.o.plugins.emoji = $.extend(true, {}, defaultOptions, trumbowyg.o.plugins.emoji || {});
+                    trumbowyg.o.plugins.emoji = trumbowyg.o.plugins.emoji || defaultOptions;
                     var emojiBtnDef = {
                         dropdown: buildDropdown(trumbowyg)
                     };
@@ -923,16 +926,32 @@
         var dropdown = [];
 
         $.each(trumbowyg.o.plugins.emoji.emojiList, function (i, emoji) {
-            var btn = emoji,
-                btnDef = {
-                    param: emoji,
-                    fn: function () {
-                        trumbowyg.execCmd('insertText', emoji);
-                        return true;
-                    }
-                };
-            trumbowyg.addBtnDef(btn, btnDef);
-            dropdown.push(btn);
+            if ($.isArray(emoji)) { // Custom emoji behaviour
+                var emojiCode = emoji[0],
+                    emojiUrl = emoji[1],
+                    emojiHtml = '<img src="' + emojiUrl + '" alt="' + emojiCode + '">',
+                    btnDef = {
+                        hasIcon: false,
+                        param: emojiHtml,
+                        fn: function () {
+                            trumbowyg.execCmd('insertImage', emojiUrl, false, true);
+                            return true;
+                        }
+                    };
+                trumbowyg.addBtnDef(emojiHtml, btnDef);
+                dropdown.push(emojiHtml);
+            } else { // Default behaviour
+                var btn = emoji,
+                    btnDef = {
+                        param: emoji,
+                        fn: function () {
+                            trumbowyg.execCmd('insertText', emoji);
+                            return true;
+                        }
+                    };
+                trumbowyg.addBtnDef(btn, btnDef);
+                dropdown.push(btn);
+            }
         });
 
         return dropdown;

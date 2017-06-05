@@ -32,6 +32,10 @@
             },
             cs: {
                 noembedError: 'Chyba'
+            },
+            ja: {
+                noembed: 'noEmbed',
+                noembedError: 'エラー'
             }
         },
 
