@@ -7,6 +7,7 @@ jQuery.trumbowyg = {
             redo: 'Redo',
 
             formatting: 'Formatting',
+            div: 'Normal',
             p: 'Paragraph',
             blockquote: 'Quote',
             code: 'Code',
@@ -225,6 +226,9 @@ jQuery.trumbowyg = {
                 key: 'Y'
             },
 
+            div: {
+                fn: 'formatBlock'
+            },
             p: {
                 fn: 'formatBlock'
             },
@@ -331,7 +335,7 @@ jQuery.trumbowyg = {
 
             // Dropdowns
             formatting: {
-                dropdown: ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4'],
+                dropdown: ['div', 'p', 'blockquote', 'h1', 'h2', 'h3', 'h4'],
                 ico: 'p'
             },
             link: {
