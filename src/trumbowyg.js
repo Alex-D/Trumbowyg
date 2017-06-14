@@ -1015,10 +1015,11 @@ jQuery.trumbowyg = {
                 t.syncTextarea();
             } else {
                 // wrap the content in a div it's easier to get the innerhtml
-                var html = '<div>' + t.$ta.val() + '</div>';
+                var html = $('<div>').html(t.$ta.val());
                 //scrub the html before loading into the doc
-                html = $(t.o.tagsToRemove.join(','), html).remove().end().html();
-                t.$ed.html(html);
+                var safe = $('<div>').append(html);
+                $(t.o.tagsToRemove.join(','), safe).remove();
+                t.$ed.html(safe.html());
             }
 
             if (t.o.autogrow) {
