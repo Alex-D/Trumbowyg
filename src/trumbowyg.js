@@ -1014,10 +1014,14 @@ jQuery.trumbowyg = {
             if (!force && t.$ed.is(':visible')) {
                 t.syncTextarea();
             } else {
-                // wrap the content in a div it's easier to get the innerhtml
-                var html = '<div>' + t.$ta.val() + '</div>';
-                //scrub the html before loading into the doc
-                html = $(t.o.tagsToRemove.join(','), html).remove().end().html();
+                if (t.o.tagsToRemove.length > 0 ) {
+                    // wrap the content in a div it's easier to get the innerhtml
+                    var html = '<div>' + t.$ta.val() + '</div>';
+                    //scrub the html before loading into the doc
+                    html = $(t.o.tagsToRemove.join(','), html).remove().end().html();
+                } else {
+                    html = t.$ta.val();
+                }
                 t.$ed.html(html);
             }
 
