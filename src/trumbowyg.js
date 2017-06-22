@@ -346,6 +346,7 @@ jQuery.trumbowyg = {
             fixedBtnPane: false,
             fixedFullWidth: false,
             autogrow: false,
+			autogrowOnEnter: false,
 
             prefix: 'trumbowyg-',
 
@@ -607,6 +608,22 @@ jQuery.trumbowyg = {
                     t.$c.trigger('tbw' + e.type);
                     if (e.type === 'blur') {
                         $('.' + prefix + 'active-button', t.$btnPane).removeClass(prefix + 'active-button ' + prefix + 'active');
+                    }
+                    if (t.o.autogrowOnEnter) {
+                        if (e.type === 'focus') {
+                            var totalheight = t.$ed[0].scrollHeight;
+                            if (totalheight !== t.$ta.css('height')) {
+                                t.$ta.css({ height: totalheight });
+                                t.$ed.css({ height: totalheight });
+                                t.$c.trigger('tbwresize');
+                            }
+                        } else {
+                            if (!t.o.autogrow) {
+                                t.$ed.css({ height: 0 });
+                                t.$ta.css({ height: 0 });
+                                t.$c.trigger('tbwresize');
+                            }
+                        }
                     }
                 })
                 .on('cut', function () {
@@ -1029,6 +1046,14 @@ jQuery.trumbowyg = {
                 t.height = t.$ed.height();
                 if (t.height !== t.$ta.css('height')) {
                     t.$ta.css({height: t.height});
+                    t.$c.trigger('tbwresize');
+                }
+            }
+            if (t.o.autogrowOnEnter) {
+                var totalheight = t.$ed[0].scrollHeight;
+                if (totalheight !== t.$ta.css('height')) {
+                    t.$ta.css({ height: totalheight });
+                    t.$ed.css({ height: totalheight });
                     t.$c.trigger('tbwresize');
                 }
             }
