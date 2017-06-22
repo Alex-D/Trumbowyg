@@ -611,16 +611,18 @@ jQuery.trumbowyg = {
                     }
                     if (t.o.autogrowOnEnter) {
                         if (e.type === 'focus') {
+                            t.autogrowOnEnter_hasHadFocus = true;
+                            t.$ed.height('auto');
                             var totalheight = t.$ed[0].scrollHeight;
                             if (totalheight !== t.$ta.css('height')) {
-                                t.$ta.css({ height: totalheight });
-                                t.$ed.css({ height: totalheight });
+                                t.$ta.animate({ height: totalheight }, 'fast');
+                                t.$ed.animate({ height: totalheight }, 'fast');
                                 t.$c.trigger('tbwresize');
                             }
                         } else {
                             if (!t.o.autogrow) {
-                                t.$ed.css({ height: 0 });
-                                t.$ta.css({ height: 0 });
+                                t.$ta.animate({ height: 0 }, 'fast');
+                                t.$ed.animate({ height: 0 }, 'fast');
                                 t.$c.trigger('tbwresize');
                             }
                         }
@@ -1050,7 +1052,8 @@ jQuery.trumbowyg = {
                 }
             }
             if (t.o.autogrowOnEnter) {
-                var totalheight = t.$ed[0].scrollHeight;
+                t.$ed.height('auto');
+                var totalheight = t.autogrowOnEnter_hasHadFocus ? t.$ed[0].scrollHeight : 0;
                 if (totalheight !== t.$ta.css('height')) {
                     t.$ta.css({ height: totalheight });
                     t.$ed.css({ height: totalheight });
