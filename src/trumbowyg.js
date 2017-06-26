@@ -183,7 +183,7 @@ jQuery.trumbowyg = {
                 type: 'GET',
                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                 dataType: 'xml',
-                crossDomain : true,
+                crossDomain: true,
                 url: svgPathOption,
                 data: null,
                 beforeSend: null,
@@ -346,7 +346,7 @@ jQuery.trumbowyg = {
             fixedBtnPane: false,
             fixedFullWidth: false,
             autogrow: false,
-			autogrowOnEnter: false,
+            autogrowOnEnter: false,
 
             prefix: 'trumbowyg-',
 
@@ -518,7 +518,7 @@ jQuery.trumbowyg = {
             t.$ta
                 .addClass(prefix + 'textarea')
                 .attr('tabindex', -1)
-            ;
+                ;
 
             t.$ed
                 .addClass(prefix + 'editor')
@@ -527,7 +527,7 @@ jQuery.trumbowyg = {
                     dir: t.lang._dir || 'ltr'
                 })
                 .html(html)
-            ;
+                ;
 
             if (t.o.tabindex) {
                 t.$ed.attr('tabindex', t.o.tabindex);
@@ -546,9 +546,12 @@ jQuery.trumbowyg = {
                     height: t.height
                 });
             }
-
+            
             t.semanticCode();
 
+            if (t.o.autogrowOnEnter) {
+                t.$ta.add(t.$ed).addClass('autogrow-on-enter');
+            }
 
             var ctrl = false,
                 composition = false,
@@ -573,9 +576,9 @@ jQuery.trumbowyg = {
                     composition = true;
                 })
                 .on(updateEventName + ' compositionend', function (e) {
-                  if (e.type === 'compositionend') {
+                    if (e.type === 'compositionend') {
                         composition = false;
-                    } else if(composition) {
+                    } else if (composition) {
                         return;
                     }
 
@@ -610,21 +613,23 @@ jQuery.trumbowyg = {
                         $('.' + prefix + 'active-button', t.$btnPane).removeClass(prefix + 'active-button ' + prefix + 'active');
                     }
                     if (t.o.autogrowOnEnter) {
+                        var $taed = t.$ed.add(t.$ta);
+                        var minHeight = t.$ed.css('min-height');
                         if (e.type === 'focus') {
-                            t.autogrowOnEnter_hasHadFocus = true;
-                            t.$ed.height('auto');
-                            var totalheight = t.$ed[0].scrollHeight;
-                            if (totalheight !== t.$ta.css('height')) {
-                                t.$ta.animate({ height: totalheight }, 'fast');
-                                t.$ed.animate({ height: totalheight }, 'fast');
+                            t.autogrowOnEnterWasFocused = true;
+                            t.autogrowOnEnterIsFocused = true;
+                            //need to autosize it to get correct size of children
+                            $taed.height('auto');
+                            var totalHeight = t.$ed[0].scrollHeight;
+                            $taed.height(minHeight);
+                            setTimeout(function () {
+                                $taed.css({ height: totalHeight });
                                 t.$c.trigger('tbwresize');
-                            }
-                        } else {
-                            if (!t.o.autogrow) {
-                                t.$ta.animate({ height: 0 }, 'fast');
-                                t.$ed.animate({ height: 0 }, 'fast');
-                                t.$c.trigger('tbwresize');
-                            }
+                            }, 0)
+                        } else if (!t.o.autogrow) {
+                            t.autogrowOnEnterIsFocused = false;
+                            $taed.css({ height: minHeight });
+                            t.$c.trigger('tbwresize');
                         }
                     }
                 })
@@ -666,7 +671,7 @@ jQuery.trumbowyg = {
                     }, 0);
                 });
             t.$ta.on('keyup paste', function () {
-              t.$c.trigger('tbwchange');
+                t.$c.trigger('tbwchange');
             });
 
             t.$box.on('keydown', function (e) {
@@ -736,8 +741,8 @@ jQuery.trumbowyg = {
                     type: 'button',
                     class: prefix + btnName + '-button ' + (btn.class || '') + (!hasIcon ? ' ' + prefix + 'textual-button' : ''),
                     html: t.hasSvg && hasIcon ?
-                      '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' :
-                      t.hideButtonTexts ? '' : (btn.text || btn.title || t.lang[btnName] || btnName),
+                        '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' :
+                        t.hideButtonTexts ? '' : (btn.text || btn.title || t.lang[btnName] || btnName),
                     title: (btn.title || btn.text || textDef) + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
                     tabindex: -1,
                     mousedown: function () {
@@ -858,7 +863,7 @@ jQuery.trumbowyg = {
             t.isFixed = false;
 
             $(window)
-                .on('scroll.'+t.eventNamespace+' resize.'+t.eventNamespace, function () {
+                .on('scroll.' + t.eventNamespace + ' resize.' + t.eventNamespace, function () {
                     if (!$box) {
                         return;
                     }
@@ -879,7 +884,7 @@ jQuery.trumbowyg = {
                                 left: fixedFullWidth ? '0' : 'auto',
                                 zIndex: 7
                             });
-                            $([t.$ta, t.$ed]).css({marginTop: bp.height()});
+                            $([t.$ta, t.$ed]).css({ marginTop: bp.height() });
                         }
                         bp.css({
                             width: fixedFullWidth ? '100%' : (($box.width() - 1) + 'px')
@@ -893,7 +898,7 @@ jQuery.trumbowyg = {
                     } else if (t.isFixed) {
                         t.isFixed = false;
                         bp.removeAttr('style');
-                        $([t.$ta, t.$ed]).css({marginTop: 0});
+                        $([t.$ta, t.$ed]).css({ marginTop: 0 });
                         $('.' + t.o.prefix + 'fixed-top', $box).css({
                             position: 'absolute',
                             top: oh
@@ -927,7 +932,7 @@ jQuery.trumbowyg = {
             if (t.isTextarea) {
                 t.$box.after(
                     t.$ta
-                        .css({height: height})
+                        .css({ height: height })
                         .val(t.html())
                         .removeClass(prefix + 'textarea')
                         .show()
@@ -935,7 +940,7 @@ jQuery.trumbowyg = {
             } else {
                 t.$box.after(
                     t.$ed
-                        .css({height: height})
+                        .css({ height: height })
                         .removeClass(prefix + 'editor')
                         .removeAttr('contenteditable')
                         .html(t.html())
@@ -951,7 +956,7 @@ jQuery.trumbowyg = {
             t.$c.removeData('trumbowyg');
             $('body').removeClass(prefix + 'body-fullscreen');
             t.$c.trigger('tbwclose');
-            $(window).off('scroll.'+t.eventNamespace+' resize.'+t.eventNamespace);
+            $(window).off('scroll.' + t.eventNamespace + ' resize.' + t.eventNamespace);
         },
 
 
@@ -1003,11 +1008,11 @@ jQuery.trumbowyg = {
 
                 $(window).trigger('scroll');
 
-                $('body', d).on('mousedown.'+t.eventNamespace, function (e) {
+                $('body', d).on('mousedown.' + t.eventNamespace, function (e) {
                     if (!$dropdown.is(e.target)) {
                         $('.' + prefix + 'dropdown', d).hide();
                         $('.' + prefix + 'active', d).removeClass(prefix + 'active');
-                        $('body', d).off('mousedown.'+t.eventNamespace);
+                        $('body', d).off('mousedown.' + t.eventNamespace);
                     }
                 });
             }
@@ -1033,7 +1038,7 @@ jQuery.trumbowyg = {
             if (!force && t.$ed.is(':visible')) {
                 t.syncTextarea();
             } else {
-                if (t.o.tagsToRemove.length > 0 ) {
+                if (t.o.tagsToRemove.length > 0) {
                     // wrap the content in a div it's easier to get the innerhtml
                     var html = '<div>' + t.$ta.val() + '</div>';
                     //scrub the html before loading into the doc
@@ -1047,16 +1052,15 @@ jQuery.trumbowyg = {
             if (t.o.autogrow) {
                 t.height = t.$ed.height();
                 if (t.height !== t.$ta.css('height')) {
-                    t.$ta.css({height: t.height});
+                    t.$ta.css({ height: t.height });
                     t.$c.trigger('tbwresize');
                 }
             }
             if (t.o.autogrowOnEnter) {
                 t.$ed.height('auto');
-                var totalheight = t.autogrowOnEnter_hasHadFocus ? t.$ed[0].scrollHeight : 0;
+                var totalheight = t.autogrowOnEnterWasFocused ? t.$ed[0].scrollHeight : t.$ed.css('min-height');
                 if (totalheight !== t.$ta.css('height')) {
-                    t.$ta.css({ height: totalheight });
-                    t.$ed.css({ height: totalheight });
+                    t.$ta.add(t.$ed).css({ height: totalheight });
                     t.$c.trigger('tbwresize');
                 }
             }
@@ -1475,10 +1479,10 @@ jQuery.trumbowyg = {
                 .addClass(prefix + 'input-error')
                 .find('input+span')
                 .append(
-                    $('<span/>', {
-                        class: prefix + 'msg-error',
-                        text: err
-                    })
+                $('<span/>', {
+                    class: prefix + 'msg-error',
+                    text: err
+                })
                 );
         },
 
