@@ -550,7 +550,7 @@ jQuery.trumbowyg = {
             t.semanticCode();
 
             if (t.o.autogrowOnEnter) {
-                t.$ta.add(t.$ed).addClass('autogrow-on-enter');
+                t.$ed.addClass('autogrow-on-enter');
             }
 
             var ctrl = false,
@@ -613,23 +613,16 @@ jQuery.trumbowyg = {
                         $('.' + prefix + 'active-button', t.$btnPane).removeClass(prefix + 'active-button ' + prefix + 'active');
                     }
                     if (t.o.autogrowOnEnter) {
-                        var $taed = t.$ed.add(t.$ta);
-                        var minHeight = t.$ed.css('min-height');
+                        if (t.autogrowOnEnterDontClose) {
+                            return;
+                        }
                         if (e.type === 'focus') {
                             t.autogrowOnEnterWasFocused = true;
-                            t.autogrowOnEnterIsFocused = true;
-                            //need to autosize it to get correct size of children
-                            $taed.height('auto');
-                            var totalHeight = t.$ed[0].scrollHeight;
-                            $taed.height(minHeight);
-                            setTimeout(function () {
-                                $taed.css({ height: totalHeight });
-                                t.$c.trigger('tbwresize');
-                            }, 0)
-                        } else if (!t.o.autogrow) {
-                            t.autogrowOnEnterIsFocused = false;
-                            $taed.css({ height: minHeight });
-                            t.$c.trigger('tbwresize');
+                            t.autogrowEditorOnEnter();
+                        }
+                        else if (!t.o.autogrow) {
+                            t.$ed.css({ height: t.$ed.css('min-height') });
+                            t.$c.trigger('tbwresize');                          
                         }
                     }
                 })
@@ -680,6 +673,23 @@ jQuery.trumbowyg = {
                     return false;
                 }
             });
+        },
+
+        //autogrow when entering logic
+        autogrowEditorOnEnter: function(){
+            var t = this;
+            t.$ed.removeClass('autogrow-on-enter');
+            var oldHeight = t.$ed[0].clientHeight;
+            t.$ed.height('auto');
+            var totalHeight = t.$ed[0].scrollHeight;
+            t.$ed.addClass('autogrow-on-enter');
+            if (oldHeight !== totalHeight) {
+                t.$ed.height(oldHeight);
+                setTimeout(function () {
+                    t.$ed.css({ height: totalHeight });
+                    t.$c.trigger('tbwresize');
+                }, 0)
+            }        
         },
 
 
@@ -971,7 +981,13 @@ jQuery.trumbowyg = {
         toggle: function () {
             var t = this,
                 prefix = t.o.prefix;
+
+            if (t.o.autogrowOnEnter) {
+                t.autogrowOnEnterDontClose = !t.$box.hasClass(prefix + 'editor-hidden');
+            }
+
             t.semanticCode(false, true);
+
             setTimeout(function () {
                 t.doc.activeElement.blur();
                 t.$box.toggleClass(prefix + 'editor-hidden ' + prefix + 'editor-visible');
@@ -981,6 +997,10 @@ jQuery.trumbowyg = {
                     t.$ta.attr('tabindex', -1);
                 } else {
                     t.$ta.removeAttr('tabindex');
+                }
+
+                if (t.o.autogrowOnEnter && !t.autogrowOnEnterDontClose) {
+                    t.autogrowEditorOnEnter();
                 }
             }, 0);
         },
@@ -1057,10 +1077,11 @@ jQuery.trumbowyg = {
                 }
             }
             if (t.o.autogrowOnEnter) {
+                // t.autogrowEditorOnEnter();
                 t.$ed.height('auto');
                 var totalheight = t.autogrowOnEnterWasFocused ? t.$ed[0].scrollHeight : t.$ed.css('min-height');
                 if (totalheight !== t.$ta.css('height')) {
-                    t.$ta.add(t.$ed).css({ height: totalheight });
+                    t.$ed.css({ height: totalheight });
                     t.$c.trigger('tbwresize');
                 }
             }
@@ -1299,9 +1320,14 @@ jQuery.trumbowyg = {
             if ($('.' + prefix + 'modal-box', t.$box).length > 0) {
                 return false;
             }
+            if (t.o.autogrowOnEnter) {
+                t.autogrowOnEnterDontClose = true;
+            }
 
             t.saveRange();
             t.showOverlay();
+            //need to reset due to autogrowing
+            t.$overlay.css({height: (t.$ed.outerHeight() + 1) + 'px'})
 
             // Disable all btnPane btns
             t.$btnPane.addClass(prefix + 'disable');
@@ -1331,6 +1357,11 @@ jQuery.trumbowyg = {
                 .on('reset', function () {
                     $modal.trigger('tbwcancel');
                     return false;
+                })
+                .on('submit reset', function () {
+                    if (t.o.autogrowOnEnter) {
+                        t.autogrowOnEnterDontClose = false;
+                    }
                 });
 
 
