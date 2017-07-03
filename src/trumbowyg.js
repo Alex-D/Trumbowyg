@@ -870,7 +870,7 @@ jQuery.trumbowyg = {
                 }
 
                 if (child.nodeType === Node.ELEMENT_NODE && child.children.length > 0) {
-                    forbiddenNodes = forbiddenNodes.concat(getForbiddenElements(child));
+                    forbiddenNodes = forbiddenNodes.concat(t.getForbiddenElements(child));
                 }
             }
 
