@@ -130,7 +130,9 @@
                                     });
                                     
                                     $.map(values, function(curr, key){
-                                        if(key !== 'file') data.append(key, curr);
+                                        if(key !== 'file') { 
+                                            data.append(key, curr);
+                                        }
                                     });
 
                                     if ($('.' + prefix + 'progress', $modal).length === 0) {
