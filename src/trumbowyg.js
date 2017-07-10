@@ -518,7 +518,7 @@ jQuery.trumbowyg = {
             t.$ta
                 .addClass(prefix + 'textarea')
                 .attr('tabindex', -1)
-                ;
+            ;
 
             t.$ed
                 .addClass(prefix + 'editor')
@@ -527,7 +527,7 @@ jQuery.trumbowyg = {
                     dir: t.lang._dir || 'ltr'
                 })
                 .html(html)
-                ;
+            ;
 
             if (t.o.tabindex) {
                 t.$ed.attr('tabindex', t.o.tabindex);
@@ -546,7 +546,7 @@ jQuery.trumbowyg = {
                     height: t.height
                 });
             }
-            
+
             t.semanticCode();
 
             if (t.o.autogrowOnEnter) {
@@ -621,8 +621,8 @@ jQuery.trumbowyg = {
                             t.autogrowEditorOnEnter();
                         }
                         else if (!t.o.autogrow) {
-                            t.$ed.css({ height: t.$ed.css('min-height') });
-                            t.$c.trigger('tbwresize');                          
+                            t.$ed.css({height: t.$ed.css('min-height')});
+                            t.$c.trigger('tbwresize');
                         }
                     }
                 })
@@ -664,9 +664,16 @@ jQuery.trumbowyg = {
                         t.$c.trigger('tbwpaste', e);
                     }, 0);
                 });
-            t.$ta.on('keyup paste', function () {
-                t.$c.trigger('tbwchange');
-            });
+
+            t.$ta
+                .on('keyup', function () {
+                    t.$c.trigger('tbwchange');
+                })
+                .on('paste', function () {
+                    setTimeout(function () {
+                        t.$c.trigger('tbwchange');
+                    }, 0);
+                });
 
             t.$box.on('keydown', function (e) {
                 if (e.which === 27 && $('.' + prefix + 'modal-box', t.$box).length === 1) {
@@ -677,7 +684,7 @@ jQuery.trumbowyg = {
         },
 
         //autogrow when entering logic
-        autogrowEditorOnEnter: function(){
+        autogrowEditorOnEnter: function () {
             var t = this;
             t.$ed.removeClass('autogrow-on-enter');
             var oldHeight = t.$ed[0].clientHeight;
@@ -687,10 +694,10 @@ jQuery.trumbowyg = {
             if (oldHeight !== totalHeight) {
                 t.$ed.height(oldHeight);
                 setTimeout(function () {
-                    t.$ed.css({ height: totalHeight });
+                    t.$ed.css({height: totalHeight});
                     t.$c.trigger('tbwresize');
                 }, 0);
-            }        
+            }
         },
 
 
@@ -895,7 +902,7 @@ jQuery.trumbowyg = {
                                 left: fixedFullWidth ? '0' : 'auto',
                                 zIndex: 7
                             });
-                            $([t.$ta, t.$ed]).css({ marginTop: bp.height() });
+                            $([t.$ta, t.$ed]).css({marginTop: bp.height()});
                         }
                         bp.css({
                             width: fixedFullWidth ? '100%' : (($box.width() - 1) + 'px')
@@ -909,7 +916,7 @@ jQuery.trumbowyg = {
                     } else if (t.isFixed) {
                         t.isFixed = false;
                         bp.removeAttr('style');
-                        $([t.$ta, t.$ed]).css({ marginTop: 0 });
+                        $([t.$ta, t.$ed]).css({marginTop: 0});
                         $('.' + t.o.prefix + 'fixed-top', $box).css({
                             position: 'absolute',
                             top: oh
@@ -943,7 +950,7 @@ jQuery.trumbowyg = {
             if (t.isTextarea) {
                 t.$box.after(
                     t.$ta
-                        .css({ height: height })
+                        .css({height: height})
                         .val(t.html())
                         .removeClass(prefix + 'textarea')
                         .show()
@@ -951,7 +958,7 @@ jQuery.trumbowyg = {
             } else {
                 t.$box.after(
                     t.$ed
-                        .css({ height: height })
+                        .css({height: height})
                         .removeClass(prefix + 'editor')
                         .removeAttr('contenteditable')
                         .html(t.html())
@@ -1070,7 +1077,7 @@ jQuery.trumbowyg = {
             if (t.o.autogrow) {
                 t.height = t.$ed.height();
                 if (t.height !== t.$ta.css('height')) {
-                    t.$ta.css({ height: t.height });
+                    t.$ta.css({height: t.height});
                     t.$c.trigger('tbwresize');
                 }
             }
@@ -1079,7 +1086,7 @@ jQuery.trumbowyg = {
                 t.$ed.height('auto');
                 var totalheight = t.autogrowOnEnterWasFocused ? t.$ed[0].scrollHeight : t.$ed.css('min-height');
                 if (totalheight !== t.$ta.css('height')) {
-                    t.$ed.css({ height: totalheight });
+                    t.$ed.css({height: totalheight});
                     t.$c.trigger('tbwresize');
                 }
             }
@@ -1508,10 +1515,10 @@ jQuery.trumbowyg = {
                 .addClass(prefix + 'input-error')
                 .find('input+span')
                 .append(
-                $('<span/>', {
-                    class: prefix + 'msg-error',
-                    text: err
-                })
+                    $('<span/>', {
+                        class: prefix + 'msg-error',
+                        text: err
+                    })
                 );
         },
 
