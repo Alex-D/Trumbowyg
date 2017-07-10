@@ -646,9 +646,15 @@ jQuery.trumbowyg = {
                         t.$c.trigger('tbwpaste', e);
                     }, 0);
                 });
-            t.$ta.on('keyup paste', function () {
-              t.$c.trigger('tbwchange');
-            });
+            t.$ta
+                .on('keyup', function () {
+                  t.$c.trigger('tbwchange');
+                })
+                .on('paste', function () {
+                    setTimeout(function () {
+                      t.$c.trigger('tbwchange');
+                    }, 0);
+                });
 
             t.$box.on('keydown', function (e) {
                 if (e.which === 27 && $('.' + prefix + 'modal-box', t.$box).length === 1) {
