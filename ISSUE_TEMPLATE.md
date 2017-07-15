@@ -1,10 +1,8 @@
-Before report an issue, be sure to put these informations. Thanks :)
-
 ### Informations
 
-**Browser + version**:
+**Browser version**:
 **OS**:
-**Resolution**:
+**Screen resolution**:
 
 
 ### How to reproduce the bug?
