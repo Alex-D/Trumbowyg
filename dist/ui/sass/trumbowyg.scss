@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.6.0 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.7.0 - A lightweight WYSIWYG editor
  * Default stylesheet for Trumbowyg editor
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -16,6 +16,7 @@ $modal-submit-color: #2ecc71 !default;
 $modal-reset-color: #EEE !default;
 
 $transition-duration: 150ms !default;
+$slow-transition-duration: 300ms !default;
 
 #trumbowyg-icons {
     overflow: hidden;
@@ -73,6 +74,9 @@ $transition-duration: 150ms !default;
     resize: none;
     outline: none;
     overflow: auto;
+    &.autogrow-on-enter {
+        transition: height $slow-transition-duration ease-out;
+    }
 }
 
 .trumbowyg-box-blur .trumbowyg-editor {

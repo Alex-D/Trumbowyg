@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.6.0 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.7.0 - A lightweight WYSIWYG editor
  * Default stylesheet for Trumbowyg editor
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -55,6 +55,10 @@
   resize: none;
   outline: none;
   overflow: auto; }
+  .trumbowyg-editor.autogrow-on-enter,
+  .trumbowyg-textarea.autogrow-on-enter {
+    -webkit-transition: height 300ms ease-out;
+            transition: height 300ms ease-out; }
 
 .trumbowyg-box-blur .trumbowyg-editor *, .trumbowyg-box-blur .trumbowyg-editor::before {
   color: transparent !important;
