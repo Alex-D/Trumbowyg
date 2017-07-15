@@ -8,6 +8,7 @@
  *          Github : https://github.com/alexgotardi
  */
 
+// jshint camelcase:false
 jQuery.trumbowyg.langs.pt_br = {
     viewHTML: 'Ver HTML',
     

@@ -2,7 +2,7 @@
   "name": "trumbowyg",
   "title": "Trumbowyg",
   "description": "A lightweight WYSIWYG editor",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "main": "dist/trumbowyg.js",
   "homepage": "http://alex-d.github.io/Trumbowyg",
   "author": {
@@ -39,7 +39,7 @@
     "vinyl-paths": "2.0.0"
   },
   "scripts": {
-    "build": "npm install && gulp build",
+    "build": "npm install && gulp clean && gulp build",
     "start": "gulp",
     "test": "gulp test"
   }

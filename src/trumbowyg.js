@@ -183,7 +183,7 @@ jQuery.trumbowyg = {
                 type: 'GET',
                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                 dataType: 'xml',
-                crossDomain : true,
+                crossDomain: true,
                 url: svgPathOption,
                 data: null,
                 beforeSend: null,
@@ -346,6 +346,7 @@ jQuery.trumbowyg = {
             fixedBtnPane: false,
             fixedFullWidth: false,
             autogrow: false,
+            autogrowOnEnter: false,
 
             prefix: 'trumbowyg-',
 
@@ -548,6 +549,9 @@ jQuery.trumbowyg = {
 
             t.semanticCode();
 
+            if (t.o.autogrowOnEnter) {
+                t.$ed.addClass('autogrow-on-enter');
+            }
 
             var ctrl = false,
                 composition = false,
@@ -557,7 +561,7 @@ jQuery.trumbowyg = {
             t.$ed
                 .on('dblclick', 'img', t.o.imgDblClickHandler)
                 .on('keydown', function (e) {
-                    if (e.ctrlKey) {
+                    if (e.ctrlKey && !e.altKey) {
                         ctrl = true;
                         var key = t.keys[String.fromCharCode(e.which).toUpperCase()];
 
@@ -572,9 +576,9 @@ jQuery.trumbowyg = {
                     composition = true;
                 })
                 .on(updateEventName + ' compositionend', function (e) {
-                  if (e.type === 'compositionend') {
+                    if (e.type === 'compositionend') {
                         composition = false;
-                    } else if(composition) {
+                    } else if (composition) {
                         return;
                     }
 
@@ -608,6 +612,19 @@ jQuery.trumbowyg = {
                     if (e.type === 'blur') {
                         $('.' + prefix + 'active-button', t.$btnPane).removeClass(prefix + 'active-button ' + prefix + 'active');
                     }
+                    if (t.o.autogrowOnEnter) {
+                        if (t.autogrowOnEnterDontClose) {
+                            return;
+                        }
+                        if (e.type === 'focus') {
+                            t.autogrowOnEnterWasFocused = true;
+                            t.autogrowEditorOnEnter();
+                        }
+                        else if (!t.o.autogrow) {
+                            t.$ed.css({height: t.$ed.css('min-height')});
+                            t.$c.trigger('tbwresize');
+                        }
+                    }
                 })
                 .on('cut', function () {
                     setTimeout(function () {
@@ -630,6 +647,7 @@ jQuery.trumbowyg = {
                                 // IE 11
                                 t.doc.getSelection().getRangeAt(0).insertNode(t.doc.createTextNode(text));
                             }
+                            t.$c.trigger('tbwchange', e);
                         } catch (d) {
                             // Not IE
                             t.execCmd('insertText', (e.originalEvent || e).clipboardData.getData('text/plain'));
@@ -646,9 +664,16 @@ jQuery.trumbowyg = {
                         t.$c.trigger('tbwpaste', e);
                     }, 0);
                 });
-            t.$ta.on('keyup paste', function () {
-              t.$c.trigger('tbwchange');
-            });
+
+            t.$ta
+                .on('keyup', function () {
+                    t.$c.trigger('tbwchange');
+                })
+                .on('paste', function () {
+                    setTimeout(function () {
+                        t.$c.trigger('tbwchange');
+                    }, 0);
+                });
 
             t.$box.on('keydown', function (e) {
                 if (e.which === 27 && $('.' + prefix + 'modal-box', t.$box).length === 1) {
@@ -656,6 +681,23 @@ jQuery.trumbowyg = {
                     return false;
                 }
             });
+        },
+
+        //autogrow when entering logic
+        autogrowEditorOnEnter: function () {
+            var t = this;
+            t.$ed.removeClass('autogrow-on-enter');
+            var oldHeight = t.$ed[0].clientHeight;
+            t.$ed.height('auto');
+            var totalHeight = t.$ed[0].scrollHeight;
+            t.$ed.addClass('autogrow-on-enter');
+            if (oldHeight !== totalHeight) {
+                t.$ed.height(oldHeight);
+                setTimeout(function () {
+                    t.$ed.css({height: totalHeight});
+                    t.$c.trigger('tbwresize');
+                }, 0);
+            }
         },
 
 
@@ -717,8 +759,8 @@ jQuery.trumbowyg = {
                     type: 'button',
                     class: prefix + btnName + '-button ' + (btn.class || '') + (!hasIcon ? ' ' + prefix + 'textual-button' : ''),
                     html: t.hasSvg && hasIcon ?
-                      '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' :
-                      t.hideButtonTexts ? '' : (btn.text || btn.title || t.lang[btnName] || btnName),
+                        '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' :
+                        t.hideButtonTexts ? '' : (btn.text || btn.title || t.lang[btnName] || btnName),
                     title: (btn.title || btn.text || textDef) + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
                     tabindex: -1,
                     mousedown: function () {
@@ -839,7 +881,7 @@ jQuery.trumbowyg = {
             t.isFixed = false;
 
             $(window)
-                .on('scroll.'+t.eventNamespace+' resize.'+t.eventNamespace, function () {
+                .on('scroll.' + t.eventNamespace + ' resize.' + t.eventNamespace, function () {
                     if (!$box) {
                         return;
                     }
@@ -932,7 +974,7 @@ jQuery.trumbowyg = {
             t.$c.removeData('trumbowyg');
             $('body').removeClass(prefix + 'body-fullscreen');
             t.$c.trigger('tbwclose');
-            $(window).off('scroll.'+t.eventNamespace+' resize.'+t.eventNamespace);
+            $(window).off('scroll.' + t.eventNamespace + ' resize.' + t.eventNamespace);
         },
 
 
@@ -947,7 +989,13 @@ jQuery.trumbowyg = {
         toggle: function () {
             var t = this,
                 prefix = t.o.prefix;
+
+            if (t.o.autogrowOnEnter) {
+                t.autogrowOnEnterDontClose = !t.$box.hasClass(prefix + 'editor-hidden');
+            }
+
             t.semanticCode(false, true);
+
             setTimeout(function () {
                 t.doc.activeElement.blur();
                 t.$box.toggleClass(prefix + 'editor-hidden ' + prefix + 'editor-visible');
@@ -957,6 +1005,10 @@ jQuery.trumbowyg = {
                     t.$ta.attr('tabindex', -1);
                 } else {
                     t.$ta.removeAttr('tabindex');
+                }
+
+                if (t.o.autogrowOnEnter && !t.autogrowOnEnterDontClose) {
+                    t.autogrowEditorOnEnter();
                 }
             }, 0);
         },
@@ -984,11 +1036,11 @@ jQuery.trumbowyg = {
 
                 $(window).trigger('scroll');
 
-                $('body', d).on('mousedown.'+t.eventNamespace, function (e) {
+                $('body', d).on('mousedown.' + t.eventNamespace, function (e) {
                     if (!$dropdown.is(e.target)) {
                         $('.' + prefix + 'dropdown', d).hide();
                         $('.' + prefix + 'active', d).removeClass(prefix + 'active');
-                        $('body', d).off('mousedown.'+t.eventNamespace);
+                        $('body', d).off('mousedown.' + t.eventNamespace);
                     }
                 });
             }
@@ -1015,16 +1067,26 @@ jQuery.trumbowyg = {
                 t.syncTextarea();
             } else {
                 // wrap the content in a div it's easier to get the innerhtml
-                var html = '<div>' + t.$ta.val() + '</div>';
+                var html = $('<div>').html(t.$ta.val());
                 //scrub the html before loading into the doc
-                html = $(t.o.tagsToRemove.join(','), html).remove().end().html();
-                t.$ed.html(html);
+                var safe = $('<div>').append(html);
+                $(t.o.tagsToRemove.join(','), safe).remove();
+                t.$ed.html(safe.html());
             }
 
             if (t.o.autogrow) {
                 t.height = t.$ed.height();
                 if (t.height !== t.$ta.css('height')) {
                     t.$ta.css({height: t.height});
+                    t.$c.trigger('tbwresize');
+                }
+            }
+            if (t.o.autogrowOnEnter) {
+                // t.autogrowEditorOnEnter();
+                t.$ed.height('auto');
+                var totalheight = t.autogrowOnEnterWasFocused ? t.$ed[0].scrollHeight : t.$ed.css('min-height');
+                if (totalheight !== t.$ta.css('height')) {
+                    t.$ed.css({height: totalheight});
                     t.$c.trigger('tbwresize');
                 }
             }
@@ -1263,9 +1325,14 @@ jQuery.trumbowyg = {
             if ($('.' + prefix + 'modal-box', t.$box).length > 0) {
                 return false;
             }
+            if (t.o.autogrowOnEnter) {
+                t.autogrowOnEnterDontClose = true;
+            }
 
             t.saveRange();
             t.showOverlay();
+            //need to reset due to autogrowing
+            t.$overlay.css({height: (t.$ed.outerHeight() + 1) + 'px'});
 
             // Disable all btnPane btns
             t.$btnPane.addClass(prefix + 'disable');
@@ -1295,6 +1362,11 @@ jQuery.trumbowyg = {
                 .on('reset', function () {
                     $modal.trigger('tbwcancel');
                     return false;
+                })
+                .on('submit reset', function () {
+                    if (t.o.autogrowOnEnter) {
+                        t.autogrowOnEnterDontClose = false;
+                    }
                 });
 
 

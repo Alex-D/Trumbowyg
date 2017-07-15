@@ -291,6 +291,7 @@ $('#form-content').trumbowyg({
                 tagsToRemove: ['script', 'style'],
 
                 autogrow: true,
+                autogrowOnEnter: true,
 
                 btnsDef: {
                     strong: {
@@ -347,7 +348,9 @@ $('#form-content').trumbowyg({
 
             /** Editor with placeholder **/
             $('#placeholder-editor')
-            .trumbowyg()
+            .trumbowyg({
+              autogrowOnEnter: true,
+            })
             .on('dblclick', function(){
                 $(this).trumbowyg();
             })
