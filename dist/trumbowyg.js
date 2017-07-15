@@ -1,3 +1,14 @@
+/**
+ * Trumbowyg v2.6.0 - A lightweight WYSIWYG editor
+ * Trumbowyg core file
+ * ------------------------
+ * @link http://alex-d.github.io/Trumbowyg
+ * @license MIT
+ * @author Alexandre Demode (Alex-D)
+ *         Twitter : @AlexandreDemode
+ *         Website : alex-d.fr
+ */
+
 jQuery.trumbowyg = {
     langs: {
         en: {
@@ -646,15 +657,9 @@ jQuery.trumbowyg = {
                         t.$c.trigger('tbwpaste', e);
                     }, 0);
                 });
-            t.$ta
-                .on('keyup', function () {
-                  t.$c.trigger('tbwchange');
-                })
-                .on('paste', function () {
-                    setTimeout(function () {
-                      t.$c.trigger('tbwchange');
-                    }, 0);
-                });
+            t.$ta.on('keyup paste', function () {
+              t.$c.trigger('tbwchange');
+            });
 
             t.$box.on('keydown', function (e) {
                 if (e.which === 27 && $('.' + prefix + 'modal-box', t.$box).length === 1) {
@@ -1021,11 +1026,10 @@ jQuery.trumbowyg = {
                 t.syncTextarea();
             } else {
                 // wrap the content in a div it's easier to get the innerhtml
-                var html = $('<div>').html(t.$ta.val());
+                var html = '<div>' + t.$ta.val() + '</div>';
                 //scrub the html before loading into the doc
-                var safe = $('<div>').append(html);
-                $(t.o.tagsToRemove.join(','), safe).remove();
-                t.$ed.html(safe.html());
+                html = $(t.o.tagsToRemove.join(','), html).remove().end().html();
+                t.$ed.html(html);
             }
 
             if (t.o.autogrow) {
