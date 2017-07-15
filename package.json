@@ -39,7 +39,7 @@
     "vinyl-paths": "2.0.0"
   },
   "scripts": {
-    "build": "npm install && gulp build",
+    "build": "npm install && gulp clean && gulp build",
     "start": "gulp",
     "test": "gulp test"
   }

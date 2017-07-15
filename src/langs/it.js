@@ -51,9 +51,9 @@ jQuery.trumbowyg.langs.it = {
     description: 'Descrizione',
     title: 'Titolo',
     text: 'Testo',
-    
-    removeformat:"Rimuovi Formattazione",
-    
-    superscript:"Apice",
-    subscript:"Pedice",
+
+    removeformat: 'Rimuovi Formattazione',
+
+    superscript: 'Apice',
+    subscript: 'Pedice',
 };
