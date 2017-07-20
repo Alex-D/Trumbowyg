@@ -561,7 +561,7 @@ jQuery.trumbowyg = {
             t.$ed
                 .on('dblclick', 'img', t.o.imgDblClickHandler)
                 .on('keydown', function (e) {
-                    if (e.ctrlKey && !e.altKey) {
+                    if ((e.ctrlKey || e.metaKey) && !e.altKey) {
                         ctrl = true;
                         var key = t.keys[String.fromCharCode(e.which).toUpperCase()];
 
@@ -588,7 +588,7 @@ jQuery.trumbowyg = {
                         return;
                     }
 
-                    if (e.ctrlKey && (keyCode === 89 || keyCode === 90)) {
+                    if ((e.ctrlKey || e.metaKey) && (keyCode === 89 || keyCode === 90)) {
                         t.$c.trigger('tbwchange');
                     } else if (!ctrl && keyCode !== 17) {
                         t.semanticCode(false, keyCode === 13);
