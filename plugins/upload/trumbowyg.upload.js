@@ -72,6 +72,11 @@
                 file: '文件',
                 uploadError: '错误'
             },
+            zh_tw: {
+                upload: '上傳',
+                file: '文件',
+                uploadError: '錯誤'
+            },            
             ru: {
                 upload: 'Загрузка',
                 file: 'Файл',
