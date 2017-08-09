@@ -537,6 +537,10 @@ jQuery.trumbowyg = {
                 t.$ed.attr('placeholder', t.$c.attr('placeholder'));
             }
 
+            if (t.$c.is('[spellcheck]')) {
+                t.$ed.attr('spellcheck', t.$c.attr('spellcheck'));
+            }
+
             if (t.o.resetCss) {
                 t.$ed.addClass(prefix + 'reset-css');
             }
