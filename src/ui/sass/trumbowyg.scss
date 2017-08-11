@@ -141,9 +141,11 @@ $slow-transition-duration: 300ms !default;
     border-bottom: 1px solid darken($light-color, 7%);
     margin: 0;
     padding: 0 5px;
+    position: relative;
     list-style-type: none;
     line-height: 10px;
     backface-visibility: hidden;
+    z-index: 11;
 
     &::after {
         content: " ";
@@ -456,9 +458,11 @@ $slow-transition-duration: 300ms !default;
 .trumbowyg-overlay {
     position: absolute;
     background-color: rgba(255, 255, 255, 0.5);
+    height: 100%;
     width: 100%;
     left: 0;
     display: none;
+    top: 0;
     z-index: 10;
 }
 
