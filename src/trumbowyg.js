@@ -854,9 +854,6 @@ jQuery.trumbowyg = {
             var t = this;
             t.$overlay = $('<div/>', {
                 class: t.o.prefix + 'overlay'
-            }).css({
-                top: t.$btnPane.outerHeight(),
-                height: (t.$ed.outerHeight() + 1) + 'px'
             }).appendTo(t.$box);
             return t.$overlay;
         },
@@ -1335,8 +1332,6 @@ jQuery.trumbowyg = {
 
             t.saveRange();
             t.showOverlay();
-            //need to reset due to autogrowing
-            t.$overlay.css({height: (t.$ed.outerHeight() + 1) + 'px'});
 
             // Disable all btnPane btns
             t.$btnPane.addClass(prefix + 'disable');
