@@ -202,11 +202,17 @@ $beer-height: 70px;
             }
 
             .beer-icon {
-                position: absolute;
-                display: block;
-                width: calc((100% - 236px) / 2);
-                height: 50px;
-                margin: 0 auto;
+                display: none;
+            }
+
+            @media (min-width: 1700px) {
+                .beer-icon {
+                    position: absolute;
+                    display: block;
+                    width: calc((100% - 236px) / 2);
+                    height: 50px;
+                    margin: 0 auto;
+                }
             }
 
             .beer-label {
@@ -216,16 +222,12 @@ $beer-height: 70px;
                 margin: 0 auto;
             }
 
-            @media (max-width: 1750px) {
-                .beer-label {
-                    font-size: 16px;
-                }
-            }
             @media (max-width: 1290px) {
                 .beer-label {
+                    font-size: 14px;
                     margin: 0;
-                    padding: 0 45px 0 15px;
-                    width: 190px;
+                    padding: 7px 0 0 15px;
+                    width: 200px;
                 }
             }
         }
