@@ -63,7 +63,8 @@ $slow-transition-duration: 300ms !default;
     resize: none;
     outline: none;
     overflow: auto;
-    &.autogrow-on-enter {
+
+    &.trumbowyg-autogrow-on-enter {
         transition: height $slow-transition-duration ease-out;
     }
 }
@@ -74,8 +75,7 @@ $slow-transition-duration: 300ms !default;
         color: transparent !important;
         text-shadow: 0 0 7px #333;
 
-        @media screen and (min-width: 0 \0
-        ) {
+        @media screen and (min-width: 0 \0) {
             color: rgba(200, 200, 200, 0.6) !important;
         }
         @supports (-ms-accelerator:true) {

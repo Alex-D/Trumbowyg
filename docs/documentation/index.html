@@ -64,7 +64,8 @@
                         <li><a href="#semantic">Semantic</a></li>
                         <li><a href="#reset-css">Reset CSS</a></li>
                         <li><a href="#remove-format-pasted">Remove format pasted</a></li>
-                        <li><a href="#auto-adjust-height">Auto grow</a></li>
+                        <li><a href="#auto-grow">Auto grow</a></li>
+                        <li><a href="#auto-grow-on-enter">Auto grow on enter</a></li>
                     </ul>
                 </li>
                 <li>
@@ -515,7 +516,7 @@ $('.trumbowyg').trumbowyg({
 
 
         <div class="feature" data-added="1.0.0">
-            <h3 id="auto-adjust-height">Auto grow</h3>
+            <h3 id="auto-grow">Auto grow</h3>
             <p>
                 The text editing zone can extend itself when writing a long text. To activate this feature, use the
                 autogrow option:
@@ -527,6 +528,24 @@ $('.trumbowyg').trumbowyg({
             </code></pre>
             <p class="note">
                 Autogrow is not active by default (set to <code>false</code>).
+            </p>
+        </div>
+
+
+        <div class="feature" data-added="2.7.0">
+            <h3 id="auto-grow-on-enter">Auto grow on enter</h3>
+            <p class="added-feature">Added in 2.7.0</p>
+            <p>
+                The text editing zone can extend itself when editor get focus and reduce on blur.
+                To activate this feature, use the following option:
+            </p>
+            <pre><code class="javascript">
+$('.trumbowyg').trumbowyg({
+    autogrowOnEnter: true
+});
+            </code></pre>
+            <p class="note">
+                Autogrow on enter is not active by default (set to <code>false</code>).
             </p>
         </div>
     </section>

@@ -554,7 +554,7 @@ jQuery.trumbowyg = {
             t.semanticCode();
 
             if (t.o.autogrowOnEnter) {
-                t.$ed.addClass('autogrow-on-enter');
+                t.$ed.addClass(prefix + 'autogrow-on-enter');
             }
 
             var ctrl = false,
