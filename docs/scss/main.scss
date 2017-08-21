@@ -1,0 +1,32 @@
+$primary-color: #ff974a;
+$primary-color-light: #ffb864;
+$primary-color-dark: #b65207;
+$secondary-color: #f48d40;
+$grey: #f4f7fa;
+$text-color: #392813;
+$white: #fff;
+
+$panton: "Panton", sans-serif;
+$font: "Open Sans", sans-serif;
+
+$radius: 6px;
+
+$transition-duration: 150ms;
+
+
+
+@import "normalize";
+@import "font";
+@import "base";
+@import "buttons";
+@import "header";
+@import "section";
+@import "introduction";
+@import "get-started";
+@import "languages";
+@import "plugins-packages";
+@import "donate";
+@import "footer";
+
+@import "highlightjs-github";
+@import "documentation";

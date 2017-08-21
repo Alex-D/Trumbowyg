@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Trumbowyg - A lightweight WYSIWYG editor by Alex-D / Alexandre Demode</title>
+    <meta name="description" content="Trumbowyg is a very small jQuery plugin for creating a powerful WYSIWYG editor">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <meta name="google-site-verification" content="ECeSHLIckOv9unlORi9lLtDUy7rk_CI5-AF9AU3upJE">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.7.0/dist/ui/trumbowyg.min.css">
+    <link rel="stylesheet"
+          href="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.7.0/dist/plugins/colors/ui/trumbowyg.colors.min.css">
+</head>
+<body>
+
+<header class="header header-landing">
+    <ul class="header-nav">
+        <li>
+            <a href="https://github.com/Alex-D/Trumbowyg" class="view-on-github">
+                <svg xmlns="http://www.w3.org/2000/svg" width="438.549" height="438.549" viewBox="0 0 438.549 438.549">
+                    <path d="M409.132 114.573c-19.608-33.596-46.205-60.194-79.798-79.8C295.736 15.166 259.057 5.365 219.27 5.365c-39.78 0-76.47 9.804-110.062 29.408-33.596 19.605-60.192 46.204-79.8 79.8C9.803 148.168 0 184.853 0 224.63c0 47.78 13.94 90.745 41.827 128.906 27.884 38.164 63.906 64.572 108.063 79.227 5.14.954 8.945.283 11.42-1.996 2.474-2.282 3.71-5.14 3.71-8.562 0-.57-.05-5.708-.144-15.417-.098-9.71-.144-18.18-.144-25.406l-6.567 1.136c-4.187.767-9.47 1.092-15.846 1-6.375-.09-12.992-.757-19.843-2-6.854-1.23-13.23-4.085-19.13-8.558-5.898-4.473-10.085-10.328-12.56-17.556l-2.855-6.57c-1.903-4.374-4.9-9.233-8.992-14.56-4.093-5.33-8.232-8.944-12.42-10.847l-1.998-1.43c-1.332-.952-2.568-2.1-3.71-3.43-1.143-1.33-1.998-2.663-2.57-3.997-.57-1.335-.097-2.43 1.428-3.29 1.525-.858 4.28-1.275 8.28-1.275l5.708.853c3.807.763 8.516 3.042 14.133 6.85 5.615 3.807 10.23 8.755 13.847 14.843 4.38 7.807 9.657 13.755 15.846 17.848 6.184 4.093 12.42 6.136 18.7 6.136 6.28 0 11.703-.476 16.273-1.423 4.565-.95 8.848-2.382 12.847-4.284 1.713-12.758 6.377-22.56 13.988-29.41-10.847-1.14-20.6-2.857-29.263-5.14-8.658-2.286-17.605-5.996-26.835-11.14-9.235-5.137-16.896-11.516-22.985-19.126-6.09-7.614-11.088-17.61-14.987-29.98-3.9-12.373-5.852-26.647-5.852-42.825 0-23.035 7.52-42.637 22.557-58.817-7.044-17.318-6.38-36.732 1.997-58.24 5.52-1.715 13.706-.428 24.554 3.853 10.85 4.284 18.794 7.953 23.84 10.995 5.046 3.04 9.09 5.618 12.135 7.708 17.706-4.947 35.977-7.42 54.82-7.42s37.116 2.473 54.822 7.42l10.85-6.85c7.418-4.57 16.18-8.757 26.26-12.564 10.09-3.806 17.803-4.854 23.135-3.14 8.562 21.51 9.325 40.923 2.28 58.24 15.035 16.18 22.558 35.788 22.558 58.818 0 16.178-1.958 30.497-5.853 42.966-3.9 12.47-8.94 22.457-15.125 29.98-6.19 7.52-13.9 13.85-23.13 18.985-9.233 5.14-18.183 8.85-26.84 11.135-8.663 2.286-18.416 4.004-29.264 5.146 9.894 8.563 14.842 22.078 14.842 40.54v60.237c0 3.422 1.19 6.28 3.572 8.562 2.38 2.278 6.136 2.95 11.276 1.994 44.163-14.653 80.185-41.062 108.068-79.226 27.88-38.16 41.826-81.126 41.826-128.906-.01-39.77-9.818-76.454-29.414-110.05z"/>
+                </svg>
+                View project on GitHub &mdash; <span class="star-count">1700</span> <span class="star">★</span>
+            </a>
+        </li>
+        <li>
+            <a href="http://alex-d.fr">
+                Made by Alex-D
+            </a>
+        </li>
+        <li>
+            <a href="#donate">
+                Donate
+            </a>
+        </li>
+        <li>
+            <a href="./documentation/">
+                Documentation
+            </a>
+        </li>
+    </ul>
+
+    <div class="header-logo-container">
+        <h1 class="header-logo-h1">
+            <img src="./img/logo.svg" alt="Trumbowyg" class="header-logo">
+            <div class="header-logo-animation">
+                <svg class="header-logo-animation-strong">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#trumbowyg-strong"></use>
+                </svg>
+                <svg class="header-logo-animation-p">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#trumbowyg-p"></use>
+                </svg>
+                <svg class="header-logo-animation-link">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#trumbowyg-link"></use>
+                </svg>
+                <svg class="header-logo-animation-blockquote">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#trumbowyg-blockquote"></use>
+                </svg>
+                <svg class="header-logo-animation-view-html">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#trumbowyg-view-html"></use>
+                </svg>
+            </div>
+        </h1>
+    </div>
+
+    <h2 class="header-subtitle">A lightweight WYSIWYG editor</h2>
+    <p class="header-description">
+        Light, translatable and customisable jQuery&nbsp;plugin. <br>
+        Beautiful design, generates semantic code, comes with a&nbsp;powerful&nbsp;API.
+    </p>
+
+    <div class="header-buttons">
+        <a href="./documentation/" class="button button-secondary">
+            Get started
+        </a>
+        <a href="https://github.com/Alex-D/Trumbowyg" class="button button-ghost">
+            See on GitHub
+        </a>
+    </div>
+</header>
+
+
+<main class="main">
+    <section class="section wrapper" id="demonstration">
+        <textarea id="trumbowyg-demo">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, <strong>some text bold</strong> sed do eiusmod tempor incididunt ut
+                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                aliquip ex ea commodo consequat.
+            </p>
+
+            <p>
+                Duis aute <a href="http://heeeeeeeey.com/" target="_blank">some link</a> irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum.
+            </p>
+        </textarea>
+
+        <div class="demo-switcher current-core">
+            <button type="button" class="button current" data-config="core">
+                Default
+            </button>
+            <button type="button" class="button" data-config="plugins">
+                With plugins
+            </button>
+        </div>
+    </section>
+
+
+    <section class="section section-introduction">
+        <div class="introduction-section">
+            <div class="wrapper">
+                <div class="introduction-section-col">
+                    <h4 class="introduction-section-col-title">
+                        <img src="./img/introduction-html.svg" alt="">
+                        HTML5 &amp; semantic
+                    </h4>
+                    <p class="introduction-section-col-description">
+                        Editor and generated code are optimized for HTML5 support. Compatible with all recents
+                        browsers like IE9+, Chrome, Opera and Firefox.
+                    </p>
+                </div>
+                <div class="introduction-section-col">
+                    <h4 class="introduction-section-col-title">
+                        <img src="./img/introduction-lightweight.svg" alt="" class="illu-lightweight">
+                        Fast &amp; lightweight
+                    </h4>
+                    <p class="introduction-section-col-description">
+                        All existing WYSIWYG editors are larger than 45kB. Trumbowyg is only 20kB which means faster
+                        page loading. No useless features, just the necessary ones to generate clean, semantic code.
+                    </p>
+                </div>
+                <div class="introduction-section-col">
+                    <h4 class="introduction-section-col-title">
+                        <img src="./img/introduction-customizable.svg" alt="">
+                        Customizable
+                    </h4>
+                    <p class="introduction-section-col-description">
+                        Options and design are entirely configurable to suit your needs. However, the default design
+                        is compatible with Retina display and optimized for a great and simple user experience.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section section-primary languages" id="languages">
+        <div class="wrapper">
+            <h2 class="section-title">30+ Languages</h2>
+
+            <p>
+                Read the documentation to <a href="./documentation/#localization">apply a localization</a>
+            </p>
+            <p>
+                You can <a href="./documentation/#add-localization">create your own localization file</a> and submit
+                it in a pull request :)
+            </p>
+
+            <div class="languages-columns">
+                <div class="col-globe">
+                    <img src="img/globe.svg" alt="" class="globe">
+                </div>
+                <div class="col-list">
+                    <ul>
+                        <li>
+                            <button class="continent-name" type="button">
+                                Africa
+                            </button>
+                            <ul>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/ar.min.js">
+                                        <span class="lang-code">ar</span>
+                                        <span class="lang-name">Arabic</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <button class="continent-name" type="button">
+                                America
+                            </button>
+                            <ul>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/es_ar.min.js">
+                                        <span class="lang-code">es_ar</span>
+                                        <span class="lang-name">Spanish (Argentina)</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <button class="continent-name" type="button">
+                                Asia
+                            </button>
+                            <ul>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/fa.min.js">
+                                        <span class="lang-code">fa</span>
+                                        <span class="lang-name">Persian</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/he.min.js">
+                                        <span class="lang-code">he</span>
+                                        <span class="lang-name">Hebrew</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/id.min.js">
+                                        <span class="lang-code">id</span>
+                                        <span class="lang-name">Indonesian</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/ja.min.js">
+                                        <span class="lang-code">ja</span>
+                                        <span class="lang-name">Japanese</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/ko.min.js">
+                                        <span class="lang-code">ko</span>
+                                        <span class="lang-name">Korean</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/my.min.js">
+                                        <span class="lang-code">my</span>
+                                        <span class="lang-name">Malaysian</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/ru.min.js">
+                                        <span class="lang-code">ru</span>
+                                        <span class="lang-name">Russian</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/tr.min.js">
+                                        <span class="lang-code">tr</span>
+                                        <span class="lang-name">Turkish</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/vi.min.js">
+                                        <span class="lang-code">vi</span>
+                                        <span class="lang-name">Vietnamese</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/zh_cn.min.js">
+                                        <span class="lang-code">zh_cn</span>
+                                        <span class="lang-name">Simplified Chinese</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/zh_tw.min.js">
+                                        <span class="lang-code">zh_tw</span>
+                                        <span class="lang-name">Traditional Chinese</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <button class="continent-name" type="button">
+                                Europe
+                            </button>
+                            <ul>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/ca.min.js">
+                                        <span class="lang-code">ca</span>
+                                        <span class="lang-name">Catalan</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/cs.min.js">
+                                        <span class="lang-code">cs</span>
+                                        <span class="lang-name">Czech</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/da.min.js">
+                                        <span class="lang-code">da</span>
+                                        <span class="lang-name">Danish</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/de.min.js">
+                                        <span class="lang-code">de</span>
+                                        <span class="lang-name">German</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/el.min.js">
+                                        <span class="lang-code">el</span>
+                                        <span class="lang-name">Greek</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/en.min.js">
+                                        <span class="lang-code">en</span>
+                                        <span class="lang-name">English</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/es.min.js">
+                                        <span class="lang-code">es</span>
+                                        <span class="lang-name">Spanish</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/fi.min.js">
+                                        <span class="lang-code">fi</span>
+                                        <span class="lang-name">Finnish</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/fr.min.js">
+                                        <span class="lang-code">fr</span>
+                                        <span class="lang-name">French</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/hu.min.js">
+                                        <span class="lang-code">hu</span>
+                                        <span class="lang-name">Hungarian</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/it.min.js">
+                                        <span class="lang-code">it</span>
+                                        <span class="lang-name">Italian</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/nl.min.js">
+                                        <span class="lang-code">nl</span>
+                                        <span class="lang-name">Dutch</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/pl.min.js">
+                                        <span class="lang-code">pl</span>
+                                        <span class="lang-name">Polish</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/pt.min.js">
+                                        <span class="lang-code">pt</span>
+                                        <span class="lang-name">Portuguese</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/ro.min.js">
+                                        <span class="lang-code">ro</span>
+                                        <span class="lang-name">Romanian</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/rs.min.js">
+                                        <span class="lang-code">rs</span>
+                                        <span class="lang-name">Serbian (Cyrlic)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/rs_latin.min.js">
+                                        <span class="lang-code">rs_latin</span>
+                                        <span class="lang-name">Serbian (Latin)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/sk.min.js">
+                                        <span class="lang-code">sk</span>
+                                        <span class="lang-name">Slovak</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/sv.min.js">
+                                        <span class="lang-code">sv</span>
+                                        <span class="lang-name">Swedish</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Alex-D/Trumbowyg/blob/v2.7.0/dist/langs/ua.min.js">
+                                        <span class="lang-code">ua</span>
+                                        <span class="lang-name">Ukrainian</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="section section-secondary plugins-packages">
+        <div class="wrapper">
+            <div class="col-plugins">
+                <h2 class="section-title" id="plugins">Plugins</h2>
+                <h3 class="section-subtitle">Extends Trumbowyg</h3>
+
+                <p>
+                    You can create your own plugins for Trumbowyg and propose them via pull requests on the Github
+                    repository. These plugins are given by community, not official plugins.
+                    <a href="https://github.com/Alex-D/Trumbowyg/tree/v2.7.0/plugins">See up to date plugin list.</a>
+                </p>
+
+                <ul>
+                    <li>
+                        <a href="https://github.com/Alex-D/Trumbowyg/tree/v2.7.0/dist/plugins/base64">
+                            <svg>
+                                <use xlink:href="#trumbowyg-base64"/>
+                            </svg>
+                            Base 64
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Alex-D/Trumbowyg/tree/v2.7.0/dist/plugins/cleanpaste">
+                            <svg>
+                                <use xlink:href="#trumbowyg-removeformat"/>
+                            </svg>
+                            Clean paste
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Alex-D/Trumbowyg/tree/v2.7.0/dist/plugins/colors">
+                            <svg>
+                                <use xlink:href="#trumbowyg-back-color"/>
+                            </svg>
+                            Colors
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Alex-D/Trumbowyg/tree/v2.7.0/dist/plugins/emoji">
+                            <svg>
+                                <use xlink:href="#trumbowyg-emoji"/>
+                            </svg>
+                            Emoji
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Alex-D/Trumbowyg/tree/v2.7.0/dist/plugins/insertaudio">
+                            <svg>
+                                <use xlink:href="#trumbowyg-insert-audio"/>
+                            </svg>
+                            Insert audio
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Alex-D/Trumbowyg/tree/v2.7.0/dist/plugins/noembed">
+                            <svg>
+                                <use xlink:href="#trumbowyg-noembed"/>
+                            </svg>
+                            No embed
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Alex-D/Trumbowyg/tree/v2.7.0/dist/plugins/pasteimage">
+                            <svg>
+                                <use xlink:href="#trumbowyg-insert-image"/>
+                            </svg>
+                            Paste image
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Alex-D/Trumbowyg/tree/v2.7.0/dist/plugins/preformatted">
+                            <svg>
+                                <use xlink:href="#trumbowyg-preformatted"/>
+                            </svg>
+                            Preformatted
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Alex-D/Trumbowyg/tree/v2.7.0/dist/plugins/table">
+                            <svg>
+                                <use xlink:href="#trumbowyg-table"/>
+                            </svg>
+                            Table
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Alex-D/Trumbowyg/tree/v2.7.0/dist/plugins/template">
+                            <svg>
+                                <use xlink:href="#trumbowyg-justify-full"/>
+                            </svg>
+                            Template
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Alex-D/Trumbowyg/tree/v2.7.0/dist/plugins/upload">
+                            <svg>
+                                <use xlink:href="#trumbowyg-upload"/>
+                            </svg>
+                            Upload
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-packages">
+                <h2 class="section-title" id="packages">Packages</h2>
+                <h3 class="section-subtitle">Ready for use Web frameworks and CMS packages</h3>
+
+                <p>
+                    You can create your own package for Trumbowyg or use a ready for use. This is the full list of
+                    non-official know packages using Trumbowyg.
+                </p>
+
+                <ul>
+                    <li>
+                        <a href="https://github.com/lizardK/trumbowyg-ng">
+                            <img src="img/packages/angular.svg" alt="">
+                            AngularJS directive
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/ankurk91/vue-trumbowyg">
+                            <img src="img/packages/vue.svg" alt="">
+                            VueJS component
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/RD17/react-trumbowyg">
+                            <img src="img/packages/react.svg" alt="">
+                            React wrapper
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/TikiTDO/trumbowyg_rails">
+                            <img src="img/packages/rails.svg" alt="">
+                            Ruby on Rails
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://octobercms.com/plugin/eein-wysiwyg">
+                            <img src="img/packages/october.svg" alt="">
+                            OctoberCMS plugin
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://99ko.hellojo.fr/ressources/read,trumbowyg,9.html">
+                            <img src="img/packages/99ko.svg" alt="">
+                            99ko plugin
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://bitbucket.org/fogstream/django-fs-trumbowyg/">
+                            <img src="img/packages/django.svg" alt="">
+                            Django widget
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/ringe/rest_in_place/">
+                            <img src="img/packages/rip.svg" alt="">
+                            REST in Place
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/artkost/yii2-trumbowyg">
+                            <img src="img/packages/yii.svg" alt="">
+                            Yii 2 widget
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="section wrapper">
+        <h2 class="section-title" id="donate">Buy me a beer</h2>
+
+        <div class="donate-container">
+            <div class="donate-description">
+                <p>
+                    Trumbowyg is an MIT-licensed open source project and completely free to use.
+                </p>
+                <p>
+                    However, the amount of effort needed to maintain and develop new features for the project is not sustainable
+                    without proper financial backing.
+                    You can support it's ongoing development by being a backer or a sponsor on
+                    <a href="https://www.patreon.com/alexandredemode">Trumbowyg Patreon campaign</a>
+                    (recurring, with perks for different tiers), and get your compagny logo here.
+                </p>
+                <p>
+                    Also, you can make a <a href="https://www.paypal.me/alexandredemode">one time donation via PayPal</a>.
+                </p>
+            </div>
+
+            <div class="donate-footer">
+                <a href="https://www.patreon.com/alexandredemode" class="button button-secondary">Be a sponsor on Patreon</a>
+                <a href="https://www.paypal.me/alexandredemode" class="button button-ghost">Donate via PayPal</a>
+            </div>
+
+            <img src="img/beer.svg" alt="" class="donate-beer">
+        </div>
+    </section>
+</main>
+
+
+<footer class="footer">
+    <div class="wrapper">
+        <span class="footer-text">
+            Made with <span class="hearts">&hearts;</span> by Alex-D
+        </span>
+    </div>
+    <div class="wrapper">
+        <a class="footer-link" href="http://alex-d.fr/" title="Discover the author's website">
+            Website
+        </a>
+        <a class="footer-link" href="https://github.com/Alex-D" title="Alex-D's GitHub profile">
+            GitHub
+        </a>
+        <a class="footer-link" href="https://twitter.com/AlexandreDemode" title="Alex-D's Twitter">
+            Twitter
+        </a>
+        <a class="footer-link" href="https://www.facebook.com/Alex.D.fr" title="Alex-D's Facebook page">
+            Facebook
+        </a>
+        <a class="footer-link" href="https://plus.google.com/+AlexandreDEMODEAlexD" title="Alex-D's Google+ page">
+            Google+
+        </a>
+        <a class="footer-link" href="https://soundcloud.com/alexandre-demode"
+           title="Listen Alex-D's compositions on SoundCloud">
+            SoundCloud
+        </a>
+    </div>
+</footer>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+
+<script src="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.7.0/dist/trumbowyg.min.js"></script>
+<script src="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.7.0/dist/plugins/base64/trumbowyg.base64.min.js"></script>
+<script src="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.7.0/dist/plugins/colors/trumbowyg.colors.min.js"></script>
+<script src="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.7.0/dist/plugins/noembed/trumbowyg.noembed.min.js"></script>
+<script src="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.7.0/dist/plugins/pasteimage/trumbowyg.pasteimage.min.js"></script>
+<script src="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.7.0/dist/plugins/preformatted/trumbowyg.preformatted.min.js"></script>
+<script src="//cdn.rawgit.com/Alex-D/Trumbowyg/v2.7.0/dist/plugins/upload/trumbowyg.upload.min.js"></script>
+
+<script src="js/vendor/highlight.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

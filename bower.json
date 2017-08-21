@@ -27,10 +27,12 @@
     "test",
     "tests",
     "src",
-    "Gulpfile.js",
+    "docs",
+    "banner.jpg",
+    "gulpfile.js",
     "package.json"
   ],
   "dependencies": {
-    "jquery": ">=1.7"
+    "jquery": ">=1.8"
   }
 }

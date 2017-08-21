@@ -1,0 +1,39 @@
+.section-introduction {
+    margin-top: 50px;
+    padding-bottom: 70px;
+
+    .introduction-section {
+        height: 300px;
+    }
+    .introduction-section-col {
+        position: relative;
+        float: left;
+        width: 30%;
+        margin-right: 5%;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+    .introduction-section-col-title {
+        font-size: 28px;
+        font-weight: 300;
+        margin-bottom: 0;
+        padding-top: 50px;
+
+        img {
+            height: 40px;
+            margin-right: 8px;
+            transform: translateY(-3px);
+
+            &.illu-lightweight {
+                transform: translateY(0px);
+            }
+        }
+    }
+    .introduction-section-col-description {
+        font-size: 18px;
+        line-height: 28px;
+        margin-top: 10px;
+    }
+}

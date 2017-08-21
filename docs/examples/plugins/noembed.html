@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>oEmbed plugin | Trumbowyg</title>
+        <link rel="stylesheet" href="//noembed.com/noembed.css">
+        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="../../dist/ui/trumbowyg.css">
+    </head>
+    <body>
+        <div id="main" role="main">
+            <header>
+                <h1>oEmbed plugin for Trumbowyg</h1>
+
+                <p>
+                    You can insert embeded content via an oEmbed proxy.
+                    Plugin uses <a href="//noembed.com">noembed</a> by default.
+                </p>
+            </header>
+
+
+
+            <div id="editor">
+                <h2>Embed Content!</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident optio nam reiciendis eius beatae quibusdam!
+                </p>
+                <p>
+                    The text is derived from Cicero's De Finibus Bonorum et Malorum (On the Ends of Goods and Evils, or alternatively [About] The Purposes of Good and Evil ). The original passage began: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit (Translation: &quot;Neither is there anyone who loves grief itself since it is grief and thus wants to obtain it&quot;).
+                </p>
+            </div>
+
+            <h2>The code</h2>
+            <code><pre>
+$('#editor')
+.trumbowyg({
+    btnsAdd: ['noembed']
+});
+            </pre></code>
+
+
+            <hr>
+
+
+            <div id="editor-dropdown">
+                <h2>Embed content through link dropdown!</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident optio nam reiciendis eius beatae quibusdam!
+                </p>
+                <p>
+                    The text is derived from Cicero's De Finibus Bonorum et Malorum (On the Ends of Goods and Evils, or alternatively [About] The Purposes of Good and Evil ). The original passage began: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit (Translation: &quot;Neither is there anyone who loves grief itself since it is grief and thus wants to obtain it&quot;).
+                </p>
+            </div>
+
+            <h2>The code</h2>
+            <code><pre>
+$('#editor-dropdown')
+.trumbowyg({
+    btnsDef: {
+        // Create a new dropdown
+        link: {
+            dropdown: ['insertLink', 'removeLink', 'noembed'],
+            ico: 'insertLink'
+        }
+    },
+    // Redefine the button pane
+    btns: ['viewHTML',
+            '|', 'formatting',
+            '|', 'btnGrp-semantic',
+            '|', 'link',
+            '|', 'insertImage',
+            '|', 'btnGrp-justify',
+            '|', 'btnGrp-lists',
+            '|', 'horizontalRule']
+});
+            </pre></code>
+        </div>
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="../../dist/trumbowyg.js"></script>
+        <script src="../../dist/plugins/noembed/trumbowyg.noembed.js"></script>
+        <script>
+            $('#editor')
+            .trumbowyg({
+                btnsAdd: ['noembed']
+            });
+
+
+
+            $('#editor-dropdown')
+            .trumbowyg({
+                btnsDef: {
+                    // Create a new dropdown
+                    link: {
+                        dropdown: ['createLink', 'unlink', 'noembed'],
+                        ico: 'link'
+                    }
+                },
+                // Redefine the button pane
+                btns: ['viewHTML',
+                        '|', 'formatting',
+                        '|', 'btnGrp-semantic',
+                        '|', 'link',
+                        '|', 'insertImage',
+                        '|', 'btnGrp-justify',
+                        '|', 'btnGrp-lists',
+                        '|', 'horizontalRule']
+            });
+        </script>
+    </body>
+</html>

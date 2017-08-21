@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Emoji plugin | Trumbowyg</title>
+        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="../../dist/ui/trumbowyg.css">
+        <link rel="stylesheet" href="../../dist/plugins/emoji/ui/trumbowyg.emoji.css">
+    </head>
+    <body>
+    <div class="container">
+            <header>
+                <h1>Emoji plugin for Trumbowyg</h1>
+                <p>
+                    This plugin allow you to add an emoji picker in Trumbowyg.
+                </p>
+            </header>
+            <div id="instructions">
+                    <h2>Instructions :</h2>
+                    This plugin require <b>emojify.js</b><br> 
+                    You can install emojify.js with Bower (run this command in the Trumbowyg root directory, to install emojify.js in bower_components) :
+                    <code><pre>bower install emojify.js</pre></code>
+            </div>
+            <div id="editor">
+                <h2>Select an emoji !</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident optio nam reiciendis eius beatae quibusdam!
+                </p>
+            </div>
+
+            <h2>The code</h2>
+            <code><pre>
+// This function initialize emojify.js
+function initEmoji() {
+    emojify.setConfig({
+        img_dir : '../../bower_components/emojify.js/dist/images/basic/',
+    });
+    emojify.run();  
+}
+initEmoji();
+
+$('#editor')
+.trumbowyg({
+    btns: [['emoji']]
+});
+
+// You can also add an emoticon directly on the editor
+$('.trumbowyg-editor').bind('input propertychange', function() {
+    initEmoji();
+});
+
+            </pre></code>
+        </div>
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="../../bower_components/emojify.js/dist/js/emojify.min.js"></script>
+        <script src="../../dist/trumbowyg.js"></script>
+        <script src="../../dist/plugins/emoji/trumbowyg.emoji.js"></script>
+        <script>
+            $('#editor')
+            .trumbowyg({
+                btns: [['emoji']]
+            });
+
+            function initEmoji() {
+                emojify.setConfig({
+                    img_dir : '../../bower_components/emojify.js/dist/images/basic/',
+                });
+                emojify.run();  
+            }
+
+            $('.trumbowyg-editor').bind('input propertychange', function() {
+                initEmoji();
+            });
+
+            initEmoji();
+        </script>
+    </body>
+</html>
