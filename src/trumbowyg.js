@@ -161,16 +161,20 @@ jQuery.trumbowyg = {
                 try {
                     throw new Error();
                 } catch (e) {
-                    var stackLines = e.stack.split('\n');
+                    if (!e.hasOwnProperty('stack')) {
+                        console.warn('You must define svgPath: https://goo.gl/CfTY9U'); // jshint ignore:line
+                    } else {
+                        var stackLines = e.stack.split('\n');
 
-                    for (var i in stackLines) {
-                        if (!stackLines[i].match(/http[s]?:\/\//)) {
-                            continue;
+                        for (var i in stackLines) {
+                            if (!stackLines[i].match(/http[s]?:\/\//)) {
+                                continue;
+                            }
+                            svgPathOption = stackLines[Number(i)].match(/((http[s]?:\/\/.+\/)([^\/]+\.js))(\?.*)?:/)[1].split('/');
+                            svgPathOption.pop();
+                            svgPathOption = svgPathOption.join('/') + '/ui/icons.svg';
+                            break;
                         }
-                        svgPathOption = stackLines[Number(i)].match(/((http[s]?:\/\/.+\/)([^\/]+\.js))(\?.*)?:/)[1].split('/');
-                        svgPathOption.pop();
-                        svgPathOption = svgPathOption.join('/') + '/ui/icons.svg';
-                        break;
                     }
                 }
             }
@@ -189,6 +193,7 @@ jQuery.trumbowyg = {
                 beforeSend: null,
                 complete: null,
                 success: function (data) {
+                    console.log(data);
                     div.innerHTML = new XMLSerializer().serializeToString(data.documentElement);
                 }
             });

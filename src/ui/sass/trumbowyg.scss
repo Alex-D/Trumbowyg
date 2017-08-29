@@ -133,8 +133,6 @@ $slow-transition-duration: 300ms !default;
 }
 
 .trumbowyg-button-pane {
-    display: flex;
-    flex-flow: row wrap;
     width: 100%;
     min-height: 36px;
     background: $light-color;
@@ -160,8 +158,7 @@ $slow-transition-duration: 300ms !default;
     }
 
     .trumbowyg-button-group {
-        display: flex;
-        flex-flow: row wrap;
+        display: inline-block;
 
         .trumbowyg-fullscreen-button svg {
             color: transparent;
@@ -169,7 +166,7 @@ $slow-transition-duration: 300ms !default;
 
         &:not(:empty) + .trumbowyg-button-group::before {
             content: " ";
-            display: block;
+            display: inline-block;
             width: 1px;
             background: darken($light-color, 7%);
             margin: 0 5px;
@@ -178,7 +175,7 @@ $slow-transition-duration: 300ms !default;
     }
 
     button {
-        display: block;
+        display: inline-block;
         position: relative;
         width: 35px;
         height: 35px;
@@ -240,7 +237,7 @@ $slow-transition-duration: 300ms !default;
     }
 
     .trumbowyg-right {
-        margin-left: auto;
+        float: right;
 
         &::before {
             display: none !important;
@@ -256,6 +253,7 @@ $slow-transition-duration: 300ms !default;
     background: #FFF;
     margin-left: -1px;
     box-shadow: rgba(0, 0, 0, .1) 0 2px 3px;
+    z-index: 11;
 
     button {
         display: block;
