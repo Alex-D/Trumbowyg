@@ -150,8 +150,9 @@ gulp.task('watch', function () {
     gulp.watch(paths.icons, ['icons']);
     gulp.watch(paths.scripts, ['scripts']);
     gulp.watch(paths.langs, ['langs']);
-    gulp.watch(paths.plugins, ['plugins']);
-    gulp.watch(paths.mainStyle, ['styles']);
+    gulp.watch(paths.pluginsScripts, ['plugins-scripts']);
+    gulp.watch(paths.pluginsStyles, ['plugins-styles']);
+    gulp.watch(paths.styles, ['styles']);
 
     gulp.watch(['dist/**', 'dist/*/**'], function (file) {
         $.livereload.changed(file);

@@ -1,0 +1,31 @@
+.footer {
+	margin-top: 40px;
+	text-align: center;
+	color: $white;
+	background: linear-gradient(to bottom left, $primary-color, $primary-color-light);
+	clear: both;
+
+	.footer-text,
+	.footer-link {
+		display: inline-block;
+		padding: 40px;
+	}
+	.footer-text {
+		padding-bottom: 0;
+
+		.hearts {
+			font-size: 18px;
+			color: $primary-color-dark;
+		}
+	}
+	.footer-link {
+		text-decoration: none;
+		color: $white;
+		transition: color 0.15s;
+
+		&:hover,
+		&:focus {
+			color: $primary-color-dark;
+		}
+	}
+}

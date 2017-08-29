@@ -1,0 +1,40 @@
+.donate-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+
+    .donate-description {
+        width: 100%;
+        padding: 30px 50px 50px;
+        background: $grey;
+        border-top-left-radius: $radius;
+        border-top-right-radius: $radius;
+    }
+
+    .donate-footer {
+        text-align: center;
+        padding: 50px 0;
+        background: $primary-color linear-gradient(to bottom left, $primary-color, $primary-color-light);
+        border-bottom-left-radius: $radius;
+        border-bottom-right-radius: $radius;
+    }
+
+    .donate-beer {
+        position: absolute;
+        left: -190px;
+        bottom: -30px;
+        width: 250px;
+    }
+
+    .button {
+        color: $white;
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            background: $white;
+            color: $primary-color;
+        }
+    }
+}

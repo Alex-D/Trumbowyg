@@ -1,0 +1,121 @@
+.languages {
+    p {
+        text-align: center;
+        margin: 0 0 5px;
+        font-size: 18px;
+        color: $white;
+
+        a {
+            color: $primary-color-dark;
+        }
+    }
+
+    .languages-columns {
+        display: flex;
+    }
+
+    .col-globe {
+        flex: 1.07;
+        margin-top: 30px;
+
+        .globe {
+            width: 90%;
+            transform: translateX(-40px);
+        }
+    }
+
+    .col-list {
+        flex: 0.93;
+        padding-top: 80px;
+        line-height: 1.6;
+        font-weight: 400;
+
+        .continent-name {
+            color: $white;
+            font-size: 22px;
+            font-weight: 400;
+            background: none;
+            border: none;
+            padding: 0;
+            margin: 0;
+
+            &:focus {
+                outline: none;
+            }
+
+            &::after {
+                content: "";
+                display: inline-block;
+                height: 0;
+                width: 0;
+                border: 6px solid transparent;
+                border-left-color: $white;
+                transform: translateX(5px) translateY(-1px);
+            }
+        }
+
+        li[style] {
+            .continent-name {
+                &::after {
+                    border-left-color: transparent;
+                    border-top-color: $white;
+                    transform: translateX(2px) translateY(2px);
+                }
+            }
+        }
+
+        .lang-code {
+            display: inline-block;
+            min-width: 30px;
+            padding-right: 8px;
+            opacity: 0.6;
+            transition: opacity $transition-duration;
+        }
+        .lang-name {
+            transition: padding-left $transition-duration;
+        }
+
+        a {
+            color: $primary-color-dark;
+            transition: color $transition-duration;
+
+            &:hover {
+                color: $white;
+                text-decoration: none;
+
+                .lang-code {
+                    opacity: 1;
+                }
+                .lang-name {
+                    padding-left: 8px;
+                }
+            }
+        }
+
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        > ul {
+            padding-right: 50px;
+
+            > li {
+                overflow: hidden;
+                transition: height $transition-duration linear;
+
+                &[data-height] {
+                    height: 30px;
+                }
+
+                ul {
+                    padding: 15px 0;
+                    columns: 2;
+                    line-height: 1.8;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Colors plugin | Trumbowyg</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../../dist/ui/trumbowyg.css">
+    <link rel="stylesheet" href="../../dist/plugins/colors/ui/trumbowyg.colors.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Colors plugin for Trumbowyg</h1>
+
+        <p>
+            This plugin allow you to add a foreground and/or background color picker.
+        </p>
+    </header>
+
+    <div id="editor">
+        <h2>You can color me!</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident
+            optio nam reiciendis eius beatae quibusdam!
+        </p>
+        <p>
+            The text is derived from Cicero's De Finibus Bonorum et Malorum (On the Ends of Goods and Evils, or
+            alternatively [About] The Purposes of Good and Evil). The original passage began: Neque porro quisquam est
+            qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit (Translation: &quot;Neither is there
+            anyone who loves grief itself since it is grief and thus wants to obtain it&quot;).
+        </p>
+    </div>
+
+    <h2>The code</h2>
+    <pre>
+    <code>
+$('#editor')
+.trumbowyg({
+    btns: ['foreColor', 'backColor']
+});
+    </code>
+    </pre>
+</div>
+<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../../dist/trumbowyg.js"></script>
+<script src="../../dist/plugins/colors/trumbowyg.colors.js"></script>
+<script>
+    $('#editor')
+        .trumbowyg({
+            btnsAdd: ['foreColor', 'backColor']
+        });
+</script>
+</body>
+</html>

@@ -1,0 +1,244 @@
+/*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
+
+html,
+button,
+input,
+select,
+textarea {
+    color: #222;
+}
+
+html {
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+html,
+body {
+    background: #fff;
+}
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+audio,
+canvas,
+img,
+video {
+    vertical-align: middle;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: vertical;
+}
+
+
+
+
+
+
+html {
+    box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+    font-family: $font;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    clear: both;
+
+    p:last-child {
+        margin-bottom: 0;
+    }
+
+    h4 {
+        font-size: 30px;
+    }
+
+    code.console {
+        background: $text-color;
+        color: #fff;
+        font-size: 16px;
+        padding: 3px 7px;
+    }
+
+    .note {
+        color: #888;
+        padding: 3px 0 3px 15px;
+        border-left: 3px solid $primary-color-light;
+        margin-right: 30px;
+
+        > :first-child {
+            margin-top: 0;
+        }
+        > :last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+.section {
+    a {
+        text-decoration: none;
+        color: $primary-color;
+
+        &:hover,
+        &:focus {
+            text-decoration: underline;
+        }
+    }
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+}
+
+hr.clearfix {
+    display: block;
+    border: none;
+    background: none;
+    margin: 0;
+    padding: 0;
+    height: 0;
+    clear: both;
+}
+
+
+
+
+table {
+    margin: 30px auto;
+    text-align: left;
+
+    thead {
+        background: #fff;
+    }
+    tbody {
+        tr {
+            border-bottom: 1px solid #ddd;
+
+            &:nth-child(2n){
+                background: #fcfcfc;
+            }
+        }
+    }
+
+    td,
+    th {
+        padding: 5px 15px;
+    }
+}
+
+
+
+
+
+/* ==========================================================================
+   Print styles
+   ========================================================================== */
+
+@media print {
+    * {
+        background: transparent !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    .ir a:after,
+    a[href^="javascript:"]:after,
+    a[href^="#"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    @page {
+        margin: 0.5cm;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}

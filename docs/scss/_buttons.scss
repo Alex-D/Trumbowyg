@@ -1,0 +1,36 @@
+.button {
+    display: inline-block;
+    position: relative;
+    width: 250px;
+    border: 2px solid transparent;
+    margin: 0 auto;
+    padding: 23px 30px;
+    color: #fff;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.2;
+    text-decoration: none;
+    border-radius: 50px;
+    text-align: center;
+    transition: color $transition-duration, background-color $transition-duration;
+
+    &-primary {
+        background: $primary-color;
+    }
+    &-secondary {
+        background: $secondary-color;
+    }
+    &-ghost {
+        border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    & + & {
+        margin-left: 20px;
+    }
+}
+.button:hover,
+.button:focus {
+    background: #fff;
+    color: $primary-color;
+    outline: none;
+}

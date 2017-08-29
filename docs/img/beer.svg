@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 293.9 343.6" enable-background="new 0 0 293.9 343.6" xml:space="preserve">
+<path fill="#E2A25D" d="M258.7,316C258.7,316,258.7,315.9,258.7,316c0-0.1,0-0.1,0-0.2v-6.3h-3.6c-13.6-12-64.6-20.9-125.4-20.9
+	S17.8,297.5,4.2,309.5H0.7v6.2c0,0.1,0,0.1,0,0.2c0,0.1,0,0.1,0,0.2v0.3h0c1.1,14.9,58.4,26.9,129,26.9s127.9-12,129-26.9h0V316z"/>
+<ellipse fill="#FFB864" cx="129.7" cy="308.6" rx="129" ry="27.4"/>
+<path fill="#EFEFEF" d="M247,14.4H16.6l24.6,291h0c0.6,7.9,41,14.2,90.9,14.2c50.2,0,90.9-6.4,90.9-14.4c0-0.1,0-0.1,0-0.2L247,14.4
+	z"/>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="86.0467" y1="307.6227" x2="86.0467" y2="26.3726">
+	<stop  offset="0" style="stop-color:#FBB03B"/>
+	<stop  offset="1" style="stop-color:#FFD23E"/>
+</linearGradient>
+<path fill="url(#SVGID_1_)" d="M52.2,293.4h0.2l0.5,6.3c8.7,3.2,35.1,7.6,76.2,7.9l13.4-281.3H29.7L52.2,293.4z"/>
+<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="181.479" y1="307.6332" x2="181.479" y2="26.3726">
+	<stop  offset="0" style="stop-color:#FBA23B"/>
+	<stop  offset="1" style="stop-color:#FFC93E"/>
+</linearGradient>
+<path fill="url(#SVGID_2_)" d="M132.1,307.6c42.8,0,70.3-4.6,79.3-7.9L234,26.4h-91.6L129,307.6C130,307.6,131,307.6,132.1,307.6z"
+	/>
+<path fill="#E5E5E5" d="M247,14.4H143l-0.6,12H234l-22.6,273.4c-8.9,3.2-36.4,7.9-79.3,7.9c-1,0-2.1,0-3.1,0l-0.6,12
+	c1.2,0,2.4,0,3.7,0c50.2,0,90.9-6.4,90.9-14.4l0-0.2L247,14.4z"/>
+<g>
+	<circle opacity="0.3" fill="#FFFFFF" cx="84" cy="252.3" r="10.6"/>
+	<circle opacity="0.3" fill="#FFFFFF" cx="119.7" cy="197.6" r="7.3"/>
+	<circle opacity="0.3" fill="#FFFFFF" cx="96" cy="100.3" r="10.6"/>
+	<circle opacity="0.3" fill="#FFFFFF" cx="151.4" cy="274.8" r="8.1"/>
+	<circle opacity="0.3" fill="#FFFFFF" cx="179.5" cy="229.9" r="10.2"/>
+	<circle opacity="0.3" fill="#FFFFFF" cx="133.7" cy="143.2" r="10.2"/>
+	<circle opacity="0.3" fill="#FFFFFF" cx="132.2" cy="139.7" r="4.5"/>
+	<circle opacity="0.3" fill="#FFFFFF" cx="169.9" cy="147" r="5.6"/>
+	<circle opacity="0.3" fill="#FFFFFF" cx="189.2" cy="99.7" r="5.6"/>
+	<circle opacity="0.3" fill="#FFFFFF" cx="80.2" cy="201.7" r="3"/>
+	<circle opacity="0.3" fill="#FFFFFF" cx="157.5" cy="279.8" r="3"/>
+	<circle opacity="0.3" fill="#FFFFFF" cx="161.2" cy="74.3" r="3"/>
+</g>
+<path opacity="0.5" fill="#F4B20C" d="M31.2,44.9l0.6,7.5h29.4v128.4c0,5.7,4.2,10.7,9.9,11.3c6.5,0.6,12.1-4.5,12.1-10.9v-70.5
+	c0-5.5,4.5-10,10-10c6.1,0,11-5,11-11V52.4h127.6l0.5-7.9L31.2,44.9z"/>
+<polygon fill="#E5E5E5" points="31.9,52.3 19.8,52.3 19.1,43.6 31.2,43.6 "/>
+<polygon fill="#D3D3D3" points="231.8,52.4 243.9,52.4 244.6,43.7 232.5,43.7 "/>
+<path fill="#FFFAEE" d="M260.5,23L260.5,23c0,12.6-10.3,23-23,23H25.2c-12.6,0-23-10.3-23-23v0c0-12.6,10.3-23,23-23l212.4,0
+	C250.2,0,260.5,10.4,260.5,23z"/>
+<g>
+	<path fill="#FFFAEE" d="M88.3,17.2H73.5c-1.1,0-2.1,0.2-3.1,0.5c-1.9-0.6-4-0.7-6.1,0c-4.8,1.4-8,5.9-8,10.9v148.3
+		c0,5.7,4.2,10.7,9.9,11.3c6.5,0.6,12.1-4.5,12.1-10.9v-70.5c0-5.5,4.5-10,10-10h0c6.1,0,11-4.9,11-11V28.2
+		C99.3,22.1,94.3,17.2,88.3,17.2z"/>
+	<g>
+		<path fill="#FFEBCC" d="M257.3,11.3c0.1,0.7,0.1,1.4,0.1,2.1v0c0,12.6-10.3,23-23,23H99.3v-8.2c0-5.1-3.5-9.4-8.3-10.6
+			c0.1,0.6,0.2,1.2,0.2,1.8v17.1V46v30.8c0,6.1-5,11-11,11c-5.5,0-10,4.5-10,10v70.5c0,6.4-5.6,11.6-12.1,10.9
+			c-0.5-0.1-1.1-0.2-1.6-0.3c0.9,4.8,4.7,8.7,9.7,9.1c6.5,0.6,12.1-4.5,12.1-10.9v-70.5c0-5.5,4.5-10,10-10c6,0,11-5,11-11V46h138.3
+			c12.6,0,23-10.3,23-23v0C260.5,18.8,259.4,14.8,257.3,11.3z"/>
+		<path fill="#FFEBCC" d="M25.2,46h31.1v-9.6H6.6C10.7,42.2,17.5,46,25.2,46z"/>
+	</g>
+</g>
+<path opacity="0.1" d="M249.5,298.5c-6-3.1-14.6-6-25.3-8.5l-1.2,15c0,0,0,0.8-0.2,1.3C224.2,305.9,249.5,298.5,249.5,298.5z"/>
+<path opacity="5.000000e-02" d="M256.5,303.5l33.6-9.6c3.5-1,3.2-6-0.3-6.6l-64.3-12l-1.3,14.8C224.2,290,249,295.2,256.5,303.5z"/>
+</svg>

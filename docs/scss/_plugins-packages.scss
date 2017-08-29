@@ -1,0 +1,61 @@
+.plugins-packages {
+    .wrapper {
+        display: flex;
+    }
+
+    .col-plugins {
+        flex: 1.07;
+    }
+    .col-packages {
+        flex: 0.93;
+    }
+    
+    .section-title {
+        text-align: left;
+        transform: translateX(-5px);
+    }
+
+    p {
+        padding: 0 100px 0 0;
+        line-height: 1.6;
+    }
+
+    ul,
+    li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    ul {
+        columns: 2;
+        margin: 50px 0 0;
+        max-width: 500px;
+    }
+
+    li {
+        a {
+            position: relative;
+            display: inline-block;
+            overflow: visible;
+            color: $text-color;
+            transition: color $transition-duration, transform $transition-duration;
+            line-height: 1.8;
+
+            &:hover {
+                color: $primary-color;
+                text-decoration: none;
+            }
+
+            img,
+            svg {
+                display: inline-block;
+                fill: $primary-color;
+                width: 20px;
+                height: 20px;
+                margin-right: 8px;
+                vertical-align: sub;
+            }
+        }
+    }
+}
