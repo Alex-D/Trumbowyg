@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.7.0 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.7.1 - A lightweight WYSIWYG editor
  * Default stylesheet for Trumbowyg editor
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -74,7 +74,8 @@ $slow-transition-duration: 300ms !default;
     resize: none;
     outline: none;
     overflow: auto;
-    &.autogrow-on-enter {
+
+    &.trumbowyg-autogrow-on-enter {
         transition: height $slow-transition-duration ease-out;
     }
 }
@@ -85,8 +86,7 @@ $slow-transition-duration: 300ms !default;
         color: transparent !important;
         text-shadow: 0 0 7px #333;
 
-        @media screen and (min-width: 0 \0
-        ) {
+        @media screen and (min-width: 0 \0) {
             color: rgba(200, 200, 200, 0.6) !important;
         }
         @supports (-ms-accelerator:true) {
@@ -144,17 +144,17 @@ $slow-transition-duration: 300ms !default;
 }
 
 .trumbowyg-button-pane {
-    display: flex;
-    flex-flow: row wrap;
     width: 100%;
     min-height: 36px;
     background: $light-color;
     border-bottom: 1px solid darken($light-color, 7%);
     margin: 0;
     padding: 0 5px;
+    position: relative;
     list-style-type: none;
     line-height: 10px;
     backface-visibility: hidden;
+    z-index: 11;
 
     &::after {
         content: " ";
@@ -169,8 +169,7 @@ $slow-transition-duration: 300ms !default;
     }
 
     .trumbowyg-button-group {
-        display: flex;
-        flex-flow: row wrap;
+        display: inline-block;
 
         .trumbowyg-fullscreen-button svg {
             color: transparent;
@@ -178,7 +177,7 @@ $slow-transition-duration: 300ms !default;
 
         &:not(:empty) + .trumbowyg-button-group::before {
             content: " ";
-            display: block;
+            display: inline-block;
             width: 1px;
             background: darken($light-color, 7%);
             margin: 0 5px;
@@ -187,7 +186,7 @@ $slow-transition-duration: 300ms !default;
     }
 
     button {
-        display: block;
+        display: inline-block;
         position: relative;
         width: 35px;
         height: 35px;
@@ -249,7 +248,7 @@ $slow-transition-duration: 300ms !default;
     }
 
     .trumbowyg-right {
-        margin-left: auto;
+        float: right;
 
         &::before {
             display: none !important;
@@ -265,6 +264,7 @@ $slow-transition-duration: 300ms !default;
     background: #FFF;
     margin-left: -1px;
     box-shadow: rgba(0, 0, 0, .1) 0 2px 3px;
+    z-index: 11;
 
     button {
         display: block;
@@ -467,9 +467,11 @@ $slow-transition-duration: 300ms !default;
 .trumbowyg-overlay {
     position: absolute;
     background-color: rgba(255, 255, 255, 0.5);
+    height: 100%;
     width: 100%;
     left: 0;
     display: none;
+    top: 0;
     z-index: 10;
 }
 

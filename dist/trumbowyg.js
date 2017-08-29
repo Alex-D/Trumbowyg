@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.7.0 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.7.1 - A lightweight WYSIWYG editor
  * Trumbowyg core file
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -172,16 +172,20 @@ jQuery.trumbowyg = {
                 try {
                     throw new Error();
                 } catch (e) {
-                    var stackLines = e.stack.split('\n');
+                    if (!e.hasOwnProperty('stack')) {
+                        console.warn('You must define svgPath: https://goo.gl/CfTY9U'); // jshint ignore:line
+                    } else {
+                        var stackLines = e.stack.split('\n');
 
-                    for (var i in stackLines) {
-                        if (!stackLines[i].match(/http[s]?:\/\//)) {
-                            continue;
+                        for (var i in stackLines) {
+                            if (!stackLines[i].match(/http[s]?:\/\//)) {
+                                continue;
+                            }
+                            svgPathOption = stackLines[Number(i)].match(/((http[s]?:\/\/.+\/)([^\/]+\.js))(\?.*)?:/)[1].split('/');
+                            svgPathOption.pop();
+                            svgPathOption = svgPathOption.join('/') + '/ui/icons.svg';
+                            break;
                         }
-                        svgPathOption = stackLines[Number(i)].match(/((http[s]?:\/\/.+\/)([^\/]+\.js))(\?.*)?:/)[1].split('/');
-                        svgPathOption.pop();
-                        svgPathOption = svgPathOption.join('/') + '/ui/icons.svg';
-                        break;
                     }
                 }
             }
@@ -200,6 +204,7 @@ jQuery.trumbowyg = {
                 beforeSend: null,
                 complete: null,
                 success: function (data) {
+                    console.log(data);
                     div.innerHTML = new XMLSerializer().serializeToString(data.documentElement);
                 }
             });
@@ -548,6 +553,10 @@ jQuery.trumbowyg = {
                 t.$ed.attr('placeholder', t.$c.attr('placeholder'));
             }
 
+            if (t.$c.is('[spellcheck]')) {
+                t.$ed.attr('spellcheck', t.$c.attr('spellcheck'));
+            }
+
             if (t.o.resetCss) {
                 t.$ed.addClass(prefix + 'reset-css');
             }
@@ -561,7 +570,7 @@ jQuery.trumbowyg = {
             t.semanticCode();
 
             if (t.o.autogrowOnEnter) {
-                t.$ed.addClass('autogrow-on-enter');
+                t.$ed.addClass(prefix + 'autogrow-on-enter');
             }
 
             var ctrl = false,
@@ -572,7 +581,7 @@ jQuery.trumbowyg = {
             t.$ed
                 .on('dblclick', 'img', t.o.imgDblClickHandler)
                 .on('keydown', function (e) {
-                    if (e.ctrlKey && !e.altKey) {
+                    if ((e.ctrlKey || e.metaKey) && !e.altKey) {
                         ctrl = true;
                         var key = t.keys[String.fromCharCode(e.which).toUpperCase()];
 
@@ -599,7 +608,7 @@ jQuery.trumbowyg = {
                         return;
                     }
 
-                    if (e.ctrlKey && (keyCode === 89 || keyCode === 90)) {
+                    if ((e.ctrlKey || e.metaKey) && (keyCode === 89 || keyCode === 90)) {
                         t.$c.trigger('tbwchange');
                     } else if (!ctrl && keyCode !== 17) {
                         t.semanticCode(false, keyCode === 13);
@@ -861,9 +870,6 @@ jQuery.trumbowyg = {
             var t = this;
             t.$overlay = $('<div/>', {
                 class: t.o.prefix + 'overlay'
-            }).css({
-                top: t.$btnPane.outerHeight(),
-                height: (t.$ed.outerHeight() + 1) + 'px'
             }).appendTo(t.$box);
             return t.$overlay;
         },
@@ -1342,8 +1348,6 @@ jQuery.trumbowyg = {
 
             t.saveRange();
             t.showOverlay();
-            //need to reset due to autogrowing
-            t.$overlay.css({height: (t.$ed.outerHeight() + 1) + 'px'});
 
             // Disable all btnPane btns
             t.$btnPane.addClass(prefix + 'disable');
