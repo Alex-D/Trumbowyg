@@ -1077,7 +1077,7 @@ jQuery.trumbowyg = {
                 //scrub the html before loading into the doc
                 var safe = $('<div>').append(html);
                 $(t.o.tagsToRemove.join(','), safe).remove();
-                t.$ed.html(safe.html());
+                t.$ed.html(safe.contents().html());
             }
 
             if (t.o.autogrow) {
