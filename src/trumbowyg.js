@@ -600,7 +600,7 @@ jQuery.trumbowyg = {
                     if ((e.ctrlKey || e.metaKey) && (keyCode === 89 || keyCode === 90)) {
                         t.$c.trigger('tbwchange');
                     } else if (!ctrl && keyCode !== 17) {
-                        t.semanticCode(false, keyCode === 13);
+                        t.semanticCode(false, false);
                         t.$c.trigger('tbwchange');
                     } else if (typeof e.which === 'undefined') {
                         t.semanticCode(false, false, true);
