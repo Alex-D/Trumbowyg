@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.7.1 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.7.2 - A lightweight WYSIWYG editor
  * Trumbowyg core file
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -611,7 +611,7 @@ jQuery.trumbowyg = {
                     if ((e.ctrlKey || e.metaKey) && (keyCode === 89 || keyCode === 90)) {
                         t.$c.trigger('tbwchange');
                     } else if (!ctrl && keyCode !== 17) {
-                        t.semanticCode(false, keyCode === 13);
+                        t.semanticCode(false, e.type === 'compositionend' && keyCode === 13);
                         t.$c.trigger('tbwchange');
                     } else if (typeof e.which === 'undefined') {
                         t.semanticCode(false, false, true);
@@ -1088,7 +1088,7 @@ jQuery.trumbowyg = {
                 //scrub the html before loading into the doc
                 var safe = $('<div>').append(html);
                 $(t.o.tagsToRemove.join(','), safe).remove();
-                t.$ed.html(safe.html());
+                t.$ed.html(safe.contents().html());
             }
 
             if (t.o.autogrow) {
