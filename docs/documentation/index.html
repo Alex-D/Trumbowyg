@@ -7,16 +7,10 @@
     <meta name="description" content="Trumbowyg is a jQuery plugin for create WYSIWYG editor">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" href="../favicon.png">
 
     <link rel="stylesheet" href="../css/main.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-
-    <script>
-        if (window.location.href.indexOf('index.html') > 0) {
-            window.location = window.location.href.replace('index.html', '');
-        }
-    </script>
 </head>
 <body class="documentation-body">
 <svg xmlns="http://www.w3.org/2000/svg" style="overflow: hidden;visibility: hidden;height: 0;width: 0;">
@@ -28,12 +22,17 @@
 <div class="sidebar">
     <div class="sidebar-inner">
         <header class="header-documentation">
-            <a href="../" class="documentation-logo-link">
+            <a href="../" class="documentation-logo-link" title="Back to Trumbowyg landing">
                 <img src="../img/logo-doc.svg" alt="" class="documentation-logo">
             </a>
             <h1 class="documentation-title">
                 Documentation
             </h1>
+            <nav class="documentation-menu">
+                <a href="./">Home</a> &bull;
+                <a href="./plugins/">Plugins</a> &bull;
+                <a href="./core/">Core</a>
+            </nav>
         </header>
 
         <aside class="documentation-summary">
@@ -76,10 +75,7 @@
                         <li><a href="#add-localization">Add a localization</a></li>
                         <li><a href="#custom-buttons">Custom buttons</a></li>
                         <li><a href="#custom-dropdowns">Custom dropdowns</a></li>
-                        <li><a href="#keyboard-shortcuts">Keyboard shortcuts</a></li>
-                        <!-- TODO
-                        <li><a href="#create-plugin">Create a plugin</a></li>
-                        -->
+                        <li><a href="./plugins/#create-your-own">Create a plugin</a></li>
                     </ul>
                 </li>
                 <li>
@@ -201,14 +197,6 @@ $('#trumbowyg-demo').trumbowyg({
         <div class="feature">
             <h3 id="use-plugins">Use plugins</h3>
 
-            <h4>Plugin list</h4>
-
-            <p>
-                You can check <a href="../#plugins">plugin list on the home</a> or
-                <a href="https://github.com/Alex-D/Trumbowyg/tree/master/dist/plugins">
-                    check plugins folder on the master branch</a>.
-            </p>
-
             <h4>Add a plugin to your page</h4>
 
             <p>
@@ -241,10 +229,13 @@ $('#trumbowyg-demo').trumbowyg({
             </p>
             <p>
                 But most popular plugins are button-based, like
-                <a href="./plugins/upload.html">upload</a> or
-                <a href="./plugins/colors.html">colors</a> ones.
+                <a href="./plugins/#plugin-upload">upload</a> or
+                <a href="./plugins/#plugin-colors">colors</a> ones.
                 If you want to use these plugins, load them like explained before, then add the plugin button to your editor
-                by <a href="#button-pane">checking de button pane doc section</a>.
+                by <a href="#button-pane">checking the button pane doc section</a>.
+            </p>
+            <p>
+                For more informations on plugins, check <a href="./plugins/">the plugins documentation page.</a>
             </p>
         </div>
     </section>
@@ -660,7 +651,7 @@ jQuery.trumbowyg.langs.fr = {
             <h3 id="custom-buttons">Custom buttons</h3>
             <p>
                 If Trumbowyg does not fit your needs, maybe you can create your very own custom button to solve this.
-                The following code (which does not works as is) show you all available button options.
+                The following code (which does not works as is) show you all available button parameters.
             </p>
             <pre><code class="javascript">
 $('.trumbowyg').trumbowyg({
@@ -781,7 +772,7 @@ $('.trumbowyg').trumbowyg({
     btnsDef: {
         dropdownButtonName: {
             dropdown: ['btnA', 'btnB'],
-            title: 'Displayed button name',
+            title: 'Displayed dropdown button name',
             ico: 'iconName',
             hasIcon: true
         }
@@ -816,7 +807,7 @@ $('.trumbowyg').trumbowyg({
                 </dd>
             </dl>
             <p>
-                Working example:
+                Working example which groups all justify buttons in one dropdown:
             </p>
             <pre><code class="javascript">
 $('.trumbowyg').trumbowyg({
@@ -844,20 +835,21 @@ $('.trumbowyg').trumbowyg({
                 When you want create your custom extension for Trumbowyg, you can open and close a modal box with custom
                 inner HTML code, listen events and more.
             </p>
+
             <h4>Open and close</h4>
             <p>
-                For that use the <code class="javascript">.trumbowyg()</code> method and give parameters <code>"openModal"</code>
-                or <code>"closeModal"</code> like that:
+                For that use the <code class="javascript">.trumbowyg()</code> method and give parameters <code>'openModal'</code>
+                or <code>'closeModal'</code> like that:
             </p>
             <pre><code class="javascript">
 // Open a modal box
-var $modal = $("#editor").trumbowyg("openModal", {
-    title: "A title for modal box",
-    content: "&lt;p&gt;Content in HTML which you want include in created modal box&lt;/p&gt;"
+var $modal = $('#editor').trumbowyg('openModal', {
+    title: 'A title for modal box',
+    content: '&lt;p&gt;Content in HTML which you want include in created modal box&lt;/p&gt;'
 });
 
 // Close current modal box
-$("#editor").trumbowyg("closeModal");
+$('#editor').trumbowyg('closeModal');
             </code></pre>
             <p>
                 An <code>openModal</code> call returns a jQuery object which contains the modal box. You need this
@@ -871,38 +863,39 @@ $("#editor").trumbowyg("closeModal");
             <h4>Events on modal box</h4>
             <p>
                 Modal boxes in Trumbowy come with two buttons: "Confirm" and "Cancel". An event is associated to each
-                button:
+                one:
             </p>
             <ul>
-                <li><code>tbwsubmit</code>: Trigged when form is submit</li>
-                <li><code>tbwreset</code>: Trigged when user cancel operation</li>
+                <li><code>tbwsubmit</code>: trigged when form is submit</li>
+                <li><code>tbwreset</code>: trigged when user cancel operation</li>
             </ul>
             <pre><code class="javascript">
 // Open a modal box
-var $modal = $("#editor").trumbowyg("openModal", {
-    title: "A title for modal box",
-    content: "&lt;p&gt;Content in HTML which you want include in created modal box&lt;/p&gt;"
+var $modal = $('#editor').trumbowyg('openModal', {
+    title: 'A title for modal box',
+    content: '&lt;p&gt;Content in HTML which you want include in created modal box&lt;/p&gt;'
 });
 
 // Listen clicks on modal box buttons
 $modal.on('trumbowyg-confirm', function(e){
     // Save datas
-    $("#editor").trumbowyg("closeModal");
+    $("#editor").trumbowyg('closeModal');
 });
 $modal.on('trumbowyg-cancel', function(e){
-    $("#editor").trumbowyg("closeModal");
+    console.error(e); // Show error
+    $('#editor').trumbowyg('closeModal');
 });
             </code></pre>
 
             <h4>Only build inputs in modal</h4>
             <p>
-                If you want only add inputs in the modal box, this function was more simple. Indeed, you do not manage
+                If you want only add inputs in the modal box, this function is more simple. Indeed, you do not manage
                 confirm and close buttons, and get all input value on confirm.
             </p>
             <pre><code class="javascript">
 var img = $('img#an-img');
-$("#editor").trumbowyg("openModalInsert", {
-    title: "A title for modal box",
+$("#editor").trumbowyg('openModalInsert', {
+    title: 'A title for modal box',
     fields: {
         url: {
             value: img.attr('src')
@@ -914,7 +907,7 @@ $("#editor").trumbowyg("openModalInsert", {
         },
         example: {
             // Missing label is replaced by the key of this object (here 'example')
-            // Missing name is the same
+            // Missing name is the key
             // When value is missing, value = ''
         }
     },
@@ -923,7 +916,7 @@ $("#editor").trumbowyg("openModalInsert", {
         img.attr('alt', values['alt']);
 
         return true; // Return true if you have finished with this modal box
-        // If you do not return anything, you need manage yourself the closure of the modal box
+        // If you do not return anything, you must manage the closing of the modal box yourself
     }
 });
             </code></pre>

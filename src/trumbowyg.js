@@ -151,9 +151,9 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
                     // Enable/disable
                     case 'enable':
-                        return t.toggleDisable(false);
+                        return t.setDisabled(false);
                     case 'disable':
-                        return t.toggleDisable(true);
+                        return t.setDisabled(true);
 
                     // Destroy
                     case 'destroy':
@@ -451,7 +451,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             setTimeout(function () {
                 if (t.disabled) {
-                    t.toggleDisable(true);
+                    t.setDisabled(true);
                 }
                 t.$c.trigger('tbwinit');
             });
@@ -893,7 +893,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         },
 
         // Disable editor
-        toggleDisable: function (disable) {
+        setDisabled: function (disable) {
             var t = this,
                 prefix = t.o.prefix;
 

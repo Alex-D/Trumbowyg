@@ -1,5 +1,9 @@
 'use strict';
 
+if (window.location.href.indexOf('index.html') > 0) {
+    window.location = window.location.href.replace('index.html', '');
+}
+
 hljs.initHighlightingOnLoad();
 
 (function ($) {
