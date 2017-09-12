@@ -26,7 +26,8 @@ $beer-height: 70px;
     h4 {
         padding: 20px 0 0;
     }
-    p {
+    p,
+    dd {
         code {
             color: #616870;
             background: #dfe5eb;
@@ -256,9 +257,6 @@ $beer-height: 70px;
 .deprecated-info {
     padding: 7px 15px;
     border-radius: 2px;
-}
-
-.deprecated-info {
     background: #f2dfc1;
     border: 1px solid $deprecated-color;
 
@@ -344,5 +342,20 @@ $beer-height: 70px;
         .title-link {
             opacity: 1;
         }
+    }
+}
+
+dl {
+    dt {
+        display: inline-block;
+        color: #616870;
+        background: #dfe5eb;
+        padding: 0 5px;
+        border: 1px solid #d0d9e1;
+        border-radius: 2px;
+    }
+    dd {
+        padding: 5px 0 15px;
+        margin-left: 15px;
     }
 }

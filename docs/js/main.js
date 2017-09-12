@@ -65,7 +65,7 @@ hljs.initHighlightingOnLoad();
 
     // Languages continent switch
     var $continentNames = $('.continent-name');
-    $continentNames.each(function() {
+    $continentNames.each(function () {
         $(this).parent().attr('data-height', $(this).parent().height());
     });
     $continentNames.click(function () {
@@ -89,22 +89,21 @@ hljs.initHighlightingOnLoad();
         }));
     });
 
-    // Toggle class on body to show/hide removed features
-    $('#show-removed').click(function () {
-        $('body').toggleClass('show-removed');
-    });
-
-    $('.link-to-removed').click(function () {
-        $('body').addClass('show-removed');
-    });
-    if (window.location.hash.length > 1 && !$(window.location.hash).is(':visible')) {
-        $('body').addClass('show-removed');
-    }
+    // Force scroll to anchor
+    setTimeout(function () {
+        if (window.location.hash.length > 1 &&
+            $(window.location.hash).length > 0 &&
+            $(window.location.hash).offset().top > 0
+        ) {
+            $('main').scrollTop($(window.location.hash).offset().top);
+        }
+    }, 100);
 
     // Show star count
     function setStarsCount(stars) {
         $('.star-count').text(stars);
     }
+
     var date = new Date();
     var starsKey = 'stars_' + date.getMonth() + '_' + date.getYear();
     var stars = localStorage.getItem(starsKey);
