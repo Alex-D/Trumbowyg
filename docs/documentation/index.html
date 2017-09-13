@@ -29,9 +29,10 @@
                 Documentation
             </h1>
             <nav class="documentation-menu">
-                <a href="./">Home</a> &bull;
+                <a href="./">Docs</a> &bull;
                 <a href="./plugins/">Plugins</a> &bull;
-                <a href="./core/">Core</a>
+                <a href="./core/">Core</a> &bull;
+                <a href="../demos/">Demos</a>
             </nav>
         </header>
 
@@ -44,6 +45,7 @@
                         <li><a href="#basics">Basics</a></li>
                         <li><a href="#common-issues">Common issues</a></li>
                         <li><a href="#use-plugins">Use plugins</a></li>
+                        <li><a href="./plugins/#create-your-own">Create a plugin</a></li>
                     </ul>
                 </li>
                 <li>
@@ -75,7 +77,6 @@
                         <li><a href="#add-localization">Add a localization</a></li>
                         <li><a href="#custom-buttons">Custom buttons</a></li>
                         <li><a href="#custom-dropdowns">Custom dropdowns</a></li>
-                        <li><a href="./plugins/#create-your-own">Create a plugin</a></li>
                     </ul>
                 </li>
                 <li>
@@ -677,64 +678,64 @@ $('.trumbowyg').trumbowyg({
             </p>
             <h4>Parameters</h4>
             <dl>
-                <dt><strong><code>fn</code></strong> <code>[string|function]</code></dt>
+                <dt><strong><code>fn</code></strong> <code class="type">string</code>|<code class="type">function</code></dt>
                 <dd>
                     The name of a Trumbowyg internal method OR a callable function OR browser native execCommand name.
                     In any case, the function is called when the user click on the button or use the associated shortcut.
                     <br>
                     <strong>Default</strong>: button name
                 </dd>
-                <dt><strong><code>tag</code></strong> <code>[string]</code></dt>
+                <dt><strong><code>tag</code></strong> <code class="type">string</code></dt>
                 <dd>
                     The HTML tag name which highlight the button if cursor is in a tag which this tag name.
                     <br>
                     <strong>Default</strong>: button name
                 </dd>
-                <dt><strong><code>title</code></strong> <code>[string]</code></dt>
+                <dt><strong><code>title</code></strong> <code class="type">string</code></dt>
                 <dd>
                     The text displayed in a tooltip on mouse over a button.
                     <br>
                     <strong>Default</strong>: <code>text</code> parameter OR translated button name OR raw button name
                 </dd>
-                <dt><strong><code>text</code></strong> <code>[string]</code></dt>
+                <dt><strong><code>text</code></strong> <code class="type">string</code></dt>
                 <dd>
                     The text of the button used when <a href="#svg-icons">svgPath is set to false</a>.
                     This text can be hidden via <code><a href="#hide-button-texts">hideButtonTexts</a></code> option.
                     <br>
                     <strong>Default</strong>: <code>title</code> parameter OR translated button name OR raw button name
                 </dd>
-                <dt><strong><code>isSupported</code></strong> <code>[function]</code></dt>
+                <dt><strong><code>isSupported</code></strong> <code class="type">function</code></dt>
                 <dd>
                     A function which returns a Boolean to know if the custom button is supported (browser compatibility
                     check, context check, ...)
                     <br>
                     <strong>Default</strong>: <code>null</code> (no check)
                 </dd>
-                <dt><strong><code>key</code></strong> <code>[string]</code></dt>
+                <dt><strong><code>key</code></strong> <code class="type">string</code></dt>
                 <dd>
                     Shortcut key which triggers the button function (<code>fn</code>)
                     <br>
                     <strong>Default</strong>: <code>null</code> (no shortcut defined)
                 </dd>
-                <dt><strong><code>param</code></strong> <code>[string]</code></dt>
+                <dt><strong><code>param</code></strong> <code class="type">string</code></dt>
                 <dd>
                     In case of using browser native execCommand, give this as parameter.
                     <br>
                     <strong>Default</strong>: button name
                 </dd>
-                <dt><strong><code>forceCSS</code></strong> <code>[string]</code></dt>
+                <dt><strong><code>forceCSS</code></strong> <code class="type">string</code></dt>
                 <dd>
                     In case of using browser native execCommand, force usage of inline CSS insteed of a tag.
                     <br>
                     <strong>Default</strong>: <code>false</code>
                 </dd>
-                <dt><strong><code>class</code></strong> <code>[string]</code></dt>
+                <dt><strong><code>class</code></strong> <code class="type">string</code></dt>
                 <dd>
                     A string which is added to the button class attribute.
                     <br>
                     <strong>Default</strong>: Trumbowyg adds a <code>prefix + '-' + buttonName</code> class
                 </dd>
-                <dt><strong><code>hasIcon</code></strong> <code>[boolean]</code></dt>
+                <dt><strong><code>hasIcon</code></strong> <code class="type">boolean</code></dt>
                 <dd>
                     Allow us to force the display of the text for a specific button.
                     <br>
@@ -781,25 +782,25 @@ $('.trumbowyg').trumbowyg({
             </code></pre>
             <h4>Parameters</h4>
             <dl>
-                <dt><strong><code>dropdown</code></strong> <code>[array&lt;string>]</code></dt>
+                <dt><strong><code>dropdown</code></strong> <code class="type">array&lt;string></code></dt>
                 <dd>
                     A list of button names to list in the dropdown.
                     <br>
                     <strong>Default</strong>: <code>[]</code>
                 </dd>
-                <dt><strong><code>title</code></strong> <code>[string]</code></dt>
+                <dt><strong><code>title</code></strong> <code class="type">string</code></dt>
                 <dd>
                     The text displayed in a tooltip on mouse over the dropdown button.
                     <br>
                     <strong>Default</strong>: translated dropdown button name OR raw dropdown button name
                 </dd>
-                <dt><strong><code>ico</code></strong> <code>[string]</code></dt>
+                <dt><strong><code>ico</code></strong> <code class="type">string</code></dt>
                 <dd>
                     The icon name for the dropdown. You can reuse <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/src/ui/icons">some existing icons from Trumbowyg</a>.
                     <br>
                     <strong>Default</strong>: icon with button name in snake case
                 </dd>
-                <dt><strong><code>hasIcon</code></strong> <code>[boolean]</code></dt>
+                <dt><strong><code>hasIcon</code></strong> <code class="type">boolean</code></dt>
                 <dd>
                     Allow us to force the display of the text for a specific button.
                     <br>
@@ -877,12 +878,11 @@ var $modal = $('#editor').trumbowyg('openModal', {
 });
 
 // Listen clicks on modal box buttons
-$modal.on('trumbowyg-confirm', function(e){
+$modal.on('tbwconfirm', function(e){
     // Save datas
     $("#editor").trumbowyg('closeModal');
 });
-$modal.on('trumbowyg-cancel', function(e){
-    console.error(e); // Show error
+$modal.on('tbwcancel', function(e){
     $('#editor').trumbowyg('closeModal');
 });
             </code></pre>
@@ -918,6 +918,15 @@ $("#editor").trumbowyg('openModalInsert', {
         return true; // Return true if you have finished with this modal box
         // If you do not return anything, you must manage the closing of the modal box yourself
     }
+});
+
+// You can also listen for modal confirm/cancel events to do some custom things
+// Note: the openModalInsert callback is called on tbwconfirm
+$modal.on('tbwconfirm', function(e){
+    // Do what you want
+});
+$modal.on('tbwcancel', function(e){
+    trumbowyg.closeModal();
 });
             </code></pre>
         </div>

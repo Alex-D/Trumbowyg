@@ -29,9 +29,10 @@
                 Plugins
             </h1>
             <nav class="documentation-menu">
-                <a href="../">Home</a> &bull;
+                <a href="../">Docs</a> &bull;
                 <a href="./">Plugins</a> &bull;
-                <a href="../core/">Core</a>
+                <a href="../core/">Core</a> &bull;
+                <a href="../../demos/">Demos</a>
             </nav>
         </header>
 
@@ -45,7 +46,7 @@
                         <li><a href="#plugin-colors">Colors</a></li>
                         <li><a href="#plugin-emoji">Emoji</a></li>
                         <li><a href="#plugin-insertaudio">Insert audio</a></li>
-                        <li><a href="#plugin-noembed">noEmbed</a></li>
+                        <li><a href="#plugin-noembed">Noembed</a></li>
                         <li><a href="#plugin-pasteimage">Paste image</a></li>
                         <li><a href="#plugin-preformatted">Preformatted</a></li>
                         <li><a href="#plugin-table">Table</a></li>
@@ -163,17 +164,44 @@ $('#my-editor').trumbowyg({
 
         <div class="feature">
             <h3 id="plugin-emoji">Emoji</h3>
-            <p class="deprecated-feature">Need documentation</p>
+            <p class="added-feature">Stable</p>
 
-            <p class="note">
-                Some doc to write... <br>
-                You can contribute to this documentation by submitting a Pull Request :)
+            <p>
+                Emoji plugin allows you to insert some emojis in your editor.
             </p>
+
+            <h4>How to use it?</h4>
+            <p>
+                This plugin require <strong>emojify.js</strong> which can be installed with:
+                <code>npm&nbsp;install&nbsp;emojify.js</code>
+            </p>
+            <pre><code class="html">
+&lt;-- Import emojify.js and Trumbowyg emoji at the end of &lt;body>... -->
+&lt;script src="node_modules/emojify.js/dist/js/emojify.min.js">&lt;/script>
+&lt;script src="node_modules/trumbowyg/dist/plugins/emoji/trumbowyg.emoji.min.js">&lt;/script>
+            </code></pre>
+            <p>
+                You should setup emojify.js, then you can use the new button definition <code>emoji</code>
+            </p>
+
+            <pre><code class="javascript">
+// Setup emojify.js
+emojify.setConfig({
+    img_dir : 'node_modules/emojify.js/dist/images/basic/',
+});
+emojify.run();
+
+$('#my-editor').trumbowyg({
+    btns: [
+        ['emoji']
+    ]
+});
+            </code></pre>
         </div>
 
         <div class="feature">
             <h3 id="plugin-insertaudio">Insert audio</h3>
-            <p class="deprecated-feature">Stable</p>
+            <p class="added-feature">Stable</p>
 
             <p>
                 Do the same as insert image, but for audio.
@@ -197,7 +225,7 @@ $('#my-editor').trumbowyg({
         </div>
 
         <div class="feature">
-            <h3 id="plugin-noembed">noEmbed</h3>
+            <h3 id="plugin-noembed">Noembed</h3>
             <p class="added-feature">Stable</p>
 
             <p>

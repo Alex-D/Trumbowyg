@@ -114,6 +114,9 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 (function (navigator, window, document, $) {
     'use strict';
 
+    var CONFIRM_EVENT = 'tbwconfirm',
+        CANCEL_EVENT = 'tbwcancel';
+
     $.fn.trumbowyg = function (options, params) {
         var trumbowygDataName = 'trumbowyg';
         if (options === Object(options) || !options) {
@@ -619,6 +622,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     if (t.o.removeformatPasted) {
                         e.preventDefault();
 
+                        if (window.getSelection && window.getSelection().deleteFromDocument) {
+                            window.getSelection().deleteFromDocument();
+                        }
+
                         try {
                             // IE
                             var text = window.clipboardData.getData('Text');
@@ -911,13 +918,12 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         // Destroy the editor
         destroy: function () {
             var t = this,
-                prefix = t.o.prefix,
-                height = t.height;
+                prefix = t.o.prefix;
 
             if (t.isTextarea) {
                 t.$box.after(
                     t.$ta
-                        .css({height: height})
+                        .css({height: ''})
                         .val(t.html())
                         .removeClass(prefix + 'textarea')
                         .show()
@@ -925,9 +931,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             } else {
                 t.$box.after(
                     t.$ed
-                        .css({height: height})
+                        .css({height: ''})
                         .removeClass(prefix + 'editor')
                         .removeAttr('contenteditable')
+                        .removeAttr('dir')
                         .html(t.html())
                         .show()
                 );
@@ -1312,7 +1319,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             // Click on overlay close modal by cancelling them
             t.$overlay.one('click', function () {
-                $modal.trigger('tbwcancel');
+                $modal.trigger(CANCEL_EVENT);
                 return false;
             });
 
@@ -1322,11 +1329,11 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 html: content
             })
                 .on('submit', function () {
-                    $modal.trigger('tbwconfirm');
+                    $modal.trigger(CONFIRM_EVENT);
                     return false;
                 })
                 .on('reset', function () {
-                    $modal.trigger('tbwcancel');
+                    $modal.trigger(CANCEL_EVENT);
                     return false;
                 })
                 .on('submit reset', function () {
@@ -1410,8 +1417,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             var t = this,
                 prefix = t.o.prefix,
                 lg = t.lang,
-                html = '',
-                CONFIRM_EVENT = 'tbwconfirm';
+                html = '';
 
             $.each(fields, function (fieldName, field) {
                 var l = field.label,
@@ -1463,7 +1469,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         }
                     }
                 })
-                .one('tbwcancel', function () {
+                .one(CANCEL_EVENT, function () {
                     $(this).off(CONFIRM_EVENT);
                     t.closeModal();
                 });
@@ -1643,7 +1649,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             tags.push(tag);
 
-            return t.getTagsRecursive(element, tags);
+            return t.getTagsRecursive(element, tags).filter(function(tag) { return tag != null; });
         },
 
         // Plugins

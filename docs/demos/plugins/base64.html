@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>base64 plugin | Trumbowyg</title>
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../../dist/ui/trumbowyg.css">
+    <link rel="stylesheet" href="../../../dist/ui/trumbowyg.css">
 </head>
 <body>
 <div class="container">
@@ -16,19 +16,7 @@
         </p>
     </header>
 
-    <h2>Setup</h2>
-    <pre>
-        <code class="html">
-&lt;-- At the bottom of your BODY, AFTER jQuery and Trumbowyg imports -->
-&lt;script src="bower_components/trumbowyg/dist/plugins/base64/trumbowyg.base64.js">&lt;/script>
-        </code>
-    </pre>
-
-
-    <hr>
-
     <h2>Basic usage</h2>
-
 
     <div id="editor">
         <h2>Insert your base64 image!</h2>
@@ -87,14 +75,17 @@ $('#editor-dropdown')
     },
     // Redefine the button pane
     btns: [
-        'viewHTML',
-        '|', 'formatting',
-        '|', 'btnGrp-semantic',
-        '|', 'link',
-        '|', 'image',
-        '|', 'btnGrp-justify',
-        '|', 'btnGrp-lists',
-        '|', 'horizontalRule'
+        ['viewHTML'],
+        ['formatting'],
+        ['strong', 'em', 'del'],
+        ['superscript', 'subscript'],
+        ['link'],
+        ['image'], // Our fresh created dropdown
+        ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+        ['unorderedList', 'orderedList'],
+        ['horizontalRule'],
+        ['removeformat'],
+        ['fullscreen']
     ]
 });
     </code>
@@ -103,11 +94,11 @@ $('#editor-dropdown')
 
 
 <!-- Import jQuery -->
-<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../../../bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Import Trumbowyg -->
-<script src="../../dist/trumbowyg.js"></script>
-<!-- Import all plugin you want AFETER importing jQuery and Trumbowyg -->
-<script src="../../dist/plugins/base64/trumbowyg.base64.js"></script>
+<script src="../../../dist/trumbowyg.js"></script>
+<!-- Import all plugin you want AFTER importing jQuery and Trumbowyg -->
+<script src="../../../dist/plugins/base64/trumbowyg.base64.js"></script>
 
 
 <!-- DO NOT COPY THIS LINES, THEY ARE THERE JUST FOR THE EXAMPLE PAGE PRUPOSE -->

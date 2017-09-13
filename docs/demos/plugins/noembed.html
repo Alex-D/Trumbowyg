@@ -2,36 +2,25 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>base64 plugin | Trumbowyg</title>
+    <title>Noembed plugin | Trumbowyg</title>
+    <link rel="stylesheet" href="//noembed.com/noembed.css">
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../../dist/ui/trumbowyg.css">
+    <link rel="stylesheet" href="../../../dist/ui/trumbowyg.css">
 </head>
 <body>
 <div class="container">
     <header>
-        <h1>Base64 plugin</h1>
+        <h1>Noembed plugin for Trumbowyg</h1>
 
         <p>
-            You can insert an image in <em>base64</em> in src attribute of <code>img</code> tag.
+            You can insert embeded content via a noembed proxy.
+            Plugin uses <a href="//noembed.com">noembed</a> by default.
         </p>
     </header>
 
-    <h2>Setup</h2>
-    <pre>
-        <code class="html">
-&lt;-- At the bottom of your BODY, AFTER jQuery and Trumbowyg imports -->
-&lt;script src="bower_components/trumbowyg/dist/plugins/base64/trumbowyg.base64.js">&lt;/script>
-        </code>
-    </pre>
-
-
-    <hr>
-
-    <h2>Basic usage</h2>
-
 
     <div id="editor">
-        <h2>Insert your base64 image!</h2>
+        <h2>Embed Content!</h2>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident
             optio nam reiciendis eius beatae quibusdam!
@@ -46,21 +35,20 @@
 
     <h3>The code</h3>
     <pre>
-        <code class="js-code-to-eval javascript">
+    <code class="js-code-to-eval javascript">
 $('#editor')
 .trumbowyg({
-    btns: ['base64']
+    btns: ['noembed']
 });
-        </code>
+    </code>
     </pre>
 
 
     <hr>
 
-    <h2>Put base64 button in an "Image" dropdown</h2>
 
     <div id="editor-dropdown">
-        <h2>Insert your base64 image through image dropdown!</h2>
+        <h2>Embed content through link dropdown!</h2>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident
             optio nam reiciendis eius beatae quibusdam!
@@ -80,22 +68,20 @@ $('#editor-dropdown')
 .trumbowyg({
     btnsDef: {
         // Create a new dropdown
-        image: {
-            dropdown: ['insertImage', 'base64'],
-            ico: 'insertImage'
+        link: {
+            dropdown: ['insertLink', 'removeLink', 'noembed'],
+            ico: 'insertLink'
         }
     },
     // Redefine the button pane
-    btns: [
-        'viewHTML',
-        '|', 'formatting',
-        '|', 'btnGrp-semantic',
-        '|', 'link',
-        '|', 'image',
-        '|', 'btnGrp-justify',
-        '|', 'btnGrp-lists',
-        '|', 'horizontalRule'
-    ]
+    btns: ['viewHTML',
+            '|', 'formatting',
+            '|', 'btnGrp-semantic',
+            '|', 'link',
+            '|', 'insertImage',
+            '|', 'btnGrp-justify',
+            '|', 'btnGrp-lists',
+            '|', 'horizontalRule']
 });
     </code>
     </pre>
@@ -103,11 +89,11 @@ $('#editor-dropdown')
 
 
 <!-- Import jQuery -->
-<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../../../bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Import Trumbowyg -->
-<script src="../../dist/trumbowyg.js"></script>
-<!-- Import all plugin you want AFETER importing jQuery and Trumbowyg -->
-<script src="../../dist/plugins/base64/trumbowyg.base64.js"></script>
+<script src="../../../dist/trumbowyg.js"></script>
+<!-- Import all plugin you want AFTER importing jQuery and Trumbowyg -->
+<script src="../../../dist/plugins/noembed/trumbowyg.noembed.js"></script>
 
 
 <!-- DO NOT COPY THIS LINES, THEY ARE THERE JUST FOR THE EXAMPLE PAGE PRUPOSE -->

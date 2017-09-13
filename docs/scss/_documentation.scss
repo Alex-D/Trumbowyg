@@ -37,6 +37,18 @@ $beer-height: 70px;
         }
     }
 
+    code.type {
+        padding: 0 3px;
+        color: $primary-color-dark;
+
+        &::before {
+            content: "<";
+        }
+        &::after {
+            content: ">";
+        }
+    }
+
     ::-webkit-scrollbar {
         width: 17px;
     }

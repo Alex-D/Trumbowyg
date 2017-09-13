@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>Colors plugin | Trumbowyg</title>
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../../dist/ui/trumbowyg.css">
-    <link rel="stylesheet" href="../../dist/plugins/colors/ui/trumbowyg.colors.css">
+    <link rel="stylesheet" href="../../../dist/ui/trumbowyg.css">
+    <link rel="stylesheet" href="../../../dist/plugins/colors/ui/trumbowyg.colors.css">
 </head>
 <body>
 <div class="container">
@@ -31,9 +31,9 @@
         </p>
     </div>
 
-    <h2>The code</h2>
+    <h3>The code</h3>
     <pre>
-    <code>
+    <code class="js-code-to-eval javascript">
 $('#editor')
 .trumbowyg({
     btns: ['foreColor', 'backColor']
@@ -41,14 +41,18 @@ $('#editor')
     </code>
     </pre>
 </div>
-<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
-<script src="../../dist/trumbowyg.js"></script>
-<script src="../../dist/plugins/colors/trumbowyg.colors.js"></script>
-<script>
-    $('#editor')
-        .trumbowyg({
-            btnsAdd: ['foreColor', 'backColor']
-        });
-</script>
+
+
+<!-- Import jQuery -->
+<script src="../../../bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Import Trumbowyg -->
+<script src="../../../dist/trumbowyg.js"></script>
+<!-- Import all plugin you want AFTER importing jQuery and Trumbowyg -->
+<script src="../../../dist/plugins/colors/trumbowyg.colors.js"></script>
+
+
+<!-- DO NOT COPY THIS LINES, THEY ARE THERE JUST FOR THE EXAMPLE PAGE PRUPOSE -->
+<script src="../js/runExampleCode.js"></script>
+<script src="../js/highlight.js"></script>
 </body>
 </html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Template plugin | Trumbowyg by Alex-D</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../../../dist/ui/trumbowyg.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Template plugin for Trumbowyg</h1>
+
+        <p>
+            This plugin allows you to add a template-dropdown.
+        </p>
+    </header>
+
+    <div id="editor">
+        <h2>Lorem ipsum dolor sit amet</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident
+            optio nam reiciendis eius beatae quibusdam!
+        </p>
+        <p>
+            The text is derived from Cicero's De Finibus Bonorum et Malorum (On the Ends of Goods and Evils, or
+            alternatively [About] The Purposes of Good and Evil ). The original passage began: Neque porro quisquam est
+            qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit (Translation: &quot;Neither is there
+            anyone who loves grief itself since it is grief and thus wants to obtain it&quot;).
+        </p>
+    </div>
+
+    <h3>The code</h3>
+    <pre>
+    <code class="js-code-to-eval javascript">
+        $('#editor')
+        .trumbowyg({
+            btns: ['template'],
+            plugins: {
+                templates: [
+                    {
+                        name: 'Template 1',
+                        html: '&lt;p&gt;I am a template!&lt;/p&gt;'
+                    },
+                    {
+                        name: 'Template 2',
+                        html: '&lt;p&gt;I am a different template!&lt;/p&gt;'
+                    }
+                ]
+            }
+        });
+    </code>
+    </pre>
+</div>
+
+
+<!-- Import jQuery -->
+<script src="../../../bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Import Trumbowyg -->
+<script src="../../../dist/trumbowyg.js"></script>
+<!-- Import all plugin you want AFTER importing jQuery and Trumbowyg -->
+<script src="../../../dist/plugins/template/trumbowyg.template.js"></script>
+
+
+<!-- DO NOT COPY THIS LINES, THEY ARE THERE JUST FOR THE EXAMPLE PAGE PRUPOSE -->
+<script src="../js/runExampleCode.js"></script>
+<script src="../js/highlight.js"></script>
+</body>
+</html>

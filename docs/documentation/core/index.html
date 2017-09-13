@@ -29,9 +29,10 @@
                 Core
             </h1>
             <nav class="documentation-menu">
-                <a href="../">Home</a> &bull;
+                <a href="../">Docs</a> &bull;
                 <a href="../plugins/">Plugins</a> &bull;
-                <a href="./">Core</a>
+                <a href="./">Core</a> &bull;
+                <a href="../../demos/">Demos</a>
             </nav>
         </header>
 
@@ -113,12 +114,11 @@ var $modal = trumbowyg.openModal({
 });
 
 // Listen clicks on modal box buttons
-$modal.on('trumbowyg-confirm', function(e){
-    // Save datas
+$modal.on('tbwconfirm', function(e){
+    // Do what you want
     trumbowyg.closeModal();
 });
-$modal.on('trumbowyg-cancel', function(e){
-    console.error(e); // Show error
+$modal.on('tbwcancel', function(e){
     trumbowyg.closeModal();
 });
             </code></pre>
@@ -130,7 +130,7 @@ $modal.on('trumbowyg-cancel', function(e){
             </p>
             <pre><code class="javascript">
 var img = $('img#an-img');
-trumbowyg.openModalInsert({
+$modal = trumbowyg.openModalInsert({
     title: 'A title for modal box',
     fields: {
         url: {
@@ -147,6 +147,7 @@ trumbowyg.openModalInsert({
             // When value is missing, value = ''
         }
     },
+    // Callback is called when user confirms
     callback: function(values){
         img.attr('src', values['url']);
         img.attr('alt', values['alt']);
@@ -154,6 +155,15 @@ trumbowyg.openModalInsert({
         return true; // Return true if you have finished with this modal box
         // If you do not return anything, you must manage the closing of the modal box yourself
     }
+});
+
+// You can also listen for modal confirm/cancel events to do some custom things
+// Note: the openModalInsert callback is called on tbwconfirm
+$modal.on('tbwconfirm', function(e){
+    // Do what you want
+});
+$modal.on('tbwcancel', function(e){
+    trumbowyg.closeModal();
 });
             </code></pre>
         </div>
