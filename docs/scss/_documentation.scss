@@ -15,6 +15,20 @@ $beer-height: 70px;
         overflow: auto;
     }
 
+    .main-demos {
+        padding: 0;
+        overflow: hidden;
+
+        iframe {
+            width: 100%;
+            height: 100vh;
+        }
+    }
+
+    .main-demo-inner {
+        width: 100%;
+    }
+
     .section-title {
         padding: 50px 0 0;
     }
@@ -168,7 +182,8 @@ $beer-height: 70px;
             margin: 0 auto;
             padding: 0 15px;
 
-            a {
+            a,
+            .documentation-summary-title {
                 display: block;
                 height: 30px;
                 line-height: 30px;
@@ -185,11 +200,14 @@ $beer-height: 70px;
                     margin-top: 50px;
                 }
 
-                > a {
+                > a,
+                .documentation-summary-title {
                     font-weight: 600;
                     text-transform: uppercase;
                     margin-bottom: 5px;
+                }
 
+                > a {
                     &:hover,
                     &:focus {
                         color: $primary-color-dark;

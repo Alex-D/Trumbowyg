@@ -123,6 +123,23 @@ hljs.initHighlightingOnLoad();
     } else {
         setStarsCount(stars);
     }
+
+    // Switch iframe src for demos
+    if ($('.main-demos').length > 0) {
+        $('.documentation-summary a').each(function() {
+            var demoHash = $(this).attr('href').replace('.html', '').replace(/[\/.]/g, '-').replace(/^-*/g, '');
+            $(this).attr('data-hash', demoHash);
+            $(this).click(function() {
+                $('.main-demos iframe').attr('src', $(this).attr('href'));
+                window.location.hash = demoHash;
+                return false;
+            });
+        });
+        if (window.location.hash.length > 1) {
+            var demoHref = $('[data-hash="' + window.location.hash.replace('#', '') + '"]').attr('href');
+            $('.main-demos iframe').attr('src', demoHref);
+        }
+    }
 })(jQuery);
 
 /* Google Analytics */
