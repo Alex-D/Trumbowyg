@@ -872,7 +872,6 @@
             ':white_medium_small_square:',
             ':black_medium_square:',
             ':white_medium_square:',
-            ':black_large_square:',
             ':white_large_square:',
             ':white_check_mark:',
             ':black_square_button:',
@@ -930,27 +929,31 @@
                 var emojiCode = emoji[0],
                     emojiUrl = emoji[1],
                     emojiHtml = '<img src="' + emojiUrl + '" alt="' + emojiCode + '">',
-                    btnDef = {
+                    customEmojiBtnName = 'emoji-' + emojiCode.replace(/:/g, ''),
+                    customEmojiBtnDef = {
                         hasIcon: false,
-                        param: emojiHtml,
+                        text: emojiHtml,
                         fn: function () {
                             trumbowyg.execCmd('insertImage', emojiUrl, false, true);
                             return true;
                         }
                     };
-                trumbowyg.addBtnDef(emojiHtml, btnDef);
-                dropdown.push(emojiHtml);
+
+                trumbowyg.addBtnDef(customEmojiBtnName, customEmojiBtnDef);
+                dropdown.push(customEmojiBtnName);
             } else { // Default behaviour
-                var btn = emoji,
-                    btnDef = {
-                        param: emoji,
+                var btn = emoji.replace(/:/g, ''),
+                    defaultEmojiBtnName = 'emoji-' + btn,
+                    defaultEmojiBtnDef = {
+                        text: emoji,
                         fn: function () {
                             trumbowyg.execCmd('insertText', emoji);
                             return true;
                         }
                     };
-                trumbowyg.addBtnDef(btn, btnDef);
-                dropdown.push(btn);
+
+                trumbowyg.addBtnDef(defaultEmojiBtnName, defaultEmojiBtnDef);
+                dropdown.push(defaultEmojiBtnName);
             }
         });
 

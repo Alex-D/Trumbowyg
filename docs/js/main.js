@@ -1,5 +1,9 @@
 'use strict';
 
+if (window.location.href.indexOf('index.html') > 0) {
+    window.location = window.location.href.replace('index.html', '');
+}
+
 hljs.initHighlightingOnLoad();
 
 (function ($) {
@@ -65,7 +69,7 @@ hljs.initHighlightingOnLoad();
 
     // Languages continent switch
     var $continentNames = $('.continent-name');
-    $continentNames.each(function() {
+    $continentNames.each(function () {
         $(this).parent().attr('data-height', $(this).parent().height());
     });
     $continentNames.click(function () {
@@ -89,22 +93,21 @@ hljs.initHighlightingOnLoad();
         }));
     });
 
-    // Toggle class on body to show/hide removed features
-    $('#show-removed').click(function () {
-        $('body').toggleClass('show-removed');
-    });
-
-    $('.link-to-removed').click(function () {
-        $('body').addClass('show-removed');
-    });
-    if (window.location.hash.length > 1 && !$(window.location.hash).is(':visible')) {
-        $('body').addClass('show-removed');
-    }
+    // Force scroll to anchor
+    setTimeout(function () {
+        if (window.location.hash.length > 1 &&
+            $(window.location.hash).length > 0 &&
+            $(window.location.hash).offset().top > 0
+        ) {
+            $('main').scrollTop($(window.location.hash).offset().top);
+        }
+    }, 100);
 
     // Show star count
     function setStarsCount(stars) {
         $('.star-count').text(stars);
     }
+
     var date = new Date();
     var starsKey = 'stars_' + date.getMonth() + '_' + date.getYear();
     var stars = localStorage.getItem(starsKey);
@@ -119,6 +122,23 @@ hljs.initHighlightingOnLoad();
         });
     } else {
         setStarsCount(stars);
+    }
+
+    // Switch iframe src for demos
+    if ($('.main-demos').length > 0) {
+        $('.documentation-summary a').each(function() {
+            var demoHash = $(this).attr('href').replace('.html', '').replace(/[\/.]/g, '-').replace(/^-*/g, '');
+            $(this).attr('data-hash', demoHash);
+            $(this).click(function() {
+                $('.main-demos iframe').attr('src', $(this).attr('href'));
+                window.location.hash = demoHash;
+                return false;
+            });
+        });
+        if (window.location.hash.length > 1) {
+            var demoHref = $('[data-hash="' + window.location.hash.replace('#', '') + '"]').attr('href');
+            $('.main-demos iframe').attr('src', demoHref);
+        }
     }
 })(jQuery);
 
