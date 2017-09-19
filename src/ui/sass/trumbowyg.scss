@@ -330,6 +330,7 @@ $slow-transition-duration: 300ms !default;
 
         .trumbowyg-progress-bar {
             background: #2BC06A;
+            width: 0;
             height: 100%;
             transition: width $transition-duration linear;
         }

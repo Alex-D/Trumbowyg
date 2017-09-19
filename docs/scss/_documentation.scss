@@ -15,6 +15,21 @@ $beer-height: 70px;
         overflow: auto;
     }
 
+    .main-demos {
+        padding: 0;
+        overflow: hidden;
+
+        iframe {
+            width: 100%;
+            height: 100vh;
+            background: $grey;
+        }
+    }
+
+    .main-demo-inner {
+        width: 100%;
+    }
+
     .section-title {
         padding: 50px 0 0;
     }
@@ -26,13 +41,41 @@ $beer-height: 70px;
     h4 {
         padding: 20px 0 0;
     }
-    p {
+    p,
+    dd {
         code {
             color: #616870;
             background: #dfe5eb;
             padding: 0 5px;
             border: 1px solid #d0d9e1;
             border-radius: 2px;
+        }
+    }
+
+    code.type {
+        padding: 0 3px;
+        color: $primary-color-dark;
+
+        &::before {
+            content: "<";
+        }
+        &::after {
+            content: ">";
+        }
+    }
+
+    .button.button-demo {
+        border-color: rgba($secondary-color, 0.6);
+        color: $secondary-color;
+        width: auto;
+        padding: 10px 30px;
+
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            border-color: $secondary-color;
+            background: $secondary-color;
+            color: $white;
         }
     }
 
@@ -75,6 +118,21 @@ $beer-height: 70px;
             font-size: 2.5vw;
         }
     }
+    .documentation-menu {
+        text-align: center;
+        margin-top: 40px;
+        background: $secondary-color;
+
+        a {
+            display: inline-block;
+            padding: 20px 5px;
+
+            &:hover,
+            &:focus {
+                text-decoration: underline;
+            }
+        }
+    }
 }
 
 .sidebar {
@@ -113,6 +171,8 @@ $beer-height: 70px;
 
     .sidebar-inner {
         overflow: auto;
+        overflow-y: scroll;
+        overflow-x: hidden;
         height: calc(100vh - #{$beer-height});
         padding-bottom: 100px;
     }
@@ -138,7 +198,8 @@ $beer-height: 70px;
             margin: 0 auto;
             padding: 0 15px;
 
-            a {
+            a,
+            .documentation-summary-title {
                 display: block;
                 height: 30px;
                 line-height: 30px;
@@ -155,11 +216,14 @@ $beer-height: 70px;
                     margin-top: 50px;
                 }
 
-                > a {
+                > a,
+                .documentation-summary-title {
                     font-weight: 600;
                     text-transform: uppercase;
                     margin-bottom: 5px;
+                }
 
+                > a {
                     &:hover,
                     &:focus {
                         color: $primary-color-dark;
@@ -256,9 +320,6 @@ $beer-height: 70px;
 .deprecated-info {
     padding: 7px 15px;
     border-radius: 2px;
-}
-
-.deprecated-info {
     background: #f2dfc1;
     border: 1px solid $deprecated-color;
 
@@ -344,5 +405,20 @@ $beer-height: 70px;
         .title-link {
             opacity: 1;
         }
+    }
+}
+
+dl {
+    dt {
+        display: inline-block;
+        color: #616870;
+        background: #dfe5eb;
+        padding: 0 5px;
+        border: 1px solid #d0d9e1;
+        border-radius: 2px;
+    }
+    dd {
+        padding: 5px 0 15px;
+        margin-left: 15px;
     }
 }

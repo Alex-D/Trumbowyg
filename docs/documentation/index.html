@@ -3,20 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Documentation of Trumbowyg : a lightweight WYSIWYG editor | Alex-D / Alexandre Demode</title>
+    <title>Documentation | Trumbowyg : a lightweight WYSIWYG editor | Alex-D / Alexandre Demode</title>
     <meta name="description" content="Trumbowyg is a jQuery plugin for create WYSIWYG editor">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" href="../favicon.png">
 
     <link rel="stylesheet" href="../css/main.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-
-    <script>
-        if (window.location.href.indexOf('index.html') > 0) {
-            window.location = window.location.href.replace('index.html', '');
-        }
-    </script>
 </head>
 <body class="documentation-body">
 <svg xmlns="http://www.w3.org/2000/svg" style="overflow: hidden;visibility: hidden;height: 0;width: 0;">
@@ -28,12 +22,18 @@
 <div class="sidebar">
     <div class="sidebar-inner">
         <header class="header-documentation">
-            <a href="../" class="documentation-logo-link">
+            <a href="../" class="documentation-logo-link" title="Back to Trumbowyg landing">
                 <img src="../img/logo-doc.svg" alt="" class="documentation-logo">
             </a>
             <h1 class="documentation-title">
                 Documentation
             </h1>
+            <nav class="documentation-menu">
+                <a href="./">Docs</a> &bull;
+                <a href="./plugins/">Plugins</a> &bull;
+                <a href="./core/">Core</a> &bull;
+                <a href="../demos/">Demos</a>
+            </nav>
         </header>
 
         <aside class="documentation-summary">
@@ -44,6 +44,8 @@
                         <li><a href="#installation">Installation</a></li>
                         <li><a href="#basics">Basics</a></li>
                         <li><a href="#common-issues">Common issues</a></li>
+                        <li><a href="#use-plugins">Use plugins</a></li>
+                        <li><a href="./plugins/#create-your-own">Create a plugin</a></li>
                     </ul>
                 </li>
                 <li>
@@ -61,6 +63,7 @@
                     <a href="#basic-options">Basic Options</a>
                     <ul>
                         <li><a href="#button-pane">Button pane</a></li>
+                        <li><a href="#hide-button-texts">Hide button texts</a></li>
                         <li><a href="#semantic">Semantic</a></li>
                         <li><a href="#reset-css">Reset CSS</a></li>
                         <li><a href="#remove-format-pasted">Remove format pasted</a></li>
@@ -72,12 +75,8 @@
                     <a href="#advanced-options">Advanced Options</a>
                     <ul>
                         <li><a href="#add-localization">Add a localization</a></li>
-                        <!-- TODO
                         <li><a href="#custom-buttons">Custom buttons</a></li>
-                        <li><a href="#keyboard-shortcuts">Keyboard shortcuts</a></li>
-                        <li><a href="#add-button-type">Add button type</a></li>
-                        <li><a href="#create-plugin">Create a plugin</a></li>
-                        -->
+                        <li><a href="#custom-dropdowns">Custom dropdowns</a></li>
                     </ul>
                 </li>
                 <li>
@@ -99,8 +98,8 @@
             <a href="../#donate">
                 <img src="../img/beer.svg" alt="" class="beer-icon">
                 <span class="beer-label">
-                    Did you enjoy Trumbowyg? <br>
-                    Buy me a beer :)
+                    Do you enjoy Trumbowyg? <br>
+                    Buy me some beers :)
                 </span>
             </a>
         </div>
@@ -152,7 +151,8 @@
             </code></pre>
 
             <p>
-                Don't forget to load Trumbowyg CSS in the <code>&lt;head&gt;</code>, or load your own style for the editor.
+                Don't forget to load Trumbowyg CSS in the <code>&lt;head&gt;</code>, or load your own style for the
+                editor.
             </p>
             <pre><code class="html">
 &lt;link rel="stylesheet" href="node_modules/trumbowyg/dist/ui/trumbowyg.min.css">
@@ -187,11 +187,56 @@ $('#trumbowyg-demo').trumbowyg({
 
             <ul>
                 <li>check if you are in HTTP(S) protocol;</li>
-                <li>check if you did not have strong problem;</li>
+                <li>check if you do not have cross domain error (XHR request is used).</li>
             </ul>
             <p>
                 If your problem is not solved by these tips, check the
                 <a href="#svg-icons">SVG icons section</a>.
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3 id="use-plugins">Use plugins</h3>
+
+            <h4>Add a plugin to your page</h4>
+
+            <p>
+                Basically you need to add the plugin JS to your page, at the bottom of your <code>&lt;body></code>,
+                <strong>after</strong> jQuery and Trumbowyg imports (in this order), but before your custom JS which
+                initialize Trumbowyg:
+            </p>
+            <pre><code class="html">
+&lt;-- Import jQuery -->
+&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">&lt;/script>
+&lt;script>window.jQuery || document.write('&lt;script src="js/vendor/jquery-3.2.1.min.js">&lt;\/script>')&lt;/script>
+
+&lt;-- Import Trumbowyg -->
+&lt;script src="node_modules/trumbowyg/dist/trumbowyg.min.js">&lt;/script>
+
+&lt;-- Import Trumbowyg plugins... -->
+&lt;script src="node_modules/trumbowyg/dist/plugins/upload/trumbowyg.cleanpaste.min.js">&lt;/script>
+&lt;script src="node_modules/trumbowyg/dist/plugins/upload/trumbowyg.pasteimage.min.js">&lt;/script>
+
+&lt;-- Init Trumbowyg -->
+&lt;script>
+    // Doing this in a loaded JS file is better, I put this here for simplicity
+    $('#my-editor').trumbowyg();
+&lt;/script>
+            </code></pre>
+
+            <p>
+                In the previous case, plugins are "auto registering" themself into Trumbowyg and be activated in
+                <strong>all</strong> future Trumbowyg instances.
+            </p>
+            <p>
+                But most popular plugins are button-based, like
+                <a href="./plugins/#plugin-upload">upload</a> or
+                <a href="./plugins/#plugin-colors">colors</a> ones.
+                If you want to use these plugins, load them like explained before, then add the plugin button to your editor
+                by <a href="#button-pane">checking the button pane doc section</a>.
+            </p>
+            <p>
+                For more informations on plugins, check <a href="./plugins/">the plugins documentation page.</a>
             </p>
         </div>
     </section>
@@ -317,6 +362,10 @@ $.trumbowyg.svgPath = '/assets/my-custom-path/icons.svg';
             <pre><code class="javascript">
 $.trumbowyg.svgPath = false:
             </code></pre>
+            <p>
+                Check <a href="#hide-button-texts">hide button texts</a> option if you did not want button content at all
+                and customize it by yourself.
+            </p>
             <p class="note">
                 This global way needs to be done before initialize any Trumbowyg instance.
             </p>
@@ -356,7 +405,7 @@ $('.editor').trumbowyg({
             </p>
             <p>
                 Trumbowyg check if a <code>#&lt;prefix&gt;-icons</code> exists. If not, it loads SVG icons file via
-                XHR and put it in a div with this id. Next editor on the page did not load icons again. By adding
+                XHR and put it in a div with this id. Next editor on the page do not load icons again. By adding
                 this div in the page, you "hack" this mecanism to load it by your own.
             </p>
         </div>
@@ -434,29 +483,42 @@ $('.simple-editor').trumbowyg({
 $('.simple-editor').trumbowyg({
     btns: [
         ['viewHTML'],
+        ['undo', 'redo'], // Only supported in Blink browsers
         ['formatting'],
-        'btnGrp-semantic',
+        ['strong', 'em', 'del'],
         ['superscript', 'subscript'],
         ['link'],
         ['insertImage'],
-        'btnGrp-justify',
-        'btnGrp-lists',
+        ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+        ['unorderedList', 'orderedList'],
         ['horizontalRule'],
         ['removeformat'],
         ['fullscreen']
     ]
 });
-
-/** WTF are btnGrp-* buttons? There are just arrays of strings :)
-*  jQuery.trumbowyg.btnsGrps = {
-*      design:   ['bold', 'italic', 'underline', 'strikethrough'],
-*      semantic: ['strong', 'em'],
-*      justify:  ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
-*      lists:    ['unorderedList', 'orderedList']
-*  };
-*/
                 </code></pre>
             </div>
+        </div>
+
+
+        <div class="feature" data-added="2.5.0">
+            <h3 id="hide-button-texts">Hide button texts</h3>
+            <p class="added-feature">Added in 2.5.0</p>
+            <p>
+                You can hide button texts showed when you put <a href="#svg-icons">svgPath to false</a>.
+            </p>
+            <pre><code class="javascript">
+// Globally
+$.trumbowyg.hideButtonTexts = true
+
+// Or locally
+$('.trumbowyg').trumbowyg({
+    hideButtonTexts: true
+});
+            </code></pre>
+            <p class="note">
+                If you disable SVG icons and button texts, you should design them by yourself.
+            </p>
         </div>
 
 
@@ -513,6 +575,9 @@ $('.trumbowyg').trumbowyg({
 });
             </code></pre>
             <p class="note">
+                In order to use this option, you need to define a font size in your CSS or use a reset like normalize.
+            </p>
+            <p class="note">
                 Remove format pasted is not active by default (set to <code>false</code>).
             </p>
         </div>
@@ -565,15 +630,15 @@ $('.trumbowyg').trumbowyg({
             </p>
             <pre><code class="javascript">
 jQuery.trumbowyg.langs.fr = {
-    _dir: "ltr", // This line is optionnal, but usefull to override the `dir` option
+    _dir: "ltr", // Changes the editor dir
 
     bold: "Gras",
     close: "Fermer"
 };
             </code></pre>
             <p>
-                Some localizations are added each day, you can find them <a
-                    href="https://github.com/Alex-D/Trumbowyg/tree/master/dist/langs">here</a>
+                Some localizations are added each day, you can find them in
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/master/dist/langs">the langs folder on GitHub</a>
             </p>
             <p>
                 You can submit a new localization file by creating a new pull request on the Github repository.
@@ -581,6 +646,183 @@ jQuery.trumbowyg.langs.fr = {
             <p class="note">
                 English is the default localization, you don't need to include any file to get Trumbowyg in English.
             </p>
+        </div>
+
+        <div class="feature" data-added="1.0.0">
+            <h3 id="custom-buttons">Custom buttons</h3>
+            <p>
+                If Trumbowyg does not fit your needs, maybe you can create your very own custom button to solve this.
+                The following code (which does not works as is) show you all available button parameters.
+            </p>
+            <pre><code class="javascript">
+$('.trumbowyg').trumbowyg({
+    btnsDef: {
+        buttonName: {
+            fn: 'functionName',
+            tag: 'tagName',
+            title: 'Button tooltip',
+            text: 'Displayed button name',
+            isSupported: function () { return true; },
+            key: 'K',
+            param: '' ,
+            forceCSS: false,
+            class: '',
+            hasIcon: true
+        }
+    }
+});
+            </code></pre>
+            <p>
+                The key (here <code>buttonName</code>) is the button name used in <code>btns</code> and in <code>dropdown</code>.
+                It is used as many default in options below.
+            </p>
+            <h4>Parameters</h4>
+            <dl>
+                <dt><strong><code>fn</code></strong> <code class="type">string</code>|<code class="type">function</code></dt>
+                <dd>
+                    The name of a Trumbowyg internal method OR a callable function OR browser native execCommand name.
+                    In any case, the function is called when the user click on the button or use the associated shortcut.
+                    <br>
+                    <strong>Default</strong>: button name
+                </dd>
+                <dt><strong><code>tag</code></strong> <code class="type">string</code></dt>
+                <dd>
+                    The HTML tag name which highlight the button if cursor is in a tag which this tag name.
+                    <br>
+                    <strong>Default</strong>: button name
+                </dd>
+                <dt><strong><code>title</code></strong> <code class="type">string</code></dt>
+                <dd>
+                    The text displayed in a tooltip on mouse over a button.
+                    <br>
+                    <strong>Default</strong>: <code>text</code> parameter OR translated button name OR raw button name
+                </dd>
+                <dt><strong><code>text</code></strong> <code class="type">string</code></dt>
+                <dd>
+                    The text of the button used when <a href="#svg-icons">svgPath is set to false</a>.
+                    This text can be hidden via <code><a href="#hide-button-texts">hideButtonTexts</a></code> option.
+                    <br>
+                    <strong>Default</strong>: <code>title</code> parameter OR translated button name OR raw button name
+                </dd>
+                <dt><strong><code>isSupported</code></strong> <code class="type">function</code></dt>
+                <dd>
+                    A function which returns a Boolean to know if the custom button is supported (browser compatibility
+                    check, context check, ...)
+                    <br>
+                    <strong>Default</strong>: <code>null</code> (no check)
+                </dd>
+                <dt><strong><code>key</code></strong> <code class="type">string</code></dt>
+                <dd>
+                    Shortcut key which triggers the button function (<code>fn</code>)
+                    <br>
+                    <strong>Default</strong>: <code>null</code> (no shortcut defined)
+                </dd>
+                <dt><strong><code>param</code></strong> <code class="type">string</code></dt>
+                <dd>
+                    In case of using browser native execCommand, give this as parameter.
+                    <br>
+                    <strong>Default</strong>: button name
+                </dd>
+                <dt><strong><code>forceCSS</code></strong> <code class="type">string</code></dt>
+                <dd>
+                    In case of using browser native execCommand, force usage of inline CSS insteed of a tag.
+                    <br>
+                    <strong>Default</strong>: <code>false</code>
+                </dd>
+                <dt><strong><code>class</code></strong> <code class="type">string</code></dt>
+                <dd>
+                    A string which is added to the button class attribute.
+                    <br>
+                    <strong>Default</strong>: Trumbowyg adds a <code>prefix + '-' + buttonName</code> class
+                </dd>
+                <dt><strong><code>hasIcon</code></strong> <code class="type">boolean</code></dt>
+                <dd>
+                    Allow us to force the display of the text for a specific button.
+                    <br>
+                    <strong>Default</strong>: <code>true</code>
+                </dd>
+            </dl>
+            <p>
+                Working example:
+            </p>
+            <pre><code class="javascript">
+$('.trumbowyg').trumbowyg({
+    btnsDef: {
+        alert: {
+            fn: function() {
+                alert('some text')
+            },
+            ico: 'blockquote'
+        }
+    },
+    btns: [
+        ['alert']
+    ]
+});
+            </code></pre>
+        </div>
+
+        <div class="feature" data-added="1.0.0">
+            <h3 id="custom-dropdowns">Custom dropdowns</h3>
+            <p>
+                You can also create your own dropdown, like buttons. The following code (which does not works as is)
+                show use all options which can be used to make our own customized dropdown.
+            </p>
+            <pre><code class="javascript">
+$('.trumbowyg').trumbowyg({
+    btnsDef: {
+        dropdownButtonName: {
+            dropdown: ['btnA', 'btnB'],
+            title: 'Displayed dropdown button name',
+            ico: 'iconName',
+            hasIcon: true
+        }
+    }
+});
+            </code></pre>
+            <h4>Parameters</h4>
+            <dl>
+                <dt><strong><code>dropdown</code></strong> <code class="type">array&lt;string></code></dt>
+                <dd>
+                    A list of button names to list in the dropdown.
+                    <br>
+                    <strong>Default</strong>: <code>[]</code>
+                </dd>
+                <dt><strong><code>title</code></strong> <code class="type">string</code></dt>
+                <dd>
+                    The text displayed in a tooltip on mouse over the dropdown button.
+                    <br>
+                    <strong>Default</strong>: translated dropdown button name OR raw dropdown button name
+                </dd>
+                <dt><strong><code>ico</code></strong> <code class="type">string</code></dt>
+                <dd>
+                    The icon name for the dropdown. You can reuse <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/src/ui/icons">some existing icons from Trumbowyg</a>.
+                    <br>
+                    <strong>Default</strong>: icon with button name in snake case
+                </dd>
+                <dt><strong><code>hasIcon</code></strong> <code class="type">boolean</code></dt>
+                <dd>
+                    Allow us to force the display of the text for a specific button.
+                    <br>
+                    <strong>Default</strong>: <code>true</code>
+                </dd>
+            </dl>
+            <p>
+                Working example which groups all justify buttons in one dropdown:
+            </p>
+            <pre><code class="javascript">
+$('.trumbowyg').trumbowyg({
+    btnsDef: {
+        align: {
+            dropdown: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+            ico: 'justifyLeft'
+        }
+    },
+    btns: [
+        ['align']
+    ]
+});
+            </code></pre>
         </div>
     </section>
 
@@ -594,20 +836,21 @@ jQuery.trumbowyg.langs.fr = {
                 When you want create your custom extension for Trumbowyg, you can open and close a modal box with custom
                 inner HTML code, listen events and more.
             </p>
+
             <h4>Open and close</h4>
             <p>
-                For that use the <code class="javascript">.trumbowyg()</code> method and give parameters <code>"openModal"</code>
-                or <code>"closeModal"</code> like that:
+                For that use the <code class="javascript">.trumbowyg()</code> method and give parameters <code>'openModal'</code>
+                or <code>'closeModal'</code> like that:
             </p>
             <pre><code class="javascript">
 // Open a modal box
-var $modal = $("#editor").trumbowyg("openModal", {
-    title: "A title for modal box",
-    content: "&lt;p&gt;Content in HTML which you want include in created modal box&lt;/p&gt;"
+var $modal = $('#editor').trumbowyg('openModal', {
+    title: 'A title for modal box',
+    content: '&lt;p&gt;Content in HTML which you want include in created modal box&lt;/p&gt;'
 });
 
 // Close current modal box
-$("#editor").trumbowyg("closeModal");
+$('#editor').trumbowyg('closeModal');
             </code></pre>
             <p>
                 An <code>openModal</code> call returns a jQuery object which contains the modal box. You need this
@@ -621,38 +864,38 @@ $("#editor").trumbowyg("closeModal");
             <h4>Events on modal box</h4>
             <p>
                 Modal boxes in Trumbowy come with two buttons: "Confirm" and "Cancel". An event is associated to each
-                button:
+                one:
             </p>
             <ul>
-                <li><code>tbwsubmit</code>: Trigged when form is submit</li>
-                <li><code>tbwreset</code>: Trigged when user cancel operation</li>
+                <li><code>tbwsubmit</code>: trigged when form is submit</li>
+                <li><code>tbwreset</code>: trigged when user cancel operation</li>
             </ul>
             <pre><code class="javascript">
 // Open a modal box
-var $modal = $("#editor").trumbowyg("openModal", {
-    title: "A title for modal box",
-    content: "&lt;p&gt;Content in HTML which you want include in created modal box&lt;/p&gt;"
+var $modal = $('#editor').trumbowyg('openModal', {
+    title: 'A title for modal box',
+    content: '&lt;p&gt;Content in HTML which you want include in created modal box&lt;/p&gt;'
 });
 
 // Listen clicks on modal box buttons
-$modal.on('trumbowyg-confirm', function(e){
+$modal.on('tbwconfirm', function(e){
     // Save datas
-    $("#editor").trumbowyg("closeModal");
+    $("#editor").trumbowyg('closeModal');
 });
-$modal.on('trumbowyg-cancel', function(e){
-    $("#editor").trumbowyg("closeModal");
+$modal.on('tbwcancel', function(e){
+    $('#editor').trumbowyg('closeModal');
 });
             </code></pre>
 
             <h4>Only build inputs in modal</h4>
             <p>
-                If you want only add inputs in the modal box, this function was more simple. Indeed, you do not manage
+                If you want only add inputs in the modal box, this function is more simple. Indeed, you do not manage
                 confirm and close buttons, and get all input value on confirm.
             </p>
             <pre><code class="javascript">
 var img = $('img#an-img');
-$("#editor").trumbowyg("openModalInsert", {
-    title: "A title for modal box",
+$("#editor").trumbowyg('openModalInsert', {
+    title: 'A title for modal box',
     fields: {
         url: {
             value: img.attr('src')
@@ -664,7 +907,7 @@ $("#editor").trumbowyg("openModalInsert", {
         },
         example: {
             // Missing label is replaced by the key of this object (here 'example')
-            // Missing name is the same
+            // Missing name is the key
             // When value is missing, value = ''
         }
     },
@@ -673,8 +916,17 @@ $("#editor").trumbowyg("openModalInsert", {
         img.attr('alt', values['alt']);
 
         return true; // Return true if you have finished with this modal box
-        // If you do not return anything, you need manage yourself the closure of the modal box
+        // If you do not return anything, you must manage the closing of the modal box yourself
     }
+});
+
+// You can also listen for modal confirm/cancel events to do some custom things
+// Note: the openModalInsert callback is called on tbwconfirm
+$modal.on('tbwconfirm', function(e){
+    // Do what you want
+});
+$modal.on('tbwcancel', function(e){
+    trumbowyg.closeModal();
 });
             </code></pre>
         </div>
