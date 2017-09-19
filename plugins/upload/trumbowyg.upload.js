@@ -15,7 +15,7 @@
     'use strict';
 
     var defaultOptions = {
-        serverPath: './src/plugins/upload/trumbowyg.upload.php',
+        serverPath: '',
         fileFieldName: 'fileToUpload',
         data: [],                       // Additional data for ajax [{name: 'key', value: 'value'}]
         headers: {},                    // Additional headers
@@ -165,9 +165,7 @@
                                         contentType: false,
 
                                         progressUpload: function (e) {
-                                            $('.' + prefix + 'progress-bar').stop().animate({
-                                                width: Math.round(e.loaded * 100 / e.total) + '%'
-                                            }, 200);
+                                            $('.' + prefix + 'progress-bar').css('width', Math.round(e.loaded * 100 / e.total) + '%');
                                         },
 
                                         success: function (data) {
@@ -223,7 +221,7 @@
 
 
     function addXhrProgressEvent() {
-        if (!$.trumbowyg && !$.trumbowyg.addedXhrProgressEvent) {   // Avoid adding progress event multiple times
+        if (!$.trumbowyg.addedXhrProgressEvent) {   // Avoid adding progress event multiple times
             var originalXhr = $.ajaxSettings.xhr;
             $.ajaxSetup({
                 xhr: function () {

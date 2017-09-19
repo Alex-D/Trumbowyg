@@ -93,6 +93,8 @@
                 Base 64 plugin allows you to insert images inline as base64.
             </p>
 
+            <a href="../../demos/#plugins-base64" class="button button-demo">Try base64 live demo!</a>
+
             <h4>How to use it?</h4>
             <pre><code class="html">
 &lt;-- Import Trumbowyg plugins... -->
@@ -113,6 +115,7 @@ $('#my-editor').trumbowyg({
         <div class="feature">
             <h3 id="plugin-cleanpaste">Clean paste</h3>
             <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need demo</p>
 
             <p>
                 Clean paste plugin handle paste events, clean the HTML code before insert content into the editor.
@@ -135,6 +138,8 @@ $('#my-editor').trumbowyg({
             <p>
                 Colors plugin allows you to change foreground and background color of your text.
             </p>
+
+            <a href="../../demos/#plugins-colors" class="button button-demo">Try colors live demo!</a>
 
             <h4>How to use it?</h4>
             <pre><code class="html">
@@ -170,6 +175,8 @@ $('#my-editor').trumbowyg({
                 Emoji plugin allows you to insert some emojis in your editor.
             </p>
 
+            <a href="../../demos/#plugins-emoji" class="button button-demo">Try emoji live demo!</a>
+
             <h4>How to use it?</h4>
             <p>
                 This plugin require <strong>emojify.js</strong> which can be installed with:
@@ -187,14 +194,19 @@ $('#my-editor').trumbowyg({
             <pre><code class="javascript">
 // Setup emojify.js
 emojify.setConfig({
-    img_dir : 'node_modules/emojify.js/dist/images/basic/',
+    img_dir : '//cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/',
 });
-emojify.run();
 
 $('#my-editor').trumbowyg({
     btns: [
         ['emoji']
     ]
+});
+emojify.run();
+
+// Will transform an :emoji: to img tag at each input
+$('.trumbowyg-editor').on('input propertychange', function() {
+    emojify.run();
 });
             </code></pre>
         </div>
@@ -206,6 +218,8 @@ $('#my-editor').trumbowyg({
             <p>
                 Do the same as insert image, but for audio.
             </p>
+
+            <a href="../../demos/#plugins-insertaudio" class="button button-demo">Try insert audio live demo!</a>
 
             <h4>How to use it?</h4>
             <pre><code class="html">
@@ -232,6 +246,8 @@ $('#my-editor').trumbowyg({
                 Allows you to embed any content from a link using <a href="https://noembed.com/">noembed.com</a> API.
             </p>
 
+            <a href="../../demos/#plugins-noembed" class="button button-demo">Try noembed live demo!</a>
+
             <h4>How to use it?</h4>
             <pre><code class="html">
 &lt;-- Import Trumbowyg plugins... -->
@@ -252,6 +268,7 @@ $('#my-editor').trumbowyg({
         <div class="feature">
             <h3 id="plugin-pasteimage">Paste image</h3>
             <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need demo</p>
 
             <p>
                 Paste image plugin handle paste events, check if you have image files in your clipboard, then paste them
@@ -271,6 +288,7 @@ $('#my-editor').trumbowyg({
         <div class="feature">
             <h3 id="plugin-preformatted">Preformatted</h3>
             <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need demo</p>
 
             <p>
                 Wrap your code with <code>&lt;pre></code> tags.
@@ -295,7 +313,9 @@ $('#my-editor').trumbowyg({
 
         <div class="feature">
             <h3 id="plugin-table">Table</h3>
-            <p class="deprecated-feature">Not stable &bull; Need documentation</p>
+            <p class="deprecated-feature">Not stable</p>
+            <p class="deprecated-feature">Need documentation</p>
+            <p class="deprecated-feature">Need demo</p>
 
             <p>
                 <a href="https://github.com/Alex-D/Trumbowyg/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20table">
@@ -310,11 +330,14 @@ $('#my-editor').trumbowyg({
 
         <div class="feature">
             <h3 id="plugin-template">Template</h3>
-            <p class="added-feature">Stable &bull; Need documentation</p>
+            <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need documentation</p>
 
             <p>
                 Manage a set of HTML templates to insert fast.
             </p>
+
+            <a href="../../demos/#plugins-template" class="button button-demo">Try template live demo!</a>
 
             <h4>How to use it?</h4>
             <pre><code class="html">
@@ -339,12 +362,15 @@ $('#my-editor').trumbowyg({
 
         <div class="feature">
             <h3 id="plugin-upload">Upload</h3>
-            <p class="added-feature">Stable &bull; Need documentation</p>
+            <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need documentation</p>
 
             <p>
                 Add an upload front-end allowing users to select an image, upload it with progress bar and then insert
                 the uploaded image in the editor.
             </p>
+
+            <a href="../../demos/#plugins-upload" class="button button-demo">Try upload live demo!</a>
 
             <h4>How to use it?</h4>
             <pre><code class="html">
@@ -358,13 +384,95 @@ $('#my-editor').trumbowyg({
 $('#my-editor').trumbowyg({
     btns: [
         ['upload']
-    ]
+    ],
+    plugins: {
+        upload: {
+            // Some upload plugin options, see details below
+        }
+    }
 });
             </code></pre>
-            <p class="note">
-                Some doc to write about front-end plugin options and back-end server "protocol"... <br>
-                You can contribute to this documentation by submitting a Pull Request :)
+
+            <h4>Parameters</h4>
+            <dl>
+                <dt><strong><code>serverPath</code></strong> <code class="type">string</code></dt>
+                <dd>
+                    The URL to the server which catch the upload request
+                    <br>
+                    <strong>Default</strong>: <code>''</code>
+                </dd>
+                <dt><strong><code>fileFieldName</code></strong> <code class="type">string</code></dt>
+                <dd>
+                    The POST property key associated to the upload file
+                    <br>
+                    <strong>Default</strong>: <code>'fileToUpload'</code>
+                </dd>
+                <dt><strong><code>data</code></strong> <code class="type">array&lt;Object></code></dt>
+                <dd>
+                    Additional data for ajax. <a href="http://api.jquery.com/jquery.ajax/">jQuery.ajax data option</a>
+                    Example: <code>[{name: 'myKey1', value: 'myValue1'}, {name: 'username', value: 'myUsername'}]</code>
+                    <br>
+                    <strong>Default</strong>: <code>[]</code>
+                </dd>
+                <dt><strong><code>headers</code></strong> <code class="type">Object</code></dt>
+                <dd>
+                    Additional headers. Check <a href="http://api.jquery.com/jquery.ajax/">jQuery.ajax headers option</a>
+                    Example: <code>{headerKey: 'headerValue', Authorization: 'Client-ID xxxxxxxxx'}</code>
+                    <br>
+                    <strong>Default</strong>: <code>{}</code>
+                </dd>
+                <dt><strong><code>xhrFields</code></strong> <code class="type">Object</code></dt>
+                <dd>
+                    Additional xhrFields. Check <a href="http://api.jquery.com/jquery.ajax/">jQuery.ajax xhrFields option</a>
+                    <br>
+                    <strong>Default</strong>: <code>{}</code>
+                </dd>
+                <dt><strong><code>urlPropertyName</code></strong> <code class="type">string</code></dt>
+                <dd>
+                    How to get image URL in the JSON response.
+                    Example: <code>'url'</code> for <code>{url: 'https://example.com/myimage.jpg', success: true}</code>
+                    <br>
+                    <strong>Default</strong>: <code>'file'</code>
+                </dd>
+                <dt><strong><code>statusPropertyName</code></strong> <code class="type">string</code></dt>
+                <dd>
+                    How to get status from the json response.
+                    Example: <code>'success'</code> for <code>{success: true, url: 'https://example.com/myimage.jpg'}</code>
+                    <br>
+                    <strong>Default</strong>: <code>'success'</code>
+                </dd>
+                <dt><strong><code>success</code></strong> <code class="type">function</code></dt>
+                <dd>
+                    Success callback: <code>function (data, trumbowyg, $modal, values) {}</code>
+                    <br>
+                    <strong>Default</strong>: <code>null</code>
+                </dd>
+                <dt><strong><code>error</code></strong> <code class="type">function</code></dt>
+                <dd>
+                    Error callback: <code>function () {}</code>
+                    <br>
+                    <strong>Default</strong>: <code>null</code>
+                </dd>
+            </dl>
+
+            <h4>Server side</h4>
+            <p>
+                Server side receives a POST request with the image in the <code>fileFieldName</code> field and
+                <code>alt</code> which contains image description:
             </p>
+            <pre><code>
+alt: 'Image description'
+fileToUpload: // The image file
+            </code></pre>
+            <p>
+                It must save this image, then return a JSON response like that:
+            </p>
+            <pre><code>
+{
+    success: true, // Must be false if upload fails
+    url: 'https://example.com/myimage.jpg'
+}
+            </code></pre>
         </div>
     </section>
 

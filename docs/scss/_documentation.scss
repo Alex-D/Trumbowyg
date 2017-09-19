@@ -22,6 +22,7 @@ $beer-height: 70px;
         iframe {
             width: 100%;
             height: 100vh;
+            background: $grey;
         }
     }
 
@@ -60,6 +61,21 @@ $beer-height: 70px;
         }
         &::after {
             content: ">";
+        }
+    }
+
+    .button.button-demo {
+        border-color: rgba($secondary-color, 0.6);
+        color: $secondary-color;
+        width: auto;
+        padding: 10px 30px;
+
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            border-color: $secondary-color;
+            background: $secondary-color;
+            color: $white;
         }
     }
 

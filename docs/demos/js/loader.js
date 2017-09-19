@@ -31,3 +31,12 @@ function loadScript(scriptPath, comment) {
     }
     scriptLoadingContainer.innerText += '\n<script src="node_modules/trumbowyg/' + scriptPath + '"></script>\n\n';
 }
+
+(function($) {
+    'use strict';
+
+    $('a').click(function() {
+        window.top.location = $(this).attr('href');
+        return false;
+    });
+})(jQuery);

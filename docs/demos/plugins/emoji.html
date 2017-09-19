@@ -17,6 +17,8 @@
                 This plugin allow you to add an emoji picker in Trumbowyg.
             </p>
 
+            <a href="../../documentation/plugins/#plugin-emoji" class="button button-demo">Read emoji plugin documentation</a>
+
             <div id="editor">
                 <h2>Select an emoji !</h2>
                 <p>
@@ -26,8 +28,7 @@
             </div>
 
             <h4>The code</h4>
-            <pre>
-            <code class="js-code-to-eval javascript">
+            <pre><code class="js-code-to-eval javascript">
 // Customize your emoji images base URL
 emojify.setConfig({
     img_dir : '//cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/',
@@ -41,32 +42,27 @@ $('#editor')
 });
 emojify.run();
 
-// Will transform an :emoji: to img tag at each
+// Will transform an :emoji: to img tag at each input
 $('.trumbowyg-editor').on('input propertychange', function() {
     emojify.run();
 });
-            </code>
-            </pre>
+            </code></pre>
         </div>
 
         <div class="feature">
             <h3>Setup</h3>
 
             <h4>In head tag</h4>
-            <pre>
-            <code class="html loading-head">
-            </code>
-            </pre>
+            <pre><code class="html loading-head">
+            </code></pre>
             <h4>At the end of body</h4>
-            <pre>
-            <code class="html loading-body">
+            <pre><code class="html loading-body">
 &lt;!-- Import jQuery -->
 &lt;script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">&lt;/script>
 &lt;script>window.jQuery || document.write('&lt;script src="js/vendor/jquery-3.2.1.min.js">&lt;\/script>')&lt;/script>
 &lt;!-- Import emojify.js -->
 &lt;script src="//cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/js/emojify.min.js">&lt;/script>
-            </code>
-            </pre>
+            </code></pre>
         </div>
     </section>
 </div>
