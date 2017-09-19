@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.7.2 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.8.0 - A lightweight WYSIWYG editor
  * Default stylesheet for Trumbowyg editor
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -264,6 +264,7 @@
     top: 58px; }
     .trumbowyg-modal-box .trumbowyg-progress .trumbowyg-progress-bar {
       background: #2BC06A;
+      width: 0;
       height: 100%;
       transition: width 150ms linear; }
   .trumbowyg-modal-box label {
