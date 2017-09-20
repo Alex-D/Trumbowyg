@@ -81,14 +81,19 @@ $('#editor-dropdown')
         }
     },
     // Redefine the button pane
-    btns: ['viewHTML',
-            '|', 'formatting',
-            '|', 'btnGrp-semantic',
-            '|', 'link',
-            '|', 'image',
-            '|', 'btnGrp-justify',
-            '|', 'btnGrp-lists',
-            '|', 'horizontalRule'],
+    btns: [
+        ['viewHTML'],
+        ['formatting'],
+        ['strong', 'em', 'del'],
+        ['superscript', 'subscript'],
+        ['link'],
+        ['image'], // Our fresh created dropdown
+        ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+        ['unorderedList', 'orderedList'],
+        ['horizontalRule'],
+        ['removeformat'],
+        ['fullscreen']
+    ],
     plugins: {
         // Add imagur parameters to upload plugin for demo purposes
         upload: {
