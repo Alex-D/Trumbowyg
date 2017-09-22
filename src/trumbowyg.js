@@ -1343,6 +1343,7 @@ jQuery.trumbowyg = {
                 target = $a.attr('target');
                 var range = t.doc.createRange();
                 range.selectNode(node);
+                documentSelection.removeAllRanges();
                 documentSelection.addRange(range);
             }
 
