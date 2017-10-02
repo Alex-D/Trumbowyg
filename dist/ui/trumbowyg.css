@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.8.0 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.8.1 - A lightweight WYSIWYG editor
  * Default stylesheet for Trumbowyg editor
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -139,7 +139,8 @@
       width: 1px;
       background: #d7e0e2;
       margin: 0 5px;
-      height: 35px; }
+      height: 35px;
+      vertical-align: top; }
   .trumbowyg-button-pane button {
     display: inline-block;
     position: relative;
@@ -151,10 +152,15 @@
     border: none;
     cursor: pointer;
     background: none;
+    vertical-align: middle;
     transition: background-color 150ms, opacity 150ms; }
     .trumbowyg-button-pane button.trumbowyg-textual-button {
       width: auto;
-      line-height: 35px; }
+      line-height: 35px;
+      -webkit-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none; }
   .trumbowyg-button-pane.trumbowyg-disable button:not(.trumbowyg-not-disable):not(.trumbowyg-active),
   .trumbowyg-disabled .trumbowyg-button-pane button:not(.trumbowyg-not-disable):not(.trumbowyg-viewHTML-button) {
     opacity: 0.2;

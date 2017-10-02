@@ -36,6 +36,9 @@
             en: {
                 insertAudio: 'Insert Audio'
             },
+            ru: {
+                insertAudio: 'Вставить аудио'
+            },
             ja: {
                 insertAudio: '音声の挿入'
             }
