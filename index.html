@@ -91,7 +91,7 @@ $('#default-editor').trumbowyg();
                 </p>
                 <code><pre>
 $('#simple-editor').trumbowyg({
-    btns: [jQuery.trumbowyg.btnsGrps.semantic]
+    btns: ['strong', 'em', 'del']
 });
                 </pre></code>
             </div>
@@ -101,11 +101,6 @@ $('#simple-editor').trumbowyg({
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident optio nam reiciendis eius beatae quibusdam!
                 </p>
-                <code><pre>
-$('#simple-editor').trumbowyg({
-    btns: [jQuery.trumbowyg.btnsGrps.semantic]
-});
-                </pre></code>
             </div>
 
             <div id="customized-buttonpane">
@@ -146,9 +141,7 @@ btnsDef: {
 },
 btns: ['viewHTML',
     ['formatting'],
-    ['btnGrp-test'],
     ['align'],
-    ['btnGrp-lists'],
     ['image'],
     ['preformatted'],
     'fullscreen', 'close']
@@ -213,10 +206,11 @@ $('#form-content').trumbowyg({
         <script src="/dist/plugins/colors/trumbowyg.colors.js"></script>
         <script src="/dist/plugins/noembed/trumbowyg.noembed.js"></script>
         <script src="/dist/plugins/pasteimage/trumbowyg.pasteimage.js"></script>
+        <script src="/dist/plugins/template/trumbowyg.template.js"></script>
         <script src="/dist/plugins/preformatted/trumbowyg.preformatted.js"></script>
         <script src="/dist/plugins/upload/trumbowyg.upload.js"></script>
         <script>
-            var isIE9 = navigator.userAgent.toLowerCase().indexOf('msie') != -1 && parseInt(navigator.userAgent.toLowerCase().split('msie')[1]);
+            var isIE9 = navigator.userAgent.toLowerCase().indexOf('msie') !== -1 && parseInt(navigator.userAgent.toLowerCase().split('msie')[1]);
             if (!isIE9) {
                 $('#trumbowyg-icons').remove();
             }
@@ -249,7 +243,7 @@ $('#form-content').trumbowyg({
             /** Default editor configuration **/
             $('#simple-editor')
             .trumbowyg({
-                btns: ['btnGrp-semantic']
+                btns: ['strong', 'em', 'del']
             })
             .on('dblclick', function(){
                 $(this).trumbowyg();
@@ -282,10 +276,21 @@ $('#form-content').trumbowyg({
                     ['upload', 'base64', 'noembed'],
                     ['foreColor', 'backColor'],
                     ['preformatted'],
+                    ['template'],
                     ['fullscreen', 'close']
                 ],
                 plugins: {
-                    upload: uploadOptions
+                    upload: uploadOptions,
+                    templates: [
+                        {
+                            name: 'Template 1',
+                            html: '<p>I am a template!</p>'
+                        },
+                        {
+                            name: 'Template 2',
+                            html: '<p>I am a different template!</p>'
+                        }
+                    ]
                 }
             });
 
@@ -322,9 +327,7 @@ $('#form-content').trumbowyg({
                 btns: [
                     ['viewHTML'],
                     ['formatting'],
-                    'btnGrp-test',
                     ['align'],
-                    'btnGrp-lists',
                     ['image'],
                     ['foreColor', 'backColor'],
                     ['preformatted'],

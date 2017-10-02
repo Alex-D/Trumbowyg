@@ -10,6 +10,9 @@
             nl: {
                 template: 'Sjabloon'
             },
+            ru: {
+                template: 'Шаблон'
+            },
             ja: {
                 template: 'テンプレート'
             }
