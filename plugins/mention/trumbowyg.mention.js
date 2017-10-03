@@ -54,7 +54,7 @@
         var dropdown = [];
 
         // Check if source is an array
-        if (trumbowyg.o.plugins.mention.source.constructor === Array) {
+        if (items === Array) {
             $.each(items, function (i, item) {
                 var btn = 'mention-' + i,
                     btnDef = {
