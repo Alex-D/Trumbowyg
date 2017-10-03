@@ -1177,7 +1177,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 },
                 text: {
                     label: t.lang.text,
-                    value: t.getRangeText()
+                    value: new XMLSerializer().serializeToString(documentSelection.getRangeAt(0).cloneContents())
                 },
                 target: {
                     label: t.lang.target,
