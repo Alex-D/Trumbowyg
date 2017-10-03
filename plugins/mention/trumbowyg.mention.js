@@ -54,7 +54,7 @@
         var dropdown = [];
 
         // Check if source is an array
-        if (items === Array) {
+        if (items.constructor === Array) {
             $.each(items, function (i, item) {
                 var btn = 'mention-' + i,
                     btnDef = {
