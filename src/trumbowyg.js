@@ -587,7 +587,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         ctrl = false;
                     }, 200);
                 })
-                .on('mouseup keydown keyup', function () {
+                .on('mouseup keydown keyup', function (e) {
                     if ((!e.ctrlKey && !e.metaKey) || e.altKey) {
                         setTimeout(function () { // "hold on" to the ctrl key for 200ms
                             ctrl = false;
