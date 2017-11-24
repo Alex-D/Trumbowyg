@@ -1515,6 +1515,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     alt: {
                         label: t.lang.description,
                         value: $img.attr('alt')
+                    },
+                    width: {
+                    	label: 'Width',
+                    	value: $img.attr('width')
                     }
                 }, function (v) {
                     if (v.src !== base64) {
@@ -1524,6 +1528,9 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     }
                     $img.attr({
                         alt: v.alt
+                    });
+                    $img.attr({
+                        width: v.width
                     });
                     return true;
                 });
