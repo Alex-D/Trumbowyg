@@ -160,6 +160,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     case 'disable':
                         return t.setDisabled(true);
 
+                    // Toggle
+                    case 'toggle':
+                        return t.toggle();
+
                     // Destroy
                     case 'destroy':
                         return t.destroy();
