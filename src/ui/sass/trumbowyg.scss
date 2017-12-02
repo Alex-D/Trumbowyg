@@ -164,7 +164,7 @@ $slow-transition-duration: 300ms !default;
             color: transparent;
         }
 
-        &:not(:empty) + .trumbowyg-button-group::before {
+        & + .trumbowyg-button-group::before {
             content: " ";
             display: inline-block;
             width: 1px;

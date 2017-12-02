@@ -209,24 +209,16 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         if ($('#' + trumbowygIconsId, t.doc).length === 0 && svgPathOption !== false) {
             if (svgPathOption == null) {
                 // Hack to get svgPathOption based on trumbowyg.js path
-                try {
-                    throw new Error();
-                } catch (e) {
-                    if (!e.hasOwnProperty('stack')) {
-                        console.warn('You must define svgPath: https://goo.gl/CfTY9U'); // jshint ignore:line
-                    } else {
-                        var stackLines = e.stack.split('\n');
-
-                        for (var i in stackLines) {
-                            if (!stackLines[i].match(/https?:\/\//)) {
-                                continue;
-                            }
-                            svgPathOption = stackLines[Number(i)].match(/((https?:\/\/.+\/)([^\/]+\.js))(\?.*)?:/)[1].split('/');
-                            svgPathOption.pop();
-                            svgPathOption = svgPathOption.join('/') + '/ui/icons.svg';
-                            break;
-                        }
+                var scriptElements = document.getElementsByTagName('script');
+                for (var i = 0; i < scriptElements.length; i += 1) {
+                    var source = scriptElements[i].src;
+                    var matches = source.match('trumbowyg(\.min)?\.js');
+                    if (matches != null) {
+                        svgPathOption = source.substring(0, source.indexOf(matches[0])) + '/ui/icons.svg';
                     }
+                }
+                if (svgPathOption == null) {
+                    console.warn('You must define svgPath: https://goo.gl/CfTY9U'); // jshint ignore:line
                 }
             }
 
@@ -721,7 +713,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     } catch (c) {
                     }
                 });
-                $btnPane.append($btnGroup);
+
+                if ($btnGroup.html().trim().length > 0) {
+                    $btnPane.append($btnGroup);
+                }
             });
 
             t.$box.prepend($btnPane);
