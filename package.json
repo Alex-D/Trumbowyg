@@ -2,7 +2,7 @@
   "name": "trumbowyg",
   "title": "Trumbowyg",
   "description": "A lightweight WYSIWYG editor",
-  "version": "2.8.1",
+  "version": "2.9.0",
   "main": "dist/trumbowyg.js",
   "homepage": "http://alex-d.github.io/Trumbowyg",
   "author": {
@@ -20,7 +20,7 @@
   "license": "MIT",
   "devDependencies": {
     "del": "2.0.2",
-    "gulp": "3.9.0",
+    "gulp": "3.9.1",
     "gulp-autoprefixer": "2.2.0",
     "gulp-concat": "2.6.0",
     "gulp-header": "1.7.1",
@@ -34,7 +34,7 @@
     "gulp-size": "2.0.0",
     "gulp-svgmin": "^1.2.2",
     "gulp-svgstore": "^5.0.5",
-    "gulp-uglify": "1.4.2",
+    "gulp-uglify": "1.5.4",
     "jshint-stylish": "2.0.1",
     "vinyl-paths": "2.0.0"
   },
