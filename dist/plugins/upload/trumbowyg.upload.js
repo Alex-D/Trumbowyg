@@ -23,7 +23,8 @@
         urlPropertyName: 'file',        // How to get url from the json response (for instance 'url' for {url: ....})
         statusPropertyName: 'success',  // How to get status from the json response 
         success: undefined,             // Success callback: function (data, trumbowyg, $modal, values) {}
-        error: undefined                // Error callback: function () {}
+        error: undefined,               // Error callback: function () {}
+        imageWidthModalEdit: false      // Add ability to edit image width
     };
 
     function getDeep(object, propertyParts) {
@@ -106,24 +107,32 @@
                             var file,
                                 prefix = trumbowyg.o.prefix;
 
+                            var fields = {
+                                file: {
+                                    type: 'file',
+                                    required: true,
+                                    attributes: {
+                                        accept: 'image/*'
+                                    }
+                                },
+                                alt: {
+                                    label: 'description',
+                                    value: trumbowyg.getRangeText()
+                                }
+                            };
+
+                            if (trumbowyg.o.plugins.upload.imageWidthModalEdit) {
+                                fields.width = {
+                                    value: ''
+                                };
+                            }
+
                             var $modal = trumbowyg.openModalInsert(
                                 // Title
                                 trumbowyg.lang.upload,
 
                                 // Fields
-                                {
-                                    file: {
-                                        type: 'file',
-                                        required: true,
-                                        attributes: {
-                                            accept: 'image/*'
-                                        }
-                                    },
-                                    alt: {
-                                        label: 'description',
-                                        value: trumbowyg.getRangeText()
-                                    }
-                                },
+                                fields,
 
                                 // Callback
                                 function (values) {
@@ -175,7 +184,13 @@
                                                 if (!!getDeep(data, trumbowyg.o.plugins.upload.statusPropertyName.split('.'))) {
                                                     var url = getDeep(data, trumbowyg.o.plugins.upload.urlPropertyName.split('.'));
                                                     trumbowyg.execCmd('insertImage', url);
-                                                    $('img[src="' + url + '"]:not([alt])', trumbowyg.$box).attr('alt', values.alt);
+                                                    var $img = $('img[src="' + url + '"]:not([alt])', trumbowyg.$box);
+                                                    $img.attr('alt', values.alt);
+                                                    if (trumbowyg.o.imageWidthModalEdit && parseInt(values.width) > 0) {
+                                                        $img.attr({
+                                                            width: values.width
+                                                        });
+                                                    }
                                                     setTimeout(function () {
                                                         trumbowyg.closeModal();
                                                     }, 250);

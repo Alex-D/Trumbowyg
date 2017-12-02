@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.8.1 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.9.0 - A lightweight WYSIWYG editor
  * Trumbowyg core file
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -62,7 +62,8 @@ jQuery.trumbowyg = {
             description: 'Description',
             title: 'Title',
             text: 'Text',
-            target: 'Target'
+            target: 'Target',
+            width: 'Width'
         }
     },
 
@@ -84,6 +85,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         fixedFullWidth: false,
         autogrow: false,
         autogrowOnEnter: false,
+        imageWidthModalEdit: false,
 
         prefix: 'trumbowyg-',
 
@@ -169,6 +171,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     case 'disable':
                         return t.setDisabled(true);
 
+                    // Toggle
+                    case 'toggle':
+                        return t.toggle();
+
                     // Destroy
                     case 'destroy':
                         return t.destroy();
@@ -220,24 +226,16 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         if ($('#' + trumbowygIconsId, t.doc).length === 0 && svgPathOption !== false) {
             if (svgPathOption == null) {
                 // Hack to get svgPathOption based on trumbowyg.js path
-                try {
-                    throw new Error();
-                } catch (e) {
-                    if (!e.hasOwnProperty('stack')) {
-                        console.warn('You must define svgPath: https://goo.gl/CfTY9U'); // jshint ignore:line
-                    } else {
-                        var stackLines = e.stack.split('\n');
-
-                        for (var i in stackLines) {
-                            if (!stackLines[i].match(/https?:\/\//)) {
-                                continue;
-                            }
-                            svgPathOption = stackLines[Number(i)].match(/((https?:\/\/.+\/)([^\/]+\.js))(\?.*)?:/)[1].split('/');
-                            svgPathOption.pop();
-                            svgPathOption = svgPathOption.join('/') + '/ui/icons.svg';
-                            break;
-                        }
+                var scriptElements = document.getElementsByTagName('script');
+                for (var i = 0; i < scriptElements.length; i += 1) {
+                    var source = scriptElements[i].src;
+                    var matches = source.match('trumbowyg(\.min)?\.js');
+                    if (matches != null) {
+                        svgPathOption = source.substring(0, source.indexOf(matches[0])) + '/ui/icons.svg';
                     }
+                }
+                if (svgPathOption == null) {
+                    console.warn('You must define svgPath: https://goo.gl/CfTY9U'); // jshint ignore:line
                 }
             }
 
@@ -598,7 +596,12 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         ctrl = false;
                     }, 200);
                 })
-                .on('mouseup keydown keyup', function () {
+                .on('mouseup keydown keyup', function (e) {
+                    if ((!e.ctrlKey && !e.metaKey) || e.altKey) {
+                        setTimeout(function () { // "hold on" to the ctrl key for 200ms
+                            ctrl = false;
+                        }, 200);
+                    }
                     clearTimeout(debounceButtonPaneStatus);
                     debounceButtonPaneStatus = setTimeout(function () {
                         t.updateButtonPaneStatus();
@@ -727,7 +730,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     } catch (c) {
                     }
                 });
-                $btnPane.append($btnGroup);
+
+                if ($btnGroup.html().trim().length > 0) {
+                    $btnPane.append($btnGroup);
+                }
             });
 
             t.$box.prepend($btnPane);
@@ -756,7 +762,9 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                             $('body', t.doc).trigger('mousedown');
                         }
 
-                        if (t.$btnPane.hasClass(prefix + 'disable') && !$(this).hasClass(prefix + 'active') && !$(this).hasClass(prefix + 'not-disable')) {
+                        if ((t.$btnPane.hasClass(prefix + 'disable') || t.$box.hasClass(prefix + 'disabled')) &&
+                            !$(this).hasClass(prefix + 'active') &&
+                            !$(this).hasClass(prefix + 'not-disable')) {
                             return false;
                         }
 
@@ -769,10 +777,11 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             if (isDropdown) {
                 $btn.addClass(prefix + 'open-dropdown');
                 var dropdownPrefix = prefix + 'dropdown',
-                    $dropdown = $('<div/>', { // the dropdown
-                        class: dropdownPrefix + '-' + btnName + ' ' + dropdownPrefix + ' ' + prefix + 'fixed-top',
-                        'data-dropdown': btnName
-                    });
+                    dropdownOptions = { // the dropdown
+                    class: dropdownPrefix + '-' + btnName + ' ' + dropdownPrefix + ' ' + prefix + 'fixed-top'
+                };
+                dropdownOptions['data-' + dropdownPrefix] = btnName;
+                var $dropdown = $('<div/>', dropdownOptions);
                 $.each(isDropdown, function (i, def) {
                     if (t.btnsDef[def] && t.isSupportedBtn(def)) {
                         $dropdown.append(t.buildSubBtn(def));
@@ -1003,7 +1012,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             var t = this,
                 d = t.doc,
                 prefix = t.o.prefix,
-                $dropdown = $('[data-dropdown=' + name + ']', t.$box),
+                $dropdown = $('[data-' + prefix + 'dropdown=' + name + ']', t.$box),
                 $btn = $('.' + prefix + name + '-button', t.$btnPane),
                 show = $dropdown.is(':hidden');
 
@@ -1089,6 +1098,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             if (t.o.semantic) {
                 t.semanticTag('b', 'strong');
                 t.semanticTag('i', 'em');
+                t.semanticTag('s', 'del');
                 t.semanticTag('strike', 'del');
 
                 if (full) {
@@ -1188,7 +1198,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 },
                 text: {
                     label: t.lang.text,
-                    value: t.getRangeText()
+                    value: new XMLSerializer().serializeToString(documentSelection.getRangeAt(0).cloneContents())
                 },
                 target: {
                     label: t.lang.target,
@@ -1204,6 +1214,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 }
                 t.range.deleteContents();
                 t.range.insertNode(link[0]);
+                t.syncCode();
+                t.$c.trigger('tbwchange');
                 return true;
             });
         },
@@ -1229,7 +1241,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         insertImage: function () {
             var t = this;
             t.saveRange();
-            t.openModalInsert(t.lang.insertImage, {
+
+            var options = {
                 url: {
                     label: 'URL',
                     required: true
@@ -1238,9 +1251,26 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     label: t.lang.description,
                     value: t.getRangeText()
                 }
-            }, function (v) { // v are values
+            };
+
+            if (t.o.imageWidthModalEdit) {
+                options.width = {};
+            }
+
+            t.openModalInsert(t.lang.insertImage, options, function (v) { // v are values
                 t.execCmd('insertImage', v.url);
-                $('img[src="' + v.url + '"]:not([alt])', t.$box).attr('alt', v.alt);
+                var $img = $('img[src="' + v.url + '"]:not([alt])', t.$box);
+                $img.attr('alt', v.alt);
+
+                if (t.o.imageWidthModalEdit) {
+                    $img.attr({
+                        width: v.width
+                    });
+                }
+
+                t.syncCode();
+                t.$c.trigger('tbwchange');
+
                 return true;
             });
         },
@@ -1517,7 +1547,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     src = base64;
                 }
 
-                t.openModalInsert(t.lang.insertImage, {
+                var options = {
                     url: {
                         label: 'URL',
                         value: src,
@@ -1527,7 +1557,15 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         label: t.lang.description,
                         value: $img.attr('alt')
                     }
-                }, function (v) {
+                };
+
+                if (t.o.imageWidthModalEdit) {
+                    options.width = {
+                        value: $img.attr('width') ? $img.attr('width') : ''
+                    };
+                }
+
+                t.openModalInsert(t.lang.insertImage, options, function (v) {
                     if (v.src !== base64) {
                         $img.attr({
                             src: v.src
@@ -1536,6 +1574,17 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     $img.attr({
                         alt: v.alt
                     });
+
+                    if (t.o.imageWidthModalEdit) {
+                        if (parseInt(v.width) > 0) {
+                            $img.attr({
+                                width: v.width
+                            });
+                        } else {
+                            $img.removeAttr('width');
+                        }
+                    }
+
                     return true;
                 });
                 return false;

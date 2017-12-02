@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.8.1 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.9.0 - A lightweight WYSIWYG editor
  * Default stylesheet for Trumbowyg editor
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -104,7 +104,6 @@ $slow-transition-duration: 300ms !default;
     display: block;
     overflow: auto;
     border: none;
-    white-space: normal;
     font-size: 14px;
     font-family: "Inconsolata", "Consolas", "Courier", "Courier New", sans-serif;
     line-height: 18px;
@@ -175,7 +174,7 @@ $slow-transition-duration: 300ms !default;
             color: transparent;
         }
 
-        &:not(:empty) + .trumbowyg-button-group::before {
+        & + .trumbowyg-button-group::before {
             content: " ";
             display: inline-block;
             width: 1px;
@@ -267,7 +266,7 @@ $slow-transition-duration: 300ms !default;
     background: #FFF;
     margin-left: -1px;
     box-shadow: rgba(0, 0, 0, .1) 0 2px 3px;
-    z-index: 11;
+    z-index: 12;
 
     button {
         display: block;
@@ -537,7 +536,6 @@ body.trumbowyg-body-fullscreen {
         font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif !important;
         font-size: 14px !important;
         line-height: 1.45em !important;
-        white-space: normal !important;
         color: #333;
 
         a {
