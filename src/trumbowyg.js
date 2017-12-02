@@ -1080,6 +1080,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             if (t.o.semantic) {
                 t.semanticTag('b', 'strong');
                 t.semanticTag('i', 'em');
+                t.semanticTag('s', 'del');
                 t.semanticTag('strike', 'del');
 
                 if (full) {
