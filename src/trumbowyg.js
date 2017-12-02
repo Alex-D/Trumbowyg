@@ -51,7 +51,8 @@ jQuery.trumbowyg = {
             description: 'Description',
             title: 'Title',
             text: 'Text',
-            target: 'Target'
+            target: 'Target',
+            width: 'Width'
         }
     },
 
@@ -73,6 +74,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         fixedFullWidth: false,
         autogrow: false,
         autogrowOnEnter: false,
+        imageWidthModalEdit: false,
 
         prefix: 'trumbowyg-',
 
@@ -1218,7 +1220,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         insertImage: function () {
             var t = this;
             t.saveRange();
-            t.openModalInsert(t.lang.insertImage, {
+
+            var options = {
                 url: {
                     label: 'URL',
                     required: true
@@ -1227,9 +1230,23 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     label: t.lang.description,
                     value: t.getRangeText()
                 }
-            }, function (v) { // v are values
+            };
+
+            if (t.o.imageWidthModalEdit) {
+                options.width = {};
+            }
+
+            t.openModalInsert(t.lang.insertImage, options, function (v) { // v are values
                 t.execCmd('insertImage', v.url);
-                $('img[src="' + v.url + '"]:not([alt])', t.$box).attr('alt', v.alt);
+                var $img = $('img[src="' + v.url + '"]:not([alt])', t.$box);
+                $img.attr('alt', v.alt);
+
+                if (t.o.imageWidthModalEdit) {
+                    $img.attr({
+                        width: v.width
+                    });
+                }
+
                 return true;
             });
         },
@@ -1506,7 +1523,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     src = base64;
                 }
 
-                t.openModalInsert(t.lang.insertImage, {
+                var options = {
                     url: {
                         label: 'URL',
                         value: src,
@@ -1516,7 +1533,15 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         label: t.lang.description,
                         value: $img.attr('alt')
                     }
-                }, function (v) {
+                };
+
+                if (t.o.imageWidthModalEdit) {
+                    options.width = {
+                        value: $img.attr('width') ? $img.attr('width') : ''
+                    };
+                }
+
+                t.openModalInsert(t.lang.insertImage, options, function (v) {
                     if (v.src !== base64) {
                         $img.attr({
                             src: v.src
@@ -1525,6 +1550,17 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     $img.attr({
                         alt: v.alt
                     });
+
+                    if (t.o.imageWidthModalEdit) {
+                        if (parseInt(v.width) > 0) {
+                            $img.attr({
+                                width: v.width
+                            });
+                        } else {
+                            $img.removeAttr('width');
+                        }
+                    }
+
                     return true;
                 });
                 return false;

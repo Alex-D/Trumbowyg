@@ -164,8 +164,7 @@ $('#form-content').trumbowyg({
     semantic: true,
     resetCss: true,
     autoAjustHeight: true,
-    autogrow: true,
-    btnsAdd: ['close']
+    autogrow: true
 });
                 </pre></code>
             </textarea>
@@ -246,7 +245,8 @@ $('#form-content').trumbowyg({
                 serverPath: 'https://api.imgur.com/3/image',
                 fileFieldName: 'image',
                 headers: {'Authorization': 'Client-ID 9e57cb1c4791cea'},
-                urlPropertyName: 'data.link'
+                urlPropertyName: 'data.link',
+                imageWidthModalEdit: true
             };
 
             /** Full flat button pane **/
@@ -323,7 +323,10 @@ $('#form-content').trumbowyg({
                     ['foreColor', 'backColor'],
                     ['preformatted'],
                     ['fullscreen', 'close']
-                ]
+                ],
+                plugins: {
+                    upload: uploadOptions
+                }
             };
             $('#customized-buttonpane')
             .trumbowyg(customizedButtonPaneTbwOptions)
@@ -343,6 +346,7 @@ $('#form-content').trumbowyg({
                 resetCss: true,
                 removeformatPasted: true,
                 tagsToRemove: ['script', 'style'],
+                imageWidthModalEdit: true,
 
                 autogrow: true,
                 autogrowOnEnter: true,
@@ -352,8 +356,7 @@ $('#form-content').trumbowyg({
                         fn: 'bold',
                         key: 'G'
                     }
-                },
-                btnsAdd: ['close']
+                }
             };
             $('#form-content')
             .trumbowyg(formTbwOptions)
