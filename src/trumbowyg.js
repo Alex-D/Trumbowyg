@@ -1202,6 +1202,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 }
                 t.range.deleteContents();
                 t.range.insertNode(link[0]);
+                t.syncCode();
+                t.$c.trigger('tbwchange');
                 return true;
             });
         },
@@ -1253,6 +1255,9 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         width: v.width
                     });
                 }
+
+                t.syncCode();
+                t.$c.trigger('tbwchange');
 
                 return true;
             });
