@@ -1000,11 +1000,12 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 prefix = t.o.prefix,
                 $dropdown = $('[data-dropdown=' + name + ']', t.$box),
                 $btn = $('.' + prefix + name + '-button', t.$btnPane),
-                show = $dropdown.is(':hidden');
+                show = $dropdown.is(':hidden'),
+                enabled = !t.disabled;
 
             $('body', d).trigger('mousedown');
 
-            if (show) {
+            if (show && enabled) {
                 var o = $btn.offset().left;
                 $btn.addClass(prefix + 'active');
 
