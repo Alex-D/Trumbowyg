@@ -41,6 +41,7 @@
                 <li>
                     <a href="#existing-plugins">Existing plugins</a>
                     <ul>
+                        <li><a href="#plugin-allow-tags-from-paste">Allow tags from paste</a></li>
                         <li><a href="#plugin-base64">Base 64</a></li>
                         <li><a href="#plugin-cleanpaste">Clean paste</a></li>
                         <li><a href="#plugin-colors">Colors</a></li>
@@ -49,6 +50,7 @@
                         <li><a href="#plugin-noembed">Noembed</a></li>
                         <li><a href="#plugin-pasteimage">Paste image</a></li>
                         <li><a href="#plugin-preformatted">Preformatted</a></li>
+                        <li><a href="#plugin-ruby">Ruby</a></li>
                         <li><a href="#plugin-table">Table</a></li>
                         <li><a href="#plugin-template">Template</a></li>
                         <li><a href="#plugin-upload">Upload</a></li>
@@ -86,6 +88,28 @@
         </p>
 
         <div class="feature">
+            <h3 id="plugin-allow-tags-from-paste">Allow tags from paste</h3>
+            <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need documentation</p>
+            <p class="deprecated-feature">Need demo</p>
+
+            <p>
+                Allow tags from paste plugin allows you to filter tags allowed when an user paste some code into the editor.
+            </p>
+
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/allowtagsfrompaste/trumbowyg.allowtagsfrompaste.js" class="button button-demo">
+                    View allowTagsFromPaste plugin code on GitHub
+                </a>
+            </p>
+
+            <p class="note">
+                Some doc to write... <br>
+                You can contribute to this documentation by submitting a Pull Request :)
+            </p>
+        </div>
+
+        <div class="feature">
             <h3 id="plugin-base64">Base 64</h3>
             <p class="added-feature">Stable</p>
 
@@ -93,7 +117,12 @@
                 Base 64 plugin allows you to insert images inline as base64.
             </p>
 
-            <a href="../../demos/#plugins-base64" class="button button-demo">Try base64 live demo!</a>
+            <p>
+                <a href="../../demos/#plugins-base64" class="button button-demo">Try base64 live demo!</a>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/base64/trumbowyg.base64.js" class="button button-demo">
+                    View base64 plugin code on GitHub
+                </a>
+            </p>
 
             <h4>How to use it?</h4>
             <pre><code class="html">
@@ -121,6 +150,12 @@ $('#my-editor').trumbowyg({
                 Clean paste plugin handle paste events, clean the HTML code before insert content into the editor.
             </p>
 
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/cleanpaste/trumbowyg.cleanpaste.js" class="button button-demo">
+                    View cleanpaste plugin code on GitHub
+                </a>
+            </p>
+
             <h4>How to use it?</h4>
             <pre><code class="html">
 &lt;-- Import Trumbowyg plugins... -->
@@ -139,7 +174,12 @@ $('#my-editor').trumbowyg({
                 Colors plugin allows you to change foreground and background color of your text.
             </p>
 
-            <a href="../../demos/#plugins-colors" class="button button-demo">Try colors live demo!</a>
+            <p>
+                <a href="../../demos/#plugins-colors" class="button button-demo">Try colors live demo!</a>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/colors/trumbowyg.colors.js" class="button button-demo">
+                    View colors plugin code on GitHub
+                </a>
+            </p>
 
             <h4>How to use it?</h4>
             <pre><code class="html">
@@ -175,7 +215,12 @@ $('#my-editor').trumbowyg({
                 Emoji plugin allows you to insert some emojis in your editor.
             </p>
 
-            <a href="../../demos/#plugins-emoji" class="button button-demo">Try emoji live demo!</a>
+            <p>
+                <a href="../../demos/#plugins-emoji" class="button button-demo">Try emoji live demo!</a>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/emoji/trumbowyg.emoji.js" class="button button-demo">
+                    View emoji plugin code on GitHub
+                </a>
+            </p>
 
             <h4>How to use it?</h4>
             <p>
@@ -219,7 +264,12 @@ $('.trumbowyg-editor').on('input propertychange', function() {
                 Do the same as insert image, but for audio.
             </p>
 
-            <a href="../../demos/#plugins-insertaudio" class="button button-demo">Try insert audio live demo!</a>
+            <p>
+                <a href="../../demos/#plugins-insertaudio" class="button button-demo">Try insert audio live demo!</a>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/insertaudio/trumbowyg.insertaudio.js" class="button button-demo">
+                    View insertaudio plugin code on GitHub
+                </a>
+            </p>
 
             <h4>How to use it?</h4>
             <pre><code class="html">
@@ -246,7 +296,12 @@ $('#my-editor').trumbowyg({
                 Allows you to embed any content from a link using <a href="https://noembed.com/">noembed.com</a> API.
             </p>
 
-            <a href="../../demos/#plugins-noembed" class="button button-demo">Try noembed live demo!</a>
+            <p>
+                <a href="../../demos/#plugins-noembed" class="button button-demo">Try noembed live demo!</a>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/noembed/trumbowyg.noembed.js" class="button button-demo">
+                    View noembed plugin code on GitHub
+                </a>
+            </p>
 
             <h4>How to use it?</h4>
             <pre><code class="html">
@@ -275,6 +330,12 @@ $('#my-editor').trumbowyg({
                 into the editor as base64. It do nothing on text or HTML paste.
             </p>
 
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/pasteimage/trumbowyg.pasteimage.js" class="button button-demo">
+                    View pasteimage plugin code on GitHub
+                </a>
+            </p>
+
             <h4>How to use it?</h4>
             <pre><code class="html">
 &lt;-- Import Trumbowyg plugins... -->
@@ -292,6 +353,12 @@ $('#my-editor').trumbowyg({
 
             <p>
                 Wrap your code with <code>&lt;pre></code> tags.
+            </p>
+
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/preformatted/trumbowyg.preformatted.js" class="button button-demo">
+                    View preformatted plugin code on GitHub
+                </a>
             </p>
 
             <h4>How to use it?</h4>
@@ -312,16 +379,49 @@ $('#my-editor').trumbowyg({
         </div>
 
         <div class="feature">
+            <h3 id="plugin-ruby">Ruby</h3>
+            <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need documentation</p>
+            <p class="deprecated-feature">Need demo</p>
+
+            <p>
+                Allows you to support <a href="https://www.w3.org/International/articles/ruby/">ruby markup</a>.
+            </p>
+
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/ruby/trumbowyg.ruby.js" class="button button-demo">
+                    View ruby plugin code on GitHub
+                </a>
+            </p>
+
+            <p class="note">
+                Some doc to write... <br>
+                You can contribute to this documentation by submitting a Pull Request :)
+            </p>
+        </div>
+
+        <div class="feature">
             <h3 id="plugin-table">Table</h3>
             <p class="deprecated-feature">Not stable</p>
             <p class="deprecated-feature">Need documentation</p>
             <p class="deprecated-feature">Need demo</p>
 
             <p>
+                Table plugin allows users to create tables.
+            </p>
+
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/table/trumbowyg.table.js" class="button button-demo">
+                    View table plugin code on GitHub
+                </a>
+            </p>
+
+            <p>
                 <a href="https://github.com/Alex-D/Trumbowyg/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20table">
                     Check bugs on GitHub
                 </a>
             </p>
+
             <p class="note">
                 Some doc to write... <br>
                 You can contribute to this documentation by submitting a Pull Request :)
@@ -337,7 +437,12 @@ $('#my-editor').trumbowyg({
                 Manage a set of HTML templates to insert fast.
             </p>
 
-            <a href="../../demos/#plugins-template" class="button button-demo">Try template live demo!</a>
+            <p>
+                <a href="../../demos/#plugins-template" class="button button-demo">Try template live demo!</a>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/template/trumbowyg.template.js" class="button button-demo">
+                    View template plugin code on GitHub
+                </a>
+            </p>
 
             <h4>How to use it?</h4>
             <pre><code class="html">
@@ -370,7 +475,12 @@ $('#my-editor').trumbowyg({
                 the uploaded image in the editor.
             </p>
 
-            <a href="../../demos/#plugins-upload" class="button button-demo">Try upload live demo!</a>
+            <p>
+                <a href="../../demos/#plugins-upload" class="button button-demo">Try upload live demo!</a>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/upload/trumbowyg.upload.js" class="button button-demo">
+                    View upload plugin code on GitHub
+                </a>
+            </p>
 
             <h4>How to use it?</h4>
             <pre><code class="html">
