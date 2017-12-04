@@ -88,6 +88,7 @@
                         <li><a href="#manage-content">Manage content</a></li>
                         <li><a href="#empty">Empty</a></li>
                         <li><a href="#enable-disable-edition">Enable/disable edition</a></li>
+                        <li><a href="#toggle">Toggle HTML/WYSIWYG</a></li>
                         <li><a href="#destroy-editor">Destroy editor</a></li>
                         <li><a href="#events">Events</a></li>
                     </ul>
@@ -1017,6 +1018,18 @@ $('#editor').trumbowyg('empty');
             <pre><code class="javascript">
 $('#editor').trumbowyg('disable');
 $('#editor').trumbowyg('enable');
+            </code></pre>
+        </div>
+
+
+        <div class="feature" data-added="2.9.0">
+            <h3 id="toggle">Toggle between HTML & WYSIWYG modes</h3>
+            <p class="added-feature">Added in 2.9.0</p>
+            <p>
+                You can switch between HTML view and WYSIWYG view via toggle method.
+            </p>
+            <pre><code class="javascript">
+$('#editor').trumbowyg('toggle');
             </code></pre>
         </div>
 

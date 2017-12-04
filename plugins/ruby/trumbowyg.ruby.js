@@ -14,24 +14,24 @@
 	$.extend(true, $.trumbowyg, {
 		langs: {
 			en: {
-				insertRuby: 'Add ruby text',
+				ruby: 'Add ruby text',
 				rubyModal: 'Ruby modal',
 				rubyText: 'Ruby text'
 			},
 			id: {
-				insertRuby: 'Sisipkan teks ruby',
+				ruby: 'Sisipkan teks ruby',
 				rubyModal: 'Modal teks ruby',
 				rubyText: 'Teks ruby'
 			}
 		},
 		plugins: {
-			insertRuby: {
+			ruby: {
 				init: function(trumbowyg) {
 					var btnDef = {
 						fn: function() {
 							trumbowyg.saveRange();
 							trumbowyg.openModalInsert(
-								trumbowyg.lang.insertRuby, 
+								trumbowyg.lang.ruby,
 								{
 									rubyText: {
 										label: trumbowyg.lang.rubyText,
@@ -47,12 +47,14 @@
 									var node = $('<ruby title="' + v.rubyText + '">' + v.modal + '<rp> (</rp><rt>' + v.rubyText + '</rt><rp>)</rp></ruby>')[0];
 									trumbowyg.range.deleteContents();
 									trumbowyg.range.insertNode(node);
+                                    trumbowyg.syncCode();
+                                    trumbowyg.$c.trigger('tbwchange');
 									return true;
 								}
 							);
 						}
 					};
-					trumbowyg.addBtnDef('insertRuby', btnDef);
+					trumbowyg.addBtnDef('ruby', btnDef);
 				}
 			}
 		}
