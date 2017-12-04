@@ -48,7 +48,6 @@ hljs.initHighlightingOnLoad();
 
         // Demo switch
         var $demoTextarea = $('#trumbowyg-demo');
-        console.log($demoTextarea);
         $demoTextarea.trumbowyg(configurations.core);
         $('.demo-switcher .button').on('click', function () {
             var $current = $('.demo-switcher .current');
