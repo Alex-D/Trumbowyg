@@ -1,26 +1,26 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>insertAudio | Trumbowyg</title>
+    <title>ruby plugin | Trumbowyg</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../../css/main.css">
 </head>
 <body class="documentation-body">
 <div class="main main-demo-inner">
     <section class="wrapper section">
-        <h2 class="section-title">Audio plugin</h2>
+        <h2 class="section-title">Ruby plugin</h2>
 
         <div class="feature">
             <h3>Basic usage</h3>
             <p>
-                This plugin allow you to insert audio files into your page creating vibrante documents.
+                You can insert Ruby markup.
             </p>
 
-            <a href="../../documentation/plugins/#plugin-insertaudio" class="button button-demo">Read insert audio plugin documentation</a>
+            <a href="../../documentation/plugins/#plugin-ruby" class="button button-demo">Read ruby plugin documentation</a>
 
             <div id="editor">
-                <h2>You can make me come alive! Insert Audio</h2>
+                <h2>Insert your ruby markup!</h2>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident
                     optio nam reiciendis eius beatae quibusdam!
@@ -33,13 +33,13 @@
                 </p>
             </div>
 
-            <h3>The code</h3>
+            <h4>The code</h4>
             <pre><code class="js-code-to-eval javascript">
 $('#editor')
 .trumbowyg({
-    btns: ['insertAudio']
+    btns: ['ruby']
 });
-            </code></pre>
+                </code></pre>
         </div>
 
         <div class="feature">
@@ -68,7 +68,7 @@ $('#editor')
 <script>
     loadStyle('dist/ui/trumbowyg.css');
     loadScript('dist/trumbowyg.js', 'Import Trumbowyg');
-    loadScript('dist/plugins/insertaudio/trumbowyg.insertaudio.js', 'Import all plugins you want AFTER importing jQuery and Trumbowyg');
+    loadScript('dist/plugins/ruby/trumbowyg.ruby.js', 'Import all plugins you want AFTER importing jQuery and Trumbowyg');
 </script>
 <script src="../js/runExampleCode.js"></script>
 <script src="../js/highlight.js"></script>
