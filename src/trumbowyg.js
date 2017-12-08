@@ -1557,7 +1557,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 t.openModalInsert(t.lang.insertImage, options, function (v) {
                     if (v.src !== base64) {
                         $img.attr({
-                            src: v.src
+                            src: v.url
                         });
                     }
                     $img.attr({
