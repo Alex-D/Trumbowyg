@@ -1,5 +1,5 @@
 /* ===========================================================
- * trumbowyg.allowTagsFromPaste.js v1.0
+ * trumbowyg.allowTagsFromPaste.js v1.0.1
  * It cleans tags from pasted text, whilst allowing several specified tags
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
