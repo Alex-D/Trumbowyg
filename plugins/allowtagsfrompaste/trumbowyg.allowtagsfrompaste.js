@@ -133,7 +133,7 @@
 						setTimeout(function () {
 							var processNodes = trumbowyg.$ed.html();
 							$.each(trumbowyg.o.plugins.allowTagsFromPaste, function(iterator, tagName) {
-								processNodes = processNodes.replace(new RegExp("<\\/?" + tagName + "(\\s[^>]*|)>", "gi"), "");
+								processNodes = processNodes.replace(new RegExp("<\\/?" + tagName + "(\\s[^>]*)?>", "gi"), "");
 							});
 							trumbowyg.$ed.html(processNodes);
 						}, 0);
