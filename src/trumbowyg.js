@@ -585,13 +585,13 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
                     setTimeout(function () {
                         ctrl = false;
-                    }, 50);
+                    }, 200);
                 })
                 .on('mouseup keydown keyup', function (e) {
                     if ((!e.ctrlKey && !e.metaKey) || e.altKey) {
-                        setTimeout(function () { // "hold on" to the ctrl key for 50ms
+                        setTimeout(function () { // "hold on" to the ctrl key for 200ms
                             ctrl = false;
-                        }, 50);
+                        }, 200);
                     }
                     clearTimeout(debounceButtonPaneStatus);
                     debounceButtonPaneStatus = setTimeout(function () {
