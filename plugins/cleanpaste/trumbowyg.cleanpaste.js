@@ -52,9 +52,10 @@
         var afterStart;
         var afterFinish;
         var newSnippet;
+        var minLength = Math.min(htmlBefore.length, htmlAfter.length);
 
         // we need to extract the inserted block
-        for (afterStart = 0; htmlAfter.charAt(afterStart) === htmlBefore.charAt(afterStart); afterStart += 1) {
+        for (afterStart = 0; htmlAfter.charAt(afterStart) === htmlBefore.charAt(afterStart) && afterStart <= minLength; afterStart += 1) {
             matchedHead += htmlAfter.charAt(afterStart);
         }
 
@@ -74,7 +75,7 @@
         htmlBefore = reverse(htmlBefore);
 
         // Find end of both strings that matches
-        for (afterFinish = 0; htmlAfter.charAt(afterFinish) === htmlBefore.charAt(afterFinish); afterFinish += 1) {
+        for (afterFinish = 0; htmlAfter.charAt(afterFinish) === htmlBefore.charAt(afterFinish) && afterFinish <= minLength; afterFinish += 1) {
             matchedTail += htmlAfter.charAt(afterFinish);
         }
 
