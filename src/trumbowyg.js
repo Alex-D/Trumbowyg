@@ -52,7 +52,9 @@ jQuery.trumbowyg = {
             title: 'Title',
             text: 'Text',
             target: 'Target',
-            width: 'Width'
+            width: 'Width',
+            imageAlign: 'Align',
+            imageAlignPlaceholder:'bottom | left | middle | right | top'
         }
     },
 
@@ -75,6 +77,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         autogrow: false,
         autogrowOnEnter: false,
         imageWidthModalEdit: false,
+        imageAlignModalEdit: false,
 
         prefix: 'trumbowyg-',
 
@@ -1246,17 +1249,33 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 options.width = {};
             }
 
+            if (t.o.imageAlignModalEdit) {
+                options.align = {
+                    label: t.lang.imageAlign,
+                    value: '',
+                    attributes: {
+                        placeholder: t.lang.imageAlignPlaceholder
+                    }
+                };
+            }
+
             t.openModalInsert(t.lang.insertImage, options, function (v) { // v are values
                 t.execCmd('insertImage', v.url);
-                var $img = $('img[src="' + v.url + '"]:not([alt])', t.$box);
-                $img.attr('alt', v.alt);
+                var $img = $('img[src="' + v.url + '"]:not([alt])', t.$box),
+                    imageAttrs = { alt: v.alt };
 
-                if (t.o.imageWidthModalEdit) {
-                    $img.attr({
-                        width: v.width
-                    });
+                if (
+                    t.o.imageAlignModalEdit &&
+                    ['bottom', 'left', 'middle', 'right', 'top'].indexOf(v.align) >= 0
+                ) {
+                    imageAttrs.align = v.align;
                 }
 
+                if (t.o.imageWidthModalEdit) {
+                    imageAttrs.width = v.width;
+                }
+
+                $img.attr(imageAttrs);
                 t.syncCode();
                 t.$c.trigger('tbwchange');
 
@@ -1554,25 +1573,39 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     };
                 }
 
+                if (t.o.imageAlignModalEdit) {
+                    options.align = {
+                        label: t.lang.imageAlign,
+                        value: $img.attr('align'),
+                        attributes: {
+                            placeholder: t.lang.imageAlignPlaceholder
+                        }
+                    };
+                }
+
                 t.openModalInsert(t.lang.insertImage, options, function (v) {
+                    var imageAttrs = { alt: v.alt };
+
                     if (v.src !== base64) {
-                        $img.attr({
-                            src: v.url
-                        });
+                        imageAttrs.src = v.url;
                     }
-                    $img.attr({
-                        alt: v.alt
-                    });
+
+                    if (
+                        t.o.imageAlignModalEdit &&
+                        ['', 'bottom', 'left', 'middle', 'right', 'top'].indexOf(v.align) > -1
+                    ) {
+                        imageAttrs.align = v.align;
+                    }
 
                     if (t.o.imageWidthModalEdit) {
                         if (parseInt(v.width) > 0) {
-                            $img.attr({
-                                width: v.width
-                            });
+                            imageAttrs.width = v.width;
                         } else {
                             $img.removeAttr('width');
                         }
                     }
+
+                    $img.attr(imageAttrs);
 
                     return true;
                 });
