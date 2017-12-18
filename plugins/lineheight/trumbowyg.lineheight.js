@@ -49,7 +49,6 @@
                 text: '<span style="line-height: ' + size + ';">' + trumbowyg.lang.lineheights[size] + '</span>',
                 hasIcon: false,
                 fn: function(){
-                    trumbowyg.expandRange();
                     trumbowyg.saveRange();
                     var text = trumbowyg.getRangeText();
                     if (text.replace(/\s/g, '') !== '') {

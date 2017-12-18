@@ -49,7 +49,6 @@
                 text: '<span style="font-size: ' + size + ';">' + trumbowyg.lang.fontsizes[size] + '</span>',
                 hasIcon: false,
                 fn: function(){
-                    trumbowyg.expandRange();
                     trumbowyg.execCmd('fontSize', index+1, true);
                 }
             });

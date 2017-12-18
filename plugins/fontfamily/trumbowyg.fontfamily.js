@@ -52,7 +52,6 @@
                 title: '<span style="font-family: ' + font.family + ';">' + font.name + '</span>',
                 hasIcon: false,
                 fn: function(){
-                    trumbowyg.expandRange();
                     trumbowyg.execCmd('fontName', font.family, true);
                 }
             });
