@@ -54,6 +54,24 @@
                 columns: 'Sloupce',
                 styler: 'Tabulku třída',
                 error: 'Chyba'
+            },
+            ru: {
+                table: 'Вставить таблицу',
+                tableAddRow: 'Добавить строки',
+                tableAddColumn: 'Добавить столбцы',
+                rows: 'Строки',
+                columns: 'Столбцы',
+                styler: 'Имя CSS класса для таблицы',
+                error: 'Ошибка'
+            },
+            ja: {
+                table: '表の挿入',
+                tableAddRow: '行の追加',
+                tableAddColumn: '列の追加',
+                rows: '行',
+                columns: '列',
+                styler: '表のクラス',
+                error: 'エラー'
             }
         },
 

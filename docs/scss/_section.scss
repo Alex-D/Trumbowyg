@@ -1,0 +1,40 @@
+.section {
+	position: relative;
+	padding-bottom: 100px;
+
+	&-primary {
+		color: $primary-color-dark;
+		background: linear-gradient(to bottom left, $primary-color, $primary-color-light);
+
+		.section-title {
+			color: $white;
+		}
+		a {
+			color: $white;
+		}
+	}
+	&-secondary {
+		background: $grey;
+	}
+
+	h4 {
+		font-weight: 400;
+		color: $text-color;
+		font-size: 28px;
+		padding-top: 80px;
+	}
+}
+.section-title {
+	text-align: center;
+	font-family: $panton;
+	font-size: 100px;
+	color: $primary-color;
+	padding-top: 100px;
+	padding-bottom: 30px;
+}
+.section-subtitle {
+	margin-top: -22px;
+	font-size: 23px;
+	color: $text-color;
+	font-weight: 400;
+}

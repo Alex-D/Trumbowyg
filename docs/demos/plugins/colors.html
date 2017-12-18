@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Colors plugin | Trumbowyg</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body class="documentation-body">
+<div class="main main-demo-inner">
+    <section class="wrapper section">
+        <h2 class="section-title">Colors plugin</h2>
+
+        <div class="feature">
+            <h3>Basic usage</h3>
+            <p>
+                This plugin allow you to add a foreground and/or background color picker.
+            </p>
+
+            <a href="../../documentation/plugins/#plugin-colors" class="button button-demo">Read colors plugin documentation</a>
+
+            <div id="editor">
+                <h2>You can color me!</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident
+                    optio nam reiciendis eius beatae quibusdam!
+                </p>
+                <p>
+                    The text is derived from Cicero's De Finibus Bonorum et Malorum (On the Ends of Goods and Evils, or
+                    alternatively [About] The Purposes of Good and Evil). The original passage began: Neque porro quisquam est
+                    qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit (Translation: &quot;Neither is there
+                    anyone who loves grief itself since it is grief and thus wants to obtain it&quot;).
+                </p>
+            </div>
+
+            <h3>The code</h3>
+            <pre><code class="js-code-to-eval javascript">
+$('#editor')
+.trumbowyg({
+    btns: ['foreColor', 'backColor']
+});
+            </code></pre>
+        </div>
+
+        <div class="feature">
+            <h3>Loading</h3>
+
+            <h4>In head tag</h4>
+            <pre><code class="html loading-head">
+            </code></pre>
+            <h4>At the end of body</h4>
+            <pre><code class="html loading-body">
+&lt;!-- Import jQuery -->
+&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">&lt;/script>
+&lt;script>window.jQuery || document.write('&lt;script src="js/vendor/jquery-3.2.1.min.js">&lt;\/script>')&lt;/script>
+            </code></pre>
+        </div>
+    </section>
+</div>
+
+
+<!-- Import jQuery -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+
+<!-- DO NOT COPY THIS LINES IN YOUR PROJECT, THEY ARE THERE JUST FOR THE EXAMPLE PAGE PRUPOSE -->
+<script src="../js/loader.js"></script>
+<script>
+    loadStyle('dist/ui/trumbowyg.css');
+    loadStyle('dist/plugins/colors/ui/trumbowyg.colors.css', 'Import color plugin specific stylesheet');
+    loadScript('dist/trumbowyg.js', 'Import Trumbowyg');
+    loadScript('dist/plugins/colors/trumbowyg.colors.js', 'Import all plugins you want AFTER importing jQuery and Trumbowyg');
+</script>
+<script src="../js/runExampleCode.js"></script>
+<script src="../js/highlight.js"></script>
+</body>
+</html>

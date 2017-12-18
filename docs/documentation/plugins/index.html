@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Plugins | Trumbowyg : a lightweight WYSIWYG editor | Alex-D / Alexandre Demode</title>
+    <meta name="description" content="Trumbowyg is a jQuery plugin for create WYSIWYG editor">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" type="image/png" href="../../favicon.png">
+
+    <link rel="stylesheet" href="../../css/main.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+</head>
+<body class="documentation-body">
+<svg xmlns="http://www.w3.org/2000/svg" style="overflow: hidden;visibility: hidden;height: 0;width: 0;">
+    <symbol id="trumbowyg-link" viewBox="0 0 72 72">
+        <path d="M30.9 49.1l-6.7 6.7c-.8.8-1.6.9-2.1.9s-1.4-.1-2.1-.9l-5.2-5.2c-1.1-1.1-1.1-3.1 0-4.2l6.1-6.1.2-.2 6.5-6.5c-1.2-.6-2.5-.9-3.8-.9-2.3 0-4.6.9-6.3 2.6L10.8 42c-3.5 3.5-3.5 9.2 0 12.7l5.2 5.2c1.7 1.7 4 2.6 6.3 2.6s4.6-.9 6.3-2.6l6.7-6.7C38 50.5 38.6 46.3 37 43l-6.1 6.1zM38.5 22.7l6.7-6.7c.8-.8 1.6-.9 2.1-.9s1.4.1 2.1.9l5.2 5.2c1.1 1.1 1.1 3.1 0 4.2l-6.1 6.1-.2.2-6.5 6.5c1.2.6 2.5.9 3.8.9 2.3 0 4.6-.9 6.3-2.6l6.7-6.7c3.5-3.5 3.5-9.2 0-12.7l-5.2-5.2c-1.7-1.7-4-2.6-6.3-2.6s-4.6.9-6.3 2.6l-6.7 6.7c-2.7 2.7-3.3 6.9-1.7 10.2l6.1-6.1z"/>
+        <path d="M44.1 30.7c.2-.2.4-.6.4-.9 0-.3-.1-.6-.4-.9l-2.3-2.3c-.2-.2-.6-.4-.9-.4-.3 0-.6.1-.9.4L25.8 40.8c-.2.2-.4.6-.4.9 0 .3.1.6.4.9l2.3 2.3c.2.2.6.4.9.4.3 0 .6-.1.9-.4l14.2-14.2z"/>
+    </symbol>
+</svg>
+<div class="sidebar">
+    <div class="sidebar-inner">
+        <header class="header-documentation">
+            <a href="../../" class="documentation-logo-link">
+                <img src="../../img/logo-doc.svg" alt="" class="documentation-logo">
+            </a>
+            <h1 class="documentation-title">
+                Plugins
+            </h1>
+            <nav class="documentation-menu">
+                <a href="../">Docs</a> &bull;
+                <a href="./">Plugins</a> &bull;
+                <a href="../core/">Core</a> &bull;
+                <a href="../../demos/">Demos</a>
+            </nav>
+        </header>
+
+        <aside class="documentation-summary">
+            <ul>
+                <li>
+                    <a href="#existing-plugins">Existing plugins</a>
+                    <ul>
+                        <li><a href="#plugin-allow-tags-from-paste">Allow tags from paste</a></li>
+                        <li><a href="#plugin-base64">Base 64</a></li>
+                        <li><a href="#plugin-cleanpaste">Clean paste</a></li>
+                        <li><a href="#plugin-colors">Colors</a></li>
+                        <li><a href="#plugin-emoji">Emoji</a></li>
+                        <li><a href="#plugin-insertaudio">Insert audio</a></li>
+                        <li><a href="#plugin-noembed">Noembed</a></li>
+                        <li><a href="#plugin-pasteimage">Paste image</a></li>
+                        <li><a href="#plugin-preformatted">Preformatted</a></li>
+                        <li><a href="#plugin-ruby">Ruby</a></li>
+                        <li><a href="#plugin-table">Table</a></li>
+                        <li><a href="#plugin-template">Template</a></li>
+                        <li><a href="#plugin-upload">Upload</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#create-your-own">Create your own</a>
+                    <ul>
+                        <li><a href="#introduction">Introduction</a></li>
+                        <li><a href="#skeleton">Skeleton</a></li>
+                        <li><a href="#interact-with-content">Interact with content</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+
+        <div class="documentation-sidebar-beer">
+            <a href="../../#donate">
+                <img src="../../img/beer.svg" alt="" class="beer-icon">
+                <span class="beer-label">
+                    Do you enjoy Trumbowyg? <br>
+                    Buy me some beers :)
+                </span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<main class="main">
+    <section id="existing-plugins" class="wrapper section">
+        <h2 class="section-title">Existing plugins</h2>
+        <p>
+            If you want to add a plugin, be sure to read the
+            <a href="../#use-plugins">use plugins section of documentation</a> before continue.
+        </p>
+
+        <div class="feature">
+            <h3 id="plugin-allow-tags-from-paste">Allow tags from paste</h3>
+            <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need documentation</p>
+            <p class="deprecated-feature">Need demo</p>
+
+            <p>
+                Allow tags from paste plugin allows you to filter tags allowed when an user paste some code into the editor.
+            </p>
+
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/allowtagsfrompaste/trumbowyg.allowtagsfrompaste.js" class="button button-demo">
+                    View allowTagsFromPaste plugin code on GitHub
+                </a>
+            </p>
+
+            <p class="note">
+                Some doc to write... <br>
+                You can contribute to this documentation by submitting a Pull Request :)
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-base64">Base 64</h3>
+            <p class="added-feature">Stable</p>
+
+            <p>
+                Base 64 plugin allows you to insert images inline as base64.
+            </p>
+
+            <p>
+                <a href="../../demos/#plugins-base64" class="button button-demo">Try base64 live demo!</a>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/base64/trumbowyg.base64.js" class="button button-demo">
+                    View base64 plugin code on GitHub
+                </a>
+            </p>
+
+            <h4>How to use it?</h4>
+            <pre><code class="html">
+&lt;-- Import Trumbowyg plugins... -->
+&lt;script src="node_modules/trumbowyg/dist/plugins/base64/trumbowyg.base64.min.js">&lt;/script>
+            </code></pre>
+            <p>
+                Then you can use the new button definition <code>base64</code>
+            </p>
+            <pre><code class="javascript">
+$('#my-editor').trumbowyg({
+    btns: [
+        ['base64']
+    ]
+});
+            </code></pre>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-cleanpaste">Clean paste</h3>
+            <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need demo</p>
+
+            <p>
+                Clean paste plugin handle paste events, clean the HTML code before insert content into the editor.
+            </p>
+
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/cleanpaste/trumbowyg.cleanpaste.js" class="button button-demo">
+                    View cleanpaste plugin code on GitHub
+                </a>
+            </p>
+
+            <h4>How to use it?</h4>
+            <pre><code class="html">
+&lt;-- Import Trumbowyg plugins... -->
+&lt;script src="node_modules/trumbowyg/dist/plugins/cleanpaste/trumbowyg.cleanpaste.min.js">&lt;/script>
+            </code></pre>
+            <p>
+                Clean paste works now on every new Trumbowyg instance.
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-colors">Colors</h3>
+            <p class="added-feature">Stable</p>
+
+            <p>
+                Colors plugin allows you to change foreground and background color of your text.
+            </p>
+
+            <p>
+                <a href="../../demos/#plugins-colors" class="button button-demo">Try colors live demo!</a>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/colors/trumbowyg.colors.js" class="button button-demo">
+                    View colors plugin code on GitHub
+                </a>
+            </p>
+
+            <h4>How to use it?</h4>
+            <pre><code class="html">
+&lt;-- Import Trumbowyg colors style in &lt;head>... -->
+&lt;script src="node_modules/trumbowyg/dist/plugins/colors/ui/trumbowyg.colors.css">&lt;/script>
+            </code></pre>
+            <pre><code class="html">
+&lt;-- Import Trumbowyg colors JS at the end of &lt;body>... -->
+&lt;script src="node_modules/trumbowyg/dist/plugins/colors/trumbowyg.colors.min.js">&lt;/script>
+            </code></pre>
+            <p>
+                Then you can use the new button definitions <code>foreColor</code> and <code>backColor</code>
+            </p>
+            <pre><code class="javascript">
+$('#my-editor').trumbowyg({
+    btns: [
+        ['foreColor', 'backColor']
+    ]
+});
+            </code></pre>
+
+            <p class="note">
+                Some doc to write about color options... <br>
+                You can contribute to this documentation by submitting a Pull Request :)
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-emoji">Emoji</h3>
+            <p class="added-feature">Stable</p>
+
+            <p>
+                Emoji plugin allows you to insert some emojis in your editor.
+            </p>
+
+            <p>
+                <a href="../../demos/#plugins-emoji" class="button button-demo">Try emoji live demo!</a>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/emoji/trumbowyg.emoji.js" class="button button-demo">
+                    View emoji plugin code on GitHub
+                </a>
+            </p>
+
+            <h4>How to use it?</h4>
+            <p>
+                This plugin require <strong>emojify.js</strong> which can be installed with:
+                <code>npm&nbsp;install&nbsp;emojify.js</code>
+            </p>
+            <pre><code class="html">
+&lt;-- Import emojify.js and Trumbowyg emoji at the end of &lt;body>... -->
+&lt;script src="node_modules/emojify.js/dist/js/emojify.min.js">&lt;/script>
+&lt;script src="node_modules/trumbowyg/dist/plugins/emoji/trumbowyg.emoji.min.js">&lt;/script>
+            </code></pre>
+            <p>
+                You should setup emojify.js, then you can use the new button definition <code>emoji</code>
+            </p>
+
+            <pre><code class="javascript">
+// Setup emojify.js
+emojify.setConfig({
+    img_dir : '//cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/',
+});
+
+$('#my-editor').trumbowyg({
+    btns: [
+        ['emoji']
+    ]
+});
+emojify.run();
+
+// Will transform an :emoji: to img tag at each input
+$('.trumbowyg-editor').on('input propertychange', function() {
+    emojify.run();
+});
+            </code></pre>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-insertaudio">Insert audio</h3>
+            <p class="added-feature">Stable</p>
+
+            <p>
+                Do the same as insert image, but for audio.
+            </p>
+
+            <p>
+                <a href="../../demos/#plugins-insertaudio" class="button button-demo">Try insert audio live demo!</a>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/insertaudio/trumbowyg.insertaudio.js" class="button button-demo">
+                    View insertaudio plugin code on GitHub
+                </a>
+            </p>
+
+            <h4>How to use it?</h4>
+            <pre><code class="html">
+&lt;-- Import Trumbowyg plugins... -->
+&lt;script src="node_modules/trumbowyg/dist/plugins/insertaudio/trumbowyg.insertaudio.min.js">&lt;/script>
+            </code></pre>
+            <p>
+                Then you can use the new button definition <code>insertaudio</code>
+            </p>
+            <pre><code class="javascript">
+$('#my-editor').trumbowyg({
+    btns: [
+        ['insertaudio']
+    ]
+});
+            </code></pre>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-noembed">Noembed</h3>
+            <p class="added-feature">Stable</p>
+
+            <p>
+                Allows you to embed any content from a link using <a href="https://noembed.com/">noembed.com</a> API.
+            </p>
+
+            <p>
+                <a href="../../demos/#plugins-noembed" class="button button-demo">Try noembed live demo!</a>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/noembed/trumbowyg.noembed.js" class="button button-demo">
+                    View noembed plugin code on GitHub
+                </a>
+            </p>
+
+            <h4>How to use it?</h4>
+            <pre><code class="html">
+&lt;-- Import Trumbowyg plugins... -->
+&lt;script src="node_modules/trumbowyg/dist/plugins/noembed/trumbowyg.noembed.min.js">&lt;/script>
+            </code></pre>
+            <p>
+                Then you can use the new button definition <code>noembed</code>
+            </p>
+            <pre><code class="javascript">
+$('#my-editor').trumbowyg({
+    btns: [
+        ['noembed']
+    ]
+});
+            </code></pre>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-pasteimage">Paste image</h3>
+            <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need demo</p>
+
+            <p>
+                Paste image plugin handle paste events, check if you have image files in your clipboard, then paste them
+                into the editor as base64. It do nothing on text or HTML paste.
+            </p>
+
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/pasteimage/trumbowyg.pasteimage.js" class="button button-demo">
+                    View pasteimage plugin code on GitHub
+                </a>
+            </p>
+
+            <h4>How to use it?</h4>
+            <pre><code class="html">
+&lt;-- Import Trumbowyg plugins... -->
+&lt;script src="node_modules/trumbowyg/dist/plugins/pasteimage/trumbowyg.pasteimage.min.js">&lt;/script>
+            </code></pre>
+            <p>
+                Paste image works now on every new Trumbowyg instance.
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-preformatted">Preformatted</h3>
+            <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need demo</p>
+
+            <p>
+                Wrap your code with <code>&lt;pre></code> tags.
+            </p>
+
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/preformatted/trumbowyg.preformatted.js" class="button button-demo">
+                    View preformatted plugin code on GitHub
+                </a>
+            </p>
+
+            <h4>How to use it?</h4>
+            <pre><code class="html">
+&lt;-- Import Trumbowyg plugins... -->
+&lt;script src="node_modules/trumbowyg/dist/plugins/preformatted/trumbowyg.preformatted.min.js">&lt;/script>
+            </code></pre>
+            <p>
+                Then you can use the new button definition <code>preformatted</code>
+            </p>
+            <pre><code class="javascript">
+$('#my-editor').trumbowyg({
+    btns: [
+        ['preformatted']
+    ]
+});
+            </code></pre>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-ruby">Ruby</h3>
+            <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need documentation</p>
+
+            <p>
+                Allows you to support <a href="https://www.w3.org/International/articles/ruby/">ruby markup</a>.
+            </p>
+
+            <p>
+                <a href="../../demos/#plugins-ruby" class="button button-demo">Try ruby live demo!</a>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/ruby/trumbowyg.ruby.js" class="button button-demo">
+                    View ruby plugin code on GitHub
+                </a>
+            </p>
+
+            <p class="note">
+                Some doc to write... <br>
+                You can contribute to this documentation by submitting a Pull Request :)
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-table">Table</h3>
+            <p class="deprecated-feature">Not stable</p>
+            <p class="deprecated-feature">Need documentation</p>
+            <p class="deprecated-feature">Need demo</p>
+
+            <p>
+                Table plugin allows users to create tables.
+            </p>
+
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/table/trumbowyg.table.js" class="button button-demo">
+                    View table plugin code on GitHub
+                </a>
+            </p>
+
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20table">
+                    Check bugs on GitHub
+                </a>
+            </p>
+
+            <p class="note">
+                Some doc to write... <br>
+                You can contribute to this documentation by submitting a Pull Request :)
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-template">Template</h3>
+            <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need documentation</p>
+
+            <p>
+                Manage a set of HTML templates to insert fast.
+            </p>
+
+            <p>
+                <a href="../../demos/#plugins-template" class="button button-demo">Try template live demo!</a>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/template/trumbowyg.template.js" class="button button-demo">
+                    View template plugin code on GitHub
+                </a>
+            </p>
+
+            <h4>How to use it?</h4>
+            <pre><code class="html">
+&lt;-- Import Trumbowyg plugins... -->
+&lt;script src="node_modules/trumbowyg/dist/plugins/template/trumbowyg.template.min.js">&lt;/script>
+            </code></pre>
+            <p>
+                Then you can use the new button definition <code>template</code>
+            </p>
+            <pre><code class="javascript">
+$('#my-editor').trumbowyg({
+    btns: [
+        ['template']
+    ]
+});
+            </code></pre>
+            <p class="note">
+                Some doc to write about template options/definition... <br>
+                You can contribute to this documentation by submitting a Pull Request :)
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-upload">Upload</h3>
+            <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need documentation</p>
+
+            <p>
+                Add an upload front-end allowing users to select an image, upload it with progress bar and then insert
+                the uploaded image in the editor.
+            </p>
+
+            <p>
+                <a href="../../demos/#plugins-upload" class="button button-demo">Try upload live demo!</a>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/upload/trumbowyg.upload.js" class="button button-demo">
+                    View upload plugin code on GitHub
+                </a>
+            </p>
+
+            <h4>How to use it?</h4>
+            <pre><code class="html">
+&lt;-- Import Trumbowyg plugins... -->
+&lt;script src="node_modules/trumbowyg/dist/plugins/upload/trumbowyg.upload.min.js">&lt;/script>
+            </code></pre>
+            <p>
+                Then you can use the new button definition <code>upload</code>
+            </p>
+            <pre><code class="javascript">
+$('#my-editor').trumbowyg({
+    btns: [
+        ['upload']
+    ],
+    plugins: {
+        upload: {
+            // Some upload plugin options, see details below
+        }
+    }
+});
+            </code></pre>
+
+            <h4>Parameters</h4>
+            <dl>
+                <dt><strong><code>serverPath</code></strong> <code class="type">string</code></dt>
+                <dd>
+                    The URL to the server which catch the upload request
+                    <br>
+                    <strong>Default</strong>: <code>''</code>
+                </dd>
+                <dt><strong><code>fileFieldName</code></strong> <code class="type">string</code></dt>
+                <dd>
+                    The POST property key associated to the upload file
+                    <br>
+                    <strong>Default</strong>: <code>'fileToUpload'</code>
+                </dd>
+                <dt><strong><code>data</code></strong> <code class="type">array&lt;Object></code></dt>
+                <dd>
+                    Additional data for ajax. <a href="http://api.jquery.com/jquery.ajax/">jQuery.ajax data option</a>
+                    Example: <code>[{name: 'myKey1', value: 'myValue1'}, {name: 'username', value: 'myUsername'}]</code>
+                    <br>
+                    <strong>Default</strong>: <code>[]</code>
+                </dd>
+                <dt><strong><code>headers</code></strong> <code class="type">Object</code></dt>
+                <dd>
+                    Additional headers. Check <a href="http://api.jquery.com/jquery.ajax/">jQuery.ajax headers option</a>
+                    Example: <code>{headerKey: 'headerValue', Authorization: 'Client-ID xxxxxxxxx'}</code>
+                    <br>
+                    <strong>Default</strong>: <code>{}</code>
+                </dd>
+                <dt><strong><code>xhrFields</code></strong> <code class="type">Object</code></dt>
+                <dd>
+                    Additional xhrFields. Check <a href="http://api.jquery.com/jquery.ajax/">jQuery.ajax xhrFields option</a>
+                    <br>
+                    <strong>Default</strong>: <code>{}</code>
+                </dd>
+                <dt><strong><code>urlPropertyName</code></strong> <code class="type">string</code></dt>
+                <dd>
+                    How to get image URL in the JSON response.
+                    Example: <code>'url'</code> for <code>{url: 'https://example.com/myimage.jpg', success: true}</code>
+                    <br>
+                    <strong>Default</strong>: <code>'file'</code>
+                </dd>
+                <dt><strong><code>statusPropertyName</code></strong> <code class="type">string</code></dt>
+                <dd>
+                    How to get status from the json response.
+                    Example: <code>'success'</code> for <code>{success: true, url: 'https://example.com/myimage.jpg'}</code>
+                    <br>
+                    <strong>Default</strong>: <code>'success'</code>
+                </dd>
+                <dt><strong><code>success</code></strong> <code class="type">function</code></dt>
+                <dd>
+                    Success callback: <code>function (data, trumbowyg, $modal, values) {}</code>
+                    <br>
+                    <strong>Default</strong>: <code>null</code>
+                </dd>
+                <dt><strong><code>error</code></strong> <code class="type">function</code></dt>
+                <dd>
+                    Error callback: <code>function () {}</code>
+                    <br>
+                    <strong>Default</strong>: <code>null</code>
+                </dd>
+                <dt><strong><code>imageWidthModalEdit</code></strong> <code class="type">boolean</code></dt>
+                <dd>
+                    Add a field allowing user to set image width
+                    <br>
+                    <strong>Default</strong>: <code>false</code>
+                </dd>
+            </dl>
+
+            <h4>Server side</h4>
+            <p>
+                Server side receives a POST request with the image in the <code>fileFieldName</code> field and
+                <code>alt</code> which contains image description:
+            </p>
+            <pre><code>
+alt: 'Image description'
+fileToUpload: // The image file
+            </code></pre>
+            <p>
+                It must save this image, then return a JSON response like that:
+            </p>
+            <pre><code>
+{
+    success: true, // Must be false if upload fails
+    url: 'https://example.com/myimage.jpg'
+}
+            </code></pre>
+        </div>
+    </section>
+
+
+    <section id="create-your-own" class="wrapper section">
+        <h2 class="section-title">Create your own</h2>
+
+        <div class="feature">
+            <h3 id="introduction">Introduction</h3>
+
+            <p>
+                A plugin can be a button, a paste handler or what you want. If you want add a plugin <em>myplugin</em>
+                to official Trumbowyg list, your should follow this tree:
+            </p>
+            <pre><code>
+<strong>plugins</strong>
+ └── <strong>myplugin</strong>
+     ├── <strong>ui</strong>
+     │   ├── <strong>icons</strong>
+     │   │   └── myplugin.svg
+     │   └── <strong>sass</strong>
+     │       └── trumbowyg.myplugin.scss
+     └── trumbowyg.myplugin.js
+            </code></pre>
+            <p>
+                As plugin can be something else than a button, icons and scss are optionnal depending on your feature.
+            </p>
+            <p>
+                In a plugin, you get access to all Trumbowyg core and you can extends all things as you wish.
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3 id="skeleton">Skeleton</h3>
+
+            <p>
+                To create a new plugin, you should start you <code>trumbowyg.myplugin.js</code> with this code:
+            </p>
+            <pre><code class="javascript">
+(function ($) {
+    'use strict';
+
+    // My plugin default options
+    var defaultOptions = {
+    };
+
+    // If my plugin is a button
+    function buildButtonDef(trumbowyg) {
+        return {
+            fn: function() {
+                // My plugin button logic
+            }
+        }
+    }
+
+    $.extend(true, $.trumbowyg, {
+        // Add some translations
+        langs: {
+            en: {
+                myplugin: 'My plugin'
+            }
+        },
+        // Add our plugin to Trumbowyg registred plugins
+        plugins: {
+            myplugin: {
+                init: function(trumbowyg) {
+                    // Fill current Trumbowyg instance with my plugin default options
+                    trumbowyg.o.plugins.myplugin = $.extend(true, {},
+                        defaultOptions,
+                        trumbowyg.o.plugins.myplugin || {}
+                    );
+
+                    // If my plugin is a paste handler, register it
+                    trumbowyg.pasteHandlers.push(function(pasteEvent) {
+                        // My plugin paste logic
+                    });
+
+                    // If my plugin is a button
+                    trumbowyg.addBtnDef('myplugin', buildButtonDef(trumbowyg));
+                },
+                tagHandler: function(element, trumbowyg) {
+                    return [];
+                },
+                destroy: function() {
+                }
+            }
+        }
+    })
+})(jQuery);
+            </code></pre>
+        </div>
+
+        <div class="feature">
+            <h3 id="interact-with-content">Interact with content</h3>
+
+            <p>
+                To interact with editor and its content, you should use Trumbowyg core API.
+                You can also check existing plugins source code to see how it works!
+            </p>
+            <p>
+                <a href="../core/">Go to the core API documentation</a>
+            </p>
+        </div>
+    </section>
+</main>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
+
+<script src="../../js/vendor/highlight.js"></script>
+<script src="../../js/main.js"></script>
+</body>
+</html>

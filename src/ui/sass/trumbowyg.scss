@@ -5,6 +5,7 @@ $modal-submit-color: #2ecc71 !default;
 $modal-reset-color: #EEE !default;
 
 $transition-duration: 150ms !default;
+$slow-transition-duration: 300ms !default;
 
 #trumbowyg-icons {
     overflow: hidden;
@@ -62,6 +63,10 @@ $transition-duration: 150ms !default;
     resize: none;
     outline: none;
     overflow: auto;
+
+    &.trumbowyg-autogrow-on-enter {
+        transition: height $slow-transition-duration ease-out;
+    }
 }
 
 .trumbowyg-box-blur .trumbowyg-editor {
@@ -70,8 +75,7 @@ $transition-duration: 150ms !default;
         color: transparent !important;
         text-shadow: 0 0 7px #333;
 
-        @media screen and (min-width: 0 \0
-        ) {
+        @media screen and (min-width: 0 \0) {
             color: rgba(200, 200, 200, 0.6) !important;
         }
         @supports (-ms-accelerator:true) {
@@ -89,7 +93,6 @@ $transition-duration: 150ms !default;
     display: block;
     overflow: auto;
     border: none;
-    white-space: normal;
     font-size: 14px;
     font-family: "Inconsolata", "Consolas", "Courier", "Courier New", sans-serif;
     line-height: 18px;
@@ -129,17 +132,17 @@ $transition-duration: 150ms !default;
 }
 
 .trumbowyg-button-pane {
-    display: flex;
-    flex-flow: row wrap;
     width: 100%;
     min-height: 36px;
     background: $light-color;
     border-bottom: 1px solid darken($light-color, 7%);
     margin: 0;
     padding: 0 5px;
+    position: relative;
     list-style-type: none;
     line-height: 10px;
     backface-visibility: hidden;
+    z-index: 11;
 
     &::after {
         content: " ";
@@ -154,25 +157,25 @@ $transition-duration: 150ms !default;
     }
 
     .trumbowyg-button-group {
-        display: flex;
-        flex-flow: row wrap;
+        display: inline-block;
 
         .trumbowyg-fullscreen-button svg {
             color: transparent;
         }
 
-        &:not(:empty) + .trumbowyg-button-group::before {
+        & + .trumbowyg-button-group::before {
             content: " ";
-            display: block;
+            display: inline-block;
             width: 1px;
             background: darken($light-color, 7%);
             margin: 0 5px;
             height: 35px;
+            vertical-align: top;
         }
     }
 
     button {
-        display: block;
+        display: inline-block;
         position: relative;
         width: 35px;
         height: 35px;
@@ -182,11 +185,13 @@ $transition-duration: 150ms !default;
         border: none;
         cursor: pointer;
         background: none;
+        vertical-align: middle;
         transition: background-color $transition-duration, opacity $transition-duration;
 
         &.trumbowyg-textual-button {
             width: auto;
             line-height: 35px;
+            user-select: none;
         }
     }
 
@@ -234,7 +239,7 @@ $transition-duration: 150ms !default;
     }
 
     .trumbowyg-right {
-        margin-left: auto;
+        float: right;
 
         &::before {
             display: none !important;
@@ -250,6 +255,7 @@ $transition-duration: 150ms !default;
     background: #FFF;
     margin-left: -1px;
     box-shadow: rgba(0, 0, 0, .1) 0 2px 3px;
+    z-index: 12;
 
     button {
         display: block;
@@ -326,6 +332,7 @@ $transition-duration: 150ms !default;
 
         .trumbowyg-progress-bar {
             background: #2BC06A;
+            width: 0;
             height: 100%;
             transition: width $transition-duration linear;
         }
@@ -452,9 +459,11 @@ $transition-duration: 150ms !default;
 .trumbowyg-overlay {
     position: absolute;
     background-color: rgba(255, 255, 255, 0.5);
+    height: 100%;
     width: 100%;
     left: 0;
     display: none;
+    top: 0;
     z-index: 10;
 }
 
@@ -516,7 +525,6 @@ body.trumbowyg-body-fullscreen {
         font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif !important;
         font-size: 14px !important;
         line-height: 1.45em !important;
-        white-space: normal !important;
         color: #333;
 
         a {

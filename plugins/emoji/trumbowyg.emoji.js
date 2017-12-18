@@ -872,7 +872,6 @@
             ':white_medium_small_square:',
             ':black_medium_square:',
             ':white_medium_square:',
-            ':black_large_square:',
             ':white_large_square:',
             ':white_check_mark:',
             ':black_square_button:',
@@ -894,17 +893,28 @@
     // Add all emoji in a dropdown
     $.extend(true, $.trumbowyg, {
         langs: {
+            // jshint camelcase:false
             en: {
                 emoji: 'Add an emoji'
             },
             fr: {
                 emoji: 'Ajouter un emoji'
+            },
+            zh_cn: {
+                emoji: '添加表情'
+            },
+            ru: {
+                emoji: 'Вставить emoji'
+            },
+            ja: {
+                emoji: '絵文字の挿入'
             }
         },
+        // jshint camelcase:true
         plugins: {
             emoji: {
                 init: function (trumbowyg) {
-                    trumbowyg.o.plugins.emoji = $.extend(true, {}, defaultOptions, trumbowyg.o.plugins.emoji || {});
+                    trumbowyg.o.plugins.emoji = trumbowyg.o.plugins.emoji || defaultOptions;
                     var emojiBtnDef = {
                         dropdown: buildDropdown(trumbowyg)
                     };
@@ -918,16 +928,36 @@
         var dropdown = [];
 
         $.each(trumbowyg.o.plugins.emoji.emojiList, function (i, emoji) {
-            var btn = emoji,
-                btnDef = {
-                    param: emoji,
-                    fn: function () {
-                        trumbowyg.execCmd('insertText ' + emoji + ' ');
-                        return true;
-                    }
-                };
-            trumbowyg.addBtnDef(btn, btnDef);
-            dropdown.push(btn);
+            if ($.isArray(emoji)) { // Custom emoji behaviour
+                var emojiCode = emoji[0],
+                    emojiUrl = emoji[1],
+                    emojiHtml = '<img src="' + emojiUrl + '" alt="' + emojiCode + '">',
+                    customEmojiBtnName = 'emoji-' + emojiCode.replace(/:/g, ''),
+                    customEmojiBtnDef = {
+                        hasIcon: false,
+                        text: emojiHtml,
+                        fn: function () {
+                            trumbowyg.execCmd('insertImage', emojiUrl, false, true);
+                            return true;
+                        }
+                    };
+
+                trumbowyg.addBtnDef(customEmojiBtnName, customEmojiBtnDef);
+                dropdown.push(customEmojiBtnName);
+            } else { // Default behaviour
+                var btn = emoji.replace(/:/g, ''),
+                    defaultEmojiBtnName = 'emoji-' + btn,
+                    defaultEmojiBtnDef = {
+                        text: emoji,
+                        fn: function () {
+                            trumbowyg.execCmd('insertText', emoji);
+                            return true;
+                        }
+                    };
+
+                trumbowyg.addBtnDef(defaultEmojiBtnName, defaultEmojiBtnDef);
+                dropdown.push(defaultEmojiBtnName);
+            }
         });
 
         return dropdown;

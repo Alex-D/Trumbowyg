@@ -1,0 +1,33 @@
+{
+  "name": "trumbowyg-github-page",
+  "title": "Trumbowyg GitHub Page",
+  "description": "GitHub page of Trumbowyg",
+  "homepage": "http://alex-d.github.io/Trumbowyg",
+  "private": true,
+  "author": {
+    "name": "Alexandre Demode (Alex-D)",
+    "email": "contact@alex-d.fr",
+    "url": "http://alex-d.fr"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Alex-D/Trumbowyg.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Alex-D/Trumbowyg/issues"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-clean-css": "^3.7.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-sass": "^3.1.0"
+  },
+  "scripts": {
+    "build": "npm install && gulp build",
+    "start": "gulp",
+    "test": "gulp test"
+  }
+}

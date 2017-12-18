@@ -1,4 +1,7 @@
 Gulpfile.js
-/banner.png
-/bower.json
-/src
+banner.jpg
+bower.json
+src
+docs
+bower_components
+.idea

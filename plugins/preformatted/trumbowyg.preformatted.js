@@ -24,6 +24,12 @@
             },
             zh_cn: {
                 preformatted: '代码示例 <pre>'
+            },
+            ru: {
+                preformatted: 'Пример кода <pre>'
+            },
+            ja: {
+                preformatted: 'コードサンプル <pre>'
             }
         },
         // jshint camelcase:true
