@@ -1,7 +1,7 @@
-/*/* ===========================================================
+/* ===========================================================
  * trumbowyg.mathMl.js v1.0
  * MathML plugin for Trumbowyg
- * todo : url
+ * https://github.com/loclamor/Trumbowyg/tree/mathml-plugin/plugins/mathml
  * ===========================================================
  * Author : loclamor
  */
@@ -43,19 +43,15 @@
 									}
 								};
 								var mathmlCallback = function(v) {
-									//todo allow block formulas
 									var delimitor = v.inline ? '$' : '$$';
 									if (trumbowyg.currentMathNode) {
 										$(trumbowyg.currentMathNode).html(delimitor + ' ' + v.formulas + ' ' + delimitor).attr('formulas', v.formulas).attr('inline', (v.inline ? 'true' : 'false'));
 									} else {
-										// controls should always be show otherwise the audio will
-										// be invisible defeating the point of a wysiwyg
 										var html = '<span class="mathMlContainer" contenteditable="false" formulas="' + v.formulas + '" inline="' + (v.inline ? 'true' : 'false') + '" >' + delimitor + ' ' + v.formulas + ' ' + delimitor + '</span>';
 										var $html = $(html);
 										var node = $(html)[0];
 										node.onclick = function(e) {
 											trumbowyg.currentMathNode = this;
-											console.log("Node click !", e, this);
 											mathMLoptions.formulas.value = $(this).attr('formulas');
 											if ($(this).attr('inline') === "true") {
 												mathMLoptions.inline.attributes.checked = true;
