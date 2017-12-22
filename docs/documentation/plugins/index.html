@@ -50,6 +50,7 @@
                         <li><a href="#plugin-noembed">Noembed</a></li>
                         <li><a href="#plugin-pasteimage">Paste image</a></li>
                         <li><a href="#plugin-preformatted">Preformatted</a></li>
+                        <li><a href="#plugin-resizimg">Resizimg</a></li>
                         <li><a href="#plugin-ruby">Ruby</a></li>
                         <li><a href="#plugin-table">Table</a></li>
                         <li><a href="#plugin-template">Template</a></li>
@@ -379,9 +380,48 @@ $('#my-editor').trumbowyg({
         </div>
 
         <div class="feature">
-            <h3 id="plugin-ruby">Ruby</h3>
+            <h3 id="plugin-resizimg">Resizimg</h3>
             <p class="added-feature">Stable</p>
             <p class="deprecated-feature">Need documentation</p>
+
+            <p>
+                Allows you to resize images (preserving aspect ratio) by dragging their bottom-right corner. Available options:
+            </p>
+            
+            <ul>
+                <li><code>minSize</code> (default: 32): minimal size of image and also of draggable right-bottom corner</li>
+                <li><code>step</code> (default: 16): increment when increasing / decreasing image height</li>
+            </ul>
+          
+            <h4>Dependencies</h4>
+            <p>This plugin depends on the <a href="https://github.com/RickStrahl/jquery-resizable" target="_blank">jquery-resizable</a> plugin, which must be loaded beforehand.</p>
+
+            <h4>Notes &amp; Caveats</h4>
+            <p>
+                The resulting image size is currently absolute: CSS height in pixels (<code>style</code> attribute). A possible enhancement would be to support relative sizes as well, typically as percentage height of the container.
+            </p>
+            <p>
+                Currently Trumbowyg does not fire any event when new content is loaded in the editor (<code>html</code> command). Consequently plugins are not aware of changes, and <code>resizimg</code> does not know that it should care for the new content. As a workaround you should fire the <code>tbwfocus</code> event after loading new html:
+            </p>
+            <pre>
+                <code class="javascript hljs">
+  $('#edit-content').trumbowyg('html', html);
+  $('#edit-content').triggerHandler('tbwfocus');
+                 </code>
+            </pre>
+
+            <p>
+                <a href="../../demos/#plugins-resizimg" class="button button-demo">Try resizimg live demo!</a>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/resizimg/trumbowyg.resizimg.js" class="button button-demo">
+                    View resizimg plugin code on GitHub
+                </a>
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-ruby">Ruby</h3>
+            <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need demo</p>
 
             <p>
                 Allows you to support <a href="https://www.w3.org/International/articles/ruby/">ruby markup</a>.
