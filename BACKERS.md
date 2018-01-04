@@ -18,7 +18,7 @@ You can support it's ongoing development by being a backer or a sponsor:
 </p>
 
 <p align="center">
-    <a href="https://www.patreon.com/alexandredemode">
+    <a href="https://www.patreon.com/bePatron?c=1176005&rid=1940456">
         Become a Sponsor
     </a>
 </p>
@@ -29,7 +29,7 @@ You can support it's ongoing development by being a backer or a sponsor:
 - Johan Rosenson
 
 <p align="center">
-    <a href="https://www.patreon.com/alexandredemode">
+    <a href="https://www.patreon.com/bePatron?c=1176005&rid=1940349">
         Become a Backer
     </a>
 </p>
