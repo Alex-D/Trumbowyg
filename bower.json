@@ -28,6 +28,7 @@
     "tests",
     "src",
     "docs",
+    "sponsors",
     "banner.jpg",
     "gulpfile.js",
     "package.json"
