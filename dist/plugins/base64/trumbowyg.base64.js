@@ -39,6 +39,8 @@
                 file: '文件'
             },
             nl: {
+                base64: 'Afbeelding inline',
+                file: 'Bestand',
                 errFileReaderNotSupported: 'Uw browser ondersteunt deze functionaliteit niet.',
                 errInvalidImage: 'De gekozen afbeelding is ongeldig.'
             },
