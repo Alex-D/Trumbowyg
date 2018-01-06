@@ -1021,8 +1021,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
                 $('body', d).on('mousedown.' + t.eventNamespace, function (e) {
                     if (!$dropdown.is(e.target)) {
-                        $('.' + prefix + 'dropdown', d).hide();
-                        $('.' + prefix + 'active', d).removeClass(prefix + 'active');
+                        $('.' + prefix + 'dropdown', t.$box).hide();
+                        $('.' + prefix + 'active', t.$btnPane).removeClass(prefix + 'active');
                         $('body', d).off('mousedown.' + t.eventNamespace);
                     }
                 });
