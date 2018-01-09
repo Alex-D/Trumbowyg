@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.9.3 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.9.4 - A lightweight WYSIWYG editor
  * Trumbowyg core file
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -551,7 +551,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             var ctrl = false,
                 composition = false,
                 debounceButtonPaneStatus,
-                updateEventName = t.isIE ? 'keyup' : 'input';
+                updateEventName = 'keyup';
 
             t.$ed
                 .on('dblclick', 'img', t.o.imgDblClickHandler)
@@ -586,7 +586,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     if ((e.ctrlKey || e.metaKey) && (keyCode === 89 || keyCode === 90)) {
                         t.$c.trigger('tbwchange');
                     } else if (!ctrl && keyCode !== 17) {
-                        t.semanticCode(false, e.type === 'compositionend' && keyCode === 13);
+                        var compositionend_ie = t.isIE ? e.type === 'compositionend' : true;
+                        t.semanticCode(false, compositionend_ie && keyCode === 13);
                         t.$c.trigger('tbwchange');
                     } else if (typeof e.which === 'undefined') {
                         t.semanticCode(false, false, true);
