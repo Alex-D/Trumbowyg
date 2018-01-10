@@ -382,7 +382,6 @@ $('#my-editor').trumbowyg({
         <div class="feature">
             <h3 id="plugin-resizimg">Resizimg</h3>
             <p class="added-feature">Stable</p>
-            <p class="deprecated-feature">Need documentation</p>
 
             <p>
                 Allows you to resize images (preserving aspect ratio) by dragging their bottom-right corner. Available options:
@@ -390,7 +389,7 @@ $('#my-editor').trumbowyg({
             
             <ul>
                 <li><code>minSize</code> (default: 32): minimal size of image and also of draggable right-bottom corner</li>
-                <li><code>step</code> (default: 16): increment when increasing / decreasing image height</li>
+                <li><code>step</code> (default: 4): increment when increasing / decreasing image height</li>
             </ul>
           
             <h4>Dependencies</h4>
@@ -401,12 +400,12 @@ $('#my-editor').trumbowyg({
                 The resulting image size is currently absolute: CSS height in pixels (<code>style</code> attribute). A possible enhancement would be to support relative sizes as well, typically as percentage height of the container.
             </p>
             <p>
-                Currently Trumbowyg does not fire any event when new content is loaded in the editor (<code>html</code> command). Consequently plugins are not aware of changes, and <code>resizimg</code> does not know that it should care for the new content. As a workaround you should fire the <code>tbwfocus</code> event after loading new html:
+                Currently Trumbowyg does not fire any event when new content is loaded in the editor (<code>html</code> command). Consequently plugins are not aware of changes, and <code>resizimg</code> does not know that it should care for the new content. As a workaround you should fire the <code>tbwchange</code> event after loading new html:
             </p>
             <pre>
                 <code class="javascript hljs">
   $('#edit-content').trumbowyg('html', html);
-  $('#edit-content').triggerHandler('tbwfocus');
+  $('#edit-content').triggerHandler('tbwchange');
                  </code>
             </pre>
 
