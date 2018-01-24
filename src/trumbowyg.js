@@ -220,7 +220,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     var source = scriptElements[i].src;
                     var matches = source.match('trumbowyg(\.min)?\.js');
                     if (matches != null) {
-                        svgPathOption = source.substring(0, source.indexOf(matches[0])) + '/ui/icons.svg';
+                        svgPathOption = source.substring(0, source.indexOf(matches[0])) + 'ui/icons.svg';
                     }
                 }
                 if (svgPathOption == null) {
