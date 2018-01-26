@@ -23,6 +23,8 @@
                 table: 'Insert table',
                 tableAddRow: 'Add rows',
                 tableAddColumn: 'Add columns',
+                tableRemoveRow: 'Remove row',
+                tableRemoveColumn: 'Remove column',
                 rows: 'Rows',
                 columns: 'Columns',
                 styler: 'Table class',
@@ -72,6 +74,17 @@
                 columns: '列',
                 styler: '表のクラス',
                 error: 'エラー'
+            },
+            nl: {
+                table: 'Tabel invoegen',
+                tableAddRow: 'Rij toevoegen',
+                tableAddColumn: 'Kolom toevoegen',
+                tableRemoveRow: 'Rij verwijderen',
+                tableRemoveColumn: 'Kolom verwijderen',
+                rows: 'Rijen',
+                columns: 'Kolommen',
+                styler: 'Tabel CSS class',
+                error: 'Error'
             }
         },
 
@@ -125,28 +138,90 @@
                     var addRow = {
                         fn: function () {
                             trumbowyg.saveRange();
-                            var rower = $('<tr></tr>');
-                            trumbowyg.range.deleteContents();
-                            trumbowyg.range.insertNode(rower[0]);
+                            // Check if a table(or child) is selected
+                            var selectedNode = $(trumbowyg.doc.getSelection().focusNode);
+                            if($(selectedNode).closest('table').length > 0) {
+                                // Clone the last row of the table and insert it
+                                var tableBody = $(selectedNode).closest('table').find("tbody");
+                                var lastRow = tableBody.find("tr:last");
+                                var newRow = lastRow.clone();
+                                lastRow.after(newRow);
+                            }
+                            else {
+                                // TODO: other way of throwing "error"
+                                alert('No table selected');
+                            }
+                            return true;
+                        }
+                    };
+					
+                    var addColumn = {
+                        fn: function () {
+                            trumbowyg.saveRange();
+                            // Check if a table(or child) is selected
+                            var selectedNode = $(trumbowyg.doc.getSelection().focusNode);
+                            if($(selectedNode).closest('table').length > 0) {
+                                // Go through each tr in the tbody and an a td
+                                var tableBody = $(selectedNode).closest('table').find("tbody");
+                                $(tableBody).find('tr').each(function() {
+                                    $(this).find('td:last').after('<td></td>');
+                                });
+                            }
+                            else {
+                                // TODO: other way of throwing "error"
+                                alert('No table selected');
+                            }
                             return true;
 
                         }
                     };
-
-                    var addColumn = {
+					
+                    var removeRow = {
                         fn: function () {
                             trumbowyg.saveRange();
-                            var columner = $('<td></td>');
-                            trumbowyg.range.deleteContents();
-                            trumbowyg.range.insertNode(columner[0]);
+                            // Check if a tr(or child) is selected
+                            var selectedNode = $(trumbowyg.doc.getSelection().focusNode);
+                            if($(selectedNode).closest('tr').length > 0) {
+                                // Get the selected tr and delete it from the tbody
+                                var row = $(selectedNode).closest('tr').remove();
+                            }
+                            else {
+                                // TODO: other way of throwing "error"
+                                alert('No table selected');
+                            }
                             return true;
-
+                        }
+                    };
+					
+                    var removeColumn = {
+                        fn: function () {
+                            trumbowyg.saveRange();
+                            // Check if a table(or child) is selected
+                            var selectedNode = $(trumbowyg.doc.getSelection().focusNode);
+                            console.log($(selectedNode));
+                            return true;
+                            if($(selectedNode).closest('table').length > 0) {
+                                // Get the row index from the selected cell
+                                var cellIndex = $(selectedNode).closest('td').index();
+                                var tableBody = $(selectedNode).closest('table').find("tbody");
+                                // For every tr in the tbody, remove the td on the index
+                                $(tableBody).find('tr').each(function() {
+                                    $(this).find('td:eq('+cellIndex+')').remove();
+                                });
+                            }
+                            else {
+                                // TODO: other way of throwing "error"
+                                alert('No table selected');
+                            }
+                            return true;
                         }
                     };
 
                     trumbowyg.addBtnDef('table', tableBuild);
                     trumbowyg.addBtnDef('tableAddRow', addRow);
                     trumbowyg.addBtnDef('tableAddColumn', addColumn);
+					trumbowyg.addBtnDef('tableRemoveRow', removeRow);
+                    trumbowyg.addBtnDef('tableRemoveColumn', removeColumn);
                 }
             }
         }
