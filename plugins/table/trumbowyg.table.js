@@ -72,6 +72,15 @@
                 columns: '列',
                 styler: '表のクラス',
                 error: 'エラー'
+            },
+            tr: {
+                table: 'Tablo ekle',
+                tableAddRow: 'Satır ekle',
+                tableAddColumn: 'Kolon ekle',
+                rows: 'Satırlar',
+                columns: 'Kolonlar',
+                styler: 'Tablo sınıfı',
+                error: 'Hata'
             }
         },
 
