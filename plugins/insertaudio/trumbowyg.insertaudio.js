@@ -41,6 +41,9 @@
             },
             ja: {
                 insertAudio: '音声の挿入'
+            },
+            tr: {
+                insertAudio: 'Ses Ekle'
             }
         },
         plugins: {
