@@ -1,3 +1,14 @@
+/**
+ * Trumbowyg v2.4.0 - A lightweight WYSIWYG editor
+ * Trumbowyg core file
+ * ------------------------
+ * @link http://alex-d.github.io/Trumbowyg
+ * @license MIT
+ * @author Alexandre Demode (Alex-D)
+ *         Twitter : @AlexandreDemode
+ *         Website : alex-d.fr
+ */
+
 jQuery.trumbowyg = {
     langs: {
         en: {
@@ -1451,17 +1462,44 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 html = '';
 
             $.each(fields, function (fieldName, field) {
-                var l = field.label,
-                    n = field.name || fieldName,
-                    a = field.attributes || {};
+            	
+            	var l = field.label,
+                n = field.name || fieldName,
+                a = field.attributes || {};
+                
+                var displayLabel = ((!l) ? (lg[fieldName] ? lg[fieldName] : fieldName) : (lg[l] ? lg[l] : l));
+                
+                if(field.type == 'radio' || field.type == 'select') {
+                	var isSelect = (field.type == 'select');
 
-                var attr = Object.keys(a).map(function (prop) {
-                    return prop + '="' + a[prop] + '"';
-                }).join(' ');
+            		try {
+            			var names = displayLabel.match( "(.+)\{(.+)\}" );
+            			var values = field.data.match( "\{(.+)\}" );
+            			var multiName = names[1];
+            			
+            			var aNames = names[2].split(",");
+            			var aValues = values[1].split(",");
+            			var itemsHtml = "<div>" + ((isSelect) ? ("<select name='"+n+"'>") : (""));
+        				for(var z in aValues) {
+        					var thisHtml = (isSelect) ?
+        						("<option value='"+(aValues[z])+"'>" + aNames[z] + "</option>") :
+        						("<input type='radio' value='"+(aValues[z])+"' name='"+n+"'> " + aNames[z] + "</input>");
+            				itemsHtml += thisHtml;
+            			}	
+            			itemsHtml +=  ((isSelect) ? ("</select>") : ("")) + "</div>";
+            			html += '<label>'+itemsHtml+'<span class="' +prefix+'input-infos"><span>'+multiName+'</span></span></label>';	
+            		} catch(err) {
+            			console.log("ERROR -- " + err.message);
+            		}
+            	} else {
+	                var attr = Object.keys(a).map(function (prop) {
+	                    return prop + '="' + a[prop] + '"';
+	                }).join(' ');
+	                
+	                html += '<label><input type="' + (field.type || 'text') + '" name="' + n + '" value="' + (field.value || '').replace(/"/g, '&quot;') + '"' + attr + '><span class="' + prefix + 'input-infos"><span>' +
+	                        displayLabel + '</span></span></label>';
+            	}
 
-                html += '<label><input type="' + (field.type || 'text') + '" name="' + n + '" value="' + (field.value || '').replace(/"/g, '&quot;') + '"' + attr + '><span class="' + prefix + 'input-infos"><span>' +
-                    ((!l) ? (lg[fieldName] ? lg[fieldName] : fieldName) : (lg[l] ? lg[l] : l)) +
-                    '</span></span></label>';
             });
 
             return t.openModal(title, html)
@@ -1469,16 +1507,26 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     var $form = $('form', $(this)),
                         valid = true,
                         values = {};
-
+                    
                     $.each(fields, function (fieldName, field) {
-                        var $field = $('input[name="' + fieldName + '"]', $form),
-                            inputType = $field.attr('type');
-
-                        if (inputType.toLowerCase() === 'checkbox') {
-                            values[fieldName] = $field.is(':checked');
+                        var $field = $('input[name="' + fieldName + '"], select[name="'+ fieldName +'"]', $form);
+                        
+                        var tagName = $field.prop('tagName').toLowerCase();
+                        if (tagName=='select') {
+                        	values[fieldName] = $('select[name='+fieldName+']').val();
+                        } else if (tagName=='input') {
+                        	var inputType = $field.attr('type');
+                        	if (inputType.toLowerCase() === 'checkbox') {
+	                            values[fieldName] = $field.is(':checked');
+	                        } else if (inputType.toLowerCase() === 'radio') {
+	                        	values[fieldName] = $('input[name='+fieldName+']:checked').val();
+	                        } else {
+	                            values[fieldName] = $.trim($field.val());
+	                        }
                         } else {
-                            values[fieldName] = $.trim($field.val());
+                        	// unexpected tag type. 
                         }
+                        
                         // Validate value
                         if (field.required && values[fieldName] === '') {
                             valid = false;
