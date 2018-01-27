@@ -45,6 +45,10 @@
             ja: {
                 foreColor: '文字色',
                 backColor: '背景色'
+            },
+            tr: {
+                foreColor: 'Yazı rengi',
+                backColor: 'Arkaplan rengi'
             }
         }
     });

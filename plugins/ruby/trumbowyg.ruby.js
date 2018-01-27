@@ -22,6 +22,11 @@
 				ruby: 'Sisipkan teks ruby',
 				rubyModal: 'Modal teks ruby',
 				rubyText: 'Teks ruby'
+			},
+			tr: {
+				ruby: 'Ruby metni ekle',
+				rubyModal: 'Ruby modal',
+				rubyText: 'Ruby metni'
 			}
 		},
 		plugins: {

@@ -19,6 +19,11 @@
 					mathml: 'Inserer une formule',
 					formulas: 'Formule',
 					inline: 'En ligne'
+				},
+				tr: {
+					mathml: 'Formül Ekle',
+					formulas: 'Formüller',
+					inline: 'Satır içi'
 				}
 			},
 			plugins: {

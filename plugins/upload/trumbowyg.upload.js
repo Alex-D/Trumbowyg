@@ -93,6 +93,11 @@
                 file: 'Arquivo',
                 uploadError: 'Erro'
             },
+            tr: {
+                upload: 'Yükle',
+                file: 'Dosya',
+                uploadError: 'Hata'
+            }
         },
         // jshint camelcase:true
 

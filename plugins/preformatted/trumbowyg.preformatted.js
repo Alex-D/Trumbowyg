@@ -30,6 +30,9 @@
             },
             ja: {
                 preformatted: 'コードサンプル <pre>'
+            },
+            tr: {
+                preformatted: 'Kod örneği <pre>'
             }
         },
         // jshint camelcase:true

@@ -24,6 +24,9 @@
             },
             ru: {
                 mention: 'Упомянуть'
+            },
+            tr: {
+                mention: 'Bahset'
             }
         },
 

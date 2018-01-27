@@ -25,6 +25,9 @@
             },
             nl: {
                 fontFamily: 'Lettertype'
+            },
+            tr: {
+                fontFamily: 'Yazı Tipi'
             }
         }
     });

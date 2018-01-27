@@ -21,6 +21,15 @@
                     '1.5':    'Groot',
                     '2.0':    'Extra Groot'
                 }
+            },
+            tr: {
+                lineheight: 'Satır yüksekliği',
+                lineheights: {
+                    '0.9':    'Küçük',
+                    'normal': 'Normal',
+                    '1.5':    'Büyük',
+                    '2.0':    'Çok Büyük'
+                }
             }
         }
     });
