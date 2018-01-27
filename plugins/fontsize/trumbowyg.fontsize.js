@@ -23,6 +23,16 @@
                     'large': 'Groot',
                     'x-large': 'Extra Groot'
                 }
+            },
+            tr: {
+                fontsize: 'Yazı Boyutu',
+                fontsizes: {
+                    'x-small': 'Çok Küçük',
+                    'small': 'Küçük',
+                    'medium': 'Normal',
+                    'large': 'Büyük',
+                    'x-large': 'Çok Büyük'
+                }
             }
         }
     });
