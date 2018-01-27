@@ -15,6 +15,9 @@
             },
             ja: {
                 template: 'テンプレート'
+            },
+            tr: {
+                template: 'Şablon'
             }
         }
     });
