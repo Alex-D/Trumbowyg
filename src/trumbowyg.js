@@ -105,7 +105,9 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
         // imgDblClickHandler: default is defined in constructor
 
-        plugins: {}
+        plugins: {},
+        autoPrefixHttpsProtocol: false,
+        minimalLinks: false
     },
     writable: false,
     enumerable: true,
@@ -1166,8 +1168,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             if (node && node.nodeName === 'A') {
                 var $a = $(node);
                 url = $a.attr('href');
-                title = $a.attr('title');
-                target = $a.attr('target');
+                if (!minimalLinks) {
+                  title = $a.attr('title');
+                  target = $a.attr('target');
+                }
                 var range = t.doc.createRange();
                 range.selectNode(node);
                 documentSelection.removeAllRanges();
@@ -1176,31 +1180,43 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             t.saveRange();
 
-            t.openModalInsert(t.lang.createLink, {
-                url: {
-                    label: 'URL',
-                    required: true,
-                    value: url
-                },
+            var options = {
+              url: {
+                label: 'URL',
+                required: true,
+                value: url
+              },
+              text: {
+                label: t.lang.text,
+                value: new XMLSerializer().serializeToString(documentSelection.getRangeAt(0).cloneContents())
+              }
+            }
+            if (!minimalLinks) {
+              Object.assign(options, {
                 title: {
-                    label: t.lang.title,
-                    value: title
-                },
-                text: {
-                    label: t.lang.text,
-                    value: new XMLSerializer().serializeToString(documentSelection.getRangeAt(0).cloneContents())
+                  label: t.lang.title,
+                  value: title
                 },
                 target: {
-                    label: t.lang.target,
-                    value: target
+                  label: t.lang.target,
+                  value: target
                 }
-            }, function (v) { // v is value
-                var link = $(['<a href="', v.url, '">', v.text, '</a>'].join(''));
-                if (v.title.length > 0) {
+              })
+            }
+
+            t.openModalInsert(t.lang.createLink, options, function (v) { // v is value
+                var url = t.prependHttpProtocol(v.url);
+                if(!url.length) { return false; }
+
+                var link = $(['<a href="', url, '">', v.text, '</a>'].join(''));
+
+                if (!minimalLinks) {
+                  if (v.title.length > 0) {
                     link.attr('title', v.title);
-                }
-                if (v.target.length > 0) {
+                  }
+                  if (v.target.length > 0) {
                     link.attr('target', v.target);
+                  }
                 }
                 t.range.deleteContents();
                 t.range.insertNode(link[0]);
@@ -1208,6 +1224,15 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 t.$c.trigger('tbwchange');
                 return true;
             });
+        },
+        prependHttpProtocol: function(url) {
+          var t = this;
+          if(!t.o.autoPrefixHttpsProtocol) { return url; }
+
+          const ACCEPTABLE_LINK_FORMAT = /^(#\S+|https?:\/\/[^\/\s]+\.\S+|\S+@\S+\.\S+)/;
+          if(ACCEPTABLE_LINK_FORMAT.test(url)) { return url; }
+
+          return /^www\.\S+/.test(url) ? ('http://' + url) : '';
         },
         unlink: function () {
             var t = this,
