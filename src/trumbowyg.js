@@ -106,7 +106,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         // imgDblClickHandler: default is defined in constructor
 
         plugins: {},
-        autoPrefixHttpsProtocol: false,
+        autoPrefixHttpProtocol: false,
         minimalLinks: false
     },
     writable: false,
@@ -1227,7 +1227,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         },
         prependHttpProtocol: function(url) {
           var t = this;
-          if(!t.o.autoPrefixHttpsProtocol) { return url; }
+          if(!t.o.autoPrefixHttpProtocol) { return url; }
 
           const ACCEPTABLE_LINK_FORMAT = /^(#\S+|https?:\/\/[^\/\s]+\.\S+|\S+@\S+\.\S+)/;
           if(ACCEPTABLE_LINK_FORMAT.test(url)) { return url; }
