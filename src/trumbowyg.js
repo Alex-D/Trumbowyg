@@ -1168,7 +1168,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             if (node && node.nodeName === 'A') {
                 var $a = $(node);
                 url = $a.attr('href');
-                if (!minimalLinks) {
+                if (!t.o.minimalLinks) {
                   title = $a.attr('title');
                   target = $a.attr('target');
                 }
@@ -1190,8 +1190,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 label: t.lang.text,
                 value: new XMLSerializer().serializeToString(documentSelection.getRangeAt(0).cloneContents())
               }
-            }
-            if (!minimalLinks) {
+            };
+            if (!t.o.minimalLinks) {
               Object.assign(options, {
                 title: {
                   label: t.lang.title,
@@ -1201,7 +1201,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                   label: t.lang.target,
                   value: target
                 }
-              })
+              });
             }
 
             t.openModalInsert(t.lang.createLink, options, function (v) { // v is value
@@ -1210,7 +1210,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
                 var link = $(['<a href="', url, '">', v.text, '</a>'].join(''));
 
-                if (!minimalLinks) {
+                if (!t.o.minimalLinks) {
                   if (v.title.length > 0) {
                     link.attr('title', v.title);
                   }
