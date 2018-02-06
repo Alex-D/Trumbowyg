@@ -400,6 +400,17 @@ $slow-transition-duration: 300ms !default;
                 background: lighten($light-color, 5%);
             }
         }
+
+        input[type="checkbox"]{
+            left: 5px;
+            top: 5px;
+            right: auto;
+
+            + .trumbowyg-input-infos span{
+                width: auto;
+                padding-left: 25px;
+            }
+        }
     }
 
     .error {
