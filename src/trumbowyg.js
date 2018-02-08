@@ -17,25 +17,25 @@ jQuery.trumbowyg = {
             strikethrough: 'Stroke',
             underline: 'Underline',
 
-            strong: 'Strong',
-            em: 'Emphasis',
+            strong: 'Bold',
+            em: 'Italic',
             del: 'Deleted',
 
             superscript: 'Superscript',
             subscript: 'Subscript',
 
-            unorderedList: 'Unordered list',
-            orderedList: 'Ordered list',
+            unorderedList: 'Bullets',
+            orderedList: 'Numbering',
 
             insertImage: 'Insert Image',
             link: 'Link',
-            createLink: 'Insert link',
-            unlink: 'Remove link',
+            createLink: 'Insert Link',
+            unlink: 'Remove Link',
 
             justifyLeft: 'Align Left',
-            justifyCenter: 'Align Center',
+            justifyCenter: 'Center Text',
             justifyRight: 'Align Right',
-            justifyFull: 'Align Justify',
+            justifyFull: 'Justify Text',
 
             horizontalRule: 'Insert horizontal rule',
             removeformat: 'Remove format',
@@ -44,7 +44,7 @@ jQuery.trumbowyg = {
 
             close: 'Close',
 
-            submit: 'Confirm',
+            submit: 'Insert',
             reset: 'Cancel',
 
             required: 'Required',

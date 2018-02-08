@@ -19,8 +19,8 @@
                 backColor: 'Barva pozadí'
             },
             en: {
-                foreColor: 'Text color',
-                backColor: 'Background color'
+                foreColor: 'Font Color',
+                backColor: 'Background Color'
             },
             fr: {
                 foreColor: 'Couleur du texte',
