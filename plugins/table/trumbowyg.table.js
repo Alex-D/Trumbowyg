@@ -47,12 +47,12 @@
                 error: 'Erreur'
             },
             cs: {
-                table: 'Vytvořit příkaz Table',
-                tableAddRow: 'Přidat řádek',
-                tableAddColumn: 'Přidat sloupec',
+                table: 'Vložit tabulku',
+                tableAddRow: 'Přidat řádky',
+                tableAddColumn: 'Přidat sloupce',
                 rows: 'Řádky',
                 columns: 'Sloupce',
-                styler: 'Tabulku třída',
+                styler: 'CSS třída tabulky',
                 error: 'Chyba'
             },
             ru: {
