@@ -8,51 +8,59 @@
  *          Website : https://www.maxmade.nl/
  */
 
-(function ($) {
-    'use strict';
+(function($) {
+    "use strict";
 
     $.extend(true, $.trumbowyg, {
         plugins: {
             pasteImage: {
-                init: function (trumbowyg) {
-                    trumbowyg.pasteHandlers.push(function (pasteEvent) {
+                init: function(trumbowyg) {
+                    trumbowyg.pasteHandlers.push(function(pasteEvent) {
                         try {
-                          var clipboardData = (pasteEvent.originalEvent || pasteEvent).clipboardData;
-                          var pastedData = clipboardData.getData('Text');
-                          var request = null;
-                              if(pastedData.startsWith("http")){
+                            var clipboardData = (pasteEvent.originalEvent || pasteEvent).clipboardData;
+                            var pastedData = clipboardData.getData("Text");
+                            var request = null;
+                            if (pastedData.startsWith("http")) {
                                 pasteEvent.stopPropagation();
                                 pasteEvent.preventDefault();
 
                                 var url = pastedData;
-                                var query = { url : url.trim() };
+                                var query = {
+                                    url: url.trim()
+                                };
+                                var content = "";
 
                                 if (request && request.transport) request.transport.abort();
 
                                 request = $.ajax({
-                                  crossOrigin: true,
-                                  url: "https://noembed.com/embed?nowrap=on",
-                                  type: "GET",
-                                  data: query,
-                                  cache: false,
-                                  dataType: "json",
-                                  success: function(res) {
-                                    if (res.html) {
-                                      let content = res.html;
-                                      trumbowyg.execCmd('insertHTML', content);
+                                    crossOrigin: true,
+                                    url: "https://noembed.com/embed?nowrap=on",
+                                    type: "GET",
+                                    data: query,
+                                    cache: false,
+                                    dataType: "json",
+                                    success: function(res) {
+                                        if (res.html) {
+                                            content = res.html;
+                                        } else {
+                                            content = $("<a>", {
+                                                href: pastedData,
+                                                text: pastedData
+                                            }).prop('outerHTML');
+                                        }
+                                    },
+                                    error: function() {
+                                        content = $("<a>", {
+                                            href: pastedData,
+                                            text: pastedData
+                                        }).prop('outerHTML');
+                                    },
+                                    complete: function() {
+                                        trumbowyg.execCmd("insertHTML", content);
                                     }
-                                    else {
-                                      let content = "<a href='"+pastedData+"'>"+pastedData+"</a>";
-                                      trumbowyg.execCmd('insertHTML', content);
-                                    }
-                                  },
-                                  error: function() {
-                                    console.log('Error connecting to noembed');
-                                  }
                                 });
-                              }
-                        } catch (c) {
-                        }
+                            }
+                        } catch (c) {}
                     });
                 }
             }
