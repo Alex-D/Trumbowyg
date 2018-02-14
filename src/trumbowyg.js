@@ -1451,7 +1451,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 html = '';
 
             $.each(fields, function (fieldName, field) {
-                var l = field.label,
+                var l = field.label || fieldName,
                     n = field.name || fieldName,
                     a = field.attributes || {};
 
@@ -1460,8 +1460,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 }).join(' ');
 
                 html += '<label><input type="' + (field.type || 'text') + '" name="' + n + '" value="' + (field.value || '').replace(/"/g, '&quot;') + '"' + attr + '><span class="' + prefix + 'input-infos"><span>' +
-                    ((!l) ? (lg[fieldName] ? lg[fieldName] : fieldName) : (lg[l] ? lg[l] : l)) +
-                    '</span></span></label>';
+                    (lg[l] ? lg[l] : l) + '</span></span></label>';
             });
 
             return t.openModal(title, html)
@@ -1471,19 +1470,27 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         values = {};
 
                     $.each(fields, function (fieldName, field) {
-                        var $field = $('input[name="' + fieldName + '"]', $form),
+					var n = field.name || fieldName;
+                                      
+                    var $field = $('input[name="' + n + '"]', $form),
                             inputType = $field.attr('type');
 
-                        if (inputType.toLowerCase() === 'checkbox') {
-                            values[fieldName] = $field.is(':checked');
-                        } else {
-                            values[fieldName] = $.trim($field.val());
+                        switch (inputType.toLowerCase()) {
+                        case 'checkbox':
+                            values[n] = $field.is(':checked');
+                            break;
+                        case 'radio':
+                            values[n] = $field.filter(':checked').val();
+                            break;
+                        default:
+                            values[n] = $.trim($field.val());
+                            break;
                         }
                         // Validate value
-                        if (field.required && values[fieldName] === '') {
+                        if (field.required && values[n] === '') {
                             valid = false;
                             t.addErrorOnModalField($field, t.lang.required);
-                        } else if (field.pattern && !field.pattern.test(values[fieldName])) {
+                        } else if (field.pattern && !field.pattern.test(values[n])) {
                             valid = false;
                             t.addErrorOnModalField($field, field.patternError);
                         }
