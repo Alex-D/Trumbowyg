@@ -74,6 +74,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         fixedFullWidth: false,
         autogrow: false,
         autogrowOnEnter: false,
+        fullscreen:false,
         imageWidthModalEdit: false,
 
         prefix: 'trumbowyg-',
@@ -529,6 +530,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 t.$ta.add(t.$ed).css({
                     height: t.height
                 });
+            }
+
+            if (t.o.fullscreen) {
+                t.fullscreen();
             }
 
             t.semanticCode();
