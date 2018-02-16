@@ -1,6 +1,6 @@
 /* ===========================================================
- * trumbowyg.pasteurl.js v1.0
- * Url paste handling with noembed. Plugin for Trumbowyg
+ * trumbowyg.pasteembed.js v1.0
+ * Url paste to iframe with noembed. Plugin for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
  * Author : Max Seelig
@@ -54,15 +54,12 @@
                                         fails++;
                                     },
                                     complete: function() {
-                                        console.log(this.url);
                                         if (fails === 1) {
-                                            console.log(fails);
                                             this.url = this.url2;
                                             this.data = query;
                                             $.ajax(this);
                                         }
                                         if (fails === 2) {
-                                            console.log(fails);
                                             content = $("<a>", {
                                                 href: pastedData,
                                                 text: pastedData

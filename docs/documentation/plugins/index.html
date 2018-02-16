@@ -48,6 +48,7 @@
                         <li><a href="#plugin-emoji">Emoji</a></li>
                         <li><a href="#plugin-insertaudio">Insert audio</a></li>
                         <li><a href="#plugin-noembed">Noembed</a></li>
+                        <li><a href="#plugin-pasteembed">Paste embed</a></li>
                         <li><a href="#plugin-pasteimage">Paste image</a></li>
                         <li><a href="#plugin-preformatted">Preformatted</a></li>
                         <li><a href="#plugin-ruby">Ruby</a></li>
@@ -318,6 +319,31 @@ $('#my-editor').trumbowyg({
     ]
 });
             </code></pre>
+        </div>
+		
+		<div class="feature">
+            <h3 id="plugin-pasteembed">Paste embed</h3>
+            <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need demo</p>
+
+            <p>
+                Paste embed plugin handles paste events. It looks for paste event, checks if it's a url and uses noembed and MAXmade APIs to retrieve an iframe from that url. If it can't retrieve an iframe, it will put an anchor tag around the url. It doesn't do anything on text or HTML paste.
+            </p>
+
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/pasteembed/trumbowyg.pasteembed.js" class="button button-demo">
+                    View pasteembed plugin code on GitHub
+                </a>
+            </p>
+
+            <h4>How to use it?</h4>
+            <pre><code class="html">
+&lt;-- Import Trumbowyg plugins... -->
+&lt;script src="node_modules/trumbowyg/dist/plugins/pasteembed/trumbowyg.pasteembed.min.js">&lt;/script>
+            </code></pre>
+            <p>
+                Paste embed now works on every new Trumbowyg instance.
+            </p>
         </div>
 
         <div class="feature">
