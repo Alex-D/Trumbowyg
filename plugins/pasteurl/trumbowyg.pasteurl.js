@@ -20,43 +20,58 @@
                             var clipboardData = (pasteEvent.originalEvent || pasteEvent).clipboardData;
                             var pastedData = clipboardData.getData("Text");
                             var request = null;
+
                             if (pastedData.startsWith("http")) {
+
                                 pasteEvent.stopPropagation();
                                 pasteEvent.preventDefault();
 
-                                var url = pastedData;
                                 var query = {
-                                    url: url.trim()
+                                    url: pastedData.trim()
                                 };
                                 var content = "";
+                                var fails = 0;
 
                                 if (request && request.transport) request.transport.abort();
 
                                 request = $.ajax({
                                     crossOrigin: true,
                                     url: "https://noembed.com/embed?nowrap=on",
+                                    url2: "https://api.maxmade.nl/url2iframe/embed",
                                     type: "GET",
                                     data: query,
                                     cache: false,
-                                    dataType: "json",
+                                    dataType: "jsonp",
                                     success: function(res) {
                                         if (res.html) {
+                                            fails = 0;
                                             content = res.html;
                                         } else {
+                                            fails++;
+                                        }
+                                    },
+                                    error: function(res) {
+                                        fails++;
+                                    },
+                                    complete: function() {
+                                        console.log(this.url);
+                                        if (fails === 1) {
+                                            console.log(fails);
+                                            this.url = this.url2;
+                                            this.data = query;
+                                            $.ajax(this);
+                                        }
+                                        if (fails === 2) {
+                                            console.log(fails);
                                             content = $("<a>", {
                                                 href: pastedData,
                                                 text: pastedData
                                             }).prop('outerHTML');
                                         }
-                                    },
-                                    error: function() {
-                                        content = $("<a>", {
-                                            href: pastedData,
-                                            text: pastedData
-                                        }).prop('outerHTML');
-                                    },
-                                    complete: function() {
-                                        trumbowyg.execCmd("insertHTML", content);
+                                        if (content.length > 0) {
+                                            fails = 0;
+                                            trumbowyg.execCmd("insertHTML", content);
+                                        }
                                     }
                                 });
                             }
