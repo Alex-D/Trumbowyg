@@ -275,12 +275,23 @@ $('.trumbowyg-editor').on('input propertychange', function() {
 
                 <h4>How to use it?</h4>
                 <pre><code class="html">
-    &lt;-- Import Trumbowyg plugins... -->
+    &lt;-- Import Trumbowyg history style in &lt;head>... -->
+    &lt;script src="node_modules/trumbowyg/dist/plugins/history/ui/trumbowyg.history.css">&lt;/script>
+                </code></pre>
+                <pre><code class="html">
+    &lt;-- Import Trumbowyg history JS at the end of &lt;body>... -->
     &lt;script src="node_modules/trumbowyg/dist/plugins/history/trumbowyg.history.min.js">&lt;/script>
                 </code></pre>
                 <p>
-                    Paste embed now works on every new Trumbowyg instance.
+                    Then you can use the new button definitions <code>historyUndo</code> and <code>historyRedo</code>
                 </p>
+                <pre><code class="javascript">
+    $('#my-editor').trumbowyg({
+        btns: [
+            ['historyUndo', 'historyRedo']
+        ]
+    });
+                </code></pre>
             </div>
 
         <div class="feature">
@@ -300,20 +311,16 @@ $('.trumbowyg-editor').on('input propertychange', function() {
 
             <h4>How to use it?</h4>
             <pre><code class="html">
-&lt;-- Import Trumbowyg history style in &lt;head>... -->
-&lt;script src="node_modules/trumbowyg/dist/plugins/history/ui/trumbowyg.history.css">&lt;/script>
-            </code></pre>
-            <pre><code class="html">
-&lt;-- Import Trumbowyg history JS at the end of &lt;body>... -->
-&lt;script src="node_modules/trumbowyg/dist/plugins/history/trumbowyg.history.min.js">&lt;/script>
+&lt;-- Import Trumbowyg plugins... -->
+&lt;script src="node_modules/trumbowyg/dist/plugins/insertaudio/trumbowyg.insertaudio.min.js">&lt;/script>
             </code></pre>
             <p>
-                Then you can use the new button definitions <code>historyUndo</code> and <code>historyRedo</code>
+                Then you can use the new button definition <code>insertaudio</code>
             </p>
             <pre><code class="javascript">
 $('#my-editor').trumbowyg({
     btns: [
-        ['historyUndo', 'historyRedo']
+        ['insertaudio']
     ]
 });
             </code></pre>
