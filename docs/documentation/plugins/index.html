@@ -402,12 +402,10 @@ $('#my-editor').trumbowyg({
 
         <div class="feature">
             <h3 id="plugin-table">Table</h3>
-            <p class="deprecated-feature">Not stable</p>
-            <p class="deprecated-feature">Need documentation</p>
-            <p class="deprecated-feature">Need demo</p>
+            <p class="added-feature">stable</p>
 
             <p>
-                Table plugin allows users to create tables.
+                Table plugin allows users to create and manage tables.
             </p>
 
             <p>
@@ -422,9 +420,60 @@ $('#my-editor').trumbowyg({
                 </a>
             </p>
 
+            <h4>How to use it?</h4>
+            <pre><code class="html">
+&lt;-- Import Trumbowyg plugins... -->
+&lt;script src="node_modules/trumbowyg/dist/plugins/table/trumbowyg.table.min.js">&lt;/script>
+            </code></pre>
+            <p>
+                Then you can use the new button definition <code>table</code>
+            </p>
+            <pre><code class="javascript">
+$('#my-editor').trumbowyg({
+    btns: [
+        ['table']
+    ],
+    plugins: {
+        table: {
+            // Some table plugin options, see details below
+        }
+    }
+});
+            </code></pre>
+
+            <h4>Parameters</h4>
+            <dl>
+              <dt><strong><code>rows</code></strong> <code class="type">integer</code></dt>
+              <dd>
+                The count of rows which should be used for table building in the table grid dropdown.
+                <br>
+                <strong>Default</strong>: <code>8</code>
+              </dd>
+              <dt><strong><code>columns</code></strong> <code class="type">integer</code></dt>
+              <dd>
+                The count of columns which should be used for table building in the table grid dropdown.
+                <br>
+                <strong>Default</strong>: <code>8</code>
+              </dd>
+              <dt><strong><code>styler</code></strong> <code class="type">string</code></dt>
+              <dd>
+                The class which should be assigned to each table by default
+                <br>
+                <strong>Default</strong>: <code>'table'</code>
+              </dd>
+            </dl>
+
             <p class="note">
-                Some doc to write... <br>
-                You can contribute to this documentation by submitting a Pull Request :)
+                The table plugin provides a button with two different dropdowns depending on current selection. <br>
+                If the current cursor is not placed within a table, the dopdown renders a table grid where you can <br>
+                build the table. Otherwise the dropdown will render a few options for the current table like <br>
+                <ul>
+                  <li>Add row to table</li>
+                  <li>Add column to table</li>
+                  <li>Delete row from table</li>
+                  <li>Delete column from table</li>
+                  <li>Delete table</li>
+                </ul>
             </p>
         </div>
 
