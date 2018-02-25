@@ -1459,7 +1459,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     return prop + '="' + a[prop] + '"';
                 }).join(' ');
 
-                html += '<label><input type="' + (field.type || 'text') + '" name="' + n + '" value="' + (field.value || '').replace(/"/g, '&quot;') + '"' + attr + '><span class="' + prefix + 'input-infos"><span>' +
+                html += '<label><input type="' + (field.type || 'text') + '" name="' + n + '"' + ( field.type == 'checkbox' && field.value ? ' checked="checked"' : ' value="' + (field.value || '').replace(/"/g, '&quot;') ) + '"' + attr + '><span class="' + prefix + 'input-infos"><span>' +
                     ((!l) ? (lg[fieldName] ? lg[fieldName] : fieldName) : (lg[l] ? lg[l] : l)) +
                     '</span></span></label>';
             });
