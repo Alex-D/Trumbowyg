@@ -430,6 +430,14 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
     };
 
     Trumbowyg.prototype = {
+        DEFAULT_SEMANTIC_MAP: {
+            'b': 'strong',
+            'i': 'em',
+            's': 'del',
+            'strike': 'del',
+            'div': 'p'
+        },
+
         init: function () {
             var t = this;
             t.height = t.$ta.height();
@@ -1089,10 +1097,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             t.syncCode(force);
 
             if (t.o.semantic) {
-                t.semanticTag('b', 'strong');
-                t.semanticTag('i', 'em');
-                t.semanticTag('s', 'del');
-                t.semanticTag('strike', 'del');
+                t.semanticTag('b');
+                t.semanticTag('i');
+                t.semanticTag('s');
+                t.semanticTag('strike');
 
                 if (full) {
                     var inlineElementsSelector = t.o.inlineElementsSelector,
@@ -1114,7 +1122,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     };
                     wrapInlinesInParagraphsFrom(t.$ed.children(inlineElementsSelector).first());
 
-                    t.semanticTag('div', 'p', true);
+                    t.semanticTag('div', true);
 
                     // Unwrap paragraphs content, containing nothing usefull
                     t.$ed.find('p').filter(function () {
@@ -1140,7 +1148,17 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }
         },
 
-        semanticTag: function (oldTag, newTag, copyAttributes) {
+        semanticTag: function (oldTag, copyAttributes) {
+            var newTag;
+
+            if (this.o.semantic != null && typeof this.o.semantic === 'object' && this.o.semantic.hasOwnProperty(oldTag)) {
+                newTag = this.o.semantic[oldTag];
+            } else if (this.o.semantic === true && this.DEFAULT_SEMANTIC_MAP.hasOwnProperty(oldTag)) {
+                newTag = this.DEFAULT_SEMANTIC_MAP[oldTag];
+            } else {
+                return;
+            }
+
             $(oldTag, this.$ed).each(function () {
                 var $oldTag = $(this);
                 $oldTag.wrap('<' + newTag + '/>');
