@@ -163,7 +163,7 @@ $slow-transition-duration: 300ms !default;
             color: transparent;
         }
 
-        & + .trumbowyg-button-group::before {
+        &::after {
             content: " ";
             display: inline-block;
             width: 1px;
@@ -171,6 +171,10 @@ $slow-transition-duration: 300ms !default;
             margin: 0 5px;
             height: 35px;
             vertical-align: top;
+        }
+
+        &:last-child::after {
+            content: none;
         }
     }
 
@@ -241,10 +245,6 @@ $slow-transition-duration: 300ms !default;
 
     .trumbowyg-right {
         float: right;
-
-        &::before {
-            display: none !important;
-        }
     }
 }
 
@@ -668,7 +668,7 @@ body.trumbowyg-body-fullscreen {
         }
 
         .trumbowyg-button-group:not(:empty) {
-            &::before {
+            &::after {
                 background-color: lighten($dark-color, 7%);
             }
             .trumbowyg-fullscreen-button svg {
@@ -677,7 +677,7 @@ body.trumbowyg-body-fullscreen {
         }
 
         &.trumbowyg-disable {
-            .trumbowyg-button-group::before {
+            .trumbowyg-button-group::after {
                 background-color: lighten($dark-color, 3%);
             }
         }
