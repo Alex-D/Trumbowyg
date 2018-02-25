@@ -1216,7 +1216,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     value: target
                 }
             }, function (v) { // v is value
-                var link = $(['<a href="', v.url, '">', v.text, '</a>'].join(''));
+                var link = $(['<a href="', v.url, '">', v.text || v.url, '</a>'].join(''));
                 if (v.title.length > 0) {
                     link.attr('title', v.title);
                 }
