@@ -3,13 +3,13 @@
  * Font Clean paste plugin for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
- * Author : Eric Radin
- */
-
-/**
+ * Authors : Eric Radin
+ *           Todd Graham (slackwalker)
+ *
  * This plugin will perform a "cleaning" on any paste, in particular
  * it will clean pasted content of microsoft word document tags and classes.
  */
+
 (function ($) {
     'use strict';
 
@@ -84,7 +84,7 @@
         html = html.replace(/<\/[^ >]+:[^>]*>/g, '');
 
         // remove unwanted tags
-        html = html.replace(/<(div|span|style|meta|link){1}.*?>/gi, '');
+        html = html.replace(/<(div|span|style|meta|link).*?>/gi, '');
 
         return html;
     }

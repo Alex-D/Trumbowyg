@@ -46,7 +46,12 @@
                         <li><a href="#plugin-cleanpaste">Clean paste</a></li>
                         <li><a href="#plugin-colors">Colors</a></li>
                         <li><a href="#plugin-emoji">Emoji</a></li>
+                        <li><a href="#plugin-fontfamily">Font family</a></li>
+                        <li><a href="#plugin-fontsize">Font size</a></li>
                         <li><a href="#plugin-insertaudio">Insert audio</a></li>
+                        <li><a href="#plugin-lineheight">Line height</a></li>
+                        <li><a href="#plugin-mathml">MathML</a></li>
+                        <li><a href="#plugin-mention">Mention</a></li>
                         <li><a href="#plugin-noembed">Noembed</a></li>
                         <li><a href="#plugin-pasteimage">Paste image</a></li>
                         <li><a href="#plugin-preformatted">Preformatted</a></li>
@@ -258,6 +263,50 @@ $('.trumbowyg-editor').on('input propertychange', function() {
         </div>
 
         <div class="feature">
+            <h3 id="plugin-fontfamily">Font family</h3>
+            <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need documentation</p>
+            <p class="deprecated-feature">Need demo</p>
+
+            <p>
+                This plugin allows user to custom font family.
+            </p>
+
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/fontfamily/trumbowyg.fontfamily.js" class="button button-demo">
+                    View font family plugin code on GitHub
+                </a>
+            </p>
+
+            <p class="note">
+                Some doc to write... <br>
+                You can contribute to this documentation by submitting a Pull Request :)
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-fontsize">Font size</h3>
+            <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need documentation</p>
+            <p class="deprecated-feature">Need demo</p>
+
+            <p>
+                This plugin allows user to custom font size.
+            </p>
+
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/fontsize/trumbowyg.fontsize.js" class="button button-demo">
+                    View font size plugin code on GitHub
+                </a>
+            </p>
+
+            <p class="note">
+                Some doc to write... <br>
+                You can contribute to this documentation by submitting a Pull Request :)
+            </p>
+        </div>
+
+        <div class="feature">
             <h3 id="plugin-insertaudio">Insert audio</h3>
             <p class="added-feature">Stable</p>
 
@@ -287,6 +336,72 @@ $('#my-editor').trumbowyg({
     ]
 });
             </code></pre>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-lineheight">Line height</h3>
+            <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need documentation</p>
+            <p class="deprecated-feature">Need demo</p>
+
+            <p>
+                This plugin allows user to custom line height.
+            </p>
+
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/lineheight/trumbowyg.lineheight.js" class="button button-demo">
+                    View line height plugin code on GitHub
+                </a>
+            </p>
+
+            <p class="note">
+                Some doc to write... <br>
+                You can contribute to this documentation by submitting a Pull Request :)
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-mathml">MathML</h3>
+            <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need documentation</p>
+            <p class="deprecated-feature">Need demo</p>
+
+            <p>
+                This plugin allows user to use MathML.
+            </p>
+
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/mathml/trumbowyg.mathml.js" class="button button-demo">
+                    View MathML plugin code on GitHub
+                </a>
+            </p>
+
+            <p class="note">
+                Some doc to write... <br>
+                You can contribute to this documentation by submitting a Pull Request :)
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-mention">Mention</h3>
+            <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need documentation</p>
+            <p class="deprecated-feature">Need demo</p>
+
+            <p>
+                This plugin allows user to mention an user with AJAX autocomplete.
+            </p>
+
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/mention/trumbowyg.mention.js" class="button button-demo">
+                    View mention plugin code on GitHub
+                </a>
+            </p>
+
+            <p class="note">
+                Some doc to write... <br>
+                You can contribute to this documentation by submitting a Pull Request :)
+            </p>
         </div>
 
         <div class="feature">
@@ -393,21 +508,17 @@ $('#my-editor').trumbowyg({
             </ul>
           
             <h4>Dependencies</h4>
-            <p>This plugin depends on the <a href="https://github.com/RickStrahl/jquery-resizable" target="_blank">jquery-resizable</a> plugin, which must be loaded beforehand.</p>
+            <p>
+                This plugin depends on the
+                <a href="https://github.com/RickStrahl/jquery-resizable" target="_blank">jquery-resizable</a> plugin,
+                which must be loaded beforehand.
+            </p>
 
-            <h4>Notes &amp; Caveats</h4>
+            <h4>Notes and caveats</h4>
             <p>
-                The resulting image size is currently absolute: CSS height in pixels (<code>style</code> attribute). A possible enhancement would be to support relative sizes as well, typically as percentage height of the container.
+                The resulting image size is currently absolute: CSS height in pixels (<code>style</code> attribute).
+                A possible enhancement would be to support relative sizes as well, typically as percentage height of the container.
             </p>
-            <p>
-                Currently Trumbowyg does not fire any event when new content is loaded in the editor (<code>html</code> command). Consequently plugins are not aware of changes, and <code>resizimg</code> does not know that it should care for the new content. As a workaround you should fire the <code>tbwchange</code> event after loading new html:
-            </p>
-            <pre>
-                <code class="javascript hljs">
-  $('#edit-content').trumbowyg('html', html);
-  $('#edit-content').triggerHandler('tbwchange');
-                 </code>
-            </pre>
 
             <p>
                 <a href="../../demos/#plugins-resizimg" class="button button-demo">Try resizimg live demo!</a>

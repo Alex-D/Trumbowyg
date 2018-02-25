@@ -36,6 +36,9 @@
             en: {
                 insertAudio: 'Insert Audio'
             },
+            fr: {
+                insertAudio: 'Insérer un son'
+            },
             ru: {
                 insertAudio: 'Вставить аудио'
             },
