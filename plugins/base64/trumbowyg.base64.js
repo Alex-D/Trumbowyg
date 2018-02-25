@@ -61,7 +61,7 @@
                 file: 'Dosya',
                 errFileReaderNotSupported: 'FileReader tarayıcınız tarafından desteklenmiyor.',
                 errInvalidImage: 'Geçersiz resim dosyası.'
-            }                
+            }
         },
         // jshint camelcase:true
 

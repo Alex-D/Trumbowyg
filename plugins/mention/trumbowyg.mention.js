@@ -22,6 +22,9 @@
             en: {
                 mention: 'Mention'
             },
+            fr: {
+                mention: 'Mentioner'
+            },
             ru: {
                 mention: 'Упомянуть'
             },

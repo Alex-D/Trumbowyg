@@ -575,8 +575,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     if ((e.ctrlKey || e.metaKey) && (keyCode === 89 || keyCode === 90)) {
                         t.$c.trigger('tbwchange');
                     } else if (!ctrl && keyCode !== 17) {
-                        var compositionend_ie = t.isIE ? e.type === 'compositionend' : true;
-                        t.semanticCode(false, compositionend_ie && keyCode === 13);
+                        var compositionEndIE = t.isIE ? e.type === 'compositionend' : true;
+                        t.semanticCode(false, compositionEndIE && keyCode === 13);
                         t.$c.trigger('tbwchange');
                     } else if (typeof e.which === 'undefined') {
                         t.semanticCode(false, false, true);
@@ -768,8 +768,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 $btn.addClass(prefix + 'open-dropdown');
                 var dropdownPrefix = prefix + 'dropdown',
                     dropdownOptions = { // the dropdown
-                    class: dropdownPrefix + '-' + btnName + ' ' + dropdownPrefix + ' ' + prefix + 'fixed-top'
-                };
+                        class: dropdownPrefix + '-' + btnName + ' ' + dropdownPrefix + ' ' + prefix + 'fixed-top'
+                    };
                 dropdownOptions['data-' + dropdownPrefix] = btnName;
                 var $dropdown = $('<div/>', dropdownOptions);
                 $.each(isDropdown, function (i, def) {
@@ -1034,11 +1034,14 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         // HTML Code management
         html: function (html) {
             var t = this;
+
             if (html != null) {
                 t.$ta.val(html);
                 t.syncCode(true);
+                t.$c.trigger('tbwchange');
                 return t;
             }
+
             return t.$ta.val();
         },
         syncTextarea: function () {
@@ -1459,8 +1462,11 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     return prop + '="' + a[prop] + '"';
                 }).join(' ');
 
-                html += '<label><input type="' + (field.type || 'text') + '" name="' + n + '" value="' + (field.value || '').replace(/"/g, '&quot;') + '"' + attr + '><span class="' + prefix + 'input-infos"><span>' +
-                    (lg[l] ? lg[l] : l) + '</span></span></label>';
+                html += '<label><input type="' + (field.type || 'text') + '" name="' + n + '"' +
+                    (field.type === 'checkbox' && field.value ? ' checked="checked"' : ' value="' + (field.value || '').replace(/"/g, '&quot;')) +
+                    '"' + attr + '><span class="' + prefix + 'input-infos"><span>' +
+                    (lg[l] ? lg[l] : l)) +
+                    '</span></span></label>';
             });
 
             return t.openModal(title, html)
@@ -1470,9 +1476,9 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         values = {};
 
                     $.each(fields, function (fieldName, field) {
-					var n = field.name || fieldName;
+					              var n = field.name || fieldName;
                                       
-                    var $field = $('input[name="' + n + '"]', $form),
+                        var $field = $('input[name="' + n + '"]', $form),
                             inputType = $field.attr('type');
 
                         switch (inputType.toLowerCase()) {
@@ -1706,7 +1712,9 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             tags.push(tag);
 
-            return t.getTagsRecursive(element, tags).filter(function(tag) { return tag != null; });
+            return t.getTagsRecursive(element, tags).filter(function (tag) {
+                return tag != null;
+            });
         },
 
         // Plugins

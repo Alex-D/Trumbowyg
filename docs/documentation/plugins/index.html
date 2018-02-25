@@ -46,10 +46,17 @@
                         <li><a href="#plugin-cleanpaste">Clean paste</a></li>
                         <li><a href="#plugin-colors">Colors</a></li>
                         <li><a href="#plugin-emoji">Emoji</a></li>
+                        <li><a href="#plugin-fontfamily">Font family</a></li>
+                        <li><a href="#plugin-fontsize">Font size</a></li>
+                        <li><a href="#plugin-history">History</a></li>
                         <li><a href="#plugin-insertaudio">Insert audio</a></li>
+                        <li><a href="#plugin-lineheight">Line height</a></li>
+                        <li><a href="#plugin-mathml">MathML</a></li>
+                        <li><a href="#plugin-mention">Mention</a></li>
                         <li><a href="#plugin-noembed">Noembed</a></li>
                         <li><a href="#plugin-pasteimage">Paste image</a></li>
                         <li><a href="#plugin-preformatted">Preformatted</a></li>
+                        <li><a href="#plugin-resizimg">Resizimg</a></li>
                         <li><a href="#plugin-ruby">Ruby</a></li>
                         <li><a href="#plugin-table">Table</a></li>
                         <li><a href="#plugin-template">Template</a></li>
@@ -257,6 +264,87 @@ $('.trumbowyg-editor').on('input propertychange', function() {
         </div>
 
         <div class="feature">
+            <h3 id="plugin-fontfamily">Font family</h3>
+            <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need documentation</p>
+            <p class="deprecated-feature">Need demo</p>
+
+            <p>
+                This plugin allows user to custom font family.
+            </p>
+
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/fontfamily/trumbowyg.fontfamily.js" class="button button-demo">
+                    View font family plugin code on GitHub
+                </a>
+            </p>
+
+            <p class="note">
+                Some doc to write... <br>
+                You can contribute to this documentation by submitting a Pull Request :)
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-fontsize">Font size</h3>
+            <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need documentation</p>
+            <p class="deprecated-feature">Need demo</p>
+
+            <p>
+                This plugin allows user to custom font size.
+            </p>
+
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/fontsize/trumbowyg.fontsize.js" class="button button-demo">
+                    View font size plugin code on GitHub
+                </a>
+            </p>
+
+            <p class="note">
+                Some doc to write... <br>
+                You can contribute to this documentation by submitting a Pull Request :)
+            </p>
+        </div>
+      
+        <div class="feature">
+            <h3 id="plugin-history">History</h3>
+            <p class="added-feature">Stable</p>
+
+            <p>
+                History plugin is an enhanced implementation of the undo and redo functionality.
+                It tracks changes of the editor and will add each change to a history stack.
+                If a word is typed in or text was pasted, it counts as a single stack entry.
+            </p>
+
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/history/trumbowyg.history.js" class="button button-demo">
+                    View history plugin code on GitHub
+                </a>
+            </p>
+
+            <h4>How to use it?</h4>
+            <pre><code class="html">
+&lt;-- Import Trumbowyg history style in &lt;head>... -->
+&lt;script src="node_modules/trumbowyg/dist/plugins/history/ui/trumbowyg.history.css">&lt;/script>
+            </code></pre>
+            <pre><code class="html">
+&lt;-- Import Trumbowyg history JS at the end of &lt;body>... -->
+&lt;script src="node_modules/trumbowyg/dist/plugins/history/trumbowyg.history.min.js">&lt;/script>
+            </code></pre>
+            <p>
+                Then you can use the new button definitions <code>historyUndo</code> and <code>historyRedo</code>
+            </p>
+            <pre><code class="javascript">
+$('#my-editor').trumbowyg({
+    btns: [
+        ['historyUndo', 'historyRedo']
+    ]
+});
+            </code></pre>
+        </div>
+
+        <div class="feature">
             <h3 id="plugin-insertaudio">Insert audio</h3>
             <p class="added-feature">Stable</p>
 
@@ -286,6 +374,72 @@ $('#my-editor').trumbowyg({
     ]
 });
             </code></pre>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-lineheight">Line height</h3>
+            <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need documentation</p>
+            <p class="deprecated-feature">Need demo</p>
+
+            <p>
+                This plugin allows user to custom line height.
+            </p>
+
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/lineheight/trumbowyg.lineheight.js" class="button button-demo">
+                    View line height plugin code on GitHub
+                </a>
+            </p>
+
+            <p class="note">
+                Some doc to write... <br>
+                You can contribute to this documentation by submitting a Pull Request :)
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-mathml">MathML</h3>
+            <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need documentation</p>
+            <p class="deprecated-feature">Need demo</p>
+
+            <p>
+                This plugin allows user to use MathML.
+            </p>
+
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/mathml/trumbowyg.mathml.js" class="button button-demo">
+                    View MathML plugin code on GitHub
+                </a>
+            </p>
+
+            <p class="note">
+                Some doc to write... <br>
+                You can contribute to this documentation by submitting a Pull Request :)
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-mention">Mention</h3>
+            <p class="added-feature">Stable</p>
+            <p class="deprecated-feature">Need documentation</p>
+            <p class="deprecated-feature">Need demo</p>
+
+            <p>
+                This plugin allows user to mention an user with AJAX autocomplete.
+            </p>
+
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/mention/trumbowyg.mention.js" class="button button-demo">
+                    View mention plugin code on GitHub
+                </a>
+            </p>
+
+            <p class="note">
+                Some doc to write... <br>
+                You can contribute to this documentation by submitting a Pull Request :)
+            </p>
         </div>
 
         <div class="feature">
@@ -379,9 +533,43 @@ $('#my-editor').trumbowyg({
         </div>
 
         <div class="feature">
+            <h3 id="plugin-resizimg">Resizimg</h3>
+            <p class="added-feature">Stable</p>
+
+            <p>
+                Allows you to resize images (preserving aspect ratio) by dragging their bottom-right corner. Available options:
+            </p>
+            
+            <ul>
+                <li><code>minSize</code> (default: 32): minimal size of image and also of draggable right-bottom corner</li>
+                <li><code>step</code> (default: 4): increment when increasing / decreasing image height</li>
+            </ul>
+          
+            <h4>Dependencies</h4>
+            <p>
+                This plugin depends on the
+                <a href="https://github.com/RickStrahl/jquery-resizable" target="_blank">jquery-resizable</a> plugin,
+                which must be loaded beforehand.
+            </p>
+
+            <h4>Notes and caveats</h4>
+            <p>
+                The resulting image size is currently absolute: CSS height in pixels (<code>style</code> attribute).
+                A possible enhancement would be to support relative sizes as well, typically as percentage height of the container.
+            </p>
+
+            <p>
+                <a href="../../demos/#plugins-resizimg" class="button button-demo">Try resizimg live demo!</a>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/resizimg/trumbowyg.resizimg.js" class="button button-demo">
+                    View resizimg plugin code on GitHub
+                </a>
+            </p>
+        </div>
+
+        <div class="feature">
             <h3 id="plugin-ruby">Ruby</h3>
             <p class="added-feature">Stable</p>
-            <p class="deprecated-feature">Need documentation</p>
+            <p class="deprecated-feature">Need demo</p>
 
             <p>
                 Allows you to support <a href="https://www.w3.org/International/articles/ruby/">ruby markup</a>.
@@ -402,12 +590,10 @@ $('#my-editor').trumbowyg({
 
         <div class="feature">
             <h3 id="plugin-table">Table</h3>
-            <p class="deprecated-feature">Not stable</p>
-            <p class="deprecated-feature">Need documentation</p>
-            <p class="deprecated-feature">Need demo</p>
+            <p class="added-feature">stable</p>
 
             <p>
-                Table plugin allows users to create tables.
+                Table plugin allows users to create and manage tables.
             </p>
 
             <p>
@@ -422,9 +608,60 @@ $('#my-editor').trumbowyg({
                 </a>
             </p>
 
+            <h4>How to use it?</h4>
+            <pre><code class="html">
+&lt;-- Import Trumbowyg plugins... -->
+&lt;script src="node_modules/trumbowyg/dist/plugins/table/trumbowyg.table.min.js">&lt;/script>
+            </code></pre>
+            <p>
+                Then you can use the new button definition <code>table</code>
+            </p>
+            <pre><code class="javascript">
+$('#my-editor').trumbowyg({
+    btns: [
+        ['table']
+    ],
+    plugins: {
+        table: {
+            // Some table plugin options, see details below
+        }
+    }
+});
+            </code></pre>
+
+            <h4>Parameters</h4>
+            <dl>
+              <dt><strong><code>rows</code></strong> <code class="type">integer</code></dt>
+              <dd>
+                The count of rows which should be used for table building in the table grid dropdown.
+                <br>
+                <strong>Default</strong>: <code>8</code>
+              </dd>
+              <dt><strong><code>columns</code></strong> <code class="type">integer</code></dt>
+              <dd>
+                The count of columns which should be used for table building in the table grid dropdown.
+                <br>
+                <strong>Default</strong>: <code>8</code>
+              </dd>
+              <dt><strong><code>styler</code></strong> <code class="type">string</code></dt>
+              <dd>
+                The class which should be assigned to each table by default
+                <br>
+                <strong>Default</strong>: <code>'table'</code>
+              </dd>
+            </dl>
+
             <p class="note">
-                Some doc to write... <br>
-                You can contribute to this documentation by submitting a Pull Request :)
+                The table plugin provides a button with two different dropdowns depending on current selection. <br>
+                If the current cursor is not placed within a table, the dopdown renders a table grid where you can <br>
+                build the table. Otherwise the dropdown will render a few options for the current table like <br>
+                <ul>
+                  <li>Add row to table</li>
+                  <li>Add column to table</li>
+                  <li>Delete row from table</li>
+                  <li>Delete column from table</li>
+                  <li>Delete table</li>
+                </ul>
             </p>
         </div>
 
