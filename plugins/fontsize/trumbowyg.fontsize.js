@@ -7,21 +7,31 @@
             en: {
                 fontsize: 'Font size',
                 fontsizes: {
-                    'x-small': 'Extra Small',
+                    'x-small': 'Extra small',
                     'small': 'Small',
                     'medium': 'Regular',
                     'large': 'Large',
-                    'x-large': 'Extra Large'
+                    'x-large': 'Extra large'
+                }
+            },
+            fr: {
+                fontsize: 'Taille de la police',
+                fontsizes: {
+                    'x-small': 'Très petit',
+                    'small': 'Petit',
+                    'medium': 'Normal',
+                    'large': 'Grand',
+                    'x-large': 'Très grand'
                 }
             },
             nl: {
                 fontsize: 'Lettergrootte',
                 fontsizes: {
-                    'x-small': 'Extra Klein',
+                    'x-small': 'Extra klein',
                     'small': 'Klein',
                     'medium': 'Normaal',
                     'large': 'Groot',
-                    'x-large': 'Extra Groot'
+                    'x-large': 'Extra groot'
                 }
             },
             tr: {
@@ -50,16 +60,17 @@
             }
         }
     });
+
     function buildDropdown(trumbowyg) {
         var dropdown = [];
         var sizes = ['x-small', 'small', 'medium', 'large', 'x-large'];
 
-        $.each(sizes, function(index, size) {
+        $.each(sizes, function (index, size) {
             trumbowyg.addBtnDef('fontsize_' + size, {
                 text: '<span style="font-size: ' + size + ';">' + trumbowyg.lang.fontsizes[size] + '</span>',
                 hasIcon: false,
-                fn: function(){
-                    trumbowyg.execCmd('fontSize', index+1, true);
+                fn: function () {
+                    trumbowyg.execCmd('fontSize', index + 1, true);
                 }
             });
             dropdown.push('fontsize_' + size);
