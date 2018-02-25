@@ -196,6 +196,7 @@ $slow-transition-duration: 300ms !default;
     }
 
     &.trumbowyg-disable button:not(.trumbowyg-not-disable):not(.trumbowyg-active),
+    button.trumbowyg-disable,
     .trumbowyg-disabled & button:not(.trumbowyg-not-disable):not(.trumbowyg-viewHTML-button) {
         opacity: 0.2;
         cursor: default;
