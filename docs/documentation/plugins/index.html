@@ -48,6 +48,7 @@
                         <li><a href="#plugin-emoji">Emoji</a></li>
                         <li><a href="#plugin-fontfamily">Font family</a></li>
                         <li><a href="#plugin-fontsize">Font size</a></li>
+                        <li><a href="#plugin-history">History</a></li>
                         <li><a href="#plugin-insertaudio">Insert audio</a></li>
                         <li><a href="#plugin-lineheight">Line height</a></li>
                         <li><a href="#plugin-mathml">MathML</a></li>
@@ -304,6 +305,43 @@ $('.trumbowyg-editor').on('input propertychange', function() {
                 Some doc to write... <br>
                 You can contribute to this documentation by submitting a Pull Request :)
             </p>
+        </div>
+      
+        <div class="feature">
+            <h3 id="plugin-history">History</h3>
+            <p class="added-feature">Stable</p>
+
+            <p>
+                History plugin is an enhanced implementation of the undo and redo functionality.
+                It tracks changes of the editor and will add each change to a history stack.
+                If a word is typed in or text was pasted, it counts as a single stack entry.
+            </p>
+
+            <p>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/history/trumbowyg.history.js" class="button button-demo">
+                    View history plugin code on GitHub
+                </a>
+            </p>
+
+            <h4>How to use it?</h4>
+            <pre><code class="html">
+&lt;-- Import Trumbowyg history style in &lt;head>... -->
+&lt;script src="node_modules/trumbowyg/dist/plugins/history/ui/trumbowyg.history.css">&lt;/script>
+            </code></pre>
+            <pre><code class="html">
+&lt;-- Import Trumbowyg history JS at the end of &lt;body>... -->
+&lt;script src="node_modules/trumbowyg/dist/plugins/history/trumbowyg.history.min.js">&lt;/script>
+            </code></pre>
+            <p>
+                Then you can use the new button definitions <code>historyUndo</code> and <code>historyRedo</code>
+            </p>
+            <pre><code class="javascript">
+$('#my-editor').trumbowyg({
+    btns: [
+        ['historyUndo', 'historyRedo']
+    ]
+});
+            </code></pre>
         </div>
 
         <div class="feature">
