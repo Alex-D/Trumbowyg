@@ -1465,7 +1465,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 html += '<label><input type="' + (field.type || 'text') + '" name="' + n + '"' +
                     (field.type === 'checkbox' && field.value ? ' checked="checked"' : ' value="' + (field.value || '').replace(/"/g, '&quot;')) +
                     '"' + attr + '><span class="' + prefix + 'input-infos"><span>' +
-                    (lg[l] ? lg[l] : l)) +
+                    (lg[l] ? lg[l] : l) +
                     '</span></span></label>';
             });
 
@@ -1476,21 +1476,21 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         values = {};
 
                     $.each(fields, function (fieldName, field) {
-					              var n = field.name || fieldName;
-                                      
+                        var n = field.name || fieldName;
+
                         var $field = $('input[name="' + n + '"]', $form),
                             inputType = $field.attr('type');
 
                         switch (inputType.toLowerCase()) {
-                        case 'checkbox':
-                            values[n] = $field.is(':checked');
-                            break;
-                        case 'radio':
-                            values[n] = $field.filter(':checked').val();
-                            break;
-                        default:
-                            values[n] = $.trim($field.val());
-                            break;
+                            case 'checkbox':
+                                values[n] = $field.is(':checked');
+                                break;
+                            case 'radio':
+                                values[n] = $field.filter(':checked').val();
+                                break;
+                            default:
+                                values[n] = $.trim($field.val());
+                                break;
                         }
                         // Validate value
                         if (field.required && values[n] === '') {
