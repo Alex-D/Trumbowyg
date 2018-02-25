@@ -13,14 +13,6 @@
 (function ($) {
     'use strict';
 
-    function reverse(sentString) {
-        var theString = '';
-        for (var i = sentString.length - 1; i >= 0; i -= 1) {
-            theString += sentString.charAt(i);
-        }
-        return theString;
-    }
-
     function checkValidTags(snippet) {
         var theString = snippet;
 
@@ -46,91 +38,37 @@
         return theString;
     }
 
-    function cleanIt(htmlBefore, htmlAfter) {
-        var matchedHead = '';
-        var matchedTail = '';
-        var afterStart;
-        var afterFinish;
-        var newSnippet;
-        var minLength = Math.min(htmlBefore.length, htmlAfter.length);
-
-        // we need to extract the inserted block
-        for (afterStart = 0; htmlAfter.charAt(afterStart) === htmlBefore.charAt(afterStart) && afterStart <= minLength; afterStart += 1) {
-            matchedHead += htmlAfter.charAt(afterStart);
-        }
-
-        // If afterStart is inside a HTML tag, move to opening brace of tag
-        for (var i = afterStart; i >= 0; i -= 1) {
-            if (htmlBefore.charAt(i) === '<') {
-                afterStart = i;
-                matchedHead = htmlBefore.substring(0, afterStart);
-                break;
-            } else if (htmlBefore.charAt(i) === '>') {
-                break;
-            }
-        }
-
-        // now reverse string and work from the end in
-        htmlAfter = reverse(htmlAfter);
-        htmlBefore = reverse(htmlBefore);
-
-        // Find end of both strings that matches
-        for (afterFinish = 0; htmlAfter.charAt(afterFinish) === htmlBefore.charAt(afterFinish) && afterFinish <= minLength; afterFinish += 1) {
-            matchedTail += htmlAfter.charAt(afterFinish);
-        }
-
-        // If afterFinish is inside a HTML tag, move to closing brace of tag
-        for (var j = afterFinish; j >= 0; j -= 1) {
-            if (htmlBefore.charAt(j) === '>') {
-                afterFinish = j;
-                matchedTail = htmlBefore.substring(0, afterFinish);
-                break;
-            } else if (htmlBefore.charAt(j) === '<') {
-                break;
-            }
-        }
-
-        matchedTail = reverse(matchedTail);
-
-        // If there's no difference in pasted content
-        if (afterStart === (htmlAfter.length - afterFinish)) {
-            return false;
-        }
-
-        htmlAfter = reverse(htmlAfter);
-        newSnippet = htmlAfter.substring(afterStart, htmlAfter.length - afterFinish);
-
+    function cleanIt(html) {
         // first make sure all tags and attributes are made valid
-        newSnippet = checkValidTags(newSnippet);
+        html = checkValidTags(html);
 
         // Replace opening bold tags with strong
-        newSnippet = newSnippet.replace(/<b(\s+|>)/g, '<strong$1');
+        html = html.replace(/<b(\s+|>)/g, '<strong$1');
         // Replace closing bold tags with closing strong
-        newSnippet = newSnippet.replace(/<\/b(\s+|>)/g, '</strong$1');
+        html = html.replace(/<\/b(\s+|>)/g, '</strong$1');
 
         // Replace italic tags with em
-        newSnippet = newSnippet.replace(/<i(\s+|>)/g, '<em$1');
+        html = html.replace(/<i(\s+|>)/g, '<em$1');
         // Replace closing italic tags with closing em
-        newSnippet = newSnippet.replace(/<\/i(\s+|>)/g, '</em$1');
+        html = html.replace(/<\/i(\s+|>)/g, '</em$1');
 
         // strip out comments -cgCraft
-        newSnippet = newSnippet.replace(/<!(?:--[\s\S]*?--\s*)?>\s*/g, '');
+        html = html.replace(/<!(?:--[\s\S]*?--\s*)?>\s*/g, '');
 
         // strip out &nbsp; -cgCraft
-        newSnippet = newSnippet.replace(/&nbsp;/gi, ' ');
+        html = html.replace(/&nbsp;/gi, ' ');
         // strip out extra spaces -cgCraft
-        newSnippet = newSnippet.replace(/ <\//gi, '</');
+        html = html.replace(/ <\//gi, '</');
 
-        while (newSnippet.indexOf('  ') !== -1) {
-            var anArray = newSnippet.split('  ');
-            newSnippet = anArray.join(' ');
+        while (html.indexOf('  ') !== -1) {
+            html = html.split('  ').join(' ');
         }
 
         // strip &nbsp; -cgCraft
-        newSnippet = newSnippet.replace(/^\s*|\s*$/g, '');
+        html = html.replace(/^\s*|\s*$/g, '');
 
         // Strip out unaccepted attributes
-        newSnippet = newSnippet.replace(/<[^>]*>/g, function (match) {
+        html = html.replace(/<[^>]*>/g, function (match) {
             match = match.replace(/ ([^=]+)="[^"]*"/g, function (match2, attributeName) {
                 if (['alt', 'href', 'src', 'title'].indexOf(attributeName) !== -1) {
                     return match2;
@@ -141,15 +79,14 @@
         });
 
         // Final cleanout for MS Word crud
-        newSnippet = newSnippet.replace(/<\?xml[^>]*>/g, '');
-        newSnippet = newSnippet.replace(/<[^ >]+:[^>]*>/g, '');
-        newSnippet = newSnippet.replace(/<\/[^ >]+:[^>]*>/g, '');
+        html = html.replace(/<\?xml[^>]*>/g, '');
+        html = html.replace(/<[^ >]+:[^>]*>/g, '');
+        html = html.replace(/<\/[^ >]+:[^>]*>/g, '');
 
         // remove unwanted tags
-        newSnippet = newSnippet.replace(/<(div|span|style|meta|link){1}.*?>/gi, '');
+        html = html.replace(/<(div|span|style|meta|link){1}.*?>/gi, '');
 
-        htmlAfter = matchedHead + newSnippet + matchedTail;
-        return htmlAfter;
+        return html;
     }
 
     // clean editor
@@ -162,12 +99,7 @@
                 init: function (trumbowyg) {
                     trumbowyg.pasteHandlers.push(function () {
                         try {
-                            var contentBefore = trumbowyg.$ed.html();
-                            setTimeout(function () {
-                                var contentAfter = trumbowyg.$ed.html();
-                                contentAfter = cleanIt(contentBefore, contentAfter);
-                                trumbowyg.$ed.html(contentAfter);
-                            }, 0);
+                            trumbowyg.$ed.html(cleanIt(trumbowyg.$ed.html()));
                         } catch (c) {
                         }
                     });
