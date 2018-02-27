@@ -75,6 +75,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         autogrow: false,
         autogrowOnEnter: false,
         imageWidthModalEdit: false,
+        openModalRelative: false,
 
         prefix: 'trumbowyg-',
 
@@ -1347,6 +1348,28 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         openModal: function (title, content) {
             var t = this,
                 prefix = t.o.prefix;
+                top = t.$btnPane.height(),
+                selection = i.doc.getSelection();
+
+            var isInViewport = function(node) {
+              var elementTop = $(node).offset().top;
+              var elementBottom = elementTop + $(node).outerHeight();
+              var viewportTop = $(window).scrollTop();
+              var viewportBottom = viewportTop + $(window).height();
+              return elementBottom > viewportTop && elementTop < viewportBottom;
+            };
+
+            if(t.o.openModalRelative && selection.focusNode) {
+              var node = selection.focusNode;
+              if(node.nodeType == Node.TEXT_NODE) {
+                node = node.parentNode;
+              }
+
+              if(isInViewport(node)) {
+                var p = $(node).position();
+                top = Math.max(t.$btnPane.height(), p.top - t.$ed.position().top);
+              }
+            }
 
             // No open a modal box when exist other modal box
             if ($('.' + prefix + 'modal-box', t.$box).length > 0) {
@@ -1366,7 +1389,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             var $modal = $('<div/>', {
                 class: prefix + 'modal ' + prefix + 'fixed-top'
             }).css({
-                top: t.$btnPane.height()
+                top: top
             }).appendTo(t.$box);
 
             // Click on overlay close modal by cancelling them
