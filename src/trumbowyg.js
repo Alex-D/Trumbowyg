@@ -1176,6 +1176,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             var t = this,
                 documentSelection = t.doc.getSelection(),
                 node = documentSelection.focusNode,
+                text = new XMLSerializer().serializeToString(documentSelection.getRangeAt(0).cloneContents()),
                 url,
                 title,
                 target;
@@ -1186,6 +1187,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             if (node && node.nodeName === 'A') {
                 var $a = $(node);
+                text = $a.text();
                 url = $a.attr('href');
                 title = $a.attr('title');
                 target = $a.attr('target');
@@ -1209,7 +1211,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 },
                 text: {
                     label: t.lang.text,
-                    value: new XMLSerializer().serializeToString(documentSelection.getRangeAt(0).cloneContents())
+                    value: text
                 },
                 target: {
                     label: t.lang.target,
