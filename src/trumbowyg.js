@@ -1229,10 +1229,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
           var t = this;
           if(!t.o.autoPrefixHttpProtocol) { return url; }
 
-          const ACCEPTABLE_LINK_FORMAT = /^(#\S+|https?:\/\/[^\/\s]+\.\S+|\S+@\S+\.\S+)/;
-          if(ACCEPTABLE_LINK_FORMAT.test(url)) { return url; }
+          const VALID_LINK_PREFIX = /^([a-z][-+.a-z0-9]*:|\/|#)/i;
+          if(VALID_LINK_PREFIX.test(url)) { return url; }
 
-          return /^www\.\S+/.test(url) ? ('http://' + url) : '';
+          return url.includes("@") ? `mailto:${url}` : `http://${url}`;
         },
         unlink: function () {
             var t = this,
