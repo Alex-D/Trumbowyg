@@ -77,7 +77,7 @@
                 upload: '上傳',
                 file: '文件',
                 uploadError: '錯誤'
-            },            
+            },
             ru: {
                 upload: 'Загрузка',
                 file: 'Файл',
@@ -147,9 +147,9 @@
                                     trumbowyg.o.plugins.upload.data.map(function (cur) {
                                         data.append(cur.name, cur.value);
                                     });
-                                    
-                                    $.map(values, function(curr, key){
-                                        if(key !== 'file') { 
+
+                                    $.map(values, function (curr, key) {
+                                        if (key !== 'file') {
                                             data.append(key, curr);
                                         }
                                     });
@@ -238,7 +238,6 @@
             }
         }
     });
-
 
     function addXhrProgressEvent() {
         if (!$.trumbowyg.addedXhrProgressEvent) {   // Avoid adding progress event multiple times
