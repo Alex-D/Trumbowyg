@@ -1192,8 +1192,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 text = $a.text();
                 url = $a.attr('href');
                 if (!t.o.minimalLinks) {
-                  title = $a.attr('title');
-                  target = $a.attr('target');
+                    title = $a.attr('title');
+                    target = $a.attr('target');
                 }
                 var range = t.doc.createRange();
                 range.selectNode(node);
