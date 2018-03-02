@@ -1255,7 +1255,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             const VALID_LINK_PREFIX = /^([a-z][-+.a-z0-9]*:|\/|#)/i;
             if(VALID_LINK_PREFIX.test(url)) { return url; }
 
-            return url.includes("@") ? `mailto:${url}` : `http://${url}`;
+            const SIMPLE_EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if(SIMPLE_EMAIL_REGEX.test(url)) { return "mailto:" + url; }
+
+            return "http://" + url;
         },
         unlink: function () {
             var t = this,
