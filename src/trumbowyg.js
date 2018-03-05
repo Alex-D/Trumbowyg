@@ -106,7 +106,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         // imgDblClickHandler: default is defined in constructor
 
         plugins: {},
-        autoPrefixHttpProtocol: false,
+        urlProtocol: false,
         minimalLinks: false
     },
     writable: false,
@@ -400,6 +400,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             t.o.imgDblClickHandler = t.getDefaultImgDblClickHandler();
         }
 
+        t.urlPrefix = t.setupUrlPrefix();
+
         t.disabled = t.o.disabled || (editorElem.nodeName === 'TEXTAREA' && editorElem.disabled);
 
         if (options.btns) {
@@ -471,6 +473,23 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         addBtnDef: function (btnName, btnDef) {
             this.btnsDef[btnName] = btnDef;
         },
+
+        setupUrlPrefix: function() {
+          var t = this,
+              protocol = t.o.urlProtocol;
+
+          if(!protocol) { return; }
+
+          if(typeof(protocol) === 'boolean') {
+              return 'https://'
+          } else if(typeof(protocol) === 'string') {
+              if(protocol.match(/^https?:\/\/$/)) { return protocol; }
+
+              if(protocol.match(/^https?$/)) {
+                  return protocol + '://'
+              }
+          }
+        }
 
         buildEditor: function () {
             var t = this,
@@ -1228,7 +1247,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }
 
             t.openModalInsert(t.lang.createLink, options, function (v) { // v is value
-                var url = t.prependHttpProtocol(v.url);
+                var url = t.prependUrlPrefix(v.url);
                 if(!url.length) { return false; }
 
                 var link = $(['<a href="', v.url, '">', v.text || v.url, '</a>'].join(''));
@@ -1248,17 +1267,17 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 return true;
             });
         },
-        prependHttpProtocol: function(url) {
+        prependUrlPrefix: function(url) {
             var t = this;
-            if(!t.o.autoPrefixHttpProtocol) { return url; }
+            if(!t.urlPrefix) { return url; }
 
             const VALID_LINK_PREFIX = /^([a-z][-+.a-z0-9]*:|\/|#)/i;
             if(VALID_LINK_PREFIX.test(url)) { return url; }
 
             const SIMPLE_EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if(SIMPLE_EMAIL_REGEX.test(url)) { return "mailto:" + url; }
+            if(SIMPLE_EMAIL_REGEX.test(url)) { return 'mailto:' + url; }
 
-            return "http://" + url;
+            return t.urlPrefix + url;
         },
         unlink: function () {
             var t = this,
