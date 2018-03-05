@@ -480,16 +480,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
           if(!protocol) { return; }
 
-          if(typeof(protocol) === 'boolean') {
-              return 'https://'
-          } else if(typeof(protocol) === 'string') {
-              if(/^https?:\/\/$/.test(protocol)) { return protocol; }
-
-              if(/^https?$/.test(protocol)) {
-                  return protocol + '://'
-              }
-          }
-        }
+          if(typeof(protocol) !== 'string') { return 'https://'; }
+          if(/^https?:\/\/$/.test(protocol)) { return protocol; }
+          if(/^https?$/.test(protocol)) { return protocol + '://'; }
+        },
 
         buildEditor: function () {
             var t = this,
@@ -1230,7 +1224,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 },
                 text: {
                     label: t.lang.text,
-                    value: new XMLSerializer().serializeToString(documentSelection.getRangeAt(0).cloneContents())
+                    value: text
                 }
             };
             if (!t.o.minimalLinks) {
