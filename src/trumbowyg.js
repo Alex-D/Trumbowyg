@@ -483,9 +483,9 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
           if(typeof(protocol) === 'boolean') {
               return 'https://'
           } else if(typeof(protocol) === 'string') {
-              if(protocol.match(/^https?:\/\/$/)) { return protocol; }
+              if(/^https?:\/\/$/.test(protocol)) { return protocol; }
 
-              if(protocol.match(/^https?$/)) {
+              if(/^https?$/.test(protocol)) {
                   return protocol + '://'
               }
           }
