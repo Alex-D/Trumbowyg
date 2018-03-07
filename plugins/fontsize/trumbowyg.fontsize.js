@@ -86,24 +86,18 @@
                                 value: '48px'
                             }
                         },
-                        // callback
                         function (values) {
-                            console.log("Got value back", values);
-                            //trumbowyg.execCmd('fontSize', values.size, true);
-                            
                             var text = trumbowyg.range.startContainer.parentElement
                             var selectedText = trumbowyg.getRangeText();
                             if($(text).html() == selectedText) {
                                 $(text).css('font-size', values.size);
                             } else {
-                                console.log("Creating new span for selected text");
                                 trumbowyg.range.deleteContents();
                                 var html = '<span style="font-size: ' + values.size + ';">' + selectedText + '</span>';
                                 var node = $(html)[0];
                                 trumbowyg.range.insertNode(node);
                             }
                             trumbowyg.saveRange();
-                            console.log(text, trumbowyg);
                             return true;
                         }
                     );
