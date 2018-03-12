@@ -1,10 +1,11 @@
 /* ===========================================================
- * trumbowyg.cleanpaste.js v1.0
+ * trumbowyg.cleanpaste.js v1.1
  * Font Clean paste plugin for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
  * Authors : Eric Radin
  *           Todd Graham (slackwalker)
+ *           Sven Dunemann [dunemann@forelabs.eu]
  *
  * This plugin will perform a "cleaning" on any paste, in particular
  * it will clean pasted content of microsoft word document tags and classes.
@@ -96,10 +97,45 @@
     $.extend(true, $.trumbowyg, {
         plugins: {
             cleanPaste: {
-                init: function (trumbowyg) {
-                    trumbowyg.pasteHandlers.push(function () {
+                init: function (t) {
+                    t.pasteHandlers.push(function (pasteEvent) {
                         try {
-                            trumbowyg.$ed.html(cleanIt(trumbowyg.$ed.html()));
+                          t.saveRange();
+
+                          var clipboardData = (pasteEvent.originalEvent || pasteEvent).clipboardData,
+                              pastedData = clipboardData.getData("Text"),
+                              node = t.doc.getSelection().focusNode,
+                              range = t.doc.createRange(),
+                              cleanedPaste = cleanIt(pastedData.trim()),
+                              newNode = $(cleanedPaste)[0] || t.doc.createTextNode(cleanedPaste);
+
+                          if (t.$ed.html() == "") {
+                            // simply append if there is no content in editor
+                            t.$ed[0].appendChild(newNode);
+                          } else {
+                            // insert pasted content behind last focused node
+                            range.setStartAfter(node);
+                            range.setEndAfter(node);
+                            t.doc.getSelection().removeAllRanges();
+                            t.doc.getSelection().addRange(range);
+
+                            t.range.insertNode(newNode);
+                          }
+
+                          // now set cursor right after pasted content
+                          range = t.doc.createRange()
+                          range.setStartAfter(newNode);
+                          range.setEndAfter(newNode);
+                          t.doc.getSelection().removeAllRanges();
+                          t.doc.getSelection().addRange(range);
+
+                          // prevent defaults
+                          pasteEvent.stopPropagation();
+                          pasteEvent.preventDefault();
+
+                          // save new node as focused node
+                          t.saveRange();
+                          t.syncCode();
                         } catch (c) {
                         }
                     });
@@ -108,5 +144,3 @@
         }
     });
 })(jQuery);
-
-
