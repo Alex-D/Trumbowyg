@@ -475,14 +475,11 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         },
 
         setupUrlPrefix: function() {
-          var t = this,
-              protocol = t.o.urlProtocol;
+            var protocol = this.o.urlProtocol;
+            if(!protocol) { return; }
 
-          if(!protocol) { return; }
-
-          if(typeof(protocol) !== 'string') { return 'https://'; }
-          if(/^https?:\/\/$/.test(protocol)) { return protocol; }
-          if(/^https?$/.test(protocol)) { return protocol + '://'; }
+            if(typeof(protocol) !== 'string') { return 'https://'; }
+            return /:\/\/$/.test(protocol) ? protocol : protocol + '://';
         },
 
         buildEditor: function () {
