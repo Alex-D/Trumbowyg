@@ -30,6 +30,12 @@ You can support it's ongoing development by being a backer or a sponsor:
     <a href="https://avot.nl">
         <img src="https://cdn.rawgit.com/Alex-D/Trumbowyg/develop/sponsors/avot.svg" alt="avot®" width="200px"/>
     </a>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    <a href="https://www.appseed.us/">
+        <img src="https://cdn.rawgit.com/Alex-D/Trumbowyg/develop/sponsors/appseed.png" alt="AppSeed" width="200px"/>
+    </a>
 </p>
 
 <p align="center">
