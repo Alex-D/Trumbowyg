@@ -12,13 +12,13 @@ You can support it's ongoing development by being a backer or a sponsor:
 <h2 align="center">Gold sponsors</h2>
 
 <p align="center">
-    <a href="https://avot.nl">
+    <a href="https://avot.nl/?ref=trumbowyg">
         <img src="https://cdn.rawgit.com/Alex-D/Trumbowyg/develop/sponsors/avot.svg" alt="avot®" width="200px"/>
     </a>
     &nbsp;
     &nbsp;
     &nbsp;
-    <a href="https://www.appseed.us/">
+    <a href="https://www.appseed.us/?ref=trumbowyg">
         <img src="https://cdn.rawgit.com/Alex-D/Trumbowyg/develop/sponsors/appseed.png" alt="AppSeed" width="200px"/>
     </a>
 </p>
