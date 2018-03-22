@@ -91,7 +91,7 @@
                           dropdownOptions['data-' + dropdownPrefix] = btnName;
                           var $dropdown = $('<div/>', dropdownOptions);
 
-                          if ($("." + dropdownPrefix + "-" + btnName).length == 0) {
+                          if (t.$box.find("." + dropdownPrefix + "-" + btnName).length === 0) {
                             t.$box.append($dropdown.hide());
                           } else {
                             $dropdown = t.$box.find("." + dropdownPrefix + "-" + btnName);
