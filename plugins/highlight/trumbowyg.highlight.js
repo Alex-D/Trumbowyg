@@ -8,8 +8,7 @@
         return [
             '<pre class="language-' + language + '">',
             '<code class="language-' + language + '">' + Prism.highlight(text, Prism.languages[language]) + '</code>',
-            '</pre>',
-            '<p></p>'
+            '</pre>'
         ].join('');
     }
 
@@ -19,7 +18,7 @@
             fn: function () {
                 var $modal = trumbowyg.openModal('Code', [
                         '<div class="form-group">',
-                        '   <select class="form-control" id="language">',
+                        '   <select class="form-control language">',
                         (function () {
                             var options = '';
 
@@ -32,16 +31,18 @@
                         '   </select>',
                         '</div>',
                         '<div class="form-group">',
-                        '   <textarea class="form-control" id="code"></textarea>',
+                        '   <textarea class="form-control code"></textarea>',
                         '</div>',
                     ].join('\n')),
-                    $language = $modal.find('#language'),
-                    $code = $modal.find('#code');
+                    $language = $modal.find('.language'),
+                    $code = $modal.find('.code');
 
                 // Listen clicks on modal box buttons
                 $modal.on('tbwconfirm', function (e) {
-                    trumbowyg.range.deleteContents();
-                    trumbowyg.range.insertNode($(highlightIt($code.val(), $language.val()))[0]);
+                    trumbowyg.restoreRange();
+                    trumbowyg.execCmd('insertHTML', highlightIt($code.val(), $language.val()));
+                    trumbowyg.execCmd('insertHTML', '<p><br></p>');
+
                     trumbowyg.closeModal();
                 });
 
