@@ -107,6 +107,7 @@
                     trumbowyg.o.plugins.upload = $.extend(true, {}, defaultOptions, trumbowyg.o.plugins.upload || {});
                     var btnDef = {
                         fn: function () {
+                            console.log('qweqwe');
                             trumbowyg.saveRange();
 
                             var file,
