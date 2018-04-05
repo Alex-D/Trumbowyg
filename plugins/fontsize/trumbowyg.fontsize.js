@@ -87,7 +87,7 @@
                             }
                         },
                         function (values) {
-                            var text = trumbowyg.range.startContainer.parentElement
+                            var text = trumbowyg.range.startContainer.parentElement;
                             var selectedText = trumbowyg.getRangeText();
                             if($(text).html() == selectedText) {
                                 $(text).css('font-size', values.size);
