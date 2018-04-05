@@ -11,7 +11,8 @@
                     'small': 'Small',
                     'medium': 'Regular',
                     'large': 'Large',
-                    'x-large': 'Extra large'
+                    'x-large': 'Extra large',
+                    'custom': 'Custom'
                 }
             },
             fr: {
@@ -21,7 +22,8 @@
                     'small': 'Petit',
                     'medium': 'Normal',
                     'large': 'Grand',
-                    'x-large': 'Très grand'
+                    'x-large': 'Très grand',
+                    'custom': 'Douane'
                 }
             },
             nl: {
@@ -31,7 +33,8 @@
                     'small': 'Klein',
                     'medium': 'Normaal',
                     'large': 'Groot',
-                    'x-large': 'Extra groot'
+                    'x-large': 'Extra groot',
+                    'custom': 'Tilpasset'
                 }
             },
             tr: {
@@ -41,7 +44,8 @@
                     'small': 'Küçük',
                     'medium': 'Normal',
                     'large': 'Büyük',
-                    'x-large': 'Çok Büyük'
+                    'x-large': 'Çok Büyük',
+                    'custom': 'Görenek'
                 }
             }
         }
@@ -102,11 +106,11 @@
                         }
                     );
                 },
-                text: '<span style="font-size: medium;">Custom</span>',
+                text: '<span style="font-size: medium;">'+ trumbowyg.lang.fontsizes['custom'] +'</span>',
                 hasIcon: false
             };
         trumbowyg.addBtnDef(freeSizeButtonName, freeSizeBtnDef);
-        dropdown.push('fontsize_custom');
+        dropdown.push(freeSizeButtonName);
 
         return dropdown;
     }
