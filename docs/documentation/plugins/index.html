@@ -48,6 +48,7 @@
                         <li><a href="#plugin-emoji">Emoji</a></li>
                         <li><a href="#plugin-fontfamily">Font family</a></li>
                         <li><a href="#plugin-fontsize">Font size</a></li>
+                        <li><a href="#plugin-highlight">Highlight</a></li>
                         <li><a href="#plugin-history">History</a></li>
                         <li><a href="#plugin-insertaudio">Insert audio</a></li>
                         <li><a href="#plugin-lineheight">Line height</a></li>
@@ -305,6 +306,55 @@ $('.trumbowyg-editor').on('input propertychange', function() {
                 Some doc to write... <br>
                 You can contribute to this documentation by submitting a Pull Request :)
             </p>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-highlight">Code Highlight</h3>
+            <p class="added-feature">Stable</p>
+
+            <p>
+                This plugin allows user to add code highlight parts.
+            </p>
+
+            <p>
+                <a href="../../demos/#plugins-highlight" class="button button-demo">Try highlight plugin live demo!</a>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/highlight/trumbowyg.highlight.js" class="button button-demo">
+                    View highlight plugin code on GitHub
+                </a>
+            </p>
+
+            <h4>How to use it?</h4>
+            <p>
+                This plugin require <strong>prismjs</strong> which can be installed with:
+                <code>npm&nbsp;install&nbsp;prismjs</code>
+            </p>
+            <pre><code class="html">
+&lt;-- Import prismjs style in &lt;head>... -->
+&lt;link rel="stylesheet" href="node_modules/prismjs/themes/prism.css">
+&lt;-- Import highlight plugin style in &lt;head>... -->
+&lt;link rel="stylesheet" href="node_modules/trumbowyg/dist/plugins/highlight/ui/trumbowyg.highlight.css">
+&lt;-- Import prismjs and Trumbowyg highlight at the end of &lt;body>... -->
+&lt;script src="node_modules/prismjs/prism.js">&lt;/script>
+&lt;script src="node_modules/trumbowyg/dist/plugins/highlight/trumbowyg.highlight.min.js">&lt;/script>
+            </code></pre>
+            <p>
+                You also can add another prism language syntaxes for example:
+            </p>
+            <pre><code class="html">
+&lt;-- Import prismjs and Trumbowyg highlight at the end of &lt;body>... -->
+&lt;script src="node_modules/prismjs/prism.js">&lt;/script>
+&lt;script src="node_modules/prismjs/components/prism-csharp.js">&lt;/script>
+&lt;script src="node_modules/prismjs/components/prism-go.js">&lt;/script>
+&lt;script src="node_modules/prismjs/components/prism-markdown.js">&lt;/script>
+&lt;script src="node_modules/trumbowyg/dist/plugins/highlight/trumbowyg.highlight.min.js">&lt;/script>
+            </code></pre>
+            <p>
+                Also on your website you must connect prismjs styles to lighting code worked. For example connect prism.css in head:
+            </p>
+            <pre><code class="html">
+&lt;-- Import prismjs style in &lt;head>... on your site -->
+&lt;link rel="stylesheet" href="node_modules/prismjs/themes/prism.css">
+            </code></pre>
         </div>
       
         <div class="feature">
