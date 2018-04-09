@@ -1,3 +1,4 @@
+/* globals Prism */
 (function ($, Prism) {
     'use strict';
 
@@ -8,7 +9,7 @@
         return [
             '<pre class="language-' + language + '">',
             '<code class="language-' + language + '">' + Prism.highlight(text, Prism.languages[language]) + '</code>',
-            '</pre>'
+            '</pre>',
         ].join('');
     }
 
@@ -17,28 +18,30 @@
         return {
             fn: function () {
                 var $modal = trumbowyg.openModal('Code', [
-                        '<div class="form-group">',
-                        '   <select class="form-control language">',
+                        '<div class="' + trumbowyg.o.prefix + 'highlight-form-group">',
+                        '   <select class="' + trumbowyg.o.prefix + 'highlight-form-control language">',
                         (function () {
                             var options = '';
 
                             for (var lang in Prism.languages) {
-                                if (Prism.languages[lang].comment) options += '<option value="' + lang + '">' + lang + '</option>';
+                                if (Prism.languages[lang].comment) {
+                                    options += '<option value="' + lang + '">' + lang + '</option>';
+                                }
                             }
 
                             return options;
                         })(),
                         '   </select>',
                         '</div>',
-                        '<div class="form-group">',
-                        '   <textarea class="form-control code"></textarea>',
+                        '<div class="' + trumbowyg.o.prefix + 'highlight-form-group">',
+                        '   <textarea class="' + trumbowyg.o.prefix + 'highlight-form-control code"></textarea>',
                         '</div>',
                     ].join('\n')),
                     $language = $modal.find('.language'),
                     $code = $modal.find('.code');
 
                 // Listen clicks on modal box buttons
-                $modal.on('tbwconfirm', function (e) {
+                $modal.on('tbwconfirm', function () {
                     trumbowyg.restoreRange();
                     trumbowyg.execCmd('insertHTML', highlightIt($code.val(), $language.val()));
                     trumbowyg.execCmd('insertHTML', '<p><br></p>');
@@ -46,11 +49,11 @@
                     trumbowyg.closeModal();
                 });
 
-                $modal.on('tbwcancel', function (e) {
+                $modal.on('tbwcancel', function () {
                     trumbowyg.closeModal();
                 });
             }
-        }
+        };
     }
 
     $.extend(true, $.trumbowyg, {
@@ -75,5 +78,5 @@
                 }
             }
         }
-    })
+    });
 })(jQuery, Prism);
