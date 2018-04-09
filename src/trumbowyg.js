@@ -105,7 +105,9 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
         // imgDblClickHandler: default is defined in constructor
 
-        plugins: {}
+        plugins: {},
+        urlProtocol: false,
+        minimalLinks: false
     },
     writable: false,
     enumerable: true,
@@ -398,6 +400,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             t.o.imgDblClickHandler = t.getDefaultImgDblClickHandler();
         }
 
+        t.urlPrefix = t.setupUrlPrefix();
+
         t.disabled = t.o.disabled || (editorElem.nodeName === 'TEXTAREA' && editorElem.disabled);
 
         if (options.btns) {
@@ -468,6 +472,14 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
         addBtnDef: function (btnName, btnDef) {
             this.btnsDef[btnName] = btnDef;
+        },
+
+        setupUrlPrefix: function() {
+            var protocol = this.o.urlProtocol;
+            if(!protocol) { return; }
+
+            if(typeof(protocol) !== 'string') { return 'https://'; }
+            return /:\/\/$/.test(protocol) ? protocol : protocol + '://';
         },
 
         buildEditor: function () {
@@ -1189,8 +1201,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 var $a = $(node);
                 text = $a.text();
                 url = $a.attr('href');
-                title = $a.attr('title');
-                target = $a.attr('target');
+                if (!t.o.minimalLinks) {
+                    title = $a.attr('title');
+                    target = $a.attr('target');
+                }
                 var range = t.doc.createRange();
                 range.selectNode(node);
                 documentSelection.removeAllRanges();
@@ -1199,31 +1213,43 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             t.saveRange();
 
-            t.openModalInsert(t.lang.createLink, {
+            var options = {
                 url: {
                     label: 'URL',
                     required: true,
                     value: url
                 },
-                title: {
-                    label: t.lang.title,
-                    value: title
-                },
                 text: {
                     label: t.lang.text,
                     value: text
-                },
-                target: {
-                    label: t.lang.target,
-                    value: target
                 }
-            }, function (v) { // v is value
+            };
+            if (!t.o.minimalLinks) {
+                Object.assign(options, {
+                    title: {
+                        label: t.lang.title,
+                        value: title
+                    },
+                    target: {
+                        label: t.lang.target,
+                        value: target
+                    }
+                });
+            }
+
+            t.openModalInsert(t.lang.createLink, options, function (v) { // v is value
+                var url = t.prependUrlPrefix(v.url);
+                if(!url.length) { return false; }
+
                 var link = $(['<a href="', v.url, '">', v.text || v.url, '</a>'].join(''));
-                if (v.title.length > 0) {
-                    link.attr('title', v.title);
-                }
-                if (v.target.length > 0) {
-                    link.attr('target', v.target);
+
+                if (!t.o.minimalLinks) {
+                    if (v.title.length > 0) {
+                        link.attr('title', v.title);
+                    }
+                    if (v.target.length > 0) {
+                        link.attr('target', v.target);
+                    }
                 }
                 t.range.deleteContents();
                 t.range.insertNode(link[0]);
@@ -1231,6 +1257,18 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 t.$c.trigger('tbwchange');
                 return true;
             });
+        },
+        prependUrlPrefix: function(url) {
+            var t = this;
+            if(!t.urlPrefix) { return url; }
+
+            const VALID_LINK_PREFIX = /^([a-z][-+.a-z0-9]*:|\/|#)/i;
+            if(VALID_LINK_PREFIX.test(url)) { return url; }
+
+            const SIMPLE_EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if(SIMPLE_EMAIL_REGEX.test(url)) { return 'mailto:' + url; }
+
+            return t.urlPrefix + url;
         },
         unlink: function () {
             var t = this,
