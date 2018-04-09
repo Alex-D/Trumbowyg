@@ -9,65 +9,80 @@
  */
 
 (function($) {
-    "use strict";
+    'use strict';
+
+    var defaultOptions = {
+        enabled: true,
+        endpoints: [
+            'https://noembed.com/embed?nowrap=on',
+            'https://api.maxmade.nl/url2iframe/embed'
+        ]
+    };
 
     $.extend(true, $.trumbowyg, {
         plugins: {
-            pasteImage: {
+            pasteEmbed: {
                 init: function(trumbowyg) {
+                    trumbowyg.o.plugins.pasteEmbed = $.extend(true, {}, defaultOptions, trumbowyg.o.plugins.pasteEmbed || {});
+
+                    if (!trumbowyg.o.plugins.pasteEmbed.enabled) {
+                        return;
+                    }
+
                     trumbowyg.pasteHandlers.push(function(pasteEvent) {
                         try {
-                            var clipboardData = (pasteEvent.originalEvent || pasteEvent).clipboardData;
-                            var pastedData = clipboardData.getData("Text");
-                            var request = null;
+                            var clipboardData = (pasteEvent.originalEvent || pasteEvent).clipboardData,
+                                pastedData = clipboardData.getData('Text'),
+                                endpoints = trumbowyg.o.plugins.pasteEmbed.endpoints,
+                                request = null;
 
-                            if (pastedData.startsWith("http")) {
-
+                            if (pastedData.startsWith('http')) {
                                 pasteEvent.stopPropagation();
                                 pasteEvent.preventDefault();
 
                                 var query = {
                                     url: pastedData.trim()
                                 };
-                                var content = "";
-                                var fails = 0;
+                                var content = '';
+                                var index = 0;
 
-                                if (request && request.transport) request.transport.abort();
+                                if (request && request.transport) {
+                                    request.transport.abort();
+                                }
 
                                 request = $.ajax({
                                     crossOrigin: true,
-                                    url: "https://noembed.com/embed?nowrap=on",
-                                    url2: "https://api.maxmade.nl/url2iframe/embed",
-                                    type: "GET",
+                                    url: endpoints[index],
+                                    type: 'GET',
                                     data: query,
                                     cache: false,
-                                    dataType: "jsonp",
+                                    dataType: 'jsonp',
                                     success: function(res) {
                                         if (res.html) {
-                                            fails = 0;
+                                            index = 0;
                                             content = res.html;
                                         } else {
-                                            fails++;
+                                            index += 1;
                                         }
                                     },
-                                    error: function(res) {
-                                        fails++;
+                                    error: function() {
+                                        index += 1;
                                     },
                                     complete: function() {
-                                        if (fails === 1) {
-                                            this.url = this.url2;
+                                        if (content.length === 0 && index < endpoints.length - 1) {
+                                            this.url = endpoints[index];
                                             this.data = query;
                                             $.ajax(this);
                                         }
-                                        if (fails === 2) {
-                                            content = $("<a>", {
+                                        if (index === endpoints.length - 1) {
+                                            content = $('<a>', {
                                                 href: pastedData,
                                                 text: pastedData
                                             }).prop('outerHTML');
                                         }
                                         if (content.length > 0) {
-                                            fails = 0;
-                                            trumbowyg.execCmd("insertHTML", content);
+                                            index = 0;
+                                            trumbowyg.execCmd('insertHTML', content);
                                         }
                                     }
                                 });
