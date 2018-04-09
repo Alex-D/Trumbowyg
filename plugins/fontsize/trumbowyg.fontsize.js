@@ -11,7 +11,8 @@
                     'small': 'Small',
                     'medium': 'Regular',
                     'large': 'Large',
-                    'x-large': 'Extra large'
+                    'x-large': 'Extra large',
+                    'custom': 'Custom'
                 }
             },
             fr: {
@@ -21,7 +22,8 @@
                     'small': 'Petit',
                     'medium': 'Normal',
                     'large': 'Grand',
-                    'x-large': 'Très grand'
+                    'x-large': 'Très grand',
+                    'custom': 'Douane'
                 }
             },
             nl: {
@@ -31,7 +33,8 @@
                     'small': 'Klein',
                     'medium': 'Normaal',
                     'large': 'Groot',
-                    'x-large': 'Extra groot'
+                    'x-large': 'Extra groot',
+                    'custom': 'Tilpasset'
                 }
             },
             tr: {
@@ -41,7 +44,8 @@
                     'small': 'Küçük',
                     'medium': 'Normal',
                     'large': 'Büyük',
-                    'x-large': 'Çok Büyük'
+                    'x-large': 'Çok Büyük',
+                    'custom': 'Görenek'
                 }
             }
         }
@@ -75,6 +79,38 @@
             });
             dropdown.push('fontsize_' + size);
         });
+        
+         var freeSizeButtonName = 'fontsize_custom',
+            freeSizeBtnDef = {
+                fn: function () {
+                    trumbowyg.openModalInsert('Custom Font Size',
+                        {
+                            size: {
+                                label: 'Font Size',
+                                value: '48px'
+                            }
+                        },
+                        function (values) {
+                            var text = trumbowyg.range.startContainer.parentElement;
+                            var selectedText = trumbowyg.getRangeText();
+                            if($(text).html() == selectedText) {
+                                $(text).css('font-size', values.size);
+                            } else {
+                                trumbowyg.range.deleteContents();
+                                var html = '<span style="font-size: ' + values.size + ';">' + selectedText + '</span>';
+                                var node = $(html)[0];
+                                trumbowyg.range.insertNode(node);
+                            }
+                            trumbowyg.saveRange();
+                            return true;
+                        }
+                    );
+                },
+                text: '<span style="font-size: medium;">'+ trumbowyg.lang.fontsizes['custom'] +'</span>',
+                hasIcon: false
+            };
+        trumbowyg.addBtnDef(freeSizeButtonName, freeSizeBtnDef);
+        dropdown.push(freeSizeButtonName);
 
         return dropdown;
     }
