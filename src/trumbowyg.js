@@ -474,11 +474,15 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             this.btnsDef[btnName] = btnDef;
         },
 
-        setupUrlPrefix: function() {
+        setupUrlPrefix: function () {
             var protocol = this.o.urlProtocol;
-            if(!protocol) { return; }
+            if (!protocol) {
+                return;
+            }
 
-            if(typeof(protocol) !== 'string') { return 'https://'; }
+            if (typeof(protocol) !== 'string') {
+                return 'https://';
+            }
             return /:\/\/$/.test(protocol) ? protocol : protocol + '://';
         },
 
@@ -1239,7 +1243,9 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             t.openModalInsert(t.lang.createLink, options, function (v) { // v is value
                 var url = t.prependUrlPrefix(v.url);
-                if(!url.length) { return false; }
+                if (!url.length) {
+                    return false;
+                }
 
                 var link = $(['<a href="', v.url, '">', v.text || v.url, '</a>'].join(''));
 
@@ -1258,15 +1264,21 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 return true;
             });
         },
-        prependUrlPrefix: function(url) {
+        prependUrlPrefix: function (url) {
             var t = this;
-            if(!t.urlPrefix) { return url; }
+            if (!t.urlPrefix) {
+                return url;
+            }
 
             const VALID_LINK_PREFIX = /^([a-z][-+.a-z0-9]*:|\/|#)/i;
-            if(VALID_LINK_PREFIX.test(url)) { return url; }
+            if (VALID_LINK_PREFIX.test(url)) {
+                return url;
+            }
 
             const SIMPLE_EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if(SIMPLE_EMAIL_REGEX.test(url)) { return 'mailto:' + url; }
+            if (SIMPLE_EMAIL_REGEX.test(url)) {
+                return 'mailto:' + url;
+            }
 
             return t.urlPrefix + url;
         },
