@@ -1,152 +1,281 @@
 /* ===========================================================
- * trumbowyg.table.js v1.2
+ * trumbowyg.table.custom.js v2.0
  * Table plugin for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
- * Author : Lawrence Meckan
- *          Twitter : @absalomedia
- *          Website : absalom.biz
+ * Author : Sven Dunemann [dunemann@forelabs.eu]
  */
 
 (function ($) {
     'use strict';
 
     var defaultOptions = {
-        rows: 0,
-        columns: 0,
-        styler: ''
+        rows: 8,
+        columns: 8,
+        styler: 'table'
     };
 
     $.extend(true, $.trumbowyg, {
         langs: {
             en: {
                 table: 'Insert table',
-                tableAddRow: 'Add rows',
-                tableAddColumn: 'Add columns',
-                rows: 'Rows',
-                columns: 'Columns',
-                styler: 'Table class',
+                tableAddRow: 'Add row',
+                tableAddColumn: 'Add column',
+                tableDeleteRow: 'Delete row',
+                tableDeleteColumn: 'Delete column',
+                tableDestroy: 'Delete table',
                 error: 'Error'
+            },
+            de: {
+              table: 'Tabelle einfügen',
+              tableAddRow: 'Zeile hinzufügen',
+              tableAddColumn: 'Spalte hinzufügen',
+              tableDeleteRow: 'Zeile löschen',
+              tableDeleteColumn: 'Spalte löschen',
+              tableDestroy: 'Tabelle löschen',
+              error: 'Error'
             },
             sk: {
                 table: 'Vytvoriť tabuľky',
                 tableAddRow: 'Pridať riadok',
                 tableAddColumn: 'Pridať stĺpec',
-                rows: 'Riadky',
-                columns: 'Stĺpce',
-                styler: 'Tabuľku triedy',
                 error: 'Chyba'
             },
             fr: {
                 table: 'Insérer un tableau',
                 tableAddRow: 'Ajouter des lignes',
                 tableAddColumn: 'Ajouter des colonnes',
-                rows: 'Lignes',
-                columns: 'Colonnes',
-                styler: 'Classes CSS sur la table',
                 error: 'Erreur'
             },
             cs: {
                 table: 'Vytvořit příkaz Table',
                 tableAddRow: 'Přidat řádek',
                 tableAddColumn: 'Přidat sloupec',
-                rows: 'Řádky',
-                columns: 'Sloupce',
-                styler: 'Tabulku třída',
                 error: 'Chyba'
             },
             ru: {
                 table: 'Вставить таблицу',
                 tableAddRow: 'Добавить строки',
                 tableAddColumn: 'Добавить столбцы',
-                rows: 'Строки',
-                columns: 'Столбцы',
-                styler: 'Имя CSS класса для таблицы',
                 error: 'Ошибка'
             },
             ja: {
                 table: '表の挿入',
                 tableAddRow: '行の追加',
                 tableAddColumn: '列の追加',
-                rows: '行',
-                columns: '列',
-                styler: '表のクラス',
                 error: 'エラー'
+            },
+            tr: {
+                table: 'Tablo ekle',
+                tableAddRow: 'Satır ekle',
+                tableAddColumn: 'Kolon ekle',
+                error: 'Hata'
             }
         },
 
         plugins: {
             table: {
-                init: function (trumbowyg) {
-                    trumbowyg.o.plugins.table = $.extend(true, {}, defaultOptions, trumbowyg.o.plugins.table || {});
+                init: function (t) {
+                    t.o.plugins.table = $.extend(true, {}, defaultOptions, t.o.plugins.table || {});
 
-                    var tableBuild = {
+                    var buildButtonDef = {
                         fn: function () {
-                            trumbowyg.saveRange();
-                            trumbowyg.openModalInsert(
-                                // Title
-                                trumbowyg.lang.table,
+                          t.saveRange();
 
-                                // Fields
-                                {
-                                    rows: {
-                                        type: 'number',
-                                        required: true
-                                    },
-                                    columns: {
-                                        type: 'number',
-                                        required: true
-                                    },
-                                    styler: {
-                                        label: trumbowyg.lang.styler,
-                                        type: 'text'
-                                    }
-                                },
-                                function (v) { // v is value
-                                    var tabler = $('<table></table>');
-                                    if (v.styler.length !== 0) {
-                                        tabler.addClass(v.styler);
-                                    }
+                          var btnName = 'table';
 
-                                    for (var i = 0; i < v.rows; i += 1) {
-                                        var row = $('<tr></tr>').appendTo(tabler);
-                                        for (var j = 0; j < v.columns; j += 1) {
-                                            $('<td></td>').appendTo(row);
-                                        }
-                                    }
+                          var dropdownPrefix = t.o.prefix + 'dropdown',
+                              dropdownOptions = { // the dropdown
+                              class: dropdownPrefix + '-' + btnName + ' ' + dropdownPrefix + ' ' + t.o.prefix + 'fixed-top'
+                          };
+                          dropdownOptions['data-' + dropdownPrefix] = btnName;
+                          var $dropdown = $('<div/>', dropdownOptions);
 
-                                    trumbowyg.range.deleteContents();
-                                    trumbowyg.range.insertNode(tabler[0]);
-                                    return true;
-                                });
+                          if (t.$box.find("." + dropdownPrefix + "-" + btnName).length === 0) {
+                            t.$box.append($dropdown.hide());
+                          } else {
+                            $dropdown = t.$box.find("." + dropdownPrefix + "-" + btnName);
+                          }
+
+                          // clear dropdown
+                          $dropdown.html('');
+
+                          // when active table show AddRow / AddColumn
+                          if (t.$box.find("." + t.o.prefix + "table-button").hasClass(t.o.prefix + 'active-button')) {
+                            $dropdown.append(t.buildSubBtn('tableAddRow'));
+                            $dropdown.append(t.buildSubBtn('tableAddColumn'));
+                            $dropdown.append(t.buildSubBtn('tableDeleteRow'));
+                            $dropdown.append(t.buildSubBtn('tableDeleteColumn'));
+                            $dropdown.append(t.buildSubBtn('tableDestroy'));
+                          } else {
+                            var tableSelect = $('<table></table>');
+                            for (var i = 0; i < t.o.plugins.table.rows; i += 1) {
+                              var row = $('<tr></tr>').appendTo(tableSelect);
+                              for (var j = 0; j < t.o.plugins.table.columns; j += 1) {
+                                $('<td></td>').appendTo(row);
+                              }
+                            }
+                            tableSelect.find('td').on('mouseover', tableAnimate);
+                            tableSelect.find('td').on('mousedown', tableBuild);
+
+                            $dropdown.append(tableSelect);
+                            $dropdown.append($('<center>1x1</center>'));
+                          }
+
+                          t.dropdown(btnName);
                         }
+                    };
+
+                    var tableAnimate = function(column_event) {
+                      var column = $(column_event.target),
+                          table = column.parents('table'),
+                          colIndex = this.cellIndex,
+                          rowIndex = this.parentNode.rowIndex;
+
+                      // reset all columns
+                      table.find('td').removeClass('active');
+
+                      for (var i = 0; i <= rowIndex; i += 1) {
+                        for (var j = 0; j <= colIndex; j += 1) {
+                          table.find("tr:nth-of-type("+(i+1)+")").find("td:nth-of-type("+(j+1)+")").addClass('active');
+                        }
+                      }
+
+                      // set label
+                      table.next('center').html((colIndex+1) + "x" + (rowIndex+1));
+                    };
+
+                    var tableBuild = function(column_event) {
+                      t.saveRange();
+
+                      var tabler = $('<table></table>');
+                      if (t.o.plugins.table.styler) {
+                        tabler.attr('class', t.o.plugins.table.styler);
+                      }
+
+                      var column = $(column_event.target),
+                          colIndex = this.cellIndex,
+                          rowIndex = this.parentNode.rowIndex;
+
+                      for (var i = 0; i <= rowIndex; i += 1) {
+                        var row = $('<tr></tr>').appendTo(tabler);
+                        for (var j = 0; j <= colIndex; j += 1) {
+                          $('<td></td>').appendTo(row);
+                        }
+                      }
+
+                      t.range.deleteContents();
+                      t.range.insertNode(tabler[0]);
+                      t.$c.trigger('tbwchange');
                     };
 
                     var addRow = {
-                        fn: function () {
-                            trumbowyg.saveRange();
-                            var rower = $('<tr></tr>');
-                            trumbowyg.range.deleteContents();
-                            trumbowyg.range.insertNode(rower[0]);
-                            return true;
+                      title: t.lang['tableAddRow'],
+                      text: t.lang['tableAddRow'],
+                      ico: 'row-below',
 
+                      fn: function () {
+                        t.saveRange();
+
+                        var node = t.doc.getSelection().focusNode;
+                        var table = $(node).closest('table');
+
+                        if(table.length > 0) {
+                          var row = $('<tr></tr>');
+                          // add columns according to current columns count
+                          for (var i = 0; i < table.find('tr')[0].childElementCount; i += 1) {
+                            $('<td></td>').appendTo(row);
+                          }
+                          // add row to table
+                          row.appendTo(table);
                         }
+
+                        return true;
+                      }
                     };
 
                     var addColumn = {
-                        fn: function () {
-                            trumbowyg.saveRange();
-                            var columner = $('<td></td>');
-                            trumbowyg.range.deleteContents();
-                            trumbowyg.range.insertNode(columner[0]);
-                            return true;
+                      title: t.lang['tableAddColumn'],
+                      text: t.lang['tableAddColumn'],
+                      ico: 'col-right',
 
+                      fn: function () {
+                        t.saveRange();
+
+                        var node = t.doc.getSelection().focusNode;
+                        var table = $(node).closest('table');
+
+                        if(table.length > 0) {
+                          $(table).find('tr').each(function() {
+                            $(this).find('td:last').after('<td></td>');
+                          });
                         }
+
+                        return true;
+                      }
                     };
 
-                    trumbowyg.addBtnDef('table', tableBuild);
-                    trumbowyg.addBtnDef('tableAddRow', addRow);
-                    trumbowyg.addBtnDef('tableAddColumn', addColumn);
+                    var destroy = {
+                      title: t.lang['tableDestroy'],
+                      text: t.lang['tableDestroy'],
+                      ico: 'table-delete',
+
+                      fn: function () {
+                        t.saveRange();
+
+                        var node = t.doc.getSelection().focusNode,
+                            table = $(node).closest('table');
+
+                        table.remove();
+
+                        return true;
+                      }
+                    };
+
+                    var deleteRow = {
+                      title: t.lang['tableDeleteRow'],
+                      text: t.lang['tableDeleteRow'],
+                      ico: 'row-delete',
+
+                      fn: function () {
+                        t.saveRange();
+
+                        var node = t.doc.getSelection().focusNode,
+                            row = $(node).closest('tr');
+
+                        row.remove();
+
+                        return true;
+                      }
+                    };
+
+                    var deleteColumn = {
+                      title: t.lang['tableDeleteColumn'],
+                      text: t.lang['tableDeleteColumn'],
+                      ico: 'col-delete',
+
+                      fn: function () {
+                        t.saveRange();
+
+                        var node = t.doc.getSelection().focusNode,
+                            table = $(node).closest('table'),
+                            td = $(node).closest('td'),
+                            cellIndex = td.index();
+
+                        $(table).find('tr').each(function() {
+                          $(this).find('td:eq('+cellIndex+')').remove();
+                        });
+
+                        return true;
+                      }
+                    };
+
+                    t.addBtnDef('table', buildButtonDef);
+                    t.addBtnDef('tableAddRow', addRow);
+                    t.addBtnDef('tableAddColumn', addColumn);
+                    t.addBtnDef('tableDeleteRow', deleteRow);
+                    t.addBtnDef('tableDeleteColumn', deleteColumn);
+                    t.addBtnDef('tableDestroy', destroy);
                 }
             }
         }
