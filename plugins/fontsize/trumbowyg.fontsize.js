@@ -79,8 +79,8 @@
             });
             dropdown.push('fontsize_' + size);
         });
-        
-         var freeSizeButtonName = 'fontsize_custom',
+
+        var freeSizeButtonName = 'fontsize_custom',
             freeSizeBtnDef = {
                 fn: function () {
                     trumbowyg.openModalInsert('Custom Font Size',
@@ -93,7 +93,7 @@
                         function (values) {
                             var text = trumbowyg.range.startContainer.parentElement;
                             var selectedText = trumbowyg.getRangeText();
-                            if($(text).html() == selectedText) {
+                            if ($(text).html() === selectedText) {
                                 $(text).css('font-size', values.size);
                             } else {
                                 trumbowyg.range.deleteContents();
@@ -106,7 +106,7 @@
                         }
                     );
                 },
-                text: '<span style="font-size: medium;">'+ trumbowyg.lang.fontsizes['custom'] +'</span>',
+                text: '<span style="font-size: medium;">' + trumbowyg.lang.fontsizes.custom + '</span>',
                 hasIcon: false
             };
         trumbowyg.addBtnDef(freeSizeButtonName, freeSizeBtnDef);

@@ -18,27 +18,27 @@
         return {
             fn: function () {
                 var $modal = trumbowyg.openModal('Code', [
-                        '<div class="' + trumbowyg.o.prefix + 'highlight-form-group">',
-                        '   <select class="' + trumbowyg.o.prefix + 'highlight-form-control language">',
-                        (function () {
-                            var options = '';
+                    '<div class="' + trumbowyg.o.prefix + 'highlight-form-group">',
+                    '   <select class="' + trumbowyg.o.prefix + 'highlight-form-control language">',
+                    (function () {
+                        var options = '';
 
-                            for (var lang in Prism.languages) {
-                                if (Prism.languages[lang].comment) {
-                                    options += '<option value="' + lang + '">' + lang + '</option>';
-                                }
+                        for (var lang in Prism.languages) {
+                            if (Prism.languages[lang].comment) {
+                                options += '<option value="' + lang + '">' + lang + '</option>';
                             }
+                        }
 
-                            return options;
-                        })(),
-                        '   </select>',
-                        '</div>',
-                        '<div class="' + trumbowyg.o.prefix + 'highlight-form-group">',
-                        '   <textarea class="' + trumbowyg.o.prefix + 'highlight-form-control code"></textarea>',
-                        '</div>',
-                    ].join('\n')),
-                    $language = $modal.find('.language'),
-                    $code = $modal.find('.code');
+                        return options;
+                    })(),
+                    '   </select>',
+                    '</div>',
+                    '<div class="' + trumbowyg.o.prefix + 'highlight-form-group">',
+                    '   <textarea class="' + trumbowyg.o.prefix + 'highlight-form-control code"></textarea>',
+                    '</div>',
+                ].join('\n')),
+                $language = $modal.find('.language'),
+                $code = $modal.find('.code');
 
                 // Listen clicks on modal box buttons
                 $modal.on('tbwconfirm', function () {
