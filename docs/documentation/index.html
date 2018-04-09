@@ -70,6 +70,8 @@
                         <li><a href="#auto-grow">Auto grow</a></li>
                         <li><a href="#auto-grow-on-enter">Auto grow on enter</a></li>
                         <li><a href="#image-width-modal-edit">Image width modal edit</a></li>
+                        <li><a href="#url-protocol">URL protocol</a></li>
+                        <li><a href="#minimal-links">Minimal links</a></li>
                     </ul>
                 </li>
                 <li>
@@ -636,6 +638,59 @@ $('.trumbowyg').trumbowyg({
                 Image width modal edit is not active by default (set to <code>false</code>).
             </p>
         </div>
+
+
+        <div class="feature" data-added="2.9.4">
+            <h3 id="url-protocol">URL protocol</h3>
+            <p class="added-feature">Added in 2.9.4</p>
+            <p>
+                An option to auto-prefix URLs with a protocol.
+            </p>
+            <p>
+                When this option
+                is set to <code>true</code>, URLs missing a protocol will be
+                prefixed with <code>https://</code>. Alternatively, a string can
+                be provided for a custom prefix.
+            </p>
+            <p>
+              For example, a value of <code>true</code> would convert
+              <code>example.com</code> to
+              <code>https://example.com</code>, while a value of
+              <code>ftp</code> converts to
+              <code>ftp://example.com</code>.
+            </p>
+            <pre><code class="javascript">
+$('.trumbowyg').trumbowyg({
+    urlProtocol: true
+});
+            </code></pre>
+            <p class="note">
+              Anchors, email addresses and relative links are left unchanged.
+            </p>
+            <p class="note">
+                URL protocol is not active by default (set to <code>false</code>).
+            </p>
+        </div>
+
+
+        <div class="feature" data-added="2.9.4">
+            <h3 id="minimal-links">Minimal links</h3>
+            <p class="added-feature">Added in 2.9.4</p>
+            <p>
+                Reduce the link overlay to use only <code>url</code> and
+                <code>text</code> fields, omitting <code>title</code> and
+                <code>target</code>.
+            </p>
+            <pre><code class="javascript">
+$('.trumbowyg').trumbowyg({
+    minimalLinks: true
+});
+            </code></pre>
+            <p class="note">
+                The minimal links option is not active by default (set to
+                <code>false</code>).
+            </p>
+        </div>
     </section>
 
 
@@ -923,13 +978,20 @@ $("#editor").trumbowyg('openModalInsert', {
         alt: {
             label: 'Alt',
             name: 'alt',
-            value: img.attr('alt')
+            value: img.attr('alt'),
+            type: 'text'.
+            attributes: {}
         },
         example: {
             // Missing label is replaced by the key of this object (here 'example')
             // Missing name is the key
             // When value is missing, value = ''
-        }
+            // When type is missing, 'text' is assumed. You can use all the input field types,
+            //   plus checkbox and radio (select and textarea are not supported)
+            // When attributes is missing, {} is used. Attributes are added as attributes to
+            //   the input element.
+            // For radio and checkbox fields, you will need to use attributes if you want it
+            //   to be checked by default.        }
     },
     callback: function(values){
         img.attr('src', values['url']);

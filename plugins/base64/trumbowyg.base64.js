@@ -55,6 +55,12 @@
                 file: 'ファイル',
                 errFileReaderNotSupported: 'あなたのブラウザーはFileReaderをサポートしていません',
                 errInvalidImage: '画像形式が正しくありません'
+            },
+            tr: {
+                base64: 'Base64 olarak resim',
+                file: 'Dosya',
+                errFileReaderNotSupported: 'FileReader tarayıcınız tarafından desteklenmiyor.',
+                errInvalidImage: 'Geçersiz resim dosyası.'
             }
         },
         // jshint camelcase:true

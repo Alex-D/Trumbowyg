@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>pasteEmbed | Trumbowyg</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body class="documentation-body">
+<div class="main main-demo-inner">
+    <section class="wrapper section">
+        <h2 class="section-title">Embed plugin</h2>
+
+        <div class="feature">
+            <h3>Basic usage</h3>
+            <p>
+                This plugin allow you to insert iframes into your editor just by pasting an url.<br/>
+				It uses <a href="https://noembed.com">noembed</a> API to support Twitter, Youtube, Soundcloud and more. Find all supported websites at <a href="https://noembed.com">noembed</a>.<br/>
+				This plugin also uses <a href="https://www.maxmade.nl/">MAXmade</a> API in order to extend the list of supported websites. Need a website supported? Message them, they're nice. 
+            </p>
+
+            <a href="../../documentation/plugins/#plugin-pasteembed" class="button button-demo">Read paste embed plugin documentation</a>
+
+            <div id="editor">
+                <h2>Try to paste some urls!</h2>
+				<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/376360739&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true"></iframe>
+				<p>Try pasting this one: https://www.youtube.com/watch?v=dQw4w9WgXcQ</p>
+			</div>
+
+            <h3>The code</h3>
+            <pre><code class="js-code-to-eval javascript">
+$('#editor')
+.trumbowyg({
+});
+            </code></pre>
+        </div>
+
+        <div class="feature">
+            <h3>Setup</h3>
+
+            <h4>In head tag</h4>
+            <pre><code class="html loading-head">
+            </code></pre>
+            <h4>At the end of body</h4>
+            <pre><code class="html loading-body">
+&lt;!-- Import jQuery -->
+&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">&lt;/script>
+&lt;script>window.jQuery || document.write('&lt;script src="js/vendor/jquery-3.2.1.min.js">&lt;\/script>')&lt;/script>
+            </code></pre>
+        </div>
+    </section>
+</div>
+
+
+<!-- Import jQuery -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+
+<!-- DO NOT COPY THIS LINES IN YOUR PROJECT, THEY ARE THERE JUST FOR THE EXAMPLE PAGE PRUPOSE -->
+<script src="../js/loader.js"></script>
+<script>
+    loadStyle('dist/ui/trumbowyg.css');
+    loadScript('dist/trumbowyg.js', 'Import Trumbowyg');
+    loadScript('dist/plugins/pasteembed/trumbowyg.pasteembed.js', 'Import all plugins you want AFTER importing jQuery and Trumbowyg');
+</script>
+<script src="../js/runExampleCode.js"></script>
+<script src="../js/highlight.js"></script>
+</body>
+</html>

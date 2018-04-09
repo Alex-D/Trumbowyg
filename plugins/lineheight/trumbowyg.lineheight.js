@@ -10,7 +10,16 @@
                     '0.9':    'Small',
                     'normal': 'Regular',
                     '1.5':    'Large',
-                    '2.0':    'Extra Large'
+                    '2.0':    'Extra large'
+                }
+            },
+            fr: {
+                lineheight: 'Hauteur de ligne',
+                lineheights: {
+                    '0.9':    'Petit',
+                    'normal': 'Regular',
+                    '1.5':    'Grand',
+                    '2.0':    'Très grand'
                 }
             },
             nl: {
@@ -19,7 +28,16 @@
                     '0.9':    'Klein',
                     'normal': 'Normaal',
                     '1.5':    'Groot',
-                    '2.0':    'Extra Groot'
+                    '2.0':    'Extra groot'
+                }
+            },
+            tr: {
+                lineheight: 'Satır yüksekliği',
+                lineheights: {
+                    '0.9':    'Küçük',
+                    'normal': 'Normal',
+                    '1.5':    'Büyük',
+                    '2.0':    'Çok Büyük'
                 }
             }
         }

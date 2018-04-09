@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Highlight plugin | Trumbowyg</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.13.0/themes/prism-tomorrow.css">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body class="documentation-body">
+<div class="main main-demo-inner">
+    <section class="wrapper section">
+        <h2 class="section-title">Highlight plugin</h2>
+
+        <div class="feature">
+            <h3>Basic usage</h3>
+            <p>
+                This plugin allow you to add an code highlighter in Trumbowyg.
+            </p>
+            <a href="../../documentation/plugins/#plugin-highlight" class="button button-demo">Read highlight plugin documentation</a>
+
+            <div id="editor">
+                <p>Just press plugin button and paste code there!</p>
+                <p><br></p>
+            </div>
+
+            <h4>The code</h4>
+            <pre><code class="js-code-to-eval javascript">
+$('#editor')
+.trumbowyg({
+    btns: [
+        ['highlight']
+    ]
+});
+            </code></pre>
+        </div>
+
+        <div class="feature">
+            <h3>Setup</h3>
+
+            <h4>In head tag</h4>
+            <pre><code class="html loading-head">
+&lt;!-- Import prismjs stylesheet -->
+&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.13.0/themes/prism.css">
+            </code></pre>
+            <h4>At the end of body</h4>
+            <pre><code class="html loading-body">
+&lt;!-- Import jQuery -->
+&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">&lt;/script>
+&lt;script>window.jQuery || document.write('&lt;script src="js/vendor/jquery-3.2.1.min.js">&lt;\/script>')&lt;/script>
+&lt;!-- Import prismjs -->
+&lt;script src="//cdnjs.cloudflare.com/ajax/libs/prism/1.13.0/prism.min.js">&lt;/script>
+            </code></pre>
+        </div>
+    </section>
+</div>
+
+
+<!-- Import jQuery -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+<!-- Import highlight.js -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/prism/1.13.0/prism.min.js"></script>
+
+<!-- DO NOT COPY THIS LINES IN YOUR PROJECT, THEY ARE THERE JUST FOR THE EXAMPLE PAGE PRUPOSE -->
+<script src="../js/loader.js"></script>
+<script>
+    loadStyle('dist/ui/trumbowyg.css', 'Import Trumbowyg stylesheet');
+    loadStyle('dist/plugins/highlight/ui/trumbowyg.highlight.css', 'Import highlight plugin specific stylesheet');
+    loadScript('dist/trumbowyg.js', 'Import Trumbowyg');
+    loadScript('dist/plugins/highlight/trumbowyg.highlight.js', 'Import all plugins you want AFTER importing jQuery and Trumbowyg');
+</script>
+<script src="../js/runExampleCode.js"></script>
+<script src="../js/highlight.js"></script>
+</body>
+</html>

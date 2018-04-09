@@ -140,12 +140,20 @@ $modal = trumbowyg.openModalInsert({
         alt: {
             label: 'Alt',
             name: 'alt',
-            value: img.attr('alt')
+            value: img.attr('alt'),
+            type: 'text'.
+            attributes: {}
         },
         example: {
             // Missing label is replaced by the key of this object (here 'example')
             // Missing name is the key
             // When value is missing, value = ''
+            // When type is missing, 'text' is assumed. You can use all the input field types,
+            //   plus checkbox and radio (select and textarea are not supported)
+            // When attributes is missing, {} is used. Attributes are added as attributes to
+            //   the input element.
+            // For radio and checkbox fields, you will need to use attributes if you want it
+            //   to be checked by default.
         }
     },
     // Callback is called when user confirms
