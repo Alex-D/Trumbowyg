@@ -1247,7 +1247,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     return false;
                 }
 
-                var link = $(['<a href="', v.url, '">', v.text || v.url, '</a>'].join(''));
+                var link = $(['<a href="', url, '">', v.text || v.url, '</a>'].join(''));
 
                 if (!t.o.minimalLinks) {
                     if (v.title.length > 0) {
