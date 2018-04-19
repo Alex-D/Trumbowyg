@@ -1197,7 +1197,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 title,
                 target;
 
-            while (['A', 'DIV'].indexOf(node.nodeName) < 0) {
+            // firefox special
+            if (node && node.nodeName !== '#text' && node.childNodes[documentSelection.focusOffset - 1].nodeName === 'A') {
+                node = node.childNodes[documentSelection.focusOffset - 1];
+            } else while (['A', 'DIV'].indexOf(node.nodeName) < 0) {
                 node = node.parentNode;
             }
 
