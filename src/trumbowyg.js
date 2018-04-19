@@ -1381,7 +1381,14 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         param = '<' + param + '>';
                     }
 
-                    t.doc.execCommand(cmd, false, param);
+                    var didWork = t.doc.execCommand(cmd, false, param);
+                    if(!didWork && cmd.toLowerCase() == "inserthtml"){
+                        // fake insertHTML for IE using a temporary image element
+                        var uniqueValue = "#" + (+new Date()) + "-" + parseInt((Math.random()*1000))
+                        t.doc.execCommand('insertImage', false, uniqueValue)
+                        var $el = $('img[src="' + uniqueValue + '"]', t.$box);
+                        $el.replaceWith(param);
+                    }
 
                     t.syncCode();
                     t.semanticCode(false, true);
@@ -1672,16 +1679,18 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             t.range = null;
 
             if (documentSelection.rangeCount) {
-                var savedRange = t.range = documentSelection.getRangeAt(0),
-                    range = t.doc.createRange(),
-                    rangeStart;
-                range.selectNodeContents(t.$ed[0]);
-                range.setEnd(savedRange.startContainer, savedRange.startOffset);
-                rangeStart = (range + '').length;
-                t.metaRange = {
-                    start: rangeStart,
-                    end: rangeStart + (savedRange + '').length
-                };
+                var savedRange = documentSelection.getRangeAt(0);
+                if(savedRange.startContainer){
+                    t.range = savedRange
+                    var range = t.doc.createRange(), rangeStart;
+                    range.selectNodeContents(t.$ed[0]);
+                    range.setEnd(savedRange.startContainer, savedRange.startOffset);
+                    rangeStart = (range + '').length;
+                    t.metaRange = {
+                        start: rangeStart,
+                        end: rangeStart + (savedRange + '').length
+                    };
+                }
             }
         },
         restoreRange: function () {
