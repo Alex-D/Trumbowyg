@@ -1270,12 +1270,12 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 return url;
             }
 
-            const VALID_LINK_PREFIX = /^([a-z][-+.a-z0-9]*:|\/|#)/i;
+            var VALID_LINK_PREFIX = /^([a-z][-+.a-z0-9]*:|\/|#)/i;
             if (VALID_LINK_PREFIX.test(url)) {
                 return url;
             }
 
-            const SIMPLE_EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            var SIMPLE_EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (SIMPLE_EMAIL_REGEX.test(url)) {
                 return 'mailto:' + url;
             }
