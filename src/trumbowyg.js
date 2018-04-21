@@ -174,6 +174,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     case 'empty':
                         return t.empty();
 
+                    // Full Screen
+                    case 'fullscreen':
+                        return t.fullscreenMode(params);
+
                     // HTML
                     case 'html':
                         return t.html(params);
@@ -1054,6 +1058,14 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }
         },
 
+        // Fullscreen Mode management
+        fullscreenMode: function(isFullScreen){
+            var t = this;
+            // Check if fullscreen mode.
+            if(isFullScreen){
+                t.fullscreen();
+            }
+        },
 
         // HTML Code management
         html: function (html) {
