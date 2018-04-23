@@ -1191,19 +1191,23 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         createLink: function () {
             var t = this,
                 documentSelection = t.doc.getSelection(),
-                node = documentSelection.focusNode,
+                node,
                 text = new XMLSerializer().serializeToString(documentSelection.getRangeAt(0).cloneContents()),
                 url,
                 title,
                 target;
 
             // firefox special
-            if (node && node.nodeName !== '#text' && node.childNodes[documentSelection.focusOffset - 1].nodeName === 'A') {
-                node = node.childNodes[documentSelection.focusOffset - 1];
-            } else while (['A', 'DIV'].indexOf(node.nodeName) < 0) {
-                node = node.parentNode;
+            node = documentSelection.anchorNode;
+            if (node && node.nodeName !== '#text' && node.childNodes[documentSelection.anchorOffset].nodeName === 'A') {
+                node = node.childNodes[documentSelection.anchorOffset];
+            } else {
+                node = documentSelection.focusNode;
+                while (['A', 'DIV'].indexOf(node.nodeName) < 0) {
+                    node = node.parentNode;
+                }
             }
-
+          
             if (node && node.nodeName === 'A') {
                 var $a = $(node);
                 text = $a.text();
