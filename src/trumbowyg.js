@@ -579,6 +579,14 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         } catch (c) {
                         }
                     }
+
+                    if (typeof t.$ta.attr('maxlength') !== "undefined") {
+                        var noHtml = t.$ed.html().replace(/(<([^>]+)>)/ig, '').replace(/ /g, '#').replace(/&nbsp;/g, '#');
+
+                        if (noHtml.length >= t.$ta.attr('maxlength') && (e.keyCode != 37 && e.keyCode != 38 && e.keyCode != 39 && e.keyCode != 40 && e.keyCode != 8 && e.keyCode != 46 && !((e.keyCode == 67 || e.keyCode == 86 || e.keyCode == 65) && (e.ctrlKey || e.metaKey)))) {
+                            e.preventDefault();
+                        }
+                    }                     
                 })
                 .on('compositionstart compositionupdate', function () {
                     composition = true;
@@ -669,6 +677,21 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         } catch (d) {
                             // Not IE
                             t.execCmd('insertText', (e.originalEvent || e).clipboardData.getData('text/plain'));
+                        }
+                    }
+
+                    try {
+                        clipboardLength = window.clipboardData.getData('Text').length;
+                    } catch (d) {
+                        clipboardLength = (e.originalEvent || e).clipboardData.getData('text/plain').length;
+                    }   
+
+                    if (typeof t.$ta.attr('maxlength') !== "undefined") {
+                        var noHtml = t.$ed.html().replace(/(<([^>]+)>)/ig, '').replace(/ /g, '#').replace(/&nbsp;/g, '#');
+                        var totalLength = noHtml.length + clipboardLength;
+
+                        if (totalLength > t.$ta.attr('maxlength') && (e.keyCode != 37 && e.keyCode != 38 && e.keyCode != 39 && e.keyCode != 40 && e.keyCode != 8 && e.keyCode != 46 && !((e.keyCode == 67 || e.keyCode == 86 || e.keyCode == 65) && (e.ctrlKey || e.metaKey)))) {
+                            e.preventDefault();
                         }
                     }
 
