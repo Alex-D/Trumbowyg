@@ -268,7 +268,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             };
         t.btnsDef = {
             viewHTML: {
-                fn: 'toggle'
+                fn: 'toggle',
+                class: 'trumbowyg-not-disable',
             },
 
             undo: {
