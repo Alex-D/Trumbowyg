@@ -26,6 +26,10 @@
                 foreColor: 'Couleur du texte',
                 backColor: 'Couleur de fond'
             },
+            de: {
+                foreColor: 'Textfarbe',
+                backColor: 'Hintergrundfarbe'
+            },
             nl: {
                 foreColor: 'Tekstkleur',
                 backColor: 'Achtergrondkleur'
