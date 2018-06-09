@@ -10,6 +10,9 @@
             fr: {
                 fontFamily: 'Police'
             },
+            de: {
+                fontFamily: 'Schriftart'
+            },
             nl: {
                 fontFamily: 'Lettertype'
             },
