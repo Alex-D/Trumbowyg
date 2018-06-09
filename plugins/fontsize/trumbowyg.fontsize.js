@@ -26,6 +26,17 @@
                     'custom': 'Douane'
                 }
             },
+            de: {
+                fontsize: 'Font size',
+                fontsizes: {
+                    'x-small': 'Sehr klein',
+                    'small': 'Klein',
+                    'medium': 'Normal',
+                    'large': 'Groß',
+                    'x-large': 'Sehr groß',
+                    'custom': 'Benutzerdefiniert'
+                }
+            },
             nl: {
                 fontsize: 'Lettergrootte',
                 fontsizes: {
