@@ -764,19 +764,27 @@ $('#my-editor').trumbowyg({
 &lt;script src="node_modules/trumbowyg/dist/plugins/template/trumbowyg.template.min.js">&lt;/script>
             </code></pre>
             <p>
-                Then you can use the new button definition <code>template</code>
+                Then you can use the new button definition <code>template</code> and can add your template code.
             </p>
             <pre><code class="javascript">
 $('#my-editor').trumbowyg({
     btns: [
         ['template']
-    ]
+    ],
+    plugins: {
+        templates: [
+            {
+                name: 'Template 1',
+                html: '<p>I am a template!</p>'
+            },
+            {
+                name: 'Template 2',
+                html: '<p>I am a different template!</p>'
+            }
+        ]
+    }
 });
             </code></pre>
-            <p class="note">
-                Some doc to write about template options/definition... <br>
-                You can contribute to this documentation by submitting a Pull Request :)
-            </p>
         </div>
 
         <div class="feature">
