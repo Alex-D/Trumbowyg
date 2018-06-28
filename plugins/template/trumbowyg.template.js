@@ -7,6 +7,9 @@
             en: {
                 template: 'Template'
             },
+            da: {
+                template: 'Skabelon'
+            },
             fr: {
                 template: 'Patron'
             },

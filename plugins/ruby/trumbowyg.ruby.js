@@ -18,6 +18,11 @@
                 rubyModal: 'Ruby modal',
                 rubyText: 'Ruby text'
             },
+            da: {
+                ruby: 'Tilføj ruby tekst',
+                rubyModal: 'Ruby modal',
+                rubyText: 'Ruby tekst'
+            },
             fr: {
                 ruby: 'Ajouter du texte ruby',
                 rubyModal: 'Modale ruby',

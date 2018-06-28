@@ -16,6 +16,9 @@
             en: {
                 preformatted: 'Code sample <pre>'
             },
+            da: {
+                preformatted: 'Præformateret <pre>'
+            },
             fr: {
                 preformatted: 'Exemple de code <pre>'
             },

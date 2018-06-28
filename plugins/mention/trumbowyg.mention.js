@@ -22,6 +22,9 @@
             en: {
                 mention: 'Mention'
             },
+            da: {
+                mention: 'Nævn'
+            },
             fr: {
                 mention: 'Mentioner'
             },

@@ -22,6 +22,12 @@
                     undo: 'Undo'
                 }
             },
+            da: {
+                history: {
+                    redo: 'Annuller fortryd',
+                    undo: 'Fortryd'
+                }
+            },
             fr: {
                 history: {
                     redo: 'Annuler',

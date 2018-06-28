@@ -7,6 +7,9 @@
             en: {
                 fontFamily: 'Font'
             },
+            da: {
+                fontFamily: 'Skrifttype'
+            },
             fr: {
                 fontFamily: 'Police'
             },

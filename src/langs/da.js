@@ -10,7 +10,10 @@
 jQuery.trumbowyg.langs.da = {
     viewHTML: 'Vis HTML',
 
-    formatting: 'Formatter',
+    undo: 'Fortryd',
+    redo: 'Anuller fortryd',
+
+    formatting: 'Formattering',
     p: 'Afsnit',
     blockquote: 'Citat',
     code: 'Kode',
@@ -24,6 +27,9 @@ jQuery.trumbowyg.langs.da = {
     strong: 'Vigtig',
     em: 'Fremhæv',
     del: 'Slettet',
+
+    superscript: 'Hævet skrift',
+    subscript: 'Sænket skrift',
 
     unorderedList: 'Uordnet liste',
     orderedList: 'Ordnet liste',
@@ -40,6 +46,7 @@ jQuery.trumbowyg.langs.da = {
     justifyFull: 'Lige margener',
 
     horizontalRule: 'Horisontal linie',
+    removeformat: 'Ryd formattering',
 
     fullscreen: 'Fuld skærm',
 
@@ -51,5 +58,7 @@ jQuery.trumbowyg.langs.da = {
     required: 'Påkrævet',
     description: 'Beskrivelse',
     title: 'Titel',
-    text: 'Tekst'
+    text: 'Tekst',
+    target: 'Mål',
+    width: 'Bredde'
 };
