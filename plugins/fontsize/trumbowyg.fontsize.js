@@ -15,6 +15,17 @@
                     'custom': 'Custom'
                 }
             },
+            da: {
+                fontsize: 'Skriftstørrelse',
+                fontsizes: {
+                    'x-small': 'Ekstra lille',
+                    'small': 'Lille',
+                    'medium': 'Normal',
+                    'large': 'Stor',
+                    'x-large': 'Ekstra stor',
+                    'custom': 'Brugerdefineret'
+                }
+            },
             fr: {
                 fontsize: 'Taille de la police',
                 fontsizes: {

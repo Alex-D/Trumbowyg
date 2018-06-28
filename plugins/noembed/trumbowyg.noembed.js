@@ -23,6 +23,9 @@
                 noembed: 'Noembed',
                 noembedError: 'Error'
             },
+            da: {
+                noembedError: 'Fejl'
+            },
             sk: {
                 noembedError: 'Chyba'
             },

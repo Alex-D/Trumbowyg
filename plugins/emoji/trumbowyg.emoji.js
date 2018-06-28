@@ -897,6 +897,9 @@
             en: {
                 emoji: 'Add an emoji'
             },
+            da: {
+                emoji: 'Tilføj et humørikon'
+            },
             fr: {
                 emoji: 'Ajouter un emoji'
             },

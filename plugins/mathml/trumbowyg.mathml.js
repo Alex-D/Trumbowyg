@@ -16,6 +16,11 @@
                 formulas: 'Formulas',
                 inline: 'Inline'
             },
+            da: {
+                mathml: 'Indsæt formler',
+                formulas: 'Formler',
+                inline: 'Inline'
+            },
             fr: {
                 mathml: 'Inserer une formule',
                 formulas: 'Formule',

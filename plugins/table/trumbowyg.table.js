@@ -26,6 +26,15 @@
                 tableDestroy: 'Delete table',
                 error: 'Error'
             },
+            da: {
+              table: 'Indsæt tabel',
+              tableAddRow: 'Tilføj række',
+              tableAddColumn: 'Tilføj kolonne',
+              tableDeleteRow: 'Slet række',
+              tableDeleteColumn: 'Slet kolonne',
+              tableDestroy: 'Slet tabel',
+              error: 'Fejl'
+            },
             de: {
               table: 'Tabelle einfügen',
               tableAddRow: 'Zeile hinzufügen',
