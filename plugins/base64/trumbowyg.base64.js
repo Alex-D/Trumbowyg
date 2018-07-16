@@ -26,6 +26,12 @@
                 errFileReaderNotSupported: 'FileReader is not supported by your browser.',
                 errInvalidImage: 'Invalid image file.'
             },
+            da: {
+                base64: 'Billede som base64',
+                file: 'Fil',
+                errFileReaderNotSupported: 'FileReader er ikke understøttet af din browser.',
+                errInvalidImage: 'Ugyldig billedfil.'
+            },
             fr: {
                 base64: 'Image en base64',
                 file: 'Fichier'

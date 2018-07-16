@@ -53,6 +53,11 @@
                 file: 'File',
                 uploadError: 'Error'
             },
+            da: {
+                upload: 'Upload',
+                file: 'Fil',
+                uploadError: 'Fejl'
+            },
             sk: {
                 upload: 'Nahrať',
                 file: 'Súbor',

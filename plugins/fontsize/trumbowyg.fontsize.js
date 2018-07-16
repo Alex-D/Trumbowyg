@@ -15,6 +15,17 @@
                     'custom': 'Custom'
                 }
             },
+            da: {
+                fontsize: 'Skriftstørrelse',
+                fontsizes: {
+                    'x-small': 'Ekstra lille',
+                    'small': 'Lille',
+                    'medium': 'Normal',
+                    'large': 'Stor',
+                    'x-large': 'Ekstra stor',
+                    'custom': 'Brugerdefineret'
+                }
+            },
             fr: {
                 fontsize: 'Taille de la police',
                 fontsizes: {
@@ -24,6 +35,17 @@
                     'large': 'Grand',
                     'x-large': 'Très grand',
                     'custom': 'Douane'
+                }
+            },
+            de: {
+                fontsize: 'Font size',
+                fontsizes: {
+                    'x-small': 'Sehr klein',
+                    'small': 'Klein',
+                    'medium': 'Normal',
+                    'large': 'Groß',
+                    'x-large': 'Sehr groß',
+                    'custom': 'Benutzerdefiniert'
                 }
             },
             nl: {

@@ -13,6 +13,15 @@
                     '2.0':    'Extra large'
                 }
             },
+            da: {
+                lineheight: 'Linjehøjde',
+                lineheights: {
+                    '0.9':    'Lille',
+                    'normal': 'Normal',
+                    '1.5':    'Stor',
+                    '2.0':    'Ekstra stor'
+                }
+            },
             fr: {
                 lineheight: 'Hauteur de ligne',
                 lineheights: {
