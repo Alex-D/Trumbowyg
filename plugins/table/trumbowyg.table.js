@@ -64,8 +64,11 @@
             },
             ru: {
                 table: 'Вставить таблицу',
-                tableAddRow: 'Добавить строки',
-                tableAddColumn: 'Добавить столбцы',
+                tableAddRow: 'Добавить строку',
+                tableAddColumn: 'Добавить столбец',
+                tableDeleteRow: 'Удалить строку',
+                tableDeleteColumn: 'Удалить столбец',
+                tableDestroy: 'Удалить таблицу',
                 error: 'Ошибка'
             },
             ja: {
