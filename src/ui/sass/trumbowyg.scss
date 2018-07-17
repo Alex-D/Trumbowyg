@@ -75,7 +75,7 @@ $slow-transition-duration: 300ms !default;
         color: transparent !important;
         text-shadow: 0 0 7px #333;
 
-        @media screen and (min-width: 0 \0) {
+        @media screen and (min-width: 0) {
             color: rgba(200, 200, 200, 0.6) !important;
         }
         @supports (-ms-accelerator:true) {
@@ -644,7 +644,7 @@ body.trumbowyg-body-fullscreen {
             &::before {
                 text-shadow: 0 0 7px #ccc;
 
-                @media screen and (min-width: 0 \0
+                @media screen and (min-width: 0
                 ) {
                     color: rgba(20, 20, 20, 0.6) !important;
                 }
