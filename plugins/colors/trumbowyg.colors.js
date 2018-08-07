@@ -171,6 +171,7 @@
                         {
                             color: {
                                 label: fn,
+                                type: 'color',
                                 value: '#FFFFFF'
                             }
                         },
