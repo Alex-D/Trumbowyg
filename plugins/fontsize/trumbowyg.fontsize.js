@@ -1,4 +1,4 @@
-(function ($) {
+gulp build(function ($) {
     'use strict';
 
     $.extend(true, $.trumbowyg, {
@@ -13,6 +13,11 @@
                     'large': 'Large',
                     'x-large': 'Extra large',
                     'custom': 'Custom'
+                },
+                fontCustomSize: {
+                    title: 'Custom Font Size',
+                    label: 'Font Size',
+                    value: '48px'
                 }
             },
             da: {
@@ -105,11 +110,10 @@
         var freeSizeButtonName = 'fontsize_custom',
             freeSizeBtnDef = {
                 fn: function () {
-                    trumbowyg.openModalInsert('Custom Font Size',
-                        {
+                    trumbowyg.openModalInsert(trumbowyg.lang.fontCustomSize.title, {
                             size: {
-                                label: 'Font Size',
-                                value: '48px'
+                                label: trumbowyg.lang.fontCustomSize.label,
+                                value: trubmowyg.lang.fontCustomSize.value
                             }
                         },
                         function (values) {
