@@ -1,4 +1,4 @@
-gulp build(function ($) {
+(function ($) {
     'use strict';
 
     $.extend(true, $.trumbowyg, {
@@ -74,6 +74,22 @@ gulp build(function ($) {
                     'x-large': 'Çok Büyük',
                     'custom': 'Görenek'
                 }
+            },
+            zh_tw: {
+                fontsize: '字體大小',
+                fontsizes: {
+                    'x-small': '最小',
+                    'small': '小',
+                    'medium': '中',
+                    'large': '大',
+                    'x-large': '最大',
+                    'custom': '自訂大小',
+                },
+                fontCustomSize: {
+                    title: '自訂義字體大小',
+                    label: '字體大小',
+                    value: '48px'
+                }
             }
         }
     });
@@ -110,10 +126,11 @@ gulp build(function ($) {
         var freeSizeButtonName = 'fontsize_custom',
             freeSizeBtnDef = {
                 fn: function () {
-                    trumbowyg.openModalInsert(trumbowyg.lang.fontCustomSize.title, {
+                    trumbowyg.openModalInsert(trumbowyg.lang.fontCustomSize.title,
+                        {
                             size: {
                                 label: trumbowyg.lang.fontCustomSize.label,
-                                value: trubmowyg.lang.fontCustomSize.value
+                                value: trumbowyg.lang.fontCustomSize.value
                             }
                         },
                         function (values) {

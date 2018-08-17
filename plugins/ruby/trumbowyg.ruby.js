@@ -37,7 +37,12 @@
                 ruby: 'Ruby metni ekle',
                 rubyModal: 'Ruby modal',
                 rubyText: 'Ruby metni'
-            }
+            },
+            zh_tw: {
+                ruby: '加入 ruby 文字',
+                rubyModal: 'Ruby 彈跳視窗',
+                rubyText: 'Ruby 文字'
+            },
         },
         plugins: {
             ruby: {

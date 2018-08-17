@@ -67,7 +67,13 @@
                 file: 'Dosya',
                 errFileReaderNotSupported: 'FileReader tarayıcınız tarafından desteklenmiyor.',
                 errInvalidImage: 'Geçersiz resim dosyası.'
-            }
+            },
+            zh_tw: {
+                base64: '圖片(base64編碼)',
+                file: '檔案',
+                errFileReaderNotSupported: '你的瀏覽器不支援FileReader',
+                errInvalidImage: '不正確的檔案格式'
+             },
         },
         // jshint camelcase:true
 

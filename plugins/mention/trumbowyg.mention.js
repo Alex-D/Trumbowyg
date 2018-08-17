@@ -33,7 +33,10 @@
             },
             tr: {
                 mention: 'Bahset'
-            }
+            },
+            zh_tw: {
+                mention: '標記'
+            },
         },
 
         plugins: {
