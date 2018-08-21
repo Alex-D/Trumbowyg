@@ -48,7 +48,16 @@
                     '1.5':    'Büyük',
                     '2.0':    'Çok Büyük'
                 }
-            }
+            },
+            zh_tw: {
+                lineheight: '文字間距',
+                lineheights: {
+                    '0.9': '小',
+                    'normal': '正常',
+                    '1.5': '大',
+                    '2.0': '特大'
+                }
+            },
         }
     });
     // jshint camelcase:true

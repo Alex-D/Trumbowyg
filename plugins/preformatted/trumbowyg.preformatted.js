@@ -36,7 +36,10 @@
             },
             tr: {
                 preformatted: 'Kod örneği <pre>'
-            }
+            },
+            zh_tw: {
+                preformatted: '代碼範例 <pre>'
+            },
         },
         // jshint camelcase:true
 

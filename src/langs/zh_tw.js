@@ -12,6 +12,9 @@
 jQuery.trumbowyg.langs.zh_tw = {
     viewHTML: '原始碼',
 
+    undo: '復原',
+    redo: '重做',
+
     formatting: '格式',
     p: '段落',
     blockquote: '引用',
@@ -23,9 +26,12 @@ jQuery.trumbowyg.langs.zh_tw = {
     strikethrough: '刪除線',
     underline: '底線',
 
-    strong: '加粗',
+    strong: '粗體',
     em: '斜體',
     del: '刪除線',
+
+    superscript: '上標',
+    subscript: '下標',
 
     unorderedList: '無序列表',
     orderedList: '有序列表',
@@ -42,6 +48,7 @@ jQuery.trumbowyg.langs.zh_tw = {
     justifyFull: '左右對齊',
 
     horizontalRule: '插入分隔線',
+    removeformat: '移除格式',
 
     fullscreen: '全螢幕',
 
@@ -53,5 +60,7 @@ jQuery.trumbowyg.langs.zh_tw = {
     required: '必需的',
     description: '描述',
     title: '標題',
-    text: '文字'
+    text: '文字',
+    target: '目標',
+    width: '寬度'
 };

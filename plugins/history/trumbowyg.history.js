@@ -33,6 +33,12 @@
                     redo: 'Annuler',
                     undo: 'Rétablir'
                 }
+            },
+            zh_tw: {
+               history: {
+                   redo: '重做',
+                   undo: '復原'
+               }
             }
         },
         plugins: {

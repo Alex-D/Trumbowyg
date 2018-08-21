@@ -46,6 +46,10 @@
                 foreColor: '文字颜色',
                 backColor: '背景颜色'
             },
+            zh_tw: {
+                foreColor: '文字顏色',
+                backColor: '背景顏色'
+            },
             ru: {
                 foreColor: 'Цвет текста',
                 backColor: 'Цвет выделения текста'

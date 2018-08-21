@@ -24,7 +24,10 @@
             },
             tr: {
                 template: 'Şablon'
-            }
+            },
+            zh_tw: {
+                template: '模板',
+            },
         }
     });
 
