@@ -334,7 +334,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 key: 'I'
             },
             del: {
-                fn: 'strikethrough'
+                fn: 'strikethrough',
+                tag: 's'
             },
 
             createLink: {
@@ -438,8 +439,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         DEFAULT_SEMANTIC_MAP: {
             'b': 'strong',
             'i': 'em',
-            's': 'del',
-            'strike': 'del',
+            's': 's',
+            'strike': 's',
             'div': 'p'
         },
 
