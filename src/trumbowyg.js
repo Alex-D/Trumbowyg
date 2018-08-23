@@ -310,31 +310,23 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 tag: 'sup'
             },
 
-            bold: {
-                key: 'B',
-                tag: 'b'
-            },
-            italic: {
-                key: 'I',
-                tag: 'i'
-            },
             underline: {
                 tag: 'u'
-            },
-            strikethrough: {
-                tag: 'strike'
             },
 
             strong: {
                 fn: 'bold',
-                key: 'B'
+                key: 'B',
+                tag: 'strong'
             },
             em: {
                 fn: 'italic',
-                key: 'I'
+                key: 'I',
+                tag: 'em'
             },
             del: {
-                fn: 'strikethrough'
+                fn: 'strikethrough',
+                tag: 'del'
             },
 
             createLink: {
@@ -407,8 +399,18 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
         if (options.btns) {
             t.o.btns = options.btns;
-        } else if (!t.o.semantic) {
-            t.o.btns[3] = ['bold', 'italic', 'underline', 'strikethrough'];
+            if (!t.o.semantic) {
+                if(t.isIE){
+                    t.btnsDef.strong.tag = 'strong';
+                    t.btnsDef.em.tag = 'em';
+                }
+                else{
+                    t.btnsDef.strong.tag = 'b';
+                    t.btnsDef.em.tag = 'i';
+                }
+
+                t.btnsDef.del.tag = 'strike';
+           }
         }
 
         $.each(t.o.btnsDef, function (btnName, btnDef) {
