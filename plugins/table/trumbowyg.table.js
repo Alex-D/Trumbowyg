@@ -26,6 +26,15 @@
                 tableDestroy: 'Delete table',
                 error: 'Error'
             },
+            da: {
+              table: 'Indsæt tabel',
+              tableAddRow: 'Tilføj række',
+              tableAddColumn: 'Tilføj kolonne',
+              tableDeleteRow: 'Slet række',
+              tableDeleteColumn: 'Slet kolonne',
+              tableDestroy: 'Slet tabel',
+              error: 'Fejl'
+            },
             de: {
               table: 'Tabelle einfügen',
               tableAddRow: 'Zeile hinzufügen',
@@ -55,8 +64,11 @@
             },
             ru: {
                 table: 'Вставить таблицу',
-                tableAddRow: 'Добавить строки',
-                tableAddColumn: 'Добавить столбцы',
+                tableAddRow: 'Добавить строку',
+                tableAddColumn: 'Добавить столбец',
+                tableDeleteRow: 'Удалить строку',
+                tableDeleteColumn: 'Удалить столбец',
+                tableDestroy: 'Удалить таблицу',
                 error: 'Ошибка'
             },
             ja: {
@@ -70,7 +82,16 @@
                 tableAddRow: 'Satır ekle',
                 tableAddColumn: 'Kolon ekle',
                 error: 'Hata'
-            }
+            },
+            zh_tw: {
+              table: '插入表格',
+              tableAddRow: '加入行',
+              tableAddColumn: '加入列',
+              tableDeleteRow: '刪除行',
+              tableDeleteColumn: '刪除列',
+              tableDestroy: '刪除表格',
+              error: '錯誤'
+            },
         },
 
         plugins: {

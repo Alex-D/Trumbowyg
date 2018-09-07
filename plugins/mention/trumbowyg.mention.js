@@ -22,6 +22,9 @@
             en: {
                 mention: 'Mention'
             },
+            da: {
+                mention: 'Nævn'
+            },
             fr: {
                 mention: 'Mentioner'
             },
@@ -30,7 +33,10 @@
             },
             tr: {
                 mention: 'Bahset'
-            }
+            },
+            zh_tw: {
+                mention: '標記'
+            },
         },
 
         plugins: {
