@@ -22,11 +22,23 @@
                     undo: 'Undo'
                 }
             },
+            da: {
+                history: {
+                    redo: 'Annuller fortryd',
+                    undo: 'Fortryd'
+                }
+            },
             fr: {
                 history: {
                     redo: 'Annuler',
                     undo: 'Rétablir'
                 }
+            },
+            zh_tw: {
+               history: {
+                   redo: '重做',
+                   undo: '復原'
+               }
             }
         },
         plugins: {

@@ -16,6 +16,9 @@
             en: {
                 preformatted: 'Code sample <pre>'
             },
+            da: {
+                preformatted: 'Præformateret <pre>'
+            },
             fr: {
                 preformatted: 'Exemple de code <pre>'
             },
@@ -33,7 +36,10 @@
             },
             tr: {
                 preformatted: 'Kod örneği <pre>'
-            }
+            },
+            zh_tw: {
+                preformatted: '代碼範例 <pre>'
+            },
         },
         // jshint camelcase:true
 

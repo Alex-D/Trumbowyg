@@ -22,9 +22,17 @@
                 foreColor: 'Text color',
                 backColor: 'Background color'
             },
+            da: {
+                foreColor: 'Tekstfarve',
+                backColor: 'Baggrundsfarve'
+            },
             fr: {
                 foreColor: 'Couleur du texte',
                 backColor: 'Couleur de fond'
+            },
+            de: {
+                foreColor: 'Textfarbe',
+                backColor: 'Hintergrundfarbe'
             },
             nl: {
                 foreColor: 'Tekstkleur',
@@ -37,6 +45,10 @@
             zh_cn: {
                 foreColor: '文字颜色',
                 backColor: '背景颜色'
+            },
+            zh_tw: {
+                foreColor: '文字顏色',
+                backColor: '背景顏色'
             },
             ru: {
                 foreColor: 'Цвет текста',
@@ -163,6 +175,7 @@
                         {
                             color: {
                                 label: fn,
+                                type: 'color',
                                 value: '#FFFFFF'
                             }
                         },

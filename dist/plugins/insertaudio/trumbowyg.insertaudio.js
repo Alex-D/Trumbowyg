@@ -36,6 +36,9 @@
             en: {
                 insertAudio: 'Insert Audio'
             },
+            da: {
+                insertAudio: 'Indsæt lyd'
+            },
             fr: {
                 insertAudio: 'Insérer un son'
             },

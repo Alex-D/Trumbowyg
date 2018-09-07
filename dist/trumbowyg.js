@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.10.0 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.11.0 - A lightweight WYSIWYG editor
  * Trumbowyg core file
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -279,7 +279,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             };
         t.btnsDef = {
             viewHTML: {
-                fn: 'toggle'
+                fn: 'toggle',
+                class: 'trumbowyg-not-disable',
             },
 
             undo: {
@@ -1258,7 +1259,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     return false;
                 }
 
-                var link = $(['<a href="', v.url, '">', v.text || v.url, '</a>'].join(''));
+                var link = $(['<a href="', url, '">', v.text || v.url, '</a>'].join(''));
 
                 if (!t.o.minimalLinks) {
                     if (v.title.length > 0) {
@@ -1281,12 +1282,12 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 return url;
             }
 
-            const VALID_LINK_PREFIX = /^([a-z][-+.a-z0-9]*:|\/|#)/i;
+            var VALID_LINK_PREFIX = /^([a-z][-+.a-z0-9]*:|\/|#)/i;
             if (VALID_LINK_PREFIX.test(url)) {
                 return url;
             }
 
-            const SIMPLE_EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            var SIMPLE_EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (SIMPLE_EMAIL_REGEX.test(url)) {
                 return 'mailto:' + url;
             }
@@ -1650,7 +1651,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 }
 
                 t.openModalInsert(t.lang.insertImage, options, function (v) {
-                    if (v.src !== base64) {
+                    if (v.url !== base64) {
                         $img.attr({
                             src: v.url
                         });

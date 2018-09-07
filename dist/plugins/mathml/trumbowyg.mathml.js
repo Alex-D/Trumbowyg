@@ -16,6 +16,11 @@
                 formulas: 'Formulas',
                 inline: 'Inline'
             },
+            da: {
+                mathml: 'Indsæt formler',
+                formulas: 'Formler',
+                inline: 'Inline'
+            },
             fr: {
                 mathml: 'Inserer une formule',
                 formulas: 'Formule',
@@ -25,7 +30,12 @@
                 mathml: 'Formül Ekle',
                 formulas: 'Formüller',
                 inline: 'Satır içi'
-            }
+            },
+            zh_tw: {
+                mathml: '插入方程式',
+                formulas: '方程式',
+                inline: '內嵌'
+            },
         },
         plugins: {
             mathml: {
