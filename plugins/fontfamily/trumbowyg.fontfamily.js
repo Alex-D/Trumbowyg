@@ -44,7 +44,8 @@
             {name: 'Times New Roman', family: '\'Times New Roman\', Times, serif'},
             {name: 'Trebuchet', family: '\'Trebuchet MS\', Helvetica, sans-serif'},
             {name: 'Verdana', family: 'Verdana, Geneva, sans-serif'}
-        ]
+        ],
+        currentSelect: 'default'
     };
 
     // Add dropdown with web safe fonts
@@ -56,9 +57,27 @@
                     trumbowyg.addBtnDef('fontfamily', {
                         dropdown: buildDropdown(trumbowyg),
                         hasIcon: false,
-                        text: trumbowyg.lang.fontFamily
+                        text: trumbowyg.o.plugins.fontfamily.currentSelect
                     });
+                },
+              tagHandler: function (element, trumbowyg) {
+                var $btn = $('.' + trumbowyg.o.prefix + 'fontfamily' + '-button', trumbowyg.$btnPane);
+                var documentSelection = trumbowyg.doc.getSelection();
+                var $focusElement = $(documentSelection.focusNode).parent();
+                var styleFont = $focusElement.attr('style');
+
+                if (styleFont) {
+                  var font = styleFont.slice(0, styleFont.indexOf(','));
+                  var name = defaultOptions.fontList.filter(function (el) {
+                    return ~font.indexOf(el.name);
+                  });
+                  $btn.text(name[0] ? name[0].name : font);
                 }
+                else {
+                  $btn.text(trumbowyg.o.plugins.fontfamily.currentSelect);
+                }
+                return ['fontfamily'];
+              }
             }
         }
     });
@@ -72,6 +91,8 @@
                 hasIcon: false,
                 fn: function () {
                     trumbowyg.execCmd('fontName', font.family, true);
+                    var $btn = $('.' + 'trumbowyg-' + 'fontfamily' + '-button', trumbowyg.$btnPane);
+                    $btn.text(font.name);
                 }
             });
             dropdown.push('fontfamily_' + index);
