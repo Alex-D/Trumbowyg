@@ -44,9 +44,18 @@
             {name: 'Times New Roman', family: '\'Times New Roman\', Times, serif'},
             {name: 'Trebuchet', family: '\'Trebuchet MS\', Helvetica, sans-serif'},
             {name: 'Verdana', family: 'Verdana, Geneva, sans-serif'}
-        ],
-        currentSelect: 'default'
+        ]
     };
+
+  function getDefaultName () {
+    var body = document.getElementsByTagName('body')[0];
+    var style = window.getComputedStyle(body, null).getPropertyValue('font-family');
+    var font = style.slice(0, style.indexOf(','));
+    var fontName = defaultOptions.fontList.filter(function (el) {
+      return ~font.indexOf(el.name);
+    });
+    return fontName[0] ? fontName[0].name : font;
+  }
 
     // Add dropdown with web safe fonts
     $.extend(true, $.trumbowyg, {
@@ -57,24 +66,24 @@
                     trumbowyg.addBtnDef('fontfamily', {
                         dropdown: buildDropdown(trumbowyg),
                         hasIcon: false,
-                        text: trumbowyg.o.plugins.fontfamily.currentSelect
+                        text: getDefaultName()
                     });
                 },
               tagHandler: function (element, trumbowyg) {
                 var $btn = $('.' + trumbowyg.o.prefix + 'fontfamily' + '-button', trumbowyg.$btnPane);
                 var documentSelection = trumbowyg.doc.getSelection();
-                var $focusElement = $(documentSelection.focusNode).parent();
-                var styleFont = $focusElement.attr('style');
+                var focusElement = $(documentSelection.focusNode).parent().get(0);
+                var styleFont = focusElement.style.fontFamily;
 
                 if (styleFont) {
                   var font = styleFont.slice(0, styleFont.indexOf(','));
                   var name = defaultOptions.fontList.filter(function (el) {
-                    return ~font.indexOf(el.name);
+                      return font.indexOf(el.name) > 0;
                   });
                   $btn.text(name[0] ? name[0].name : font);
                 }
                 else {
-                  $btn.text(trumbowyg.o.plugins.fontfamily.currentSelect);
+                    $btn.text(getDefaultName());
                 }
                 return ['fontfamily'];
               }
