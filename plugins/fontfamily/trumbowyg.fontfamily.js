@@ -48,7 +48,7 @@
     };
 
   function getDefaultName () {
-    var body = document.getElementsByTagName('body')[0];
+    var body = document.getElementsByTagName('textarea')[0];
     var style = window.getComputedStyle(body, null).getPropertyValue('font-family');
     var font = style.slice(0, style.indexOf(','));
     var fontName = defaultOptions.fontList.filter(function (el) {
@@ -69,24 +69,18 @@
                         text: getDefaultName()
                     });
                 },
-              tagHandler: function (element, trumbowyg) {
-                var $btn = $('.' + trumbowyg.o.prefix + 'fontfamily' + '-button', trumbowyg.$btnPane);
-                var documentSelection = trumbowyg.doc.getSelection();
-                var focusElement = $(documentSelection.focusNode).parent().get(0);
-                var styleFont = focusElement.style.fontFamily;
+                tagHandler: function (element, t) {
+                    var $btn = $('.' + t.o.prefix + 'fontfamily' + '-button', t.$btnPane);
+                    var focusElement = $(t.doc.getSelection().focusNode).parent().get(0);
+                    var styleFont = focusElement.style.fontFamily;
 
-                if (styleFont) {
-                  var font = styleFont.slice(0, styleFont.indexOf(','));
-                  var name = defaultOptions.fontList.filter(function (el) {
-                      return font.indexOf(el.name) > 0;
-                  });
-                  $btn.text(name[0] ? name[0].name : font);
+                    if (styleFont) {
+                        var font = styleFont.slice(0, styleFont.indexOf(',')).replace(/"/g, '');
+                        $btn.text(font);
+                    } else {
+                        $btn.text(getDefaultName());
+                    }
                 }
-                else {
-                    $btn.text(getDefaultName());
-                }
-                return ['fontfamily'];
-              }
             }
         }
     });
