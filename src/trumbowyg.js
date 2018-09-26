@@ -82,6 +82,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         resetCss: false,
         removeformatPasted: false,
         tagsToRemove: [],
+        keepEmptyTags: false,
         btns: [
             ['viewHTML'],
             ['undo', 'redo'], // Only supported in Blink browsers
@@ -1070,8 +1071,14 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             return t.$ta.val();
         },
         syncTextarea: function () {
-            var t = this;
-            t.$ta.val(t.$ed.text().trim().length > 0 || t.$ed.find('hr,img,embed,iframe,input').length > 0 ? t.$ed.html() : '');
+            var t = this,
+                html = t.$ed.html();
+
+            if (t.o.keepEmptyTags === true) {
+              t.$ta.val(html);
+            } else {
+              t.$ta.val(t.$ed.text().trim().length > 0 || t.$ed.find('hr,img,embed,iframe,input').length > 0 ? html : '');
+            }
         },
         syncCode: function (force) {
             var t = this;
