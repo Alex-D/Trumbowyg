@@ -232,35 +232,23 @@ $('#my-editor').trumbowyg({
             </p>
 
             <h4>How to use it?</h4>
-            <p>
-                This plugin require <strong>emojify.js</strong> which can be installed with:
-                <code>npm&nbsp;install&nbsp;emojify.js</code>
-            </p>
+	    <pre><code class="html">
+&lt;-- Import Trumbowyg emoji style in &lt;head>... -->
+&lt;script src="node_modules/trumbowyg/dist/plugins/emoji/ui/trumbowyg.emoji.css">&lt;/script>
+            </code></pre>
             <pre><code class="html">
-&lt;-- Import emojify.js and Trumbowyg emoji at the end of &lt;body>... -->
-&lt;script src="node_modules/emojify.js/dist/js/emojify.min.js">&lt;/script>
+&lt;-- Import Trumbowyg emoji at the end of &lt;body>... -->
 &lt;script src="node_modules/trumbowyg/dist/plugins/emoji/trumbowyg.emoji.min.js">&lt;/script>
             </code></pre>
             <p>
-                You should setup emojify.js, then you can use the new button definition <code>emoji</code>
+                Then you can use the new button definition <code>emoji</code>
             </p>
 
             <pre><code class="javascript">
-// Setup emojify.js
-emojify.setConfig({
-    img_dir : '//cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/',
-});
-
 $('#my-editor').trumbowyg({
     btns: [
         ['emoji']
     ]
-});
-emojify.run();
-
-// Will transform an :emoji: to img tag at each input
-$('.trumbowyg-editor').on('input propertychange', function() {
-    emojify.run();
 });
             </code></pre>
         </div>
