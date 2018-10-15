@@ -92,6 +92,15 @@
               tableDestroy: '刪除表格',
               error: '錯誤'
             },
+            id: {
+                table: 'Sisipkan tabel',
+                tableAddRow: 'Sisipkan baris',
+                tableAddColumn: 'Sisipkan kolom',
+                tableDeleteRow: 'Hapus baris',
+                tableDeleteColumn: 'Hapus kolom',
+                tableDestroy: 'Hapus tabel',
+                error: 'Galat'
+            },
         },
 
         plugins: {
