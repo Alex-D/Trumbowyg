@@ -13,6 +13,11 @@
                     'large': 'Large',
                     'x-large': 'Extra large',
                     'custom': 'Custom'
+                },
+                fontCustomSize: {
+                    title: 'Custom Font Size',
+                    label: 'Font Size',
+                    value: '48px'
                 }
             },
             da: {
@@ -69,6 +74,22 @@
                     'x-large': 'Çok Büyük',
                     'custom': 'Görenek'
                 }
+            },
+            zh_tw: {
+                fontsize: '字體大小',
+                fontsizes: {
+                    'x-small': '最小',
+                    'small': '小',
+                    'medium': '中',
+                    'large': '大',
+                    'x-large': '最大',
+                    'custom': '自訂大小',
+                },
+                fontCustomSize: {
+                    title: '自訂義字體大小',
+                    label: '字體大小',
+                    value: '48px'
+                }
             }
         }
     });
@@ -105,11 +126,11 @@
         var freeSizeButtonName = 'fontsize_custom',
             freeSizeBtnDef = {
                 fn: function () {
-                    trumbowyg.openModalInsert('Custom Font Size',
+                    trumbowyg.openModalInsert(trumbowyg.lang.fontCustomSize.title,
                         {
                             size: {
-                                label: 'Font Size',
-                                value: '48px'
+                                label: trumbowyg.lang.fontCustomSize.label,
+                                value: trumbowyg.lang.fontCustomSize.value
                             }
                         },
                         function (values) {

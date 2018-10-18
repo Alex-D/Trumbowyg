@@ -29,22 +29,11 @@
 
             <h4>The code</h4>
             <pre><code class="js-code-to-eval javascript">
-// Customize your emoji images base URL
-emojify.setConfig({
-    img_dir : '//cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic/',
-});
-
 $('#editor')
 .trumbowyg({
     btns: [
         ['emoji']
     ]
-});
-emojify.run();
-
-// Will transform an :emoji: to img tag at each input
-$('.trumbowyg-editor').on('input propertychange', function() {
-    emojify.run();
 });
             </code></pre>
         </div>
@@ -60,8 +49,6 @@ $('.trumbowyg-editor').on('input propertychange', function() {
 &lt;!-- Import jQuery -->
 &lt;script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">&lt;/script>
 &lt;script>window.jQuery || document.write('&lt;script src="js/vendor/jquery-3.2.1.min.js">&lt;\/script>')&lt;/script>
-&lt;!-- Import emojify.js -->
-&lt;script src="//cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/js/emojify.min.js">&lt;/script>
             </code></pre>
         </div>
     </section>
@@ -71,8 +58,6 @@ $('.trumbowyg-editor').on('input propertychange', function() {
 <!-- Import jQuery -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="../../js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
-<!-- Import emojify.js -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/js/emojify.min.js"></script>
 
 <!-- DO NOT COPY THIS LINES IN YOUR PROJECT, THEY ARE THERE JUST FOR THE EXAMPLE PAGE PRUPOSE -->
 <script src="../js/loader.js"></script>

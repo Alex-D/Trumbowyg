@@ -1419,8 +1419,9 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             var $modal = $('<div/>', {
                 class: prefix + 'modal ' + prefix + 'fixed-top'
             }).css({
-                top: t.$btnPane.height()
-            }).appendTo(t.$box);
+                top: t.$box.offset().top + t.$btnPane.height(),
+                zIndex: 99999
+            }).appendTo($(document.body));
 
             // Click on overlay close modal by cancelling them
             t.$overlay.one('click', function () {
@@ -1506,7 +1507,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             t.$overlay.off();
 
             // Find the modal box
-            var $modalBox = $('.' + prefix + 'modal-box', t.$box);
+            var $modalBox = $('.' + prefix + 'modal-box', $(document.body));
 
             $modalBox.animate({
                 top: '-' + $modalBox.height()

@@ -43,7 +43,7 @@ jQuery.trumbowyg.langs.de = {
 
     fullscreen: 'Vollbild',
 
-    close: 'Schliessen',
+    close: 'Schließen',
 
     submit: 'Bestätigen',
     reset: 'Zurücksetzen',
