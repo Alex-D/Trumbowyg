@@ -34,7 +34,9 @@
                                         newHeight = opt.minSize;
                                     }
                                     newHeight -= newHeight % opt.step;
+                                    newWidth -= newWidth % opt.step;
                                     $el.height(newHeight);
+                                    $el.width(newWidth);
                                     return false;
                                 },
                                 onDragEnd: function () {
