@@ -1322,7 +1322,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }
 
             t.openModalInsert(t.lang.insertImage, options, function (v) { // v are values
-                t.execCmd('insertImage', v.url);
+                t.execCmd('insertImage', v.url, false, true);
                 var $img = $('img[src="' + v.url + '"]:not([alt])', t.$box);
                 $img.attr('alt', v.alt);
 
@@ -1421,7 +1421,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }).css({
                 top: t.$box.offset().top + t.$btnPane.height(),
                 zIndex: 99999
-            }).appendTo($(document.body));
+            }).appendTo($(t.doc.body));
 
             // Click on overlay close modal by cancelling them
             t.$overlay.one('click', function () {
