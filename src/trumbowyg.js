@@ -681,6 +681,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     setTimeout(function () {
                         t.semanticCode(false, true);
                         t.$c.trigger('tbwpaste', e);
+                        t.$c.trigger('tbwchange');
                     }, 0);
                 });
 
