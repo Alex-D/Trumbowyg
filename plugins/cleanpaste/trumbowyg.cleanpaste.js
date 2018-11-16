@@ -97,16 +97,16 @@
         plugins: {
             cleanPaste: {
                 init: function (trumbowyg) {
-                    trumbowyg.pasteHandlers.push(function () {
-                        try {
-                            trumbowyg.$ed.html(cleanIt(trumbowyg.$ed.html()));
-                        } catch (c) {
-                        }
-                    });
+                    setTimeout(function () { 
+                      trumbowyg.pasteHandlers.push(function () {
+                          try {
+                              trumbowyg.$ed.html(cleanIt(trumbowyg.$ed.html()));
+                          } catch (c) {
+                          }
+                      });
+                    }, 0);
                 }
             }
         }
     });
 })(jQuery);
-
-
