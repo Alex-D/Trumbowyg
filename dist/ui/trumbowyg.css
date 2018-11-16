@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.11.1 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.12.0 - A lightweight WYSIWYG editor
  * Default stylesheet for Trumbowyg editor
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -20,10 +20,14 @@
 
 .trumbowyg-box *,
 .trumbowyg-box *::before,
-.trumbowyg-box *::after {
+.trumbowyg-box *::after,
+.trumbowyg-modal *,
+.trumbowyg-modal *::before,
+.trumbowyg-modal *::after {
   box-sizing: border-box; }
 
-.trumbowyg-box svg {
+.trumbowyg-box svg,
+.trumbowyg-modal svg {
   width: 17px;
   height: 100%;
   fill: #222; }
