@@ -82,6 +82,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         resetCss: false,
         removeformatPasted: false,
         tagsToRemove: [],
+        tagsToKeep: ['hr', 'img', 'embed', 'iframe', 'input'],
         btns: [
             ['viewHTML'],
             ['undo', 'redo'], // Only supported in Blink browsers
@@ -681,6 +682,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     setTimeout(function () {
                         t.semanticCode(false, true);
                         t.$c.trigger('tbwpaste', e);
+                        t.$c.trigger('tbwchange');
                     }, 0);
                 });
 
@@ -1071,7 +1073,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         },
         syncTextarea: function () {
             var t = this;
-            t.$ta.val(t.$ed.text().trim().length > 0 || t.$ed.find('hr,img,embed,iframe,input').length > 0 ? t.$ed.html() : '');
+            t.$ta.val(t.$ed.text().trim().length > 0 || t.$ed.find(t.o.tagsToKeep.join(',')).length > 0 ? t.$ed.html() : '');
         },
         syncCode: function (force) {
             var t = this;
@@ -1178,6 +1180,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             $(oldTag, this.$ed).each(function () {
                 var $oldTag = $(this);
+                if($oldTag.contents().length === 0) {
+                    return false;
+                }
+
                 $oldTag.wrap('<' + newTag + '/>');
                 if (copyAttributes) {
                     $.each($oldTag.prop('attributes'), function () {
@@ -1322,7 +1328,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }
 
             t.openModalInsert(t.lang.insertImage, options, function (v) { // v are values
-                t.execCmd('insertImage', v.url);
+                t.execCmd('insertImage', v.url, false, true);
                 var $img = $('img[src="' + v.url + '"]:not([alt])', t.$box);
                 $img.attr('alt', v.alt);
 
@@ -1421,7 +1427,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }).css({
                 top: t.$box.offset().top + t.$btnPane.height(),
                 zIndex: 99999
-            }).appendTo($(document.body));
+            }).appendTo($(t.doc.body));
 
             // Click on overlay close modal by cancelling them
             t.$overlay.one('click', function () {

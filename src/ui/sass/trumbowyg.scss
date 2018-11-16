@@ -19,7 +19,8 @@ $slow-transition-duration: 300ms !default;
     }
 }
 
-.trumbowyg-box {
+.trumbowyg-box,
+.trumbowyg-modal {
     *,
     *::before,
     *::after {

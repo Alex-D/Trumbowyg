@@ -67,6 +67,8 @@
                         <li><a href="#semantic">Semantic</a></li>
                         <li><a href="#reset-css">Reset CSS</a></li>
                         <li><a href="#remove-format-pasted">Remove format pasted</a></li>
+                        <li><a href="#tags-to-remove">Tags to remove</a></li>
+                        <li><a href="#tags-to-keep">Tags to keep</a></li>
                         <li><a href="#auto-grow">Auto grow</a></li>
                         <li><a href="#auto-grow-on-enter">Auto grow on enter</a></li>
                         <li><a href="#image-width-modal-edit">Image width modal edit</a></li>
@@ -583,6 +585,43 @@ $('.trumbowyg').trumbowyg({
             </p>
             <p class="note">
                 Remove format pasted is not active by default (set to <code>false</code>).
+            </p>
+        </div>
+
+
+        <div class="feature" data-added="2.0.0">
+            <h3 id="tags-to-remove">Tags to remove</h3>
+            <p>
+                Allow to sanitize the code by removing all tags you want. The <code>tagsToRemove</code>
+                option is an array.
+            </p>
+            <pre><code class="javascript">
+$('.trumbowyg').trumbowyg({
+    tagsToRemove: ['script', 'link']
+});
+            </code></pre>
+            <p class="note">
+                You must do the sanitize server-side too to avoid some security issues like XSS.
+            </p>
+            <p class="note">
+                Tags to remove is an empty array by default (set to <code>[]</code>).
+            </p>
+        </div>
+
+
+        <div class="feature" data-added="2.12.0">
+            <h3 id="tags-to-keep">Tags to keep</h3>
+            <p>
+                Sometimes you want to keep some empty <code>i</code> tags for <em>Font Awesome</em> or anything else. You can define this list via the <code>tagsToKeep</code>
+                option.
+            </p>
+            <pre><code class="javascript">
+$('.trumbowyg').trumbowyg({
+    tagsToKeep: ['i', 'script[src]']
+});
+            </code></pre>
+            <p class="note">
+                Default tags to keep are <code>['hr', 'img', 'embed', 'iframe', 'input']</code>.
             </p>
         </div>
 
