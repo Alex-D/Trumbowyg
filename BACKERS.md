@@ -23,6 +23,20 @@ You can support it's ongoing development by being a backer or a sponsor:
     </a>
 </p>
 
+<h2 align="center">Silver sponsors</h2>
+
+<p align="center">
+    <a href="https://socialoptic.com/?ref=trumbowyg">
+        <img src="https://rawcdn.githack.com/Alex-D/Trumbowyg/develop/sponsors/socialoptic.png" alt="SocialOptic" width="150px"/>
+    </a>
+</p>
+
+<p align="center">
+    <a href="https://www.patreon.com/bePatron?c=1176005&rid=1940456">
+        Become a Sponsor
+    </a>
+</p>
+
 <h2 align="center">Backers</h2>
 
 - Johan Rosenson
