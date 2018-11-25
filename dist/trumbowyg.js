@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.12.1 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.12.2 - A lightweight WYSIWYG editor
  * Trumbowyg core file
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -653,7 +653,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         }
                     }
                 })
-                .on('cut', function () {
+                .on('cut drop', function () {
                     setTimeout(function () {
                         t.semanticCode(false, true);
                         t.$c.trigger('tbwchange');
