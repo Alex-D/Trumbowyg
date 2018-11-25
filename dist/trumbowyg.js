@@ -653,6 +653,12 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         }
                     }
                 })
+                .on('drop', function () {
+                    setTimeout(function () {
+                        t.semanticCode(false, true);
+                        t.$c.trigger('tbwchange');
+                    }, 0);
+                })
                 .on('cut', function () {
                     setTimeout(function () {
                         t.semanticCode(false, true);
