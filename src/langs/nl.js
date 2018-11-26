@@ -47,7 +47,7 @@ jQuery.trumbowyg.langs.nl = {
     close: 'Sluiten',
 
     submit: 'Opslaan',
-    reset: 'Herstellen',
+    reset: 'Annuleren',
 
     required: 'Verplicht',
     description: 'Omschrijving',
