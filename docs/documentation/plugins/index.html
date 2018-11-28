@@ -60,6 +60,7 @@
                         <li><a href="#plugin-preformatted">Preformatted</a></li>
                         <li><a href="#plugin-resizimg">Resizimg</a></li>
                         <li><a href="#plugin-ruby">Ruby</a></li>
+                        <li><a href="#plugin-specialchars">Special Chars</a></li>
                         <li><a href="#plugin-table">Table</a></li>
                         <li><a href="#plugin-template">Template</a></li>
                         <li><a href="#plugin-upload">Upload</a></li>
@@ -345,7 +346,7 @@ $('#my-editor').trumbowyg({
 &lt;link rel="stylesheet" href="node_modules/prismjs/themes/prism.css">
             </code></pre>
         </div>
-      
+
         <div class="feature">
             <h3 id="plugin-history">History</h3>
             <p class="added-feature">Stable</p>
@@ -513,7 +514,7 @@ $('#my-editor').trumbowyg({
 });
             </code></pre>
         </div>
-		
+
 		<div class="feature">
             <h3 id="plugin-pasteembed">Paste embed</h3>
             <p class="added-feature">Stable</p>
@@ -604,12 +605,12 @@ $('#my-editor').trumbowyg({
             <p>
                 Allows you to resize images (preserving aspect ratio) by dragging their bottom-right corner. Available options:
             </p>
-            
+
             <ul>
                 <li><code>minSize</code> (default: 32): minimal size of image and also of draggable right-bottom corner</li>
                 <li><code>step</code> (default: 4): increment when increasing / decreasing image height</li>
             </ul>
-          
+
             <h4>Dependencies</h4>
             <p>
                 This plugin depends on the
@@ -651,6 +652,43 @@ $('#my-editor').trumbowyg({
                 Some doc to write... <br>
                 You can contribute to this documentation by submitting a Pull Request :)
             </p>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-specialchars">Special Chars</h3>
+            <p class="added-feature">Stable</p>
+
+            <p>
+                Special Chars plugin allows you to insert some special characters in your editor.
+            </p>
+
+            <p>
+                <a href="../../demos/#plugins-specialchars" class="button button-demo">Try special chars live demo!</a>
+                <a href="https://github.com/geektortoise/Trumbowyg/tree/master/plugins/specialchars/trumbowyg.specialchars.js" class="button button-demo">
+                    View specialChars plugin code on GitHub
+                </a>
+            </p>
+
+            <h4>How to use it?</h4>
+	    <pre><code class="html">
+&lt;-- Import Trumbowyg specialchars style in &lt;head>... -->
+&lt;script src="node_modules/trumbowyg/dist/plugins/specialchars/ui/trumbowyg.specialchars.css">&lt;/script>
+            </code></pre>
+            <pre><code class="html">
+&lt;-- Import Trumbowyg specialchars at the end of &lt;body>... -->
+&lt;script src="node_modules/trumbowyg/dist/plugins/specialchars/trumbowyg.specialchars.min.js">&lt;/script>
+            </code></pre>
+            <p>
+                Then you can use the new button definition <code>specialchars</code>
+            </p>
+
+            <pre><code class="javascript">
+$('#my-editor').trumbowyg({
+    btns: [
+        ['specialChars']
+    ]
+});
+            </code></pre>
         </div>
 
         <div class="feature">
