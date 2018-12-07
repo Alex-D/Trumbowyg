@@ -20,6 +20,22 @@
                     value: '48px'
                 }
             },
+            es: {
+                fontsize: 'Tamaño de Fuente',
+                fontsizes: {
+                    'x-small': 'Extra pequeña',
+                    'small': 'Pegueña',
+                    'medium': 'Regular',
+                    'large': 'Grande',
+                    'x-large': 'Extra Grande',
+                    'custom': 'Customizada'
+                },
+                fontCustomSize: {
+                    title: 'Tamaño de Fuente Customizada',
+                    label: 'Tamaño de Fuente',
+                    value: '48px'
+                }
+            },
             da: {
                 fontsize: 'Skriftstørrelse',
                 fontsizes: {
