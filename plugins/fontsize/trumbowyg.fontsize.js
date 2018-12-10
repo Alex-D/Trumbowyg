@@ -67,6 +67,11 @@
                     'large': 'Groß',
                     'x-large': 'Sehr groß',
                     'custom': 'Benutzerdefiniert'
+                },
+                fontCustomSize: {
+                    title: 'Benutzerdefinierte Schriftgröße',
+                    label: 'Schriftgröße',
+                    value: '48px'
                 }
             },
             nl: {
