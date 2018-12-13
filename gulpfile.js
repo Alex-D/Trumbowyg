@@ -86,6 +86,7 @@ gulp.task('plugins-scripts', ['test-scripts'], function () {
 
 gulp.task('langs', ['test-langs'], function () {
     return gulp.src(paths.langs)
+        .pipe(gulp.dest('dist/langs/'))
         .pipe($.rename({suffix: '.min'}))
         .pipe($.uglify({
             preserveComments: 'all'
