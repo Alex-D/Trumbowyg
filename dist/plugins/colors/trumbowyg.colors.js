@@ -175,6 +175,7 @@
                         {
                             color: {
                                 label: fn,
+                                forceCss: true,
                                 type: 'color',
                                 value: '#FFFFFF'
                             }
