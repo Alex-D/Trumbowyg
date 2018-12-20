@@ -54,6 +54,9 @@
                 table: 'Insérer un tableau',
                 tableAddRow: 'Ajouter des lignes',
                 tableAddColumn: 'Ajouter des colonnes',
+                tableDeleteRow: 'Effacer la ligne',
+                tableDeleteColumn: 'Effacer la colonne',
+                tableDestroy: 'Effacer le tableau',
                 error: 'Erreur'
             },
             cs: {
