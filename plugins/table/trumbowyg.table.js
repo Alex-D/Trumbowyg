@@ -101,6 +101,15 @@
                 tableDestroy: 'Hapus tabel',
                 error: 'Galat'
             },
+            pt_br: {
+                table: 'Inserir tabela',
+                tableAddRow: 'Adicionar linha',
+                tableAddColumn: 'Adicionar coluna',
+                tableDeleteRow: 'Deletar linha',
+                tableDeleteColumn: 'Deletar coluna',
+                tableDestroy: 'Deletar tabela',
+                error: 'Erro'
+            }
         },
 
         plugins: {

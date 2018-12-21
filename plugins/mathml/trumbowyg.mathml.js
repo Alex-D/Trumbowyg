@@ -36,6 +36,11 @@
                 formulas: '方程式',
                 inline: '內嵌'
             },
+            pt_br: {
+                mathml: 'Inserir fórmulas',
+                formulas: 'Fórmulas',
+                inline: 'Em linha'
+            },
         },
         plugins: {
             mathml: {

@@ -22,8 +22,11 @@
             tr: {
                 fontFamily: 'Yazı Tipi'
             },
-            zh_tw:{
+            zh_tw: {
                 fontFamily: '字體',
+            },
+            pt_br: {
+                fontFamily: 'Fonte',
             }
         }
     });

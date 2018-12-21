@@ -58,6 +58,15 @@
                     '2.0': '特大'
                 }
             },
+            pt_br: {
+                lineheight: 'Altura de linha',
+                lineheights: {
+                    '0.9':    'Pequena',
+                    'normal': 'Regular',
+                    '1.5':    'Grande',
+                    '2.0':    'Extra grande'
+                }
+            },
         }
     });
     // jshint camelcase:true

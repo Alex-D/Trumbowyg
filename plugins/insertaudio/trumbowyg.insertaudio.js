@@ -50,6 +50,9 @@
             },
             tr: {
                 insertAudio: 'Ses Ekle'
+            },
+            pt_br: {
+                insertAudio: 'Inserir áudio'
             }
         },
         plugins: {

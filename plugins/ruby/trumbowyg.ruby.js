@@ -43,6 +43,11 @@
                 rubyModal: 'Ruby 彈跳視窗',
                 rubyText: 'Ruby 文字'
             },
+            pt_br: {
+                ruby: 'Adicionar texto ruby',
+                rubyModal: 'Modal ruby',
+                rubyText: 'Texto ruby'
+            }
         },
         plugins: {
             ruby: {

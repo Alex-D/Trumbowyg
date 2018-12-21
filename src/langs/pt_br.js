@@ -61,5 +61,5 @@ jQuery.trumbowyg.langs.pt_br = {
     description: 'Descrição',
     title: 'Título',
     text: 'Texto',
-    target: 'Target'
+    target: 'Alvo'
 };
