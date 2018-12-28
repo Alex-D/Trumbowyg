@@ -17,6 +17,7 @@ jQuery.trumbowyg.langs.ca = {
     blockquote: 'Citació',
     code: 'Codi',
     header: 'Títol',
+    pre: 'Preformatat',
 
     bold: 'Negreta',
     italic: 'Itàlica',

@@ -21,6 +21,7 @@ jQuery.trumbowyg.langs.fr = {
     blockquote: 'Citation',
     code: 'Code',
     header: 'Titre',
+    pre: 'Préformaté',
 
     bold: 'Gras',
     italic: 'Italique',

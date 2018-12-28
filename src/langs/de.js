@@ -15,6 +15,7 @@ jQuery.trumbowyg.langs.de = {
     blockquote: 'Zitat',
     code: 'Code',
     header: 'Überschrift',
+    pre: 'Vorformatierten'
 
     bold: 'Fett',
     italic: 'Kursiv',

@@ -18,6 +18,7 @@ jQuery.trumbowyg.langs.es = {
     blockquote: 'Cita',
     code: 'Código',
     header: 'Título',
+    pre: 'Preformateado',
 
     bold: 'Negrita',
     italic: 'Cursiva',
