@@ -125,8 +125,7 @@
                           var $dropdown = $('<div/>', dropdownOptions);
 
                           if (t.$box.find("." + dropdownPrefix + "-" + btnName).length === 0) {
-                            var buttonGroup = t.$box.find("." + t.o.prefix + btnName + "-button");
-                            buttonGroup.parent().append($dropdown.hide());
+                            t.$box.append($dropdown.hide());
                           } else {
                             $dropdown = t.$box.find("." + dropdownPrefix + "-" + btnName);
                           }

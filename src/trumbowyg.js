@@ -11,6 +11,7 @@ jQuery.trumbowyg = {
             blockquote: 'Quote',
             code: 'Code',
             header: 'Header',
+            pre: 'Preformatted',
 
             bold: 'Bold',
             italic: 'Italic',
@@ -304,6 +305,17 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 fn: 'formatBlock',
                 title: h + ' 4'
             },
+            h5: {
+                fn: 'formatBlock',
+                title: h + ' 5'
+            },
+            h6: {
+                fn: 'formatBlock',
+                title: h + ' 6'
+            },
+            pre: {
+                fn: 'formatBlock'
+            },
             subscript: {
                 tag: 'sub'
             },
@@ -388,7 +400,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             // Dropdowns
             formatting: {
-                dropdown: ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4'],
+                dropdown: ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'pre'],
                 ico: 'p'
             },
             link: {
@@ -805,7 +817,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         $dropdown.append(t.buildSubBtn(def));
                     }
                 });
-                $btn.append($dropdown.hide());
+                t.$box.append($dropdown.hide());
             } else if (btn.key) {
                 t.keys[btn.key] = {
                     fn: btn.fn || btnName,
