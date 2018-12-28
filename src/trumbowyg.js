@@ -805,7 +805,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         $dropdown.append(t.buildSubBtn(def));
                     }
                 });
-                $btn = $btn.add($dropdown.hide());
+                $btn.append($dropdown.hide());
             } else if (btn.key) {
                 t.keys[btn.key] = {
                     fn: btn.fn || btnName,
