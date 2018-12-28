@@ -48,6 +48,10 @@
                 noembed: '插入影片',
                 noembedError: '錯誤'
             },
+            pt_br: {
+                noembed: 'Incorporar',
+                noembedError: 'Erro'
+            },
         },
 
         plugins: {

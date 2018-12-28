@@ -37,6 +37,9 @@
             zh_tw: {
                 mention: '標記'
             },
+            pt_br: {
+                mention: 'Menção'
+            },
         },
 
         plugins: {

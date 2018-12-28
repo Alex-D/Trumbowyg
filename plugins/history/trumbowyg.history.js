@@ -39,7 +39,13 @@
                    redo: '重做',
                    undo: '復原'
                }
-            }
+            },
+            pt_br: {
+                history: {
+                    redo: 'Refazer',
+                    undo: 'Desfazer'
+                }
+            },
         },
         plugins: {
             history: {
