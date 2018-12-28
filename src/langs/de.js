@@ -47,7 +47,7 @@ jQuery.trumbowyg.langs.de = {
     close: 'Schließen',
 
     submit: 'Bestätigen',
-    reset: 'Zurücksetzen',
+    reset: 'Abbrechen',
 
     required: 'Erforderlich',
     description: 'Beschreibung',
