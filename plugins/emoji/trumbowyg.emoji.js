@@ -1275,6 +1275,9 @@
             da: {
                 emoji: 'Tilføj et humørikon'
             },
+	    de: {
+		emoji: 'Emoticon einfügen'
+	    },
             fr: {
                 emoji: 'Ajouter un emoji'
             },

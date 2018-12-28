@@ -58,6 +58,11 @@
                 file: 'Fil',
                 uploadError: 'Fejl'
             },
+	    de: {
+		upload: 'Hochladen',
+		file: 'Datei',
+		uploadError: 'Fehler'
+	    },
             sk: {
                 upload: 'Nahrať',
                 file: 'Súbor',
