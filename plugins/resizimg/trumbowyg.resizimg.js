@@ -38,7 +38,7 @@
                                     return false;
                                 },
                                 onDragEnd: function () {
-                                    trumbowyg.$c.trumbowyg('execCmd', {cmd: 'syncCode'});
+                                    trumbowyg.syncCode();
                                 }
                             }
                         }
