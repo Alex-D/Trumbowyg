@@ -1426,7 +1426,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             var $modal = $('<div/>', {
                 class: prefix + 'modal ' + prefix + 'fixed-top'
             }).css({
-                top: t.$box.offset().top + t.$btnPane.height(),
+                top: t.$box.offset().top + t.$btnPane.height()  + $(window).scrollTop(),
                 zIndex: 99999
             }).appendTo($(t.doc.body));
 
