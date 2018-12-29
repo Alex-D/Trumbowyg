@@ -38,7 +38,7 @@
                                     return false;
                                 },
                                 onDragEnd: function () {
-                                    trumbowyg.$c.trigger('tbwchange');
+                                    trumbowyg.syncCode();
                                 }
                             }
                         }
