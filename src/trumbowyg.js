@@ -1153,7 +1153,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         return $(this).text().trim().length === 0 && $(this).children().not('br,span').length === 0;
                     }).contents().unwrap();
 
-                    // Get rid of temporial span's
+                    // Get rid of temporary span's
                     $('[data-tbw]', t.$ed).contents().unwrap();
 
                     // Remove empty <p>
