@@ -532,7 +532,7 @@ $('.trumbowyg').trumbowyg({
             <h3 id="semantic">Semantic</h3>
             <p>
                 Generates a better, more semantic oriented HTML (i.e. <code>&lt;em&gt;</code> instead of <code>
-                &lt;i&gt;</code>, <code>&lt;strong&gt;</code> intsead of <code>&lt;b&gt;</code>, etc.). It's just a
+                &lt;i&gt;</code>, <code>&lt;strong&gt;</code> instead of <code>&lt;b&gt;</code>, etc.). It's just a
                 boolean:
             </p>
             <pre><code class="javascript">
@@ -541,13 +541,39 @@ $('.trumbowyg').trumbowyg({
 });
             </code></pre>
             <p>
-                This option deactivates the <em>underline</em> button by default because they do not convey any real
+                Enabling semantic mode deactivates the <em>underline</em> button by default because they do not convey any real
                 semantic. If you want to reactivate them, you have to do it explicitly, see <a href="#button-pane">Button
                 pane</a>
             </p>
-            <p class="note">
-                This option is set to <code>true</code> by default
+            <p>
+                Since 2.12.0 you can also put an object to customize the semantic tag mapping for each one of these tags:
+                <code>&lt;b&gt;</code>,
+                <code>&lt;i&gt;</code>,
+                <code>&lt;s&gt;</code>,
+                <code>&lt;strike&gt;</code>,
+                <code>&lt;div&gt;</code>.
             </p>
+            <pre><code class="javascript">
+$('.trumbowyg').trumbowyg({
+    semantic: {
+        'div': 'div' // Editor does nothing on div tags now
+    }
+});
+            </code></pre>
+            <p class="note">
+                This option is set to <code>true</code> by default which is equivalent to:
+            </p>
+            <pre><code class="javascript">
+$('.trumbowyg').trumbowyg({
+    semantic: {
+        'b': 'strong',
+        'i': 'em',
+        's': 'del',
+        'strike': 'del',
+        'div': 'p'
+    }
+});
+            </code></pre>
         </div>
 
 
