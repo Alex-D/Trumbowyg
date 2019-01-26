@@ -53,7 +53,8 @@
                     function destroyResizable() {
                         trumbowyg.$ed.find('img.resizable')
                             .resizable('destroy')
-                            .off('mousedown', preventDefault);
+                            .off('mousedown', preventDefault)
+                            .removeClass('resizable');
                         trumbowyg.syncTextarea();
                     }
 
