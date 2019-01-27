@@ -25,7 +25,7 @@
     "gulp-concat": "2.6.0",
     "gulp-header": "1.7.1",
     "gulp-jshint": "2.1.0",
-    "gulp-livereload": "3.8.1",
+    "gulp-livereload": "4.0.1",
     "gulp-load-plugins": "1.5.0",
     "gulp-minify-css": "1.2.1",
     "gulp-newer": "1.0.0",
