@@ -61,6 +61,9 @@
         langs: {
             en: {
                 highlight: 'Code syntax highlight'
+            },
+            pt_br: {
+                highlight: 'Realçar sintaxe de código'
             }
         },
         // Add our plugin to Trumbowyg registred plugins

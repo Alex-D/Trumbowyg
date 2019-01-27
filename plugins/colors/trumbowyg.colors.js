@@ -61,6 +61,10 @@
             tr: {
                 foreColor: 'Yazı rengi',
                 backColor: 'Arkaplan rengi'
+            },
+            pt_br: {
+                foreColor: 'Cor de fonte',
+                backColor: 'Cor de fundo'
             }
         }
     });

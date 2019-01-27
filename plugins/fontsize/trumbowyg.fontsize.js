@@ -111,6 +111,22 @@
                     label: '字體大小',
                     value: '48px'
                 }
+            },
+            pt_br: {
+                fontsize: 'Tamanho da fonte',
+                fontsizes: {
+                        'x-small':'Extra pequeno',
+                        'small':'Pequeno',
+                        'regular':'Médio',
+                        'large':'Grande',
+                        'x-large':'Extra grande',
+                        'custom':'Personalizado'
+                },
+                fontCustomSize: {
+                    title: 'Tamanho de Fonte Personalizado',
+                    label: 'Tamanho de Fonte',
+                    value: '48px'
+                }
             }
         }
     });
