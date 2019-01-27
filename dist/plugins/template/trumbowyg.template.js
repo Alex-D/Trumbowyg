@@ -28,6 +28,9 @@
             zh_tw: {
                 template: '模板',
             },
+            pt_br: {
+                template: 'Modelo'
+            }
         }
     });
 

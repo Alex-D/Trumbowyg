@@ -28,6 +28,7 @@ jQuery.trumbowyg.langs.de = {
     unorderedList: 'Ungeordnete Liste',
     orderedList: 'Geordnete Liste',
 
+    image: 'Bild',
     insertImage: 'Bild einfügen',
     insertVideo: 'Video einfügen',
     link: 'Link',
@@ -47,7 +48,7 @@ jQuery.trumbowyg.langs.de = {
     close: 'Schließen',
 
     submit: 'Bestätigen',
-    reset: 'Zurücksetzen',
+    reset: 'Abbrechen',
 
     required: 'Erforderlich',
     description: 'Beschreibung',
