@@ -1117,10 +1117,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             t.syncCode(force);
 
             if (t.o.semantic) {
-                t.semanticTag('b');
-                t.semanticTag('i');
-                t.semanticTag('s');
-                t.semanticTag('strike');
+                t.semanticTag('b', true);
+                t.semanticTag('i', true);
+                t.semanticTag('s', true);
+                t.semanticTag('strike', true);
 
                 if (full) {
                     var inlineElementsSelector = t.o.inlineElementsSelector,
