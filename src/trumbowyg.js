@@ -574,24 +574,24 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     if ((e.ctrlKey || e.metaKey) && !e.altKey) {
                         ctrl = true;
                         var key = t.keys[String.fromCharCode(e.which).toUpperCase()];
-						
+                        
                         try {
                             t.execCmd(key.fn, key.param);
                             return false;
                         } catch (c) {}
                     } else {
-						
-						if (e.key == 'Tab') { // Tab key
-							try {
-								if (e.shiftKey) {
-									t.execCmd('outdent', true, null);
-								} else {
-									t.execCmd('indent', true, null);
-								}
-								return false;
-							} catch (c) {}							
-						}
-					}
+                        
+                        if (e.key == 'Tab') { // Tab key
+                            try {
+                                if (e.shiftKey) {
+                                    t.execCmd('outdent', true, null);
+                                } else {
+                                    t.execCmd('indent', true, null);
+                                }
+                                return false;
+                            } catch (c) {}
+                        }
+                    }
                 })
                 .on('compositionstart compositionupdate', function () {
                     composition = true;
