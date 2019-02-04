@@ -81,6 +81,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         semantic: true,
         resetCss: false,
         removeformatPasted: false,
+        tabToIndent: false,
         tagsToRemove: [],
         tagsToKeep: ['hr', 'img', 'embed', 'iframe', 'input'],
         btns: [
@@ -574,11 +575,22 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     if ((e.ctrlKey || e.metaKey) && !e.altKey) {
                         ctrl = true;
                         var key = t.keys[String.fromCharCode(e.which).toUpperCase()];
-
+                        
                         try {
                             t.execCmd(key.fn, key.param);
                             return false;
-                        } catch (c) {
+                        } catch (c) {}
+                    } else {
+                        
+                        if (t.o.tabToIndent && e.key == 'Tab') {
+                            try {
+                                if (e.shiftKey) {
+                                    t.execCmd('outdent', true, null);
+                                } else {
+                                    t.execCmd('indent', true, null);
+                                }
+                                return false;
+                            } catch (c) {}
                         }
                     }
                 })
