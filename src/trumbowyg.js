@@ -81,6 +81,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         semantic: true,
         resetCss: false,
         removeformatPasted: false,
+        tabToIndent: false,
         tagsToRemove: [],
         tagsToKeep: ['hr', 'img', 'embed', 'iframe', 'input'],
         btns: [
@@ -581,7 +582,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         } catch (c) {}
                     } else {
                         
-                        if (e.key == 'Tab') { // Tab key
+                        if (t.o.tabToIndent && e.key == 'Tab') {
                             try {
                                 if (e.shiftKey) {
                                     t.execCmd('outdent', true, null);
