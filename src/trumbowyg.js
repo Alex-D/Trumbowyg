@@ -79,6 +79,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         prefix: 'trumbowyg-',
 
         semantic: true,
+        semanticKeepAttributes: false,
         resetCss: false,
         removeformatPasted: false,
         tabToIndent: false,
@@ -1129,10 +1130,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             t.syncCode(force);
 
             if (t.o.semantic) {
-                t.semanticTag('b');
-                t.semanticTag('i');
-                t.semanticTag('s');
-                t.semanticTag('strike');
+                t.semanticTag('b', t.o.semanticKeepAttributes);
+                t.semanticTag('i', t.o.semanticKeepAttributes);
+                t.semanticTag('s', t.o.semanticKeepAttributes);
+                t.semanticTag('strike', t.o.semanticKeepAttributes);
 
                 if (full) {
                     var inlineElementsSelector = t.o.inlineElementsSelector,
