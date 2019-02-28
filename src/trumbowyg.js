@@ -1739,9 +1739,11 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             // Fix IE11 Error 'Could not complete the operation due to error 800a025e'.
             // https://stackoverflow.com/questions/16160996/could-not-complete-the-operation-due-to-error-800a025e
-            if (documentSelection.rangeCount > 0 && documentSelection.getRangeAt(0).getClientRects.length > 0) {
+            try {
                 documentSelection.removeAllRanges();
+            } catch (e) {
             }
+            
             documentSelection.addRange(range || savedRange);
         },
         getRangeText: function () {
