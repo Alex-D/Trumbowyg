@@ -12,10 +12,11 @@
   "description": "A lightweight WYSIWYG editor",
   "main": "dist/trumbowyg.js",
   "keywords": [
-    "editor",
     "wysiwyg",
-    "javascript",
-    "richtext"
+    "editor",
+    "rich text",
+    "contenteditable",
+    "trumbowyg"
   ],
   "license": "MIT",
   "ignore": [

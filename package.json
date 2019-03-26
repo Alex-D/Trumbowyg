@@ -44,5 +44,12 @@
     "build": "gulp build",
     "clean": "gulp clean",
     "test": "gulp test"
-  }
+  },
+  "keywords": [
+    "wysiwyg",
+    "editor",
+    "rich text",
+    "contenteditable",
+    "trumbowyg"
+  ]
 }

@@ -1,13 +1,15 @@
 <p align="center">
-    <a href="http://alex-d.github.io/Trumbowyg/"><img src="banner.jpg" alt="Trumbowyg logo" /></a>
+    <a href="http://alex-d.github.io/Trumbowyg/"><img src="banner.jpg" alt="" /></a>
 </p>
 
 <p align="center">
-    <a href="https://cdnjs.com/libraries/Trumbowyg"><img src="https://img.shields.io/cdnjs/v/Trumbowyg.svg" alt="CDNJS" /></a>
-    <a href="https://www.npmjs.com/package/trumbowyg"><img src="https://img.shields.io/npm/dm/trumbowyg.svg" alt="Downloads" /></a>
-    <a href="https://www.npmjs.com/package/trumbowyg"><img src="https://img.shields.io/npm/v/trumbowyg.svg" alt="Version on npm" /></a>
-    <img src="https://img.shields.io/bower/v/trumbowyg.svg" alt="Version on bower" />
-    <a href="https://github.com/Alex-D/Trumbowyg/blob/develop/LICENSE"><img src="https://img.shields.io/npm/l/trumbowyg.svg" alt="Licence" /></a>
+    <a href="https://bundlephobia.com/result?p=trumbowyg"><img src="https://img.shields.io/bundlephobia/minzip/trumbowyg.svg?style=for-the-badge" alt="Downloads" /></a>
+    <a href="https://www.npmjs.com/package/trumbowyg"><img src="https://img.shields.io/npm/dm/trumbowyg.svg?color=blue&label=npm%20downloads&style=for-the-badge" alt="Downloads" /></a>
+    <a href="https://github.com/Alex-D/Trumbowyg/blob/develop/LICENSE"><img src="https://img.shields.io/npm/l/trumbowyg.svg?color=blue&style=for-the-badge" alt="Licence" /></a>
+    <br>
+    <a href="https://www.npmjs.com/package/trumbowyg"><img src="https://img.shields.io/npm/v/trumbowyg.svg?color=blue&style=for-the-badge" alt="Version on npm" /></a>
+    <a href="https://cdnjs.com/libraries/Trumbowyg"><img src="https://img.shields.io/cdnjs/v/Trumbowyg.svg?color=blue&style=for-the-badge" alt="CDNJS" /></a>
+    <img src="https://img.shields.io/bower/v/trumbowyg.svg?color=blue&style=for-the-badge" alt="Version on bower" />
 </p>
 
 
