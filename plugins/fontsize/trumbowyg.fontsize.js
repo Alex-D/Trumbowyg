@@ -127,6 +127,22 @@
                     label: 'Tamanho de Fonte',
                     value: '48px'
                 }
+            },
+            it: {
+                fontsize: 'Dimensioni del testo',
+                fontsizes: {
+                        'x-small':'Molto piccolo',
+                        'small':'piccolo',
+                        'regular':'normale',
+                        'large':'grande',
+                        'x-large':'Molto grande',
+                        'custom':'Personalizzato'
+                },
+                fontCustomSize: {
+                    title: 'Dimensioni del testo personalizzato',
+                    label: 'Dimensioni del testo',
+                    value: '48px'
+                }
             }
         }
     });

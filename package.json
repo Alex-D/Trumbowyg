@@ -2,7 +2,7 @@
   "name": "trumbowyg",
   "title": "Trumbowyg",
   "description": "A lightweight WYSIWYG editor",
-  "version": "2.14.0",
+  "version": "2.15.0",
   "main": "dist/trumbowyg.js",
   "homepage": "http://alex-d.github.io/Trumbowyg",
   "author": {
@@ -44,5 +44,12 @@
     "build": "gulp build",
     "clean": "gulp clean",
     "test": "gulp test"
-  }
+  },
+  "keywords": [
+    "wysiwyg",
+    "editor",
+    "rich text",
+    "contenteditable",
+    "trumbowyg"
+  ]
 }

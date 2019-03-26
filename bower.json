@@ -1,6 +1,6 @@
 {
   "name": "trumbowyg",
-  "version": "2.14.0",
+  "version": "2.15.0",
   "homepage": "https://github.com/Alex-D/Trumbowyg",
   "authors": [
     {
@@ -12,10 +12,11 @@
   "description": "A lightweight WYSIWYG editor",
   "main": "dist/trumbowyg.js",
   "keywords": [
-    "editor",
     "wysiwyg",
-    "javascript",
-    "richtext"
+    "editor",
+    "rich text",
+    "contenteditable",
+    "trumbowyg"
   ],
   "license": "MIT",
   "ignore": [

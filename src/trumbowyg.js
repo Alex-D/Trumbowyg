@@ -79,8 +79,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         prefix: 'trumbowyg-',
 
         semantic: true,
+        semanticKeepAttributes: false,
         resetCss: false,
         removeformatPasted: false,
+        tabToIndent: false,
         tagsToRemove: [],
         tagsToKeep: ['hr', 'img', 'embed', 'iframe', 'input'],
         btns: [
@@ -574,11 +576,22 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     if ((e.ctrlKey || e.metaKey) && !e.altKey) {
                         ctrl = true;
                         var key = t.keys[String.fromCharCode(e.which).toUpperCase()];
-
+                        
                         try {
                             t.execCmd(key.fn, key.param);
                             return false;
-                        } catch (c) {
+                        } catch (c) {}
+                    } else {
+                        
+                        if (t.o.tabToIndent && e.key == 'Tab') {
+                            try {
+                                if (e.shiftKey) {
+                                    t.execCmd('outdent', true, null);
+                                } else {
+                                    t.execCmd('indent', true, null);
+                                }
+                                return false;
+                            } catch (c) {}
                         }
                     }
                 })
@@ -1117,10 +1130,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             t.syncCode(force);
 
             if (t.o.semantic) {
-                t.semanticTag('b');
-                t.semanticTag('i');
-                t.semanticTag('s');
-                t.semanticTag('strike');
+                t.semanticTag('b', t.o.semanticKeepAttributes);
+                t.semanticTag('i', t.o.semanticKeepAttributes);
+                t.semanticTag('s', t.o.semanticKeepAttributes);
+                t.semanticTag('strike', t.o.semanticKeepAttributes);
 
                 if (full) {
                     var inlineElementsSelector = t.o.inlineElementsSelector,
@@ -1739,7 +1752,13 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 }
             }
 
-            documentSelection.removeAllRanges();
+            // Fix IE11 Error 'Could not complete the operation due to error 800a025e'.
+            // https://stackoverflow.com/questions/16160996/could-not-complete-the-operation-due-to-error-800a025e
+            try {
+                documentSelection.removeAllRanges();
+            } catch (e) {
+            }
+            
             documentSelection.addRange(range || savedRange);
         },
         getRangeText: function () {
