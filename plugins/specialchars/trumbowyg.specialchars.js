@@ -47,7 +47,6 @@
     });
     function buildDropdown(trumbowyg) {
         var dropdown = [];
-        var isNull = false;
         $.each(trumbowyg.o.plugins.specialchars.symbolList, function (i, symbol) {
             if(symbol === null){
                 symbol = '&nbsp';
@@ -59,7 +58,7 @@
                 defaultSymbolBtnDef = {
                     text: symbol,
                     fn: function () {
-                        var encodedSymbol = String.fromCodePoint(symbol.replace("&#", "0"));
+                        var encodedSymbol = String.fromCodePoint(symbol.replace('&#', '0'));
                         trumbowyg.execCmd('insertText', encodedSymbol);
                         return true;
                     }
