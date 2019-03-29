@@ -583,7 +583,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         } catch (c) {}
                     } else {
                         
-                        if (t.o.tabToIndent && e.key == 'Tab') {
+                        if (t.o.tabToIndent && e.key === 'Tab') {
                             try {
                                 if (e.shiftKey) {
                                     t.execCmd('outdent', true, null);
@@ -784,7 +784,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     type: 'button',
                     class: prefix + btnName + '-button ' + (btn.class || '') + (!hasIcon ? ' ' + prefix + 'textual-button' : ''),
                     html: t.hasSvg && hasIcon ?
-                        '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' :
+                        '<svg><use href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' :
                         t.hideButtonTexts ? '' : (btn.text || btn.title || t.lang[btnName] || btnName),
                     title: (btn.title || btn.text || textDef) + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
                     tabindex: -1,

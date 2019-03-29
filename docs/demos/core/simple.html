@@ -1,36 +1,39 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>pasteEmbed | Trumbowyg</title>
+    <title>Trumbowyg by Alex-D</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../../css/main.css">
 </head>
 <body class="documentation-body">
 <div class="main main-demo-inner">
     <section class="wrapper section">
-        <h2 class="section-title">Embed plugin</h2>
+        <h2 class="section-title">Simple</h2>
 
         <div class="feature">
             <h3>Basic usage</h3>
             <p>
-                This plugin allow you to insert iframes into your editor just by pasting an url.<br/>
-				It uses <a href="https://noembed.com">noembed</a> API to support Twitter, Youtube, Soundcloud and more. Find all supported websites at <a href="https://noembed.com">noembed</a>.<br/>
-				This plugin also uses <a href="https://www.maxmade.nl/">MAXmade</a> API in order to extend the list of supported websites. Need a website supported? Message them, they're nice. 
+                Only strong (bold), emphasis (italic), some align, image and link.
             </p>
 
-            <a href="../../documentation/plugins/#plugin-pasteembed" class="button button-demo">Read paste embed plugin documentation</a>
-
             <div id="editor">
-                <h2>Try to paste some urls!</h2>
-				<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/376360739&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true"></iframe>
-				<p>Try pasting this one: https://www.youtube.com/watch?v=dQw4w9WgXcQ</p>
-			</div>
+                <p style="text-align: center;">
+                  <strong>Colllect</strong> &mdash; See <em>more</em> at <a href="http://getcollect.io/?ref=trumbowyg">http://colllect.io</a>
+                </p>
+                <p style="text-align: center;">
+                    <img src="http://getcollect.io/images/install/ui.png" alt="Colllect" width="50%">
+                </p>
+            </div>
 
-            <h3>The code</h3>
+            <h4>The code</h4>
             <pre><code class="js-code-to-eval javascript">
-$('#editor')
-.trumbowyg({
+$('#editor').trumbowyg({
+    btns: [
+        ['strong', 'em'],
+        ['justifyLeft', 'justifyCenter'],
+        ['insertImage', 'link']
+    ]
 });
             </code></pre>
         </div>
@@ -61,7 +64,6 @@ $('#editor')
 <script>
     loadStyle('dist/ui/trumbowyg.css');
     loadScript('dist/trumbowyg.js', 'Import Trumbowyg');
-    loadScript('dist/plugins/pasteembed/trumbowyg.pasteembed.js', 'Import all plugins you want AFTER importing jQuery and Trumbowyg');
 </script>
 <script src="../js/runExampleCode.js"></script>
 <script src="../js/highlight.js"></script>
