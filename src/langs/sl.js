@@ -5,7 +5,7 @@ jQuery.trumbowyg.langs.sl = {
     p: 'Odstavek',
     blockquote: 'Citat',
     code: 'Koda',
-    header: 'Naslov',
+    header: 'Glava',
 
     bold: 'Krepko',
     italic: 'Ležeče',
