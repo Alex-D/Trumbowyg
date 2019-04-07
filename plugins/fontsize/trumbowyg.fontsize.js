@@ -21,18 +21,18 @@
                 }
             },
             es: {
-                fontsize: 'Tamaño de Fuente',
+                fontsize: 'Tamaño',
                 fontsizes: {
-                    'x-small': 'Extra pequeña',
-                    'small': 'Pegueña',
+                    'x-small': 'Extrapequeño',
+                    'small': 'Pequeño',
                     'medium': 'Regular',
                     'large': 'Grande',
-                    'x-large': 'Extra Grande',
-                    'custom': 'Customizada'
+                    'x-large': 'Extragrande',
+                    'custom': 'Personalizar'
                 },
                 fontCustomSize: {
-                    title: 'Tamaño de Fuente Customizada',
-                    label: 'Tamaño de Fuente',
+                    title: 'Tamaño personalizado',
+                    label: 'Tamaño',
                     value: '48px'
                 }
             },
