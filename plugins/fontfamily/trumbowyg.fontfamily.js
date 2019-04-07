@@ -10,6 +10,9 @@
             by: {
                 fontFamily: 'Шрыфт'
             },
+            es: {
+                fontFamily: 'Fuente'
+            },
             da: {
                 fontFamily: 'Skrifttype'
             },
