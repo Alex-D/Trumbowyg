@@ -1045,7 +1045,7 @@ $("#editor").trumbowyg('openModalInsert', {
             label: 'Alt',
             name: 'alt',
             value: img.attr('alt'),
-            type: 'text'.
+            type: 'text',
             attributes: {}
         },
         example: {
@@ -1057,8 +1057,10 @@ $("#editor").trumbowyg('openModalInsert', {
             // When attributes is missing, {} is used. Attributes are added as attributes to
             //   the input element.
             // For radio and checkbox fields, you will need to use attributes if you want it
-            //   to be checked by default.        }
+            //   to be checked by default.
+        }
     },
+    // Callback is called when user confirms
     callback: function(values){
         img.attr('src', values['url']);
         img.attr('alt', values['alt']);
