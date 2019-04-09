@@ -170,7 +170,7 @@
 
                     var tableAnimate = function(column_event) {
                       var column = $(column_event.target),
-                          table = column.parents('table'),
+                          table = column.closest('table'),
                           colIndex = this.cellIndex,
                           rowIndex = this.parentNode.rowIndex;
 
