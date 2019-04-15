@@ -250,7 +250,7 @@ $slow-transition-duration: 300ms !default;
 }
 
 .trumbowyg-dropdown {
-    width: 200px;
+    min-width: 200px;
     border: 1px solid $light-color;
     padding: 5px 0;
     border-top: none;
