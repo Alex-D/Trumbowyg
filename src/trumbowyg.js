@@ -818,6 +818,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         $dropdown.append(t.buildSubBtn(def));
                     }
                 });
+                // Allow to alter dropdown if needed.
+                if (typeof btn.alterDropdown === 'function') {
+                    btn.alterDropdown($dropdown);
+                }
                 t.$box.append($dropdown.hide());
             } else if (btn.key) {
                 t.keys[btn.key] = {
@@ -851,7 +855,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             return $('<button/>', {
                 type: 'button',
-                class: prefix + btnName + '-dropdown-button' + (btn.ico ? ' ' + prefix + btn.ico + '-button' : ''),
+                class: prefix + btnName + '-dropdown-button ' + (btn.class || '') + (btn.ico ? ' ' + prefix + btn.ico + '-button' : ''),
                 html: t.hasSvg && hasIcon ? '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' + (btn.text || btn.title || t.lang[btnName] || btnName) : (btn.text || btn.title || t.lang[btnName] || btnName),
                 title: ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : null),
                 style: btn.style || null,
