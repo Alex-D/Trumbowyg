@@ -85,7 +85,7 @@ hljs.initHighlightingOnLoad();
     // Add anchors
     $('.feature h3[id]').each(function () {
         $(this).after($('<a/>', {
-            html: '<svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#trumbowyg-link"></use></svg>',
+            html: '<svg><use xlink:href="#trumbowyg-link"></use></svg>',
             'class': 'title-link',
             href: '#' + $(this).attr('id'),
             title: 'Permalink to ' + $(this).text()
