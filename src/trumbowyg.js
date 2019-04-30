@@ -1157,7 +1157,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
                     t.semanticTag('div', true);
 
-                    // Unwrap paragraphs content, containing nothing usefull
+                    // Unwrap paragraphs content, containing nothing useful
                     t.$ed.find('p').filter(function () {
                         // Don't remove currently being edited element
                         if (t.range && this === t.range.startContainer) {
@@ -1375,7 +1375,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         /*
          * Call method of trumbowyg if exist
          * else try to call anonymous function
-         * and finaly native execCommand
+         * and finally native execCommand
          */
         execCmd: function (cmd, param, forceCss, skipTrumbowyg) {
             var t = this;
@@ -1527,7 +1527,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             t.$overlay.off();
 
             // Find the modal box
-            var $modalBox = $('.' + prefix + 'modal-box', $(document.body));
+            var $modalBox = $('.' + prefix + 'modal-box', $(t.doc.body));
 
             $modalBox.animate({
                 top: '-' + $modalBox.height()
@@ -1538,7 +1538,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             t.restoreRange();
         },
-        // Preformated build and management modal
+        // Preformatted build and management modal
         openModalInsert: function (title, fields, cmd) {
             var t = this,
                 prefix = t.o.prefix,
@@ -1612,11 +1612,15 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         },
         addErrorOnModalField: function ($field, err) {
             var prefix = this.o.prefix,
+                spanErrorClass = prefix + 'msg-error',
                 $label = $field.parent();
 
             $field
                 .on('change keyup', function () {
                     $label.removeClass(prefix + 'input-error');
+                    setTimeout(function () {
+                        $label.find('.' + spanErrorClass).remove();
+                    }, 150);
                 });
 
             $label
@@ -1624,7 +1628,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 .find('input+span')
                 .append(
                     $('<span/>', {
-                        class: prefix + 'msg-error',
+                        class: spanErrorClass,
                         text: err
                     })
                 );
@@ -1832,9 +1836,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             });
         },
         destroyPlugins: function () {
+            var t = this;
             $.each(this.loadedPlugins, function (i, plugin) {
                 if (plugin.destroy) {
-                    plugin.destroy();
+                    plugin.destroy(t);
                 }
             });
         }
