@@ -20,7 +20,7 @@
             <a href="../../documentation/plugins/#plugin-specialchars" class="button button-demo">Read special chars plugin documentation</a>
 
             <div id="editor">
-                <h2>Select a character !</h2>
+                <h2>Select a character!</h2>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident
                     optio nam reiciendis eius beatae quibusdam!
@@ -34,6 +34,38 @@ $('#editor')
     btns: [
         ['specialChars']
     ]
+});
+            </code></pre>
+        </div>
+
+        <div class="feature">
+            <h3>Custom char list</h3>
+
+            <div id="editor-custom-list">
+                <h2>Select a character!</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident
+                    optio nam reiciendis eius beatae quibusdam!
+                </p>
+            </div>
+
+            <h4>The code</h4>
+            <pre><code class="js-code-to-eval javascript">
+$('#editor-custom-list')
+.trumbowyg({
+    btns: [
+        ['specialChars']
+    ],
+    plugins: {
+        specialchars: {
+            symbolList: [
+                '00A2', '00A5', '00A4', '2030',  null,
+                '00A9', '00AE',  '2122',  null,
+                '2023', '25B6', '2B29', '25C6', null,
+                '2211', '2243', '2264', '2265'
+ 		    ]
+        }
+    }
 });
             </code></pre>
         </div>
@@ -59,7 +91,7 @@ $('#editor')
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="../../js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
 
-<!-- DO NOT COPY THIS LINES IN YOUR PROJECT, THEY ARE THERE JUST FOR THE EXAMPLE PAGE PRUPOSE -->
+<!-- DO NOT COPY THESE LINES IN YOUR PROJECT, THEY ARE THERE JUST FOR THE EXAMPLE PAGE PURPOSE -->
 <script src="../js/loader.js"></script>
 <script>
     loadStyle('dist/ui/trumbowyg.css');
