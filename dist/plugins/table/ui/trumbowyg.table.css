@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.15.2 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.16.0 - A lightweight WYSIWYG editor
  * Trumbowyg plugin stylesheet
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -31,3 +31,6 @@
     background-color: #00b393;
     box-shadow: none;
     cursor: pointer; }
+
+.trumbowyg-dropdown-table .trumbowyg-table-size {
+  text-align: center; }

@@ -58,7 +58,11 @@
         plugins: {
             fontfamily: {
                 init: function (trumbowyg) {
-                    trumbowyg.o.plugins.fontfamily = trumbowyg.o.plugins.fontfamily || defaultOptions;
+                    trumbowyg.o.plugins.fontfamily = $.extend(true, {},
+                      defaultOptions,
+                      trumbowyg.o.plugins.fontfamily || {}
+                    );
+
                     trumbowyg.addBtnDef('fontfamily', {
                         dropdown: buildDropdown(trumbowyg),
                         hasIcon: false,
