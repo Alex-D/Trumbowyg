@@ -1,44 +1,33 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Table plugin | Trumbowyg</title>
+    <title>Paste image plugin | Trumbowyg</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../../css/main.css">
 </head>
 <body class="documentation-body">
 <div class="main main-demo-inner">
     <section class="wrapper section">
-        <h2 class="section-title">Table plugin</h2>
+        <h2 class="section-title">Paste image plugin</h2>
 
         <div class="feature">
             <h3>Basic usage</h3>
             <p>
-                This plugin allows you to add and manage a table.
+                Paste image plugin handle paste events, check if you have image files in your clipboard, then paste them
+                into the editor as base64. It do nothing on text or HTML paste.
             </p>
 
-            <a href="../../documentation/plugins/#plugin-table" class="button button-demo">Read table plugin documentation</a>
+            <a href="../../documentation/plugins/#plugin-pasteimage" class="button button-demo">Read paste image plugin documentation</a>
 
             <div id="editor">
-                <h2>Add a table to the editor</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident
-                    optio nam reiciendis eius beatae quibusdam!
-                </p>
-                <p>
-                    The text is derived from Cicero's De Finibus Bonorum et Malorum (On the Ends of Goods and Evils, or
-                    alternatively [About] The Purposes of Good and Evil). The original passage began: Neque porro quisquam est
-                    qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit (Translation: &quot;Neither is there
-                    anyone who loves grief itself since it is grief and thus wants to obtain it&quot;).
-                </p>
-            </div>
+                <h2>Try to paste some image!</h2>
+				<p>For example, you can right click > Copy Image on the Trumbowyg logo, then paste it here.</p>
+			</div>
 
             <h3>The code</h3>
             <pre><code class="js-code-to-eval javascript">
-$('#editor')
-.trumbowyg({
-    btns: ['table']
-});
+$('#editor').trumbowyg();
             </code></pre>
         </div>
 
@@ -67,9 +56,8 @@ $('#editor')
 <script src="../js/loader.js"></script>
 <script>
     loadStyle('dist/ui/trumbowyg.css');
-    loadStyle('dist/plugins/table/ui/trumbowyg.table.css', 'Import table plugin specific stylesheet');
     loadScript('dist/trumbowyg.js', 'Import Trumbowyg');
-    loadScript('dist/plugins/table/trumbowyg.table.js', 'Import all plugins you want AFTER importing jQuery and Trumbowyg');
+    loadScript('dist/plugins/pasteimage/trumbowyg.pasteimage.js', 'Import all plugins you want AFTER importing jQuery and Trumbowyg');
 </script>
 <script src="../js/runExampleCode.js"></script>
 <script src="../js/highlight.js"></script>

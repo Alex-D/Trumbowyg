@@ -1,7 +1,7 @@
 /* ===========================================================
  * trumbowyg.mathMl.js v1.0
  * MathML plugin for Trumbowyg
- * https://github.com/loclamor/Trumbowyg/tree/mathml-plugin/plugins/mathml
+ * http://alex-d.github.com/Trumbowyg
  * ===========================================================
  * Author : loclamor
  */
@@ -11,6 +11,7 @@
     'use strict';
     $.extend(true, $.trumbowyg, {
         langs: {
+            // jshint camelcase:false
             en: {
                 mathml: 'Insert Formulas',
                 formulas: 'Formulas',
@@ -42,6 +43,8 @@
                 inline: 'Em linha'
             },
         },
+        // jshint camelcase:true
+
         plugins: {
             mathml: {
                 init: function(trumbowyg) {
@@ -67,20 +70,26 @@
                             var mathmlCallback = function(v) {
                                 var delimitor = v.inline ? '$' : '$$';
                                 if (trumbowyg.currentMathNode) {
-                                    $(trumbowyg.currentMathNode).html(delimitor + ' ' + v.formulas + ' ' + delimitor).attr('formulas', v.formulas).attr('inline', (v.inline ? 'true' : 'false'));
+                                    $(trumbowyg.currentMathNode)
+                                        .html(delimitor + ' ' + v.formulas + ' ' + delimitor)
+                                        .attr('formulas', v.formulas)
+                                        .attr('inline', (v.inline ? 'true' : 'false'));
                                 } else {
                                     var html = '<span class="mathMlContainer" contenteditable="false" formulas="' + v.formulas + '" inline="' + (v.inline ? 'true' : 'false') + '" >' + delimitor + ' ' + v.formulas + ' ' + delimitor + '</span>';
                                     var node = $(html)[0];
-                                    node.onclick = function(e) {
+                                    node.onclick = function() {
                                         trumbowyg.currentMathNode = this;
                                         mathMLoptions.formulas.value = $(this).attr('formulas');
-                                        if ($(this).attr('inline') === "true") {
+
+                                        if ($(this).attr('inline') === 'true') {
                                             mathMLoptions.inline.attributes.checked = true;
                                         } else {
                                             delete mathMLoptions.inline.attributes.checked;
                                         }
+
                                         trumbowyg.openModalInsert(trumbowyg.lang.mathml, mathMLoptions, mathmlCallback);
                                     };
+
                                     trumbowyg.range.deleteContents();
                                     trumbowyg.range.insertNode(node);
                                 }

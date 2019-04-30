@@ -250,7 +250,7 @@ $slow-transition-duration: 300ms !default;
 }
 
 .trumbowyg-dropdown {
-    width: 200px;
+    min-width: 200px;
     border: 1px solid $light-color;
     padding: 5px 0;
     border-top: none;
@@ -404,9 +404,11 @@ $slow-transition-duration: 300ms !default;
         }
 
         input[type="checkbox"]{
-            left: 5px;
-            top: 5px;
+            left: 6px;
+            top: 6px;
             right: auto;
+            height: 16px;
+            width: 16px;
 
             + .trumbowyg-input-infos span{
                 width: auto;

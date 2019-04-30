@@ -1,43 +1,64 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Table plugin | Trumbowyg</title>
+    <title>Allow tags from paste plugin | Trumbowyg</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../../css/main.css">
 </head>
 <body class="documentation-body">
 <div class="main main-demo-inner">
     <section class="wrapper section">
-        <h2 class="section-title">Table plugin</h2>
+        <h2 class="section-title">Allow tags from paste plugin</h2>
 
         <div class="feature">
             <h3>Basic usage</h3>
             <p>
-                This plugin allows you to add and manage a table.
+                This plugin allows you to filter tags allowed when an user paste some code into the editor.
             </p>
 
-            <a href="../../documentation/plugins/#plugin-table" class="button button-demo">Read table plugin documentation</a>
+            <a href="../../documentation/plugins/#plugin-allowtagsfrompaste" class="button button-demo">Read allow tags from paste plugin documentation</a>
 
             <div id="editor">
-                <h2>Add a table to the editor</h2>
+                <h4>Try to paste something!</h4>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident
-                    optio nam reiciendis eius beatae quibusdam!
+                    Only `h2`, `p` `strong` and `br` tags are allowed!
+                    All other tags will be removed.
                 </p>
+            </div>
+
+            <div class="sample-data">
+                <h4 style="padding: 0;">Some text to copy to test</h4>
                 <p>
-                    The text is derived from Cicero's De Finibus Bonorum et Malorum (On the Ends of Goods and Evils, or
-                    alternatively [About] The Purposes of Good and Evil). The original passage began: Neque porro quisquam est
-                    qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit (Translation: &quot;Neither is there
-                    anyone who loves grief itself since it is grief and thus wants to obtain it&quot;).
+                    This table will be not pasted:
                 </p>
+                <table style="margin: 0;">
+                    <tr>
+                        <td>h4 must be kept</td>
+                        <td>but not</td>
+                        <td>this table</td>
+                    </tr>
+                    <tr>
+                        <td>Second line</td>
+                        <td>will be</td>
+                        <td>striped out too</td>
+                    </tr>
+                </table>
             </div>
 
             <h3>The code</h3>
             <pre><code class="js-code-to-eval javascript">
 $('#editor')
 .trumbowyg({
-    btns: ['table']
+    btns: [
+        'viewHTML',
+        'h4'
+    ],
+    plugins: {
+        allowTagsFromPaste: {
+            allowedTags: ['h4', 'p', 'br']
+        }
+    }
 });
             </code></pre>
         </div>
@@ -67,9 +88,8 @@ $('#editor')
 <script src="../js/loader.js"></script>
 <script>
     loadStyle('dist/ui/trumbowyg.css');
-    loadStyle('dist/plugins/table/ui/trumbowyg.table.css', 'Import table plugin specific stylesheet');
     loadScript('dist/trumbowyg.js', 'Import Trumbowyg');
-    loadScript('dist/plugins/table/trumbowyg.table.js', 'Import all plugins you want AFTER importing jQuery and Trumbowyg');
+    loadScript('dist/plugins/allowtagsfrompaste/trumbowyg.allowtagsfrompaste.js', 'Import all plugins you want AFTER importing jQuery and Trumbowyg');
 </script>
 <script src="../js/runExampleCode.js"></script>
 <script src="../js/highlight.js"></script>

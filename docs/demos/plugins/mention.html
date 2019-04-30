@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mention plugin | Trumbowyg</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body class="documentation-body">
+<div class="main main-demo-inner">
+    <section class="wrapper section">
+        <h2 class="section-title">Mention plugin</h2>
+
+        <div class="feature">
+            <h3>Basic usage</h3>
+            <p>
+                This plugin allows to mention an user from a source list.
+            </p>
+
+            <a href="../../documentation/plugins/#plugin-mention" class="button button-demo">Read Mention plugin documentation</a>
+
+            <div id="editor">
+                <h2>Check this out, there are lot of guys in the mention dropdown!</h2>
+            </div>
+
+            <h4>The code</h4>
+            <pre><code class="js-code-to-eval javascript">
+$('#editor')
+.trumbowyg({
+    btns: [
+        ['mention']
+    ],
+    plugins: {
+        mention: {
+            source: [
+                {login: 'jdoe', name: 'John Doe (The Jean-Claude Van Damme\'s intern)'},
+                {login: 'lgaga', name: 'Lady Gaga'},
+                {login: 'jcvd', name: 'Jean-Claude Van Damme'},
+                {login: 'nminaj', name: 'Nicki Minaj'},
+                {login: 'mshinoda', name: 'Mike Shinoda'},
+                {login: 'epiaf', name: 'Edith Piaf'},
+                {login: 'kwest', name: 'Kanye West'},
+                {login: 'jbalasko', name: 'Josiane Balasko'},
+                {login: 'jcesar', name: 'Julius Cesarius'},
+                {login: 'mlisa', name: 'Mona Lisa'},
+                {login: 'mjackson', name: 'Mickael Jackson'},
+                {login: 'fflament', name: 'Flavie Flament'},
+            ],
+            formatDropdownItem: function (item) {
+                return item.name + ' (@' + item.login + ')';
+            }
+        }
+    }
+});
+            </code></pre>
+        </div>
+
+        <div class="feature">
+            <h3>Setup</h3>
+
+            <h4>In head tag</h4>
+            <pre><code class="html loading-head">
+            </code></pre>
+            <h4>At the end of body</h4>
+            <pre><code class="html loading-body">
+&lt;!-- Import jQuery -->
+&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">&lt;/script>
+&lt;script>window.jQuery || document.write('&lt;script src="js/vendor/jquery-3.3.1.min.js">&lt;\/script>')&lt;/script>
+            </code></pre>
+        </div>
+    </section>
+</div>
+
+
+<!-- Import jQuery -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
+<!-- Import MathJax -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<!-- DO NOT COPY THESE LINES IN YOUR PROJECT, THEY ARE THERE JUST FOR THE EXAMPLE PAGE PURPOSE -->
+<script src="../js/loader.js"></script>
+<script>
+  loadStyle('dist/ui/trumbowyg.css');
+  loadStyle('dist/plugins/mention/ui/trumbowyg.mention.css', 'Import Mention plugin specific stylesheet');
+  loadScript('dist/trumbowyg.js', 'Import Trumbowyg');
+  loadScript('dist/plugins/mention/trumbowyg.mention.js', 'Import all plugins you want AFTER importing jQuery and Trumbowyg');
+</script>
+<script src="../js/runExampleCode.js"></script>
+<script src="../js/highlight.js"></script>
+</body>
+</html>

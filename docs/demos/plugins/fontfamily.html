@@ -2,42 +2,69 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Table plugin | Trumbowyg</title>
+    <title>Font family plugin | Trumbowyg</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../../css/main.css">
 </head>
 <body class="documentation-body">
 <div class="main main-demo-inner">
     <section class="wrapper section">
-        <h2 class="section-title">Table plugin</h2>
+        <h2 class="section-title">Font family plugin</h2>
 
         <div class="feature">
             <h3>Basic usage</h3>
             <p>
-                This plugin allows you to add and manage a table.
+                User can pick some fonts in Trumbowyg.
             </p>
 
-            <a href="../../documentation/plugins/#plugin-table" class="button button-demo">Read table plugin documentation</a>
+            <a href="../../documentation/plugins/#plugin-fontfamily" class="button button-demo">Read font family plugin documentation</a>
 
             <div id="editor">
-                <h2>Add a table to the editor</h2>
+                <h2>Change the font!</h2>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident
                     optio nam reiciendis eius beatae quibusdam!
                 </p>
-                <p>
-                    The text is derived from Cicero's De Finibus Bonorum et Malorum (On the Ends of Goods and Evils, or
-                    alternatively [About] The Purposes of Good and Evil). The original passage began: Neque porro quisquam est
-                    qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit (Translation: &quot;Neither is there
-                    anyone who loves grief itself since it is grief and thus wants to obtain it&quot;).
-                </p>
             </div>
 
-            <h3>The code</h3>
+            <h4>The code</h4>
             <pre><code class="js-code-to-eval javascript">
 $('#editor')
 .trumbowyg({
-    btns: ['table']
+    btns: [
+        ['fontfamily']
+    ]
+});
+            </code></pre>
+        </div>
+
+        <div class="feature">
+            <h3>Custom font list</h3>
+
+            <div id="editor-custom-font-list">
+                <h2>Change the font!</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident
+                    optio nam reiciendis eius beatae quibusdam!
+                </p>
+            </div>
+
+            <h4>The code</h4>
+            <pre><code class="js-code-to-eval javascript">
+$('#editor-custom-font-list')
+.trumbowyg({
+    btns: [
+        ['fontfamily']
+    ],
+    plugins: {
+        fontfamily: {
+            fontList: [
+                {name: 'Arial', family: 'Arial, Helvetica, sans-serif'},
+                {name: 'Comic Sans', family: '\'Comic Sans MS\', Textile, cursive, sans-serif'},
+                {name: 'Open Sans', family: '\'Open Sans\', sans-serif'}
+            ]
+        }
+    }
 });
             </code></pre>
         </div>
@@ -67,9 +94,8 @@ $('#editor')
 <script src="../js/loader.js"></script>
 <script>
     loadStyle('dist/ui/trumbowyg.css');
-    loadStyle('dist/plugins/table/ui/trumbowyg.table.css', 'Import table plugin specific stylesheet');
     loadScript('dist/trumbowyg.js', 'Import Trumbowyg');
-    loadScript('dist/plugins/table/trumbowyg.table.js', 'Import all plugins you want AFTER importing jQuery and Trumbowyg');
+    loadScript('dist/plugins/fontfamily/trumbowyg.fontfamily.js', 'Import all plugins you want AFTER importing jQuery and Trumbowyg');
 </script>
 <script src="../js/runExampleCode.js"></script>
 <script src="../js/highlight.js"></script>

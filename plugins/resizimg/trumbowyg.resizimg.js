@@ -3,12 +3,20 @@
 
     var defaultOptions = {
         minSize: 32,
-        step: 4
+        step: 4,
     };
 
-    var preventDefault = function (ev) {
+    function preventDefault(ev) {
         return ev.preventDefault();
-    };
+    }
+
+    function destroyResizable(trumbowyg) {
+        trumbowyg.$ed.find('img.resizable')
+          .resizable('destroy')
+          .off('mousedown', preventDefault)
+          .removeClass('resizable');
+        trumbowyg.syncTextarea();
+    }
 
     $.extend(true, $.trumbowyg, {
         plugins: {
@@ -50,19 +58,21 @@
                             .on('mousedown', preventDefault);
                     }
 
-                    function destroyResizable() {
-                        trumbowyg.$ed.find('img.resizable')
-                            .resizable('destroy')
-                            .off('mousedown', preventDefault)
-                            .removeClass('resizable');
-                        trumbowyg.syncTextarea();
-                    }
-
+                    // Init
                     trumbowyg.$c.on('tbwinit', initResizable);
                     trumbowyg.$c.on('tbwfocus', initResizable);
                     trumbowyg.$c.on('tbwchange', initResizable);
-                    trumbowyg.$c.on('tbwblur', destroyResizable);
-                    trumbowyg.$c.on('tbwclose', destroyResizable);
+
+                    // Destroy
+                    trumbowyg.$c.on('tbwblur', function () {
+                        destroyResizable(trumbowyg);
+                    });
+                    trumbowyg.$c.on('tbwclose', function () {
+                        destroyResizable(trumbowyg);
+                    });
+                },
+                destroy: function (trumbowyg) {
+                    destroyResizable(trumbowyg);
                 }
             }
         }
