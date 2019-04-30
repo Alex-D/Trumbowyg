@@ -29,9 +29,9 @@
                 Documentation
             </h1>
             <nav class="documentation-menu">
-                <a href="./">Docs</a> &bull;
-                <a href="./plugins/">Plugins</a> &bull;
-                <a href="./core/">Core</a> &bull;
+                <a href="./">Docs</a><span class="documentation-menu-dot"> &bull;</span>
+                <a href="./plugins/">Plugins</a><span class="documentation-menu-dot"> &bull;</span>
+                <a href="./core/">Core</a><span class="documentation-menu-dot"> &bull;</span>
                 <a href="../demos/">Demos</a>
             </nav>
         </header>
@@ -134,7 +134,13 @@
                     <div class="installation-col-title">
                         Download the package
                     </div>
-                    <a href="https://github.com/Alex-D/Trumbowyg/archive/master.zip" class="button button-primary">Download</a>
+                    <a href="https://github.com/Alex-D/Trumbowyg/archive/master.zip" class="button button-ghost">Download</a>
+                </div>
+                <div class="installation-cdn">
+                    <div class="installation-col-title">
+                        Use CDNJS
+                    </div>
+                    <a href="https://cdnjs.com/libraries/Trumbowyg" class="button button-ghost">See all available files</a>
                 </div>
             </div>
 
@@ -153,7 +159,7 @@
                 After these lines, you have to load Trumbowyg.
             </p>
             <pre><code class="html">
-&lt;script src="node_modules/trumbowyg/dist/trumbowyg.min.js">&lt;/script>
+&lt;script src="trumbowyg/dist/trumbowyg.min.js">&lt;/script>
             </code></pre>
 
             <p>
@@ -161,7 +167,7 @@
                 editor.
             </p>
             <pre><code class="html">
-&lt;link rel="stylesheet" href="node_modules/trumbowyg/dist/ui/trumbowyg.min.css">
+&lt;link rel="stylesheet" href="trumbowyg/dist/ui/trumbowyg.min.css">
             </code></pre>
         </div>
 
@@ -217,11 +223,11 @@ $('#trumbowyg-demo').trumbowyg({
 &lt;script>window.jQuery || document.write('&lt;script src="js/vendor/jquery-3.3.1.min.js">&lt;\/script>')&lt;/script>
 
 &lt;-- Import Trumbowyg -->
-&lt;script src="node_modules/trumbowyg/dist/trumbowyg.min.js">&lt;/script>
+&lt;script src="trumbowyg/dist/trumbowyg.min.js">&lt;/script>
 
 &lt;-- Import Trumbowyg plugins... -->
-&lt;script src="node_modules/trumbowyg/dist/plugins/upload/trumbowyg.cleanpaste.min.js">&lt;/script>
-&lt;script src="node_modules/trumbowyg/dist/plugins/upload/trumbowyg.pasteimage.min.js">&lt;/script>
+&lt;script src="trumbowyg/dist/plugins/upload/trumbowyg.cleanpaste.min.js">&lt;/script>
+&lt;script src="trumbowyg/dist/plugins/upload/trumbowyg.pasteimage.min.js">&lt;/script>
 
 &lt;-- Init Trumbowyg -->
 &lt;script>
