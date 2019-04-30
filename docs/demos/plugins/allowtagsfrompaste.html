@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Allow tags from paste plugin | Trumbowyg</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body class="documentation-body">
+<div class="main main-demo-inner">
+    <section class="wrapper section">
+        <h2 class="section-title">Allow tags from paste plugin</h2>
+
+        <div class="feature">
+            <h3>Basic usage</h3>
+            <p>
+                This plugin allows you to filter tags allowed when an user paste some code into the editor.
+            </p>
+
+            <a href="../../documentation/plugins/#plugin-allowtagsfrompaste" class="button button-demo">Read allow tags from paste plugin documentation</a>
+
+            <div id="editor">
+                <h4>Try to paste something!</h4>
+                <p>
+                    Only `h2`, `p` `strong` and `br` tags are allowed!
+                    All other tags will be removed.
+                </p>
+            </div>
+
+            <div class="sample-data">
+                <h4 style="padding: 0;">Some text to copy to test</h4>
+                <p>
+                    This table will be not pasted:
+                </p>
+                <table style="margin: 0;">
+                    <tr>
+                        <td>h4 must be kept</td>
+                        <td>but not</td>
+                        <td>this table</td>
+                    </tr>
+                    <tr>
+                        <td>Second line</td>
+                        <td>will be</td>
+                        <td>striped out too</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>The code</h3>
+            <pre><code class="js-code-to-eval javascript">
+$('#editor')
+.trumbowyg({
+    btns: [
+        'viewHTML',
+        'h4'
+    ],
+    plugins: {
+        allowTagsFromPaste: {
+            allowedTags: ['h4', 'p', 'br']
+        }
+    }
+});
+            </code></pre>
+        </div>
+
+        <div class="feature">
+            <h3>Setup</h3>
+
+            <h4>In head tag</h4>
+            <pre><code class="html loading-head">
+            </code></pre>
+            <h4>At the end of body</h4>
+            <pre><code class="html loading-body">
+&lt;!-- Import jQuery -->
+&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">&lt;/script>
+&lt;script>window.jQuery || document.write('&lt;script src="js/vendor/jquery-3.3.1.min.js">&lt;\/script>')&lt;/script>
+            </code></pre>
+        </div>
+    </section>
+</div>
+
+
+<!-- Import jQuery -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
+
+<!-- DO NOT COPY THESE LINES IN YOUR PROJECT, THEY ARE THERE JUST FOR THE EXAMPLE PAGE PURPOSE -->
+<script src="../js/loader.js"></script>
+<script>
+    loadStyle('dist/ui/trumbowyg.css');
+    loadScript('dist/trumbowyg.js', 'Import Trumbowyg');
+    loadScript('dist/plugins/allowtagsfrompaste/trumbowyg.allowtagsfrompaste.js', 'Import all plugins you want AFTER importing jQuery and Trumbowyg');
+</script>
+<script src="../js/runExampleCode.js"></script>
+<script src="../js/highlight.js"></script>
+</body>
+</html>
