@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.16.0 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.16.2 - A lightweight WYSIWYG editor
  * Trumbowyg core file
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
