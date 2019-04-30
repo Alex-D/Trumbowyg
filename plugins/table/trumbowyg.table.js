@@ -17,6 +17,7 @@
 
     $.extend(true, $.trumbowyg, {
         langs: {
+            // jshint camelcase:false
             en: {
                 table: 'Insert table',
                 tableAddRow: 'Add row',
@@ -113,6 +114,7 @@
                 tableDestroy: 'Deletar tabela',
                 error: 'Erro'
             }
+            // jshint camelcase:true
         },
 
         plugins: {
@@ -122,194 +124,193 @@
 
                     var buildButtonDef = {
                         fn: function () {
-                          t.saveRange();
+                            t.saveRange();
 
-                          var btnName = 'table';
+                            var btnName = 'table';
 
-                          var dropdownPrefix = t.o.prefix + 'dropdown',
-                              dropdownOptions = { // the dropdown
-                              class: dropdownPrefix + '-' + btnName + ' ' + dropdownPrefix + ' ' + t.o.prefix + 'fixed-top'
-                          };
-                          dropdownOptions['data-' + dropdownPrefix] = btnName;
-                          var $dropdown = $('<div/>', dropdownOptions);
+                            var dropdownPrefix = t.o.prefix + 'dropdown',
+                                dropdownOptions = { // the dropdown
+                                class: dropdownPrefix + '-' + btnName + ' ' + dropdownPrefix + ' ' + t.o.prefix + 'fixed-top'
+                            };
+                            dropdownOptions['data-' + dropdownPrefix] = btnName;
+                            var $dropdown = $('<div/>', dropdownOptions);
 
-                          if (t.$box.find("." + dropdownPrefix + "-" + btnName).length === 0) {
-                            t.$box.append($dropdown.hide());
-                          } else {
-                            $dropdown = t.$box.find("." + dropdownPrefix + "-" + btnName);
-                          }
-
-                          // clear dropdown
-                          $dropdown.html('');
-
-                          // when active table show AddRow / AddColumn
-                          if (t.$box.find("." + t.o.prefix + "table-button").hasClass(t.o.prefix + 'active-button')) {
-                            $dropdown.append(t.buildSubBtn('tableAddRow'));
-                            $dropdown.append(t.buildSubBtn('tableAddColumn'));
-                            $dropdown.append(t.buildSubBtn('tableDeleteRow'));
-                            $dropdown.append(t.buildSubBtn('tableDeleteColumn'));
-                            $dropdown.append(t.buildSubBtn('tableDestroy'));
-                          } else {
-                            var tableSelect = $('<table></table>');
-                            for (var i = 0; i < t.o.plugins.table.rows; i += 1) {
-                              var row = $('<tr></tr>').appendTo(tableSelect);
-                              for (var j = 0; j < t.o.plugins.table.columns; j += 1) {
-                                $('<td></td>').appendTo(row);
-                              }
+                            if (t.$box.find('.' + dropdownPrefix + '-' + btnName).length === 0) {
+                                t.$box.append($dropdown.hide());
+                            } else {
+                                $dropdown = t.$box.find('.' + dropdownPrefix + '-' + btnName);
                             }
-                            tableSelect.find('td').on('mouseover', tableAnimate);
-                            tableSelect.find('td').on('mousedown', tableBuild);
 
-                            $dropdown.append(tableSelect);
-                            $dropdown.append($('<center>1x1</center>'));
-                          }
+                            // clear dropdown
+                            $dropdown.html('');
 
-                          t.dropdown(btnName);
+                            // when active table show AddRow / AddColumn
+                            if (t.$box.find('.' + t.o.prefix + 'table-button').hasClass(t.o.prefix + 'active-button')) {
+                                $dropdown.append(t.buildSubBtn('tableAddRow'));
+                                $dropdown.append(t.buildSubBtn('tableAddColumn'));
+                                $dropdown.append(t.buildSubBtn('tableDeleteRow'));
+                                $dropdown.append(t.buildSubBtn('tableDeleteColumn'));
+                                $dropdown.append(t.buildSubBtn('tableDestroy'));
+                            } else {
+                                var tableSelect = $('<table/>');
+                                for (var i = 0; i < t.o.plugins.table.rows; i += 1) {
+                                    var row = $('<tr/>').appendTo(tableSelect);
+                                    for (var j = 0; j < t.o.plugins.table.columns; j += 1) {
+                                        $('<td/>').appendTo(row);
+                                    }
+                                }
+                                tableSelect.find('td').on('mouseover', tableAnimate);
+                                tableSelect.find('td').on('mousedown', tableBuild);
+
+                                $dropdown.append(tableSelect);
+                                $dropdown.append($('<div class="trumbowyg-table-size">1x1</div>'));
+                            }
+
+                            t.dropdown(btnName);
                         }
                     };
 
-                    var tableAnimate = function(column_event) {
-                      var column = $(column_event.target),
-                          table = column.closest('table'),
-                          colIndex = this.cellIndex,
-                          rowIndex = this.parentNode.rowIndex;
+                    var tableAnimate = function(columnEvent) {
+                        var column = $(columnEvent.target),
+                            table = column.closest('table'),
+                            colIndex = this.cellIndex,
+                            rowIndex = this.parentNode.rowIndex;
 
-                      // reset all columns
-                      table.find('td').removeClass('active');
+                        // reset all columns
+                        table.find('td').removeClass('active');
 
-                      for (var i = 0; i <= rowIndex; i += 1) {
-                        for (var j = 0; j <= colIndex; j += 1) {
-                          table.find("tr:nth-of-type("+(i+1)+")").find("td:nth-of-type("+(j+1)+")").addClass('active');
+                        for (var i = 0; i <= rowIndex; i += 1) {
+                            for (var j = 0; j <= colIndex; j += 1) {
+                                table.find('tr:nth-of-type('+(i+1)+')').find('td:nth-of-type('+(j+1)+')').addClass('active');
+                            }
                         }
-                      }
 
-                      // set label
-                      table.next('center').html((colIndex+1) + "x" + (rowIndex+1));
+                        // set label
+                        table.next('.trumbowyg-table-size').html((colIndex+1) + 'x' + (rowIndex+1));
                     };
 
-                    var tableBuild = function(column_event) {
-                      t.saveRange();
+                    var tableBuild = function() {
+                        t.saveRange();
 
-                      var tabler = $('<table></table>');
-                      if (t.o.plugins.table.styler) {
-                        tabler.attr('class', t.o.plugins.table.styler);
-                      }
-
-                      var column = $(column_event.target),
-                          colIndex = this.cellIndex,
-                          rowIndex = this.parentNode.rowIndex;
-
-                      for (var i = 0; i <= rowIndex; i += 1) {
-                        var row = $('<tr></tr>').appendTo(tabler);
-                        for (var j = 0; j <= colIndex; j += 1) {
-                          $('<td></td>').appendTo(row);
+                        var tabler = $('<table/>');
+                        if (t.o.plugins.table.styler) {
+                          tabler.attr('class', t.o.plugins.table.styler);
                         }
-                      }
 
-                      t.range.deleteContents();
-                      t.range.insertNode(tabler[0]);
-                      t.$c.trigger('tbwchange');
+                        var colIndex = this.cellIndex,
+                            rowIndex = this.parentNode.rowIndex;
+
+                        for (var i = 0; i <= rowIndex; i += 1) {
+                            var row = $('<tr></tr>').appendTo(tabler);
+                            for (var j = 0; j <= colIndex; j += 1) {
+                                $('<td/>').appendTo(row);
+                            }
+                        }
+
+                        t.range.deleteContents();
+                        t.range.insertNode(tabler[0]);
+                        t.$c.trigger('tbwchange');
                     };
 
                     var addRow = {
-                      title: t.lang['tableAddRow'],
-                      text: t.lang['tableAddRow'],
-                      ico: 'row-below',
+                        title: t.lang.tableAddRow,
+                        text: t.lang.tableAddRow,
+                        ico: 'row-below',
 
-                      fn: function () {
-                        t.saveRange();
+                        fn: function () {
+                            t.saveRange();
 
-                        var node = t.doc.getSelection().focusNode;
-                        var table = $(node).closest('table');
+                            var node = t.doc.getSelection().focusNode;
+                            var table = $(node).closest('table');
 
-                        if(table.length > 0) {
-                          var row = $('<tr></tr>');
-                          // add columns according to current columns count
-                          for (var i = 0; i < table.find('tr')[0].childElementCount; i += 1) {
-                            $('<td></td>').appendTo(row);
-                          }
-                          // add row to table
-                          row.appendTo(table);
+                            if(table.length > 0) {
+                                var row = $('<tr/>');
+                                // add columns according to current columns count
+                                for (var i = 0; i < table.find('tr')[0].childElementCount; i += 1) {
+                                    $('<td/>').appendTo(row);
+                                }
+                                // add row to table
+                                row.appendTo(table);
+                            }
+
+                            t.syncCode();
                         }
-
-                        return true;
-                      }
                     };
 
                     var addColumn = {
-                      title: t.lang['tableAddColumn'],
-                      text: t.lang['tableAddColumn'],
-                      ico: 'col-right',
+                        title: t.lang.tableAddColumn,
+                        text: t.lang.tableAddColumn,
+                        ico: 'col-right',
 
-                      fn: function () {
-                        t.saveRange();
+                        fn: function () {
+                            t.saveRange();
 
-                        var node = t.doc.getSelection().focusNode;
-                        var table = $(node).closest('table');
+                            var node = t.doc.getSelection().focusNode;
+                            var table = $(node).closest('table');
 
-                        if(table.length > 0) {
-                          $(table).find('tr').each(function() {
-                            $(this).find('td:last').after('<td></td>');
-                          });
+                            if(table.length > 0) {
+                                $(table).find('tr').each(function() {
+                                    $(this).find('td:last').after('<td></td>');
+                                });
+                            }
+
+                            t.syncCode();
                         }
-
-                        return true;
-                      }
                     };
 
                     var destroy = {
-                      title: t.lang['tableDestroy'],
-                      text: t.lang['tableDestroy'],
-                      ico: 'table-delete',
+                        title: t.lang.tableDestroy,
+                        text: t.lang.tableDestroy,
+                        ico: 'table-delete',
 
-                      fn: function () {
-                        t.saveRange();
+                        fn: function () {
+                            t.saveRange();
 
-                        var node = t.doc.getSelection().focusNode,
-                            table = $(node).closest('table');
+                            var node = t.doc.getSelection().focusNode,
+                                table = $(node).closest('table');
 
-                        table.remove();
+                            table.remove();
 
-                        return true;
-                      }
+                            t.syncCode();
+                        }
                     };
 
                     var deleteRow = {
-                      title: t.lang['tableDeleteRow'],
-                      text: t.lang['tableDeleteRow'],
-                      ico: 'row-delete',
+                        title: t.lang.tableDeleteRow,
+                        text: t.lang.tableDeleteRow,
+                        ico: 'row-delete',
 
-                      fn: function () {
-                        t.saveRange();
+                        fn: function () {
+                            t.saveRange();
 
-                        var node = t.doc.getSelection().focusNode,
-                            row = $(node).closest('tr');
+                            var node = t.doc.getSelection().focusNode,
+                                row = $(node).closest('tr');
 
-                        row.remove();
+                            row.remove();
 
-                        return true;
-                      }
+                            t.syncCode();
+                        }
                     };
 
                     var deleteColumn = {
-                      title: t.lang['tableDeleteColumn'],
-                      text: t.lang['tableDeleteColumn'],
-                      ico: 'col-delete',
+                        title: t.lang.tableDeleteColumn,
+                        text: t.lang.tableDeleteColumn,
+                        ico: 'col-delete',
 
-                      fn: function () {
-                        t.saveRange();
+                        fn: function () {
+                            t.saveRange();
 
-                        var node = t.doc.getSelection().focusNode,
-                            table = $(node).closest('table'),
-                            td = $(node).closest('td'),
-                            cellIndex = td.index();
+                            var node = t.doc.getSelection().focusNode,
+                                table = $(node).closest('table'),
+                                td = $(node).closest('td'),
+                                cellIndex = td.index();
 
-                        $(table).find('tr').each(function() {
-                          $(this).find('td:eq('+cellIndex+')').remove();
-                        });
+                            $(table).find('tr').each(function() {
+                                $(this).find('td:eq(' + cellIndex + ')').remove();
+                            });
 
-                        return true;
-                      }
+                            t.syncCode();
+                        }
                     };
 
                     t.addBtnDef('table', buildButtonDef);
