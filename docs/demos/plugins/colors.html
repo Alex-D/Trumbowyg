@@ -42,6 +42,36 @@ $('#editor')
             </code></pre>
         </div>
 
+
+        <div class="feature">
+            <h3>Custom color list</h3>
+            <p>
+                You can customize the color list used by both dropdowns.
+            </p>
+
+            <div id="editor-custom-color-list">
+                <h2>You can color me with custom color list!</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident
+                    optio nam reiciendis eius beatae quibusdam!
+                </p>
+            </div>
+            <pre><code class="js-code-to-eval javascript">
+$('#editor-custom-color-list').trumbowyg({
+    btns: [
+        ['foreColor', 'backColor']
+    ],
+    plugins: {
+        colors: {
+            colorList: [
+                '#000', '#111', '#222', '#ffea00'
+            ]
+        }
+    }
+});
+            </code></pre>
+        </div>
+
         <div class="feature">
             <h3>Loading</h3>
 

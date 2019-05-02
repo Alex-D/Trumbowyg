@@ -223,10 +223,36 @@ $('#my-editor').trumbowyg({
 });
             </code></pre>
 
-            <p class="note">
-                Some doc to write about color options... <br>
-                You can contribute to this documentation by submitting a Pull Request :)
+            <h4>Parameters</h4>
+            <dl>
+                <dt><strong><code>colorList</code></strong> <code class="type">array&lt;string&gt;</code></dt>
+                <dd>
+                    List of colors available for both <code>foreColor</code> and <code>backColor</code> dropdowns.
+                    <br>
+                    <strong>Default</strong>:
+                    <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/colors/trumbowyg.colors.js">check the code</a>
+                    or
+                    <a href="../../demos/#plugins-colors">the demo</a>
+                </dd>
+            </dl>
+
+            <p>
+                Example with parameters:
             </p>
+            <pre><code class="javascript">
+$('#my-editor').trumbowyg({
+    btns: [
+        ['foreColor', 'backColor']
+    ],
+    plugins: {
+        colors: {
+            colorList: [
+                '#000', '#111', '#222', '#ffea00'
+            ]
+        }
+    }
+});
+            </code></pre>
         </div>
 
         <div class="feature">
