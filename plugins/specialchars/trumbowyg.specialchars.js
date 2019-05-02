@@ -59,6 +59,7 @@
                 defaultSymbolBtnName = 'symbol-' + btn,
                 defaultSymbolBtnDef = {
                     text: symbol,
+                    hasIcon: false,
                     fn: function () {
                         var encodedSymbol = String.fromCodePoint(parseInt(symbol.replace('&#', '0')));
                         trumbowyg.execCmd('insertText', encodedSymbol);
