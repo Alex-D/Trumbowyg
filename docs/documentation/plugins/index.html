@@ -234,10 +234,28 @@ $('#my-editor').trumbowyg({
                     or
                     <a href="../../demos/#plugins-colors">the demo</a>
                 </dd>
+                <dt><strong><code>foreColorList</code></strong> <code class="type">array&lt;string&gt;</code></dt>
+                <dd>
+                    List of colors available used in the <code>foreColor</code> dropdown instead of <code>colorList</code>'s one.
+                    <br>
+                    <strong>Default</strong>: fallbacks on <code>colorList</code>
+                </dd>
+                <dt><strong><code>backColorList</code></strong> <code class="type">array&lt;string&gt;</code></dt>
+                <dd>
+                    List of colors available used in the <code>backColor</code> dropdown instead of <code>colorList</code>'s one.
+                    <br>
+                    <strong>Default</strong>: fallbacks on <code>colorList</code>
+                </dd>
+                <dt><strong><code>displayAsList</code></strong> <code class="type">boolean</code></dt>
+                <dd>
+                    Switch from square to labelled list view. Default view is the square's one.
+                    <br>
+                    <strong>Default</strong>: <code>false</code>
+                </dd>
             </dl>
 
             <p>
-                Example with parameters:
+                Example with <code>colorList</code> parameter:
             </p>
             <pre><code class="javascript">
 $('#my-editor').trumbowyg({
@@ -253,6 +271,32 @@ $('#my-editor').trumbowyg({
     }
 });
             </code></pre>
+
+            <p>
+                Example with both <code>foreColorList</code> and <code>backColorList</code>, displayed as list:
+            </p>
+            <pre><code class="javascript">
+$('#my-editor').trumbowyg({
+    btns: [
+        ['foreColor', 'backColor']
+    ],
+    plugins: {
+        colors: {
+            foreColorList: [
+                'ff0000', '00ff00', '0000ff'
+            ],
+            backColorList: [
+                '000', '333', '555'
+            ],
+            displayAsList: true
+        }
+    }
+});
+            </code></pre>
+
+            <p class="note">
+                If both <code>foreColorList</code> and <code>backColorList</code> are set, <code>colorList</code> will be not used at all.
+            </p>
         </div>
 
         <div class="feature">
