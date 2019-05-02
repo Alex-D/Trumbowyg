@@ -490,7 +490,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             if (typeof(protocol) !== 'string') {
                 return 'https://';
             }
-            return /:\/\/$/.test(protocol) ? protocol : protocol + '://';
+            return protocol.replace('://', '') + '://';
         },
 
         buildEditor: function () {
@@ -870,10 +870,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             });
         },
         // Check if button is supported
-        isSupportedBtn: function (b) {
+        isSupportedBtn: function (btnName) {
             try {
-                return this.btnsDef[b].isSupported();
-            } catch (c) {
+                return this.btnsDef[btnName].isSupported();
+            } catch (e) {
             }
             return true;
         },
