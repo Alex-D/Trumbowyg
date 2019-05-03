@@ -55,7 +55,7 @@
         plugins: {
             fontfamily: {
                 init: function (trumbowyg) {
-                    trumbowyg.o.plugins.fontfamily = $.extend(true, {},
+                    trumbowyg.o.plugins.fontfamily = $.extend({},
                       defaultOptions,
                       trumbowyg.o.plugins.fontfamily || {}
                     );
