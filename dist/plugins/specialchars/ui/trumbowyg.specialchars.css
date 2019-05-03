@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.16.2 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.17.0 - A lightweight WYSIWYG editor
  * Trumbowyg plugin stylesheet
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -16,14 +16,8 @@
   clear: both; }
 
 .trumbowyg-dropdown-specialChars {
-  width: 265px;
-  padding: 7px 0 7px 5px;
-  height: 200px;
-  overflow-y: scroll;
-  overflow-x: hidden; }
-
-.trumbowyg-dropdown-specialChars svg {
-  display: none !important; }
+  width: 248px;
+  padding: 5px 3px 3px; }
 
 .trumbowyg-dropdown-specialChars button {
   display: block;

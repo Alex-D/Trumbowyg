@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.16.2 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.17.0 - A lightweight WYSIWYG editor
  * Trumbowyg core file
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -443,7 +443,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         t.pasteHandlers = [].concat(t.o.pasteHandlers);
 
         // Check if browser is IE
-        t.isIE = (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') !== -1);
+        t.isIE = navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') !== -1;
+
+        // Check if we are on macOs
+        t.isMac = navigator.platform.toUpperCase().indexOf('MAC') !== -1;
 
         t.init();
     };
@@ -498,7 +501,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             if (typeof(protocol) !== 'string') {
                 return 'https://';
             }
-            return /:\/\/$/.test(protocol) ? protocol : protocol + '://';
+            return protocol.replace('://', '') + '://';
         },
 
         buildEditor: function () {
@@ -797,7 +800,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     html: t.hasSvg && hasIcon ?
                         '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' :
                         t.hideButtonTexts ? '' : (btn.text || btn.title || t.lang[btnName] || btnName),
-                    title: (btn.title || btn.text || textDef) + ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : ''),
+                    title: (btn.title || btn.text || textDef) + (btn.key ? ' (' + (t.isMac ? 'Cmd' : 'Ctrl') + ' + ' + btn.key + ')' : ''),
                     tabindex: -1,
                     mousedown: function () {
                         if (!isDropdown || $('.' + btnName + '-' + prefix + 'dropdown', t.$box).is(':hidden')) {
@@ -820,7 +823,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 $btn.addClass(prefix + 'open-dropdown');
                 var dropdownPrefix = prefix + 'dropdown',
                     dropdownOptions = { // the dropdown
-                        class: dropdownPrefix + '-' + btnName + ' ' + dropdownPrefix + ' ' + prefix + 'fixed-top'
+                        class: dropdownPrefix + '-' + btnName + ' ' + dropdownPrefix + ' ' + prefix + 'fixed-top ' + (btn.dropdownClass || '')
                     };
                 dropdownOptions['data-' + dropdownPrefix] = btnName;
                 var $dropdown = $('<div/>', dropdownOptions);
@@ -862,9 +865,11 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             return $('<button/>', {
                 type: 'button',
-                class: prefix + btnName + '-dropdown-button' + (btn.ico ? ' ' + prefix + btn.ico + '-button' : ''),
-                html: t.hasSvg && hasIcon ? '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' + (btn.text || btn.title || t.lang[btnName] || btnName) : (btn.text || btn.title || t.lang[btnName] || btnName),
-                title: ((btn.key) ? ' (Ctrl + ' + btn.key + ')' : null),
+                class: prefix + btnName + '-dropdown-button ' + (btn.class || '') + (btn.ico ? ' ' + prefix + btn.ico + '-button' : ''),
+                html: t.hasSvg && hasIcon ?
+                  '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' + (btn.text || btn.title || t.lang[btnName] || btnName) :
+                  (btn.text || btn.title || t.lang[btnName] || btnName),
+                title: (btn.key ? '(' + (t.isMac ? 'Cmd' : 'Ctrl') + ' + ' + btn.key + ')' : null),
                 style: btn.style || null,
                 mousedown: function () {
                     $('body', t.doc).trigger('mousedown');
@@ -876,10 +881,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             });
         },
         // Check if button is supported
-        isSupportedBtn: function (b) {
+        isSupportedBtn: function (btnName) {
             try {
-                return this.btnsDef[b].isSupported();
-            } catch (c) {
+                return this.btnsDef[btnName].isSupported();
+            } catch (e) {
             }
             return true;
         },

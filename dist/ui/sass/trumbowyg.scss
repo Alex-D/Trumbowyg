@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.16.2 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.17.0 - A lightweight WYSIWYG editor
  * Default stylesheet for Trumbowyg editor
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -261,7 +261,10 @@ $slow-transition-duration: 300ms !default;
 }
 
 .trumbowyg-dropdown {
-    min-width: 200px;
+    max-width: 300px;
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
     border: 1px solid $light-color;
     padding: 5px 0;
     border-top: none;
