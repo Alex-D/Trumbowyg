@@ -37,11 +37,12 @@
             <pre><code class="js-code-to-eval javascript">
 $('#editor')
 .trumbowyg({
-    btns: ['foreColor', 'backColor']
+    btns: [
+        ['foreColor', 'backColor']
+    ],
 });
             </code></pre>
         </div>
-
 
         <div class="feature">
             <h3>Custom color list</h3>
@@ -66,6 +67,85 @@ $('#editor-custom-color-list').trumbowyg({
             colorList: [
                 '000', '111', '222', 'ffea00'
             ]
+        }
+    }
+});
+            </code></pre>
+        </div>
+
+        <div class="feature">
+            <h3>Custom color list for each button</h3>
+            <p>
+                You can customize the color list used by each dropdown independently.
+            </p>
+
+            <div id="editor-custom-color-list-for-each">
+                <h2>You can color me with custom color list!</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident
+                    optio nam reiciendis eius beatae quibusdam!
+                </p>
+            </div>
+            <pre><code class="js-code-to-eval javascript">
+$('#editor-custom-color-list-for-each').trumbowyg({
+    btns: [
+        ['foreColor', 'backColor']
+    ],
+    plugins: {
+        colors: {
+            foreColorList: [
+                'ff0000', '00ff00', '0000ff'
+            ],
+            backColorList: [
+                '000', '333', '555'
+            ]
+        }
+    }
+});
+            </code></pre>
+        </div>
+
+        <div class="feature">
+            <h3>Display colors as a list like other dropdowns</h3>
+            <p>
+                The <code>displayAsList</code> option allows you to change the layout of the color dropdown from squares to list.
+            </p>
+
+            <div id="editor-display-as-list">
+                <h2>Check the dropdown is not like other examples!</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident
+                    optio nam reiciendis eius beatae quibusdam!
+                </p>
+            </div>
+            <pre><code class="js-code-to-eval javascript">
+// Human labels for each hex color
+var colorLabels = {
+    '#000': 'Black',
+    '#555': 'Dark grey',
+    '#ff0000': 'Red',
+    '#00ff00': 'Green',
+    '#0000ff': 'Blue',
+    '#ff1493': 'Pink',
+};
+
+$.each(colorLabels, function(colorHexCode, colorLabel) {
+    $.trumbowyg.langs.en[colorHexCode] = colorLabel;
+})
+
+$('#editor-display-as-list').trumbowyg({
+    btns: [
+        ['foreColor', 'backColor']
+    ],
+    plugins: {
+        colors: {
+            foreColorList: [
+                'ff0000', '00ff00', '0000ff', 'ff1493'
+            ],
+            backColorList: [
+                '000', '555', 'ff0000'
+            ],
+            displayAsList: true
         }
     }
 });
