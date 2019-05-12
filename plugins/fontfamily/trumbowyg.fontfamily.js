@@ -27,7 +27,10 @@
             },
             pt_br: {
                 fontFamily: 'Fonte',
-            }
+            },
+            ko: {
+                fontFamily: '글꼴'
+            },
         }
     });
     // jshint camelcase:true
