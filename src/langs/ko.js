@@ -37,7 +37,7 @@ jQuery.trumbowyg.langs.ko = {
     insertImage: '그림 넣기',
     link: '링크',
     createLink: '링크 넣기',
-    unlink: '링크 빼기',
+    unlink: '링크 지우기',
 
     justifyLeft: '왼쪽 정렬',
     justifyCenter: '가운데 정렬',

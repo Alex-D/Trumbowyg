@@ -154,7 +154,7 @@
                 fontsizes: {
                     'x-small': '아주 작게',
                     'small': '작게',
-                    'medium': '중간',
+                    'medium': '보통',
                     'large': '크게',
                     'x-large': '아주 크게',
                     'custom': '사용자 지정'
