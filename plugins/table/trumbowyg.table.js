@@ -113,7 +113,16 @@
                 tableDeleteColumn: 'Deletar coluna',
                 tableDestroy: 'Deletar tabela',
                 error: 'Erro'
-            }
+            },
+            ko: {
+                table: '표 넣기',
+                tableAddRow: '줄 추가',
+                tableAddColumn: '칸 추가',
+                tableDeleteRow: '줄 삭제',
+                tableDeleteColumn: '칸 삭제',
+                tableDestroy: '표 지우기',
+                error: '에러'
+            },
             // jshint camelcase:true
         },
 
