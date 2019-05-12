@@ -24,9 +24,9 @@ jQuery.trumbowyg.langs.ko = {
     strikethrough: '취소선',
     underline: '밑줄',
 
-    strong: '진하게',
-    em: '기울임',
-    del: '취소선',
+    strong: '중요',
+    em: '강조',
+    del: '삭제',
 
     superscript: '위 첨자',
     subscript: '아래 첨자',
