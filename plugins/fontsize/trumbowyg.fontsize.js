@@ -148,7 +148,23 @@
                     label: 'Dimensioni del testo',
                     value: '48px'
                 }
-            }
+            },
+            ko: {
+                fontsize: '글꼴 크기',
+                fontsizes: {
+                    'x-small': '아주 작게',
+                    'small': '작게',
+                    'medium': '중간',
+                    'large': '크게',
+                    'x-large': '아주 크게',
+                    'custom': '사용자 지정'
+                },
+                fontCustomSize: {
+                    title: '사용자 지정 글꼴 크기',
+                    label: '글꼴 크기',
+                    value: '48px'
+                }
+            },
         }
     });
     // jshint camelcase:true
