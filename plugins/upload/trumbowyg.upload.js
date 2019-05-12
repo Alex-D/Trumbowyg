@@ -107,7 +107,12 @@
                 upload: 'Yükle',
                 file: 'Dosya',
                 uploadError: 'Hata'
-            }
+            },
+            ko: {
+                upload: '파일 넣기',
+                file: '파일',
+                uploadError: '에러'
+            },
         },
         // jshint camelcase:true
 
