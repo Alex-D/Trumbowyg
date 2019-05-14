@@ -109,7 +109,7 @@
                 uploadError: 'Hata'
             },
             ko: {
-                upload: '파일 넣기',
+                upload: '그림 업로드',
                 file: '파일',
                 uploadError: '에러'
             },
