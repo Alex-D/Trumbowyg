@@ -76,6 +76,15 @@
                     '2.0': 'Molto alta'
                 }
             },
+            ko: {
+                lineheight: '줄 간격',
+                lineheights: {
+                    '0.9': '좁게',
+                    'normal': '보통',
+                    '1.5': '넓게',
+                    '2.0': '아주 넓게'
+                }
+            },
         }
     });
     // jshint camelcase:true

@@ -46,6 +46,12 @@
                     undo: 'Desfazer'
                 }
             },
+            ko: {
+                history: {
+                    redo: '다시 실행',
+                    undo: '되돌리기'
+                }
+            },
         },
         plugins: {
             history: {

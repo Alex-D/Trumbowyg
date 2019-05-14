@@ -80,6 +80,12 @@
                 errFileReaderNotSupported: 'FileReader não é suportado pelo seu navegador.',
                 errInvalidImage: 'Arquivo de imagem inválido.'
             },
+            ko: {
+                base64: '그림 넣기(base64)',
+                file: '파일',
+                errFileReaderNotSupported: 'FileReader가 현재 브라우저를 지원하지 않습니다.',
+                errInvalidImage: '유효하지 않은 파일'
+            },
         },
         // jshint camelcase:true
 

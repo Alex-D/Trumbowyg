@@ -52,6 +52,10 @@
                 noembed: 'Incorporar',
                 noembedError: 'Erro'
             },
+            ko: {
+                noembed: 'oEmbed 넣기',
+                noembedError: '에러'
+            },
         },
 
         plugins: {

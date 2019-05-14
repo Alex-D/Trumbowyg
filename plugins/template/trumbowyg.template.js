@@ -30,7 +30,10 @@
             },
             pt_br: {
                 template: 'Modelo'
-            }
+            },
+            ko: {
+                template: '서식'
+            },
         }
     });
 

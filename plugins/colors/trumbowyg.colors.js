@@ -69,7 +69,13 @@
             pt_br: {
                 foreColor: 'Cor de fonte',
                 backColor: 'Cor de fundo'
-            }
+            },
+            ko: {
+                foreColor: '글자색',
+                backColor: '배경색',
+                foreColorRemove: '글자색 지우기',
+                backColorRemove: '배경색 지우기'
+            },
         }
     });
 

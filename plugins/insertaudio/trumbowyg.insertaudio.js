@@ -53,7 +53,10 @@
             },
             pt_br: {
                 insertAudio: 'Inserir áudio'
-            }
+            },
+            ko: {
+                insertAudio: '소리 넣기'
+            },
         },
         plugins: {
             insertAudio: {

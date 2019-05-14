@@ -24,9 +24,9 @@ jQuery.trumbowyg.langs.ko = {
     strikethrough: '취소선',
     underline: '밑줄',
 
-    strong: '진하게',
-    em: '기울임',
-    del: '취소선',
+    strong: '중요',
+    em: '강조',
+    del: '삭제',
 
     superscript: '위 첨자',
     subscript: '아래 첨자',
@@ -37,7 +37,7 @@ jQuery.trumbowyg.langs.ko = {
     insertImage: '그림 넣기',
     link: '링크',
     createLink: '링크 넣기',
-    unlink: '링크 빼기',
+    unlink: '링크 지우기',
 
     justifyLeft: '왼쪽 정렬',
     justifyCenter: '가운데 정렬',
