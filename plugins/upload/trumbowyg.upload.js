@@ -259,8 +259,8 @@
             var originalXhr = $.ajaxSettings.xhr;
             $.ajaxSetup({
                 xhr: function () {
-                    var req = originalXhr(),
-                        that = this;
+                    var req = originalXhr();
+                    var that = this;
                     if (req && typeof req.upload === 'object' && that.progressUpload !== undefined) {
                         req.upload.addEventListener('progress', function (e) {
                             that.progressUpload(e);
