@@ -101,6 +101,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         ],
         // For custom button definitions
         btnsDef: {},
+        changeActiveDropdownIcon: false,
 
         inlineElementsSelector: 'a,abbr,acronym,b,caption,cite,code,col,dfn,dir,dt,dd,em,font,hr,i,kbd,li,q,span,strikeout,strong,sub,sup,u',
 
@@ -255,7 +256,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
         /**
          * When the button is associated to a empty object
-         * fn and title attributs are defined from the button key value
+         * fn and title attributes are defined from the button key value
          *
          * For example
          *      foo: {}
@@ -643,7 +644,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 .on('focus blur', function (e) {
                     t.$c.trigger('tbw' + e.type);
                     if (e.type === 'blur') {
-                        $('.' + prefix + 'active-button', t.$btnPane).removeClass(prefix + 'active-button ' + prefix + 'active');
+                        t.clearButtonPaneStatus()
                     }
                     if (t.o.autogrowOnEnter) {
                         if (t.autogrowOnEnterDontClose) {
@@ -1774,13 +1775,27 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             return this.range + '';
         },
 
+        clearButtonPaneStatus: function () {
+            var t = this,
+              prefix = t.o.prefix,
+              activeClasses = prefix + 'active-button ' + prefix + 'active',
+              originalIconClass = prefix + 'original-icon';
+
+            // Reset all buttons and dropdown state
+            $('.' + prefix + 'active-button', t.$btnPane).removeClass(activeClasses);
+            $('.' + originalIconClass, t.$btnPane).each(function () {
+                $(this).find('svg use').attr('xlink:href', $(this).data(originalIconClass));
+            });
+        },
         updateButtonPaneStatus: function () {
             var t = this,
                 prefix = t.o.prefix,
-                tags = t.getTagsRecursive(t.doc.getSelection().focusNode),
-                activeClasses = prefix + 'active-button ' + prefix + 'active';
+                activeClasses = prefix + 'active-button ' + prefix + 'active',
+                originalIconClass = prefix + 'original-icon',
+                tags = t.getTagsRecursive(t.doc.getSelection().focusNode);
 
-            $('.' + prefix + 'active-button', t.$btnPane).removeClass(activeClasses);
+            t.clearButtonPaneStatus();
+
             $.each(tags, function (i, tag) {
                 var btnName = t.tagToButton[tag.toLowerCase()],
                     $btn = $('.' + prefix + btnName + '-button', t.$btnPane);
@@ -1790,8 +1805,25 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 } else {
                     try {
                         $btn = $('.' + prefix + 'dropdown .' + prefix + btnName + '-dropdown-button', t.$box);
-                        var dropdownBtnName = $btn.parent().data('dropdown');
-                        $('.' + prefix + dropdownBtnName + '-button', t.$box).addClass(activeClasses);
+                        var $btnSvgUse = $btn.find('svg use'),
+                            dropdownBtnName = $btn.parent().data(prefix + 'dropdown'),
+                            $dropdownBtn = $('.' + prefix + dropdownBtnName + '-button', t.$box),
+                            $dropdownBtnSvgUse = $dropdownBtn.find('svg use');
+
+                        // Highlight the dropdown button
+                        $dropdownBtn.addClass(activeClasses);
+
+                        // Switch dropdown icon to the active sub-icon one
+                        if (t.o.changeActiveDropdownIcon && $btnSvgUse.length > 0) {
+                            // Save original icon
+                            $dropdownBtn
+                              .addClass(originalIconClass)
+                              .data(originalIconClass, $dropdownBtnSvgUse.attr('xlink:href'));
+
+                            // Put the active sub-button's icon
+                            $dropdownBtnSvgUse
+                              .attr('xlink:href', $btnSvgUse.attr('xlink:href'));
+                        }
                     } catch (e) {
                     }
                 }
