@@ -64,6 +64,7 @@ $slow-transition-duration: 300ms !default;
     resize: none;
     outline: none;
     overflow: auto;
+    user-select: text; // Avoid issues on iOS
 
     &.trumbowyg-autogrow-on-enter {
         transition: height $slow-transition-duration ease-out;
