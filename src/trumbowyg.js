@@ -487,7 +487,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         },
 
         addBtnDef: function (btnName, btnDef) {
-            this.btnsDef[btnName] = btnDef;
+            this.btnsDef[btnName] = $.extend(btnDef, this.btnsDef[btnName] || {});
         },
 
         setupUrlPrefix: function () {

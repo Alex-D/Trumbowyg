@@ -96,6 +96,23 @@ $('#simple-editor').trumbowyg({
                 </pre></code>
             </div>
 
+            <div id="upload-editor">
+                <h2>This is a minimalist demo of Trumbowyg with upload image plugin.</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident optio nam reiciendis eius beatae quibusdam!
+                </p>
+                <code><pre>
+$('#simple-editor').trumbowyg({
+    btns: ['strong', 'em', 'del', 'upload'],
+    btnsDef: {
+      upload: {
+        ico: 'insertImage'
+      }
+    }
+});
+                </pre></code>
+            </div>
+
             <div id="flat-buttonpane">
                 <h2>All buttons of Trumbowyg are here.</h2>
                 <p>
@@ -206,19 +223,9 @@ $('#form-content').trumbowyg({
         <script src="/dist/plugins/ruby/trumbowyg.ruby.js"></script>
         <script src="/dist/plugins/upload/trumbowyg.upload.js"></script>
         <script>
-            $(document).on('keydown', function (e) {
-                if (e.which === 27) {
-                    console.log('ESCAPE');
-                }
-            });
-
-
             /** Default editor configuration **/
             $('#default-editor, #empty-textarea, #disabled-textarea')
             .trumbowyg()
-            .on('dblclick', function(){
-                $(this).trumbowyg();
-            })
             .on('tbwinit tbwfocus tbwblur tbwchange tbwresize tbwpaste tbwopenfullscreen tbwclosefullscreen tbwclose', function(e){
                 console.log(e.type);
             });
@@ -231,14 +238,24 @@ $('#form-content').trumbowyg({
             });
 
 
-            /** Default editor configuration **/
+            /** Minimal configuration **/
             $('#simple-editor')
-            .trumbowyg({
+              .trumbowyg({
                 btns: ['strong', 'em', 'del']
-            })
-            .on('dblclick', function(){
-                $(this).trumbowyg();
-            });
+              });
+
+
+            /** Minimal with upload **/
+            $('#upload-editor')
+              .trumbowyg({
+                btns: ['strong', 'em', 'del', 'upload'],
+                btnsDef: {
+                  upload: {
+                    ico: 'insertImage',
+                    title: 'insertImage'
+                  }
+                }
+              });
 
 
             /* Add imagur parameters to upload plugin */
