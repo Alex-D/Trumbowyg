@@ -1376,10 +1376,25 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             var t = this,
                 prefix = t.o.prefix,
                 fullscreenCssClass = prefix + 'fullscreen',
-                isFullscreen;
+                fullscreenPlaceholderClass = fullscreenCssClass + '-placeholder',
+                isFullscreen,
+                editorHeight = t.$box.outerHeight();
 
             t.$box.toggleClass(fullscreenCssClass);
             isFullscreen = t.$box.hasClass(fullscreenCssClass);
+
+            if (isFullscreen) {
+                t.$box.before(
+                    $('<div/>', {
+                        class: fullscreenPlaceholderClass
+                    }).css({
+                        height: editorHeight + 'px'
+                    })
+                );
+            } else {
+                $('.' + fullscreenPlaceholderClass).remove();
+            }
+
             $('body').toggleClass(prefix + 'body-fullscreen', isFullscreen);
             $(window).trigger('scroll');
             t.$c.trigger('tbw' + (isFullscreen ? 'open' : 'close') + 'fullscreen');
