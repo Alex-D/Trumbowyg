@@ -929,36 +929,36 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
                     var scrollTop = $(window).scrollTop(),
                         offset = $box.offset().top + 1,
-                        bp = t.$btnPane,
-                        oh = bp.outerHeight() - 2;
+                        $buttonPane = t.$btnPane,
+                        buttonPaneOuterHeight = $buttonPane.outerHeight() - 2;
 
                     if ((scrollTop - offset > 0) && ((scrollTop - offset - t.height) < 0)) {
                         if (!t.isFixed) {
                             t.isFixed = true;
-                            bp.css({
+                            $buttonPane.css({
                                 position: 'fixed',
                                 top: 0,
-                                left: fixedFullWidth ? '0' : 'auto',
+                                left: fixedFullWidth ? 0 : 'auto',
                                 zIndex: 7
                             });
-                            $([t.$ta, t.$ed]).css({marginTop: bp.height()});
+                            t.$box.css({paddingTop: $buttonPane.height()});
                         }
-                        bp.css({
-                            width: fixedFullWidth ? '100%' : (($box.width() - 1) + 'px')
+                        $buttonPane.css({
+                            width: fixedFullWidth ? '100%' : (($box.width() - 1))
                         });
 
                         $('.' + t.o.prefix + 'fixed-top', $box).css({
                             position: fixedFullWidth ? 'fixed' : 'absolute',
-                            top: fixedFullWidth ? oh : oh + (scrollTop - offset) + 'px',
+                            top: fixedFullWidth ? buttonPaneOuterHeight : buttonPaneOuterHeight + (scrollTop - offset),
                             zIndex: 15
                         });
                     } else if (t.isFixed) {
                         t.isFixed = false;
-                        bp.removeAttr('style');
-                        $([t.$ta, t.$ed]).css({marginTop: 0});
+                        $buttonPane.removeAttr('style');
+                        t.$box.css({paddingTop: 0});
                         $('.' + t.o.prefix + 'fixed-top', $box).css({
                             position: 'absolute',
-                            top: oh
+                            top: buttonPaneOuterHeight
                         });
                     }
                 });
@@ -1055,31 +1055,31 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         // Open dropdown when click on a button which open that
         dropdown: function (name) {
             var t = this,
-                d = t.doc,
+                $body = $('body', t.doc),
                 prefix = t.o.prefix,
                 $dropdown = $('[data-' + prefix + 'dropdown=' + name + ']', t.$box),
                 $btn = $('.' + prefix + name + '-button', t.$btnPane),
                 show = $dropdown.is(':hidden');
 
-            $('body', d).trigger('mousedown');
+            $body.trigger('mousedown');
 
             if (show) {
-                var o = $btn.offset().left;
+                var btnOffsetLeft = $btn.offset().left;
                 $btn.addClass(prefix + 'active');
 
                 $dropdown.css({
                     position: 'absolute',
                     top: $btn.offset().top - t.$btnPane.offset().top + $btn.outerHeight(),
-                    left: (t.o.fixedFullWidth && t.isFixed) ? o + 'px' : (o - t.$btnPane.offset().left) + 'px'
+                    left: (t.o.fixedFullWidth && t.isFixed) ? btnOffsetLeft : (btnOffsetLeft - t.$btnPane.offset().left)
                 }).show();
 
                 $(window).trigger('scroll');
 
-                $('body', d).on('mousedown.' + t.eventNamespace, function (e) {
+                $body.on('mousedown.' + t.eventNamespace, function (e) {
                     if (!$dropdown.is(e.target)) {
                         $('.' + prefix + 'dropdown', t.$box).hide();
                         $('.' + prefix + 'active', t.$btnPane).removeClass(prefix + 'active');
-                        $('body', d).off('mousedown.' + t.eventNamespace);
+                        $body.off('mousedown.' + t.eventNamespace);
                     }
                 });
             }
@@ -1388,7 +1388,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     $('<div/>', {
                         class: fullscreenPlaceholderClass
                     }).css({
-                        height: editorHeight + 'px'
+                        height: editorHeight
                     })
                 );
             } else {
@@ -1504,7 +1504,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 html: $form
             })
                 .css({
-                    top: '-' + t.$btnPane.outerHeight() + 'px',
+                    top: '-' + t.$btnPane.outerHeight(),
                     opacity: 0
                 })
                 .appendTo($modal)
