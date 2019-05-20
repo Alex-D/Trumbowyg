@@ -188,7 +188,6 @@ $beer-height: 70px;
         overflow-y: scroll;
         overflow-x: hidden;
         height: calc(100vh - #{$beer-height});
-        padding-bottom: 100px;
     }
 
     ul,
@@ -206,6 +205,7 @@ $beer-height: 70px;
     .documentation-summary {
         position: relative;
         font-size: 18px;
+        margin-bottom: 100px;
 
         > ul {
             max-width: 340px;

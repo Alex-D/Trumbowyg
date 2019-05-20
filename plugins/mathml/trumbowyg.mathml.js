@@ -42,6 +42,11 @@
                 formulas: 'Fórmulas',
                 inline: 'Em linha'
             },
+            ko: {
+                mathml: '수식 넣기',
+                formulas: '수식',
+                inline: '글 안에 넣기'
+            },
         },
         // jshint camelcase:true
 

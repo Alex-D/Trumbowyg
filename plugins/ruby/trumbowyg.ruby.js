@@ -47,7 +47,12 @@
                 ruby: 'Adicionar texto ruby',
                 rubyModal: 'Modal ruby',
                 rubyText: 'Texto ruby'
-            }
+            },
+            ko: {
+                ruby: '루비 문자 넣기',
+                rubyModal: '대상 문자',
+                rubyText: '루비 문자'
+            },
         },
         plugins: {
             ruby: {

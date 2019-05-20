@@ -30,7 +30,10 @@
             },
             fr: {
                 specialChars: 'Caractères spéciaux'
-            }
+            },
+            ko: {
+                specialChars: '특수문자'
+            },
         },
         plugins: {
             specialchars: {
