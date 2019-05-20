@@ -307,6 +307,14 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 fn: 'formatBlock',
                 title: h + ' 4'
             },
+            h5: {
+                fn: 'formatBlock',
+                title: h + ' 5'
+            },
+            h6: {
+                fn: 'formatBlock',
+                title: h + ' 6'
+            },
             subscript: {
                 tag: 'sub'
             },
