@@ -303,9 +303,7 @@ $('#form-content').trumbowyg({
             var customizedButtonPaneTbwOptions = {
                 lang: 'fr',
                 fixedBtnPane: true,
-                btnsGrps: {
-                    test: ['strong', 'em'] // Custom named group
-                },
+                semantic: false,
                 btnsDef: {
                     // Customizable dropdowns
                     align: {
@@ -320,6 +318,7 @@ $('#form-content').trumbowyg({
                 btns: [
                     ['viewHTML'],
                     ['formatting'],
+                    ['bold', 'italic', 'strikethrough'],
                     ['align'],
                     ['image'],
                     ['foreColor', 'backColor'],
