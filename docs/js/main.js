@@ -12,7 +12,7 @@ hljs.initHighlightingOnLoad();
             core: {},
             plugins: {
                 btnsDef: {
-                    // Customizables dropdowns
+                    // Customizable dropdowns
                     image: {
                         dropdown: ['insertImage', 'upload', 'base64', 'noembed'],
                         ico: 'insertImage'
@@ -33,7 +33,7 @@ hljs.initHighlightingOnLoad();
                     ['fullscreen']
                 ],
                 plugins: {
-                    // Add imagur parameters to upload plugin
+                    // Add imgur parameters to upload plugin
                     upload: {
                         serverPath: 'https://api.imgur.com/3/image',
                         fileFieldName: 'image',
@@ -142,9 +142,12 @@ hljs.initHighlightingOnLoad();
 })(jQuery);
 
 /* Google Analytics */
-var _gaq = [['_setAccount', 'UA-35470243-1'], ['_trackPageview']]; // jshint ignore:line
-(function (d, t) {
-    var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
-    g.src = ('https:' === location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
-    s.parentNode.insertBefore(g, s);
-}(document, 'script'));
+// jshint ignore:start
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('set', 'anonymizeIp', true);
+ga('create', 'UA-35470243-2', 'auto');
+ga('send', 'pageview');
