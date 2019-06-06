@@ -10,6 +10,9 @@
             da: {
                 template: 'Skabelon'
             },
+            de: {
+                template: 'Vorlage'
+            },
             fr: {
                 template: 'Patron'
             },

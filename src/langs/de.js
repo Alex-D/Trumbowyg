@@ -10,7 +10,7 @@
 jQuery.trumbowyg.langs.de = {
     viewHTML: 'HTML anzeigen',
 
-    formatting: 'Formatieren',
+    formatting: 'Formatierung',
     p: 'Absatz',
     blockquote: 'Zitat',
     code: 'Code',
@@ -41,8 +41,8 @@ jQuery.trumbowyg.langs.de = {
     justifyFull: 'Blocksatz',
 
     horizontalRule: 'Horizontale Linie einfügen',
-    removeformat: 'Format entfernen',
-    
+    removeformat: 'Formatierung entfernen',
+
     fullscreen: 'Vollbild',
 
     close: 'Schließen',
