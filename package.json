@@ -40,6 +40,9 @@
     "jshint-stylish": "2.2.1",
     "vinyl-paths": "2.1.0"
   },
+  "peerDependencies": {
+    "jQuery": ">=1.8"
+  },
   "scripts": {
     "start": "gulp",
     "build": "gulp build",
