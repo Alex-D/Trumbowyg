@@ -64,7 +64,7 @@
                 }
             },
             de: {
-                fontsize: 'Font size',
+                fontsize: 'Schriftgröße',
                 fontsizes: {
                     'x-small': 'Sehr klein',
                     'small': 'Klein',
