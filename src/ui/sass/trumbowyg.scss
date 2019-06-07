@@ -255,6 +255,7 @@ $slow-transition-duration: 300ms !default;
     max-height: 250px;
     overflow-y: auto;
     overflow-x: hidden;
+    white-space: nowrap;
     border: 1px solid $light-color;
     padding: 5px 0;
     border-top: none;
