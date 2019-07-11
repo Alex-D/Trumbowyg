@@ -9,6 +9,6 @@
  */
 
 /**
- * English is the default languange of Trumbowyg,
+ * English is the default language of Trumbowyg,
  * you don't need to include any file :)
  */
