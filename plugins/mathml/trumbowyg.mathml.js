@@ -73,14 +73,14 @@
                             };
 
                             var mathmlCallback = function(v) {
-                                var delimitor = v.inline ? '$' : '$$';
+                                var delimiter = v.inline ? '$' : '$$';
                                 if (trumbowyg.currentMathNode) {
                                     $(trumbowyg.currentMathNode)
-                                        .html(delimitor + ' ' + v.formulas + ' ' + delimitor)
+                                        .html(delimiter + ' ' + v.formulas + ' ' + delimiter)
                                         .attr('formulas', v.formulas)
                                         .attr('inline', (v.inline ? 'true' : 'false'));
                                 } else {
-                                    var html = '<span class="mathMlContainer" contenteditable="false" formulas="' + v.formulas + '" inline="' + (v.inline ? 'true' : 'false') + '" >' + delimitor + ' ' + v.formulas + ' ' + delimitor + '</span>';
+                                    var html = '<span class="mathMlContainer" contenteditable="false" formulas="' + v.formulas + '" inline="' + (v.inline ? 'true' : 'false') + '" >' + delimiter + ' ' + v.formulas + ' ' + delimiter + '</span>';
                                     var node = $(html)[0];
                                     node.onclick = function() {
                                         trumbowyg.currentMathNode = this;
