@@ -162,6 +162,7 @@
                                 $dropdown.append(t.buildSubBtn('tableDestroy'));
                             } else {
                                 var tableSelect = $('<table/>');
+                                $('<tbody/>').appendTo(tableSelect);
                                 for (var i = 0; i < t.o.plugins.table.rows; i += 1) {
                                     var row = $('<tr/>').appendTo(tableSelect);
                                     for (var j = 0; j < t.o.plugins.table.columns; j += 1) {
@@ -202,6 +203,7 @@
                         t.saveRange();
 
                         var tabler = $('<table/>');
+                        $('<tbody/>').appendTo(tabler);
                         if (t.o.plugins.table.styler) {
                           tabler.attr('class', t.o.plugins.table.styler);
                         }
