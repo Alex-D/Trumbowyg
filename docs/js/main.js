@@ -13,9 +13,9 @@ hljs.initHighlightingOnLoad();
             plugins: {
                 btnsDef: {
                     // Customizable dropdowns
-                    image: {
-                        dropdown: ['insertImage', 'upload', 'base64', 'noembed'],
-                        ico: 'insertImage'
+                    align: {
+                        dropdown: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                        ico: 'justifyLeft'
                     }
                 },
                 btns: [
@@ -23,16 +23,18 @@ hljs.initHighlightingOnLoad();
                     ['undo', 'redo'],
                     ['formatting'],
                     ['strong', 'em', 'del', 'underline'],
-                    ['link'],
-                    ['image'],
-                    ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
-                    ['unorderedList', 'orderedList'],
                     ['foreColor', 'backColor'],
+                    ['link'],
+                    ['insertImage', 'upload', 'base64', 'noembed', 'giphy'],
+                    ['align'],
                     ['preformatted'],
                     ['horizontalRule'],
                     ['fullscreen']
                 ],
                 plugins: {
+                    giphy: {
+                        apiKey: 'dNhCbN6hrhpBMxXhIswM34wIR2UBpCns'
+                    },
                     // Add imgur parameters to upload plugin
                     upload: {
                         serverPath: 'https://api.imgur.com/3/image',
