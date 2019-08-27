@@ -48,6 +48,7 @@
                         <li><a href="#plugin-emoji">Emoji</a></li>
                         <li><a href="#plugin-fontfamily">Font family</a></li>
                         <li><a href="#plugin-fontsize">Font size</a></li>
+                        <li><a href="#plugin-giphy">Giphy</a></li>
                         <li><a href="#plugin-highlight">Highlight</a></li>
                         <li><a href="#plugin-history">History</a></li>
                         <li><a href="#plugin-insertaudio">Insert audio</a></li>
@@ -400,7 +401,7 @@ $('#my-editor').trumbowyg({
 
             <h4>How to use it?</h4>
             <pre><code class="html">
-&lt;-- Import Trumbowyg colors JS at the end of &lt;body>... -->
+&lt;-- Import Trumbowyg font size JS at the end of &lt;body>... -->
 &lt;script src="trumbowyg/dist/plugins/fontsize/trumbowyg.fontsize.min.js">&lt;/script>
             </code></pre>
             <p>
@@ -449,6 +450,65 @@ $('#my-editor').trumbowyg({
             </code></pre>
             <p class="note">
                 Default <code>allowCustomSize</code> value is <code>true</code>.
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-giphy">Giphy</h3>
+
+            <p>
+                User can search and pick gif to insert from Giphy
+            </p>
+
+            <p>
+                <a href="../../demos/#plugins-giphy" class="button button-demo">Try Giphy plugin live demo!</a>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/giphy/trumbowyg.giphy.js" class="button button-demo">
+                    View Giphy plugin code on GitHub
+                </a>
+            </p>
+
+            <h4>How to use it?</h4>
+            <pre><code class="html">
+&lt;-- Import Trumbowyg Giphy JS at the end of &lt;body>... -->
+&lt;script src="trumbowyg/dist/plugins/giphy/trumbowyg.giphy.min.js">&lt;/script>
+            </code></pre>
+            <p>
+                Then, you need to <a href="https://developers.giphy.com/dashboard/?create=true">create a Giphy App to get an API Key</a>.
+            </p>
+            <p>
+                Use the new button definition <code>giphy</code> and your newly created Giphy API Key:
+            </p>
+            <pre><code class="javascript">
+$('#my-editor').trumbowyg({
+    btns: [
+        ['giphy']
+    ],
+    plugins: {
+        giphy: {
+            apiKey: 'yourVeryOwnApiKey'
+        }
+    }
+});
+            </code></pre>
+            <p>
+                You can also choose custom rating:
+            </p>
+            <pre><code class="javascript">
+$('#my-editor').trumbowyg({
+    btns: [
+        ['giphy']
+    ],
+    plugins: {
+        giphy: {
+            apiKey: 'yourVeryOwnApiKey',
+            rating: 'pg'
+        }
+    }
+});
+            </code></pre>
+            <p class="note">
+                Default <code>rating</code> value is <code>g</code>. <br>
+                <a href="https://developers.giphy.com/docs/optional-settings/#rating">See Giphy documentation for allowed rating value details</a>.
             </p>
         </div>
 
