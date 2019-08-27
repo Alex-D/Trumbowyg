@@ -7,7 +7,7 @@
  *          Github : https://github.com/gonateek
  */
 
-jQuery.trumbowyg.langs.de = {
+jQuery.trumbowyg.langs.th = {
   viewHTML: 'ดู HTML',
 
   formatting: 'จัดรูปแบบ',
