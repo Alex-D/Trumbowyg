@@ -721,8 +721,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     }, 0);
                 });
 
-            t.$box.on('keydown', function (e) {
-                if (e.which === 27 && $('.' + prefix + 'modal-box', t.$box).length === 1) {
+            $(t.doc.body).on('keydown', function (e) {
+                if (e.which === 27 && $('.' + prefix + 'modal-box').length >= 1) {
                     t.closeModal();
                     return false;
                 }
