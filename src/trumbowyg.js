@@ -140,7 +140,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 switch (options) {
                     // Exec command
                     case 'execCmd':
-                        return t.execCmd(params.cmd, params.param, params.forceCss);
+                        return t.execCmd(params.cmd, params.param, params.forceCss, params.skipTrumbowyg);
 
                     // Modal box
                     case 'openModal':
