@@ -2,11 +2,34 @@
     transform: scale(1.22);
 }
 
+.trumbowyg-powered-by-giphy {
+    position: absolute;
+    top: calc(5% + 12px);
+    right: calc(5% + 10px);
+    pointer-events: none;
+    user-select: none;
+
+    span {
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 10px;
+        opacity: 0.6;
+    }
+
+    svg {
+        width: 66px;
+        height: auto;
+        vertical-align: bottom;
+        margin-left: 6px;
+        opacity: 0.45;
+    }
+}
+
 .trumbowyg-giphy-search {
     width: 90%;
     margin: 5%;
     padding-left: 10px;
-    padding-right: 10px;
+    padding-right: 150px;
 }
 
 .trumbowyg-giphy-modal-scroll {
