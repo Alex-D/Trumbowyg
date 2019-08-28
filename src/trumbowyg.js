@@ -1109,7 +1109,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             } else {
                 // wrap the content in a div it's easier to get the innerhtml
                 var html = $('<div>').html(t.$ta.val());
-                //scrub the html before loading into the doc
+                // scrub the html before loading into the doc
                 var safe = $('<div>').append(html);
                 $(t.o.tagsToRemove.join(','), safe).remove();
                 t.$ed.html(safe.contents().html());
@@ -1123,7 +1123,6 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 }
             }
             if (t.o.autogrowOnEnter) {
-                // t.autogrowEditorOnEnter();
                 t.$ed.height('auto');
                 var totalheight = t.autogrowOnEnterWasFocused ? t.$ed[0].scrollHeight : t.$ed.css('min-height');
                 if (totalheight !== t.$ta.css('height')) {
@@ -1575,7 +1574,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             t.restoreRange();
         },
-        // Preformatted build and management modal
+        // Pre-formatted build and management modal
         openModalInsert: function (title, fields, cmd) {
             var t = this,
                 prefix = t.o.prefix,
