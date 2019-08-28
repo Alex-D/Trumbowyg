@@ -26,8 +26,8 @@
     "gulp-sass": "4.0.2"
   },
   "scripts": {
-    "build": "npm install && gulp build",
     "start": "gulp",
+    "build": "gulp build",
     "test": "gulp test"
   }
 }
