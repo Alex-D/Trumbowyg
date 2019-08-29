@@ -140,7 +140,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 switch (options) {
                     // Exec command
                     case 'execCmd':
-                        return t.execCmd(params.cmd, params.param, params.forceCss);
+                        return t.execCmd(params.cmd, params.param, params.forceCss, params.skipTrumbowyg);
 
                     // Modal box
                     case 'openModal':
@@ -588,13 +588,12 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     if ((e.ctrlKey || e.metaKey) && !e.altKey) {
                         ctrl = true;
                         var key = t.keys[String.fromCharCode(e.which).toUpperCase()];
-                        
+
                         try {
                             t.execCmd(key.fn, key.param);
                             return false;
                         } catch (c) {}
                     } else {
-                        
                         if (t.o.tabToIndent && e.key === 'Tab') {
                             try {
                                 if (e.shiftKey) {
@@ -652,7 +651,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 .on('focus blur', function (e) {
                     t.$c.trigger('tbw' + e.type);
                     if (e.type === 'blur') {
-                        t.clearButtonPaneStatus()
+                        t.clearButtonPaneStatus();
                     }
                     if (t.o.autogrowOnEnter) {
                         if (t.autogrowOnEnterDontClose) {
@@ -722,8 +721,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     }, 0);
                 });
 
-            t.$box.on('keydown', function (e) {
-                if (e.which === 27 && $('.' + prefix + 'modal-box', t.$box).length === 1) {
+            $(t.doc.body).on('keydown', function (e) {
+                if (e.which === 27 && $('.' + prefix + 'modal-box').length >= 1) {
                     t.closeModal();
                     return false;
                 }
@@ -1110,7 +1109,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             } else {
                 // wrap the content in a div it's easier to get the innerhtml
                 var html = $('<div>').html(t.$ta.val());
-                //scrub the html before loading into the doc
+                // scrub the html before loading into the doc
                 var safe = $('<div>').append(html);
                 $(t.o.tagsToRemove.join(','), safe).remove();
                 t.$ed.html(safe.contents().html());
@@ -1124,7 +1123,6 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 }
             }
             if (t.o.autogrowOnEnter) {
-                // t.autogrowEditorOnEnter();
                 t.$ed.height('auto');
                 var totalheight = t.autogrowOnEnterWasFocused ? t.$ed[0].scrollHeight : t.$ed.css('min-height');
                 if (totalheight !== t.$ta.css('height')) {
@@ -1446,9 +1444,11 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
 
         // Open a modal box
-        openModal: function (title, content) {
+        openModal: function (title, content, buildForm) {
             var t = this,
                 prefix = t.o.prefix;
+
+            buildForm = buildForm !== false;
 
             // No open a modal box when exist other modal box
             if ($('.' + prefix + 'modal-box', t.$box).length > 0) {
@@ -1479,33 +1479,39 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             });
 
             // Build the form
-            var $form = $('<form/>', {
-                action: '',
-                html: content
-            })
-                .on('submit', function () {
-                    $modal.trigger(CONFIRM_EVENT);
-                    return false;
+            var formOrContent;
+            if (buildForm) {
+                formOrContent = $('<form/>', {
+                    action: '',
+                    html: content
                 })
-                .on('reset', function () {
-                    $modal.trigger(CANCEL_EVENT);
-                    return false;
-                })
-                .on('submit reset', function () {
-                    if (t.o.autogrowOnEnter) {
-                        t.autogrowOnEnterDontClose = false;
-                    }
-                });
+                  .on('submit', function () {
+                      $modal.trigger(CONFIRM_EVENT);
+                      return false;
+                  })
+                  .on('reset', function () {
+                      $modal.trigger(CANCEL_EVENT);
+                      return false;
+                  })
+                  .on('submit reset', function () {
+                      if (t.o.autogrowOnEnter) {
+                          t.autogrowOnEnterDontClose = false;
+                      }
+                  });
+            } else {
+                formOrContent = content;
+            }
 
 
             // Build ModalBox and animate to show them
             var $box = $('<div/>', {
                 class: prefix + 'modal-box',
-                html: $form
+                html: formOrContent
             })
                 .css({
                     top: '-' + t.$btnPane.outerHeight(),
-                    opacity: 0
+                    opacity: 0,
+                    paddingBottom: buildForm ? null : '5%',
                 })
                 .appendTo($modal)
                 .animate({
@@ -1515,22 +1521,23 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
 
             // Append title
-            $('<span/>', {
-                text: title,
-                class: prefix + 'modal-title'
-            }).prependTo($box);
+            if (title) {
+                $('<span/>', {
+                    text: title,
+                    class: prefix + 'modal-title'
+                }).prependTo($box);
+            }
 
-            $modal.height($box.outerHeight() + 10);
+            if (buildForm) {
+                // Focus in modal box
+                $('input:first', $box).focus();
 
+                // Append Confirm and Cancel buttons
+                t.buildModalBtn('submit', $box);
+                t.buildModalBtn('reset', $box);
 
-            // Focus in modal box
-            $('input:first', $box).focus();
-
-
-            // Append Confirm and Cancel buttons
-            t.buildModalBtn('submit', $box);
-            t.buildModalBtn('reset', $box);
-
+                $modal.height($box.outerHeight() + 10);
+            }
 
             $(window).trigger('scroll');
 
@@ -1567,7 +1574,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             t.restoreRange();
         },
-        // Preformatted build and management modal
+        // Pre-formatted build and management modal
         openModalInsert: function (title, fields, cmd) {
             var t = this,
                 prefix = t.o.prefix,
@@ -1791,7 +1798,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 documentSelection.removeAllRanges();
             } catch (e) {
             }
-            
+
             documentSelection.addRange(range || savedRange);
         },
         getRangeText: function () {

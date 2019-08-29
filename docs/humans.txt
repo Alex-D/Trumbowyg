@@ -3,14 +3,9 @@
 
 # TEAM
 
-    Alex-D -- Main developper -- @AlexandreDemode
-
-# THANKS
-
-    Vinz
-    Simbilou
+    Alex-D -- Main developer -- @AlexandreDemode
 
 # TECHNOLOGY COLOPHON
 
     HTML5, CSS3
-    jQuery, Modernizr
+    JavaScript, jQuery

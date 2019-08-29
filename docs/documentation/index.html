@@ -249,7 +249,7 @@ $('#trumbowyg-demo').trumbowyg({
                 by <a href="#button-pane">checking the button pane doc section</a>.
             </p>
             <p>
-                For more informations on plugins, check <a href="./plugins/">the plugins documentation page.</a>
+                For more information on plugins, check <a href="./plugins/">the plugins documentation page.</a>
             </p>
         </div>
     </section>
@@ -373,7 +373,7 @@ $.trumbowyg.svgPath = '/assets/my-custom-path/icons.svg';
                 icons by CSS or what you want.
             </p>
             <pre><code class="javascript">
-$.trumbowyg.svgPath = false:
+$.trumbowyg.svgPath = false;
             </code></pre>
             <p>
                 Check <a href="#hide-button-texts">hide button texts</a> option if you did not want button content at all
@@ -399,7 +399,7 @@ $('.editor').trumbowyg({
             </p>
             <p>
                 If you do not want use HTTP(S) protocol or use XHR to load icons, you can load icons in your HTML
-                by your own. You just need to include the
+                on your own. You just need to include the
                 <a href="https://raw.githubusercontent.com/Alex-D/Trumbowyg/master/dist/ui/icons.svg">icons.svg file</a>
                 inline in your <code>&lt;body></code>:
             </p>
@@ -417,9 +417,9 @@ $('.editor').trumbowyg({
                 You need to use this id: <code>&lt;prefix&gt;-icons</code>.
             </p>
             <p>
-                Trumbowyg check if a <code>#&lt;prefix&gt;-icons</code> exists. If not, it loads SVG icons file via
-                XHR and put it in a div with this id. Next editor on the page do not load icons again. By adding
-                this div in the page, you "hack" this mecanism to load it by your own.
+                Trumbowyg checks if a <code>#&lt;prefix&gt;-icons</code> exists. If not, it loads SVG icons file via
+                XHR and puts it in a div with this id. Next editor on the page does not load icons again. By adding
+                this div in the page, you "hack" this mechanism to load it on your own.
             </p>
         </div>
 
@@ -1023,7 +1023,7 @@ $('#editor').trumbowyg('closeModal');
             </p>
             <p class="note">
                 Only one modal box can open at any given moment. So, <code>openModal</code> return false if a modal is
-                curently opened.
+                currently opened.
             </p>
 
             <h4>Events on modal box</h4>
@@ -1032,8 +1032,8 @@ $('#editor').trumbowyg('closeModal');
                 one:
             </p>
             <ul>
-                <li><code>tbwsubmit</code>: trigged when form is submit</li>
-                <li><code>tbwreset</code>: trigged when user cancel operation</li>
+                <li><code>tbwsubmit</code>: triggered when form is submit</li>
+                <li><code>tbwreset</code>: triggered when user cancel operation</li>
             </ul>
             <pre><code class="javascript">
 // Open a modal box
@@ -1044,7 +1044,7 @@ var $modal = $('#editor').trumbowyg('openModal', {
 
 // Listen clicks on modal box buttons
 $modal.on('tbwconfirm', function(e){
-    // Save datas
+    // Save data
     $("#editor").trumbowyg('closeModal');
 });
 $modal.on('tbwcancel', function(e){

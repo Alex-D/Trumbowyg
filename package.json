@@ -2,7 +2,7 @@
   "name": "trumbowyg",
   "title": "Trumbowyg",
   "description": "A lightweight WYSIWYG editor",
-  "version": "2.18.0",
+  "version": "2.19.0",
   "main": "dist/trumbowyg.js",
   "homepage": "http://alex-d.github.io/Trumbowyg",
   "author": {
@@ -39,6 +39,9 @@
     "jshint": "2.9.6",
     "jshint-stylish": "2.2.1",
     "vinyl-paths": "2.1.0"
+  },
+  "peerDependencies": {
+    "jQuery": ">=1.8"
   },
   "scripts": {
     "start": "gulp",

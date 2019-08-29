@@ -179,7 +179,7 @@ $beer-height: 70px;
         bottom: $beer-height;
         width: calc(100% - 17px);
         height: 100px;
-        background: linear-gradient(to bottom, transparent, $primary-color-light);
+        background: linear-gradient(to bottom, rgba($primary-color-light, 0), $primary-color-light);
         pointer-events: none;
     }
 
