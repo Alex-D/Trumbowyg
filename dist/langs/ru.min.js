@@ -1,6 +1,6 @@
 /* ===========================================================
  * ru.js
- * Russion translation for Trumbowyg
+ * Russian translation for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
  * Author : Yuri Lya

@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.18.0 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.19.0 - A lightweight WYSIWYG editor
  * Default stylesheet for Trumbowyg editor
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -99,7 +99,8 @@
   opacity: 0 !important; }
 
 .trumbowyg-box.trumbowyg-editor-hidden .trumbowyg-textarea {
-  display: block; }
+  display: block;
+  margin-bottom: 1px; }
 
 .trumbowyg-box.trumbowyg-editor-hidden .trumbowyg-editor {
   display: none; }
@@ -206,6 +207,7 @@
   max-height: 250px;
   overflow-y: auto;
   overflow-x: hidden;
+  white-space: nowrap;
   border: 1px solid #ecf0f1;
   padding: 5px 0;
   border-top: none;
@@ -455,6 +457,8 @@ body.trumbowyg-body-fullscreen {
       color: #555; }
     .trumbowyg-editor.trumbowyg-reset-css ul {
       list-style: disc; }
+    .trumbowyg-editor.trumbowyg-reset-css ol {
+      list-style: decimal; }
     .trumbowyg-editor.trumbowyg-reset-css ul,
     .trumbowyg-editor.trumbowyg-reset-css ol {
       padding-left: 20px !important; }
