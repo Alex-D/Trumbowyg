@@ -1033,6 +1033,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }
 
             t.semanticCode(false, true);
+            t.$c.trigger('tbwchange');
 
             setTimeout(function () {
                 t.doc.activeElement.blur();
