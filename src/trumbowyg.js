@@ -1108,7 +1108,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             if (!force && t.$ed.is(':visible')) {
                 t.syncTextarea();
             } else {
-                // wrap the content in a div it's easier to get the innerhtml
+                // wrap the content in a div it's easier to get the inner html
                 var html = $('<div>').html(t.$ta.val());
                 // scrub the html before loading into the doc
                 var safe = $('<div>').append(html);
@@ -1125,9 +1125,9 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }
             if (t.o.autogrowOnEnter) {
                 t.$ed.height('auto');
-                var totalheight = t.autogrowOnEnterWasFocused ? t.$ed[0].scrollHeight : t.$ed.css('min-height');
-                if (totalheight !== t.$ta.css('height')) {
-                    t.$ed.css({height: totalheight});
+                var totalHeight = t.autogrowOnEnterWasFocused ? t.$ed[0].scrollHeight : t.$ed.css('min-height');
+                if (totalHeight !== t.$ta.css('height')) {
+                    t.$ed.css({height: totalHeight});
                     t.$c.trigger('tbwresize');
                 }
             }
@@ -1169,15 +1169,6 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     wrapInlinesInParagraphsFrom(t.$ed.children(inlineElementsSelector).first());
 
                     t.semanticTag('div', true);
-
-                    // Unwrap paragraphs content, containing nothing useful
-                    t.$ed.find('p').filter(function () {
-                        // Don't remove currently being edited element
-                        if (t.range && this === t.range.startContainer) {
-                            return false;
-                        }
-                        return $(this).text().trim().length === 0 && $(this).children().not('br,span').length === 0;
-                    }).contents().unwrap();
 
                     // Get rid of temporary span's
                     $('[data-tbw]', t.$ed).contents().unwrap();
