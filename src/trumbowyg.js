@@ -1225,8 +1225,9 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         createLink: function () {
             var t = this,
                 documentSelection = t.doc.getSelection(),
+                selectedRange = documentSelection.getRangeAt(0),
                 node = documentSelection.focusNode,
-                text = new XMLSerializer().serializeToString(documentSelection.getRangeAt(0).cloneContents()),
+                text = new XMLSerializer().serializeToString(selectedRange.cloneContents()) || selectedRange + '',
                 url,
                 title,
                 target;
@@ -1263,7 +1264,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 }
             };
             if (!t.o.minimalLinks) {
-                Object.assign(options, {
+                $.extend(options, {
                     title: {
                         label: t.lang.title,
                         value: title
