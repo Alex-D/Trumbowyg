@@ -2,10 +2,37 @@
     transform: scale(1.22);
 }
 
+.trumbowyg-giphy-search {
+    display: block;
+    width: 80%;
+    margin: 5%;
+    padding-left: 10px;
+    padding-right: 150px;
+}
+
+.trumbowyg-giphy-close {
+    position: absolute;
+    top: calc(5% + 8px);
+    right: calc(5% - 2px);
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: 1px solid transparent;
+
+    &:hover,
+    &:focus {
+        outline: none;
+        background: #ecf0f1;
+    }
+    &:focus {
+        border-color: rgba(0, 0, 0, 0.3);
+    }
+}
+
 .trumbowyg-powered-by-giphy {
     position: absolute;
     top: calc(5% + 12px);
-    right: calc(5% + 10px);
+    right: calc(15% + 10px);
     pointer-events: none;
     user-select: none;
 
@@ -18,18 +45,11 @@
 
     svg {
         width: 66px;
-        height: auto;
+        height: 15px;
         vertical-align: bottom;
         margin-left: 6px;
         opacity: 0.45;
     }
-}
-
-.trumbowyg-giphy-search {
-    width: 90%;
-    margin: 5%;
-    padding-left: 10px;
-    padding-right: 150px;
 }
 
 .trumbowyg-giphy-modal-scroll {
