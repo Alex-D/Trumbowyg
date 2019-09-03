@@ -92,16 +92,17 @@
                 throw new Error('You must set a Giphy API Key');
               }
 
-              var BASE_URL = 'https://api.giphy.com/v1/gifs/search?api_key=' + trumbowyg.o.plugins.giphy.apiKey + '&rating=' + trumbowyg.o.plugins.giphy.rating;
-              var DEFAULT_URL = BASE_URL.replace('/search', '/trending');
+              var BASE_URL = 'https://api.giphy.com/v1/gifs/search?api_key=' + trumbowyg.o.plugins.giphy.apiKey + '&rating=' + trumbowyg.o.plugins.giphy.rating,
+                  DEFAULT_URL = BASE_URL.replace('/search', '/trending');
               var previousAjaxCall = {abort: function () {}};
               var prefix = trumbowyg.o.prefix;
 
               // Create and open the modal
-              var searchInput = '<input name="" class="' + prefix + 'giphy-search" placeholder="Search a GIF" autofocus="autofocus">';
-              var closeButton = '<button class="' + prefix + 'giphy-close" title="' + trumbowyg.lang.close + '"><svg><use xlink:href="' + trumbowyg.svgPath + '#' + prefix + 'close"/></svg></button>';
-              var poweredByGiphy = '<div class="' + prefix + 'powered-by-giphy"><span>Powered by</span>' + giphyLogo + '</div>';
-              var giphyModalHtml = searchInput + closeButton + poweredByGiphy + '<div class="' + prefix + 'giphy-modal-scroll"><div class="' + prefix + 'giphy-modal"></div></div>';
+              var searchInput = '<input name="" class="' + prefix + 'giphy-search" placeholder="Search a GIF" autofocus="autofocus">',
+                  closeButton = '<button class="' + prefix + 'giphy-close" title="' + trumbowyg.lang.close + '"><svg><use xlink:href="' + trumbowyg.svgPath + '#' + prefix + 'close"/></svg></button>',
+                  poweredByGiphy = '<div class="' + prefix + 'powered-by-giphy"><span>Powered by</span>' + giphyLogo + '</div>',
+                  giphyModalHtml = searchInput + closeButton + poweredByGiphy + '<div class="' + prefix + 'giphy-modal-scroll"><div class="' + prefix + 'giphy-modal"></div></div>';
+
               trumbowyg
                 .openModal(null, giphyModalHtml, false)
                 .one(CANCEL_EVENT, function () {
@@ -111,9 +112,10 @@
 
                   trumbowyg.closeModal();
                 });
-              var $giphyInput = $('.' + trumbowyg.o.prefix + 'giphy-search');
-              var $giphyClose = $('.' + trumbowyg.o.prefix + 'giphy-close');
-              var $giphyModal = $('.' + trumbowyg.o.prefix + 'giphy-modal');
+
+              var $giphyInput = $('.' + trumbowyg.o.prefix + 'giphy-search'),
+                  $giphyClose = $('.' + trumbowyg.o.prefix + 'giphy-close'),
+                  $giphyModal = $('.' + trumbowyg.o.prefix + 'giphy-modal');
 
               // Load trending gifs as default
               $.ajax({
