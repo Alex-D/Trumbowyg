@@ -40,6 +40,12 @@
             zh_tw: {
                 preformatted: '代碼範例 <pre>'
             },
+            pt_br: {
+                preformatted: 'Exemple de código <pre>'
+            },
+            ko: {
+                preformatted: '코드 예제 <pre>'
+            },
         },
         // jshint camelcase:true
 

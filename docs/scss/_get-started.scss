@@ -1,10 +1,15 @@
 .installation-first-step {
-    height: 200px;
+    height: 400px;
     color: $text-color;
     text-align: center;
     padding-top: 10px;
-    margin: 20px 0;
+    margin: 20px 0 50px;
     border: 1px solid rgba(0, 0, 0, 0.15);
+
+    code {
+        display: block;
+        color: #888;
+    }
 
     .installation-download,
     .installation-package-managers {
@@ -17,41 +22,69 @@
         color: $text-color;
     }
 
-    .installation-download {
-        .button {
-            display: block;
-            color: $white;
-            box-shadow: 0 0 50px rgba($primary-color, 0.4);
+    .button {
+        display: block;
+        color: $text-color;
+        border-color: rgba(0, 0, 0, 0.07);
+        background-color: transparent;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.03);
+        transition: background-color 150ms, box-shadow 150ms, color 150ms;
 
-            &:hover {
-                text-decoration: none;
-                color: $primary-color;
-            }
+        &:hover {
+            text-decoration: none;
+            color: $white;
+            border-color: transparent;
+            background-color: $primary-color;
+            box-shadow: 0 0 50px rgba($primary-color, 0.4);
         }
     }
+
     .installation-or {
+        position: relative;
         font-weight: bold;
         text-transform: uppercase;
         width: 4%;
         float: left;
         font-size: 18px;
-        margin: 60px 0;
-        padding: 11px 0;
-        background: $white;
+        margin: 140px 0 20px;
         border-radius: 50px;
+        z-index: 0;
     }
+    .installation-or::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: -1;
+        width: 100%;
+        padding-top: 100%;
+        min-width: 45px;
+        min-height: 45px;
+        background: $white;
+        border-radius: 100%;
+        transform: translate(-50%, -50%);
+    }
+
     .installation-package-managers {
-        color: #888;
         font-size: 18px;
 
         code {
-            display: block;
             padding-top: 5px;
             line-height: 1.6;
 
             & + code {
                 padding-top: 0;
             }
+        }
+    }
+
+    .installation-cdn {
+        clear: both;
+        width: 100%;
+
+        code {
+
         }
     }
 }

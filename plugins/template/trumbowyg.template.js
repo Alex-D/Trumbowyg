@@ -10,6 +10,9 @@
             da: {
                 template: 'Skabelon'
             },
+            de: {
+                template: 'Vorlage'
+            },
             fr: {
                 template: 'Patron'
             },
@@ -27,6 +30,12 @@
             },
             zh_tw: {
                 template: '模板',
+            },
+            pt_br: {
+                template: 'Modelo'
+            },
+            ko: {
+                template: '서식'
             },
         }
     });

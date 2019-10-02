@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Documentation | Trumbowyg : a lightweight WYSIWYG editor | Alex-D / Alexandre Demode</title>
+    <title>Documentation | Trumbowyg: A lightweight WYSIWYG editor | Alex-D / Alexandre Demode</title>
     <meta name="description" content="Trumbowyg is a jQuery plugin for create WYSIWYG editor">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -15,8 +15,8 @@
 <body class="documentation-body">
 <svg xmlns="http://www.w3.org/2000/svg" style="overflow: hidden;visibility: hidden;height: 0;width: 0;">
     <symbol id="trumbowyg-link" viewBox="0 0 72 72">
-        <path d="M30.9 49.1l-6.7 6.7c-.8.8-1.6.9-2.1.9s-1.4-.1-2.1-.9l-5.2-5.2c-1.1-1.1-1.1-3.1 0-4.2l6.1-6.1.2-.2 6.5-6.5c-1.2-.6-2.5-.9-3.8-.9-2.3 0-4.6.9-6.3 2.6L10.8 42c-3.5 3.5-3.5 9.2 0 12.7l5.2 5.2c1.7 1.7 4 2.6 6.3 2.6s4.6-.9 6.3-2.6l6.7-6.7C38 50.5 38.6 46.3 37 43l-6.1 6.1zM38.5 22.7l6.7-6.7c.8-.8 1.6-.9 2.1-.9s1.4.1 2.1.9l5.2 5.2c1.1 1.1 1.1 3.1 0 4.2l-6.1 6.1-.2.2-6.5 6.5c1.2.6 2.5.9 3.8.9 2.3 0 4.6-.9 6.3-2.6l6.7-6.7c3.5-3.5 3.5-9.2 0-12.7l-5.2-5.2c-1.7-1.7-4-2.6-6.3-2.6s-4.6.9-6.3 2.6l-6.7 6.7c-2.7 2.7-3.3 6.9-1.7 10.2l6.1-6.1z"/>
-        <path d="M44.1 30.7c.2-.2.4-.6.4-.9 0-.3-.1-.6-.4-.9l-2.3-2.3c-.2-.2-.6-.4-.9-.4-.3 0-.6.1-.9.4L25.8 40.8c-.2.2-.4.6-.4.9 0 .3.1.6.4.9l2.3 2.3c.2.2.6.4.9.4.3 0 .6-.1.9-.4l14.2-14.2z"/>
+        <path d="M30.9 49.1l-6.7 6.7c-.8.8-1.6.9-2.1.9s-1.4-.1-2.1-.9l-5.2-5.2c-1.1-1.1-1.1-3.1 0-4.2l6.1-6.1.2-.2 6.5-6.5c-1.2-.6-2.5-.9-3.8-.9-2.3 0-4.6.9-6.3 2.6L10.8 42c-3.5 3.5-3.5 9.2 0 12.7l5.2 5.2c1.7 1.7 4 2.6 6.3 2.6s4.6-.9 6.3-2.6l6.7-6.7C38 50.5 38.6 46.3 37 43l-6.1 6.1zM38.5 22.7l6.7-6.7c.8-.8 1.6-.9 2.1-.9s1.4.1 2.1.9l5.2 5.2c1.1 1.1 1.1 3.1 0 4.2l-6.1 6.1-.2.2-6.5 6.5c1.2.6 2.5.9 3.8.9 2.3 0 4.6-.9 6.3-2.6l6.7-6.7c3.5-3.5 3.5-9.2 0-12.7l-5.2-5.2c-1.7-1.7-4-2.6-6.3-2.6s-4.6.9-6.3 2.6l-6.7 6.7c-2.7 2.7-3.3 6.9-1.7 10.2l6.1-6.1z"></path>
+        <path d="M44.1 30.7c.2-.2.4-.6.4-.9 0-.3-.1-.6-.4-.9l-2.3-2.3c-.2-.2-.6-.4-.9-.4-.3 0-.6.1-.9.4L25.8 40.8c-.2.2-.4.6-.4.9 0 .3.1.6.4.9l2.3 2.3c.2.2.6.4.9.4.3 0 .6-.1.9-.4l14.2-14.2z"></path>
     </symbol>
 </svg>
 <div class="sidebar">
@@ -29,9 +29,9 @@
                 Documentation
             </h1>
             <nav class="documentation-menu">
-                <a href="./">Docs</a> &bull;
-                <a href="./plugins/">Plugins</a> &bull;
-                <a href="./core/">Core</a> &bull;
+                <a href="./">Docs</a><span class="documentation-menu-dot"> &bull;</span>
+                <a href="./plugins/">Plugins</a><span class="documentation-menu-dot"> &bull;</span>
+                <a href="./core/">Core</a><span class="documentation-menu-dot"> &bull;</span>
                 <a href="../demos/">Demos</a>
             </nav>
         </header>
@@ -63,6 +63,7 @@
                     <a href="#basic-options">Basic Options</a>
                     <ul>
                         <li><a href="#button-pane">Button pane</a></li>
+                        <li><a href="#change-active-dropdown-icon">Active dropdown icon</a></li>
                         <li><a href="#hide-button-texts">Hide button texts</a></li>
                         <li><a href="#semantic">Semantic</a></li>
                         <li><a href="#reset-css">Reset CSS</a></li>
@@ -134,7 +135,13 @@
                     <div class="installation-col-title">
                         Download the package
                     </div>
-                    <a href="https://github.com/Alex-D/Trumbowyg/archive/master.zip" class="button button-primary">Download</a>
+                    <a href="https://github.com/Alex-D/Trumbowyg/archive/master.zip" class="button button-ghost">Download</a>
+                </div>
+                <div class="installation-cdn">
+                    <div class="installation-col-title">
+                        Use CDNJS
+                    </div>
+                    <a href="https://cdnjs.com/libraries/Trumbowyg" class="button button-ghost">See all available files</a>
                 </div>
             </div>
 
@@ -142,8 +149,8 @@
                 If you don't already do it, load jQuery at bottom of <code>&lt;body&gt;</code> like so:
             </p>
             <pre><code class="html">
-&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">&lt;/script>
-&lt;script>window.jQuery || document.write('&lt;script src="js/vendor/jquery-3.2.1.min.js">&lt;\/script>')&lt;/script>
+&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">&lt;/script>
+&lt;script>window.jQuery || document.write('&lt;script src="js/vendor/jquery-3.3.1.min.js">&lt;\/script>')&lt;/script>
             </code></pre>
             <p class="note">
                 Trumbowyg requires jQuery >= 1.8
@@ -153,7 +160,7 @@
                 After these lines, you have to load Trumbowyg.
             </p>
             <pre><code class="html">
-&lt;script src="node_modules/trumbowyg/dist/trumbowyg.min.js">&lt;/script>
+&lt;script src="trumbowyg/dist/trumbowyg.min.js">&lt;/script>
             </code></pre>
 
             <p>
@@ -161,7 +168,7 @@
                 editor.
             </p>
             <pre><code class="html">
-&lt;link rel="stylesheet" href="node_modules/trumbowyg/dist/ui/trumbowyg.min.css">
+&lt;link rel="stylesheet" href="trumbowyg/dist/ui/trumbowyg.min.css">
             </code></pre>
         </div>
 
@@ -213,15 +220,15 @@ $('#trumbowyg-demo').trumbowyg({
             </p>
             <pre><code class="html">
 &lt;-- Import jQuery -->
-&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">&lt;/script>
-&lt;script>window.jQuery || document.write('&lt;script src="js/vendor/jquery-3.2.1.min.js">&lt;\/script>')&lt;/script>
+&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">&lt;/script>
+&lt;script>window.jQuery || document.write('&lt;script src="js/vendor/jquery-3.3.1.min.js">&lt;\/script>')&lt;/script>
 
 &lt;-- Import Trumbowyg -->
-&lt;script src="node_modules/trumbowyg/dist/trumbowyg.min.js">&lt;/script>
+&lt;script src="trumbowyg/dist/trumbowyg.min.js">&lt;/script>
 
 &lt;-- Import Trumbowyg plugins... -->
-&lt;script src="node_modules/trumbowyg/dist/plugins/upload/trumbowyg.cleanpaste.min.js">&lt;/script>
-&lt;script src="node_modules/trumbowyg/dist/plugins/upload/trumbowyg.pasteimage.min.js">&lt;/script>
+&lt;script src="trumbowyg/dist/plugins/upload/trumbowyg.cleanpaste.min.js">&lt;/script>
+&lt;script src="trumbowyg/dist/plugins/upload/trumbowyg.pasteimage.min.js">&lt;/script>
 
 &lt;-- Init Trumbowyg -->
 &lt;script>
@@ -242,7 +249,7 @@ $('#trumbowyg-demo').trumbowyg({
                 by <a href="#button-pane">checking the button pane doc section</a>.
             </p>
             <p>
-                For more informations on plugins, check <a href="./plugins/">the plugins documentation page.</a>
+                For more information on plugins, check <a href="./plugins/">the plugins documentation page.</a>
             </p>
         </div>
     </section>
@@ -366,7 +373,7 @@ $.trumbowyg.svgPath = '/assets/my-custom-path/icons.svg';
                 icons by CSS or what you want.
             </p>
             <pre><code class="javascript">
-$.trumbowyg.svgPath = false:
+$.trumbowyg.svgPath = false;
             </code></pre>
             <p>
                 Check <a href="#hide-button-texts">hide button texts</a> option if you did not want button content at all
@@ -392,7 +399,7 @@ $('.editor').trumbowyg({
             </p>
             <p>
                 If you do not want use HTTP(S) protocol or use XHR to load icons, you can load icons in your HTML
-                by your own. You just need to include the
+                on your own. You just need to include the
                 <a href="https://raw.githubusercontent.com/Alex-D/Trumbowyg/master/dist/ui/icons.svg">icons.svg file</a>
                 inline in your <code>&lt;body></code>:
             </p>
@@ -410,9 +417,9 @@ $('.editor').trumbowyg({
                 You need to use this id: <code>&lt;prefix&gt;-icons</code>.
             </p>
             <p>
-                Trumbowyg check if a <code>#&lt;prefix&gt;-icons</code> exists. If not, it loads SVG icons file via
-                XHR and put it in a div with this id. Next editor on the page do not load icons again. By adding
-                this div in the page, you "hack" this mecanism to load it by your own.
+                Trumbowyg checks if a <code>#&lt;prefix&gt;-icons</code> exists. If not, it loads SVG icons file via
+                XHR and puts it in a div with this id. Next editor on the page does not load icons again. By adding
+                this div in the page, you "hack" this mechanism to load it on your own.
             </p>
         </div>
 
@@ -507,6 +514,23 @@ $('.simple-editor').trumbowyg({
         </div>
 
 
+        <div class="feature" data-added="2.18.0">
+            <h3 id="change-active-dropdown-icon">Active dropdown icon</h3>
+            <p class="added-feature">Added in 2.18.0</p>
+            <p>
+                Dropdown icon can change to the active sub-button icon with this option enabled.
+            </p>
+            <pre><code class="javascript">
+$('.simple-editor').trumbowyg({
+    changeActiveDropdownIcon: true
+});
+            </code></pre>
+            <p class="note">
+                By default, <code>changeActiveDropdownIcon</code> option value is: <code>false</code>
+            </p>
+        </div>
+
+
         <div class="feature" data-added="2.5.0">
             <h3 id="hide-button-texts">Hide button texts</h3>
             <p class="added-feature">Added in 2.5.0</p>
@@ -532,7 +556,7 @@ $('.trumbowyg').trumbowyg({
             <h3 id="semantic">Semantic</h3>
             <p>
                 Generates a better, more semantic oriented HTML (i.e. <code>&lt;em&gt;</code> instead of <code>
-                &lt;i&gt;</code>, <code>&lt;strong&gt;</code> intsead of <code>&lt;b&gt;</code>, etc.). It's just a
+                &lt;i&gt;</code>, <code>&lt;strong&gt;</code> instead of <code>&lt;b&gt;</code>, etc.). It's just a
                 boolean:
             </p>
             <pre><code class="javascript">
@@ -541,13 +565,39 @@ $('.trumbowyg').trumbowyg({
 });
             </code></pre>
             <p>
-                This option deactivates the <em>underline</em> button by default because they do not convey any real
+                Enabling semantic mode deactivates the <em>underline</em> button by default because they do not convey any real
                 semantic. If you want to reactivate them, you have to do it explicitly, see <a href="#button-pane">Button
                 pane</a>
             </p>
-            <p class="note">
-                This option is set to <code>true</code> by default
+            <p>
+                Since 2.12.0 you can also put an object to customize the semantic tag mapping for each one of these tags:
+                <code>&lt;b&gt;</code>,
+                <code>&lt;i&gt;</code>,
+                <code>&lt;s&gt;</code>,
+                <code>&lt;strike&gt;</code>,
+                <code>&lt;div&gt;</code>.
             </p>
+            <pre><code class="javascript">
+$('.trumbowyg').trumbowyg({
+    semantic: {
+        'div': 'div' // Editor does nothing on div tags now
+    }
+});
+            </code></pre>
+            <p class="note">
+                This option is set to <code>true</code> by default which is equivalent to:
+            </p>
+            <pre><code class="javascript">
+$('.trumbowyg').trumbowyg({
+    semantic: {
+        'b': 'strong',
+        'i': 'em',
+        's': 'del',
+        'strike': 'del',
+        'div': 'p'
+    }
+});
+            </code></pre>
         </div>
 
 
@@ -973,7 +1023,7 @@ $('#editor').trumbowyg('closeModal');
             </p>
             <p class="note">
                 Only one modal box can open at any given moment. So, <code>openModal</code> return false if a modal is
-                curently opened.
+                currently opened.
             </p>
 
             <h4>Events on modal box</h4>
@@ -982,8 +1032,8 @@ $('#editor').trumbowyg('closeModal');
                 one:
             </p>
             <ul>
-                <li><code>tbwsubmit</code>: trigged when form is submit</li>
-                <li><code>tbwreset</code>: trigged when user cancel operation</li>
+                <li><code>tbwsubmit</code>: triggered when form is submit</li>
+                <li><code>tbwreset</code>: triggered when user cancel operation</li>
             </ul>
             <pre><code class="javascript">
 // Open a modal box
@@ -994,7 +1044,7 @@ var $modal = $('#editor').trumbowyg('openModal', {
 
 // Listen clicks on modal box buttons
 $modal.on('tbwconfirm', function(e){
-    // Save datas
+    // Save data
     $("#editor").trumbowyg('closeModal');
 });
 $modal.on('tbwcancel', function(e){
@@ -1019,7 +1069,7 @@ $("#editor").trumbowyg('openModalInsert', {
             label: 'Alt',
             name: 'alt',
             value: img.attr('alt'),
-            type: 'text'.
+            type: 'text',
             attributes: {}
         },
         example: {
@@ -1031,8 +1081,10 @@ $("#editor").trumbowyg('openModalInsert', {
             // When attributes is missing, {} is used. Attributes are added as attributes to
             //   the input element.
             // For radio and checkbox fields, you will need to use attributes if you want it
-            //   to be checked by default.        }
+            //   to be checked by default.
+        }
     },
+    // Callback is called when user confirms
     callback: function(values){
         img.attr('src', values['url']);
         img.attr('alt', values['alt']);
@@ -1176,7 +1228,7 @@ $('#editor')
 </main>
 
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
 
 <script src="../js/vendor/highlight.js"></script>

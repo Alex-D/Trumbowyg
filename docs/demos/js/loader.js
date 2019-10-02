@@ -1,35 +1,45 @@
-var baseURL = window.location.hostname.indexOf('github.') !== -1 ? '//rawcdn.githack.com/Alex-D/Trumbowyg/v2.12.0/' : '../../../';
+var baseURL = window.location.hostname.indexOf('github.') !== -1 ? '//rawcdn.githack.com/Alex-D/Trumbowyg/v2.19.1/' : '../../../';
 var styleLoadingContainer = document.querySelector('.loading-head');
 var scriptLoadingContainer = document.querySelector('.loading-body');
+
+function loadTag(tagToInsert, container, comment, tagForDocumentation) {
+    'use strict';
+
+    document.write(tagToInsert);
+
+    var html = '';
+    if (container.innerHTML.trim().length > 0) {
+        html = '\n' + container.innerHTML.trim() + '\n';
+    }
+
+    if (comment !== undefined) {
+        html += '\n&lt;!-- ' + comment + ' -->';
+    }
+    html += tagForDocumentation.replace(/</g, '&lt;');
+
+    container.innerHTML = html;
+}
 
 function loadStyle(stylePath, comment) {
     'use strict';
 
-    document.write('<link rel="stylesheet" href="' + baseURL + stylePath + '"/>');
-
-    styleLoadingContainer.innerHTML = styleLoadingContainer.innerHTML.trim();
-    if (styleLoadingContainer.innerHTML.length > 0) {
-        styleLoadingContainer.innerHTML = '\n' + styleLoadingContainer.innerHTML;
-    }
-    if (comment !== undefined) {
-        styleLoadingContainer.innerText += '\n<!-- ' + comment + ' -->';
-    }
-    styleLoadingContainer.innerText += '\n<link rel="stylesheet" href="node_modules/trumbowyg/' + stylePath + '">\n\n';
+    loadTag(
+      '<link rel="stylesheet" href="' + baseURL + stylePath + '"/>',
+      styleLoadingContainer,
+      comment,
+      '\n<link rel="stylesheet" href="trumbowyg/' + stylePath + '">\n\n'
+    );
 }
 
 function loadScript(scriptPath, comment) {
     'use strict';
 
-    document.write('<script src="' + baseURL + scriptPath + '"></script>');
-
-    scriptLoadingContainer.innerHTML = scriptLoadingContainer.innerHTML.trim();
-    if (scriptLoadingContainer.innerHTML.length > 0) {
-        scriptLoadingContainer.innerHTML = '\n' + scriptLoadingContainer.innerHTML;
-    }
-    if (comment !== undefined) {
-        scriptLoadingContainer.innerText += '\n<!-- ' + comment + ' -->';
-    }
-    scriptLoadingContainer.innerText += '\n<script src="node_modules/trumbowyg/' + scriptPath + '"></script>\n\n';
+    loadTag(
+      '<script src="' + baseURL + scriptPath + '"></script>',
+      scriptLoadingContainer,
+      comment,
+      '\n<script src="trumbowyg/' + scriptPath + '"></script>\n\n'
+    );
 }
 
 (function($) {

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MathML plugin | Trumbowyg</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body class="documentation-body">
+<div class="main main-demo-inner">
+    <section class="wrapper section">
+        <h2 class="section-title">MathML plugin</h2>
+
+        <div class="feature">
+            <h3>Basic usage</h3>
+            <p>
+                This plugin allows user to use MathML.
+            </p>
+
+            <a href="../../documentation/plugins/#plugin-mathml" class="button button-demo">Read MathML plugin documentation</a>
+
+            <div id="editor">
+                <h2>You can try to insert some formulas</h2>
+            </div>
+
+            <div class="sample-data">
+                <h4>Some formulas to copy/paste to try it</h4>
+                <p>
+                    <input type="text" readonly value="\left( \sum_{k=1}^n a_k b_k \right)^{\!\!2} \leq  \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)" onclick="this.select();">
+                    <input type="text" readonly value="P(E) = {n \choose k} p^k (1-p)^{ n-k}" onclick="this.select();">
+                </p>
+            </div>
+
+            <h4>The code</h4>
+            <pre><code class="js-code-to-eval javascript">
+// MathJax inline configuration
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [
+            ['$', '$'],
+            ['\\(', '\\)']
+        ]
+    }
+});
+
+// Trumbowyg initialization with MathML button
+$('#editor')
+.trumbowyg({
+    btns: [
+        'mathml'
+    ]
+});
+            </code></pre>
+        </div>
+
+        <div class="feature">
+            <h3>Setup</h3>
+
+            <h4>In head tag</h4>
+            <pre><code class="html loading-head">
+            </code></pre>
+            <h4>At the end of body</h4>
+            <pre><code class="html loading-body">
+&lt;!-- Import jQuery -->
+&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">&lt;/script>
+&lt;script>window.jQuery || document.write('&lt;script src="js/vendor/jquery-3.3.1.min.js">&lt;\/script>')&lt;/script>
+
+&lt;!-- Import MathJax -->
+&lt;script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">&lt;/script>
+            </code></pre>
+        </div>
+    </section>
+</div>
+
+
+<!-- Import jQuery -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
+<!-- Import MathJax -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<!-- DO NOT COPY THESE LINES IN YOUR PROJECT, THEY ARE THERE JUST FOR THE EXAMPLE PAGE PURPOSE -->
+<script src="../js/loader.js"></script>
+<script>
+  loadStyle('dist/ui/trumbowyg.css');
+  loadStyle('dist/plugins/mathml/ui/trumbowyg.mathml.css', 'Import MathML plugin specific stylesheet');
+  loadScript('dist/trumbowyg.js', 'Import Trumbowyg');
+  loadScript('dist/plugins/mathml/trumbowyg.mathml.js', 'Import all plugins you want AFTER importing jQuery and Trumbowyg');
+</script>
+<script src="../js/runExampleCode.js"></script>
+<script src="../js/highlight.js"></script>
+</body>
+</html>

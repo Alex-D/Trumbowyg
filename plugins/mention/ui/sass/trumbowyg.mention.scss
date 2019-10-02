@@ -1,14 +1,4 @@
 .trumbowyg-dropdown-mention {
-    height: calc(75%);
-    width: 300px;
-    max-width: 300px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-
-    svg {
-        display: none !important;
-    }
-
     button {
         position: relative;
         white-space: nowrap;

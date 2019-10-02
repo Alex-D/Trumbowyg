@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>resizimg plugin | Trumbowyg</title>
+    <title>Resizimg plugin | Trumbowyg</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../../css/main.css">
 </head>
@@ -21,20 +21,22 @@
 
             <div id="editor" style="margin: 1rem">
                 <h2>Resize that image!</h2>
-                <img src="https://github.com/Alex-D/Trumbowyg/raw/develop/banner.jpg" style="height: 200px">
+                <img src="//rawcdn.githack.com/Alex-D/Trumbowyg/develop/banner.jpg" style="height: 200px">
             </div>
 
             <h4>The code</h4>
-            <p>nothing to do unless you want to change the default values of options, in which case you could:</p>
+            <p>
+                Nothing to do unless you want to change the default values of options, in which case you could:
+            </p>
             <pre><code class="js-code-to-eval javascript">
 $('#editor').trumbowyg({
-  plugins: {
-    resizimg : {
-      minSize: 64,
-      step: 16,
+    plugins: {
+        resizimg: {
+            minSize: 64,
+            step: 16,
+        }
     }
-  }
-});            
+});
             </code></pre>
         </div>
 
@@ -48,10 +50,11 @@ $('#editor').trumbowyg({
             <p>Note the additional requirement: the <a href="https://github.com/RickStrahl/jquery-resizable" target="_blank">jquery-resizable</a> plugin must be loaded for Resizimg to work.</p>
             <pre><code class="html loading-body">
 &lt;!-- Import jQuery -->
-&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">&lt;/script>
-&lt;script>window.jQuery || document.write('&lt;script src="js/vendor/jquery-3.2.1.min.js">&lt;\/script>')&lt;/script>
-&lt;!-- Import dependency for Resizimg  (note that the link below will only work for a limited number of requests, for a productive setup make a local copy from https://github.com/RickStrahl/jquery-resizable  -->
-&lt;script src="https://rawgit.com/RickStrahl/jquery-resizable/master/dist/jquery-resizable.min.js">&lt;/script>
+&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">&lt;/script>
+&lt;script>window.jQuery || document.write('&lt;script src="js/vendor/jquery-3.3.1.min.js">&lt;\/script>')&lt;/script>
+
+&lt;!-- Import dependency for Resizimg. For a productive setup, follow install instructions here: https://github.com/RickStrahl/jquery-resizable -->
+&lt;script src="//rawcdn.githack.com/RickStrahl/jquery-resizable/master/dist/jquery-resizable.min.js">&lt;/script>
             </code></pre>
         </div>
     </section>
@@ -59,11 +62,12 @@ $('#editor').trumbowyg({
 
 
 <!-- Import jQuery -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="../../js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
-<script type="text/javascript" src="https://rawgit.com/RickStrahl/jquery-resizable/master/dist/jquery-resizable.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
+<!-- Import dependency for Resizimg -->
+<script src="//rawcdn.githack.com/RickStrahl/jquery-resizable/master/dist/jquery-resizable.min.js"></script>
 
-  <!-- DO NOT COPY THIS LINES IN YOUR PROJECT, THEY ARE THERE JUST FOR THE EXAMPLE PAGE PRUPOSE -->
+  <!-- DO NOT COPY THESE LINES IN YOUR PROJECT, THEY ARE THERE JUST FOR THE EXAMPLE PAGE PURPOSE -->
 <script src="../js/loader.js"></script>
 <script>
     loadStyle('dist/ui/trumbowyg.css');

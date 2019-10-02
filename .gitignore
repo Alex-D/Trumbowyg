@@ -9,7 +9,7 @@
 /plugins/**/ui/sass/_sprite*
 
 # We use npm: ignore yarn
-yarn.lock
+package-lock.json
 
 # Windows image file caches
 Thumbs.db
@@ -22,3 +22,4 @@ Desktop.ini
 
 # IDEA
 .idea
+/nbproject

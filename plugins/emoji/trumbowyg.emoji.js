@@ -1275,6 +1275,9 @@
             da: {
                 emoji: 'Tilføj et humørikon'
             },
+            de: {
+                emoji: 'Emoticon einfügen'
+            },
             fr: {
                 emoji: 'Ajouter un emoji'
             },
@@ -1289,7 +1292,10 @@
             },
             tr: {
                 emoji: 'Emoji ekle'
-            }
+            },
+            ko: {
+                emoji: '이모지 넣기'
+            },
         },
         // jshint camelcase:true
         plugins: {

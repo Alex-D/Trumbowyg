@@ -4,5 +4,12 @@ bower.json
 src
 docs
 bower_components
+.gitattributes
+.gitignore
+.jshintrc
+.github
 .idea
+.bowerrc
 sponsors
+BACKERS.md
+CONTRIBUTORS.md

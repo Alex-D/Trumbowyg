@@ -42,7 +42,8 @@ $beer-height: 70px;
         padding: 20px 0 0;
     }
     p,
-    dd {
+    dd,
+    ul {
         code {
             color: #616870;
             background: #dfe5eb;
@@ -132,6 +133,19 @@ $beer-height: 70px;
                 text-decoration: underline;
             }
         }
+
+        @media (max-width: 1550px) {
+            padding: 5px 7%;
+
+            a {
+                width: 48%;
+                padding: 10px 0;
+            }
+
+            .documentation-menu-dot {
+                display: none;
+            }
+        }
     }
 }
 
@@ -165,7 +179,7 @@ $beer-height: 70px;
         bottom: $beer-height;
         width: calc(100% - 17px);
         height: 100px;
-        background: linear-gradient(to bottom, transparent, $primary-color-light);
+        background: linear-gradient(to bottom, rgba($primary-color-light, 0), $primary-color-light);
         pointer-events: none;
     }
 
@@ -174,7 +188,6 @@ $beer-height: 70px;
         overflow-y: scroll;
         overflow-x: hidden;
         height: calc(100vh - #{$beer-height});
-        padding-bottom: 100px;
     }
 
     ul,
@@ -192,11 +205,12 @@ $beer-height: 70px;
     .documentation-summary {
         position: relative;
         font-size: 18px;
+        margin-bottom: 100px;
 
         > ul {
-            max-width: 266px;
+            max-width: 340px;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0 30px;
 
             a,
             .documentation-summary-title {
@@ -404,6 +418,27 @@ $beer-height: 70px;
     &:hover {
         .title-link {
             opacity: 1;
+        }
+    }
+}
+
+.sample-data {
+    background: $white;
+    padding: 25px;
+
+    h4 {
+        padding: 0;
+    }
+
+    input {
+        width: 100%;
+        border: none;
+        padding: 5px 7px;
+        color: #616870;
+        background: #dfe5eb;
+
+        &:not(:last-child) {
+            margin-bottom: 10px;
         }
     }
 }

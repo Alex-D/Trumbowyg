@@ -5,53 +5,162 @@ Trumbowyg is the result of many people who made translations or the code better.
 Special thanks to [Adrien Gervaix](https://dribbble.com/adriengervaix) for the Trumbowyg v2 icon set.
 
 - Alex-D
-- lizardK
+- Steve Rackham
+- Lawrence
 - Ra100
+- lizardK
+- Ulrich Mayring
+- Kirill Urgant
 - VeeeneX
-- Danny Hiemstra
-- Nicolás Moncada
+- Nicolas Pion
+- Sven Dunemann
+- Zane Chua
+- freekpost
+- Blufish Technologies
 - Civil
+- Danny Hiemstra
+- Edwin Veldhuizen
+- Florian
+- Michael Holroyd
+- Nicklas
+- Nicolás Moncada
+- Don Desroches
 - Jan Svoboda
-- g2010a
-- foo9
-- matopeter
+- Martin
+- Max Seelig
+- Stufingo
+- Alexander van Eerd
+- AragurDEV
+- Davor Budimir
+- Eduardo Russo
+- Fathi Anshory
+- Fyers
+- Hirokazu Kutsu
+- Justas Brazauskas
+- Jérôme Steunou
 - Manfred62
 - Merianos Nikos
 - Nikola Trifunovic
-- jake johns
+- Paul Pritchard
+- Richard Kiewiet
+- Stef Kariotidis
+- Vijay Jagadeesan
 - Vlad Radulescu
-- Rezha Julio
-- Tim
-- Vietworm
-- Vinzgore
-- Wisse Jelgersma
-- abomokhahmed
-- akai
-- basteyy
-- brentanalexander
-- dev.hibiki
-- kingdido999
-- munzur
-- teppokoivula
-- udidoron
-- Игорь
+- Vladimir
+- foo9
+- g2010a
+- hiendv
+- jake johns
+- matopeter
+- ronan
+- sinjuice
 - Adam Balogh
-- Олег Ильин
+- AdamHess
+- Aleksandar Dimitrov
+- Aleksandr-ru
+- Alessio Dionisi
+- Alex Gotardi
 - Andreas Kohn
+- Andrei
 - Andrey Kogut
 - Antoine Leblanc
+- Anton Morozov
 - Artur
+- Benjamin Bourot
+- Bennett
+- Boylett
 - Burak Erdem
+- Burak Ozdemir
+- Carlos Barros
+- Chitoku
 - Christian
+- Christopher Kirk-Nielsen
+- maxom
+- Dariush Abbasi
 - Delvallée
+- Denis Jacquemin
+- Elisha Witte
+- Eric Radin
+- Ersin Guvenc
+- François Houlbrèque
+- Freek Post
+- Gabriel S. L
+- Grafikart
+- Henio Tierra
+- Hunor Karamán
+- Ian Mustafa
 - John Pozy
+- Jonathan Hedrén
+- Jonathan del Strother
 - JoongSeob Vito Kim
+- Jorrit Schippers
+- Karalkou
+- Ken Cheung
+- Kim Trolle Wadum
+- Lars Boldt
+- Leo Gono
+- Leopard Ho
 - MIRK0
+- Marcin Wieprzkowicz
+- Markus Spallek
+- Matt Johnson
+- Mattias Hagberg
 - Mike Goodfellow
 - Mike Richmond
+- Mitja Šlenc
 - Moisés Márquez
 - Nathan Rosquist
+- Nenad Novkovic
+- Nikki Locke
+- OBernard2
+- Oguzhan Inan
 - Oleg Berman
 - Paweł Abramowicz
 - Peter Dave Hello
+- Petr Čech
+- Philipp Palmtag
 - Ramiro Varandas Jr
+- Rezha Julio
+- Ricardo Cardeña
+- Roberto
+- Rodrigo Boratto
+- Sergey Golomedov
+- Stéphane Lavergne
+- TheGeekTortoise
+- Tiago Alves
+- TikiTDO
+- Tim
+- Timo Jarventausta
+- Todd Graham
+- Val
+- Vietworm
+- Vinzgore
+- Wisse Jelgersma
+- Zane J. Chua
+- abomokhahmed
+- adalenv
+- akai
+- basteyy
+- brainfogz
+- brentanalexander
+- chadidi
+- cleoo
+- de Oliveira Prado
+- dev.hibiki
+- dominiczaq
+- figroc
+- gonatee
+- joey91133
+- jsejakobsen
+- kingdido999
+- loclamor
+- luetge
+- munzur
+- naoh
+- root
+- slackwalker
+- teppokoivula
+- udidoron
+- Игорь
+- Михаил Гущин
+- Олег Ильин

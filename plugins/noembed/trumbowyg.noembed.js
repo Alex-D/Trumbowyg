@@ -48,6 +48,14 @@
                 noembed: '插入影片',
                 noembedError: '錯誤'
             },
+            pt_br: {
+                noembed: 'Incorporar',
+                noembedError: 'Erro'
+            },
+            ko: {
+                noembed: 'oEmbed 넣기',
+                noembedError: '에러'
+            },
         },
 
         plugins: {

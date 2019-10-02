@@ -58,6 +58,11 @@
                 file: 'Fil',
                 uploadError: 'Fejl'
             },
+            de: {
+                upload: 'Hochladen',
+                file: 'Datei',
+                uploadError: 'Fehler'
+            },
             sk: {
                 upload: 'Nahrať',
                 file: 'Súbor',
@@ -102,7 +107,12 @@
                 upload: 'Yükle',
                 file: 'Dosya',
                 uploadError: 'Hata'
-            }
+            },
+            ko: {
+                upload: '그림 올리기',
+                file: '파일',
+                uploadError: '에러'
+            },
         },
         // jshint camelcase:true
 
@@ -249,8 +259,9 @@
             var originalXhr = $.ajaxSettings.xhr;
             $.ajaxSetup({
                 xhr: function () {
-                    var req = originalXhr(),
-                        that = this;
+                    var that = this,
+                        req = originalXhr();
+
                     if (req && typeof req.upload === 'object' && that.progressUpload !== undefined) {
                         req.upload.addEventListener('progress', function (e) {
                             that.progressUpload(e);
