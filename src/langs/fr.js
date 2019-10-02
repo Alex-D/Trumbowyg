@@ -43,6 +43,7 @@ jQuery.trumbowyg.langs.fr = {
     createLink: 'Insérer un lien',
     unlink: 'Supprimer le lien',
 
+    align: 'Alignement',
     justifyLeft: 'Aligner à gauche',
     justifyCenter: 'Centrer',
     justifyRight: 'Aligner à droite',
