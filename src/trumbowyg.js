@@ -579,8 +579,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             var ctrl = false,
                 composition = false,
-                debounceButtonPaneStatus,
-                updateEventName = 'keyup';
+                debounceButtonPaneStatus;
 
             t.$ed
                 .on('dblclick', 'img', t.o.imgDblClickHandler)
@@ -609,7 +608,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 .on('compositionstart compositionupdate', function () {
                     composition = true;
                 })
-                .on(updateEventName + ' compositionend', function (e) {
+                .on('keyup compositionend', function (e) {
                     if (e.type === 'compositionend') {
                         composition = false;
                     } else if (composition) {
@@ -649,10 +648,11 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     }, 50);
                 })
                 .on('focus blur', function (e) {
-                    t.$c.trigger('tbw' + e.type);
                     if (e.type === 'blur') {
+                        t.syncCode(true);
                         t.clearButtonPaneStatus();
                     }
+                    t.$c.trigger('tbw' + e.type);
                     if (t.o.autogrowOnEnter) {
                         if (t.autogrowOnEnterDontClose) {
                             return;
@@ -665,6 +665,14 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                             t.$ed.css({height: t.$ed.css('min-height')});
                             t.$c.trigger('tbwresize');
                         }
+                    }
+                })
+                .on('keyup focus', function () {
+                    if (!t.$ta.val().match(/<.*>/)) {
+                        setTimeout(function () {
+                            var block = t.isIE ? '<p>' : 'p';
+                            t.doc.execCommand('formatBlock', false, block);
+                        }, 0);
                     }
                 })
                 .on('cut drop', function () {
