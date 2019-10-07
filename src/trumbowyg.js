@@ -649,7 +649,6 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 })
                 .on('focus blur', function (e) {
                     if (e.type === 'blur') {
-                        t.syncCode(true);
                         t.clearButtonPaneStatus();
                     }
                     t.$c.trigger('tbw' + e.type);
@@ -672,6 +671,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         setTimeout(function () {
                             var block = t.isIE ? '<p>' : 'p';
                             t.doc.execCommand('formatBlock', false, block);
+                            t.syncCode();
                         }, 0);
                     }
                 })
