@@ -7,7 +7,7 @@ the project is not sustainable without proper financial backing.
 You can support it's ongoing development by being a backer or a sponsor:
  
 - [Become a backer or sponsor on Patreon](https://www.patreon.com/alexandredemode)
-- [One-time donation via PayPal](https://www.paypal.me/alexandredemode/20eur)
+- [One-time donation via PayPal](https://www.paypal.me/demodealexandre/20eur)
 
 <h2 align="center">Gold sponsors</h2>
 
