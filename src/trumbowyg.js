@@ -346,7 +346,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 key: 'I'
             },
             del: {
-                fn: 'strikethrough'
+                fn: 'strikethrough',
+                tag: 's'
             },
 
             createLink: {
