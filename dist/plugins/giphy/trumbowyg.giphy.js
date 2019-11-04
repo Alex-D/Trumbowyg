@@ -43,7 +43,6 @@
 
   // Fills modal with response gifs
   function renderGifs(response, $giphyModal, trumbowyg, mustEmpty) {
-    mustEmpty = mustEmpty === true;
     var width = ($giphyModal.width() - 20) / 3;
 
     var html = response.data
@@ -59,7 +58,15 @@
       .join('')
     ;
 
-    if (mustEmpty) {
+    if (mustEmpty === true) {
+      if (html.length === 0) {
+        if ($('.' + trumbowyg.o.prefix + 'giphy-no-result', $giphyModal).length > 0) {
+          return;
+        }
+
+        html = '<img class="' + trumbowyg.o.prefix + 'giphy-no-result" src="' + trumbowyg.o.plugins.giphy.noResultGifUrl + '"/>';
+      }
+
       $giphyModal.empty();
     }
     $giphyModal.append(html);
@@ -74,6 +81,8 @@
   var defaultOptions = {
     rating: 'g',
     apiKey: null,
+    throttleDelay: 300,
+    noResultGifUrl: 'https://media.giphy.com/media/2Faz9FbRzmwxY0pZS/giphy.gif'
   };
 
   // Add dropdown with font sizes
@@ -113,9 +122,16 @@
                   trumbowyg.closeModal();
                 });
 
-              var $giphyInput = $('.' + trumbowyg.o.prefix + 'giphy-search'),
-                  $giphyClose = $('.' + trumbowyg.o.prefix + 'giphy-close'),
-                  $giphyModal = $('.' + trumbowyg.o.prefix + 'giphy-modal');
+              var $giphyInput = $('.' + prefix + 'giphy-search'),
+                  $giphyClose = $('.' + prefix + 'giphy-close'),
+                  $giphyModal = $('.' + prefix + 'giphy-modal');
+
+              var ajaxError = function () {
+                if (!navigator.onLine && !$('.' + prefix + 'giphy-offline', $giphyModal).length) {
+                  $giphyModal.empty();
+                  $giphyModal.append('<p class="' + prefix + 'giphy-offline">You are offline</p>');
+                }
+              };
 
               // Load trending gifs as default
               $.ajax({
@@ -123,25 +139,34 @@
                 dataType: 'json',
 
                 success: function(response) {
+                  console.log(arguments);
                   renderGifs(response, $giphyModal, trumbowyg, true);
-                }
+                },
+                error: ajaxError
               });
 
               var searchGifsOnInput = function () {
+                var query = $giphyInput.val();
+
+                if (query.length === 0) {
+                  return;
+                }
+
                 try {
                   previousAjaxCall.abort();
                 } catch (e) {}
 
                 previousAjaxCall = $.ajax({
-                  url: BASE_URL + '&q=' + encodeURIComponent($giphyInput.val()),
+                  url: BASE_URL + '&q=' + encodeURIComponent(query),
                   dataType: 'json',
 
                   success: function(response) {
                     renderGifs(response, $giphyModal, trumbowyg, true);
-                  }
+                  },
+                  error: ajaxError
                 });
               };
-              var throttledInputRequest = trumbowygThrottle(searchGifsOnInput, 300);
+              var throttledInputRequest = trumbowygThrottle(searchGifsOnInput, trumbowyg.o.plugins.giphy.throttleDelay);
 
               $giphyInput.on('input', throttledInputRequest);
               $giphyInput.focus();

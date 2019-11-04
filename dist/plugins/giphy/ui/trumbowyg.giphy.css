@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.19.1 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.20.0 - A lightweight WYSIWYG editor
  * Trumbowyg plugin stylesheet
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -65,6 +65,15 @@
        columns: 3;
   -moz-column-gap: 10px;
        column-gap: 10px; }
+  .trumbowyg-giphy-modal .trumbowyg-giphy-no-result {
+    width: 250%;
+    margin: 13% 0 0 29%; }
+  .trumbowyg-giphy-modal .trumbowyg-giphy-offline {
+    font-size: 18px;
+    width: 305%;
+    height: 600px;
+    margin-top: 95px;
+    text-align: center; }
 
 .trumbowyg-giphy-modal .img-container {
   width: 100%;

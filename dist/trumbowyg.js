@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.19.1 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.20.0 - A lightweight WYSIWYG editor
  * Trumbowyg core file
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -122,13 +122,13 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
         plugins: {},
         urlProtocol: false,
-        minimalLinks: false
+        minimalLinks: false,
+        defaultLinkTarget: undefined
     },
     writable: false,
     enumerable: true,
     configurable: false
 });
-
 
 (function (navigator, window, document, $) {
     'use strict';
@@ -590,8 +590,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             var ctrl = false,
                 composition = false,
-                debounceButtonPaneStatus,
-                updateEventName = 'keyup';
+                debounceButtonPaneStatus;
 
             t.$ed
                 .on('dblclick', 'img', t.o.imgDblClickHandler)
@@ -620,7 +619,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 .on('compositionstart compositionupdate', function () {
                     composition = true;
                 })
-                .on(updateEventName + ' compositionend', function (e) {
+                .on('keyup compositionend', function (e) {
                     if (e.type === 'compositionend') {
                         composition = false;
                     } else if (composition) {
@@ -660,10 +659,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     }, 50);
                 })
                 .on('focus blur', function (e) {
-                    t.$c.trigger('tbw' + e.type);
                     if (e.type === 'blur') {
                         t.clearButtonPaneStatus();
                     }
+                    t.$c.trigger('tbw' + e.type);
                     if (t.o.autogrowOnEnter) {
                         if (t.autogrowOnEnterDontClose) {
                             return;
@@ -676,6 +675,15 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                             t.$ed.css({height: t.$ed.css('min-height')});
                             t.$c.trigger('tbwresize');
                         }
+                    }
+                })
+                .on('keyup focus', function () {
+                    if (!t.$ta.val().match(/<.*>/)) {
+                        setTimeout(function () {
+                            var block = t.isIE ? '<p>' : 'p';
+                            t.doc.execCommand('formatBlock', false, block);
+                            t.syncCode();
+                        }, 0);
                     }
                 })
                 .on('cut drop', function () {
@@ -1244,7 +1252,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 url = $a.attr('href');
                 if (!t.o.minimalLinks) {
                     title = $a.attr('title');
-                    target = $a.attr('target');
+                    target = $a.attr('target') || t.o.defaultLinkTarget;
                 }
                 var range = t.doc.createRange();
                 range.selectNode(node);
@@ -1286,13 +1294,11 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
                 var link = $(['<a href="', url, '">', v.text || v.url, '</a>'].join(''));
 
-                if (!t.o.minimalLinks) {
-                    if (v.title.length > 0) {
-                        link.attr('title', v.title);
-                    }
-                    if (v.target.length > 0) {
-                        link.attr('target', v.target);
-                    }
+                if (v.title) {
+                    link.attr('title', v.title);
+                }
+                if (v.target || t.o.defaultLinkTarget) {
+                    link.attr('target', v.target || t.o.defaultLinkTarget);
                 }
                 t.range.deleteContents();
                 t.range.insertNode(link[0]);
@@ -1544,6 +1550,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }
 
             $(window).trigger('scroll');
+            t.$c.trigger('tbwmodalopen');
 
             return $modal;
         },
@@ -1574,6 +1581,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }, 100, function () {
                 $modalBox.parent().remove();
                 t.hideOverlay();
+                t.$c.trigger('tbwmodalclose');
             });
 
             t.restoreRange();
