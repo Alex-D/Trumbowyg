@@ -1541,6 +1541,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }
 
             $(window).trigger('scroll');
+            t.$c.trigger('tbwmodalopen');
 
             return $modal;
         },
@@ -1571,6 +1572,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }, 100, function () {
                 $modalBox.parent().remove();
                 t.hideOverlay();
+                t.$c.trigger('tbwmodalclose');
             });
 
             t.restoreRange();
