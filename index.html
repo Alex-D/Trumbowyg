@@ -337,6 +337,7 @@ $('#form-content').trumbowyg({
                     ['viewHTML'],
                     ['formatting'],
                     ['bold', 'italic', 'strikethrough'],
+                    ['link'],
                     ['align'],
                     ['image'],
                     ['foreColor', 'backColor'],
@@ -344,6 +345,8 @@ $('#form-content').trumbowyg({
                     ['fullscreen', 'close']
                 ],
                 changeActiveDropdownIcon: true,
+                minimalLinks: true,
+                defaultLinkTarget: '_blank',
                 plugins: {
                     upload: uploadOptions
                 }

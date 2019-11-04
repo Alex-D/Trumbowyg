@@ -111,13 +111,13 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
         plugins: {},
         urlProtocol: false,
-        minimalLinks: false
+        minimalLinks: false,
+        defaultLinkTarget: undefined
     },
     writable: false,
     enumerable: true,
     configurable: false
 });
-
 
 (function (navigator, window, document, $) {
     'use strict';
@@ -1241,7 +1241,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 url = $a.attr('href');
                 if (!t.o.minimalLinks) {
                     title = $a.attr('title');
-                    target = $a.attr('target');
+                    target = $a.attr('target') || t.o.defaultLinkTarget;
                 }
                 var range = t.doc.createRange();
                 range.selectNode(node);
@@ -1283,13 +1283,11 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
                 var link = $(['<a href="', url, '">', v.text || v.url, '</a>'].join(''));
 
-                if (!t.o.minimalLinks) {
-                    if (v.title.length > 0) {
-                        link.attr('title', v.title);
-                    }
-                    if (v.target.length > 0) {
-                        link.attr('target', v.target);
-                    }
+                if (v.title) {
+                    link.attr('title', v.title);
+                }
+                if (v.target || t.o.defaultLinkTarget) {
+                    link.attr('target', v.target || t.o.defaultLinkTarget);
                 }
                 t.range.deleteContents();
                 t.range.insertNode(link[0]);

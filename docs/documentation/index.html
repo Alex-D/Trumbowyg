@@ -75,6 +75,7 @@
                         <li><a href="#image-width-modal-edit">Image width modal edit</a></li>
                         <li><a href="#url-protocol">URL protocol</a></li>
                         <li><a href="#minimal-links">Minimal links</a></li>
+                        <li><a href="#default-link-target">Default link target</a></li>
                     </ul>
                 </li>
                 <li>
@@ -779,6 +780,25 @@ $('.trumbowyg').trumbowyg({
             <p class="note">
                 The minimal links option is not active by default (set to
                 <code>false</code>).
+            </p>
+        </div>
+
+
+        <div class="feature" data-added="2.20.0">
+            <h3 id="default-link-target">Default link target</h3>
+            <p class="added-feature">Added in 2.20.0</p>
+            <p>
+                Allow to set link target attribute value to what you want, even if the <code>minimalLinks</code>
+                option is set to <code>true</code>.
+            </p>
+            <pre><code class="javascript">
+$('.trumbowyg').trumbowyg({
+    defaultLinkTarget: '_blank'
+});
+            </code></pre>
+            <p class="note">
+                Default link target does nothing by default (set to
+                <code>undefined</code>).
             </p>
         </div>
     </section>
