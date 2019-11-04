@@ -75,6 +75,7 @@
                         <li><a href="#image-width-modal-edit">Image width modal edit</a></li>
                         <li><a href="#url-protocol">URL protocol</a></li>
                         <li><a href="#minimal-links">Minimal links</a></li>
+                        <li><a href="#default-link-target">Default link target</a></li>
                     </ul>
                 </li>
                 <li>
@@ -781,6 +782,25 @@ $('.trumbowyg').trumbowyg({
                 <code>false</code>).
             </p>
         </div>
+
+
+        <div class="feature" data-added="2.20.0">
+            <h3 id="default-link-target">Default link target</h3>
+            <p class="added-feature">Added in 2.20.0</p>
+            <p>
+                Allow to set link target attribute value to what you want, even if the <code>minimalLinks</code>
+                option is set to <code>true</code>.
+            </p>
+            <pre><code class="javascript">
+$('.trumbowyg').trumbowyg({
+    defaultLinkTarget: '_blank'
+});
+            </code></pre>
+            <p class="note">
+                Default link target does nothing by default (set to
+                <code>undefined</code>).
+            </p>
+        </div>
     </section>
 
 
@@ -1216,6 +1236,8 @@ $('#editor').trumbowyg('destroy');
                 <li>Leave editor's fullscreen mode: <code>tbwclosefullscreen</code> <span
                         class="version-tag">2.0.0</span></li>
                 <li>Close the editor: <code>tbwclose</code> <span class="version-tag">2.0.0</span></li>
+                <li>Modal open: <code>tbwmodalopen</code> <span class="version-tag">2.20.0</span></li>
+                <li>Modal close: <code>tbwmodalclose</code> <span class="version-tag">2.0.0</span></li>
             </ul>
             <pre><code class="javascript">
 $('#editor')
@@ -1229,7 +1251,7 @@ $('#editor')
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
+<script>window.jQuery || document.write('<script src="../js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
 
 <script src="../js/vendor/highlight.js"></script>
 <script src="../js/main.js"></script>

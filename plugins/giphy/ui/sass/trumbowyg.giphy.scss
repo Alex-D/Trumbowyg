@@ -62,6 +62,19 @@
     padding: 0 5%;
     columns: 3;
     column-gap: 10px;
+
+  .trumbowyg-giphy-no-result {
+    width: 250%;
+    margin: 13% 0 0 29%;
+  }
+
+  .trumbowyg-giphy-offline {
+    font-size: 18px;
+    width: 305%;
+    height: 600px;
+    margin-top: 95px;
+    text-align: center;
+  }
 }
 
 .trumbowyg-giphy-modal .img-container {

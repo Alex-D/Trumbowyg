@@ -494,8 +494,38 @@ $('#my-editor').trumbowyg({
     }
 });
             </code></pre>
+
+
+            <h4>Parameters</h4>
+            <dl>
+                <dt><strong><code>apiKey</code></strong> <code class="type">string</code> <strong>(required)</strong></dt>
+                <dd>
+                    Giphy API Key of your application.
+                    <a href="https://developers.giphy.com/dashboard/?create=true">Create a Giphy App to get an API Key</a>.
+                </dd>
+                <dt><strong><code>rating</code></strong> <code class="type">string</code></dt>
+                <dd>
+                    Giphy image rating filter.
+                    <a href="https://developers.giphy.com/docs/optional-settings/#rating">See Giphy documentation for allowed rating value details</a>.
+                    <br>
+                    <strong>Default</strong>: <code>g</code>
+                </dd>
+                <dt><strong><code>throttleDelay</code></strong> <code class="type">number</code> (in milliseconds)</dt>
+                <dd>
+                    It's the delay between each Giphy API requests while user is typing his query.
+                    <br>
+                    <strong>Default</strong>: <code>300</code>
+                </dd>
+                <dt><strong><code>noResultGifUrl</code></strong> <code class="type">string</code></dt>
+                <dd>
+                    The image URL shown when there is no result.
+                    <br>
+                    <strong>Default</strong>: <a href="https://media.giphy.com/media/2Faz9FbRzmwxY0pZS/giphy.gif" rel="noreferrer noopener"><code>https://media.giphy.com/media/2Faz9FbRzmwxY0pZS/giphy.gif</code></a>
+                </dd>
+            </dl>
+
             <p>
-                You can also choose custom rating:
+                Example with parameters:
             </p>
             <pre><code class="javascript">
 $('#my-editor').trumbowyg({
@@ -505,15 +535,13 @@ $('#my-editor').trumbowyg({
     plugins: {
         giphy: {
             apiKey: 'yourVeryOwnApiKey',
-            rating: 'pg'
+            rating: 'pg',
+            throttleDelay: 500,
+            noResultGifUrl: 'http://example.com/yourimage.gif'
         }
     }
 });
             </code></pre>
-            <p class="note">
-                Default <code>rating</code> value is <code>g</code>. <br>
-                <a href="https://developers.giphy.com/docs/optional-settings/#rating">See Giphy documentation for allowed rating value details</a>.
-            </p>
         </div>
 
         <div class="feature">
@@ -1451,7 +1479,7 @@ fileToUpload: // The image file
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
+<script>window.jQuery || document.write('<script src="../../js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
 
 <script src="../../js/vendor/highlight.js"></script>
 <script src="../../js/main.js"></script>
