@@ -1,27 +1,35 @@
 (function ($) {
-    'use strict';
+    "use strict";
 
     var defaultOptions = {
         minSize: 32,
         step: 4,
     };
 
+    //object to interact with canvas
+    var rszwtcanvas = new ResizeWithCanvas();
+         
     function preventDefault(ev) {
         return ev.preventDefault();
     }
 
     function destroyResizable(trumbowyg) {
-        trumbowyg.$ed.find('img.resizable')
-          .resizable('destroy')
-          .off('mousedown', preventDefault)
-          .removeClass('resizable');
-        trumbowyg.syncTextarea();
+        //clean html code
+        trumbowyg.$ed.find('canvas.resizable')
+            .resizable('destroy')
+            .off('mousedown', preventDefault)
+            .removeClass('resizable');
+
+        rszwtcanvas.reset();
+
+        trumbowyg.syncCode();
     }
 
     $.extend(true, $.trumbowyg, {
         plugins: {
             resizimg: {
                 init: function (trumbowyg) {
+                    
                     trumbowyg.o.plugins.resizimg = $.extend(true, {},
                         defaultOptions,
                         trumbowyg.o.plugins.resizimg || {},
@@ -46,6 +54,8 @@
                                     return false;
                                 },
                                 onDragEnd: function () {
+                                    //resize update canvas information
+                                    rszwtcanvas.refresh();
                                     trumbowyg.syncCode();
                                 }
                             }
@@ -53,15 +63,45 @@
                     );
 
                     function initResizable() {
-                        trumbowyg.$ed.find('img:not(.resizable)')
-                            .resizable(trumbowyg.o.plugins.resizimg.resizable)
-                            .on('mousedown', preventDefault);
+                        trumbowyg.$ed.find('img')
+                            .off('click')
+                            .on('click', function (ev) {
+                                //if I'm already do a resize, reset it
+                                if (rszwtcanvas.isActive()){
+                                    rszwtcanvas.reset();
+                                }
+                                //initialize resize of image
+                                rszwtcanvas.setup(this, trumbowyg.o.plugins.resizimg.resizable);
+                            });
                     }
 
                     // Init
-                    trumbowyg.$c.on('tbwinit', initResizable);
+                    trumbowyg.$c.on('tbwinit', function (ev) {
+                        initResizable();
+
+                        //disable resize when click on other items
+                        trumbowyg.$ed.on('click', function (ev) {
+                            // tell the browser we're handling this event
+                            ev.preventDefault();
+                            ev.stopPropagation();
+
+                            //check if I've clicked out of canvas or image to reset it
+                            if (!($(ev.target).is('img') || ev.target.id === rszwtcanvas.canvasId())) {
+                                rszwtcanvas.reset();
+                                
+                                //save changes
+                                trumbowyg.$c.trigger('tbwchange');
+                            }
+                        });
+
+                        trumbowyg.$ed.on('scroll', function (ev) {
+                            rszwtcanvas.reCalcOffset();
+                        });
+                    });
                     trumbowyg.$c.on('tbwfocus', initResizable);
                     trumbowyg.$c.on('tbwchange', initResizable);
+                    trumbowyg.$c.on('tbwresize', function (ev){ rszwtcanvas.reCalcOffset(); });
+
 
                     // Destroy
                     trumbowyg.$c.on('tbwblur', function () {

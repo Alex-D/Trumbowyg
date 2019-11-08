@@ -53,6 +53,8 @@ $('#editor').trumbowyg({
 &lt;script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">&lt;/script>
 &lt;script>window.jQuery || document.write('&lt;script src="js/vendor/jquery-3.3.1.min.js">&lt;\/script>')&lt;/script>
 
+&lt;!-- Import only if you use JQuery UI with Resizable interaction -->
+&lt;script src="//rawcdn.githack.com/trumbowyg/dist/plugins/resizimg/resolveconflict-resizable.min.js">&lt;/script>
 &lt;!-- Import dependency for Resizimg. For a productive setup, follow install instructions here: https://github.com/RickStrahl/jquery-resizable -->
 &lt;script src="//rawcdn.githack.com/RickStrahl/jquery-resizable/master/dist/jquery-resizable.min.js">&lt;/script>
             </code></pre>
@@ -72,6 +74,7 @@ $('#editor').trumbowyg({
 <script>
     loadStyle('dist/ui/trumbowyg.css');
     loadScript('dist/trumbowyg.js', 'Import Trumbowyg');
+    loadScript('dist/plugins/resizimg/resize.with.canvas.js', 'Import all plugins you want AFTER importing jQuery and Trumbowyg');
     loadScript('dist/plugins/resizimg/trumbowyg.resizimg.js', 'Import all plugins you want AFTER importing jQuery and Trumbowyg');
 </script>
 <script src="../js/runExampleCode.js"></script>
