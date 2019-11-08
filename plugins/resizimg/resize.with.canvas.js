@@ -7,6 +7,9 @@ function ResizeWithCanvas() {
     this.ctx = null;
     this.resizeimg = null;
 
+    //function callback to do something when appen something
+    this.beforecanvasreplaced = function (canvas, image){};
+
     //PRIVATE FUNCTION
     var cursors = ['default', 'se-resize', 'not-allowed'];
     var currentCursor = 0;
@@ -106,6 +109,9 @@ function ResizeWithCanvas() {
             this.resizeimg.height = this.resizecanvas.clientHeight - 20;
             //clear style of image to avoid issue on resize because this attribute have priority over width and height attribute
             this.resizeimg.style = "";
+
+            this.beforecanvasreplaced(this.resizecanvas, this.resizeimg);
+
             //sostituisce il canvas con l'immagine
             $(this.resizecanvas).replaceWith($(this.resizeimg));
 
