@@ -3,14 +3,19 @@
 function ResizeWithCanvas() {
     //variable to create canvas and save img in resize mode
     this.resizecanvas = document.createElement('canvas');
+    //to allow canvas to get focus
+    this.resizecanvas.setAttribute('tabindex','0');
     this.resizecanvas.id = 'tbwresizeme';
     this.ctx = null;
     this.resizeimg = null;
 
     //function callback to do something when appen something
     this.beforecanvasreplaced = function (canvas, image){};
+    this.presskeyesc = function (obj){};
+    this.presskeydelorcanc = function (obj){};
 
     //PRIVATE FUNCTION
+    var isfocusednow = false;
     var cursors = ['default', 'se-resize', 'not-allowed'];
     var currentCursor = 0;
     var stylesFilled = ['rgb(0, 0, 0)', 'rgb(200, 0, 0)'];
@@ -100,6 +105,14 @@ function ResizeWithCanvas() {
         return this.resizeimg !== null;
     };
 
+    this.isFocusedNow = function () {
+        return isfocusednow;
+    };
+
+    this.UnFocusNow = function () {
+        isfocusednow = false;
+    };
+
     //restore image in the HTML of the editor
     this.reset = function () {
         console.log('resize reset');
@@ -142,6 +155,7 @@ function ResizeWithCanvas() {
             $(this.resizecanvas).resizable(resizableopt)
                 .on('mousedown', function (ev) { return ev.preventDefault(); });
 
+            var _this = this;
             var _ctx = this.ctx;
             $(this.resizecanvas)
                 .on('mousemove', function (e) {                    
@@ -167,7 +181,25 @@ function ResizeWithCanvas() {
                         currentCursor = newCursor;
                         this.style.cursor = cursors[currentCursor];
                     }
+                })
+                .on('keydown', function (ev) {
+                    var x = event.keyCode;
+                    if (x == 27 && _this.isActive()){//ESC
+                        _this.presskeyesc(_this);
+                    }
+                    else if ((x == 46 || x == 8) && _this.isActive()){//CANC DEL
+                        _this.presskeydelorcanc(_this);
+                    }
+                })
+                .on('focus', function (ev) {
+                    console.log('canvas focus');
+                    // tell the browser we're handling this event
+                    ev.stopPropagation();
+                    return ev.preventDefault();
                 });
+
+                this.resizecanvas.focus();
+                isfocusednow = true;
 
             return true;
         }
