@@ -977,12 +977,19 @@ $('#my-editor').trumbowyg({
                 <a href="https://github.com/RickStrahl/jquery-resizable" target="_blank">jquery-resizable</a> plugin,
                 which must be loaded beforehand.
             </p>
+            <p>
+                If in your project use the JQuery UI library with resizable interaction you need to include this 
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/resizimg/resolveconflict-resizable.js">script</a> to avoid issue before load jquery-resizable.
+            </p>
 
             <h4>How to use it?</h4>
             <pre><code class="html">
+&lt;-- Import this only if you use jQuery UI with resizable extension -->
+&lt;script src="trumbowyg/dist/plugins/resizimg/resolveconflict-resizable.min.js">&lt;/script>
 &lt;-- Import jQuery resizimg plugin -->
 &lt;script src="jquery-resizable/dist/jquery-resizable.min.js">&lt;/script>
 &lt;-- Import Trumbowyg plugins... -->
+&lt;script src="trumbowyg/dist/plugins/resizimg/resize.with.canvas.min.js">&lt;/script>
 &lt;script src="trumbowyg/dist/plugins/resizimg/trumbowyg.resizimg.min.js">&lt;/script>
             </code></pre>
 
