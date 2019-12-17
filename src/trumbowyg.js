@@ -729,7 +729,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     }, 0);
                 });
 
-            $(t.doc.body).on('keydown', function (e) {
+            $(t.doc.body).on('keydown.' + t.eventNamespace, function (e) {
                 if (e.which === 27 && $('.' + prefix + 'modal-box').length >= 1) {
                     t.closeModal();
                     return false;
@@ -1021,6 +1021,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             $('body').removeClass(prefix + 'body-fullscreen');
             t.$c.trigger('tbwclose');
             $(window).off('scroll.' + t.eventNamespace + ' resize.' + t.eventNamespace);
+            $(t.doc.body).off('keydown.' + t.eventNamespace);
         },
 
 
