@@ -1,5 +1,5 @@
 (function(factory, undefined) {
-	"use strict";
+	'use strict';
 
     if (typeof define === 'function' && define.amd) {
 		// AMD
@@ -12,7 +12,7 @@
 		factory(jQuery);
 	}
 }(function($, undefined) {
-	"use strict";
+	'use strict';
 
     // rename to avoid conflict with jquery-resizable
     $.fn.uiresizable = $.fn.resizable;

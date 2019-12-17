@@ -1,5 +1,5 @@
 (function ($) {
-    "use strict";
+    'use strict';
 
     var defaultOptions = {
         minSize: 32,
@@ -55,7 +55,7 @@
                                     $el.height(newHeight);
                                     return false;
                                 },
-                                onDragEnd: function (ev) {
+                                onDragEnd: function () {
                                     //resize update canvas information
                                     rszwtcanvas.refresh();
                                     trumbowyg.syncCode();
@@ -82,7 +82,7 @@
                     }
 
                     // Init
-                    trumbowyg.$c.on('tbwinit', function (ev) {
+                    trumbowyg.$c.on('tbwinit', function () {
                         initResizable();
 
                         //disable resize when click on other items
@@ -99,15 +99,12 @@
                             }
                         });
 
-                        trumbowyg.$ed.on('scroll', function (ev) {
+                        trumbowyg.$ed.on('scroll', function () {
                             rszwtcanvas.reCalcOffset();
                         });
                     });
 
-                    trumbowyg.$c.on('tbwfocus', function (ev) {
-                        console.log("tbwfocus");
-                        //if I have already focused the canvas avoid init
-                        //if(!rszwtcanvas.isFocusedNow())
+                    trumbowyg.$c.on('tbwfocus', function () {
                             initResizable(); 
                     });
                     trumbowyg.$c.on('tbwchange', initResizable);
@@ -115,13 +112,14 @@
 
 
                     // Destroy
-                    trumbowyg.$c.on('tbwblur', function (ev) {
-                        console.log("tbwblur");
+                    trumbowyg.$c.on('tbwblur', function () {
                         //if I have already focused the canvas avoid destroy
-                        //if(rszwtcanvas.isFocusedNow())
-                        //    rszwtcanvas.UnFocusNow();
-                        //else
+                        if(rszwtcanvas.isFocusedNow()){
+                            rszwtcanvas.UnFocusNow();
+                        }
+                        else{                 
                             destroyResizable(trumbowyg);
+                        }
                     });
                     trumbowyg.$c.on('tbwclose', function () {
                         destroyResizable(trumbowyg);
@@ -129,16 +127,14 @@
 
                     //Init resize with canvas events
                     rszwtcanvas.presskeyesc = function(obj){
-                        console.log("press key esc");
                         //reset it because the image is replaced by the canvas and have to reset it manually - the IsActive check in initResizable doesn't fire because have a canvas and not the image
                         obj.reset();
                         initResizable();
-                    }
+                    };
                     rszwtcanvas.presskeydelorcanc = function(obj){
-                        console.log("press key del or canc");
-                        $(obj.resizecanvas).replaceWith("");
+                        $(obj.resizecanvas).replaceWith('');
                         obj.resizeimg = null;
-                    }
+                    };
                 },
                 destroy: function (trumbowyg) {
                     destroyResizable(trumbowyg);

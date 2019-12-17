@@ -1,6 +1,5 @@
-"use strict";
-
 function ResizeWithCanvas() {
+    'use strict';
     //variable to create canvas and save img in resize mode
     this.resizecanvas = document.createElement('canvas');
     //to allow canvas to get focus
@@ -45,14 +44,12 @@ function ResizeWithCanvas() {
     //calculate offset to change mouse over square in the canvas
     var offsetX, offsetY;
     var reOffset = function (canvas) {
-        console.log('reset offset');
         var BB = canvas.getBoundingClientRect();
         offsetX = BB.left;
         offsetY = BB.top;
     };
 
     var drawRect = function (shapedata, ctx) {
-        console.log('draw rect');
         ctx.beginPath();
         ctx.fillStyle = stylesFilled[shapedata.style];
         ctx.rect(shapedata.points.x, shapedata.points.y, shapedata.points.width, shapedata.points.height);
@@ -89,8 +86,8 @@ function ResizeWithCanvas() {
     //necessary to correctly print cursor over square. Called once for instance. unuseful with trumbowyg
     this.init = function(){
         var _this = this;
-        window.onscroll=function(ev) { console.log('onscroll offset'); reOffset(_this.resizecanvas); };
-        window.onresize=function(ev) { console.log('onresize offset'); reOffset(_this.resizecanvas); }; 
+        window.onscroll=function() { reOffset(_this.resizecanvas); };
+        window.onresize=function() { reOffset(_this.resizecanvas); }; 
     };
 
     this.reCalcOffset = function(){
@@ -115,13 +112,12 @@ function ResizeWithCanvas() {
 
     //restore image in the HTML of the editor
     this.reset = function () {
-        console.log('resize reset');
 
         if (this.resizeimg !== null) {
             this.resizeimg.width = this.resizecanvas.clientWidth - 20;
             this.resizeimg.height = this.resizecanvas.clientHeight - 20;
             //clear style of image to avoid issue on resize because this attribute have priority over width and height attribute
-            this.resizeimg.style = "";
+            this.resizeimg.style = '';
 
             this.beforecanvasreplaced(this.resizecanvas, this.resizeimg);
 
@@ -136,7 +132,6 @@ function ResizeWithCanvas() {
 
     //setup canvas with points and border to allow the resizing operation
     this.setup = function (img, resizableopt) {
-        console.log('resize setup');
 
         this.resizeimg = img;
 
@@ -182,17 +177,16 @@ function ResizeWithCanvas() {
                         this.style.cursor = cursors[currentCursor];
                     }
                 })
-                .on('keydown', function (ev) {
+                .on('keydown', function () {
                     var x = event.keyCode;
-                    if (x == 27 && _this.isActive()){//ESC
+                    if (x === 27 && _this.isActive()){//ESC
                         _this.presskeyesc(_this);
                     }
-                    else if ((x == 46 || x == 8) && _this.isActive()){//CANC DEL
+                    else if ((x === 46 || x === 8) && _this.isActive()){//CANC DEL
                         _this.presskeydelorcanc(_this);
                     }
                 })
                 .on('focus', function (ev) {
-                    console.log('canvas focus');
                     // tell the browser we're handling this event
                     ev.stopPropagation();
                     return ev.preventDefault();
@@ -209,12 +203,9 @@ function ResizeWithCanvas() {
 
     //update the canvas after the resizing
     this.refresh = function(){
-        console.log('resize refresh');
-
         if (this.resizecanvas.getContext) {
             this.resizecanvas.width = this.resizecanvas.clientWidth;
             this.resizecanvas.height = this.resizecanvas.clientHeight;
-            //updateCanvas(this.resizecanvas, this.ctx, this.resizeimg, this.resizecanvas.clientWidth, this.resizecanvas.clientHeight);
             updateCanvas(this.resizecanvas, this.ctx, this.resizeimg, this.resizecanvas.width, this.resizecanvas.height);
         }
     };
