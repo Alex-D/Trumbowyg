@@ -1,7 +1,7 @@
-var ResizeWithCanvas = (function ($) {
+ (function ($, window) {
     'use strict';
 
- return function ResizeWithCanvas() {
+    window.ResizeWithCanvas= function() {
 
         //variable to create canvas and save img in resize mode
         this.resizecanvas = document.createElement('canvas');
@@ -215,4 +215,4 @@ var ResizeWithCanvas = (function ($) {
         };
     };
 
-})(jQuery);
+})(jQuery, window);
