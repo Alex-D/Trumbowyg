@@ -11,10 +11,18 @@
         this.ctx = null;
         this.resizeimg = null;
 
+        /* jshint unused:vars */
         //function callback to do something when appen something
-        this.beforecanvasreplaced = function (canvas, image){};
-        this.presskeyesc = function (obj){};
-        this.presskeydelorcanc = function (obj){};
+        this.beforecanvasreplaced = function (canvas, image){
+
+        };
+        this.presskeyesc = function (obj){
+            obj.reset();
+        };
+        this.presskeydelorcanc = function (obj){
+            $(obj.resizecanvas).replaceWith('');
+            obj.resizeimg = null;
+        };
 
         //PRIVATE FUNCTION
         var isfocusednow = false;
@@ -67,7 +75,7 @@
             shapesFilled[2].points = { x: -10, y: canvasHeight - 10, width: 20, height: 20 };
             shapesFilled[3].points = { x: canvasWidth - 10, y: canvasHeight - 10, width: 20, height: 20 };
 
-            for (var i = 0; i < shapesFilled.length; i++) {
+            for (var i = 0; i < shapesFilled.length; i+=1) {
                 drawRect(shapesFilled[i], ctx);
             }
 
@@ -164,7 +172,7 @@
 
                         // Put your mousemove stuff here
                         var newCursor;
-                        for (var i = 0; i < shapesFilled.length; i++) {
+                        for (var i = 0; i < shapesFilled.length; i+=1) {
                             var s = shapesFilled[i];
                             drawRect(s, _ctx);
                             if (_ctx.isPointInPath(mouseX, mouseY)) {

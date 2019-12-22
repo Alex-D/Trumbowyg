@@ -1,3 +1,5 @@
+/* global ResizeWithCanvas */
+
 (function ($) {
     'use strict';
 

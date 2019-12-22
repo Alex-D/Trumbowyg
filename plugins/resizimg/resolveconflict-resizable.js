@@ -1,4 +1,4 @@
-(function(factory, undefined) {
+(function(factory, undefined, define, require, module) {
 	'use strict';
 
     if (typeof define === 'function' && define.amd) {
