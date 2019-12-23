@@ -4,28 +4,28 @@
     window.ResizeWithCanvas= function() {
 
         //variable to create canvas and save img in resize mode
-        this.resizecanvas = document.createElement('canvas');
+        this.resizeCanvas = document.createElement('canvas');
         //to allow canvas to get focus
-        this.resizecanvas.setAttribute('tabindex','0');
-        this.resizecanvas.id = 'tbwresizeme';
+        this.resizeCanvas.setAttribute('tabindex','0');
+        this.resizeCanvas.id = 'tbwresizeme';
         this.ctx = null;
-        this.resizeimg = null;
+        this.resizeImg = null;
 
         /* jshint unused:vars */
         //function callback to do something when appen something
-        this.beforecanvasreplaced = function (canvas, image){
+        this.beforeCanvasReplaced = function (canvas, image){
 
         };
-        this.presskeyesc = function (obj){
+        this.pressKeyEsc = function (obj){
             obj.reset();
         };
-        this.presskeydelorcanc = function (obj){
-            $(obj.resizecanvas).replaceWith('');
-            obj.resizeimg = null;
+        this.pressKeyDelOrCanc = function (obj){
+            $(obj.resizeCanvas).replaceWith('');
+            obj.resizeImg = null;
         };
 
         //PRIVATE FUNCTION
-        var isfocusednow = false;
+        var focusedNow = false;
         var cursors = ['default', 'se-resize', 'not-allowed'];
         var currentCursor = 0;
         var stylesFilled = ['rgb(0, 0, 0)', 'rgb(200, 0, 0)'];
@@ -97,75 +97,75 @@
         //necessary to correctly print cursor over square. Called once for instance. unuseful with trumbowyg
         this.init = function(){
             var _this = this;
-            window.onscroll=function() { reOffset(_this.resizecanvas); };
-            window.onresize=function() { reOffset(_this.resizecanvas); }; 
+            window.onscroll=function() { reOffset(_this.resizeCanvas); };
+            window.onresize=function() { reOffset(_this.resizeCanvas); }; 
         };
 
         this.reCalcOffset = function(){
-            reOffset(this.resizecanvas);
+            reOffset(this.resizeCanvas);
         };
 
         this.canvasId = function () {
-            return this.resizecanvas.id;
+            return this.resizeCanvas.id;
         };
 
         this.isActive = function () {
-            return this.resizeimg !== null;
+            return this.resizeImg !== null;
         };
 
         this.isFocusedNow = function () {
-            return isfocusednow;
+            return focusedNow;
         };
 
         this.UnFocusNow = function () {
-            isfocusednow = false;
+            focusedNow = false;
         };
 
         //restore image in the HTML of the editor
         this.reset = function () {
 
-            if (this.resizeimg !== null) {
-                this.resizeimg.width = this.resizecanvas.clientWidth - 20;
-                this.resizeimg.height = this.resizecanvas.clientHeight - 20;
+            if (this.resizeImg !== null) {
+                this.resizeImg.width = this.resizeCanvas.clientWidth - 20;
+                this.resizeImg.height = this.resizeCanvas.clientHeight - 20;
                 //clear style of image to avoid issue on resize because this attribute have priority over width and height attribute
-                this.resizeimg.style = '';
+                this.resizeImg.style = '';
 
-                this.beforecanvasreplaced(this.resizecanvas, this.resizeimg);
+                this.beforeCanvasReplaced(this.resizeCanvas, this.resizeImg);
 
                 //sostituisce il canvas con l'immagine
-                $(this.resizecanvas).replaceWith($(this.resizeimg));
+                $(this.resizeCanvas).replaceWith($(this.resizeImg));
 
                 //reset canvas style
-                this.resizecanvas.style = '';
-                this.resizeimg = null;
+                this.resizeCanvas.style = '';
+                this.resizeImg = null;
             }
         };
 
         //setup canvas with points and border to allow the resizing operation
         this.setup = function (img, resizableopt) {
 
-            this.resizeimg = img;
+            this.resizeImg = img;
 
-            if (this.resizecanvas.getContext) {
-                isfocusednow = true;
+            if (this.resizeCanvas.getContext) {
+                focusedNow = true;
                 
                 //draw canvas
-                this.resizecanvas.width = $(this.resizeimg).width() + 20;
-                this.resizecanvas.height = $(this.resizeimg).height() + 20;
-                this.ctx = this.resizecanvas.getContext('2d');
+                this.resizeCanvas.width = $(this.resizeImg).width() + 20;
+                this.resizeCanvas.height = $(this.resizeImg).height() + 20;
+                this.ctx = this.resizeCanvas.getContext('2d');
 
                 //sostituisce l'immagine con il canvas
-                $(this.resizeimg).replaceWith($(this.resizecanvas));
+                $(this.resizeImg).replaceWith($(this.resizeCanvas));
 
-                updateCanvas(this.resizecanvas, this.ctx, this.resizeimg, this.resizecanvas.width, this.resizecanvas.height);
+                updateCanvas(this.resizeCanvas, this.ctx, this.resizeImg, this.resizeCanvas.width, this.resizeCanvas.height);
 
                 //enable resize
-                $(this.resizecanvas).resizable(resizableopt)
+                $(this.resizeCanvas).resizable(resizableopt)
                     .on('mousedown', function (ev) { return ev.preventDefault(); });
 
                 var _this = this;
                 var _ctx = this.ctx;
-                $(this.resizecanvas)
+                $(this.resizeCanvas)
                     .on('mousemove', function (e) {                    
                         var mouseX = parseInt(e.clientX - offsetX);
                         var mouseY = parseInt(e.clientY - offsetY);
@@ -193,10 +193,10 @@
                     .on('keydown', function () {
                         var x = event.keyCode;
                         if (x === 27 && _this.isActive()){//ESC
-                            _this.presskeyesc(_this);
+                            _this.pressKeyEsc(_this);
                         }
                         else if ((x === 46 || x === 8) && _this.isActive()){//CANC DEL
-                            _this.presskeydelorcanc(_this);
+                            _this.pressKeyDelOrCanc(_this);
                         }
                     })
                     .on('focus', function (ev) {
@@ -205,7 +205,7 @@
                         return ev.preventDefault();
                     });
 
-                this.resizecanvas.focus();
+                this.resizeCanvas.focus();
 
                 return true;
             }
@@ -215,10 +215,10 @@
 
         //update the canvas after the resizing
         this.refresh = function(){
-            if (this.resizecanvas.getContext) {
-                this.resizecanvas.width = this.resizecanvas.clientWidth;
-                this.resizecanvas.height = this.resizecanvas.clientHeight;
-                updateCanvas(this.resizecanvas, this.ctx, this.resizeimg, this.resizecanvas.width, this.resizecanvas.height);
+            if (this.resizeCanvas.getContext) {
+                this.resizeCanvas.width = this.resizeCanvas.clientWidth;
+                this.resizeCanvas.height = this.resizeCanvas.clientHeight;
+                updateCanvas(this.resizeCanvas, this.ctx, this.resizeImg, this.resizeCanvas.width, this.resizeCanvas.height);
             }
         };
     };
