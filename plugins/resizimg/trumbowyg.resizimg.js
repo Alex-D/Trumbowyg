@@ -1,3 +1,5 @@
+/* global ResizeWithCanvas */
+
 (function ($) {
     'use strict';
 
@@ -126,12 +128,12 @@
                     });
 
                     //Init resize with canvas events
-                    rszwtcanvas.presskeyesc = function(obj){
+                    rszwtcanvas.pressKeyEsc = function(obj){
                         //reset it because the image is replaced by the canvas and have to reset it manually - the IsActive check in initResizable doesn't fire because have a canvas and not the image
                         obj.reset();
                         initResizable();
                     };
-                    rszwtcanvas.presskeydelorcanc = function(obj){
+                    rszwtcanvas.pressKeyDelOrCanc = function(obj){
                         $(obj.resizecanvas).replaceWith('');
                         obj.resizeimg = null;
                     };
