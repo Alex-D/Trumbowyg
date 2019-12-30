@@ -59,6 +59,7 @@
     $.extend(true, $.trumbowyg, {
         // Add some translations
         langs: {
+            // jshint camelcase:false
             en: {
                 highlight: 'Code syntax highlight'
             },
@@ -68,6 +69,7 @@
             ko: {
                 highlight: '코드 문법 하이라이트'
             },
+            // jshint camelcase:true
         },
         // Add our plugin to Trumbowyg registered plugins
         plugins: {
