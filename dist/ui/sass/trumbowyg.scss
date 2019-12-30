@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.20.0 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.21.0 - A lightweight WYSIWYG editor
  * Default stylesheet for Trumbowyg editor
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -547,6 +547,9 @@ body.trumbowyg-body-fullscreen {
     }
     img {
         cursor: move;
+    }
+    canvas:focus {
+        outline: none;
     }
 
     /*

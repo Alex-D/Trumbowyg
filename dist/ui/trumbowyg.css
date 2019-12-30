@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.20.0 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.21.0 - A lightweight WYSIWYG editor
  * Default stylesheet for Trumbowyg editor
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -425,6 +425,8 @@ body.trumbowyg-body-fullscreen {
     height: auto; }
   .trumbowyg-editor img {
     cursor: move; }
+  .trumbowyg-editor canvas:focus {
+    outline: none; }
   .trumbowyg-editor.trumbowyg-reset-css {
     background: #FEFEFE !important;
     font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif !important;
