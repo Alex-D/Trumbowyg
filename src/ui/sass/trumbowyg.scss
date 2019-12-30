@@ -537,6 +537,9 @@ body.trumbowyg-body-fullscreen {
     img {
         cursor: move;
     }
+    canvas:focus {
+        outline: none;
+    }
 
     /*
      * lset for resetCss option
