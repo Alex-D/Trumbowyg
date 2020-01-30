@@ -201,16 +201,21 @@
     function setFontSize(trumbowyg, size) {
         trumbowyg.$ed.focus();
         trumbowyg.saveRange();
-        var text = trumbowyg.range.startContainer.parentElement;
-        var selectedText = trumbowyg.getRangeText();
-        if ($(text).html() === selectedText) {
-            $(text).css('font-size', size);
-        } else {
-            trumbowyg.range.deleteContents();
-            var html = '<span style="font-size: ' + size + ';">' + selectedText + '</span>';
-            var node = $(html)[0];
-            trumbowyg.range.insertNode(node);
-        }
+
+        // Temporary size
+        trumbowyg.execCmd('fontSize', '1');
+
+        // Find <font> elements that were added and change to <span> with chosen size
+        trumbowyg.$ed.find('font[size="1"]').replaceWith(function() {
+            return $('<span/>', {
+                css: { 'font-size': size },
+                html: this.innerHTML,
+            });
+        });
+
+        // Remove and leftover <span> elements
+        $(trumbowyg.range.startContainer.parentElement).find('span[style=""]').contents().unwrap();
+
         trumbowyg.restoreRange();
     }
 
