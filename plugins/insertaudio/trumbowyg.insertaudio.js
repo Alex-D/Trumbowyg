@@ -43,6 +43,9 @@
             fr: {
                 insertAudio: 'Insérer un son'
             },
+            hu: {
+                insertAudio: 'Audio beszúrás'
+            },
             ja: {
                 insertAudio: '音声の挿入'
             },

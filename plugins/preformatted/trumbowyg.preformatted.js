@@ -22,11 +22,14 @@
             fr: {
                 preformatted: 'Exemple de code <pre>'
             },
-            ja: {
-                preformatted: 'コードサンプル <pre>'
+            hu: {
+                preformatted: 'Kód minta <pre>'
             },
             it: {
                 preformatted: 'Codice <pre>'
+            },
+            ja: {
+                preformatted: 'コードサンプル <pre>'
             },
             ko: {
                 preformatted: '코드 예제 <pre>'

@@ -40,6 +40,12 @@
                 base64: 'Image en base64',
                 file: 'Fichier'
             },
+            hu: {
+                base64: 'Kép beszúrás inline',
+                file: 'Fájl',
+                errFileReaderNotSupported: 'Ez a böngésző nem támogatja a FileReader funkciót.',
+                errInvalidImage: 'Érvénytelen képfájl.'
+            },
             ja: {
                 base64: '画像 (Base64形式)',
                 file: 'ファイル',

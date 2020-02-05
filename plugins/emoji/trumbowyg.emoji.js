@@ -1281,6 +1281,9 @@
             fr: {
                 emoji: 'Ajouter un emoji'
             },
+            hu: {
+                emoji: 'Emoji beszúrás'
+            },
             ja: {
                 emoji: '絵文字の挿入'
             },

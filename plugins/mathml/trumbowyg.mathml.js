@@ -27,6 +27,11 @@
                 formulas: 'Formule',
                 inline: 'En ligne'
             },
+            hu: {
+                mathml: 'Formulák beszúrás',
+                formulas: 'Formulák',
+                inline: 'Inline'
+            },
             ko: {
                 mathml: '수식 넣기',
                 formulas: '수식',

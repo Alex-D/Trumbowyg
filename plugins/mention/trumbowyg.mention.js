@@ -29,6 +29,9 @@
             fr: {
                 mention: 'Mentionner'
             },
+            hu: {
+                mention: 'Említ'
+            },
             ko: {
                 mention: '언급'
             },

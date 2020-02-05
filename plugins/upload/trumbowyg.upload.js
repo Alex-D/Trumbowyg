@@ -73,6 +73,11 @@
                 file: 'Fichier',
                 uploadError: 'Erreur'
             },
+            hu: {
+                upload: 'Feltöltés',
+                file: 'Fájl',
+                uploadError: 'Hiba'
+            },
             ja: {
                 upload: 'アップロード',
                 file: 'ファイル',

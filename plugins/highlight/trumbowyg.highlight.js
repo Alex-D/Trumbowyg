@@ -63,6 +63,9 @@
             en: {
                 highlight: 'Code syntax highlight'
             },
+            hu: {
+                highlight: 'Kód kiemelés'
+            },
             ko: {
                 highlight: '코드 문법 하이라이트'
             },
