@@ -1281,20 +1281,20 @@
             fr: {
                 emoji: 'Ajouter un emoji'
             },
-            zh_cn: {
-                emoji: '添加表情'
+            ja: {
+                emoji: '絵文字の挿入'
+            },
+            ko: {
+                emoji: '이모지 넣기'
             },
             ru: {
                 emoji: 'Вставить emoji'
             },
-            ja: {
-                emoji: '絵文字の挿入'
-            },
             tr: {
                 emoji: 'Emoji ekle'
             },
-            ko: {
-                emoji: '이모지 넣기'
+            zh_cn: {
+                emoji: '添加表情'
             },
         },
         // jshint camelcase:true

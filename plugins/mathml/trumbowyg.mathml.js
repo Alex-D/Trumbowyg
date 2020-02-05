@@ -27,6 +27,16 @@
                 formulas: 'Formule',
                 inline: 'En ligne'
             },
+            ko: {
+                mathml: '수식 넣기',
+                formulas: '수식',
+                inline: '글 안에 넣기'
+            },
+            pt_br: {
+                mathml: 'Inserir fórmulas',
+                formulas: 'Fórmulas',
+                inline: 'Em linha'
+            },
             tr: {
                 mathml: 'Formül Ekle',
                 formulas: 'Formüller',
@@ -36,16 +46,6 @@
                 mathml: '插入方程式',
                 formulas: '方程式',
                 inline: '內嵌'
-            },
-            pt_br: {
-                mathml: 'Inserir fórmulas',
-                formulas: 'Fórmulas',
-                inline: 'Em linha'
-            },
-            ko: {
-                mathml: '수식 넣기',
-                formulas: '수식',
-                inline: '글 안에 넣기'
             },
         },
         // jshint camelcase:true
