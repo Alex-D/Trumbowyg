@@ -53,6 +53,11 @@
                 file: 'File',
                 uploadError: 'Error'
             },
+            cs: {
+                upload: 'Nahrát obrázek',
+                file: 'Soubor',
+                uploadError: 'Chyba'
+            },
             da: {
                 upload: 'Upload',
                 file: 'Fil',
@@ -63,20 +68,40 @@
                 file: 'Datei',
                 uploadError: 'Fehler'
             },
-            sk: {
-                upload: 'Nahrať',
-                file: 'Súbor',
-                uploadError: 'Chyba'
-            },
             fr: {
                 upload: 'Envoi',
                 file: 'Fichier',
                 uploadError: 'Erreur'
             },
-            cs: {
-                upload: 'Nahrát obrázek',
-                file: 'Soubor',
+            ja: {
+                upload: 'アップロード',
+                file: 'ファイル',
+                uploadError: 'エラー'
+            },
+            ko: {
+                upload: '그림 올리기',
+                file: '파일',
+                uploadError: '에러'
+            },
+            pt_br: {
+                upload: 'Enviar do local',
+                file: 'Arquivo',
+                uploadError: 'Erro'
+            },
+            ru: {
+                upload: 'Загрузка',
+                file: 'Файл',
+                uploadError: 'Ошибка'
+            },
+            sk: {
+                upload: 'Nahrať',
+                file: 'Súbor',
                 uploadError: 'Chyba'
+            },
+            tr: {
+                upload: 'Yükle',
+                file: 'Dosya',
+                uploadError: 'Hata'
             },
             zh_cn: {
                 upload: '上传',
@@ -87,31 +112,6 @@
                 upload: '上傳',
                 file: '文件',
                 uploadError: '錯誤'
-            },
-            ru: {
-                upload: 'Загрузка',
-                file: 'Файл',
-                uploadError: 'Ошибка'
-            },
-            ja: {
-                upload: 'アップロード',
-                file: 'ファイル',
-                uploadError: 'エラー'
-            },
-            pt_br: {
-                upload: 'Enviar do local',
-                file: 'Arquivo',
-                uploadError: 'Erro'
-            },
-            tr: {
-                upload: 'Yükle',
-                file: 'Dosya',
-                uploadError: 'Hata'
-            },
-            ko: {
-                upload: '그림 올리기',
-                file: '파일',
-                uploadError: '에러'
             },
         },
         // jshint camelcase:true

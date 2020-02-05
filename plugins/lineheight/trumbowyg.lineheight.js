@@ -31,6 +31,24 @@
                     '2.0': 'Très grande'
                 }
             },
+            it: {
+                lineheight: 'Altezza linea',
+                lineheights: {
+                    '0.9': 'Bassa',
+                    'normal': 'Normale',
+                    '1.5': 'Alta',
+                    '2.0': 'Molto alta'
+                }
+            },
+            ko: {
+                lineheight: '줄 간격',
+                lineheights: {
+                    '0.9': '좁게',
+                    'normal': '보통',
+                    '1.5': '넓게',
+                    '2.0': '아주 넓게'
+                }
+            },
             nl: {
                 lineheight: 'Regelhoogte',
                 lineheights: {
@@ -38,6 +56,15 @@
                     'normal': 'Normaal',
                     '1.5': 'Groot',
                     '2.0': 'Extra groot'
+                }
+            },
+            pt_br: {
+                lineheight: 'Altura de linha',
+                lineheights: {
+                    '0.9': 'Pequena',
+                    'normal': 'Regular',
+                    '1.5': 'Grande',
+                    '2.0': 'Extra grande'
                 }
             },
             tr: {
@@ -56,33 +83,6 @@
                     'normal': '正常',
                     '1.5': '大',
                     '2.0': '特大'
-                }
-            },
-            pt_br: {
-                lineheight: 'Altura de linha',
-                lineheights: {
-                    '0.9': 'Pequena',
-                    'normal': 'Regular',
-                    '1.5': 'Grande',
-                    '2.0': 'Extra grande'
-                }
-            },
-            it: {
-                lineheight: 'Altezza linea',
-                lineheights: {
-                    '0.9': 'Bassa',
-                    'normal': 'Normale',
-                    '1.5': 'Alta',
-                    '2.0': 'Molto alta'
-                }
-            },
-            ko: {
-                lineheight: '줄 간격',
-                lineheights: {
-                    '0.9': '좁게',
-                    'normal': '보통',
-                    '1.5': '넓게',
-                    '2.0': '아주 넓게'
                 }
             },
         }
