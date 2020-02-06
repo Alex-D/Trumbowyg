@@ -38,6 +38,12 @@
                 foreColorRemove: 'Supprimer la couleur du texte',
                 backColorRemove: 'Supprimer la couleur de fond'
             },
+            hu: {
+                foreColor: 'Betű szín',
+                backColor: 'Háttér szín',
+                foreColorRemove: 'Betű szín eltávolítása',
+                backColorRemove: 'Háttér szín eltávolítása'
+            },
             ja: {
                 foreColor: '文字色',
                 backColor: '背景色'

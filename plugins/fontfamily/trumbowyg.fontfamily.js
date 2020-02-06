@@ -16,6 +16,9 @@
             fr: {
                 fontFamily: 'Police'
             },
+            hu: {
+                fontFamily: 'Betűtípus'
+            },
             ko: {
                 fontFamily: '글꼴'
             },

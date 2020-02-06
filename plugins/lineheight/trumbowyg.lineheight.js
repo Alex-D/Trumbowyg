@@ -31,6 +31,15 @@
                     '2.0': 'Très grande'
                 }
             },
+            hu: {
+                lineheight: 'Line height',
+                lineheights: {
+                    '0.9': 'Small',
+                    'normal': 'Regular',
+                    '1.5': 'Large',
+                    '2.0': 'Extra large'
+                }
+            },
             it: {
                 lineheight: 'Altezza linea',
                 lineheights: {

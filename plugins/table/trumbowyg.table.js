@@ -70,6 +70,17 @@
                 tableDestroy: 'Effacer le tableau',
                 error: 'Erreur'
             },
+            hu: {
+                table: 'Táblázat beszúrás',
+                tableAddRow: 'Sor hozzáadás',
+                tableAddRowAbove: 'Sor beszúrás fönt',
+                tableAddColumnLeft: 'Sor beszúrás balra',
+                tableAddColumn: 'Sor beszúrás jobbra',
+                tableDeleteRow: 'Sor törlés',
+                tableDeleteColumn: 'Oszlop törlés',
+                tableDestroy: 'Táblázat törlés',
+                error: 'Hiba'
+            },
             id: {
                 table: 'Sisipkan tabel',
                 tableAddRow: 'Sisipkan baris',

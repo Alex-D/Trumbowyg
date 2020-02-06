@@ -33,6 +33,10 @@
             fr: {
                 noembedError: 'Erreur'
             },
+            hu: {
+                noembed: 'Noembed',
+                noembedError: 'Hiba'
+            },
             ja: {
                 noembedError: 'エラー'
             },

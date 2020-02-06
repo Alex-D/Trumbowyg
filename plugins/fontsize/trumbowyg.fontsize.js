@@ -79,6 +79,22 @@
                     value: '48px'
                 }
             },
+            hu: {
+                fontsize: 'Betű méret',
+                fontsizes: {
+                    'x-small': 'Extra kicsi',
+                    'small': 'Kicsi',
+                    'medium': 'Normális',
+                    'large': 'Nagy',
+                    'x-large': 'Extra nagy',
+                    'custom': 'Egyedi'
+                },
+                fontCustomSize: {
+                    title: 'Egyedi betű méret',
+                    label: 'Betű méret',
+                    value: '48px'
+                }
+            },
             it: {
                 fontsize: 'Dimensioni del testo',
                 fontsizes: {
