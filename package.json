@@ -41,7 +41,7 @@
     "vinyl-paths": "2.1.0"
   },
   "peerDependencies": {
-    "jQuery": ">=1.8"
+    "jquery": ">=1.8"
   },
   "scripts": {
     "start": "gulp",
