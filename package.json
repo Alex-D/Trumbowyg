@@ -1,8 +1,8 @@
 {
-  "name": "trumbowyg",
+  "name": "holematrumbowyg",
   "title": "Trumbowyg",
   "description": "A lightweight WYSIWYG editor",
-  "version": "2.21.0",
+  "version": "2.21.1",
   "main": "dist/trumbowyg.js",
   "homepage": "http://alex-d.github.io/Trumbowyg",
   "author": {

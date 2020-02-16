@@ -78,12 +78,13 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
         prefix: 'trumbowyg-',
 // classes for inputs
-        h1Class: null,
-        h2Class: null,
-        h3Class: null,
-        h4Class: null,
-        pClass: null,
-
+        tagClasses:{
+            'h1': null,
+            'h2': null,
+            'h3': null,
+            'h4': null,
+            'p': null,
+        },
         semantic: true,
         semanticKeepAttributes: false,
         resetCss: false,
@@ -1442,12 +1443,12 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     t.semanticCode(false, true);
                     try {
                         var listId = window.getSelection().focusNode.parentNode;
-                        var arrayKey = param + 'Class';
-
-                        var arr = t.o[arrayKey];
+                        var arr = t.o.tagClasses[param];
                         if (arr) {
                             $(listId).removeClass();
-
+                            for (var i = 0; i < arr.length; i++) {
+                                $(listId).removeClass(arr[i]);
+                            }
                             for (var i = 0; i < arr.length; i++) {
                                 $(listId).addClass(arr[i]);
                             }
