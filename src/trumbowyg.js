@@ -584,6 +584,11 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             t.$ed
                 .on('dblclick', 'img', t.o.imgDblClickHandler)
                 .on('keydown', function (e) {
+                    // append flags to differentiate Chrome spans
+                    var keyCode = e.which;
+                    if (keyCode === 8 || keyCode === 13 || keyCode === 46) {
+                        t.toggleSpan(true);
+                    }
                     if ((e.ctrlKey || e.metaKey) && !e.altKey) {
                         ctrl = true;
                         var key = t.keys[String.fromCharCode(e.which).toUpperCase()];
@@ -619,6 +624,11 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
                     if (keyCode >= 37 && keyCode <= 40) {
                         return;
+                    }
+
+                    // remove Chrome generated span tags
+                    if (keyCode === 8 || keyCode === 13 || keyCode === 46) {
+                        t.toggleSpan();
                     }
 
                     if ((e.ctrlKey || e.metaKey) && (keyCode === 89 || keyCode === 90)) {
@@ -1059,6 +1069,18 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     t.autogrowEditorOnEnter();
                 }
             }, 0);
+        },
+
+        // Remove or add flags to span tags to remove Chrome generated spans
+        toggleSpan: function (addFlag) {
+            var t = this;
+            t.$ed.find('span').each(function () {
+                if (addFlag === true) {
+                    $(this).attr('data-tbw-flag', true);
+                } else {
+                    $(this).attr('data-tbw-flag') ? $(this).removeAttr('data-tbw-flag') : $(this).contents().unwrap();
+                }
+            });
         },
 
         // Open dropdown when click on a button which open that
