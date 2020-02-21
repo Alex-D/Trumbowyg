@@ -63,7 +63,7 @@
         // Remove multiple spaces
         html.replace(/\s+/g, ' ');
 
-        // strip &nbsp; -cgCraft
+        // strip leading and trailing spaces
         html = html.replace(/^\s*|\s*$/g, '');
 
         // Strip out unaccepted attributes
