@@ -1442,7 +1442,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     t.syncCode();
                     t.semanticCode(false, true);
                     try {
-                        var listId = window.getSelection().focusNode.parentNode;
+                        var listId = window.getSelection().focusNode;
+                        if(!$(window.getSelection().focusNode.parentNode).hasClass('trumbowyg-editor')){
+                            listId = window.getSelection().focusNode.parentNode;
+                        }
                         var arr = t.o.tagClasses[param];
                         if (arr) {
                             $(listId).removeClass();
