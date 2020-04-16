@@ -1448,15 +1448,9 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         }
                         var arr = t.o.tagClasses[param];
                         if (arr) {
-                            $(listId).removeClass();
-                            for (var i = 0; i < arr.length; i++) {
-                                $(listId).removeClass(arr[i]);
-                            }
                             for (var i = 0; i < arr.length; i++) {
                                 $(listId).addClass(arr[i]);
                             }
-
-
                         }
                     } catch (e) {
 
