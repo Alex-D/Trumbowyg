@@ -1173,6 +1173,11 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             t.saveRange();
             t.syncCode(force);
 
+            var restoreRange = true;
+            if (t.range && t.range.collapsed) {
+                restoreRange = false;
+            }
+
             if (t.o.semantic) {
                 t.semanticTag('b', t.o.semanticKeepAttributes);
                 t.semanticTag('i', t.o.semanticKeepAttributes);
@@ -1208,9 +1213,9 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     t.$ed.find('p:empty').remove();
                 }
 
-                /*if (!keepRange) {
+                if (!keepRange && restoreRange) {
                     t.restoreRange();
-                }*/
+                }
 
                 t.syncTextarea();
             }
