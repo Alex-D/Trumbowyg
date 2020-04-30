@@ -211,7 +211,7 @@
                                                     trumbowyg.execCmd('insertImage', url, false, true);
                                                     var $img = $('img[src="' + url + '"]:not([alt])', trumbowyg.$box);
                                                     $img.attr('alt', values.alt);
-                                                    if (trumbowyg.o.imageWidthModalEdit && parseInt(values.width) > 0) {
+                                                    if (trumbowyg.o.plugins.upload.imageWidthModalEdit && parseInt(values.width) > 0) {
                                                         $img.attr({
                                                             width: values.width
                                                         });
