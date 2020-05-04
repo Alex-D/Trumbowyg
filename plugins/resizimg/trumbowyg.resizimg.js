@@ -14,6 +14,7 @@
     var ResizeWithCanvas = function () {
         // variable to create canvas and save img in resize mode
         this.resizeCanvas = document.createElement('canvas');
+        document.head.appendChild(this.resizeCanvas);
         // to allow canvas to get focus
         this.resizeCanvas.setAttribute('tabindex', '0');
         this.resizeCanvas.id = 'trumbowyg-resizimg-' + (+new Date());
