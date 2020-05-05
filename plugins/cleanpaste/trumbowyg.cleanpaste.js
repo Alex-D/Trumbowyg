@@ -68,8 +68,11 @@
 
         // Strip out unaccepted attributes
         html = html.replace(/<[^>]*>/g, function (match) {
-            match = match.replace(/ ([^=]+)="[^"]*"/g, function (match2, attributeName) {
-                if (['alt', 'href', 'src', 'title'].indexOf(attributeName) !== -1) {
+            match = match.replace(/ ([^=]+)="([^"]*)"/g, function (match2, attributeName, attributeValue) {
+                if (['alt', 'href', 'src', 'title', 'style'].indexOf(attributeName) !== -1) {
+					if(attributeName === 'style'){
+						return processStyleAttribute(attributeValue);
+					}
                     return match2;
                 }
                 return '';
@@ -83,58 +86,40 @@
         html = html.replace(/<\/[^ >]+:[^>]*>/g, '');
 
         // remove unwanted tags
-        html = html.replace(/<(div|span|style|meta|link).*?>/gi, '');
-
+        html = html.replace(/<(div|style|meta|link).*?>/gi, '');
         return html;
     }
+    
+    // Clear unwanted styles. Keep trumbowyg functionality styles.
+	function processStyleAttribute(attributeValue){
+		var allowedStyleValueRegex = /(background-color|color|font-size|[^-]font-family):(&quot;|\s{0,1}?)[\s\S]+?(&quot;){0,1}?(;|$)/g;
+		
+		attributeValue = correctWordStyleNaming(attributeValue);
+		
+		var matches = attributeValue.match(allowedStyleValueRegex);
+		if(matches){
+			return ' style="' + matches.join('') + '"'
+		} else {
+			return '';
+		}
+	}
+    
+    function correctWordStyleNaming(attributeValue){
+		return attributeValue.replace(/\bbackground:\b/, function(){
+			return 'background-color:';
+		});
+	}
 
     // clean editor
     // this will clean the inserted contents
-    // it does a compare, before and after paste to determine the
-    // pasted contents
     $.extend(true, $.trumbowyg, {
         plugins: {
             cleanPaste: {
                 init: function (trumbowyg) {
-                    trumbowyg.pasteHandlers.push(function (pasteEvent) {
+                    trumbowyg.pasteHandlers.push(function () {
                         setTimeout(function () {
                           try {
-                              trumbowyg.saveRange();
-
-                              var clipboardData = (pasteEvent.originalEvent || pasteEvent).clipboardData,
-                                  pastedData = clipboardData.getData('Text'),
-                                  node = trumbowyg.doc.getSelection().focusNode,
-                                  range = trumbowyg.doc.createRange(),
-                                  cleanedPaste = cleanIt(pastedData.trim()),
-                                  newNode = $(cleanedPaste)[0] || trumbowyg.doc.createTextNode(cleanedPaste);
-
-                              if (trumbowyg.$ed.html() === '') {
-                                // simply append if there is no content in editor
-                                trumbowyg.$ed[0].appendChild(newNode);
-                              } else {
-                                // insert pasted content behind last focused node
-                                range.setStartAfter(node);
-                                range.setEndAfter(node);
-                                trumbowyg.doc.getSelection().removeAllRanges();
-                                trumbowyg.doc.getSelection().addRange(range);
-
-                                trumbowyg.range.insertNode(newNode);
-                              }
-
-                              // now set cursor right after pasted content
-                              range = trumbowyg.doc.createRange()
-                              range.setStartAfter(newNode);
-                              range.setEndAfter(newNode);
-                              trumbowyg.doc.getSelection().removeAllRanges();
-                              trumbowyg.doc.getSelection().addRange(range);
-
-                              // prevent defaults
-                              pasteEvent.stopPropagation();
-                              pasteEvent.preventDefault();
-
-                              // save new node as focused node
-                              trumbowyg.saveRange();
-                              trumbowyg.syncCode();
+                              trumbowyg.$ed.html(cleanIt(trumbowyg.$ed.html()));
                           } catch (c) {
                           }
                         }, 0);
