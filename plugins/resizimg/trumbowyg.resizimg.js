@@ -32,6 +32,7 @@
         // PRIVATE FUNCTION
         var focusedNow = false;
         var isCursorSeResize = false;
+        var attachedToDom = false;
 
         // calculate offset to change mouse over square in the canvas
         var offsetX, offsetY;
@@ -74,6 +75,11 @@
 
             return ctx;
         };
+        
+        var attachToDom = function (canvas) {
+            document.body.appendChild(canvas);
+            attachedToDom = true;
+        };
 
         // PUBLIC FUNCTION
         // necessary to correctly print cursor over square. Called once for instance. Useless with trumbowyg.
@@ -85,6 +91,10 @@
         };
 
         this.reCalcOffset = function () {
+            if(!attachedToDom) {
+                attachToDom(this.resizeCanvas);
+            }
+            
             reOffset(this.resizeCanvas);
         };
 
@@ -120,10 +130,18 @@
             // reset canvas style
             this.resizeCanvas.removeAttribute('style');
             this.resizeImg = null;
+            
+            if(this.attachedToDom) {
+                document.body.removeChild(this.resizeCanvas);
+            }
         };
 
         // setup canvas with points and border to allow the resizing operation
         this.setup = function (img, resizableOptions) {
+            if(!attachedToDom) {
+                attachToDom(this.resizeCanvas);
+            }
+            
             this.resizeImg = img;
 
             if (!this.resizeCanvas.getContext) {
