@@ -24,7 +24,7 @@
             obj.reset();
         };
         this.pressBackspaceOrDelete = function (obj) {
-            $(obj.resizeCanvas).replaceWith('');
+            $(obj.resizeCanvas).remove();
             obj.resizeImg = null;
         };
 
