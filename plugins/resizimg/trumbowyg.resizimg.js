@@ -193,25 +193,26 @@
         };
     };
 
-    // object to interact with canvas
-    var resizeWithCanvas = new ResizeWithCanvas();
-
-    function destroyResizable(trumbowyg) {
-        // clean html code
-        trumbowyg.$ed.find('canvas.resizable')
-            .resizable('destroy')
-            .off('mousedown', preventDefault)
-            .removeClass('resizable');
-
-        resizeWithCanvas.reset();
-
-        trumbowyg.syncCode();
-    }
-
     $.extend(true, $.trumbowyg, {
         plugins: {
             resizimg: {
                 init: function (trumbowyg) {
+					
+					// object to interact with canvas
+					var resizeWithCanvas = new ResizeWithCanvas(trumbowyg);
+
+					function destroyResizable(trumbowyg) {
+						// clean html code
+						trumbowyg.$ed.find('canvas.resizable')
+							.resizable('destroy')
+							.off('mousedown', preventDefault)
+							.removeClass('resizable');
+
+						resizeWithCanvas.reset();
+
+						trumbowyg.syncCode();
+					}
+					
                     trumbowyg.o.plugins.resizimg = $.extend(true, {},
                         defaultOptions,
                         trumbowyg.o.plugins.resizimg || {},
