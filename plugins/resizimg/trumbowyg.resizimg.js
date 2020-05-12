@@ -11,7 +11,7 @@
         e.preventDefault();
     }
 
-    var ResizeWithCanvas = function () {
+    var ResizeWithCanvas = function (trumbowyg) {
         // variable to create canvas and save img in resize mode
         this.resizeCanvas = document.createElement('canvas');
         // to allow canvas to get focus
@@ -26,6 +26,8 @@
         this.pressBackspaceOrDelete = function (obj) {
             $(obj.resizeCanvas).remove();
             obj.resizeImg = null;
+			if(trumbowyg !== null)
+                trumbowyg.syncCode();
         };
 
         // PRIVATE FUNCTION
