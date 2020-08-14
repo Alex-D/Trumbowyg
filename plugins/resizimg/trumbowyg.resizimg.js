@@ -176,7 +176,8 @@
                 .on('blur', function (e) {
                     _this.reset();
                     // save changes
-                    trumbowyg.$c.trigger('tbwchange');
+                    if (trumbowyg !== null)
+						trumbowyg.syncCode();
                 });
 
             this.resizeCanvas.focus();
