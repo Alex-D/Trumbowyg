@@ -177,7 +177,7 @@
                     _this.reset();
                     // save changes
                     if (trumbowyg !== null)
-						trumbowyg.syncCode();
+                        trumbowyg.syncCode();
                 });
 
             this.resizeCanvas.focus();
