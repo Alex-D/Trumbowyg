@@ -111,10 +111,8 @@
                 return;
             }
 
-            this.resizeImg.width = this.resizeCanvas.clientWidth - 10;
-            this.resizeImg.height = this.resizeCanvas.clientHeight - 10;
-            // clear style of image to avoid issue on resize because this attribute have priority over width and height attribute
-            this.resizeImg.removeAttribute('style');
+            // set style of image to avoid issue on resize because this attribute have priority over width and height attribute
+            this.resizeImg.setAttribute('style', 'width: 100%; max-width: '+( this.resizeCanvas.clientWidth - 10)+'px; height: auto; max-height: '+( this.resizeCanvas.clientHeight - 10)+'px;');
 
             $(this.resizeCanvas).replaceWith($(this.resizeImg));
 
@@ -174,7 +172,12 @@
                         _this.pressBackspaceOrDelete(_this);
                     }
                 })
-                .on('focus', preventDefault);
+                .on('focus', preventDefault)
+				.on('blur', function(e){ 
+					_this.reset();
+					// save changes
+					trumbowyg.$c.trigger('tbwchange');
+				});
 
             this.resizeCanvas.focus();
 
@@ -289,7 +292,7 @@
 
                     // Destroy
                     trumbowyg.$c.on('tbwblur', function () {
-                        // if I have already focused the canvas avoid destroy
+                        // when canvas is created the tbwblur is called - this code avoid to destroy the canvas that allow the image resizing
                         if (resizeWithCanvas.isFocusedNow()) {
                             resizeWithCanvas.blurNow();
                         } else {
