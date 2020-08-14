@@ -1,4 +1,4 @@
-;(function ($) {
+; (function ($) {
     'use strict';
 
     var defaultOptions = {
@@ -26,7 +26,7 @@
         this.pressBackspaceOrDelete = function (obj) {
             $(obj.resizeCanvas).remove();
             obj.resizeImg = null;
-			if(trumbowyg !== null)
+            if (trumbowyg !== null)
                 trumbowyg.syncCode();
         };
 
@@ -112,7 +112,7 @@
             }
 
             // set style of image to avoid issue on resize because this attribute have priority over width and height attribute
-            this.resizeImg.setAttribute('style', 'width: 100%; max-width: '+( this.resizeCanvas.clientWidth - 10)+'px; height: auto; max-height: '+( this.resizeCanvas.clientHeight - 10)+'px;');
+            this.resizeImg.setAttribute('style', 'width: 100%; max-width: ' + (this.resizeCanvas.clientWidth - 10) + 'px; height: auto; max-height: ' + (this.resizeCanvas.clientHeight - 10) + 'px;');
 
             $(this.resizeCanvas).replaceWith($(this.resizeImg));
 
@@ -173,11 +173,11 @@
                     }
                 })
                 .on('focus', preventDefault)
-				.on('blur', function(e){ 
-					_this.reset();
-					// save changes
-					trumbowyg.$c.trigger('tbwchange');
-				});
+                .on('blur', function (e) {
+                    _this.reset();
+                    // save changes
+                    trumbowyg.$c.trigger('tbwchange');
+                });
 
             this.resizeCanvas.focus();
 
@@ -200,22 +200,22 @@
         plugins: {
             resizimg: {
                 init: function (trumbowyg) {
-					
-					// object to interact with canvas
-					var resizeWithCanvas = new ResizeWithCanvas(trumbowyg);
 
-					function destroyResizable(trumbowyg) {
-						// clean html code
-						trumbowyg.$ed.find('canvas.resizable')
-							.resizable('destroy')
-							.off('mousedown', preventDefault)
-							.removeClass('resizable');
+                    // object to interact with canvas
+                    var resizeWithCanvas = new ResizeWithCanvas(trumbowyg);
 
-						resizeWithCanvas.reset();
+                    function destroyResizable(trumbowyg) {
+                        // clean html code
+                        trumbowyg.$ed.find('canvas.resizable')
+                            .resizable('destroy')
+                            .off('mousedown', preventDefault)
+                            .removeClass('resizable');
 
-						trumbowyg.syncCode();
-					}
-					
+                        resizeWithCanvas.reset();
+
+                        trumbowyg.syncCode();
+                    }
+
                     trumbowyg.o.plugins.resizimg = $.extend(true, {},
                         defaultOptions,
                         trumbowyg.o.plugins.resizimg || {},
