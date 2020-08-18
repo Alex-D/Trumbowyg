@@ -26,8 +26,11 @@
         this.pressBackspaceOrDelete = function (obj) {
             $(obj.resizeCanvas).remove();
             obj.resizeImg = null;
-            if (trumbowyg !== null)
+            if (trumbowyg !== null){
                 trumbowyg.syncCode();
+				// notify changes
+                trumbowyg.$c.trigger('tbwchange');
+			}
         };
 
         // PRIVATE FUNCTION
@@ -176,8 +179,11 @@
                 .on('blur', function (e) {
                     _this.reset();
                     // save changes
-                    if (trumbowyg !== null)
+                    if (trumbowyg !== null){
                         trumbowyg.syncCode();
+						// notify changes
+                        trumbowyg.$c.trigger('tbwchange');
+					}
                 });
 
             this.resizeCanvas.focus();
@@ -276,8 +282,9 @@
 
                             preventDefault(e);
                             resizeWithCanvas.reset();
-
-                            // save changes
+							//sync
+							trumbowyg.syncCode();
+                            // notify changes
                             trumbowyg.$c.trigger('tbwchange');
                         });
 
