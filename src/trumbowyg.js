@@ -1173,6 +1173,11 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             t.saveRange();
             t.syncCode(force);
 
+            var restoreRange = true;
+            if (t.range && t.range.collapsed) {
+                restoreRange = false;
+            }
+
             if (t.o.semantic) {
                 t.semanticTag('b', t.o.semanticKeepAttributes);
                 t.semanticTag('i', t.o.semanticKeepAttributes);
@@ -1208,7 +1213,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     t.$ed.find('p:empty').remove();
                 }
 
-                if (!keepRange) {
+                if (!keepRange && restoreRange) {
                     t.restoreRange();
                 }
 
@@ -1216,8 +1221,9 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }
         },
 
-        semanticTag: function (oldTag, copyAttributes) {
-            var newTag;
+        semanticTag: function (oldTag, copyAttributes, revert) {
+            var newTag, t = this;
+            var tmpTag = oldTag;
 
             if (this.o.semantic != null && typeof this.o.semantic === 'object' && this.o.semantic.hasOwnProperty(oldTag)) {
                 newTag = this.o.semantic[oldTag];
@@ -1227,19 +1233,34 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 return;
             }
 
+            if(revert) {
+                oldTag = newTag;
+                newTag = tmpTag;
+            }
+
             $(oldTag, this.$ed).each(function () {
+                var resetRange = false;
                 var $oldTag = $(this);
                 if($oldTag.contents().length === 0) {
                     return false;
                 }
 
-                $oldTag.wrap('<' + newTag + '/>');
+                if(t.range.startContainer.parentNode && t.range.startContainer.parentNode === this) {
+                    resetRange = true;
+                }
+                var $newTag = $('<' + newTag + '/>');
+                $newTag.insertBefore($oldTag);
                 if (copyAttributes) {
                     $.each($oldTag.prop('attributes'), function () {
-                        $oldTag.parent().attr(this.name, this.value);
+                        $newTag.attr(this.name, this.value);
                     });
                 }
-                $oldTag.contents().unwrap();
+                $newTag.html($oldTag.html());
+                $oldTag.remove();
+                if(resetRange === true) {
+                    t.range.selectNodeContents($newTag.get(0));
+                    t.range.collapse(false);
+                }
             });
         },
 
@@ -1432,6 +1453,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             if (cmd !== 'dropdown') {
                 t.$ed.focus();
+            }
+
+            if(cmd === 'strikethrough' && t.o.semantic) {
+                t.semanticTag('strike', t.o.semanticKeepAttributes, true); // browsers cannot undo e.g. <del> as they expect <strike>
             }
 
             try {
