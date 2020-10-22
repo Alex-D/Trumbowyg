@@ -75,6 +75,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         autogrow: false,
         autogrowOnEnter: false,
         imageWidthModalEdit: false,
+        imageFloatModalEdit: false,
 
         prefix: 'trumbowyg-',
 
@@ -1396,6 +1397,19 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 options.width = {};
             }
 
+            if (t.o.imageFloatModalEdit) {
+              options.float = {
+                label: 'Float',
+                type: 'select',
+                value: 'none',
+                options: [
+                  'none',
+                  'left',
+                  'right',
+                ],
+              };
+            }
+
             t.openModalInsert(t.lang.insertImage, options, function (v) { // v are values
                 t.execCmd('insertImage', v.url, false, true);
                 var $img = $('img[src="' + v.url + '"]:not([alt])', t.$box);
@@ -1405,6 +1419,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     $img.attr({
                         width: v.width
                     });
+                }
+
+                if (t.o.imageFloatModalEdit) {
+                    $img.css('float', v.float);
                 }
 
                 t.syncCode();
@@ -1633,17 +1651,33 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             $.each(fields, function (fieldName, field) {
                 var l = field.label || fieldName,
                     n = field.name || fieldName,
+                    t = field.type || 'text',
+                    v = field.value || '',
                     a = field.attributes || {};
 
                 var attr = Object.keys(a).map(function (prop) {
                     return prop + '="' + a[prop] + '"';
                 }).join(' ');
 
-                html += '<label><input type="' + (field.type || 'text') + '" name="' + n + '"' +
-                    (field.type === 'checkbox' && field.value ? ' checked="checked"' : ' value="' + (field.value || '').replace(/"/g, '&quot;')) +
-                    '"' + attr + '><span class="' + prefix + 'input-infos"><span>' +
-                    (lg[l] ? lg[l] : l) +
-                    '</span></span></label>';
+                var output = '<label>';
+                if (t === 'select') {
+                    var opts = field.options || [];
+                    output += '<select name="'+n+'">';
+                    for (var i=0; i<opts.length; i+=1) {
+                        var selected = (v === opts[i]) ? ' selected' : '';
+                        output += '<option value="'+opts[i]+'"'+selected+'>'+opts[i]+'</option>';
+                    }
+                    output += '</select>';
+                } else {
+                    output += '<input type="' + t + '" name="' + n + '"' +
+                              (field.type === 'checkbox' && field.value ? ' checked="checked"' : ' value="' + (field.value || '').replace(/"/g, '&quot;')) +
+                              '"' + attr + '>';
+                }
+                output += '<span class="' + prefix + 'input-infos"><span>' +
+                          (lg[l] ? lg[l] : l) +
+                          '</span></span>';
+                output += '</label>';
+                html += output;
             });
 
             return t.openModal(title, html)
@@ -1655,8 +1689,9 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     $.each(fields, function (fieldName, field) {
                         var n = field.name || fieldName;
 
-                        var $field = $('input[name="' + n + '"]', $form),
-                            inputType = $field.attr('type');
+                        var $field = $('[name="' + n + '"]', $form),
+                            tagName = $field[0].tagName,
+                            inputType = (tagName==='SELECT') ? 'select' : $field.attr('type');
 
                         switch (inputType.toLowerCase()) {
                             case 'checkbox':
@@ -1724,6 +1759,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             return function () {
                 var $img = $(this),
+                    float = $img.css('float') ? $img.css('float') : 'none',
                     src = $img.attr('src'),
                     base64 = '(Base64)';
 
@@ -1749,6 +1785,19 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     };
                 }
 
+                if (t.o.imageFloatModalEdit) {
+                    options.float = {
+                        label: 'Float',
+                        type: 'select',
+                        value: float,
+                        options: [
+                          'none',
+                          'left',
+                          'right',
+                        ],
+                    };
+                }
+
                 t.openModalInsert(t.lang.insertImage, options, function (v) {
                     if (v.url !== base64) {
                         $img.attr({
@@ -1767,6 +1816,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         } else {
                             $img.removeAttr('width');
                         }
+                    }
+
+                    if (t.o.imageFloatModalEdit) {
+                        $img.css('float',v.float);
                     }
 
                     return true;
