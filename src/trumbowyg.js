@@ -120,6 +120,37 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
     configurable: false
 });
 
+var TrumbowygMediaLibrary = null;
+function TrumbowygSelectMedia() {
+  'use strict';
+  if (TrumbowygMediaLibrary) {
+    TrumbowygMediaLibrary.open();
+    return false;
+  }
+  TrumbowygMediaLibrary = window.wp.media({
+    frame: 'select',
+    title: 'Insert Media',
+    multiple: false,
+    library: {
+      order: 'DESC',
+      orderby: 'date',
+      type: 'image',
+    },
+    button: {
+      text: 'Select'
+    }
+  });
+  TrumbowygMediaLibrary.on('select',function(){
+    var sel = TrumbowygMediaLibrary.state().get( 'selection' ).first().toJSON();
+    var $url = jQuery('.trumbowyg-modal form input[name="url"]');
+    $url.attr('value',sel.url);
+    var $alt = jQuery('.trumbowyg-modal form input[name="alt"]');
+    $alt.attr('value',sel.description);
+  });
+  TrumbowygMediaLibrary.open();
+  return false;
+}
+
 (function (navigator, window, document, $) {
     'use strict';
 
@@ -1381,6 +1412,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         insertImage: function () {
             var t = this;
             t.saveRange();
+            var wp_media = (window.wp) ? window.wp.media : false;
 
             var options = {
                 url: {
@@ -1407,6 +1439,17 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                   'left',
                   'right',
                 ],
+              };
+            }
+
+            if (wp_media !== false) {
+              options.mediaLibrary = {
+                type: 'button',
+                label: 'Media Library',
+                value: 'Select WP Media Library',
+                attributes: {
+                  onclick: 'javascript:TrumbowygSelectMedia();',
+                },
               };
             }
 
