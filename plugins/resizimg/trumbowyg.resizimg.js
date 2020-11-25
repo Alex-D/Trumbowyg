@@ -1,4 +1,4 @@
-;(function ($) {
+; (function ($) {
     'use strict';
 
     var defaultOptions = {
@@ -11,7 +11,7 @@
         e.preventDefault();
     }
 
-    var ResizeWithCanvas = function () {
+    var ResizeWithCanvas = function (trumbowyg) {
         // variable to create canvas and save img in resize mode
         this.resizeCanvas = document.createElement('canvas');
         // to allow canvas to get focus
@@ -24,8 +24,13 @@
             obj.reset();
         };
         this.pressBackspaceOrDelete = function (obj) {
-            $(obj.resizeCanvas).replaceWith('');
+            $(obj.resizeCanvas).remove();
             obj.resizeImg = null;
+            if (trumbowyg !== null){
+                trumbowyg.syncCode();
+				// notify changes
+                trumbowyg.$c.trigger('tbwchange');
+			}
         };
 
         // PRIVATE FUNCTION
@@ -109,10 +114,8 @@
                 return;
             }
 
-            this.resizeImg.width = this.resizeCanvas.clientWidth - 10;
-            this.resizeImg.height = this.resizeCanvas.clientHeight - 10;
-            // clear style of image to avoid issue on resize because this attribute have priority over width and height attribute
-            this.resizeImg.removeAttribute('style');
+            // set style of image to avoid issue on resize because this attribute have priority over width and height attribute
+            this.resizeImg.setAttribute('style', 'width: 100%; max-width: ' + (this.resizeCanvas.clientWidth - 10) + 'px; height: auto; max-height: ' + (this.resizeCanvas.clientHeight - 10) + 'px;');
 
             $(this.resizeCanvas).replaceWith($(this.resizeImg));
 
@@ -172,7 +175,16 @@
                         _this.pressBackspaceOrDelete(_this);
                     }
                 })
-                .on('focus', preventDefault);
+                .on('focus', preventDefault)
+                .on('blur', function (e) {
+                    _this.reset();
+                    // save changes
+                    if (trumbowyg !== null){
+                        trumbowyg.syncCode();
+						// notify changes
+                        trumbowyg.$c.trigger('tbwchange');
+					}
+                });
 
             this.resizeCanvas.focus();
 
@@ -191,25 +203,26 @@
         };
     };
 
-    // object to interact with canvas
-    var resizeWithCanvas = new ResizeWithCanvas();
-
-    function destroyResizable(trumbowyg) {
-        // clean html code
-        trumbowyg.$ed.find('canvas.resizable')
-            .resizable('destroy')
-            .off('mousedown', preventDefault)
-            .removeClass('resizable');
-
-        resizeWithCanvas.reset();
-
-        trumbowyg.syncCode();
-    }
-
     $.extend(true, $.trumbowyg, {
         plugins: {
             resizimg: {
                 init: function (trumbowyg) {
+
+                    // object to interact with canvas
+                    var resizeWithCanvas = new ResizeWithCanvas(trumbowyg);
+
+                    function destroyResizable(trumbowyg) {
+                        // clean html code
+                        trumbowyg.$ed.find('canvas.resizable')
+                            .resizable('destroy')
+                            .off('mousedown', preventDefault)
+                            .removeClass('resizable');
+
+                        resizeWithCanvas.reset();
+
+                        trumbowyg.syncCode();
+                    }
+
                     trumbowyg.o.plugins.resizimg = $.extend(true, {},
                         defaultOptions,
                         trumbowyg.o.plugins.resizimg || {},
@@ -269,8 +282,9 @@
 
                             preventDefault(e);
                             resizeWithCanvas.reset();
-
-                            // save changes
+							//sync
+							trumbowyg.syncCode();
+                            // notify changes
                             trumbowyg.$c.trigger('tbwchange');
                         });
 
@@ -286,7 +300,7 @@
 
                     // Destroy
                     trumbowyg.$c.on('tbwblur', function () {
-                        // if I have already focused the canvas avoid destroy
+                        // when canvas is created the tbwblur is called - this code avoid to destroy the canvas that allow the image resizing
                         if (resizeWithCanvas.isFocusedNow()) {
                             resizeWithCanvas.blurNow();
                         } else {
