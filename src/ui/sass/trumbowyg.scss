@@ -132,6 +132,7 @@ $slow-transition-duration: 300ms !default;
     content: attr(placeholder);
     color: #999;
     pointer-events: none;
+    white-space: break-spaces;
 }
 
 .trumbowyg-button-pane {
