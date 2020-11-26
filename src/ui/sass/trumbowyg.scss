@@ -41,7 +41,6 @@ $slow-transition-duration: 300ms !default;
     border: 1px solid #DDD;
     width: 100%;
     min-height: 300px;
-    margin: 17px auto;
 }
 
 .trumbowyg-box .trumbowyg-editor {
@@ -132,6 +131,7 @@ $slow-transition-duration: 300ms !default;
     content: attr(placeholder);
     color: #999;
     pointer-events: none;
+    white-space: break-spaces;
 }
 
 .trumbowyg-button-pane {

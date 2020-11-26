@@ -29,6 +29,11 @@
                 rubyModal: 'Modale ruby',
                 rubyText: 'Texte ruby'
             },
+            hu: {
+                ruby: 'Ruby szöveg hozzáadás',
+                rubyModal: 'Ruby modal',
+                rubyText: 'Ruby szöveg'
+            },
             id: {
                 ruby: 'Sisipkan teks ruby',
                 rubyModal: 'Modal teks ruby',

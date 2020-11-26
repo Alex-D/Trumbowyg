@@ -17,10 +17,10 @@
 
 Trumbowyg is an MIT-licensed open source project and completely free to use.
 
-However, the amount of effort needed to maintain and develop new features for 
-the project is not sustainable without proper financial backing. 
+However, the amount of effort needed to maintain and develop new features for
+the project is not sustainable without proper financial backing.
 You can support it's ongoing development by being a backer or a sponsor:
- 
+
 - [Become a backer or sponsor on Patreon](https://www.patreon.com/alexandredemode)
 - [One-time donation via PayPal](https://www.paypal.me/demodealexandre/20eur)
 
@@ -31,10 +31,6 @@ You can support it's ongoing development by being a backer or a sponsor:
 <p align="center">
     <a href="https://avot.nl/?ref=trumbowyg">
         <img src="https://cdn.rawgit.com/Alex-D/Trumbowyg/develop/sponsors/avot.svg" alt="avot®" width="200px"/>
-    </a>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="https://bookingninja.io/?ref=trumbowyg">
-        <img src="https://rawcdn.githack.com/Alex-D/Trumbowyg/develop/sponsors/bookingninja.png" alt="BookingNinja" width="200px"/>
     </a>
 </p>
 
@@ -80,11 +76,10 @@ Thanks to `node` and `gulp`, you can improve core script, style or icons easily.
 First, fork and clone the repository
 
 ```bash
-cd Trumbowyg # to go into the project's root directory
-npm install # to install development dependencies
-npm install -g bower gulp # to install bower and gulp command if you don't have them already
-bower install # to install Trumbowyg dependencies (ie: jQuery)
-gulp build # to build the project
+cd Trumbowyg # go into the project's root directory
+npm install # install development dependencies
+npm run dev # watch mode
+npm run build # to build the project
 ```
 
 `gulp` command launch default Gulp task watcher and rebuild on the fly.

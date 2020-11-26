@@ -5,9 +5,9 @@
     // My plugin default options
     var defaultOptions = {};
 
-    function highlightIt(text, language) {
+    function highlightIt(text, language, lineHighlight) {
         return [
-            '<pre class="language-' + language + '">',
+            '<pre class="language-' + language + '" ' + (lineHighlight ? 'data-line="' + lineHighlight + '"' : '') + '>',
             '<code class="language-' + language + '">' + Prism.highlight(text, Prism.languages[language]) + '</code>',
             '</pre>',
         ].join('');
@@ -36,14 +36,20 @@
                     '<div class="' + trumbowyg.o.prefix + 'highlight-form-group">',
                     '   <textarea class="' + trumbowyg.o.prefix + 'highlight-form-control code"></textarea>',
                     '</div>',
+                    '<div class="' + trumbowyg.o.prefix + 'highlight-form-group">',
+                    '   <input title="'+ trumbowyg.lang.prismHighlightPluginAlert +
+                            '" placeholder="' + trumbowyg.lang.highlightLine +
+                            '" class="' + trumbowyg.o.prefix + 'highlight-form-control trumbowyg-line-highlight"/>',
+                    '</div>'
                 ].join('\n')),
                 $language = $modal.find('.language'),
-                $code = $modal.find('.code');
+                $code = $modal.find('.code'),
+                $lineHighlight = $modal.find('.trumbowyg-line-highlight');
 
                 // Listen clicks on modal box buttons
                 $modal.on('tbwconfirm', function () {
                     trumbowyg.restoreRange();
-                    trumbowyg.execCmd('insertHTML', highlightIt($code.val(), $language.val()));
+                    trumbowyg.execCmd('insertHTML', highlightIt($code.val(), $language.val(), $lineHighlight.val()));
                     trumbowyg.execCmd('insertHTML', '<p><br></p>');
 
                     trumbowyg.closeModal();
@@ -61,13 +67,23 @@
         langs: {
             // jshint camelcase:false
             en: {
-                highlight: 'Code syntax highlight'
+                highlight: 'Code syntax highlight',
+                highlightLine: 'Highlight lines, e.g.: 1,3-5',
+                prismHighlightPluginAlert: 'You must have Prism Line Highlight plugin installed'
             },
-            pt_br: {
-                highlight: 'Realçar sintaxe de código'
+            es: {
+                highlight: 'Resaltado de sintaxis de código',
+                highlightLine: 'Resaltar lineas, ej: 1,3-5',
+                prismHighlightPluginAlert: 'Debes de tener el plugin Prism Line Highlight instalado'
+            },
+            hu: {
+                highlight: 'Kód kiemelés'
             },
             ko: {
                 highlight: '코드 문법 하이라이트'
+            },
+            pt_br: {
+                highlight: 'Realçar sintaxe de código'
             },
             // jshint camelcase:true
         },
