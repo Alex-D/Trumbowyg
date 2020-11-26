@@ -44,7 +44,7 @@
     "jquery": ">=1.8"
   },
   "scripts": {
-    "start": "gulp",
+    "dev": "gulp",
     "build": "gulp build",
     "clean": "gulp clean",
     "test": "gulp test"

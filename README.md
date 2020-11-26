@@ -76,11 +76,10 @@ Thanks to `node` and `gulp`, you can improve core script, style or icons easily.
 First, fork and clone the repository
 
 ```bash
-cd Trumbowyg # to go into the project's root directory
-npm install # to install development dependencies
-npm install -g bower gulp # to install bower and gulp command if you don't have them already
-bower install # to install Trumbowyg dependencies (ie: jQuery)
-gulp build # to build the project
+cd Trumbowyg # go into the project's root directory
+npm install # install development dependencies
+npm run dev # watch mode
+npm run build # to build the project
 ```
 
 `gulp` command launch default Gulp task watcher and rebuild on the fly.
