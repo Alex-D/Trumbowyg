@@ -28,9 +28,9 @@
             obj.resizeImg = null;
             if (trumbowyg !== null){
                 trumbowyg.syncCode();
-				// notify changes
+                // notify changes
                 trumbowyg.$c.trigger('tbwchange');
-			}
+            }
         };
 
         // PRIVATE FUNCTION
@@ -181,9 +181,9 @@
                     // save changes
                     if (trumbowyg !== null){
                         trumbowyg.syncCode();
-						// notify changes
+                        // notify changes
                         trumbowyg.$c.trigger('tbwchange');
-					}
+                    }
                 });
 
             this.resizeCanvas.focus();
@@ -282,8 +282,8 @@
 
                             preventDefault(e);
                             resizeWithCanvas.reset();
-							//sync
-							trumbowyg.syncCode();
+                            //sync
+                            trumbowyg.syncCode();
                             // notify changes
                             trumbowyg.$c.trigger('tbwchange');
                         });
