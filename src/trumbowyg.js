@@ -685,7 +685,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     }
                 })
                 .on('keyup focus', function () {
-                    if (!t.$ta.val().match(/<.*>/)) {
+                  if (!t.$ta.val().match(/<.*>/) && !t.$ed.html().match(/<.*>/)) {
                         setTimeout(function () {
                             var block = t.isIE ? '<p>' : 'p';
                             t.doc.execCommand('formatBlock', false, block);
