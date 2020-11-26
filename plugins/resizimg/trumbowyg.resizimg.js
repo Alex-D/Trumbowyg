@@ -45,15 +45,6 @@
             offsetY = BB.top;
         };
 
-        var drawRect = function (shapeData, ctx) {
-            // Inner
-            ctx.beginPath();
-            ctx.fillStyle = 'rgb(255, 255, 255)';
-            ctx.rect(shapeData.points.x, shapeData.points.y, shapeData.points.width, shapeData.points.height);
-            ctx.fill();
-            ctx.stroke();
-        };
-
         var updateCanvas = function (canvas, ctx, img, canvasWidth, canvasHeight) {
             ctx.translate(0.5, 0.5);
             ctx.lineWidth = 1;
@@ -176,7 +167,7 @@
                     }
                 })
                 .on('focus', preventDefault)
-                .on('blur', function (e) {
+                .on('blur', function () {
                     _this.reset();
                     // save changes
                     if (trumbowyg !== null){
@@ -206,12 +197,14 @@
     $.extend(true, $.trumbowyg, {
         plugins: {
             resizimg: {
+                destroyResizable: function () {},
                 init: function (trumbowyg) {
+                    var destroyResizable = this.destroyResizable;
 
                     // object to interact with canvas
                     var resizeWithCanvas = new ResizeWithCanvas(trumbowyg);
 
-                    function destroyResizable(trumbowyg) {
+                    this.destroyResizable = function () {
                         // clean html code
                         trumbowyg.$ed.find('canvas.resizable')
                             .resizable('destroy')
@@ -221,7 +214,7 @@
                         resizeWithCanvas.reset();
 
                         trumbowyg.syncCode();
-                    }
+                    };
 
                     trumbowyg.o.plugins.resizimg = $.extend(true, {},
                         defaultOptions,
@@ -300,16 +293,17 @@
 
                     // Destroy
                     trumbowyg.$c.on('tbwblur', function () {
-                        // when canvas is created the tbwblur is called - this code avoid to destroy the canvas that allow the image resizing
+                        // when canvas is created the tbwblur is called
+                        // this code avoid to destroy the canvas that allow the image resizing
                         if (resizeWithCanvas.isFocusedNow()) {
                             resizeWithCanvas.blurNow();
                         } else {
-                            destroyResizable(trumbowyg);
+                            destroyResizable();
                         }
                     });
                 },
-                destroy: function (trumbowyg) {
-                    destroyResizable(trumbowyg);
+                destroy: function () {
+                    this.destroyResizable();
                 }
             }
         }

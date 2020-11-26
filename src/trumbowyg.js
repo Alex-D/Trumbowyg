@@ -264,7 +264,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }
         }
 
-        var baseHref = !!t.doc.querySelector('base') ? window.location.href.split(/[?#]/)[0] : ''
+        var baseHref = !!t.doc.querySelector('base') ? window.location.href.split(/[?#]/)[0] : '';
         t.svgPath = $trumbowyg.svgAbsoluteUseHref ? svgPathOption : baseHref;
 
 
@@ -1091,7 +1091,11 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 if (addFlag === true) {
                     $(this).attr('data-tbw-flag', true);
                 } else {
-                    $(this).attr('data-tbw-flag') ? $(this).removeAttr('data-tbw-flag') : $(this).contents().unwrap();
+                    if ($(this).attr('data-tbw-flag')) {
+                        $(this).removeAttr('data-tbw-flag');
+                    } else {
+                        $(this).contents().unwrap();
+                    }
                 }
             });
         },
@@ -1500,7 +1504,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         }
                         var arr = t.o.tagClasses[param];
                         if (arr) {
-                            for (var i = 0; i < arr.length; i++) {
+                            for (var i = 0; i < arr.length; i+=1) {
                                 $(listId).addClass(arr[i]);
                             }
                         }

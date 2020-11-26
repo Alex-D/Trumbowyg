@@ -37,8 +37,8 @@
                     '   <textarea class="' + trumbowyg.o.prefix + 'highlight-form-control code"></textarea>',
                     '</div>',
                     '<div class="' + trumbowyg.o.prefix + 'highlight-form-group">',
-                    '   <input title="'+ trumbowyg.lang.prism_highlight_plugin_alert +
-                            '" placeholder="' + trumbowyg.lang.highlight_line +
+                    '   <input title="'+ trumbowyg.lang.prismHighlightPluginAlert +
+                            '" placeholder="' + trumbowyg.lang.highlightLine +
                             '" class="' + trumbowyg.o.prefix + 'highlight-form-control trumbowyg-line-highlight"/>',
                     '</div>'
                 ].join('\n')),
@@ -68,13 +68,13 @@
             // jshint camelcase:false
             en: {
                 highlight: 'Code syntax highlight',
-                highlight_line: 'Highlight lines, e.g.: 1,3-5',
-                prism_highlight_plugin_alert: 'You must have Prism Line Highlight plugin installed'
+                highlightLine: 'Highlight lines, e.g.: 1,3-5',
+                prismHighlightPluginAlert: 'You must have Prism Line Highlight plugin installed'
             },
             es: {
                 highlight: 'Resaltado de sintaxis de código',
-                highlight_line: 'Resaltar lineas, ej: 1,3-5',
-                prism_highlight_plugin_alert: 'Debes de tener el plugin Prism Line Highlight instalado'
+                highlightLine: 'Resaltar lineas, ej: 1,3-5',
+                prismHighlightPluginAlert: 'Debes de tener el plugin Prism Line Highlight instalado'
             },
             hu: {
                 highlight: 'Kód kiemelés'
