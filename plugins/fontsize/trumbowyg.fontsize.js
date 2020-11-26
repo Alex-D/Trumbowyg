@@ -234,6 +234,7 @@
 
         trumbowyg.restoreRange();
         trumbowyg.syncCode();
+        trumbowyg.$c.trigger('tbwchange');
     }
 
     function buildDropdown(trumbowyg) {
