@@ -119,7 +119,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         plugins: {},
         urlProtocol: false,
         minimalLinks: false,
-        defaultLinkTarget: undefined
+        defaultLinkTarget: undefined,
+        svgSideLoad: true
     },
     writable: false,
     enumerable: true,
@@ -221,11 +222,19 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
         t.hideButtonTexts = $trumbowyg.hideButtonTexts != null ? $trumbowyg.hideButtonTexts : options.hideButtonTexts;
 
+        // Defaults Options
+        t.o = $.extend(true, {}, $trumbowyg.defaultOptions, options);
+
         // SVG path
         var svgPathOption = $trumbowyg.svgPath != null ? $trumbowyg.svgPath : options.svgPath;
         t.hasSvg = svgPathOption !== false;
-        t.svgPath = !!t.doc.querySelector('base') ? window.location.href.split('#')[0] : '';
-        if ($('#' + trumbowygIconsId, t.doc).length === 0 && svgPathOption !== false) {
+        if (!options.svgSideLoad && svgPathOption == null) {
+          console.warn('You must define svgPath: https://goo.gl/CfTY9U'); // jshint ignore:line
+        }
+        var baseHref = !!t.doc.querySelector('base') ? window.location.href.split('#')[0] : ''
+        t.svgPath = options.svgSideLoad ? baseHref : svgPathOption;
+        
+        if (options.svgSideLoad && $('#' + trumbowygIconsId, t.doc).length === 0 && svgPathOption !== false) {
             if (svgPathOption == null) {
                 // Hack to get svgPathOption based on trumbowyg.js path
                 var scriptElements = document.getElementsByTagName('script');
@@ -414,8 +423,6 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }
         };
 
-        // Defaults Options
-        t.o = $.extend(true, {}, $trumbowyg.defaultOptions, options);
         if (!t.o.hasOwnProperty('imgDblClickHandler')) {
             t.o.imgDblClickHandler = t.getDefaultImgDblClickHandler();
         }
