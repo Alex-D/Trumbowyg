@@ -51,6 +51,7 @@
                         <li><a href="#plugin-giphy">Giphy</a></li>
                         <li><a href="#plugin-highlight">Highlight</a></li>
                         <li><a href="#plugin-history">History</a></li>
+                        <li><a href="#plugin-indent">Indent</a></li>
                         <li><a href="#plugin-insertaudio">Insert audio</a></li>
                         <li><a href="#plugin-lineheight">Line height</a></li>
                         <li><a href="#plugin-mathml">MathML</a></li>
@@ -620,6 +621,37 @@ $('#my-editor').trumbowyg({
 $('#my-editor').trumbowyg({
     btns: [
         ['historyUndo', 'historyRedo']
+    ]
+});
+            </code></pre>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-indent">Indent</h3>
+
+            <p>
+                This plugin allows you to indent or outdent your text.
+            </p>
+
+            <p>
+                <a href="../../demos/#plugins-indent" class="button button-demo">Try indent live demo!</a>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/indent/trumbowyg.indent.js" class="button button-demo">
+                    View indent plugin code on GitHub
+                </a>
+            </p>
+
+            <h4>How to use it?</h4>
+            <pre><code class="html">
+&lt;-- Import Trumbowyg indent at the end of &lt;body>... -->
+&lt;script src="trumbowyg/dist/plugins/indent/trumbowyg.indent.min.js">&lt;/script>
+            </code></pre>
+            <p>
+                Then you can use the news buttons definition <code>indent</code> or <code>outdent</code>
+            </p>
+            <pre><code class="javascript">
+$('#my-editor').trumbowyg({
+    btns: [
+        ['indent', 'outdent']
     ]
 });
             </code></pre>
