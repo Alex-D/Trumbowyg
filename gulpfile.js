@@ -76,7 +76,7 @@ const scripts = gulp.series(testScripts, function scripts() {
         .pipe($.size({title: 'trumbowyg.min.js'}));
 });
 
-const pluginsScripts = gulp.series(testScripts, function pluginsScripts() {
+const pluginsScripts = gulp.series(testPluginsScripts, function pluginsScripts() {
     return gulp.src(paths.pluginsScripts)
         .pipe(gulp.dest('dist/plugins/'))
         .pipe($.rename({suffix: '.min'}))
