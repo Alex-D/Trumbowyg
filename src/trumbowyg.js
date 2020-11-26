@@ -421,6 +421,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }
         };
 
+        // Default Options
+        t.o = $.extend(true, {}, $trumbowyg.defaultOptions, options);
         if (!t.o.hasOwnProperty('imgDblClickHandler')) {
             t.o.imgDblClickHandler = t.getDefaultImgDblClickHandler();
         }
