@@ -61,6 +61,7 @@ jQuery.trumbowyg = {
 
     // SVG Path globally
     svgPath: null,
+    svgAbsoluteUseHref: false,
 
     hideButtonTexts: null
 };
@@ -77,13 +78,13 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         imageWidthModalEdit: false,
 
         prefix: 'trumbowyg-',
-// classes for inputs
+        // classes for inputs
         tagClasses:{
-            'h1': null,
-            'h2': null,
-            'h3': null,
-            'h4': null,
-            'p': null,
+            h1: null,
+            h2: null,
+            h3: null,
+            h4: null,
+            p: null,
         },
         semantic: true,
         semanticKeepAttributes: false,
@@ -119,8 +120,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         plugins: {},
         urlProtocol: false,
         minimalLinks: false,
-        defaultLinkTarget: undefined,
-        svgSideLoad: true
+        defaultLinkTarget: undefined
     },
     writable: false,
     enumerable: true,
@@ -222,19 +222,11 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
         t.hideButtonTexts = $trumbowyg.hideButtonTexts != null ? $trumbowyg.hideButtonTexts : options.hideButtonTexts;
 
-        // Defaults Options
-        t.o = $.extend(true, {}, $trumbowyg.defaultOptions, options);
-
         // SVG path
         var svgPathOption = $trumbowyg.svgPath != null ? $trumbowyg.svgPath : options.svgPath;
         t.hasSvg = svgPathOption !== false;
-        if (!options.svgSideLoad && svgPathOption == null) {
-          console.warn('You must define svgPath: https://goo.gl/CfTY9U'); // jshint ignore:line
-        }
-        var baseHref = !!t.doc.querySelector('base') ? window.location.href.split('#')[0] : ''
-        t.svgPath = options.svgSideLoad ? baseHref : svgPathOption;
-        
-        if (options.svgSideLoad && $('#' + trumbowygIconsId, t.doc).length === 0 && svgPathOption !== false) {
+
+        if (svgPathOption !== false && ($trumbowyg.svgAbsoluteUseHref || $('#' + trumbowygIconsId, t.doc).length === 0)) {
             if (svgPathOption == null) {
                 // Hack to get svgPathOption based on trumbowyg.js path
                 var scriptElements = document.getElementsByTagName('script');
@@ -245,29 +237,35 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         svgPathOption = source.substring(0, source.indexOf(matches[0])) + 'ui/icons.svg';
                     }
                 }
-                if (svgPathOption == null) {
-                    console.warn('You must define svgPath: https://goo.gl/CfTY9U'); // jshint ignore:line
-                }
             }
 
-            var div = t.doc.createElement('div');
-            div.id = trumbowygIconsId;
-            t.doc.body.insertBefore(div, t.doc.body.childNodes[0]);
-            $.ajax({
-                async: true,
-                type: 'GET',
-                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                dataType: 'xml',
-                crossDomain: true,
-                url: svgPathOption,
-                data: null,
-                beforeSend: null,
-                complete: null,
-                success: function (data) {
-                    div.innerHTML = new XMLSerializer().serializeToString(data.documentElement);
-                }
-            });
+            // Do not merge with previous if block: svgPathOption can be redefined in it.
+            // Here we are checking that we find a match
+            if (svgPathOption == null) {
+                console.warn('You must define svgPath: https://goo.gl/CfTY9U'); // jshint ignore:line
+            } else if (!$trumbowyg.svgAbsoluteUseHref) {
+                var div = t.doc.createElement('div');
+                div.id = trumbowygIconsId;
+                t.doc.body.insertBefore(div, t.doc.body.childNodes[0]);
+                $.ajax({
+                    async: true,
+                    type: 'GET',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    dataType: 'xml',
+                    crossDomain: true,
+                    url: svgPathOption,
+                    data: null,
+                    beforeSend: null,
+                    complete: null,
+                    success: function (data) {
+                        div.innerHTML = new XMLSerializer().serializeToString(data.documentElement);
+                    }
+                });
+            }
         }
+
+        var baseHref = !!t.doc.querySelector('base') ? window.location.href.split(/[?#]/)[0] : ''
+        t.svgPath = $trumbowyg.svgAbsoluteUseHref ? svgPathOption : baseHref;
 
 
         /**
