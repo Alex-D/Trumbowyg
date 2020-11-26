@@ -135,6 +135,7 @@
                                 // save new node as focused node
                                 trumbowyg.saveRange();
                                 trumbowyg.syncCode();
+                                trumbowyg.$c.trigger('tbwchange');
                             } catch (c) {
                             }
                         }, 0);
