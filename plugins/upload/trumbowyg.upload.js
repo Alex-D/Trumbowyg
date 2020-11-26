@@ -21,7 +21,7 @@
         headers: {},                    // Additional headers
         xhrFields: {},                  // Additional fields
         urlPropertyName: 'file',        // How to get url from the json response (for instance 'url' for {url: ....})
-        statusPropertyName: 'success',  // How to get status from the json response 
+        statusPropertyName: 'success',  // How to get status from the json response
         success: undefined,             // Success callback: function (data, trumbowyg, $modal, values) {}
         error: undefined,               // Error callback: function () {}
         imageWidthModalEdit: false      // Add ability to edit image width
@@ -152,6 +152,9 @@
                                 };
                             }
 
+                            // Prevent multiple submissions while uploading
+                            var isUploading = false;
+
                             var $modal = trumbowyg.openModalInsert(
                                 // Title
                                 trumbowyg.lang.upload,
@@ -161,6 +164,11 @@
 
                                 // Callback
                                 function (values) {
+                                    if (isUploading) {
+                                        return;
+                                    }
+                                    isUploading = true;
+
                                     var data = new FormData();
                                     data.append(trumbowyg.o.plugins.upload.fileFieldName, file);
 
@@ -228,6 +236,8 @@
                                                     trumbowyg.$c.trigger('tbwuploaderror', [trumbowyg, data]);
                                                 }
                                             }
+
+                                            isUploading = false;
                                         },
 
                                         error: trumbowyg.o.plugins.upload.error || function () {
@@ -236,6 +246,8 @@
                                                 trumbowyg.lang.uploadError
                                             );
                                             trumbowyg.$c.trigger('tbwuploaderror', [trumbowyg]);
+
+                                            isUploading = false;
                                         }
                                     });
                                 }
