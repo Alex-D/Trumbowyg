@@ -20,7 +20,7 @@
   "license": "MIT",
   "devDependencies": {
     "del": "2.0.2",
-    "gulp": "3.9.1",
+    "gulp": "4.0.2",
     "gulp-autoprefixer": "2.2.0",
     "gulp-concat": "2.6.0",
     "gulp-header": "1.7.1",
