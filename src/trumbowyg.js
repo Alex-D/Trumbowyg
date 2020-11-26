@@ -229,14 +229,14 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         if (svgPathOption !== false && ($trumbowyg.svgAbsoluteUseHref || $('#' + trumbowygIconsId, t.doc).length === 0)) {
             if (svgPathOption == null) {
                 // Hack to get svgPathOption based on trumbowyg.js path
-                var scriptElements = document.getElementsByTagName('script');
-                for (var i = 0; i < scriptElements.length; i += 1) {
-                    var source = scriptElements[i].src;
+                var $scriptElements = $('script[src]');
+                $scriptElements.each(function (i, scriptElement) {
+                    var source = scriptElement.src;
                     var matches = source.match('trumbowyg(\.min)?\.js');
                     if (matches != null) {
                         svgPathOption = source.substring(0, source.indexOf(matches[0])) + 'ui/icons.svg';
                     }
-                }
+                })
             }
 
             // Do not merge with previous if block: svgPathOption can be redefined in it.
