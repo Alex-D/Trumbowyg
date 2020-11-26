@@ -233,6 +233,7 @@
         $(trumbowyg.range.startContainer.parentElement).find('span[style=""]').contents().unwrap();
 
         trumbowyg.restoreRange();
+        trumbowyg.syncCode();
     }
 
     function buildDropdown(trumbowyg) {
