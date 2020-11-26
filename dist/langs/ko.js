@@ -5,6 +5,8 @@
  * ===========================================================
  * Author : SeungWoo Chae (SDuck4)
  *          Github : https://github.com/SDuck4
+ *          Victor Chanil Park (opdev1004)
+ *          Github : https://github.com/opdev1004
  */
 
 jQuery.trumbowyg.langs.ko = {
@@ -34,7 +36,8 @@ jQuery.trumbowyg.langs.ko = {
     unorderedList: '기호 목록',
     orderedList: '번호 목록',
 
-    insertImage: '그림 넣기',
+    insertImage: '이미지 넣기',
+    insertVideo: '비디오 넣기',
     link: '링크',
     createLink: '링크 넣기',
     unlink: '링크 지우기',

@@ -5,6 +5,9 @@
  * ===========================================================
  * Author : Emrah Bilbay (munzur)
  *          Github : https://github.com/munzur
+ *
+ *          Özgür Görgülü (ozgurg)
+ *          Github : https://github.com/ozgurg
  */
 
 jQuery.trumbowyg.langs.tr = {
@@ -51,5 +54,8 @@ jQuery.trumbowyg.langs.tr = {
     required: 'Gerekli',
     description: 'Açıklama',
     title: 'Başlık',
-    text: 'Metin'
+    text: 'Metin',
+    
+    undo: 'Geri al',
+    redo: 'İleri al'
 };
