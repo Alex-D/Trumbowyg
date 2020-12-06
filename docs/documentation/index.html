@@ -394,6 +394,25 @@ $('.editor').trumbowyg({
 });
             </code></pre>
 
+            <h4>Use absolute path to SVG sprite</h4>
+            <p class="added-feature">Added in 2.22.0</p>
+            <p class="note">
+                If you want to be IE-complient you should use this option.
+            </p>
+            <p>
+                This will load icons directly from the sprite file.
+                Instead of loading the sprite inline into the page, you can directly set this global option to true.
+            </p>
+            <pre><code class="javascript">
+$.trumbowyg.svgAbsoluteUsePath = true;
+            </code></pre>
+            <p>
+                This option is useful to avoid issues with <code>baseURL</code>.
+            </p>
+            <p class="note">
+                This global way needs to be done before initialize any Trumbowyg instance.
+            </p>
+
             <h4>Use SVG icons without XHR or via an another protocol than HTTP(S)</h4>
             <p class="note">
                 If you want to be IE9-complient you should use this option.

@@ -1,3 +1,5 @@
+@import "variables";
+
 .plugins-packages {
     .wrapper {
         display: flex;
@@ -9,7 +11,7 @@
     .col-packages {
         flex: 0.93;
     }
-    
+
     .section-title {
         text-align: left;
         transform: translateX(-5px);

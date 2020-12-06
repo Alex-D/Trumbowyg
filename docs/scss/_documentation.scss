@@ -1,3 +1,5 @@
+@import "variables";
+
 $added-color: #5ecb0e;
 $deprecated-color: #ff9a4d;
 
@@ -372,6 +374,11 @@ $beer-height: 70px;
         transform: translateX(-50%);
     }
 
+    h3,
+    h4 {
+        display: inline-block;
+        position: relative;
+    }
     h3 {
         position: relative;
         padding-top: 50px;
