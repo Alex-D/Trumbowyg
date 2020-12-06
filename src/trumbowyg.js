@@ -79,14 +79,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         hideButtonTexts: null,
 
         prefix: 'trumbowyg-',
-        // classes for inputs
-        tagClasses:{
-            h1: null,
-            h2: null,
-            h3: null,
-            h4: null,
-            p: null,
-        },
+        tagClasses: {},
         semantic: true,
         semanticKeepAttributes: false,
         resetCss: false,
@@ -1508,11 +1501,9 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         if(!$(window.getSelection().focusNode.parentNode).hasClass('trumbowyg-editor')){
                             listId = window.getSelection().focusNode.parentNode;
                         }
-                        var arr = t.o.tagClasses[param];
-                        if (arr) {
-                            for (var i = 0; i < arr.length; i+=1) {
-                                $(listId).addClass(arr[i]);
-                            }
+                        var classes = t.o.tagClasses[param];
+                        if (classes) {
+                            $(listId).addClass(classes);
                         }
                     } catch (e) {
 
