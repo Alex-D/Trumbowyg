@@ -236,7 +236,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     if (matches != null) {
                         svgPathOption = source.substring(0, source.indexOf(matches[0])) + 'ui/icons.svg';
                     }
-                })
+                });
             }
 
             // Do not merge with previous if block: svgPathOption can be redefined in it.
