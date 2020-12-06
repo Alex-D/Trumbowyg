@@ -76,6 +76,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         autogrow: false,
         autogrowOnEnter: false,
         imageWidthModalEdit: false,
+        hideButtonTexts: null,
 
         prefix: 'trumbowyg-',
         // classes for inputs
