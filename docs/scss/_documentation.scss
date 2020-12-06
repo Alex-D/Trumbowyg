@@ -427,6 +427,11 @@ $beer-height: 70px;
             opacity: 1;
         }
     }
+
+    .trumbowyg-box,
+    .trumbowyg-editor {
+        margin: 24px auto;
+    }
 }
 
 .sample-data {
