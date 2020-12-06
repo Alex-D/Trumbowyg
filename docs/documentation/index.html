@@ -76,6 +76,7 @@
                         <li><a href="#url-protocol">URL protocol</a></li>
                         <li><a href="#minimal-links">Minimal links</a></li>
                         <li><a href="#default-link-target">Default link target</a></li>
+                        <li><a href="#tag-classes">Tag classes</a></li>
                     </ul>
                 </li>
                 <li>
@@ -393,6 +394,28 @@ $('.editor').trumbowyg({
     svgPath: false // or a path like '/assets/my-custom-path/icons.svg'
 });
             </code></pre>
+
+            <h4>Use absolute path to SVG sprite</h4>
+            <p class="added-feature">Added in 2.22.0</p>
+            <p class="note">
+                If you want to be IE-complient you should use this option.
+            </p>
+            <p>
+                This will load icons directly from the sprite file.
+                Instead of loading the sprite inline into the page, you can directly set this global option to true.
+            </p>
+            <pre><code class="javascript">
+$.trumbowyg.svgAbsoluteUsePath = true;
+            </code></pre>
+            <p>
+                This option is useful to avoid issues with <code>baseURL</code>.
+            </p>
+            <p class="note">
+                This global way needs to be done before initialize any Trumbowyg instance.
+            </p>
+            <p class="note">
+                Default value for <code>svgAbsoluteUsePath</code> is <code>false</code>.
+            </p>
 
             <h4>Use SVG icons without XHR or via an another protocol than HTTP(S)</h4>
             <p class="note">
@@ -799,6 +822,26 @@ $('.trumbowyg').trumbowyg({
             <p class="note">
                 Default link target does nothing by default (set to
                 <code>undefined</code>).
+            </p>
+        </div>
+
+
+        <div class="feature" data-added="2.23.0">
+            <h3 id="tag-classes">Tag classes</h3>
+            <p class="added-feature">Added in 2.23.0</p>
+            <p>
+                Add classes to any tag.
+            </p>
+            <pre><code class="javascript">
+$('.trumbowyg').trumbowyg({
+    tagClasses: {
+        h1: 'h1', // Bootstrap example
+        blockquote: 'bg-grey-100 rounded-xl', // Tailwind CSS example
+    }
+});
+            </code></pre>
+            <p class="note">
+                No classes are applied by default.
             </p>
         </div>
     </section>

@@ -1,3 +1,5 @@
+@import "variables";
+
 .header-landing {
     position: relative;
     background: $primary-color linear-gradient(to bottom left, $primary-color, $primary-color-light);
