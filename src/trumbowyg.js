@@ -118,9 +118,12 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         // imgDblClickHandler: default is defined in constructor
 
         plugins: {},
+
         urlProtocol: false,
         minimalLinks: false,
-        defaultLinkTarget: undefined
+        defaultLinkTarget: undefined,
+
+        svgPath: null
     },
     writable: false,
     enumerable: true,
