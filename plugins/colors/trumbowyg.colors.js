@@ -98,7 +98,7 @@
         } else if (rgb === 'rgba(0, 0, 0, 0)') {
             return 'transparent';
         } else {
-            rgb = rgb.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+))?\)$/);
+            rgb = rgb.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d?(.\d+)))?\)$/);
             return hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
         }
     }
