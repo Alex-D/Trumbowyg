@@ -144,9 +144,12 @@
             tr: {
                 table: 'Tablo ekle',
                 tableAddRow: 'Satır ekle',
-                tableAddRowAbove: 'Satır ekle',
-                tableAddColumnLeft: 'Kolon ekle',
-                tableAddColumn: 'Kolon ekle',
+                tableAddRowAbove: 'Yukarıya satır ekle',
+                tableAddColumnLeft: 'Sola sütun ekle',
+                tableAddColumn: 'Sağa sütun ekle',
+                tableDeleteRow: 'Satırı sil',
+                tableDeleteColumn: 'Sütunu sil',
+                tableDestroy: 'Tabloyu sil',
                 error: 'Hata'
             },
             zh_tw: {
