@@ -72,7 +72,9 @@
             },
             tr: {
                 foreColor: 'Yazı rengi',
-                backColor: 'Arkaplan rengi'
+                backColor: 'Arka plan rengi',
+                foreColorRemove: 'Yazı rengini kaldır',
+                backColorRemove: 'Arka plan rengini kaldır'
             },
             zh_cn: {
                 foreColor: '文字颜色',
