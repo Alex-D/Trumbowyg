@@ -13,6 +13,9 @@
       hu: {
         giphy: 'GIF beszúrás',
       },
+      tr: {
+        giphy: 'GIF ekle',
+      },
       // jshint camelcase:true
     }
   });
