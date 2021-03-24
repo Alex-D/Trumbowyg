@@ -155,14 +155,19 @@
                 }
             },
             tr: {
-                fontsize: 'Yazı Boyutu',
+                fontsize: 'Yazı boyutu',
                 fontsizes: {
-                    'x-small': 'Çok Küçük',
+                    'x-small': 'Çok küçük',
                     'small': 'Küçük',
                     'medium': 'Normal',
                     'large': 'Büyük',
-                    'x-large': 'Çok Büyük',
-                    'custom': 'Görenek'
+                    'x-large': 'Çok büyük',
+                    'custom': 'Özel'
+                },
+                fontCustomSize: {
+                    title: 'Özel Yazı Boyutu',
+                    label: 'Yazı Boyutu',
+                    value: '48px'
                 }
             },
             zh_tw: {
