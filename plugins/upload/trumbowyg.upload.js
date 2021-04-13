@@ -68,6 +68,11 @@
                 file: 'Datei',
                 uploadError: 'Fehler'
             },
+            et: {
+                upload: 'Lae üles',
+                file: 'Fail',
+                uploadError: 'Viga'
+            },
             fr: {
                 upload: 'Envoi',
                 file: 'Fichier',

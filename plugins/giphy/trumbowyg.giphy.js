@@ -7,6 +7,9 @@
       en: {
         giphy: 'Insert GIF',
       },
+      et: {
+        giphy: 'Sisesta GIF',
+      },
       fr: {
         giphy: 'Insérer un GIF',
       },

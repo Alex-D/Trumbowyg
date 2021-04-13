@@ -32,6 +32,12 @@
                 foreColor: 'Textfarbe',
                 backColor: 'Hintergrundfarbe'
             },
+            et: {
+                foreColor: 'Teksti värv',
+                backColor: 'Taustavärv',
+                foreColorRemove: 'Eemalda teksti värv',
+                backColorRemove: 'Eemalda taustavärv'
+            },
             fr: {
                 foreColor: 'Couleur du texte',
                 backColor: 'Couleur de fond',
