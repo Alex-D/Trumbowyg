@@ -63,6 +63,22 @@
                     value: '48px'
                 }
             },
+            et: {
+                fontsize: 'Teksti suurus',
+                fontsizes: {
+                    'x-small': 'Väga väike',
+                    'small': 'Väike',
+                    'medium': 'Tavaline',
+                    'large': 'Suur',
+                    'x-large': 'Väga suur',
+                    'custom': 'Määra ise'
+                },
+                fontCustomSize: {
+                    title: 'Kohandatud teksti suurus',
+                    label: 'Teksti suurus',
+                    value: '48px'
+                }
+            },
             fr: {
                 fontsize: 'Taille de la police',
                 fontsizes: {

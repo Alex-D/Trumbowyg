@@ -59,6 +59,17 @@
                 tableDestroy: 'Tabelle löschen',
                 error: 'Error'
             },
+            et: {
+                table: 'Sisesta tabel',
+                tableAddRow: 'Lisa rida',
+                tableAddRowAbove: 'Lisa rida üles',
+                tableAddColumnLeft: 'Lisa tulp vasakule',
+                tableAddColumn: 'Lisa tulp paremale',
+                tableDeleteRow: 'Kustuta rida',
+                tableDeleteColumn: 'Kustuta tulp',
+                tableDestroy: 'Kustuta tabel',
+                error: 'Viga'
+            },
             fr: {
                 table: 'Insérer un tableau',
                 tableAddRow: 'Ajouter des lignes',

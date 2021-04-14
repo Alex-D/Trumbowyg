@@ -13,6 +13,9 @@
             de: {
                 fontFamily: 'Schriftart'
             },
+            et: {
+                fontFamily: 'Font'
+            },
             fr: {
                 fontFamily: 'Police'
             },

@@ -76,6 +76,11 @@
                 highlightLine: 'Resaltar lineas, ej: 1,3-5',
                 prismHighlightPluginAlert: 'Debes de tener el plugin Prism Line Highlight instalado'
             },
+            et: {
+                highlight: 'Koodi esiletoomine',
+                highlightLine: 'Koodiread, näiteks: 1,3-5',
+                prismHighlightPluginAlert: 'Teil peab olema paigaldatud plugin nimega Prism Line Highlight'
+            },
             hu: {
                 highlight: 'Kód kiemelés'
             },
