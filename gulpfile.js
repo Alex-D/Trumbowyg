@@ -170,4 +170,4 @@ module.exports = {
     build,
     test,
     watch,
-}
+};

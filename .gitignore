@@ -9,7 +9,7 @@
 /plugins/**/ui/sass/_sprite*
 
 # We use npm: ignore yarn
-package-lock.json
+yarn.lock
 
 # Windows image file caches
 Thumbs.db
