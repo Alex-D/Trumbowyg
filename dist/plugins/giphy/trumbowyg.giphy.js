@@ -7,11 +7,17 @@
       en: {
         giphy: 'Insert GIF',
       },
+      et: {
+        giphy: 'Sisesta GIF',
+      },
       fr: {
         giphy: 'Insérer un GIF',
       },
       hu: {
         giphy: 'GIF beszúrás',
+      },
+      tr: {
+        giphy: 'GIF ekle',
       },
       // jshint camelcase:true
     }

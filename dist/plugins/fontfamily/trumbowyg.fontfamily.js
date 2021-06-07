@@ -16,6 +16,9 @@
             de: {
                 fontFamily: 'Schriftart'
             },
+            et: {
+                fontFamily: 'Font'
+            },
             fr: {
                 fontFamily: 'Police'
             },
@@ -32,7 +35,7 @@
                 fontFamily: 'Fonte',
             },
             tr: {
-                fontFamily: 'Yazı Tipi'
+                fontFamily: 'Yazı tipi'
             },
             zh_tw: {
                 fontFamily: '字體',
