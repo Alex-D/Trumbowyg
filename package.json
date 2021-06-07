@@ -2,8 +2,40 @@
   "name": "trumbowyg",
   "title": "Trumbowyg",
   "description": "A lightweight WYSIWYG editor",
-  "version": "2.23.0",
+  "version": "2.24.0",
   "main": "dist/trumbowyg.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "gulp",
+    "build": "gulp build",
+    "clean": "gulp clean",
+    "test": "gulp test"
+  },
+  "devDependencies": {
+    "del": "6.0.0",
+    "gulp": "4.0.2",
+    "gulp-autoprefixer": "6.1.0",
+    "gulp-concat": "2.6.1",
+    "gulp-header": "2.0.9",
+    "gulp-jshint": "2.1.0",
+    "gulp-livereload": "4.0.2",
+    "gulp-load-plugins": "2.0.7",
+    "gulp-minify-css": "1.2.4",
+    "gulp-newer": "1.4.0",
+    "gulp-rename": "2.0.0",
+    "gulp-sass": "4.1.0",
+    "gulp-size": "3.0.0",
+    "gulp-svgmin": "3.0.0",
+    "gulp-svgstore": "7.0.1",
+    "gulp-terser": "2.0.1",
+    "jquery": "^3.6.0",
+    "jshint": "2.13.0",
+    "jshint-stylish": "2.2.1",
+    "vinyl-paths": "3.0.1"
+  },
+  "peerDependencies": {
+    "jquery": ">=1.8"
+  },
   "homepage": "http://alex-d.github.io/Trumbowyg",
   "author": {
     "name": "Alexandre Demode (Alex-D)",
@@ -16,38 +48,6 @@
   },
   "bugs": {
     "url": "https://github.com/Alex-D/Trumbowyg/issues"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "del": "2.0.2",
-    "gulp": "4.0.2",
-    "gulp-autoprefixer": "2.2.0",
-    "gulp-concat": "2.6.0",
-    "gulp-header": "1.7.1",
-    "gulp-jshint": "2.1.0",
-    "gulp-livereload": "4.0.1",
-    "gulp-load-plugins": "1.5.0",
-    "gulp-minify-css": "1.2.1",
-    "gulp-newer": "1.0.0",
-    "gulp-rename": "1.2.2",
-    "gulp-sass": "4.0.2",
-    "gulp-size": "2.0.0",
-    "gulp-svgmin": "1.2.2",
-    "gulp-svgstore": "5.0.5",
-    "gulp-uglify": "1.5.4",
-    "jquery": "^3.4.0",
-    "jshint": "2.9.6",
-    "jshint-stylish": "2.2.1",
-    "vinyl-paths": "2.1.0"
-  },
-  "peerDependencies": {
-    "jquery": ">=1.8"
-  },
-  "scripts": {
-    "dev": "gulp",
-    "build": "gulp build",
-    "clean": "gulp clean",
-    "test": "gulp test"
   },
   "keywords": [
     "wysiwyg",

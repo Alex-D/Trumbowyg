@@ -15,7 +15,11 @@
         langs: {
             en: {
                 indent: 'Indent',
-                outdent: 'Outdent'  
+                outdent: 'Outdent'
+            },
+            et: {
+                indent: 'Taande suurendamine',
+                outdent: 'Taande vähendamine'
             },
             fr: {
                 indent: 'Augmenter le retrait',
@@ -32,8 +36,8 @@
                     var indentBtnDef = {
                         fn: 'indent',
                         title: trumbowyg.lang.indent,
-                        isSupported: function () { 
-                            return !!document.queryCommandSupported && !!document.queryCommandSupported('indent'); 
+                        isSupported: function () {
+                            return !!document.queryCommandSupported && !!document.queryCommandSupported('indent');
                         },
                         ico: 'indent'
                     };
@@ -41,8 +45,8 @@
                     var outdentBtnDef = {
                         fn: 'outdent',
                         title: trumbowyg.lang.outdent,
-                        isSupported: function () { 
-                            return !!document.queryCommandSupported && !!document.queryCommandSupported('outdent'); 
+                        isSupported: function () {
+                            return !!document.queryCommandSupported && !!document.queryCommandSupported('outdent');
                         },
                         ico: 'outdent'
                     };
