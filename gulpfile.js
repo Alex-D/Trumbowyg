@@ -70,7 +70,7 @@ const scripts = gulp.series(testScripts, function scripts() {
         .pipe(gulp.dest('dist/'))
         .pipe($.size({title: 'trumbowyg.js'}))
         .pipe($.rename({suffix: '.min'}))
-        .pipe($.uglify())
+        .pipe($.terser())
         .pipe($.header(bannerLight, {pkg: pkg}))
         .pipe(gulp.dest('dist/'))
         .pipe($.size({title: 'trumbowyg.min.js'}));
@@ -80,7 +80,7 @@ const pluginsScripts = gulp.series(testPluginsScripts, function pluginsScripts()
     return gulp.src(paths.pluginsScripts)
         .pipe(gulp.dest('dist/plugins/'))
         .pipe($.rename({suffix: '.min'}))
-        .pipe($.uglify())
+        .pipe($.terser())
         .pipe(gulp.dest('dist/plugins/'));
 });
 
@@ -88,8 +88,10 @@ const langs = gulp.series(testLangs, function langs() {
     return gulp.src(paths.langs)
         .pipe(gulp.dest('dist/langs/'))
         .pipe($.rename({suffix: '.min'}))
-        .pipe($.uglify({
-            preserveComments: 'all'
+        .pipe($.terser({
+            format: {
+                comments: 'all'
+            }
         }))
         .pipe(gulp.dest('dist/langs/'));
 });
