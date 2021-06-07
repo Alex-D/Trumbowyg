@@ -164,7 +164,7 @@ const watch = function () {
     $.livereload.listen();
 };
 
-const build = gulp.parallel(scripts, pluginsScripts, langs, icons, sassDist, pluginsSassDist);
+const build = gulp.series(clean, gulp.parallel(scripts, pluginsScripts, langs, icons, sassDist, pluginsSassDist));
 
 module.exports = {
     default: gulp.series(build, watch),
