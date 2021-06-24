@@ -144,6 +144,32 @@ $modal = trumbowyg.openModalInsert({
             type: 'text',
             attributes: {}
         },
+
+        // Build your own input by setting type as a function and returning the html
+        referrerpolicy: {
+            label: 'Referrer Policy',
+            name: 'referrerpolicy',
+            type: function(field, prefix, lg) {
+                const html = `
+                    <div class="${prefix}input-row">
+                        <div class="${prefix}input-infos">
+                            <span>${lg[field.label] ? lg[field.label] : field.label}</span>
+                        </div>
+                        <div class="${prefix}input-html">
+                            <select name="${field.name}">
+                                <option${field.value === 'no-referrer' ? ' selected="selected"' : ''}>no-referrer</option>
+                                <option${field.value === 'no-referrer-when-downgrade' ? ' selected="selected"' : ''}>no-referrer-when-downgrade</option>
+                                <option${field.value === 'origin' ? ' selected="selected"' : ''}>origin</option>
+                                <option${field.value === 'origin-when-cross-origin' ? ' selected="selected"' : ''}>origin-when-cross-origin</option>
+                                <option${field.value === 'unsafe-url' ? ' selected="selected"' : ''}>unsafe-url</option>
+                            </select>
+                        </div>
+                    </div>
+                `;
+
+                return html;
+            }
+        },
         example: {
             // Missing label is replaced by the key of this object (here 'example')
             // Missing name is the key

@@ -1668,11 +1668,30 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     return prop + '="' + a[prop] + '"';
                 }).join(' ');
 
-                html += '<label><input type="' + (field.type || 'text') + '" name="' + n + '"' +
-                    (field.type === 'checkbox' && field.value ? ' checked="checked"' : ' value="' + (field.value || '').replace(/"/g, '&quot;')) +
-                    '"' + attr + '><span class="' + prefix + 'input-infos"><span>' +
-                    (lg[l] ? lg[l] : l) +
-                    '</span></span></label>';
+                if (typeof field.type === 'function') {
+                  html += field.type(field, prefix, lg);
+                } else {
+                  html += `
+                    <div class="${prefix}input-row">
+                      <div class="${prefix}input-infos">
+                        <label for="form-${fieldName}">
+                          <span>${lg[l] ? lg[l] : l}</span>
+                        </label>
+                      </div>
+                      <div class="${prefix}input-html">
+                        <input
+                          type="${field.type || 'text'}"
+                          name="${n}"
+                          id="form-${fieldName}"
+                          ${attr ? ' '+attr : ''}
+                          ${field.type === 'checkbox' && field.value ? ' checked="checked"' : ''}
+                          value="${field.value || ''}"
+                        />
+                      </div>
+                    </div>
+                  `;
+                }
+
             });
 
             return t.openModal(title, html)
@@ -1684,8 +1703,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     $.each(fields, function (fieldName, field) {
                         var n = field.name || fieldName;
 
-                        var $field = $('input[name="' + n + '"]', $form),
-                            inputType = $field.attr('type');
+                        var $field = $(':input[name="' + n + '"]', $form),
+                            inputType = $field[0].nodeName;
 
                         switch (inputType.toLowerCase()) {
                             case 'checkbox':
@@ -1727,19 +1746,19 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         addErrorOnModalField: function ($field, err) {
             var prefix = this.o.prefix,
                 spanErrorClass = prefix + 'msg-error',
-                $label = $field.parent();
+                $row = $field.closest('.' + prefix + 'input-row');
 
             $field
                 .on('change keyup', function () {
-                    $label.removeClass(prefix + 'input-error');
+                    $row.removeClass(prefix + 'input-error');
                     setTimeout(function () {
-                        $label.find('.' + spanErrorClass).remove();
+                        $row.find('.' + spanErrorClass).remove();
                     }, 150);
                 });
 
-            $label
+            $row
                 .addClass(prefix + 'input-error')
-                .find('input+span')
+                .find('.' + prefix + 'input-infos label')
                 .append(
                     $('<span/>', {
                         class: spanErrorClass,
