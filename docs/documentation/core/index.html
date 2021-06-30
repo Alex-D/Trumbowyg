@@ -150,22 +150,22 @@ $modal = trumbowyg.openModalInsert({
             label: 'Referrer Policy',
             name: 'referrerpolicy',
             type: function(field, prefix, lg) {
-                const html = `
-                    <div class="${prefix}input-row">
-                        <div class="${prefix}input-infos">
-                            <span>${lg[field.label] ? lg[field.label] : field.label}</span>
-                        </div>
-                        <div class="${prefix}input-html">
-                            <select name="${field.name}">
-                                <option${field.value === 'no-referrer' ? ' selected="selected"' : ''}>no-referrer</option>
-                                <option${field.value === 'no-referrer-when-downgrade' ? ' selected="selected"' : ''}>no-referrer-when-downgrade</option>
-                                <option${field.value === 'origin' ? ' selected="selected"' : ''}>origin</option>
-                                <option${field.value === 'origin-when-cross-origin' ? ' selected="selected"' : ''}>origin-when-cross-origin</option>
-                                <option${field.value === 'unsafe-url' ? ' selected="selected"' : ''}>unsafe-url</option>
-                            </select>
-                        </div>
-                    </div>
-                `;
+                var html += '&lt;div class="' + prefix + 'input-row"&gt;' +
+                    '&lt;div class="' + prefix + 'input-infos"&gt;' +
+                      '&lt;label for="form-' + fieldName + '"&gt;' +
+                        '&lt;span&gt;' + (lg[field.label] ? lg[field.label] : field.label) + '&lt;/span&gt;' +
+                      '&lt;/label&gt;' +
+                    '&lt;/div&gt;' +
+                    '&lt;div class="' + prefix + 'input-html"&gt;' +
+                        '&lt;select name="' + field.name + '"&gt;' +
+                            '&lt;option' + (field.value === 'no-referrer' ? ' selected="selected"' : '') + '&gt;no-referrer&lt;/option&gt;' +
+                            '&lt;option' + (field.value === 'no-referrer-when-downgrade' ? ' selected="selected"' : '') + '&gt;no-referrer-when-downgrade&lt;/option&gt;' +
+                            '&lt;option' + (field.value === 'origin' ? ' selected="selected"' : '') + '&gt;origin&lt;/option&gt;' +
+                            '&lt;option' + (field.value === 'origin-when-cross-origin' ? ' selected="selected"' : '') + '&gt;origin-when-cross-origin&lt;/option&gt;' +
+                            '&lt;option' + (field.value === 'unsafe-url' ? ' selected="selected"' : '') + '&gt;unsafe-url&lt;/option&gt;' +
+                       '&lt;/select&gt;' +
+                    '&lt;/div&gt;' +
+                '&lt;/div&gt;';
 
                 return html;
             }

@@ -1669,29 +1669,18 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 }).join(' ');
 
                 if (typeof field.type === 'function') {
+                  if (!field.name) {
+                    field.name = n;
+                  }
                   html += field.type(field, prefix, lg);
                 } else {
-                  html += `
-                    <div class="${prefix}input-row">
-                      <div class="${prefix}input-infos">
-                        <label for="form-${fieldName}">
-                          <span>${lg[l] ? lg[l] : l}</span>
-                        </label>
-                      </div>
-                      <div class="${prefix}input-html">
-                        <input
-                          type="${field.type || 'text'}"
-                          name="${n}"
-                          id="form-${fieldName}"
-                          ${attr ? ' '+attr : ''}
-                          ${field.type === 'checkbox' && field.value ? ' checked="checked"' : ''}
-                          value="${field.value || ''}"
-                        />
-                      </div>
-                    </div>
-                  `;
+                  html += '<div class="' + prefix + 'input-row">' +
+                    '<div class="' + prefix + 'input-infos"><label for="form-' + fieldName + '"><span>' + (lg[l] ? lg[l] : l) + '</span></label></div>' +
+                    '<div class="' + prefix + 'input-html"><input type="' + (field.type || 'text') + '" name="' + n + '" id="form-' + fieldName + '"';
+                    if (attr) { html += ' ' + attr; }
+                    html += (field.type === 'checkbox' && field.value ? ' checked="checked"' : '') + ' value="' + (field.value || '').replace(/"/g, '&quot;') + '"></div>';
+                  html += '</div>';
                 }
-
             });
 
             return t.openModal(title, html)

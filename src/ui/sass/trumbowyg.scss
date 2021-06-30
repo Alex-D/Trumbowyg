@@ -7,6 +7,8 @@ $modal-reset-color: #EEE !default;
 $transition-duration: 150ms !default;
 $slow-transition-duration: 300ms !default;
 
+$modal-label-width: 150px;
+
 #trumbowyg-icons {
     overflow: hidden;
     visibility: hidden;
@@ -349,7 +351,6 @@ $slow-transition-duration: 300ms !default;
 
     .trumbowyg-input {
         &-row {
-            display: flex;
             position: relative;
             margin: 15px 12px;
             border: 1px solid #DEDEDE;
@@ -359,10 +360,14 @@ $slow-transition-duration: 300ms !default;
         &-infos {
             text-align: left;
             transition: all 150ms;
-            flex: 0 0 150px;
+            width: $modal-label-width;
             border-right: 1px solid #DEDEDE;
             padding: 0 7px;
             background-color: lighten($light-color, 5%);
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
 
             label {
                 cursor: pointer;
@@ -385,8 +390,7 @@ $slow-transition-duration: 300ms !default;
         }
 
         &-html {
-            flex: 1;
-            padding: 1px;
+            padding: 1px 1px 1px $modal-label-width + 2px;
 
             &, input, textarea, select {
                 font-size: 14px;
