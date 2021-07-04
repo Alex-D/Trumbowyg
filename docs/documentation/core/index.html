@@ -144,6 +144,32 @@ $modal = trumbowyg.openModalInsert({
             type: 'text',
             attributes: {}
         },
+
+        // Build your own input by setting type as a function and returning the html
+        referrerpolicy: {
+            label: 'Referrer Policy',
+            name: 'referrerpolicy',
+            type: function(field, prefix, lg) {
+                var html += '&lt;div class="' + prefix + 'input-row"&gt;' +
+                    '&lt;div class="' + prefix + 'input-infos"&gt;' +
+                      '&lt;label for="form-' + fieldName + '"&gt;' +
+                        '&lt;span&gt;' + (lg[field.label] ? lg[field.label] : field.label) + '&lt;/span&gt;' +
+                      '&lt;/label&gt;' +
+                    '&lt;/div&gt;' +
+                    '&lt;div class="' + prefix + 'input-html"&gt;' +
+                        '&lt;select name="' + field.name + '"&gt;' +
+                            '&lt;option' + (field.value === 'no-referrer' ? ' selected="selected"' : '') + '&gt;no-referrer&lt;/option&gt;' +
+                            '&lt;option' + (field.value === 'no-referrer-when-downgrade' ? ' selected="selected"' : '') + '&gt;no-referrer-when-downgrade&lt;/option&gt;' +
+                            '&lt;option' + (field.value === 'origin' ? ' selected="selected"' : '') + '&gt;origin&lt;/option&gt;' +
+                            '&lt;option' + (field.value === 'origin-when-cross-origin' ? ' selected="selected"' : '') + '&gt;origin-when-cross-origin&lt;/option&gt;' +
+                            '&lt;option' + (field.value === 'unsafe-url' ? ' selected="selected"' : '') + '&gt;unsafe-url&lt;/option&gt;' +
+                       '&lt;/select&gt;' +
+                    '&lt;/div&gt;' +
+                '&lt;/div&gt;';
+
+                return html;
+            }
+        },
         example: {
             // Missing label is replaced by the key of this object (here 'example')
             // Missing name is the key
