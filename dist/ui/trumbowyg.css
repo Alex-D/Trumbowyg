@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.24.0 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.25.0 - A lightweight WYSIWYG editor
  * Default stylesheet for Trumbowyg editor
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -305,64 +305,66 @@
       -webkit-transition: width 150ms linear;
       -o-transition: width 150ms linear;
       transition: width 150ms linear; }
-  .trumbowyg-modal-box label {
-    display: block;
+  .trumbowyg-modal-box .trumbowyg-input-row {
     position: relative;
     margin: 15px 12px;
-    height: 29px;
-    line-height: 29px;
+    border: 1px solid #DEDEDE;
     overflow: hidden; }
-    .trumbowyg-modal-box label .trumbowyg-input-infos {
-      display: block;
-      text-align: left;
-      height: 25px;
-      line-height: 25px;
+  .trumbowyg-modal-box .trumbowyg-input-infos {
+    text-align: left;
+    -webkit-transition: all 150ms;
+    -o-transition: all 150ms;
+    transition: all 150ms;
+    width: 150px;
+    border-right: 1px solid #DEDEDE;
+    padding: 0 7px;
+    background-color: #fbfcfc;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0; }
+    .trumbowyg-modal-box .trumbowyg-input-infos label {
+      color: #69878f;
+      overflow: hidden;
+      height: 27px;
+      line-height: 27px; }
+      .trumbowyg-modal-box .trumbowyg-input-infos label, .trumbowyg-modal-box .trumbowyg-input-infos label span {
+        display: block;
+        height: 27px;
+        line-height: 27px;
+        -webkit-transition: all 150ms;
+        -o-transition: all 150ms;
+        transition: all 150ms; }
+    .trumbowyg-modal-box .trumbowyg-input-infos .trumbowyg-msg-error {
+      color: #e74c3c; }
+  .trumbowyg-modal-box .trumbowyg-input-html {
+    padding: 1px 1px 1px 152px; }
+    .trumbowyg-modal-box .trumbowyg-input-html, .trumbowyg-modal-box .trumbowyg-input-html input, .trumbowyg-modal-box .trumbowyg-input-html textarea, .trumbowyg-modal-box .trumbowyg-input-html select {
+      font-size: 14px; }
+    .trumbowyg-modal-box .trumbowyg-input-html input, .trumbowyg-modal-box .trumbowyg-input-html textarea, .trumbowyg-modal-box .trumbowyg-input-html select {
       -webkit-transition: all 150ms;
       -o-transition: all 150ms;
-      transition: all 150ms; }
-      .trumbowyg-modal-box label .trumbowyg-input-infos span {
-        display: block;
-        color: #69878f;
-        background-color: #fbfcfc;
-        border: 1px solid #DEDEDE;
-        padding: 0 7px;
-        width: 150px; }
-      .trumbowyg-modal-box label .trumbowyg-input-infos span.trumbowyg-msg-error {
-        color: #e74c3c; }
-    .trumbowyg-modal-box label.trumbowyg-input-error input,
-    .trumbowyg-modal-box label.trumbowyg-input-error textarea {
-      border: 1px solid #e74c3c; }
-    .trumbowyg-modal-box label.trumbowyg-input-error .trumbowyg-input-infos {
-      margin-top: -27px; }
-    .trumbowyg-modal-box label input {
-      position: absolute;
-      top: 0;
-      right: 0;
+      transition: all 150ms;
       height: 27px;
       line-height: 27px;
-      border: 1px solid #DEDEDE;
-      background: #fff;
-      font-size: 14px;
-      max-width: 330px;
-      width: 70%;
-      padding: 0 7px;
-      -webkit-transition: all 150ms;
-      -o-transition: all 150ms;
-      transition: all 150ms; }
-      .trumbowyg-modal-box label input:hover, .trumbowyg-modal-box label input:focus {
-        outline: none;
-        border: 1px solid #95a5a6; }
-      .trumbowyg-modal-box label input:focus {
+      border: 0;
+      width: 100%;
+      padding: 0 7px; }
+      .trumbowyg-modal-box .trumbowyg-input-html input:hover, .trumbowyg-modal-box .trumbowyg-input-html input:focus, .trumbowyg-modal-box .trumbowyg-input-html textarea:hover, .trumbowyg-modal-box .trumbowyg-input-html textarea:focus, .trumbowyg-modal-box .trumbowyg-input-html select:hover, .trumbowyg-modal-box .trumbowyg-input-html select:focus {
+        outline: 1px solid #95a5a6; }
+      .trumbowyg-modal-box .trumbowyg-input-html input:focus, .trumbowyg-modal-box .trumbowyg-input-html textarea:focus, .trumbowyg-modal-box .trumbowyg-input-html select:focus {
         background: #fbfcfc; }
-    .trumbowyg-modal-box label input[type="checkbox"] {
-      left: 6px;
-      top: 6px;
-      right: auto;
+    .trumbowyg-modal-box .trumbowyg-input-html input[type="checkbox"] {
+      width: 16px;
       height: 16px;
-      width: 16px; }
-      .trumbowyg-modal-box label input[type="checkbox"] + .trumbowyg-input-infos span {
-        width: auto;
-        padding-left: 25px; }
+      padding: 0; }
+    .trumbowyg-modal-box .trumbowyg-input-html-with-checkbox {
+      text-align: left;
+      padding: 3px 1px 1px 3px; }
+  .trumbowyg-modal-box .trumbowyg-input-error input, .trumbowyg-modal-box .trumbowyg-input-error select, .trumbowyg-modal-box .trumbowyg-input-error textarea {
+    outline: 1px solid #e74c3c; }
+  .trumbowyg-modal-box .trumbowyg-input-error .trumbowyg-input-infos label span:first-child {
+    margin-top: -27px; }
   .trumbowyg-modal-box .error {
     margin-top: 25px;
     display: block;
