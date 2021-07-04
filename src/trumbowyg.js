@@ -1606,7 +1606,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             if (buildForm) {
                 // Focus in modal box
-                $('input:first', $box).focus();
+                $(':input:first', $box).focus();
 
                 // Append Confirm and Cancel buttons
                 t.buildModalBtn('submit', $box);
@@ -1657,22 +1657,31 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             var t = this,
                 prefix = t.o.prefix,
                 lg = t.lang,
-                html = '';
+                html = '',
+                idPrefix = prefix + 'form-' + Date.now() + '-';
 
             $.each(fields, function (fieldName, field) {
                 var l = field.label || fieldName,
                     n = field.name || fieldName,
-                    a = field.attributes || {};
+                    a = field.attributes || {},
+                    fieldId = idPrefix + fieldName;
 
                 var attr = Object.keys(a).map(function (prop) {
                     return prop + '="' + a[prop] + '"';
                 }).join(' ');
 
-                html += '<label><input type="' + (field.type || 'text') + '" name="' + n + '"' +
-                    (field.type === 'checkbox' && field.value ? ' checked="checked"' : ' value="' + (field.value || '').replace(/"/g, '&quot;')) +
-                    '"' + attr + '><span class="' + prefix + 'input-infos"><span>' +
-                    (lg[l] ? lg[l] : l) +
-                    '</span></span></label>';
+                if (typeof field.type === 'function') {
+                  if (!field.name) {
+                    field.name = n;
+                  }
+                  html += field.type(field, fieldId, prefix, lg);
+                } else {
+                  html += '<div class="' + prefix + 'input-row">' +
+                    '<div class="' + prefix + 'input-infos"><label for="' + fieldId + '"><span>' + (lg[l] ? lg[l] : l) + '</span></label></div>' +
+                    '<div class="' + prefix + 'input-html"><input id="' + fieldId + '" type="' + (field.type || 'text') + '" name="' + n + '" ' + attr;
+                    html += (field.type === 'checkbox' && field.value ? ' checked="checked"' : '') + ' value="' + (field.value || '').replace(/"/g, '&quot;') + '"></div>';
+                  html += '</div>';
+                }
             });
 
             return t.openModal(title, html)
@@ -1684,8 +1693,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     $.each(fields, function (fieldName, field) {
                         var n = field.name || fieldName;
 
-                        var $field = $('input[name="' + n + '"]', $form),
-                            inputType = $field.attr('type');
+                        var $field = $(':input[name="' + n + '"]', $form),
+                            inputType = $field[0].type;
 
                         switch (inputType.toLowerCase()) {
                             case 'checkbox':
@@ -1727,19 +1736,19 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         addErrorOnModalField: function ($field, err) {
             var prefix = this.o.prefix,
                 spanErrorClass = prefix + 'msg-error',
-                $label = $field.parent();
+                $row = $field.closest('.' + prefix + 'input-row');
 
             $field
                 .on('change keyup', function () {
-                    $label.removeClass(prefix + 'input-error');
+                    $row.removeClass(prefix + 'input-error');
                     setTimeout(function () {
-                        $label.find('.' + spanErrorClass).remove();
+                        $row.find('.' + spanErrorClass).remove();
                     }, 150);
                 });
 
-            $label
+            $row
                 .addClass(prefix + 'input-error')
-                .find('input+span')
+                .find('.' + prefix + 'input-infos label')
                 .append(
                     $('<span/>', {
                         class: spanErrorClass,

@@ -1,3 +1,11 @@
+/* ===========================================================
+ * sl.js
+ * Slovenian translation for Trumbowyg
+ * http://alex-d.github.com/Trumbowyg
+ * ===========================================================
+ * Author: Matjaz Zavski (https://github.com/matjaz321)
+ */
+
 jQuery.trumbowyg.langs.sl = {
     viewHTML: 'Prikaži HTML',
 
@@ -33,7 +41,7 @@ jQuery.trumbowyg.langs.sl = {
 
     horizontalRule: 'Vstavite vodoravno črto',
     removeformat: 'Odstrani format',
-    
+
     fullscreen: 'Celozaslonski način',
 
     close: 'Zapri',
