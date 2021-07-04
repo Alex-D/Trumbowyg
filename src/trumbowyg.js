@@ -1657,12 +1657,14 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             var t = this,
                 prefix = t.o.prefix,
                 lg = t.lang,
-                html = '';
+                html = '',
+                idPrefix = prefix + 'form-' + Date.now() + '-';
 
             $.each(fields, function (fieldName, field) {
                 var l = field.label || fieldName,
                     n = field.name || fieldName,
-                    a = field.attributes || {};
+                    a = field.attributes || {},
+                    fieldId = idPrefix + fieldName;
 
                 var attr = Object.keys(a).map(function (prop) {
                     return prop + '="' + a[prop] + '"';
@@ -1672,12 +1674,11 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                   if (!field.name) {
                     field.name = n;
                   }
-                  html += field.type(field, prefix, lg);
+                  html += field.type(field, fieldId, prefix, lg);
                 } else {
                   html += '<div class="' + prefix + 'input-row">' +
-                    '<div class="' + prefix + 'input-infos"><label for="form-' + fieldName + '"><span>' + (lg[l] ? lg[l] : l) + '</span></label></div>' +
-                    '<div class="' + prefix + 'input-html"><input type="' + (field.type || 'text') + '" name="' + n + '" id="form-' + fieldName + '"';
-                    if (attr) { html += ' ' + attr; }
+                    '<div class="' + prefix + 'input-infos"><label for="' + fieldId + '"><span>' + (lg[l] ? lg[l] : l) + '</span></label></div>' +
+                    '<div class="' + prefix + 'input-html"><input id="' + fieldId + '" type="' + (field.type || 'text') + '" name="' + n + '" ' + attr;
                     html += (field.type === 'checkbox' && field.value ? ' checked="checked"' : '') + ' value="' + (field.value || '').replace(/"/g, '&quot;') + '"></div>';
                   html += '</div>';
                 }

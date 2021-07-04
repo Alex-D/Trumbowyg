@@ -149,15 +149,15 @@ $modal = trumbowyg.openModalInsert({
         referrerpolicy: {
             label: 'Referrer Policy',
             name: 'referrerpolicy',
-            type: function(field, prefix, lg) {
+            type: function(field, fieldId, prefix, lg) {
                 var html += '&lt;div class="' + prefix + 'input-row"&gt;' +
                     '&lt;div class="' + prefix + 'input-infos"&gt;' +
-                      '&lt;label for="form-' + fieldName + '"&gt;' +
+                      '&lt;label for="' + fieldId + '"&gt;' +
                         '&lt;span&gt;' + (lg[field.label] ? lg[field.label] : field.label) + '&lt;/span&gt;' +
                       '&lt;/label&gt;' +
                     '&lt;/div&gt;' +
                     '&lt;div class="' + prefix + 'input-html"&gt;' +
-                        '&lt;select name="' + field.name + '"&gt;' +
+                        '&lt;select id="' + fieldId + '" name="' + field.name + '"&gt;' +
                             '&lt;option' + (field.value === 'no-referrer' ? ' selected="selected"' : '') + '&gt;no-referrer&lt;/option&gt;' +
                             '&lt;option' + (field.value === 'no-referrer-when-downgrade' ? ' selected="selected"' : '') + '&gt;no-referrer-when-downgrade&lt;/option&gt;' +
                             '&lt;option' + (field.value === 'origin' ? ' selected="selected"' : '') + '&gt;origin&lt;/option&gt;' +
