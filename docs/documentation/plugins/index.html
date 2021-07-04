@@ -225,7 +225,7 @@ $('#my-editor').trumbowyg({
 });
             </code></pre>
 
-            <h4>Parameters</h4>
+            <h4>Options</h4>
             <dl>
                 <dt><strong><code>colorList</code></strong> <code class="type">array&lt;string&gt;</code></dt>
                 <dd>
@@ -497,7 +497,7 @@ $('#my-editor').trumbowyg({
             </code></pre>
 
 
-            <h4>Parameters</h4>
+            <h4>Options</h4>
             <dl>
                 <dt><strong><code>apiKey</code></strong> <code class="type">string</code> <strong>(required)</strong></dt>
                 <dd>
@@ -526,7 +526,7 @@ $('#my-editor').trumbowyg({
             </dl>
 
             <p>
-                Example with parameters:
+                Example with options:
             </p>
             <pre><code class="javascript">
 $('#my-editor').trumbowyg({
@@ -561,7 +561,7 @@ $('#my-editor').trumbowyg({
 
             <h4>How to use it?</h4>
             <p>
-                This plugin require <strong>prismjs</strong> which can be installed with:
+                This plugin require <strong>Prism</strong> which can be installed with:
                 <code>npm&nbsp;install&nbsp;prismjs</code>
             </p>
             <pre><code class="html">
@@ -591,6 +591,29 @@ $('#my-editor').trumbowyg({
 &lt;-- Import prismjs style in &lt;head>... on your site -->
 &lt;link rel="stylesheet" href="node_modules/prismjs/themes/prism.css">
             </code></pre>
+
+
+            <h4>Options</h4>
+            <dl>
+                <dt><strong><code>enableLineHighlight</code></strong> <code class="type">boolean</code></dt>
+                <dd>
+                    Add a field to highlight some lines if enabled. <br>
+                    You need to import the
+                    <a href="https://prismjs.com/plugins/line-highlight/">Prism Line Highlight plugin</a> JS + CSS.
+                    <br>
+                    <strong>Default</strong>: <code>true</code>
+                </dd>
+
+                <dt><strong><code>languageNames</code></strong> <code class="type">Object&lt;string, string></code></dt>
+                <dd>
+                    Pairs with language code as key and language name as value.
+                    <br>
+                    <strong>Default</strong>:
+                    <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/highlight/trumbowyg.highlight.js">
+                        List of all languages available in Prism
+                    </a>
+                </dd>
+            </dl>
         </div>
 
         <div class="feature">
@@ -827,12 +850,12 @@ $('#my-editor').trumbowyg({
 });
             </code></pre>
 
-            <h4>Parameters</h4>
+            <h4>Options</h4>
             <dl>
                 <dt><strong><code>source</code></strong> <code class="type">array&lt;object&gt;</code></dt>
                 <dd>
                     List of mentionable users.
-                    Must contains <code>login</code> key if you do not override two other parameters.
+                    Must contains <code>login</code> key if you do not override two other options.
                     <br>
                     <strong>Default</strong>: <code>[]</code>
                 </dd>
@@ -851,7 +874,7 @@ $('#my-editor').trumbowyg({
             </dl>
 
             <p>
-                Example with parameters:
+                Example with options:
             </p>
             <pre><code class="javascript">
 $('#my-editor').trumbowyg({
@@ -1022,7 +1045,7 @@ $('#my-editor').trumbowyg({
 &lt;script src="trumbowyg/dist/plugins/resizimg/trumbowyg.resizimg.min.js">&lt;/script>
             </code></pre>
 
-            <h4>Parameters</h4>
+            <h4>Options</h4>
             <dl>
                 <dt><strong><code>minSize</code></strong> <code class="type">number</code></dt>
                 <dd>
@@ -1038,7 +1061,7 @@ $('#my-editor').trumbowyg({
                 </dd>
             </dl>
             <p>
-                Example with parameters:
+                Example with options:
             </p>
             <pre><code class="javascript">
 $('#editor').trumbowyg({
@@ -1127,7 +1150,7 @@ $('#my-editor').trumbowyg({
 });
             </code></pre>
 
-            <h4>Parameters</h4>
+            <h4>Options</h4>
             <dl>
                 <dt><strong><code>symbolList</code></strong> <code class="type">array&lt;string&gt;</code></dt>
                 <dd>
@@ -1139,7 +1162,7 @@ $('#my-editor').trumbowyg({
             </dl>
 
             <p>
-                Example with parameters:
+                Example with options:
             </p>
             <pre><code class="javascript">
 $('#editor-custom-list')
@@ -1200,7 +1223,7 @@ $('#my-editor').trumbowyg({
 });
             </code></pre>
 
-            <h4>Parameters</h4>
+            <h4>Options</h4>
             <dl>
                 <dt><strong><code>rows</code></strong> <code class="type">number</code></dt>
                 <dd>
@@ -1318,7 +1341,7 @@ $('#my-editor').trumbowyg({
 });
             </code></pre>
 
-            <h4>Parameters</h4>
+            <h4>Options</h4>
             <dl>
                 <dt><strong><code>serverPath</code></strong> <code class="type">string</code></dt>
                 <dd>
