@@ -1693,7 +1693,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         var n = field.name || fieldName;
 
                         var $field = $(':input[name="' + n + '"]', $form),
-                            inputType = $field[0].nodeName;
+                            inputType = $field[0].type;
 
                         switch (inputType.toLowerCase()) {
                             case 'checkbox':
