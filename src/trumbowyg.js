@@ -1261,7 +1261,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     return false;
                 }
 
-                if(t.range.startContainer.parentNode && t.range.startContainer.parentNode === this) {
+                if (t.range && t.range.startContainer.parentNode === this) {
                     resetRange = true;
                 }
                 var $newTag = $('<' + newTag + '/>');
