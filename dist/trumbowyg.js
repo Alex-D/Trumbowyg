@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.25.0 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.25.1 - A lightweight WYSIWYG editor
  * Trumbowyg core file
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -1272,7 +1272,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     return false;
                 }
 
-                if(t.range.startContainer.parentNode && t.range.startContainer.parentNode === this) {
+                if (t.range && t.range.startContainer.parentNode === this) {
                     resetRange = true;
                 }
                 var $newTag = $('<' + newTag + '/>');
