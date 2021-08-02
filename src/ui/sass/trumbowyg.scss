@@ -1,3 +1,7 @@
+$button-size: 35px;
+$icon-size: 17px;
+$pane-spacing: 5px;
+
 $light-color: #ecf0f1 !default;
 $dark-color: #222 !default;
 
@@ -30,7 +34,7 @@ $modal-label-width: 150px;
     }
 
     svg {
-        width: 17px;
+        width: $icon-size;
         height: 100%;
         fill: $dark-color;
     }
@@ -142,7 +146,7 @@ $modal-label-width: 150px;
     background: $light-color;
     border-bottom: 1px solid darken($light-color, 7%);
     margin: 0;
-    padding: 0 5px;
+    padding: 0 $pane-spacing;
     position: relative;
     list-style-type: none;
     line-height: 10px;
@@ -173,8 +177,8 @@ $modal-label-width: 150px;
             display: inline-block;
             width: 1px;
             background: darken($light-color, 7%);
-            margin: 0 5px;
-            height: 35px;
+            margin: 0 $pane-spacing;
+            height: $button-size;
             vertical-align: top;
         }
 
@@ -186,8 +190,8 @@ $modal-label-width: 150px;
     button {
         display: inline-block;
         position: relative;
-        width: 35px;
-        height: 35px;
+        width: $button-size;
+        height: $button-size;
         padding: 1px 6px !important;
         margin-bottom: 1px;
         overflow: hidden;
@@ -199,7 +203,7 @@ $modal-label-width: 150px;
 
         &.trumbowyg-textual-button {
             width: auto;
-            line-height: 35px;
+            line-height: $button-size;
             user-select: none;
         }
     }
@@ -243,7 +247,7 @@ $modal-label-width: 150px;
             padding-right: 18px !important;
 
             &::after {
-                top: 17px;
+                top: $icon-size;
                 right: 7px;
             }
         }
@@ -261,7 +265,7 @@ $modal-label-width: 150px;
     overflow-x: hidden;
     white-space: nowrap;
     border: 1px solid $light-color;
-    padding: 5px 0;
+    padding: $pane-spacing 0;
     border-top: none;
     background: #FFF;
     margin-left: -1px;
@@ -271,8 +275,8 @@ $modal-label-width: 150px;
     button {
         display: block;
         width: 100%;
-        height: 35px;
-        line-height: 35px;
+        height: $button-size;
+        line-height: $button-size;
         text-decoration: none;
         background: #FFF;
         padding: 0 20px 0 10px;
@@ -449,7 +453,7 @@ $modal-label-width: 150px;
         color: #FFF;
         display: block;
         width: 100px;
-        height: 35px;
+        height: $button-size;
         line-height: 33px;
         margin: 0 10px;
         background-color: #333;
