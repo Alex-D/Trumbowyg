@@ -1,6 +1,7 @@
 $button-size: 35px;
 $icon-size: 17px;
 $pane-spacing: 5px;
+$border-radius: 6px;
 
 $light-color: #ecf0f1;
 $light-background-color-pane: darken($light-color, 3%);
@@ -67,6 +68,7 @@ $modal-label-width: 150px;
     position: relative;
     width: 100%;
     min-height: 300px;
+    border-radius: 0 0 $border-radius $border-radius;
 }
 
 .trumbowyg-box .trumbowyg-editor {
@@ -92,6 +94,8 @@ $modal-label-width: 150px;
     color: $light-text-color;
     
     border-top: none;
+    border-radius: 0 0 $border-radius $border-radius;
+
     &.trumbowyg-autogrow-on-enter {
         transition: height $slow-transition-duration ease-out;
     }
@@ -181,6 +185,14 @@ $modal-label-width: 150px;
 
         &:last-child::after {
             content: none;
+        }
+        
+        &:first-child button:first-child {
+            border-radius: $border-radius 0 0 0;
+        }
+
+        &.trumbowyg-right:last-child button:last-child {
+            border-radius: 0 $border-radius 0 0;
         }
         
         &.trumbowyg-right {
@@ -328,6 +340,7 @@ $modal-label-width: 150px;
     background-color: $light-background-color-modal;
     text-align: center;
     font-size: 14px;
+    border-radius: $border-radius;
     box-shadow: rgba(0, 0, 0, .2) 0 2px 3px;
     backface-visibility: hidden;
 
@@ -459,6 +472,7 @@ $modal-label-width: 150px;
         margin: 0 10px;
         background-color: #333;
         border: none;
+        border-radius: $border-radius;
         cursor: pointer;
         font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif;
         font-size: 16px;
@@ -503,6 +517,7 @@ $modal-label-width: 150px;
     display: none;
     top: 0;
     z-index: 10;
+    border-radius: $border-radius;
 }
 
 /**
