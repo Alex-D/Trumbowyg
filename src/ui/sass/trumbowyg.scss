@@ -219,6 +219,10 @@ $modal-label-width: 150px;
         vertical-align: middle;
         transition: background-color $transition-duration, opacity $transition-duration;
 
+        &:hover svg {
+            transform: scale(1.25);
+        }
+
         &.trumbowyg-textual-button {
             width: auto;
             line-height: $button-size;
