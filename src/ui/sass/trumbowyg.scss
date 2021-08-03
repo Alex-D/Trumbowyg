@@ -536,12 +536,12 @@ body.trumbowyg-body-fullscreen {
 
 .trumbowyg-fullscreen {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+    top: .5em;
+    left: .5em;
+    bottom: .5em;
+    right: .5em;
+    box-shadow: 0 0 1em 0 rgba(0,0,0,0.3);
+    width: auto;
     z-index: 99999;
 
     &.trumbowyg-box,
