@@ -72,7 +72,7 @@ const scripts = gulp.series(testScripts, function scripts() {
         .pipe($.rename({suffix: '.min'}))
         .pipe($.terser())
         .pipe($.header(bannerLight, {pkg: pkg}))
-        .pipe(gulp.dest('dist/'))
+        .pipe(gulp.dest('dist/minified/'))
         .pipe($.size({title: 'trumbowyg.min.js'}));
 });
 
@@ -81,7 +81,7 @@ const pluginsScripts = gulp.series(testPluginsScripts, function pluginsScripts()
         .pipe(gulp.dest('dist/plugins/'))
         .pipe($.rename({suffix: '.min'}))
         .pipe($.terser())
-        .pipe(gulp.dest('dist/plugins/'));
+        .pipe(gulp.dest('dist/minified/plugins/'));
 });
 
 const langs = gulp.series(testLangs, function langs() {
@@ -93,7 +93,7 @@ const langs = gulp.series(testLangs, function langs() {
                 comments: 'all'
             }
         }))
-        .pipe(gulp.dest('dist/langs/'));
+        .pipe(gulp.dest('dist/minified/langs/'));
 });
 
 
@@ -102,7 +102,8 @@ const icons = function () {
         .pipe($.rename({prefix: 'trumbowyg-'}))
         .pipe($.svgmin())
         .pipe($.svgstore({inlineSvg: true}))
-        .pipe(gulp.dest('dist/ui/'));
+        .pipe(gulp.dest('dist/ui/'))
+        .pipe(gulp.dest('dist/minified/ui/'));
 };
 
 
@@ -116,7 +117,7 @@ const styles = function () {
         .pipe($.rename({suffix: '.min'}))
         .pipe($.minifyCss())
         .pipe($.header(bannerLight, {pkg: pkg}))
-        .pipe(gulp.dest('dist/ui/'))
+        .pipe(gulp.dest('dist/minified/ui/'))
         .pipe($.size({title: 'trumbowyg.min.css'}));
 };
 
@@ -138,7 +139,7 @@ const pluginsStyles = function () {
         .pipe($.rename({suffix: '.min'}))
         .pipe($.minifyCss())
         .pipe($.header(bannerLight, {pkg: pkg}))
-        .pipe(gulp.dest('dist/plugins/'))
+        .pipe(gulp.dest('dist/minified/plugins/'))
         .pipe($.size({title: 'Plugins styles'}));
 };
 
