@@ -19,9 +19,9 @@ $dark-color: #222;
 $dark-background-color-editor: #000;
 $dark-background-color-pane: lighten($dark-color, 3%);
 $dark-background-color-button: #222;
-$dark-background-color-dropdown: #fff;
-$dark-background-color-dropdown-button: #fff;
-$dark-background-color-modal: #fff;
+$dark-background-color-dropdown: #000;
+$dark-background-color-dropdown-button: #000;
+$dark-background-color-modal: #000;
 $dark-border-color: #343434;
 $dark-text-color: #fff;
 $dark-text-color-dropdown-button: #fff;
@@ -741,12 +741,12 @@ body.trumbowyg-body-fullscreen {
         box-shadow: rgba(0, 0, 0, .3) 0 2px 3px;
 
         button {
-            background: $dark-background-color-modal-button;
+            background: $dark-background-color-dropdown-button;
             color: $dark-text-color;
 
             &:hover,
             &:focus {
-                background: $dark-background-color-modal;
+                background: $dark-background-color-button;
             }
         }
     }
