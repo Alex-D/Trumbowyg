@@ -74,6 +74,9 @@ $modal-label-width: 150px;
 .trumbowyg-box .trumbowyg-editor {
     margin: 0 auto;
     color: $light-text-color;
+    > *:first-child {
+        margin-top: 0;
+    }
 }
 
 .trumbowyg-editor,
