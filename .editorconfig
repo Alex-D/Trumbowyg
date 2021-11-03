@@ -4,7 +4,7 @@
 
 root = true
 
-[*.{css,html,js,json,scss,xml}]
+[*.{css,html,js,json,scss,svg}]
 charset = utf-8
 indent_style = space
 indent_size = 4
