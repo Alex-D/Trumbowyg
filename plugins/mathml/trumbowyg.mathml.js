@@ -63,9 +63,7 @@
         plugins: {
             mathml: {
                 init: function (trumbowyg) {
-                    var editClass = 'mathMlContainer',
-
-                    mathMLoptions = {
+                    var mathMlOptions = {
                         formulas: {
                             label: trumbowyg.lang.formulas,
                             required: true,
@@ -79,9 +77,9 @@
                             type: 'checkbox',
                             required: false,
                         }
-                    },
+                    };
 
-                    mathmlCallback = function (v) {
+                    var mathmlCallback = function (v) {
                         var delimiter = v.inline ? '$' : '$$';
                         if (trumbowyg.currentMathNode) {
                             $(trumbowyg.currentMathNode)
@@ -89,7 +87,7 @@
                                 .attr('formulas', v.formulas)
                                 .attr('inline', (v.inline ? 'true' : 'false'));
                         } else {
-                            var html = '<span class="'+ editClass +'" contenteditable="false" formulas="' + v.formulas + '" inline="' + (v.inline ? 'true' : 'false') + '" >' + delimiter + ' ' + v.formulas + ' ' + delimiter + '</span>';
+                            var html = '<span contenteditable="false" formulas="' + v.formulas + '" inline="' + (v.inline ? 'true' : 'false') + '" >' + delimiter + ' ' + v.formulas + ' ' + delimiter + '</span>';
                             var node = $(html)[0];
                             node.onclick = openModal;
 
@@ -100,38 +98,38 @@
                         trumbowyg.currentMathNode = false;
                         MathJax.Hub.Queue(['Typeset', MathJax.Hub]);
                         return true;
-                    },
+                    };
 
-                    openModal = function () {
+                    var openModal = function () {
                         trumbowyg.currentMathNode = this;
-                        mathMLoptions.formulas.value = $(this).attr('formulas');
+                        mathMlOptions.formulas.value = $(this).attr('formulas');
 
                         if ($(this).attr('inline') === 'true') {
-                            mathMLoptions.inline.attributes.checked = true;
+                            mathMlOptions.inline.attributes.checked = true;
                         } else {
-                            delete mathMLoptions.inline.attributes.checked;
+                            delete mathMlOptions.inline.attributes.checked;
                         }
 
-                        trumbowyg.openModalInsert(trumbowyg.lang.mathml, mathMLoptions, mathmlCallback);
-                    },
+                        trumbowyg.openModalInsert(trumbowyg.lang.mathml, mathMlOptions, mathmlCallback);
+                    };
 
-                    btnDef = {
+                    var btnDef = {
                         fn: function () {
                             trumbowyg.saveRange();
 
-                            mathMLoptions.formulas.value = trumbowyg.getRangeText();
-                            mathMLoptions.inline.attributes.checked = true;
-                            trumbowyg.openModalInsert(trumbowyg.lang.mathml, mathMLoptions, mathmlCallback);
+                            mathMlOptions.formulas.value = trumbowyg.getRangeText();
+                            mathMlOptions.inline.attributes.checked = true;
+                            trumbowyg.openModalInsert(trumbowyg.lang.mathml, mathMlOptions, mathmlCallback);
                         }
                     };
-                    
-                    trumbowyg.$ta.on('tbwinit',() => {
-                        var nodes = trumbowyg.$ed.find('.'+ editClass)
-                        
-                        nodes.each((i,elem)=>{
+
+                    trumbowyg.$ta.on('tbwinit', function () {
+                        var nodes = trumbowyg.$ed.find('[formulas]');
+
+                        nodes.each(function (i, elem) {
                             elem.onclick = openModal;
-                        })
-                    })
+                        });
+                    });
 
                     trumbowyg.addBtnDef('mathml', btnDef);
                 }
