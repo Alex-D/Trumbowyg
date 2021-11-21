@@ -242,8 +242,15 @@
         // Temporary size
         trumbowyg.execCmd('fontSize', '1');
 
+        var fontElements = trumbowyg.$ed.find('font[size="1"]');
+
+        // Remove previous font-size span tags. Needed to prevent Firefox from
+        // nesting multiple spans on font-size changes.
+        // (see https://github.com/Alex-D/Trumbowyg/issues/1252)
+        fontElements.find('span[style*="font-size"]').contents().unwrap();
+
         // Find <font> elements that were added and change to <span> with chosen size
-        trumbowyg.$ed.find('font[size="1"]').replaceWith(function() {
+        fontElements.replaceWith(function() {
             return $('<span/>', {
                 css: { 'font-size': size },
                 html: this.innerHTML,
