@@ -24,6 +24,11 @@
             fr: {
                 indent: 'Augmenter le retrait',
                 outdent: 'Diminuer le retrait'
+            },
+            pt_br: {
+                indent: 'Aumentar Recuo',
+                outdent: 'Diminuir Recuo'
+            
             }
         }
     });
