@@ -54,6 +54,11 @@
                 rubyModal: 'Modal ruby',
                 rubyText: 'Texto ruby'
             },
+            ru: {
+                ruby: 'Вставить ruby текст',
+                rubyModal: 'Ruby аннотация',
+                rubyText: 'Ruby текст'
+            },
             tr: {
                 ruby: 'Ruby metni ekle',
                 rubyModal: 'Ruby modal',

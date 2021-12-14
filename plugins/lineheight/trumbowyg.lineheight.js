@@ -85,6 +85,15 @@
                     '2.0': 'Extra grande'
                 }
             },
+            ru: {
+                lineheight: 'Межстрочный интервал',
+                lineheights: {
+                    '0.9': 'Маленький',
+                    'normal': 'Обычный',
+                    '1.5': 'Большой',
+                    '2.0': 'Очень большой'
+                }
+            },
             tr: {
                 lineheight: 'Satır yüksekliği',
                 lineheights: {

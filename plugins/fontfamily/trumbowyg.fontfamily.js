@@ -31,6 +31,9 @@
             pt_br: {
                 fontFamily: 'Fonte',
             },
+            ru: {
+                fontFamily: 'Шрифт'
+            },
             tr: {
                 fontFamily: 'Yazı tipi'
             },

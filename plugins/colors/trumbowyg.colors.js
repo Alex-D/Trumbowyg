@@ -70,7 +70,9 @@
             },
             ru: {
                 foreColor: 'Цвет текста',
-                backColor: 'Цвет выделения текста'
+                backColor: 'Цвет выделения текста',
+                foreColorRemove: 'Очистить цвет текста',
+                backColorRemove: 'Очистить цвет выделения текста'
             },
             sk: {
                 foreColor: 'Farba textu',

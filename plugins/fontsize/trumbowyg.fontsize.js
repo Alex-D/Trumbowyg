@@ -170,6 +170,22 @@
                     value: '48px'
                 }
             },
+            ru: {
+                fontsize: 'Размер шрифта',
+                fontsizes: {
+                    'x-small': 'Очень маленький',
+                    'small': 'Маленький',
+                    'medium': 'Обычный',
+                    'large': 'Большой',
+                    'x-large': 'Очень большой',
+                    'custom': 'Пользовательский'
+                },
+                fontCustomSize: {
+                    title: 'Пользовательский Размер Шрифта',
+                    label: 'Размер Шрифта',
+                    value: '48px'
+                }
+            },
             tr: {
                 fontsize: 'Yazı boyutu',
                 fontsizes: {

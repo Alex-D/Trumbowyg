@@ -47,6 +47,11 @@
                 formulas: 'Fórmulas',
                 inline: 'Em linha'
             },
+            ru: {
+                mathml: 'Вставить формулу',
+                formulas: 'Формула',
+                inline: 'Строчный элемент'
+            },
             tr: {
                 mathml: 'Formül Ekle',
                 formulas: 'Formüller',

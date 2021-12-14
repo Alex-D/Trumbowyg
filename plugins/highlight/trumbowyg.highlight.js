@@ -286,6 +286,10 @@
             pt_br: {
                 highlight: 'Realçar sintaxe de código'
             },
+            ru: {
+                highlight: 'Подсветка синтаксиса кода',
+                highlightLine: 'Подсветить строки, напр.: 1,3-5'
+            },
             // jshint camelcase:true
         },
         // Add our plugin to Trumbowyg registered plugins

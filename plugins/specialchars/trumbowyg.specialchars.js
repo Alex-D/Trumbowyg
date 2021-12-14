@@ -40,6 +40,9 @@
             ko: {
                 specialChars: '특수문자'
             },
+            ru: {
+                specialChars: 'Специальные символы'
+            },
         },
         plugins: {
             specialchars: {

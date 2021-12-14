@@ -59,6 +59,12 @@
                     undo: 'Desfazer'
                 }
             },
+            ru: {
+                history: {
+                    redo: 'Повторить',
+                    undo: 'Отменить'
+                }
+            },
             zh_tw: {
                history: {
                    redo: '重做',

@@ -16,6 +16,9 @@
       hu: {
         giphy: 'GIF beszúrás',
       },
+      ru: {
+        giphy: 'Вставить GIF',
+      },
       tr: {
         giphy: 'GIF ekle',
       },
