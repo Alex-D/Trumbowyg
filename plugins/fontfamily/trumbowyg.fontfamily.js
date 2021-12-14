@@ -7,6 +7,9 @@
             en: {
                 fontFamily: 'Font'
             },
+            by: {
+                fontFamily: 'Шрыфт'
+            },
             da: {
                 fontFamily: 'Skrifttype'
             },

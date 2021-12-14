@@ -7,6 +7,9 @@
       en: {
         giphy: 'Insert GIF',
       },
+      by: {
+        giphy: 'Уставіць GIF',
+      },
       et: {
         giphy: 'Sisesta GIF',
       },

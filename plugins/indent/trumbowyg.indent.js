@@ -18,6 +18,10 @@
                 indent: 'Indent',
                 outdent: 'Outdent'
             },
+            by: {
+                indent: 'Водступ',
+                outdent: 'Выступ'
+            },
             et: {
                 indent: 'Taande suurendamine',
                 outdent: 'Taande vähendamine'

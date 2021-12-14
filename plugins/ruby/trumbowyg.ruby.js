@@ -19,6 +19,11 @@
                 rubyModal: 'Ruby modal',
                 rubyText: 'Ruby text'
             },
+            by: {
+                ruby: 'Уставіць ruby тэкст',
+                rubyModal: 'Ruby анатацыя',
+                rubyText: 'Ruby тэкст'
+            },
             da: {
                 ruby: 'Tilføj ruby tekst',
                 rubyModal: 'Ruby modal',

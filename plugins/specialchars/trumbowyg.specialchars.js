@@ -28,6 +28,9 @@
             en: {
                 specialChars: 'Special characters'
             },
+            by: {
+                specialChars: 'Спецыяльныя сімвалы'
+            },
             et: {
                 specialChars: 'Erimärgid'
             },

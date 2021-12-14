@@ -13,6 +13,15 @@
                     '2.0': 'Extra large'
                 }
             },
+            by: {
+                lineheight: 'Міжрадковы інтэрвал',
+                lineheights: {
+                    '0.9': 'Маленькі',
+                    'normal': 'Звычайны',
+                    '1.5': 'Вялікі',
+                    '2.0': 'Вельмі вялікі'
+                }
+            },
             da: {
                 lineheight: 'Linjehøjde',
                 lineheights: {

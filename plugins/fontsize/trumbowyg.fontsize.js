@@ -20,6 +20,22 @@
                     value: '48px'
                 }
             },
+            by: {
+                fontsize: 'Памер шрыфта',
+                fontsizes: {
+                    'x-small': 'Вельмі маленькі',
+                    'small': 'Маленькі',
+                    'medium': 'Звычайны',
+                    'large': 'Вялікі',
+                    'x-large': 'Вельмі вялікі',
+                    'custom': 'Карыстальніцкі'
+                },
+                fontCustomSize: {
+                    title: 'Карыстальніцкі Памер Шрыфта',
+                    label: 'Памер Шрыфта',
+                    value: '48px'
+                }
+            },
             da: {
                 fontsize: 'Skriftstørrelse',
                 fontsizes: {

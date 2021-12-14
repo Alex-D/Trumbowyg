@@ -17,6 +17,11 @@
                 formulas: 'Formulas',
                 inline: 'Inline'
             },
+            by: {
+                mathml: 'Уставіць формулу',
+                formulas: 'Формула',
+                inline: 'Inline-элемент'
+            },
             da: {
                 mathml: 'Indsæt formler',
                 formulas: 'Formler',

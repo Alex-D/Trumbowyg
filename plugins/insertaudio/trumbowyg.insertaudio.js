@@ -37,6 +37,9 @@
             en: {
                 insertAudio: 'Insert Audio'
             },
+            by: {
+                insertAudio: 'Уставіць аўдыё'
+            },
             da: {
                 insertAudio: 'Indsæt lyd'
             },

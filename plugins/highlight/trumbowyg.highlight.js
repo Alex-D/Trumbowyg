@@ -269,6 +269,10 @@
                 highlight: 'Code syntax highlight',
                 highlightLine: 'Highlight lines, e.g.: 1,3-5'
             },
+            by: {
+                highlight: 'Падсветка сінтаксісу кода',
+                highlightLine: 'Падсвятліць радкі, напр.: 1,3-5'
+            },
             es: {
                 highlight: 'Resaltado de sintaxis de código',
                 highlightLine: 'Resaltar lineas, ej: 1,3-5'
