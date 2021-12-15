@@ -20,6 +20,12 @@
                 foreColorRemove: 'Remove text color',
                 backColorRemove: 'Remove background color'
             },
+            by: {
+                foreColor: 'Колер тэксту',
+                backColor: 'Колер фону тэксту',
+                foreColorRemove: 'Выдаліць колер тэксту',
+                backColorRemove: 'Выдаліць колер фону тэксту'
+            },
             cs: {
                 foreColor: 'Barva textu',
                 backColor: 'Barva pozadí'
@@ -70,7 +76,9 @@
             },
             ru: {
                 foreColor: 'Цвет текста',
-                backColor: 'Цвет выделения текста'
+                backColor: 'Цвет выделения текста',
+                foreColorRemove: 'Очистить цвет текста',
+                backColorRemove: 'Очистить цвет выделения текста'
             },
             sk: {
                 foreColor: 'Farba textu',

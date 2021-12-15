@@ -20,6 +20,22 @@
                     value: '48px'
                 }
             },
+            by: {
+                fontsize: 'Памер шрыфта',
+                fontsizes: {
+                    'x-small': 'Вельмі маленькі',
+                    'small': 'Маленькі',
+                    'medium': 'Звычайны',
+                    'large': 'Вялікі',
+                    'x-large': 'Вельмі вялікі',
+                    'custom': 'Карыстальніцкі'
+                },
+                fontCustomSize: {
+                    title: 'Карыстальніцкі Памер Шрыфта',
+                    label: 'Памер Шрыфта',
+                    value: '48px'
+                }
+            },
             da: {
                 fontsize: 'Skriftstørrelse',
                 fontsizes: {
@@ -167,6 +183,22 @@
                 fontCustomSize: {
                     title: 'Tamanho de Fonte Personalizado',
                     label: 'Tamanho de Fonte',
+                    value: '48px'
+                }
+            },
+            ru: {
+                fontsize: 'Размер шрифта',
+                fontsizes: {
+                    'x-small': 'Очень маленький',
+                    'small': 'Маленький',
+                    'medium': 'Обычный',
+                    'large': 'Большой',
+                    'x-large': 'Очень большой',
+                    'custom': 'Пользовательский'
+                },
+                fontCustomSize: {
+                    title: 'Пользовательский Размер Шрифта',
+                    label: 'Размер Шрифта',
                     value: '48px'
                 }
             },

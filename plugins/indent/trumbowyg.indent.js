@@ -13,9 +13,14 @@
 
     $.extend(true, $.trumbowyg, {
         langs: {
+            // jshint camelcase:false
             en: {
                 indent: 'Indent',
                 outdent: 'Outdent'
+            },
+            by: {
+                indent: 'Водступ',
+                outdent: 'Выступ'
             },
             et: {
                 indent: 'Taande suurendamine',
@@ -28,8 +33,12 @@
             pt_br: {
                 indent: 'Aumentar Recuo',
                 outdent: 'Diminuir Recuo'
-            
-            }
+            },
+            ru: {
+                indent: 'Отступ',
+                outdent: 'Выступ'
+            },
+            // jshint camelcase:true
         }
     });
 
