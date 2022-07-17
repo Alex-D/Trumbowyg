@@ -46,6 +46,9 @@
             ru: {
                 specialChars: 'Специальные символы'
             },
+            tr: {
+                specialChars: 'Özel karakterler'
+            },
         },
         plugins: {
             specialchars: {
