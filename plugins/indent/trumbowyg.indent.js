@@ -38,6 +38,10 @@
                 indent: 'Отступ',
                 outdent: 'Выступ'
             },
+            tr: {
+                indent: 'Girinti',
+                outdent: 'Çıkıntı'
+            },
             // jshint camelcase:true
         }
     });

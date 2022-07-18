@@ -71,6 +71,12 @@
                     undo: 'Отменить'
                 }
             },
+            tr: {
+                history: {
+                    redo: 'Geri al',
+                    undo: 'Yinele'
+                }
+            },
             zh_tw: {
                history: {
                    redo: '重做',
