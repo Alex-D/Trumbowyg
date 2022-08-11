@@ -1,4 +1,4 @@
-var baseURL = window.location.hostname.indexOf('github.') !== -1 ? '//rawcdn.githack.com/Alex-D/Trumbowyg/v2.25.0/' : '../../../';
+var baseURL = window.location.hostname.indexOf('github.') !== -1 ? '//rawcdn.githack.com/Alex-D/Trumbowyg/v2.25.2/' : '../../../';
 var styleLoadingContainer = document.querySelector('.loading-head');
 var scriptLoadingContainer = document.querySelector('.loading-body');
 
