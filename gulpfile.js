@@ -70,7 +70,11 @@ const scripts = gulp.series(testScripts, function scripts() {
         .pipe(gulp.dest('dist/'))
         .pipe($.size({title: 'trumbowyg.js'}))
         .pipe($.rename({suffix: '.min'}))
-        .pipe($.terser())
+        .pipe($.terser({
+            format: {
+                comments: false
+            }
+        }))
         .pipe($.header(bannerLight, {pkg: pkg}))
         .pipe(gulp.dest('dist/'))
         .pipe($.size({title: 'trumbowyg.min.js'}));
@@ -80,7 +84,11 @@ const pluginsScripts = gulp.series(testPluginsScripts, function pluginsScripts()
     return gulp.src(paths.pluginsScripts)
         .pipe(gulp.dest('dist/plugins/'))
         .pipe($.rename({suffix: '.min'}))
-        .pipe($.terser())
+        .pipe($.terser({
+            format: {
+                comments: /trumbowyg\./
+            }
+        }))
         .pipe(gulp.dest('dist/plugins/'));
 });
 
@@ -109,12 +117,14 @@ const icons = function () {
 const styles = function () {
     return gulp.src(paths.styles)
         .pipe($.sass())
+        .pipe($.sourcemaps.init())
         .pipe($.autoprefixer(['last 1 version', '> 1%', 'ff >= 20', 'ie >= 9', 'opera >= 12', 'Android >= 2.2'], {cascade: true}))
         .pipe($.header(banner, {pkg: pkg, description: 'Default stylesheet for Trumbowyg editor'}))
         .pipe(gulp.dest('dist/ui/'))
         .pipe($.size({title: 'trumbowyg.css'}))
         .pipe($.rename({suffix: '.min'}))
         .pipe($.minifyCss())
+        .pipe($.sourcemaps.write('.'))
         .pipe($.header(bannerLight, {pkg: pkg}))
         .pipe(gulp.dest('dist/ui/'))
         .pipe($.size({title: 'trumbowyg.min.css'}));

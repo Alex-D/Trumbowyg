@@ -2,7 +2,7 @@
   "name": "trumbowyg",
   "title": "Trumbowyg",
   "description": "A lightweight WYSIWYG editor",
-  "version": "2.25.1",
+  "version": "2.25.2",
   "main": "dist/trumbowyg.js",
   "license": "MIT",
   "scripts": {
@@ -25,6 +25,7 @@
     "gulp-rename": "2.0.0",
     "gulp-sass": "4.1.0",
     "gulp-size": "3.0.0",
+    "gulp-sourcemaps": "3.0.0",
     "gulp-svgmin": "3.0.0",
     "gulp-svgstore": "7.0.1",
     "gulp-terser": "2.0.1",
@@ -55,5 +56,9 @@
     "rich text",
     "contenteditable",
     "trumbowyg"
-  ]
+  ],
+  "volta": {
+    "node": "14.18.1",
+    "npm": "6.14.15"
+  }
 }
