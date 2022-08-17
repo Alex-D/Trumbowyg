@@ -4,6 +4,7 @@
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
  * Author: Matjaz Zavski (https://github.com/matjaz321)
+ * Mod: Uros Gaber (uros@powercom.si)
  */
 
 jQuery.trumbowyg.langs.sl = {
@@ -28,20 +29,20 @@ jQuery.trumbowyg.langs.sl = {
     orderedList: 'Oštevilčen seznam',
 
     image: 'Slika',
-    insertImage: 'Vzstavi sliko',
-    insertVideo: 'Vzstavi video',
+    insertImage: 'Vstavi sliko',
+    insertVideo: 'Vstavi video',
     link: 'Povezava',
-    createLink: 'Vzstavi povezavo',
+    createLink: 'Vstavi povezavo',
     unlink: 'Odstrani povezavo',
 
     justifyLeft: 'Poravnava levo',
-    justifyCenter: 'Poravnaj na sredino',
+    justifyCenter: 'Sredinska poravnava',
     justifyRight: 'Poravnava desno',
     justifyFull: 'Obojestranska poravnava',
 
     horizontalRule: 'Vstavite vodoravno črto',
-    removeformat: 'Odstrani format',
-
+    removeformat: 'Odstrani obliko',
+    
     fullscreen: 'Celozaslonski način',
 
     close: 'Zapri',
@@ -49,7 +50,7 @@ jQuery.trumbowyg.langs.sl = {
     submit: 'Potrdi',
     reset: 'Resetiraj',
 
-    required: 'Erforderlich',
+    required: 'Zahtevano',
     description: 'Opis',
     title: 'Naslov',
     text: 'Besedilo'
