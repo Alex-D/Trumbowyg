@@ -4,12 +4,13 @@
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
  * Author: Matjaz Zavski (https://github.com/matjaz321)
+ * Mod: Uros Gaber (uros@powercom.si)
  */
 
 jQuery.trumbowyg.langs.sl = {
     viewHTML: 'Prikaži HTML',
 
-    formatting: 'Formatiranje',
+    formatting: 'Oblika',
     p: 'Odstavek',
     blockquote: 'Citat',
     code: 'Koda',
@@ -47,9 +48,9 @@ jQuery.trumbowyg.langs.sl = {
     close: 'Zapri',
 
     submit: 'Potrdi',
-    reset: 'Resetiraj',
+    reset: 'Prekliči',
 
-    required: 'Erforderlich',
+    required: 'Zahtevano',
     description: 'Opis',
     title: 'Naslov',
     text: 'Besedilo'
