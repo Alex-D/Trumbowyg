@@ -1115,7 +1115,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 $btn.addClass(prefix + 'active');
 
                 $dropdown.css({
-                    position: 'absolute',
+                    position: t.$btnPane.css('position') === "fixed" ? 'fixed' : 'absolute', // change dropdown menu position to fixed if the toolbar is also fixed
                     top: $btn.offset().top - t.$btnPane.offset().top + $btn.outerHeight(),
                     left: (t.o.fixedFullWidth && t.isFixed) ? btnOffsetLeft : (btnOffsetLeft - t.$btnPane.offset().left)
                 }).show();
@@ -1914,6 +1914,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             t.clearButtonPaneStatus();
 
             $.each(tags, function (i, tag) {
+                if (typeof tag === "undefined") return; // in the unlikely event that the tag is not defined skip it as to not raise an error
                 var btnName = t.tagToButton[tag.toLowerCase()],
                     $btn = $('.' + prefix + btnName + '-button', t.$btnPane);
 
