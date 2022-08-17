@@ -10,7 +10,7 @@
 jQuery.trumbowyg.langs.sl = {
     viewHTML: 'Prikaži HTML',
 
-    formatting: 'Formatiranje',
+    formatting: 'Oblika',
     p: 'Odstavek',
     blockquote: 'Citat',
     code: 'Koda',
@@ -29,26 +29,26 @@ jQuery.trumbowyg.langs.sl = {
     orderedList: 'Oštevilčen seznam',
 
     image: 'Slika',
-    insertImage: 'Vstavi sliko',
-    insertVideo: 'Vstavi video',
+    insertImage: 'Vzstavi sliko',
+    insertVideo: 'Vzstavi video',
     link: 'Povezava',
-    createLink: 'Vstavi povezavo',
+    createLink: 'Vzstavi povezavo',
     unlink: 'Odstrani povezavo',
 
     justifyLeft: 'Poravnava levo',
-    justifyCenter: 'Sredinska poravnava',
+    justifyCenter: 'Poravnaj na sredino',
     justifyRight: 'Poravnava desno',
     justifyFull: 'Obojestranska poravnava',
 
     horizontalRule: 'Vstavite vodoravno črto',
-    removeformat: 'Odstrani obliko',
+    removeformat: 'Odstrani format',
 
     fullscreen: 'Celozaslonski način',
 
     close: 'Zapri',
 
     submit: 'Potrdi',
-    reset: 'Resetiraj',
+    reset: 'Prekliči',
 
     required: 'Zahtevano',
     description: 'Opis',
