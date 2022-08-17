@@ -4,6 +4,7 @@
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
  * Author : Sven Dunemann [dunemann@forelabs.eu]
+ * Mod : Uros Gaber [uros@powercom.si] - Added Slovenian (sl) translations
  */
 
 (function ($) {
@@ -28,6 +29,17 @@
                 tableDeleteColumn: 'Delete column',
                 tableDestroy: 'Delete table',
                 error: 'Error'
+            },
+            sl: {
+                table: 'Dodaj tabelo',
+                tableAddRow: 'Dodaj vrstico',
+                tableAddRowAbove: 'Vrini vrstico',
+                tableAddColumnLeft: 'Vrini stolpec',
+                tableAddColumn: 'Dodaj stolpec',
+                tableDeleteRow: 'Izbriši vrstico',
+                tableDeleteColumn: 'Izbriši stolpec',
+                tableDestroy: 'Izbriši tabelo',
+                error: 'Napaka'
             },
             cs: {
                 table: 'Vytvořit příkaz Table',
