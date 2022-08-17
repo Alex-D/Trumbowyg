@@ -42,7 +42,7 @@ jQuery.trumbowyg.langs.sl = {
 
     horizontalRule: 'Vstavite vodoravno črto',
     removeformat: 'Odstrani obliko',
-    
+
     fullscreen: 'Celozaslonski način',
 
     close: 'Zapri',
