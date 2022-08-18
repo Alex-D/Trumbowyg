@@ -17,6 +17,12 @@
                     undo: 'Undo'
                 }
             },
+            sl: {
+                history: {
+                    redo: 'Ponovno uveljavi',
+                    undo: 'Razveljavi'
+                }
+            },
             by: {
                 history: {
                     redo: 'Паўтарыць',
