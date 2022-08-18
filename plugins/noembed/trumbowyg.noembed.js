@@ -24,6 +24,10 @@
                 noembed: 'Noembed',
                 noembedError: 'Error'
             },
+            sl: {
+                noembed: 'Noembed',
+                noembedError: 'Napaka'
+            },
             by: {
                 noembedError: 'Памылка'
             },

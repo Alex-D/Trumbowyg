@@ -20,6 +20,22 @@
                     value: '48px'
                 }
             },
+            sl: {
+                fontsize: 'Velikost pisave',
+                fontsizes: {
+                    'x-small': 'Ekstra majhna',
+                    'small': 'Majhna',
+                    'medium': 'Navadno',
+                    'large': 'Velika',
+                    'x-large': 'Ekstra velika',
+                    'custom': 'Poljubna'
+                },
+                fontCustomSize: {
+                    title: 'Poljubna velikost pisave',
+                    label: 'Velikost pisave',
+                    value: '48px'
+                }
+            },
             by: {
                 fontsize: 'Памер шрыфта',
                 fontsizes: {

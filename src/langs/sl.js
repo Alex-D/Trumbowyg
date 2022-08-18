@@ -29,10 +29,10 @@ jQuery.trumbowyg.langs.sl = {
     orderedList: 'Oštevilčen seznam',
 
     image: 'Slika',
-    insertImage: 'Vzstavi sliko',
-    insertVideo: 'Vzstavi video',
+    insertImage: 'Vstavi sliko',
+    insertVideo: 'Vstavi video',
     link: 'Povezava',
-    createLink: 'Vzstavi povezavo',
+    createLink: 'Vstavi povezavo',
     unlink: 'Odstrani povezavo',
 
     justifyLeft: 'Poravnava levo',
