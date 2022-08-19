@@ -183,7 +183,12 @@
                     'medium': 'Normaal',
                     'large': 'Groot',
                     'x-large': 'Extra groot',
-                    'custom': 'Tilpasset'
+                    'custom': 'Handmatig'
+                },
+                fontCustomSize: {
+                    title: 'Handmatige lettergrootte',
+                    label: 'Lettergrootte',
+                    value: '48px'
                 }
             },
             pt_br: {
