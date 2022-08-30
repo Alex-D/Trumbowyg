@@ -115,7 +115,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
         urlProtocol: false,
         minimalLinks: false,
-        defaultLinkTarget: undefined,
+        defaultLinkTarget: '_self',
 
         svgPath: null
     },
@@ -1289,7 +1289,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 text = new XMLSerializer().serializeToString(selectedRange.cloneContents()) || selectedRange + '',
                 url,
                 title,
-                target;
+                target,
+                targetOptions = ['_self', '_blank', '_parent', '_top'];
 
             while (['A', 'DIV'].indexOf(node.nodeName) < 0) {
                 node = node.parentNode;
@@ -1330,7 +1331,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     },
                     target: {
                         label: t.lang.target,
-                        value: target
+                        value: target,
+                        options: targetOptions
                     }
                 });
             }
@@ -1676,10 +1678,20 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                   }
                   html += field.type(field, fieldId, prefix, lg);
                 } else {
-                  html += '<div class="' + prefix + 'input-row">' +
-                    '<div class="' + prefix + 'input-infos"><label for="' + fieldId + '"><span>' + (lg[l] ? lg[l] : l) + '</span></label></div>' +
-                    '<div class="' + prefix + 'input-html"><input id="' + fieldId + '" type="' + (field.type || 'text') + '" name="' + n + '" ' + attr;
-                    html += (field.type === 'checkbox' && field.value ? ' checked="checked"' : '') + ' value="' + (field.value || '').replace(/"/g, '&quot;') + '"></div>';
+                  html += '<div class="' + prefix + 'input-row">';
+                  html += '<div class="' + prefix + 'input-infos"><label for="' + fieldId + '"><span>' + (lg[l] ? lg[l] : l) + '</span></label></div>';
+                  html += '<div class="' + prefix + 'input-html">';
+
+                  if (field.options !== undefined && Array.isArray(field.options)) {
+                      html += '<select name="target">';
+                      html += field.options.map((targetValue) => {
+                          return `<option value="${targetValue}" ${targetValue === field.value ? "selected" : ""}>${targetValue}</option>`;
+                      }).join('');
+                      html += '</select>';
+                  } else {
+                      html += '<input id="' + fieldId + '" type="' + (field.type || 'text') + '" name="' + n + '" ' + attr;
+                      html += (field.type === 'checkbox' && field.value ? ' checked="checked"' : '') + ' value="' + (field.value || '').replace(/"/g, '&quot;') + '"></div>';
+                  }
                   html += '</div>';
                 }
             });
