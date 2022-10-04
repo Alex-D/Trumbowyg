@@ -103,17 +103,21 @@
                                         cache: false,
                                         dataType: 'json',
 
-                                        success: trumbowyg.o.plugins.noembed.success || function (data) {
-                                            if (data.html) {
-                                                trumbowyg.execCmd('insertHTML', data.html);
-                                                setTimeout(function () {
-                                                    trumbowyg.closeModal();
-                                                }, 250);
+                                        success: function (data) {
+                                            if (trumbowyg.o.plugins.noembed.success) {
+                                                trumbowyg.o.plugins.noembed.success(data, trumbowyg, $modal)
                                             } else {
-                                                trumbowyg.addErrorOnModalField(
-                                                    $('input[type=text]', $modal),
-                                                    data.error
-                                                );
+                                                if (data.html) {
+                                                    trumbowyg.execCmd('insertHTML', data.html);
+                                                    setTimeout(function () {
+                                                        trumbowyg.closeModal();
+                                                    }, 250);
+                                                } else {
+                                                    trumbowyg.addErrorOnModalField(
+                                                        $('input[type=text]', $modal),
+                                                        data.error
+                                                    );
+                                                }
                                             }
                                         },
                                         error: trumbowyg.o.plugins.noembed.error || function () {
