@@ -65,10 +65,12 @@
 
     var html = response.data
       .filter(function (gifData) {
-        return gifData.images.downsized.url !== '';
+        var downsized = gifData.images.downsized || gifData.images.downsized_medium;
+        return !!downsized.url;
       })
       .map(function (gifData) {
-        var image = gifData.images.downsized,
+        var downsized = gifData.images.downsized || gifData.images.downsized_medium;
+        var image = downsized,
             imageRatio = image.height / image.width;
 
         return '<div class="img-container"><img src=' + image.url + ' width="' + width + '" height="' + imageRatio * width + '" loading="lazy" onload="this.classList.add(\'tbw-loaded\')"/></div>';
