@@ -71,9 +71,11 @@
       .map(function (gifData) {
         var downsized = gifData.images.downsized || gifData.images.downsized_medium;
         var image = downsized,
-            imageRatio = image.height / image.width;
+            imageRatio = image.height / image.width,
+            altText = gifData.title;
 
-        return '<div class="img-container"><img src=' + image.url + ' width="' + width + '" height="' + imageRatio * width + '" loading="lazy" onload="this.classList.add(\'tbw-loaded\')"/></div>';
+        var imgHtml = '<img src=' + image.url + ' width="' + width + '" height="' + imageRatio * width + '" alt="' + altText + '" loading="lazy" onload="this.classList.add(\'tbw-loaded\')"/>';
+        return '<div class="img-container">' + imgHtml + '</div>';
       })
       .join('')
     ;
@@ -91,8 +93,18 @@
     }
     $giphyModal.append(html);
     $('img', $giphyModal).on('click', function () {
+      var src = $(this).attr('src'),
+          alt = $(this).attr('alt');
       trumbowyg.restoreRange();
-      trumbowyg.execCmd('insertImage', $(this).attr('src'), false, true);
+      trumbowyg.execCmd('insertImage', src, false, true);
+
+      // relay alt tag into inserted image
+      if (alt){
+        var $img = $('img[src="' + src + '"]:not([alt])',trumbowyg.$box);
+        $img.attr('alt', alt);
+        // Note: This seems to fire relatively early and could be wrapped in a setTimeout if needed
+        trumbowyg.syncCode();
+      }
       $('img', $giphyModal).off();
       trumbowyg.closeModal();
     });
