@@ -74,7 +74,7 @@
             imageRatio = image.height / image.width,
             altText = gifData.title;
 
-        var imgHtml = '<img src=' + image.url + ' width="' + width + '" height="' + imageRatio * width + '" alt="' + altText + '" loading="lazy" onload="this.classList.add(\'tbw-loaded\')"/>';
+        var imgHtml = '<img src=' + image.url + ' width="' + width + '" height="' + imageRatio * width + '" alt="' + altText + '" loading="lazy" />';
         return '<div class="img-container">' + imgHtml + '</div>';
       })
       .join('')
@@ -92,6 +92,20 @@
       $giphyModal.empty();
     }
     $giphyModal.append(html);
+
+    // Remove gray overlay on image load
+    // moved here from inline callback definition due to CSP issue
+    // Note: this is being done post-factum because load event doesn't bubble up and so can't be delegated
+    var addLoadedClass = function (img) { img.classList.add('tbw-loaded'); };
+    $('img', $giphyModal).each(function (){
+      var img = this;
+      if (img.complete){ // images load instantly when cached and esp. when loaded in previous modal open
+        addLoadedClass(img);
+      } else {
+        img.addEventListener('load', function(){ addLoadedClass(this); });
+      }
+    });
+
     $('img', $giphyModal).on('click', function () {
       var src = $(this).attr('src'),
           alt = $(this).attr('alt');
