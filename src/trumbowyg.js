@@ -264,7 +264,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }
         }
 
-        var baseHref = !!t.doc.querySelector('base') ? window.location.href.split(/[?#]/)[0] : '';
+        var baseHref = !!t.doc.querySelector('base') ? window.location.href.replace(window.location.hash, '') : '';
         t.svgPath = $trumbowyg.svgAbsoluteUseHref ? svgPathOption : baseHref;
 
 
