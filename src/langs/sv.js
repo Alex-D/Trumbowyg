@@ -43,6 +43,7 @@ jQuery.trumbowyg.langs.sv = {
     justifyFull: 'Marginaljustera',
 
     horizontalRule: 'Horisontell linje',
+    removeformat: 'Ta bort formatering',
 
     fullscreen: 'Fullskärm',
 
