@@ -75,7 +75,7 @@
                         <li><a href="#image-width-modal-edit">Image width modal edit</a></li>
                         <li><a href="#url-protocol">URL protocol</a></li>
                         <li><a href="#minimal-links">Minimal links</a></li>
-                        <li><a href="#default-link-target">Default link target</a></li>
+                        <li><a href="#link-targets">Link targets</a></li>
                         <li><a href="#tag-classes">Tag classes</a></li>
                     </ul>
                 </li>
@@ -807,22 +807,36 @@ $('.trumbowyg').trumbowyg({
         </div>
 
 
-        <div class="feature" data-added="2.20.0">
-            <h3 id="default-link-target">Default link target</h3>
-            <p class="added-feature">Added in 2.20.0</p>
+        <div class="feature" data-added="2.26.0">
+            <h3 id="link-targets">Link targets</h3>
+            <p class="added-feature">Added in 2.26.0</p>
             <p>
                 Allow to set link target attribute value to what you want, even if the <code>minimalLinks</code>
                 option is set to <code>true</code>.
             </p>
+            <p>
+                First value is the default value (similar to previous <code>defaultLinkTarget</code> option).
+            </p>
             <pre><code class="javascript">
 $('.trumbowyg').trumbowyg({
-    defaultLinkTarget: '_blank'
+    linkTargets: ['_blank', '_self']
 });
             </code></pre>
             <p class="note">
-                Default link target does nothing by default (set to
-                <code>undefined</code>).
+                Link targets only list most used options by default (set to <code>['_self', '_blank']</code>).
             </p>
+            <div>
+                <h4>
+                    Upgrade from <code>defaultLinkTarget</code>
+                </h4>
+
+                <pre><code class="javascript">
+$('.trumbowyg').trumbowyg({
+<span class="hljs-deletion">-    defaultLinkTarget: '_blank',</span>
+<span class="hljs-addition">+    linkTargets: ['_blank', '_self', '_parent', '_top'],</span>
+});
+                </code></pre>
+            </div>
         </div>
 
 
