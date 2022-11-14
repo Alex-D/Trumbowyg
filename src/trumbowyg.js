@@ -1559,6 +1559,11 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 zIndex: 99999
             }).appendTo($(t.doc.body));
 
+            var darkClass = prefix + 'dark';
+            if (t.$c.parents('.' + darkClass).length !== 0) {
+                $modal.addClass(darkClass);
+            }
+
             // Click on overlay close modal by cancelling them
             t.$overlay.one('click', function () {
                 $modal.trigger(CANCEL_EVENT);

@@ -15,7 +15,7 @@ $light-text-color: #222;
 $light-text-color-dropdown-button: #222;
 
 $dark-color: #222;
-$dark-background-color-editor: #000;
+$dark-background-color-editor: #222;
 $dark-background-color-pane: $dark-color;
 $dark-background-color-button: $dark-color;
 $dark-background-color-dropdown: $dark-background-color-pane;
@@ -348,6 +348,7 @@ $modal-label-width: 150px;
     background-color: $light-background-color-modal;
     text-align: center;
     font-size: 14px;
+    font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif;
     box-shadow: rgba(0, 0, 0, .2) 0 2px 3px;
     backface-visibility: hidden;
 
@@ -776,48 +777,50 @@ body.trumbowyg-body-fullscreen {
 
         .trumbowyg-modal-title {
             border-bottom: 1px solid #555;
-            color: #fff;
+            color: $dark-text-color;
             background: lighten($dark-color, 10%);
         }
 
-        label {
-            display: block;
-            position: relative;
-            margin: 15px 12px;
-            height: 27px;
-            line-height: 27px;
-            overflow: hidden;
+        .trumbowyg-input-row {
+            border-color: $dark-background-color-button;
+        }
 
-            .trumbowyg-input-infos {
-                span {
-                    color: #eee;
-                    background-color: lighten($dark-color, 5%);
-                    border-color: $dark-border-color;
-                }
-                span.trumbowyg-msg-error {
-                    color: #e74c3c;
-                }
-            }
+        .trumbowyg-input-infos {
+            color: #eee;
+            background-color: lighten($dark-color, 5%);
+            border-right-color: $dark-background-color-button;
 
-            &.trumbowyg-input-error {
-                input,
-                textarea {
-                    border-color: #e74c3c;
-                }
-            }
-
-            input {
+            span {
+                color: #eee;
+                background-color: lighten($dark-color, 5%);
                 border-color: $dark-border-color;
-                color: $dark-text-color;
-                background: $dark-background-color-editor;
+            }
+            span.trumbowyg-msg-error {
+                color: #e74c3c;
+            }
+        }
 
-                &:hover,
-                &:focus {
-                    border-color: lighten($dark-color, 25%);
-                }
-                &:focus {
-                    background-color: lighten($dark-color, 5%);
-                }
+        .trumbowyg-input-row.trumbowyg-input-error {
+            input,
+            select,
+            textarea {
+                border-color: #e74c3c;
+            }
+        }
+
+        input,
+        select,
+        textarea {
+            border-color: $dark-border-color;
+            color: $dark-text-color;
+            background: $dark-background-color-editor;
+
+            &:hover,
+            &:focus {
+                border-color: lighten($dark-color, 25%);
+            }
+            &:focus {
+                background-color: lighten($dark-color, 5%);
             }
         }
 
@@ -847,6 +850,7 @@ body.trumbowyg-body-fullscreen {
             }
         }
     }
+
     .trumbowyg-overlay {
         background-color: rgba(15, 15, 15, 0.6);
     }
