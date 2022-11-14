@@ -65,11 +65,15 @@
 
     var html = response.data
       .filter(function (gifData) {
+        // jshint camelcase:false
         var downsized = gifData.images.downsized || gifData.images.downsized_medium;
+        // jshint camelcase:true
         return !!downsized.url;
       })
       .map(function (gifData) {
+        // jshint camelcase:false
         var downsized = gifData.images.downsized || gifData.images.downsized_medium;
+        // jshint camelcase:true
         var image = downsized,
             imageRatio = image.height / image.width,
             altText = gifData.title;
