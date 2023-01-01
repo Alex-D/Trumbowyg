@@ -1389,6 +1389,9 @@
             en: {
                 emoji: 'Add an emoji'
             },
+            az: {
+                emoji: 'Emoji yerləşdir'
+            },
             sl: {
                 emoji: 'Vstavi emotikon'
             },

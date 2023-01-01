@@ -13,6 +13,15 @@
                     '2.0': 'Extra large'
                 }
             },
+            az: {
+                lineheight: 'Sətir yüksəkliyi',
+                lineheights: {
+                    '0.9': 'Kiçik',
+                    'normal': 'Normal',
+                    '1.5': 'Böyük',
+                    '2.0': 'Daha böyük'
+                }
+            },
             sl: {
                 lineheight: 'Višina vrstice',
                 lineheights: {

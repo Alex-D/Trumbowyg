@@ -269,6 +269,10 @@
                 highlight: 'Code syntax highlight',
                 highlightLine: 'Highlight lines, e.g.: 1,3-5'
             },
+            az: {
+                highlight: 'Kod birləşməsini vurğulamaq',
+                highlightLine: 'Sətirləri vurğulamaq, məsələn: 1,3-5'
+            },
             sl: {
                 highlight: 'Označi sintakso kode',
                 highlightLine: 'Označi številko vrstice, npr.: 1,3-5'

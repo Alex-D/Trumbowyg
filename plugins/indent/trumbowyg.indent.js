@@ -18,6 +18,10 @@
                 indent: 'Indent',
                 outdent: 'Outdent'
             },
+            az: {
+                indent: 'Girinti',
+                outdent: 'Çıxıntı'
+            },
             sl: {
                 indent: 'Povečaj zamik',
                 outdent: 'Zmanjšaj zamik'

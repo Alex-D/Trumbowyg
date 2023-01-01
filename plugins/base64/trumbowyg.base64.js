@@ -26,6 +26,12 @@
                 errFileReaderNotSupported: 'FileReader is not supported by your browser.',
                 errInvalidImage: 'Invalid image file.'
             },
+            az: {
+                base64: 'base64 olaraq şəkil',
+                file: 'Fayl',
+                errFileReaderNotSupported: 'FileReader brauzeriniz tərəfindən dəstəklənmir.',
+                errInvalidImage: 'Yanlış şəkil faylı.'
+            },
             sl: {
                 base64: 'Slika kot base64',
                 file: 'Datoteka',

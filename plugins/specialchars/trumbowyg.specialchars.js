@@ -28,6 +28,9 @@
             en: {
                 specialChars: 'Special characters'
             },
+            az: {
+                specialChars: 'Xüsusi simvollar'
+            },
             sl: {
                 specialChars: 'Posebni znaki'
             },

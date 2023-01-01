@@ -20,6 +20,22 @@
                     value: '48px'
                 }
             },
+            az: {
+                fontsize: 'Şrift həcmi',
+                fontsizes: {
+                    'x-small': 'Daha kiçik',
+                    'small': 'Kiçik',
+                    'medium': 'Normal',
+                    'large': 'Böyük',
+                    'x-large': 'Daha böyük',
+                    'custom': 'Fərdi həcm'
+                },
+                fontCustomSize: {
+                    title: 'Fərdi şrift həcmi',
+                    label: 'Şrift həcmi',
+                    value: '48px'
+                }
+            },
             sl: {
                 fontsize: 'Velikost pisave',
                 fontsizes: {
