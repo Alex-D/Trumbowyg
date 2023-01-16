@@ -24,6 +24,10 @@
                 noembed: 'Noembed',
                 noembedError: 'Error'
             },
+            az: {
+                noembed: 'Noembed',
+                noembedError: 'Xəta'
+            },
             sl: {
                 noembed: 'Noembed',
                 noembedError: 'Napaka'

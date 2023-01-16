@@ -7,6 +7,9 @@
             en: {
                 fontFamily: 'Font'
             },
+            az: {
+                fontFamily: 'Şrift'
+            },
             sl: {
                 fontFamily: 'Pisava'
             },

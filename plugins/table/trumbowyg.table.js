@@ -30,6 +30,17 @@
                 tableDestroy: 'Delete table',
                 error: 'Error'
             },
+            az: {
+                table: 'Cədvəl yerləşdir',
+                tableAddRow: 'Sətir əlavə et',
+                tableAddRowAbove: 'Yuxarı sətir əlavə et',
+                tableAddColumnLeft: 'Sola sütun əlavə et',
+                tableAddColumn: 'Sağa sütun əlavə et',
+                tableDeleteRow: 'Sətri sil',
+                tableDeleteColumn: 'Sütunu sil',
+                tableDestroy: 'Cədvəli sil',
+                error: 'Xəta'
+            },
             sl: {
                 table: 'Dodaj tabelo',
                 tableAddRow: 'Dodaj vrstico',
