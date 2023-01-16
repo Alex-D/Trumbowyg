@@ -151,27 +151,17 @@ hr.clearfix {
 
 
 
-table {
-    margin: 30px auto;
-    text-align: left;
+:root {
+    --tbw-cell-vertical-padding: 4px;
+    --tbw-cell-horizontal-padding: 8px;
+    --tbw-cell-line-height: 1.5em;
+}
 
-    thead {
-        background: #fff;
-    }
-    tbody {
-        tr {
-            border-bottom: 1px solid #ddd;
-
-            &:nth-child(2n){
-                background: #fcfcfc;
-            }
-        }
-    }
-
-    td,
-    th {
-        padding: 5px 15px;
-    }
+td {
+    height: calc(var(--tbw-cell-vertical-padding) * 2 + var(--tbw-cell-line-height));
+    min-width: calc(var(--tbw-cell-horizontal-padding) * 2);
+    padding: var(--tbw-cell-vertical-padding) var(--tbw-cell-horizontal-padding);
+    border: 1px solid #e7eaec;
 }
 
 

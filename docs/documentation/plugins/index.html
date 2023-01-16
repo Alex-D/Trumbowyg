@@ -1222,6 +1222,26 @@ $('#my-editor').trumbowyg({
     }
 });
             </code></pre>
+            <p>
+                To get a good UX, you need to have some CSS defined on your tables.
+                A good start can be something to guarantee that cell height and width
+                will not be junky, and allow to click inside. Also, ensure you have some borders
+                to distinguish cells. Here is a minimal example using CSS custom properties:
+            </p>
+            <pre><code class="css">
+:root {
+    --tbw-cell-vertical-padding: 4px;
+    --tbw-cell-horizontal-padding: 8px;
+    --tbw-cell-line-height: 1.5em;
+}
+
+td {
+    height: calc(var(--tbw-cell-vertical-padding) * 2 + var(--tbw-cell-line-height));
+    min-width: calc(var(--tbw-cell-horizontal-padding) * 2);
+    padding: var(--tbw-cell-vertical-padding) var(--tbw-cell-horizontal-padding);
+    border: 1px solid #e7eaec;
+}
+            </code></pre>
 
             <h4>Options</h4>
             <dl>
