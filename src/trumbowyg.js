@@ -790,7 +790,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             });
 
             $.each(t.o.btns, function (i, btnGrp) {
-                if (!$.isArray(btnGrp)) {
+                if (!Array.isArray(btnGrp)) {
                     btnGrp = [btnGrp];
                 }
 
