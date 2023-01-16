@@ -142,8 +142,8 @@ const styles = function () {
         .pipe(gulpSize({title: 'trumbowyg.css'}))
         .pipe(gulpRename({suffix: '.min'}))
         .pipe(gulpCleanCss())
-        .pipe(gulpSourcemaps.write('.'))
         .pipe(gulpHeader(bannerLight, {pkg: pkg}))
+        .pipe(gulpSourcemaps.write('.'))
         .pipe(gulp.dest('dist/ui/'))
         .pipe(gulpSize({title: 'trumbowyg.min.css'}));
 };
