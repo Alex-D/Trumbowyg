@@ -50,8 +50,7 @@ $beer-height: 70px;
             color: #616870;
             background: #dfe5eb;
             padding: 0 5px;
-            border: 1px solid #d0d9e1;
-            border-radius: 2px;
+            border-radius: 4px;
         }
     }
 
@@ -335,7 +334,7 @@ $beer-height: 70px;
 
 .deprecated-info {
     padding: 7px 15px;
-    border-radius: 2px;
+    border-radius: 4px;
     background: #f2dfc1;
     border: 1px solid $deprecated-color;
 
@@ -380,15 +379,16 @@ $beer-height: 70px;
         position: relative;
     }
     h3 {
-        position: relative;
         padding-top: 50px;
         margin-left: -15px;
         padding-left: 15px;
     }
     h4 {
-        position: relative;
         font-size: 20px;
         font-weight: bold;
+    }
+    h3 + h4 {
+        display: block;
     }
 
     .title-link {
@@ -460,9 +460,8 @@ dl {
         display: inline-block;
         color: #616870;
         background: #dfe5eb;
-        padding: 0 5px;
-        border: 1px solid #d0d9e1;
-        border-radius: 2px;
+        padding: 0 4px 0 6px;
+        border-radius: 4px;
     }
     dd {
         padding: 5px 0 15px;

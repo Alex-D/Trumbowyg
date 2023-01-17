@@ -12,11 +12,13 @@
 pre code.hljs {
     display: block;
     overflow-x: auto;
-    padding: 1em
+    padding: 0 1.5em;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
 }
 
 code.hljs {
-    padding: 3px 5px
+    padding: 3px 5px;
 }
 
 .hljs {
@@ -46,6 +48,10 @@ code.hljs {
 
 .hljs-code, .hljs-comment, .hljs-formula {
     color: #6a737d
+}
+
+.hljs-comment {
+    font-style: italic;
 }
 
 .hljs-name, .hljs-quote, .hljs-selector-pseudo, .hljs-selector-tag {
