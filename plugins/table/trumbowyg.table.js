@@ -288,24 +288,39 @@
                     var tableBuild = function() {
                         t.saveRange();
 
-                        var tabler = $('<table/>');
-                        $('<tbody/>').appendTo(tabler);
-                        if (t.o.plugins.table.styler) {
-                            tabler.attr('class', t.o.plugins.table.styler);
-                        }
+                        var newTable = $('<table/>');
+                        $('<tbody/>').appendTo(newTable);
 
                         var colIndex = this.cellIndex,
                             rowIndex = this.parentNode.rowIndex;
 
                         for (var i = 0; i <= rowIndex; i += 1) {
-                            var row = $('<tr></tr>').appendTo(tabler);
+                            var row = $('<tr></tr>').appendTo(newTable);
                             for (var j = 0; j <= colIndex; j += 1) {
                                 $('<td/>').appendTo(row);
                             }
                         }
 
-                        t.range.deleteContents();
-                        t.range.insertNode(tabler[0]);
+                        // Find first parent element
+                        var rangeNode = t.range.endContainer;
+                        while (rangeNode.nodeType !== Node.ELEMENT_NODE) {
+                            rangeNode = rangeNode.parentNode;
+                        }
+
+                        // Put range after the parent of the selected element
+                        if (rangeNode !== t.$ed[0]) {
+                            t.range.setEndAfter(rangeNode);
+                        }
+
+                        // Insert table after the range
+                        t.range.collapse();
+                        t.range.insertNode(newTable[0]);
+
+                        // Remove empty paragraph
+                        if (rangeNode.nodeName === 'P' && rangeNode.textContent.trim().length === 0) {
+                            rangeNode.remove();
+                        }
+
                         t.$c.trigger('tbwchange');
                     };
 
