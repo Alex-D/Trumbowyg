@@ -66,10 +66,14 @@
                 margin-top: 0;
             }
 
-            table {
+            :root {
                 --tbw-cell-vertical-padding: 4px;
                 --tbw-cell-horizontal-padding: 8px;
                 --tbw-cell-line-height: 1.5em;
+            }
+
+            table {
+                margin-bottom: var(--tbw-cell-line-height);
             }
 
             td {
