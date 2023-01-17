@@ -21,6 +21,7 @@
             // jshint camelcase:false
             en: {
                 table: 'Insert table',
+                tableAddHeaderRow: 'Add head row',
                 tableAddRow: 'Add row',
                 tableAddRowAbove: 'Add row above',
                 tableAddColumnLeft: 'Add column to the left',
@@ -28,7 +29,6 @@
                 tableDeleteRow: 'Delete row',
                 tableDeleteColumn: 'Delete column',
                 tableDestroy: 'Delete table',
-                error: 'Error'
             },
             az: {
                 table: 'Cədvəl yerləşdir',
@@ -39,7 +39,6 @@
                 tableDeleteRow: 'Sətri sil',
                 tableDeleteColumn: 'Sütunu sil',
                 tableDestroy: 'Cədvəli sil',
-                error: 'Xəta'
             },
             sl: {
                 table: 'Dodaj tabelo',
@@ -50,7 +49,6 @@
                 tableDeleteRow: 'Izbriši vrstico',
                 tableDeleteColumn: 'Izbriši stolpec',
                 tableDestroy: 'Izbriši tabelo',
-                error: 'Napaka'
             },
             cs: {
                 table: 'Vytvořit příkaz Table',
@@ -58,7 +56,6 @@
                 tableAddRowAbove: 'Přidat řádek',
                 tableAddColumnLeft: 'Přidat sloupec',
                 tableAddColumn: 'Přidat sloupec',
-                error: 'Chyba'
             },
             da: {
                 table: 'Indsæt tabel',
@@ -69,7 +66,6 @@
                 tableDeleteRow: 'Slet række',
                 tableDeleteColumn: 'Slet kolonne',
                 tableDestroy: 'Slet tabel',
-                error: 'Fejl'
             },
             de: {
                 table: 'Tabelle einfügen',
@@ -80,7 +76,6 @@
                 tableDeleteRow: 'Zeile löschen',
                 tableDeleteColumn: 'Spalte löschen',
                 tableDestroy: 'Tabelle löschen',
-                error: 'Error'
             },
             et: {
                 table: 'Sisesta tabel',
@@ -91,10 +86,10 @@
                 tableDeleteRow: 'Kustuta rida',
                 tableDeleteColumn: 'Kustuta tulp',
                 tableDestroy: 'Kustuta tabel',
-                error: 'Viga'
             },
             fr: {
                 table: 'Insérer un tableau',
+                tableAddHeaderRow: 'Ajouter une line d\'en-tête',
                 tableAddRow: 'Ajouter des lignes',
                 tableAddRowAbove: 'Ajouter des lignes',
                 tableAddColumnLeft: 'Ajouter des colonnes',
@@ -102,7 +97,6 @@
                 tableDeleteRow: 'Effacer la ligne',
                 tableDeleteColumn: 'Effacer la colonne',
                 tableDestroy: 'Effacer le tableau',
-                error: 'Erreur'
             },
             hu: {
                 table: 'Táblázat beszúrás',
@@ -113,7 +107,6 @@
                 tableDeleteRow: 'Sor törlés',
                 tableDeleteColumn: 'Oszlop törlés',
                 tableDestroy: 'Táblázat törlés',
-                error: 'Hiba'
             },
             id: {
                 table: 'Sisipkan tabel',
@@ -124,7 +117,6 @@
                 tableDeleteRow: 'Hapus baris',
                 tableDeleteColumn: 'Hapus kolom',
                 tableDestroy: 'Hapus tabel',
-                error: 'Galat'
             },
             ja: {
                 table: '表の挿入',
@@ -132,7 +124,6 @@
                 tableAddRowAbove: '行の追加',
                 tableAddColumnLeft: '列の追加',
                 tableAddColumn: '列の追加',
-                error: 'エラー'
             },
             ko: {
                 table: '표 넣기',
@@ -143,7 +134,6 @@
                 tableDeleteRow: '줄 삭제',
                 tableDeleteColumn: '칸 삭제',
                 tableDestroy: '표 지우기',
-                error: '에러'
             },
             pt_br: {
                 table: 'Inserir tabela',
@@ -154,7 +144,6 @@
                 tableDeleteRow: 'Deletar linha',
                 tableDeleteColumn: 'Deletar coluna',
                 tableDestroy: 'Deletar tabela',
-                error: 'Erro'
             },
             ru: {
                 table: 'Вставить таблицу',
@@ -165,7 +154,6 @@
                 tableDeleteRow: 'Удалить строку',
                 tableDeleteColumn: 'Удалить столбец',
                 tableDestroy: 'Удалить таблицу',
-                error: 'Ошибка'
             },
             sk: {
                 table: 'Vytvoriť tabuľky',
@@ -173,7 +161,6 @@
                 tableAddRowAbove: 'Pridať riadok',
                 tableAddColumnLeft: 'Pridať stĺpec',
                 tableAddColumn: 'Pridať stĺpec',
-                error: 'Chyba'
             },
             tr: {
                 table: 'Tablo ekle',
@@ -184,7 +171,6 @@
                 tableDeleteRow: 'Satırı sil',
                 tableDeleteColumn: 'Sütunu sil',
                 tableDestroy: 'Tabloyu sil',
-                error: 'Hata'
             },
             zh_tw: {
                 table: '插入表格',
@@ -195,7 +181,6 @@
                 tableDeleteRow: '刪除行',
                 tableDeleteColumn: '刪除列',
                 tableDestroy: '刪除表格',
-                error: '錯誤'
             },
             es: {
                 table: 'Insertar tabla',
@@ -206,7 +191,6 @@
                 tableDeleteRow: 'Borrar fila',
                 tableDeleteColumn: 'Borrar columna',
                 tableDestroy: 'Borrar tabla',
-                error: 'Error'
             }// jshint camelcase:true
         },
 
@@ -214,6 +198,10 @@
             table: {
                 init: function (t) {
                     t.o.plugins.table = $.extend(true, {}, defaultOptions, t.o.plugins.table || {});
+
+
+                    ////////////////////////////////////////////////////
+                    // Dropdown
 
                     var buildButtonDef = {
                         fn: function () {
@@ -239,6 +227,14 @@
 
                             // when active table show AddRow / AddColumn
                             if (t.$box.find('.' + t.o.prefix + 'table-button').hasClass(t.o.prefix + 'active-button')) {
+                                // Conditional thead button
+                                var $table = $(t.doc.getSelection().focusNode).closest('table');
+                                var hasThead = $('thead', $table).length !== 0;
+                                if (!hasThead) {
+                                    $dropdown.append(t.buildSubBtn('tableAddHeaderRow'));
+                                }
+
+                                // All other buttons
                                 $dropdown.append(t.buildSubBtn('tableAddRowAbove'));
                                 $dropdown.append(t.buildSubBtn('tableAddRow'));
                                 $dropdown.append(t.buildSubBtn('tableAddColumnLeft'));
@@ -255,7 +251,7 @@
                                         $('<td/>').appendTo(row);
                                     }
                                 }
-                                tableSelect.find('td').on('mouseover', tableAnimate);
+                                tableSelect.find('td').on('mouseover', toggleActiveDropdownCells);
                                 tableSelect.find('td').on('mousedown', tableBuild);
 
                                 $dropdown.append(tableSelect);
@@ -266,7 +262,7 @@
                         }
                     };
 
-                    var tableAnimate = function(columnEvent) {
+                    var toggleActiveDropdownCells = function (columnEvent) {
                         var column = $(columnEvent.target),
                             table = column.closest('table'),
                             colIndex = this.cellIndex,
@@ -277,29 +273,42 @@
 
                         for (var i = 0; i <= rowIndex; i += 1) {
                             for (var j = 0; j <= colIndex; j += 1) {
-                                table.find('tr:nth-of-type('+(i+1)+')').find('td:nth-of-type('+(j+1)+')').addClass('active');
+                                table.find('tr:nth-of-type(' + (i + 1) + ')').find('td:nth-of-type(' + (j + 1) + ')').addClass('active');
                             }
                         }
 
                         // set label
-                        table.next('.trumbowyg-table-size').html((colIndex+1) + 'x' + (rowIndex+1));
+                        table.next('.trumbowyg-table-size').html((colIndex + 1) + 'x' + (rowIndex + 1));
                     };
 
-                    var tableBuild = function() {
+                    var tableBuild = function () {
                         t.saveRange();
 
                         var newTable = $('<table/>');
-                        $('<tbody/>').appendTo(newTable);
+
+                        // Build thead
+                        var $thead = $('<thead/>');
+                        var $theadTr = $('<tr/>');
+                        $theadTr.appendTo($thead);
+                        for (var th = 0; th <= this.cellIndex; th += 1) {
+                            $('<th/>', {scope: 'col'}).appendTo($theadTr);
+                        }
+                        $thead.appendTo(newTable);
+
+                        // Build tbody
+                        var $tbody = $('<tbody/>');
 
                         var colIndex = this.cellIndex,
                             rowIndex = this.parentNode.rowIndex;
 
                         for (var i = 0; i <= rowIndex; i += 1) {
-                            var row = $('<tr></tr>').appendTo(newTable);
+                            var row = $('<tr/>').appendTo($tbody);
                             for (var j = 0; j <= colIndex; j += 1) {
                                 $('<td/>').appendTo(row);
                             }
                         }
+
+                        $tbody.appendTo(newTable);
 
                         // Find first parent element
                         var rangeNode = t.range.endContainer;
@@ -324,30 +333,51 @@
                         t.$c.trigger('tbwchange');
                     };
 
-                    var addRow = {
-                        title: t.lang.tableAddRow,
-                        text: t.lang.tableAddRow,
-                        ico: 'row-below',
 
-                        fn: function () {
+                    ////////////////////////////////////////////////////
+                    // Buttons
+
+                    var tableButtonAction = function (callback) {
+                        return function () {
                             t.saveRange();
 
                             var node = t.doc.getSelection().focusNode;
-                            var focusedRow = $(node).closest('tr');
-                            var table = $(node).closest('table');
+                            var $focusedRow = $(node).closest('tr');
+                            var $table = $(node).closest('table');
 
-                            if(table.length > 0) {
-                                var row = $('<tr/>');
-                                // add columns according to current columns count
-                                $('td,th', focusedRow).each(function(){
-                                    $(this).clone().appendTo(row).text('');
-                                });
-                                // add row to table
-                                focusedRow.after(row);
+                            if ($table.length === 0) {
+                                return;
                             }
 
+                            callback($table, $focusedRow, node);
+
                             t.syncCode();
-                        }
+                        };
+                    };
+
+
+                    ////// Rows
+
+                    var addRowButtonAction = function (isBefore = false) {
+                        return tableButtonAction(function ($table, $focusedRow) {
+                            var $newRow = $('<tr/>');
+
+                            if ($focusedRow.closest('thead').length !== 0) {
+                                $focusedRow = $('tbody tr', $table).first();
+                            }
+
+                            // add columns according to current columns count
+                            $('td', $focusedRow).each(function () {
+                                $(this).clone().appendTo($newRow).text('');
+                            });
+
+                            // add row to table
+                            if (isBefore) {
+                                $focusedRow.before($newRow);
+                            } else {
+                                $focusedRow.after($newRow);
+                            }
+                        });
                     };
 
                     var addRowAbove = {
@@ -355,48 +385,59 @@
                         text: t.lang.tableAddRowAbove,
                         ico: 'row-above',
 
-                        fn: function () {
-                            t.saveRange();
-
-                            var node = t.doc.getSelection().focusNode;
-                            var focusedRow = $(node).closest('tr');
-                            var table = $(node).closest('table');
-
-                            if(table.length > 0) {
-                                var row = $('<tr/>');
-                                // add columns according to current columns count
-                                $('td,th', focusedRow).each(function(){
-                                    $(this).clone().appendTo(row).text('');
-                                });
-                                // add row to table
-                                focusedRow.before(row);
-                            }
-
-                            t.syncCode();
-                        }
+                        fn: addRowButtonAction(true),
                     };
 
-                    var addColumn = {
-                        title: t.lang.tableAddColumn,
-                        text: t.lang.tableAddColumn,
-                        ico: 'col-right',
+                    var addRowBelow = {
+                        title: t.lang.tableAddRow,
+                        text: t.lang.tableAddRow,
+                        ico: 'row-below',
 
-                        fn: function () {
-                            t.saveRange();
+                        fn: addRowButtonAction(false),
+                    };
 
-                            var node = t.doc.getSelection().focusNode;
-                            var focusedCol = $(node).closest('td');
-                            var table = $(node).closest('table');
-                            var focusedColIdx = focusedCol.index();
+                    var addHeaderRow = {
+                        title: t.lang.tableAddHeaderRow,
+                        text: t.lang.tableAddHeaderRow,
+                        ico: 'header-row',
 
-                            if(table.length > 0) {
-                                $(table).find('tr').each(function() {
-                                    $($(this).children()[focusedColIdx]).after('<td></td>');
+                        fn: tableButtonAction(function ($table) {
+                            var $tableFirstRow = $('tr', $table).first();
+                            var $thead = $('<thead/>');
+                            var $theadRow = $('<tr/>').appendTo($thead);
+
+                            // add columns according to current columns count
+                            $('td', $tableFirstRow).each(function () {
+                                var $newTh = $('<th/>').appendTo($theadRow);
+
+                                $.each(this.attributes, function (attribute) {
+                                    $newTh.attr(attribute.name, attribute.value);
                                 });
-                            }
+                            });
 
-                            t.syncCode();
-                        }
+                            // add thead to table
+                            $table.prepend($thead);
+                        }),
+                    };
+
+
+                    ////// Columns
+
+                    var addColumnButtonAction = function (isBefore = false) {
+                        return tableButtonAction(function ($table, $focusedRow, node) {
+                            var focusedColIdx = $(node).closest('td').index();
+
+                            $('tr', $table).each(function () {
+                                var $previousCell = $(this).children()[focusedColIdx];
+                                var $newCell = $previousCell.clone().text('');
+
+                                if (isBefore) {
+                                    $previousCell.before($newCell);
+                                } else {
+                                    $previousCell.after($newCell);
+                                }
+                            });
+                        });
                     };
 
                     var addColumnLeft = {
@@ -404,39 +445,28 @@
                         text: t.lang.tableAddColumnLeft,
                         ico: 'col-left',
 
-                        fn: function () {
-                            t.saveRange();
-
-                            var node = t.doc.getSelection().focusNode;
-                            var focusedCol = $(node).closest('td');
-                            var table = $(node).closest('table');
-                            var focusedColIdx = focusedCol.index();
-
-                            if(table.length > 0) {
-                                $(table).find('tr').each(function() {
-                                    $($(this).children()[focusedColIdx]).before('<td></td>');
-                                });
-                            }
-
-                            t.syncCode();
-                        }
+                        fn: addColumnButtonAction(true)
                     };
+
+                    var addColumnRight = {
+                        title: t.lang.tableAddColumn,
+                        text: t.lang.tableAddColumn,
+                        ico: 'col-right',
+
+                        fn: addColumnButtonAction(false)
+                    };
+
+
+                    ////// Delete
 
                     var destroy = {
                         title: t.lang.tableDestroy,
                         text: t.lang.tableDestroy,
                         ico: 'table-delete',
 
-                        fn: function () {
-                            t.saveRange();
-
-                            var node = t.doc.getSelection().focusNode,
-                                table = $(node).closest('table');
-
-                            table.remove();
-
-                            t.syncCode();
-                        }
+                        fn: tableButtonAction(function ($table) {
+                            $table.remove();
+                        })
                     };
 
                     var deleteRow = {
@@ -444,16 +474,21 @@
                         text: t.lang.tableDeleteRow,
                         ico: 'row-delete',
 
-                        fn: function () {
-                            t.saveRange();
+                        fn: tableButtonAction(function ($table, $focusedRow) {
+                            // Only one row is remaining in the table, remove the table
+                            if ($('tbody tr', $table).length === 1) {
+                                $table.remove();
+                                return;
+                            }
 
-                            var node = t.doc.getSelection().focusNode,
-                                row = $(node).closest('tr');
-
-                            row.remove();
-
-                            t.syncCode();
-                        }
+                            // Pick element to remove
+                            var $elementToRemove = $focusedRow;
+                            var $focusedRowParent = $focusedRow.parent();
+                            if ($focusedRowParent.is('thead')) {
+                                $elementToRemove = $focusedRowParent;
+                            }
+                            $elementToRemove.remove();
+                        }),
                     };
 
                     var deleteColumn = {
@@ -461,27 +496,21 @@
                         text: t.lang.tableDeleteColumn,
                         ico: 'col-delete',
 
-                        fn: function () {
-                            t.saveRange();
+                        fn: tableButtonAction(function ($table, $focusedRow, node) {
+                            var cellIndex = $(node).closest('td').index();
 
-                            var node = t.doc.getSelection().focusNode,
-                                table = $(node).closest('table'),
-                                td = $(node).closest('td'),
-                                cellIndex = td.index();
-
-                            $(table).find('tr').each(function() {
+                            $table.find('tr').each(function () {
                                 $(this).find('td:eq(' + cellIndex + ')').remove();
                             });
-
-                            t.syncCode();
-                        }
+                        })
                     };
 
                     t.addBtnDef('table', buildButtonDef);
+                    t.addBtnDef('tableAddHeaderRow', addHeaderRow);
                     t.addBtnDef('tableAddRowAbove', addRowAbove);
-                    t.addBtnDef('tableAddRow', addRow);
+                    t.addBtnDef('tableAddRow', addRowBelow);
                     t.addBtnDef('tableAddColumnLeft', addColumnLeft);
-                    t.addBtnDef('tableAddColumn', addColumn);
+                    t.addBtnDef('tableAddColumn', addColumnRight);
                     t.addBtnDef('tableDeleteRow', deleteRow);
                     t.addBtnDef('tableDeleteColumn', deleteColumn);
                     t.addBtnDef('tableDestroy', destroy);
