@@ -662,6 +662,14 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         ctrl = false;
                     }, 50);
                 })
+                .on('input', function (e) {
+                    // Trigger change event when spelling fixes applied
+                    var event = e.originalEvent;
+                    if (typeof event === 'object' && (event.inputType === 'insertReplacementText' ||
+                        (event.inputType === 'insertText' && event.data === null))) {
+                        t.$c.trigger('tbwchange');
+                    }
+                })
                 .on('mouseup keydown keyup', function (e) {
                     if ((!e.ctrlKey && !e.metaKey) || e.altKey) {
                         setTimeout(function () { // "hold on" to the ctrl key for 50ms
