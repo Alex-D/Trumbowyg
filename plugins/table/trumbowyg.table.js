@@ -505,6 +505,90 @@
                         })
                     };
 
+
+                    ////// Cell selection
+                    var getCellColumnCount = function ($cell) {
+                        var colspan = $cell.attr('colspan');
+                        if (colspan === undefined) {
+                            return 1;
+                        }
+
+                        return parseInt(colspan, 10);
+                    };
+
+                    var getCellIndex = function ($cell, $rowCells) {
+                        var cellIndex = 0;
+                        var i = 0;
+
+                        while ($rowCells[i] !== $cell[0]) {
+                            cellIndex += getCellColumnCount($($rowCells[i]));
+                            i += 1;
+                        }
+
+                        return cellIndex;
+                    };
+
+                    var tableCellSelectionModeClass = t.o.prefix + 'table-cell-selection-mode';
+                    var tableCellSelectedClass = t.o.prefix + 'table-cell-selected';
+                    setTimeout(function () { // Wait for init
+                        $(t.doc).on('selectionchange.table', function () {
+                            var selection = t.doc.getSelection();
+
+                            var $tableAnchor = $(selection.anchorNode).closest('table');
+                            var $tableFocus = $(selection.focusNode).closest('table');
+
+                            $('.' + tableCellSelectedClass, t.$ed).removeClass(tableCellSelectedClass);
+
+                            if (($tableAnchor.length === 0 && $tableFocus.length === 0) ||
+                                $tableAnchor[0] !== $tableFocus[0] ||
+                                selection.anchorNode === selection.focusNode
+                            ) {
+                                $('.' + tableCellSelectionModeClass, t.$ed).removeClass(tableCellSelectionModeClass);
+                                return;
+                            }
+
+                            // Toggle table to selection mode
+                            $tableAnchor.addClass(tableCellSelectionModeClass);
+
+                            // Find cells to set as selected
+                            var $anchorSelectedCell = $(selection.anchorNode).closest('td, th');
+                            var $focusSelectedCell = $(selection.focusNode).closest('td, th');
+
+                            var $allRows = $('tr', $tableAnchor);
+
+                            var $anchorSelectedRow = $anchorSelectedCell.closest('tr');
+                            var anchorSelectedRowIndex = $allRows.index($anchorSelectedRow);
+                            var $focusSelectedRow = $focusSelectedCell.closest('tr');
+                            var focusSelectedRowIndex = $allRows.index($focusSelectedRow);
+
+                            var anchorSelectedCellIndex = getCellIndex($anchorSelectedCell, $('td, th', $anchorSelectedRow));
+                            var focusSelectedCellIndex = getCellIndex($focusSelectedCell, $('td, th', $focusSelectedRow));
+
+                            var firstSelectedRowIndex = Math.min(anchorSelectedRowIndex, focusSelectedRowIndex);
+                            var lastSelectedRowIndex = Math.max(anchorSelectedRowIndex, focusSelectedRowIndex);
+                            var firstSelectedCellIndex = Math.min(anchorSelectedCellIndex, focusSelectedCellIndex);
+                            var lastSelectedCellIndex = Math.max(anchorSelectedCellIndex, focusSelectedCellIndex);
+
+                            // Set cells as selected
+                            $allRows.each(function (rowIndex, rowElement) {
+                                if (rowIndex < firstSelectedRowIndex || rowIndex > lastSelectedRowIndex) {
+                                    return;
+                                }
+
+                                var $rowCells = $('td, th', $(rowElement));
+                                $('td, th', rowElement).each(function (_, cellElement) {
+                                    var cellIndex = getCellIndex($(cellElement), $rowCells);
+                                    if (cellIndex < firstSelectedCellIndex || cellIndex > lastSelectedCellIndex) {
+                                        return;
+                                    }
+
+                                    $(cellElement).addClass(tableCellSelectedClass);
+                                });
+                            });
+                        });
+                    });
+
+
                     t.addBtnDef('table', buildButtonDef);
                     t.addBtnDef('tableAddHeaderRow', addHeaderRow);
                     t.addBtnDef('tableAddRowAbove', addRowAbove);
@@ -514,7 +598,10 @@
                     t.addBtnDef('tableDeleteRow', deleteRow);
                     t.addBtnDef('tableDeleteColumn', deleteColumn);
                     t.addBtnDef('tableDestroy', destroy);
-                }
+                },
+                destroy: function (t) {
+                    $(t.doc).off('selectionchange.table');
+                },
             }
         }
     });

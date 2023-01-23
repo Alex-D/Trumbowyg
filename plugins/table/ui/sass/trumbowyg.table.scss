@@ -24,3 +24,12 @@
         text-align: center;
     }
 }
+
+.trumbowyg-table-cell-selection-mode ::selection {
+    color: inherit;
+    background-color: transparent;
+}
+
+.trumbowyg-table-cell-selected {
+    background-color: #b4d3fe;
+}
