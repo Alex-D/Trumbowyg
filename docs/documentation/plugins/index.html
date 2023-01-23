@@ -1484,39 +1484,42 @@ fileToUpload: // The image file
 
     // If the plugin is a button
     function buildButtonIcon() {
-        if (!document.querySelector("#trumbowyg-myplugin")) {
-            /*
-            When your button is created, an SVG will be inserted with an xref
-            to a symbol living at the fragment "#trumbowyg-myplugin".
-            For Trumbowyg's own plugins, this will come from a sprite sheet
-            which is injected into the document, built from the icon SVG
-            in "ui/icons" in your plugin's source tree.
-
-            But, nothing says it *has* to come from Trumbowyg's injected
-            sprite sheet; it only requires that this symbol exists in your
-            document. To allow stand-alone distribution of your plugin, we're
-            going to insert a custom SVG symbol into the document with the
-            correct ID.
-            */
-            const iconWrap = $(document.createElementNS("http://www.w3.org/2000/svg", "svg"));
-
-            /*
-            This class is only here to allow CSS to hide it. In your plugin's
-            stylesheet you will probably want something like this:
-
-            .trumbowyg-myplugin-icons {
-                display: none;
-            }
-            */
-            iconWrap.addClass("trumbowyg-myplugin-icons");
-            // For demonstration purposes, we've taken the "File" icon from
-            // Remix Icon - https://remixicon.com/
-            iconWrap.html(`
-                &lt;symbol id="trumbowyg-myplugin" viewBox="0 0 24 24"&gt;
-                    &lt;path d="M21 8v12.993A1 1 0 0 1 20.007 22H3.993A.993.993 0 0 1 3 21.008V2.992C3 2.455 3.449 2 4.002 2h10.995L21 8zm-2 1h-5V4H5v16h14V9zM8 7h3v2H8V7zm0 4h8v2H8v-2zm0 4h8v2H8v-2z"/&gt;
-                &lt;/symbol&gt;
-            `).appendTo(document.body);
+        if (document.querySelector("#trumbowyg-myplugin")) {
+            return;
         }
+        /*
+        When your button is created, an SVG will be inserted with an xref to a
+        symbol living at the fragment "#trumbowyg-myplugin". For Trumbowyg's
+        own plugins, this will come from a sprite sheet which is injected into
+        the document, built from the icon SVG in "ui/icons" in your plugin's
+        source tree. This is how you should organise things if you are
+        proposing your plugin to be included in the Trumbowyg main
+        distribution, or if you are rolling your own custom build of Trumbowyg
+        for your site.
+
+        But, nothing says it *has* to come from Trumbowyg's injected sprite
+        sheet; it only requires that this symbol exists in your document. To
+        allow stand-alone distribution of your plugin, we're going to insert a
+        custom SVG symbol into the document with the correct ID.
+        */
+        const iconWrap = $(document.createElementNS("http://www.w3.org/2000/svg", "svg"));
+
+        /*
+        This class is only here to allow CSS to hide it. In your plugin's
+        stylesheet you will probably want something like this:
+
+        .trumbowyg-myplugin-icons {
+            display: none;
+        }
+        */
+        iconWrap.addClass("trumbowyg-myplugin-icons");
+        // For demonstration purposes, we've taken the "File" icon from
+        // Remix Icon - https://remixicon.com/
+        iconWrap.html(`
+            &lt;symbol id="trumbowyg-myplugin" viewBox="0 0 24 24"&gt;
+                &lt;path d="M21 8v12.993A1 1 0 0 1 20.007 22H3.993A.993.993 0 0 1 3 21.008V2.992C3 2.455 3.449 2 4.002 2h10.995L21 8zm-2 1h-5V4H5v16h14V9zM8 7h3v2H8V7zm0 4h8v2H8v-2zm0 4h8v2H8v-2z"/&gt;
+            &lt;/symbol&gt;
+        `).appendTo(document.body);
     }
 
 
