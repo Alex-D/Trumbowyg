@@ -650,7 +650,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     if ((e.ctrlKey || e.metaKey) && (keyCode === 89 || keyCode === 90)) {
                         t.semanticCode(false, true);
                         t.$c.trigger('tbwchange');
-                    } else if (!ctrl && keyCode !== 17) {
+                    } else if (!ctrl && keyCode !== 16 && keyCode !== 17) {
                         var compositionEndIE = t.isIE ? e.type === 'compositionend' : true;
                         t.semanticCode(false, compositionEndIE && keyCode === 13);
                         t.$c.trigger('tbwchange');
