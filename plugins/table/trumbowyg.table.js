@@ -199,6 +199,8 @@
                 init: function (t) {
                     t.o.plugins.table = $.extend(true, {}, defaultOptions, t.o.plugins.table || {});
 
+                    // State
+                    var tableSelectionState;
 
                     ////////////////////////////////////////////////////
                     // Dropdown
@@ -401,7 +403,9 @@
                                 return;
                             }
 
-                            callback($table, $focusedRow, node);
+                            var tableState = getTableState($table);
+
+                            callback($table, $focusedRow, node, tableState);
 
                             t.syncCode();
                         };
@@ -667,9 +671,8 @@
                                     $(cellElement).addClass(tableCellSelectedClass);
                                 });
                             });
-                            console.log({
-                                selectedCellsState,
-                            });
+
+                            tableSelectionState = selectedCellsState;
                         });
                     });
 
