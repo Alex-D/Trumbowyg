@@ -333,6 +333,58 @@
                         t.$c.trigger('tbwchange');
                     };
 
+                    var getTableState = function ($table) {
+                        var $tableRows = $('tr', $table);
+                        var tableState = [];
+                        for (var i = 0; i < $tableRows.length; i += 1) {
+                            tableState.push([]);
+                        }
+
+                        $tableRows.each(function (rowIndex, row) {
+                            var columnIndex = 0;
+                            $('td, th', $(row)).each(function (cellIndex, cell) {
+                                var $cell = $(cell);
+                                var colspanAttr = $cell.attr('colspan');
+                                var rowspanAttr = $cell.attr('rowspan');
+                                var colspan = parseInt(colspanAttr ? colspanAttr : 1, 10);
+                                var rowspan = parseInt(rowspanAttr ? rowspanAttr : 1, 10);
+
+                                while (tableState[rowIndex][columnIndex] !== undefined) {
+                                    columnIndex += 1;
+                                }
+
+                                tableState[rowIndex][columnIndex] = {
+                                    tag: cell.tagName,
+                                    element: cell,
+                                    colspan: colspan,
+                                    rowspan: rowspan,
+                                };
+
+                                for (var cols = 1; cols < colspan; cols += 1) {
+                                    tableState[rowIndex][columnIndex + cols] = {
+                                        mergedIn: [rowIndex, columnIndex]
+                                    };
+                                }
+
+                                for (var rows = 1; rows < rowspan; rows += 1) {
+                                    tableState[rowIndex + rows][columnIndex] = {
+                                        mergedIn: [rowIndex, columnIndex]
+                                    };
+
+                                    for (var colsInRow = 1; colsInRow < colspan; colsInRow += 1) {
+                                        tableState[rowIndex + rows][columnIndex + colsInRow] = {
+                                            mergedIn: [rowIndex, columnIndex]
+                                        };
+                                    }
+                                }
+
+                                columnIndex += colspan;
+                            });
+                        });
+
+                        return tableState;
+                    };
+
 
                     ////////////////////////////////////////////////////
                     // Buttons
@@ -508,41 +560,63 @@
 
                     ////// Cell selection
 
-                    var getCellColumnCount = function ($cell) {
-                        var colspan = $cell.attr('colspan');
-                        if (colspan === undefined) {
-                            return 1;
-                        }
+                    var getCellIndex = function (cellElement, rowState) {
+                        return rowState.findIndex(function (rowStateCell) {
+                            if (rowStateCell.element === undefined) {
+                                return false;
+                            }
 
-                        return parseInt(colspan, 10);
+                            return rowStateCell.element === cellElement;
+                        });
                     };
 
-                    var getCellIndex = function ($cell, $rowCells) {
-                        var cellIndex = 0;
-                        var i = 0;
+                    // Prevent Ctrl+Click on Firefox
+                    var resetTableMouseHack = function () {
+                        $('table', t.$ed).off('mousedown.tbwTable');
+                        $('table', t.$ed).on('mousedown.tbwTable', function (e) {
+                            if (!e.ctrlKey) {
+                                return;
+                            }
 
-                        while ($rowCells[i] !== $cell[0]) {
-                            cellIndex += getCellColumnCount($($rowCells[i]));
-                            i += 1;
-                        }
-
-                        return cellIndex;
+                            e.preventDefault();
+                        });
                     };
 
                     var tableCellSelectionModeClass = t.o.prefix + 'table-cell-selection-mode';
                     var tableCellSelectedClass = t.o.prefix + 'table-cell-selected';
                     setTimeout(function () { // Wait for init
-                        $(t.doc).on('selectionchange.table', function () {
-                            var selection = t.doc.getSelection();
+                        resetTableMouseHack();
+                        t.$c.on('tbwchange', function () {
+                            resetTableMouseHack();
+                        });
 
-                            var $tableAnchor = $(selection.anchorNode).closest('table');
-                            var $tableFocus = $(selection.focusNode).closest('table');
+                        $(t.doc).on('selectionchange.tbwTable', function () {
+                            var selection = t.doc.getSelection();
+                            var rangeCount = selection.rangeCount;
+
+                            var anchorNode = selection.anchorNode;
+                            var focusNode = selection.focusNode;
+
+                            // Firefox create one range by cell
+                            if (rangeCount > 1) {
+                                var firstRange = selection.getRangeAt(0);
+                                var lastRange = selection.getRangeAt(rangeCount - 1);
+
+                                anchorNode = firstRange.startContainer.childNodes[firstRange.startOffset];
+                                focusNode = lastRange.startContainer.childNodes[lastRange.startOffset];
+                            }
+
+                            var $anchorCell = $(anchorNode);
+                            var $focusCell = $(focusNode);
+
+                            var $tableAnchor = $anchorCell.closest('table');
+                            var $tableFocus = $focusCell.closest('table');
 
                             $('.' + tableCellSelectedClass, t.$ed).removeClass(tableCellSelectedClass);
 
                             if (($tableAnchor.length === 0 && $tableFocus.length === 0) ||
                                 $tableAnchor[0] !== $tableFocus[0] ||
-                                selection.anchorNode === selection.focusNode
+                                anchorNode === focusNode
                             ) {
                                 $('.' + tableCellSelectionModeClass, t.$ed).removeClass(tableCellSelectionModeClass);
                                 return;
@@ -551,9 +625,12 @@
                             // Toggle table to selection mode
                             $tableAnchor.addClass(tableCellSelectionModeClass);
 
+                            // Get table state
+                            var tableState = getTableState($tableAnchor);
+
                             // Find cells to set as selected
-                            var $anchorSelectedCell = $(selection.anchorNode).closest('td, th');
-                            var $focusSelectedCell = $(selection.focusNode).closest('td, th');
+                            var $anchorSelectedCell = $anchorCell.closest('td, th');
+                            var $focusSelectedCell = $focusCell.closest('td, th');
 
                             var $allRows = $('tr', $tableAnchor);
 
@@ -562,8 +639,8 @@
                             var $focusSelectedRow = $focusSelectedCell.closest('tr');
                             var focusSelectedRowIndex = $allRows.index($focusSelectedRow);
 
-                            var anchorSelectedCellIndex = getCellIndex($anchorSelectedCell, $('td, th', $anchorSelectedRow));
-                            var focusSelectedCellIndex = getCellIndex($focusSelectedCell, $('td, th', $focusSelectedRow));
+                            var anchorSelectedCellIndex = getCellIndex($anchorSelectedCell[0], tableState[anchorSelectedRowIndex]);
+                            var focusSelectedCellIndex = getCellIndex($focusSelectedCell[0], tableState[focusSelectedRowIndex]);
 
                             var firstSelectedRowIndex = Math.min(anchorSelectedRowIndex, focusSelectedRowIndex);
                             var lastSelectedRowIndex = Math.max(anchorSelectedRowIndex, focusSelectedRowIndex);
@@ -571,20 +648,24 @@
                             var lastSelectedCellIndex = Math.max(anchorSelectedCellIndex, focusSelectedCellIndex);
 
                             // Set cells as selected
+                            var selectedCellsState = [];
                             $allRows.each(function (rowIndex, rowElement) {
                                 if (rowIndex < firstSelectedRowIndex || rowIndex > lastSelectedRowIndex) {
                                     return;
                                 }
 
-                                var $rowCells = $('td, th', $(rowElement));
                                 $('td, th', rowElement).each(function (_, cellElement) {
-                                    var cellIndex = getCellIndex($(cellElement), $rowCells);
+                                    var cellIndex = getCellIndex(cellElement, tableState[rowIndex]);
                                     if (cellIndex < firstSelectedCellIndex || cellIndex > lastSelectedCellIndex) {
                                         return;
                                     }
 
+                                    selectedCellsState.push(tableState[rowIndex][cellIndex]);
                                     $(cellElement).addClass(tableCellSelectedClass);
                                 });
+                            });
+                            console.log({
+                                selectedCellsState,
                             });
                         });
                     });
