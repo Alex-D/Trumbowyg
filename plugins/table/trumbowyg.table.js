@@ -500,13 +500,14 @@
                             var cellIndex = $(node).closest('td').index();
 
                             $table.find('tr').each(function () {
-                                $(this).find('td:eq(' + cellIndex + ')').remove();
+                                $(this).find('td:eq(' + cellIndex + '), th:eq(' + cellIndex + ')').remove();
                             });
                         })
                     };
 
 
                     ////// Cell selection
+
                     var getCellColumnCount = function ($cell) {
                         var colspan = $cell.attr('colspan');
                         if (colspan === undefined) {
