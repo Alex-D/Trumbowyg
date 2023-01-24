@@ -570,10 +570,13 @@
                         });
                     };
 
-                    // Prevent Ctrl+Click on Firefox
-                    var resetTableMouseHack = function () {
+                    var resetTableMouseHacks = function () {
                         $('table', t.$ed).off('mousedown.tbwTable');
                         $('table', t.$ed).on('mousedown.tbwTable', function (e) {
+                            // Cells drag and drop while changing cell selection
+                            t.doc.getSelection().removeAllRanges();
+
+                            // Prevent Ctrl+Click on Firefox
                             if (!e.ctrlKey) {
                                 return;
                             }
@@ -585,9 +588,9 @@
                     var tableCellSelectionModeClass = t.o.prefix + 'table-cell-selection-mode';
                     var tableCellSelectedClass = t.o.prefix + 'table-cell-selected';
                     setTimeout(function () { // Wait for init
-                        resetTableMouseHack();
+                        resetTableMouseHacks();
                         t.$c.on('tbwchange', function () {
-                            resetTableMouseHack();
+                            resetTableMouseHacks();
                         });
 
                         $(t.doc).on('selectionchange.tbwTable', function () {
