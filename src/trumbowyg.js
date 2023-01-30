@@ -525,15 +525,20 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 class: prefix + 'box ' + prefix + 'editor-visible ' + prefix + t.o.lang + ' trumbowyg'
             });
 
+            t.$edBox = $('<div/>', {
+                class: prefix + 'editor-box',
+            });
+
             // $ta = Textarea
             // $ed = Editor
             t.isTextarea = t.$ta.is('textarea');
             if (t.isTextarea) {
                 html = t.$ta.val();
-                t.$ed = $('<div/>');
+                t.$ed = $('<div/>')
+                    .appendTo(t.$edBox);
                 t.$box
                     .insertAfter(t.$ta)
-                    .append(t.$ed, t.$ta);
+                    .append(t.$edBox, t.$ta);
             } else {
                 t.$ed = t.$ta;
                 html = t.$ed.html();
@@ -545,7 +550,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
                 t.$box
                     .insertAfter(t.$ed)
-                    .append(t.$ta, t.$ed);
+                    .append(t.$ta, t.$edBox);
+                t.$edBox.append(t.$ed);
                 t.syncCode();
             }
 
@@ -580,7 +586,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }
 
             if (!t.o.autogrow) {
-                t.$ta.add(t.$ed).css({
+                t.$ta.add(t.$edBox).css({
                     height: t.height
                 });
             }
@@ -694,7 +700,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                             t.autogrowOnEnterWasFocused = true;
                             t.autogrowEditorOnEnter();
                         } else if (!t.o.autogrow) {
-                            t.$ed.css({height: t.$ed.css('min-height')});
+                            t.$edBox.css({height: t.$edBox.css('min-height')});
                             t.$c.trigger('tbwresize');
                         }
                     }
@@ -775,13 +781,13 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             var t = this;
             t.$ed.removeClass('autogrow-on-enter');
             var oldHeight = t.$ed[0].clientHeight;
-            t.$ed.height('auto');
+            t.$edBox.height('auto');
             var totalHeight = t.$ed[0].scrollHeight;
             t.$ed.addClass('autogrow-on-enter');
             if (oldHeight !== totalHeight) {
-                t.$ed.height(oldHeight);
+                t.$edBox.height(oldHeight);
                 setTimeout(function () {
-                    t.$ed.css({height: totalHeight});
+                    t.$edBox.css({height: totalHeight});
                     t.$c.trigger('tbwresize');
                 }, 0);
             }
@@ -1035,7 +1041,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 );
             } else {
                 t.$box.after(
-                    t.$ed
+                    t.$edBox
                         .css({height: ''})
                         .removeClass(prefix + 'editor')
                         .removeAttr('contenteditable')
@@ -1175,17 +1181,17 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }
 
             if (t.o.autogrow) {
-                t.height = t.$ed.height();
+                t.height = t.$edBox.height();
                 if (t.height !== t.$ta.css('height')) {
                     t.$ta.css({height: t.height});
                     t.$c.trigger('tbwresize');
                 }
             }
             if (t.o.autogrowOnEnter) {
-                t.$ed.height('auto');
-                var totalHeight = t.autogrowOnEnterWasFocused ? t.$ed[0].scrollHeight : t.$ed.css('min-height');
+                t.$edBox.height('auto');
+                var totalHeight = t.autogrowOnEnterWasFocused ? t.$edBox[0].scrollHeight : t.$edBox.css('min-height');
                 if (totalHeight !== t.$ta.css('height')) {
-                    t.$ed.css({height: totalHeight});
+                    t.$edBox.css({height: totalHeight});
                     t.$c.trigger('tbwresize');
                 }
             }
