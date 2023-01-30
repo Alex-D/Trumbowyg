@@ -1,10 +1,12 @@
 /* ===========================================================
- * trumbowyg.table.custom.js v2.0
+ * trumbowyg.table.js v3.0
  * Table plugin for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
- * Author : Sven Dunemann [dunemann@forelabs.eu]
- * Mod : Uros Gaber [uros@powercom.si] - Added Slovenian (sl) translations
+ * Author : Alexandre Demode (Alex-D)
+ *          Twitter : @AlexandreDemode
+ *          Website : alex-d.fr
+ * Original Author : Sven Dunemann [dunemann@forelabs.eu]
  */
 
 (function ($) {
@@ -29,6 +31,7 @@
                 tableDeleteRow: 'Delete row',
                 tableDeleteColumn: 'Delete column',
                 tableDestroy: 'Delete table',
+                tableMergeCells: 'Merge cells',
             },
             az: {
                 table: 'Cədvəl yerləşdir',
@@ -200,7 +203,7 @@
                     t.o.plugins.table = $.extend(true, {}, defaultOptions, t.o.plugins.table || {});
 
                     // State
-                    var tableSelectionState;
+                    var tableSelectedCells;
 
                     ////////////////////////////////////////////////////
                     // Dropdown
@@ -238,6 +241,7 @@
 
                                 // All other buttons
                                 $dropdown.append(t.buildSubBtn('tableAddRowAbove'));
+                                $dropdown.append(t.buildSubBtn('tableMergeCells'));
                                 $dropdown.append(t.buildSubBtn('tableAddRow'));
                                 $dropdown.append(t.buildSubBtn('tableAddColumnLeft'));
                                 $dropdown.append(t.buildSubBtn('tableAddColumn'));
@@ -395,7 +399,7 @@
                         return function () {
                             t.saveRange();
 
-                            var node = t.doc.getSelection().focusNode;
+                            var node = t.doc.getSelection().anchorNode;
                             var $focusedRow = $(node).closest('tr');
                             var $table = $(node).closest('table');
 
@@ -562,6 +566,137 @@
                     };
 
 
+                    ////// Cell merging
+
+                    var canMergeSelectedCells = function (tableState) {
+                        if (tableSelectedCells.length === 0) {
+                            return false;
+                        }
+
+                        // Check that all tags are the same
+                        var firstCellState = tableSelectedCells[0];
+                        var firstSelectedCellTag = tableState[firstCellState[0]][firstCellState[1]].tag;
+                        var allTagsAreTheSame = tableSelectedCells.every(function (value) {
+                            var cellState = tableState[value[1]][value[0]];
+                            if (cellState.mergedIn !== undefined) {
+                                cellState = tableState[cellState.mergedIn[1]][cellState.mergedIn[0]];
+                            }
+
+                            return cellState.tag === firstSelectedCellTag;
+                        });
+
+                        if (!allTagsAreTheSame) {
+                            return false;
+                        }
+
+                        // Check that all selected cells make a rectangle
+                        var minByRow = [];
+                        var maxByRow = [];
+                        $(tableSelectedCells).each(function (_, tableSelectedCell) {
+                            var y = tableSelectedCell[0];
+                            var x = tableSelectedCell[1];
+                            var cellState = tableState[y][x];
+
+                            var cellRowspan = cellState.rowspan;
+                            var maxRow = y + cellRowspan;
+
+                            for (; y < maxRow; y += 1) {
+                                if (minByRow[y] === undefined) {
+                                    minByRow[y] = tableState[0].length;
+                                }
+
+                                if (maxByRow[y] === undefined) {
+                                    maxByRow[y] = 0;
+                                }
+
+                                minByRow[y] = Math.min(minByRow[y], x);
+                                maxByRow[y] = Math.max(maxByRow[y], x + cellState.colspan);
+                            }
+                        });
+
+                        if (minByRow.length === 0 || maxByRow.length === 0) {
+                            return false;
+                        }
+
+                        var allMinAreTheSame = minByRow.every(function (value) {
+                            return value === minByRow[minByRow.length - 1];
+                        });
+
+                        var allMaxAreTheSame = maxByRow.every(function (value) {
+                            return value === maxByRow[maxByRow.length - 1];
+                        });
+
+                        return allMinAreTheSame && allMaxAreTheSame;
+                    };
+
+                    var findTopLeftCellInSelection = function () {
+                        var MAX_VALUE = 999999;
+                        var topLeftY = MAX_VALUE;
+                        var topLeftX = MAX_VALUE;
+
+                        $(tableSelectedCells).each(function (_, cell) {
+                            topLeftY = Math.min(cell[0], topLeftY);
+                            topLeftX = Math.min(cell[1], topLeftX);
+                        });
+
+                        if (topLeftX === MAX_VALUE || topLeftY === MAX_VALUE) {
+                            return undefined;
+                        }
+
+                        return [topLeftY, topLeftX];
+                    };
+
+                    var mergeCells = {
+                        title: t.lang.tableMergeCells,
+                        text: t.lang.tableMergeCells,
+                        ico: 'table-merge',
+
+                        fn: tableButtonAction(function ($table, $focusedRow, node, tableState) {
+                            if (!canMergeSelectedCells(tableState)) {
+                                return;
+                            }
+
+                            var topLeftCellCoordinates = findTopLeftCellInSelection();
+                            if (topLeftCellCoordinates === undefined) {
+                                return;
+                            }
+
+                            var topLeftCellState = tableState[topLeftCellCoordinates[0]][topLeftCellCoordinates[1]];
+                            var $topLeftCell = $(topLeftCellState.element);
+                            var minY = 999999;
+                            var maxY = 0;
+                            var minX = 999999;
+                            var maxX = 0;
+                            $(tableSelectedCells).each(function (_, selectedCell) {
+                                var y = selectedCell[0];
+                                var x = selectedCell[1];
+                                var cellState = tableState[y][x];
+
+                                minY = Math.min(minY, y);
+                                maxY = Math.max(maxY, y + cellState.rowspan - 1);
+                                minX = Math.min(minX, x);
+                                maxX = Math.max(maxX, x + cellState.colspan - 1);
+
+                                if (cellState.element === $topLeftCell[0]) {
+                                    return;
+                                }
+
+                                cellState.element.remove();
+                            });
+
+                            var cellHeight = maxY - minY + 1;
+                            var cellWidth = maxX - minX + 1;
+
+                            if (cellHeight > 1) {
+                                $topLeftCell.attr('rowspan', cellHeight);
+                            }
+                            if (cellWidth > 1) {
+                                $topLeftCell.attr('colspan', cellWidth);
+                            }
+                        }),
+                    };
+
+
                     ////// Cell selection
 
                     var getCellIndex = function (cellElement, rowState) {
@@ -593,7 +728,7 @@
                     var tableCellSelectedClass = t.o.prefix + 'table-cell-selected';
                     setTimeout(function () { // Wait for init
                         resetTableMouseHacks();
-                        t.$c.on('tbwchange', function () {
+                        t.$c.on('tbwchange.tbwTable', function () {
                             resetTableMouseHacks();
                         });
 
@@ -613,17 +748,17 @@
                                 focusNode = lastRange.startContainer.childNodes[lastRange.startOffset];
                             }
 
-                            var $anchorCell = $(anchorNode);
-                            var $focusCell = $(focusNode);
+                            var $anchorSelectedCell = $(anchorNode).closest('td, th');
+                            var $focusSelectedCell = $(focusNode).closest('td, th');
 
-                            var $tableAnchor = $anchorCell.closest('table');
-                            var $tableFocus = $focusCell.closest('table');
+                            var $tableAnchor = $anchorSelectedCell.closest('table');
+                            var $tableFocus = $focusSelectedCell.closest('table');
 
                             $('.' + tableCellSelectedClass, t.$ed).removeClass(tableCellSelectedClass);
 
                             if (($tableAnchor.length === 0 && $tableFocus.length === 0) ||
                                 $tableAnchor[0] !== $tableFocus[0] ||
-                                anchorNode === focusNode
+                                $anchorSelectedCell[0] === $focusSelectedCell[0]
                             ) {
                                 $('.' + tableCellSelectionModeClass, t.$ed).removeClass(tableCellSelectionModeClass);
                                 return;
@@ -636,9 +771,6 @@
                             var tableState = getTableState($tableAnchor);
 
                             // Find cells to set as selected
-                            var $anchorSelectedCell = $anchorCell.closest('td, th');
-                            var $focusSelectedCell = $focusCell.closest('td, th');
-
                             var $allRows = $('tr', $tableAnchor);
 
                             var $anchorSelectedRow = $anchorSelectedCell.closest('tr');
@@ -655,7 +787,7 @@
                             var lastSelectedCellIndex = Math.max(anchorSelectedCellIndex, focusSelectedCellIndex);
 
                             // Set cells as selected
-                            var selectedCellsState = [];
+                            var selectedCellsCoordinates = [];
                             $allRows.each(function (rowIndex, rowElement) {
                                 if (rowIndex < firstSelectedRowIndex || rowIndex > lastSelectedRowIndex) {
                                     return;
@@ -667,12 +799,12 @@
                                         return;
                                     }
 
-                                    selectedCellsState.push(tableState[rowIndex][cellIndex]);
+                                    selectedCellsCoordinates.push([rowIndex, cellIndex]);
                                     $(cellElement).addClass(tableCellSelectedClass);
                                 });
                             });
 
-                            tableSelectionState = selectedCellsState;
+                            tableSelectedCells = selectedCellsCoordinates;
                         });
                     });
 
@@ -686,9 +818,12 @@
                     t.addBtnDef('tableDeleteRow', deleteRow);
                     t.addBtnDef('tableDeleteColumn', deleteColumn);
                     t.addBtnDef('tableDestroy', destroy);
+                    t.addBtnDef('tableMergeCells', mergeCells);
                 },
                 destroy: function (t) {
-                    $(t.doc).off('selectionchange.table');
+                    $(t.doc).off('selectionchange.tbwTable');
+                    t.$c.off('tbwchange.tbwTable');
+                    $('table', t.$ed).off('mousedown.tbwTable');
                 },
             }
         }
