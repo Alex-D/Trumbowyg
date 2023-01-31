@@ -33,3 +33,20 @@
 .trumbowyg-table-cell-selected {
     background-color: #b4d3fe;
 }
+
+// Resize
+
+.trumbowyg-table-resize-layers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+}
+
+.trumbowyg-table-resize-vertical-handle {
+    position: absolute;
+    width: 3px;
+    margin-left: -2px;
+    cursor: col-resize;
+}

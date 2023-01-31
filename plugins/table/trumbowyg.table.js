@@ -732,6 +732,8 @@
                             resetTableMouseHacks();
                         });
 
+                        buildResizeLayers();
+
                         $(t.doc).on('selectionchange.tbwTable', function () {
                             var selection = t.doc.getSelection();
                             var rangeCount = selection.rangeCount;
@@ -807,6 +809,105 @@
                             tableSelectedCells = selectedCellsCoordinates;
                         });
                     });
+
+
+                    ////// Cell resize
+
+                    var TRUMBOWYG_TABLE_HANDLE_FOR = 'trumbowyg-table-handle-for';
+                    var buildResizeLayers = function () {
+                        var tableState;
+                        var targetColumnIndex;
+                        var $table;
+
+                        var $resizeLayers = $('<div/>', {
+                            class: t.o.prefix + 'table-resize-layers',
+                        }).appendTo(t.$edBox);
+
+                        $('table', t.$ed).each(function (_tableIndex, table) {
+                            $('td, th', $(table)).each(function (_cellIndex, cell) {
+                                // Vertical handles
+                                $('<div/>', {
+                                    class: t.o.prefix + 'table-resize-vertical-handle',
+                                })
+                                    .prop(TRUMBOWYG_TABLE_HANDLE_FOR, cell)
+                                    .on('mousedown.tbwTable', function (e) {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        var targetCell = $(e.target).prop(TRUMBOWYG_TABLE_HANDLE_FOR);
+                                        $table = $(targetCell).closest('table');
+                                        tableState = getTableState($table);
+                                        var $allRows = $('tr', $table);
+                                        var $row = $(targetCell).closest('tr');
+                                        var rowIndex = $allRows.index($row);
+                                        var rowState = tableState[rowIndex];
+                                        var columnIndex = getCellIndex(targetCell, rowState);
+                                        var targetCellState = tableState[rowIndex][columnIndex];
+                                        if (targetCellState.mergedIn !== undefined) {
+                                            targetCellState = tableState[targetCellState.mergedIn[0]][targetCellState.mergedIn[1]];
+                                        }
+
+                                        targetColumnIndex = columnIndex + targetCellState.colspan - 1;
+                                    })
+                                    .appendTo($resizeLayers);
+                            });
+                        });
+                        redrawResizeLayers();
+
+                        $(t.doc)
+                            .on('mousemove.tbwTable', function (e) {
+                                if (targetColumnIndex === undefined) {
+                                    return;
+                                }
+                                e.preventDefault();
+                                e.stopPropagation();
+
+                                var tableRect = $table[0].getBoundingClientRect();
+                                var tableLeftInPixels = e.pageX - tableRect.left;
+                                // var tableLeftInPercents = (tableLeftInPixels / tableRect.width) * 100;
+
+                                var cellElement = tableState[0][targetColumnIndex].element;
+                                var cellRect = cellElement.getBoundingClientRect();
+                                var cellLeftInPixels = cellRect.left - tableRect.left;
+
+                                var cellWidthInPixels = tableLeftInPixels - cellLeftInPixels;
+
+                                $(cellElement).css({
+                                    width: cellWidthInPixels,
+                                });
+
+                                redrawResizeLayers();
+                            })
+                            .on('mouseup.tbwTable', function (e) {
+                                if (targetColumnIndex === undefined) {
+                                    return;
+                                }
+                                e.preventDefault();
+                                e.stopPropagation();
+
+                                $table = undefined;
+                                tableState = undefined;
+                                targetColumnIndex = undefined;
+                            });
+                    };
+
+                    var redrawResizeLayers = function () {
+                        var $resizeLayers = $('.' + t.o.prefix + 'table-resize-layers', t.$edBox);
+
+                        var resizeLayersBoundingClientRect = $resizeLayers[0].getBoundingClientRect();
+                        var resizeLayersTop = resizeLayersBoundingClientRect.top;
+                        var resizeLayersLeft = resizeLayersBoundingClientRect.left;
+
+                        $('.' + t.o.prefix + 'table-resize-vertical-handle', $resizeLayers).each(function (_, cellHandle) {
+                            var $cellHandle = $(cellHandle);
+                            var cell = $cellHandle.prop(TRUMBOWYG_TABLE_HANDLE_FOR);
+                            var cellBoundingClientRect = cell.getBoundingClientRect();
+                            $cellHandle.css({
+                                top: cellBoundingClientRect.top - resizeLayersTop,
+                                left: cellBoundingClientRect.left - resizeLayersLeft + cellBoundingClientRect.width,
+                                height: cellBoundingClientRect.height,
+                            });
+                        });
+                    };
 
 
                     t.addBtnDef('table', buildButtonDef);
