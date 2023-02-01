@@ -847,6 +847,13 @@
                                         }
 
                                         targetColumnIndex = columnIndex + targetCellState.colspan - 1;
+
+                                        ensureColgroupExists($table, tableState);
+                                        setColWidthInPixels($table, tableState);
+
+                                        $table.css({
+                                            maxWidth: '',
+                                        });
                                     })
                                     .appendTo($resizeLayers);
                             });
@@ -863,15 +870,17 @@
 
                                 var tableRect = $table[0].getBoundingClientRect();
                                 var tableLeftInPixels = e.pageX - tableRect.left;
-                                // var tableLeftInPercents = (tableLeftInPixels / tableRect.width) * 100;
 
-                                var cellElement = tableState[0][targetColumnIndex].element;
+                                var cellState = findFirstCellAtIndex(tableState, targetColumnIndex);
+
+                                var cellElement = cellState.element;
                                 var cellRect = cellElement.getBoundingClientRect();
                                 var cellLeftInPixels = cellRect.left - tableRect.left;
 
                                 var cellWidthInPixels = tableLeftInPixels - cellLeftInPixels;
 
-                                $(cellElement).css({
+                                var colElement = $('col', $table)[targetColumnIndex];
+                                $(colElement).css({
                                     width: cellWidthInPixels,
                                 });
 
@@ -884,10 +893,83 @@
                                 e.preventDefault();
                                 e.stopPropagation();
 
+                                // Fix width
+                                ensureColgroupExists($table, tableState);
+                                setColWidthInPercents($table, tableState);
+
+                                // Reset resize state
                                 $table = undefined;
                                 tableState = undefined;
                                 targetColumnIndex = undefined;
+
+                                // Ensure resize layers are up to date
+                                redrawResizeLayers();
                             });
+
+                        $(window)
+                            .on('resize.tbwTable', function () {
+                                redrawResizeLayers();
+                            });
+                    };
+
+                    var ensureColgroupExists = function ($table, tableState) {
+                        var $colgroup = $('colgroup', $table);
+                        if ($colgroup.length === 0) {
+                            $colgroup = $('<colgroup/>').prependTo($table);
+                        }
+
+                        var columnCount = tableState[0].length;
+                        var currentColCount = $('col', $colgroup).length;
+                        for (; currentColCount < columnCount; currentColCount += 1) {
+                            $('<col/>').appendTo($colgroup);
+                        }
+                    };
+
+                    var findFirstCellAtIndex = function (tableState, cellIndex) {
+                        var cellState;
+                        var rowIndex = 0;
+                        do {
+                            cellState = tableState[rowIndex][cellIndex];
+                            rowIndex += 1;
+                        } while (cellState.element === undefined || cellState.colspan !== 1);
+
+                        return cellState;
+                    };
+
+                    var setColWidths = function ($table, tableState, isUnitPercent = false) {
+                        var $colgroup = $('colgroup', $table);
+                        var $cols = $('col', $colgroup);
+                        var tableWidth = $table[0].offsetWidth;
+                        $table.css({
+                            maxWidth: $table[0].offsetWidth,
+                        });
+
+                        var columnCount = tableState[0].length;
+                        var colWidths = [];
+                        for (var columnIndex = 0; columnIndex < columnCount; columnIndex += 1) {
+                            var cellElement = findFirstCellAtIndex(tableState, columnIndex).element;
+                            var cellWidth = cellElement.getBoundingClientRect().width;
+
+                            if (isUnitPercent) {
+                                cellWidth = ((cellWidth / tableWidth) * 100) + '%';
+                            }
+
+                            colWidths[columnIndex] = cellWidth;
+                        }
+
+                        for (var colIndex = 0; colIndex < columnCount; colIndex += 1) {
+                            $($cols[colIndex]).css({
+                                width: colWidths[colIndex],
+                            });
+                        }
+                    };
+
+                    var setColWidthInPixels = function ($table, tableState) {
+                        setColWidths($table, tableState, false);
+                    };
+
+                    var setColWidthInPercents = function ($table, tableState) {
+                        setColWidths($table, tableState, true);
                     };
 
                     var redrawResizeLayers = function () {
@@ -922,9 +1004,19 @@
                     t.addBtnDef('tableMergeCells', mergeCells);
                 },
                 destroy: function (t) {
-                    $(t.doc).off('selectionchange.tbwTable');
-                    t.$c.off('tbwchange.tbwTable');
-                    $('table', t.$ed).off('mousedown.tbwTable');
+                    $(window)
+                        .off('resize.tbwTable');
+
+                    $(t.doc)
+                        .off('selectionchange.tbwTable')
+                        .off('mousemove.tbwTable')
+                        .off('mouseup.tbwTable');
+
+                    t.$c
+                        .off('tbwchange.tbwTable');
+
+                    $('table', t.$ed)
+                        .off('mousedown.tbwTable');
                 },
             }
         }
