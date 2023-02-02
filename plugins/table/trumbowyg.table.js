@@ -577,9 +577,9 @@
                         var firstCellState = tableSelectedCells[0];
                         var firstSelectedCellTag = tableState[firstCellState[0]][firstCellState[1]].tag;
                         var allTagsAreTheSame = tableSelectedCells.every(function (value) {
-                            var cellState = tableState[value[1]][value[0]];
+                            var cellState = tableState[value[0]][value[1]];
                             if (cellState.mergedIn !== undefined) {
-                                cellState = tableState[cellState.mergedIn[1]][cellState.mergedIn[0]];
+                                cellState = tableState[cellState.mergedIn[0]][cellState.mergedIn[1]];
                             }
 
                             return cellState.tag === firstSelectedCellTag;
