@@ -816,6 +816,7 @@
                             var $tableAnchor = $anchorSelectedCell.closest('table');
                             var $tableFocus = $focusSelectedCell.closest('table');
 
+                            $('[class="' + tableCellSelectedClass + '"]', t.$ed).removeAttr('class');
                             $('.' + tableCellSelectedClass, t.$ed).removeClass(tableCellSelectedClass);
 
                             if (($tableAnchor.length === 0 && $tableFocus.length === 0) ||
