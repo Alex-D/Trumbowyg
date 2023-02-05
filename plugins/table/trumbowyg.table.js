@@ -234,7 +234,7 @@
                             // when active table show AddRow / AddColumn
                             if (t.$box.find('.' + t.o.prefix + 'table-button').hasClass(t.o.prefix + 'active-button')) {
                                 // Conditional thead button
-                                var $table = $(t.doc.getSelection().focusNode).closest('table');
+                                var $table = $(t.doc.getSelection().anchorNode).closest('table');
                                 var hasThead = $('thead', $table).length !== 0;
                                 if (!hasThead) {
                                     $dropdown.append(t.buildSubBtn('tableAddHeaderRow'));
@@ -463,6 +463,11 @@
                         ico: 'header-row',
 
                         fn: tableButtonAction(function ($table) {
+                            var hasThead = $('thead', $table).length !== 0;
+                            if (hasThead) {
+                                return false;
+                            }
+
                             var $tableFirstRow = $('tr', $table).first();
                             var $thead = $('<thead/>');
                             var $theadRow = $('<tr/>').appendTo($thead);
