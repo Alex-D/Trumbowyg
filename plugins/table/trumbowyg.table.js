@@ -199,6 +199,7 @@
 
         plugins: {
             table: {
+                // jshint maxstatements:false
                 init: function (t) {
                     t.o.plugins.table = $.extend(true, {}, defaultOptions, t.o.plugins.table || {});
 
@@ -646,6 +647,56 @@
                         return [topLeftY, topLeftX];
                     };
 
+                    var simplifyCells = function ($table) {
+                        var tableState = getTableState($table);
+
+                        // Remove colspan if every line contains same amount of th/td
+                        var realCellCountByRow = $.map(tableState, function (rowState) {
+                            return rowState.reduce(function (rowCellCount, cellState) {
+                                if (cellState.mergedIn === undefined) {
+                                    return rowCellCount + 1;
+                                }
+
+                                return rowCellCount;
+                            }, 0);
+                        });
+                        var hasSameCellCountByRow = realCellCountByRow.every(function (rowCellCount) {
+                            return rowCellCount === realCellCountByRow[0];
+                        });
+
+                        if (hasSameCellCountByRow) {
+                            $(tableState).each(function (_, rowState) {
+                                $(rowState).each(function (_, cellState) {
+                                    $(cellState.element).removeAttr('colspan');
+                                });
+                            });
+                        }
+
+                        // Remove rowspan if a row is empty
+                        var $rows = $('tr', $table);
+                        $(tableState).each(function (rowIndex, rowState) {
+                            var isRowEmpty = rowState.every(function (cellState) {
+                                return cellState.mergedIn !== undefined;
+                            });
+
+                            if (isRowEmpty) {
+                                // Reduce by 1 the rowspan on each cell in previous row
+                                $(tableState[rowIndex - 1]).each(function (_, cellState) {
+                                    cellState.rowspan -= 1;
+
+                                    if (cellState.rowspan === 1) {
+                                        return cellState.element.removeAttribute('rowspan');
+                                    }
+
+                                    cellState.element.setAttribute('rowspan', cellState.rowspan);
+                                });
+
+                                // Remove empty tr
+                                $rows[rowIndex].remove();
+                            }
+                        });
+                    };
+
                     var mergeCells = {
                         title: t.lang.tableMergeCells,
                         text: t.lang.tableMergeCells,
@@ -693,6 +744,10 @@
                             if (cellWidth > 1) {
                                 $topLeftCell.attr('colspan', cellWidth);
                             }
+
+                            simplifyCells($table);
+
+                            redrawResizeLayers();
                         }),
                     };
 
