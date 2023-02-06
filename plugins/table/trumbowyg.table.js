@@ -438,6 +438,8 @@
                             } else {
                                 $focusedRow.after($newRow);
                             }
+
+                            rebuildResizeLayers();
                         });
                     };
 
@@ -481,6 +483,8 @@
 
                             // add thead to table
                             $table.prepend($thead);
+
+                            rebuildResizeLayers();
                         }),
                     };
 
@@ -790,7 +794,7 @@
                             resetTableMouseHacks();
                         });
 
-                        buildResizeLayers();
+                        rebuildResizeLayers();
 
                         $(t.doc).on('selectionchange.tbwTable', function () {
                             var selection = t.doc.getSelection();
@@ -873,14 +877,24 @@
                     ////// Cell resize
 
                     var TRUMBOWYG_TABLE_HANDLE_FOR = 'trumbowyg-table-handle-for';
-                    var buildResizeLayers = function () {
+                    var rebuildResizeLayers = function () {
                         var tableState;
                         var targetColumnIndex;
                         var $table;
 
-                        var $resizeLayers = $('<div/>', {
-                            class: t.o.prefix + 'table-resize-layers',
-                        }).appendTo(t.$edBox);
+                        var $resizeLayers = $(t.o.prefix + 'table-resize-layers');
+                        var hasResizeLayers = $resizeLayers.length > 0;
+                        if (!hasResizeLayers) {
+                            $resizeLayers = $('<div/>', {
+                                class: t.o.prefix + 'table-resize-layers',
+                            }).appendTo(t.$edBox);
+
+                            $(t.o.prefix + 'table-resize-vertical-handle', $resizeLayers).each(function (_, handle) {
+                                $(handle)
+                                    .off()
+                                    .remove();
+                            });
+                        }
 
                         $('table', t.$ed).each(function (_tableIndex, table) {
                             $('td, th', $(table)).each(function (_cellIndex, cell) {
@@ -918,6 +932,12 @@
                             });
                         });
                         redrawResizeLayers();
+
+                        // If resize layer was here
+                        // We do not need to add following events
+                        if (hasResizeLayers) {
+                            return;
+                        }
 
                         $(t.doc)
                             .on('mousemove.tbwTable', function (e) {
