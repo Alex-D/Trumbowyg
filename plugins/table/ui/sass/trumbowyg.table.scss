@@ -31,8 +31,9 @@
 }
 
 .trumbowyg-table-cell-selected {
-    background-color: #b4d3fe;
+    background-color: #b4d3fe !important;
 }
+
 
 // Resize
 
@@ -50,3 +51,64 @@
     margin-left: -3px;
     cursor: col-resize;
 }
+
+
+// Background color
+
+.trumbowyg-dropdown-tableCellBackgroundColor:not(.trumbowyg-dropdown--color-list) {
+    max-width: 276px;
+    padding: 7px 5px;
+    overflow: initial;
+
+    button {
+        display: block;
+        position: relative;
+        float: left;
+        text-indent: -9999px;
+        height: 20px;
+        width: 20px;
+        border: 1px solid #333;
+        padding: 0;
+        margin: 2px;
+
+        &:hover,
+        &:focus {
+            &::after {
+                content: " ";
+                display: block;
+                position: absolute;
+                top: -5px;
+                left: -5px;
+                width: 27px;
+                height: 27px;
+                background: inherit;
+                border: 1px solid #fff;
+                box-shadow: #000 0 0 2px;
+                z-index: 10;
+            }
+        }
+    }
+}
+
+.trumbowyg-dropdown-tableCellBackgroundColor.trumbowyg-dropdown--color-list {
+    button:not(.trumbowyg-removeCellBackgroundColor-dropdown-button) {
+        position: relative;
+        color: #fff !important;
+
+        &:hover,
+        &:focus {
+            &::after {
+                content: " ";
+                display: block;
+                position: absolute;
+                top: 13px;
+                left: 0;
+                width: 0;
+                height: 0;
+                border: 5px solid transparent;
+                border-left-color: #fff;
+            }
+        }
+    }
+}
+

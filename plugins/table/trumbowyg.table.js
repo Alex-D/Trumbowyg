@@ -15,8 +15,35 @@
     var defaultOptions = {
         rows: 8,
         columns: 8,
-        styler: 'table'
+        backgroundColorList: [
+            'ffffff', '000000', 'eeece1', '1f497d', '4f81bd', 'c0504d', '9bbb59', '8064a2', '4bacc6', 'f79646', 'ffff00',
+            'f2f2f2', '7f7f7f', 'ddd9c3', 'c6d9f0', 'dbe5f1', 'f2dcdb', 'ebf1dd', 'e5e0ec', 'dbeef3', 'fdeada', 'fff2ca',
+            'd8d8d8', '595959', 'c4bd97', '8db3e2', 'b8cce4', 'e5b9b7', 'd7e3bc', 'ccc1d9', 'b7dde8', 'fbd5b5', 'ffe694',
+            'bfbfbf', '3f3f3f', '938953', '548dd4', '95b3d7', 'd99694', 'c3d69b', 'b2a2c7', 'b7dde8', 'fac08f', 'f2c314',
+            'a5a5a5', '262626', '494429', '17365d', '366092', '953734', '76923c', '5f497a', '92cddc', 'e36c09', 'c09100',
+            '7f7f7f', '0c0c0c', '1d1b10', '0f243e', '244061', '632423', '4f6128', '3f3151', '31859b', '974806', '7f6000'
+        ],
+        allowCustomBackgroundColor: true,
+        displayBackgroundColorsAsList: false,
     };
+
+    function hex(x) {
+        return ('0' + parseInt(x).toString(16)).slice(-2);
+    }
+
+    function colorToHex(rgb) {
+        if (rgb.search('rgb') === -1) {
+            return rgb.replace('#', '');
+        } else if (rgb === 'rgba(0, 0, 0, 0)') {
+            return 'transparent';
+        } else {
+            rgb = rgb.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d?(.\d+)))?\)$/);
+            if (rgb == null) {
+                return 'transparent'; // No match, return transparent as unkown color
+            }
+            return hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+        }
+    }
 
     $.extend(true, $.trumbowyg, {
         langs: {
@@ -35,6 +62,7 @@
                 tableVerticalAlignTop: 'Align text to top',
                 tableVerticalAlignMiddle: 'Center text vertically',
                 tableVerticalAlignBottom: 'Align text to bottom',
+                tableCellBackgroundColor: 'Cell background color'
             },
             az: {
                 table: 'Cədvəl yerləşdir',
@@ -711,6 +739,10 @@
                                 $rows[rowIndex].remove();
                             }
                         });
+
+                        // Remove empty attributes
+                        $('[class=""]', $table).removeAttr('class');
+                        $('[style=""]', $table).removeAttr('style');
                     };
 
                     var mergeCells = {
@@ -1102,6 +1134,7 @@
 
 
                     ////// Vertical alignment
+
                     var tableVerticalAlign = function (alignPosition) {
                         return tableButtonAction(function ($table, $focusedRow, node, tableState) {
                             foreachSelectedCell(function ($cell) {
@@ -1137,6 +1170,97 @@
                     };
 
 
+                    ////// Cell Background color
+
+                    var backgroundColorDropdownClass = t.o.plugins.table.displayAsList ? t.o.prefix + 'dropdown--color-list' : '';
+                    var applyBackgroundColorToSelectedCells = function (color) {
+                        return function () {
+                            var $table = $(t.doc.getSelection().anchorNode).closest('table');
+
+                            if ($table.length === 0) {
+                                return;
+                            }
+
+                            var tableState = getTableState($table);
+                            foreachSelectedCell(function ($cell) {
+                                $cell.css({
+                                    backgroundColor: color,
+                                });
+                            }, tableState);
+
+                            simplifyCells($table);
+                        };
+                    };
+                    var cellBackgroundColorBtnDef = {
+                        dropdown: (function () {
+                            var dropdown = [];
+                            var trumbowygTableOptions = t.o.plugins.table;
+                            var colorList = trumbowygTableOptions.backgroundColorList;
+
+                            $.each(colorList, function (i, color) {
+                                var btn = 'tableCellBackgroundColor' + color;
+                                var btnDef = {
+                                    fn: applyBackgroundColorToSelectedCells('#' + color),
+                                    hasIcon: false,
+                                    text: t.lang['#' + color] || ('#' + color),
+                                    style: 'background-color: #' + color + ';'
+                                };
+
+                                t.addBtnDef(btn, btnDef);
+                                dropdown.push(btn);
+                            });
+
+                            // Remove color
+                            var removeColorButtonName = 'removeCellBackgroundColor',
+                                removeColorBtnDef = {
+                                    fn: applyBackgroundColorToSelectedCells(''),
+                                    hasIcon: false,
+                                    style: 'background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAG0lEQVQIW2NkQAAfEJMRmwBYhoGBYQtMBYoAADziAp0jtJTgAAAAAElFTkSuQmCC);'
+                                };
+
+                            if (trumbowygTableOptions.displayAsList) {
+                                removeColorBtnDef.style = '';
+                            }
+
+                            t.addBtnDef(removeColorButtonName, removeColorBtnDef);
+                            dropdown.push(removeColorButtonName);
+
+                            // Custom color
+                            if (trumbowygTableOptions.allowCustomBackgroundColor) {
+                                var freeColorBtnDef = {
+                                    fn: function () {
+                                        t.openModalInsert(t.lang.backgroundColor,
+                                            {
+                                                color: {
+                                                    label: 'backgroundColor',
+                                                    forceCss: true,
+                                                    type: 'color',
+                                                    value: '#FFFFFF'
+                                                }
+                                            },
+                                            // callback
+                                            function (values) {
+                                                applyBackgroundColorToSelectedCells(values.color)();
+                                                return true;
+                                            }
+                                        );
+                                    },
+                                    hasIcon: false,
+                                    text: '#',
+                                    // style adjust for displaying the text
+                                    style: 'text-indent: 0; line-height: 20px; padding: 0 5px;'
+                                };
+
+                                var freeColorButtonName = 'freeCellBackgroundColor';
+                                t.addBtnDef(freeColorButtonName, freeColorBtnDef);
+                                dropdown.push(freeColorButtonName);
+                            }
+
+                            return dropdown;
+                        })(),
+                        dropdownClass: backgroundColorDropdownClass,
+                    };
+
 
                     ////// Register buttons
 
@@ -1155,6 +1279,8 @@
                     t.addBtnDef('tableVerticalAlignTop', verticalAlignTop);
                     t.addBtnDef('tableVerticalAlignMiddle', verticalAlignMiddle);
                     t.addBtnDef('tableVerticalAlignBottom', verticalAlignBottom);
+
+                    t.addBtnDef('tableCellBackgroundColor', cellBackgroundColorBtnDef);
 
                     t.addBtnDef('tableDeleteRow', deleteRow);
                     t.addBtnDef('tableDeleteColumn', deleteColumn);
@@ -1175,7 +1301,7 @@
                     $('table', t.$ed)
                         .off('mousedown.tbwTable');
                 },
-                tagHandler: function (element) {
+                tagHandler: function (element, t) {
                     var tags = [];
 
                     if (element.tagName === 'table') {
@@ -1189,6 +1315,16 @@
                     var elementVerticalAlign = element.style.verticalAlign;
                     if (elementVerticalAlign !== '') {
                         tags.push('tableVerticalAlign' + elementVerticalAlign[0].toUpperCase() + elementVerticalAlign.slice(1).toLowerCase());
+                    }
+
+                    var elementBackgroundColor = element.style.backgroundColor;
+                    if ((element.tagName === 'TH' || element.tagName === 'TD') && elementBackgroundColor !== '') {
+                        var backColor = colorToHex(elementBackgroundColor);
+                        if (t.o.plugins.table.backgroundColorList.indexOf(backColor) >= 0) {
+                            tags.push('tableCellBackgroundColor' + backColor);
+                        } else {
+                            tags.push('freeCellBackgroundColor');
+                        }
                     }
 
                     return tags;
