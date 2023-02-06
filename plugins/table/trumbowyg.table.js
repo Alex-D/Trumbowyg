@@ -493,18 +493,21 @@
 
                     var addColumnButtonAction = function (isBefore = false) {
                         return tableButtonAction(function ($table, $focusedRow, node) {
-                            var focusedColIdx = $(node).closest('td').index();
+                            var $focusedCell = $(node).closest('td, th');
+                            var focusedColIdx = $focusedCell.index();
 
                             $('tr', $table).each(function () {
                                 var $previousCell = $(this).children()[focusedColIdx];
-                                var $newCell = $previousCell.clone().text('');
+                                var newCellElement = t.doc.createElement($previousCell.tagName);
 
                                 if (isBefore) {
-                                    $previousCell.before($newCell);
+                                    $previousCell.before(newCellElement);
                                 } else {
-                                    $previousCell.after($newCell);
+                                    $previousCell.after(newCellElement);
                                 }
                             });
+
+                            rebuildResizeLayers();
                         });
                     };
 
