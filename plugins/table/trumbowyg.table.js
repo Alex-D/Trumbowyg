@@ -468,18 +468,16 @@
                                 return false;
                             }
 
-                            var $tableFirstRow = $('tr', $table).first();
+                            var tableState = getTableState($table);
+                            var columnCount = tableState[0].length;
+
                             var $thead = $('<thead/>');
                             var $theadRow = $('<tr/>').appendTo($thead);
 
                             // add columns according to current columns count
-                            $('td', $tableFirstRow).each(function () {
-                                var $newTh = $('<th/>').appendTo($theadRow);
-
-                                $.each(this.attributes, function (attribute) {
-                                    $newTh.attr(attribute.name, attribute.value);
-                                });
-                            });
+                            for (var columnIndex = 0; columnIndex < columnCount; columnIndex += 1) {
+                                $('<th/>').appendTo($theadRow);
+                            }
 
                             // add thead to table
                             $table.prepend($thead);
