@@ -337,7 +337,7 @@
                             rangeNode.remove();
                         }
 
-                        t.$c.trigger('tbwchange');
+                        t.syncCode();
                     };
 
                     var getTableState = function ($table) {
