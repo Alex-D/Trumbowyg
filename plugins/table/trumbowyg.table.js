@@ -32,6 +32,9 @@
                 tableDeleteColumn: 'Delete column',
                 tableDestroy: 'Delete table',
                 tableMergeCells: 'Merge cells',
+                tableVerticalAlignTop: 'Align text to top',
+                tableVerticalAlignMiddle: 'Center text vertically',
+                tableVerticalAlignBottom: 'Align text to bottom',
             },
             az: {
                 table: 'Cədvəl yerləşdir',
@@ -242,10 +245,13 @@
 
                                 // All other buttons
                                 $dropdown.append(t.buildSubBtn('tableAddRowAbove'));
-                                $dropdown.append(t.buildSubBtn('tableMergeCells'));
                                 $dropdown.append(t.buildSubBtn('tableAddRow'));
                                 $dropdown.append(t.buildSubBtn('tableAddColumnLeft'));
                                 $dropdown.append(t.buildSubBtn('tableAddColumn'));
+                                $dropdown.append(t.buildSubBtn('tableMergeCells'));
+                                $dropdown.append(t.buildSubBtn('tableVerticalAlignTop'));
+                                $dropdown.append(t.buildSubBtn('tableVerticalAlignMiddle'));
+                                $dropdown.append(t.buildSubBtn('tableVerticalAlignBottom'));
                                 $dropdown.append(t.buildSubBtn('tableDeleteRow'));
                                 $dropdown.append(t.buildSubBtn('tableDeleteColumn'));
                                 $dropdown.append(t.buildSubBtn('tableDestroy'));
@@ -876,6 +882,27 @@
                         });
                     });
 
+                    var foreachSelectedCell = function (callback, tableState) {
+                        if (tableSelectedCells === undefined) {
+                            var $node = $(t.doc.getSelection().anchorNode).closest('td, th');
+                            if ($node.length === 0) {
+                                return;
+                            }
+
+                            callback($node);
+                            return;
+                        }
+
+                        $(tableSelectedCells).each(function (_, cellCoordinates) {
+                            var cellState = tableState[cellCoordinates[0]][cellCoordinates[1]];
+                            if (cellState.mergedIn) {
+                                return;
+                            }
+
+                            callback($(cellState.element));
+                        });
+                    };
+
 
                     ////// Cell resize
 
@@ -1074,16 +1101,64 @@
                     };
 
 
+                    ////// Vertical alignment
+                    var tableVerticalAlign = function (alignPosition) {
+                        return tableButtonAction(function ($table, $focusedRow, node, tableState) {
+                            foreachSelectedCell(function ($cell) {
+                                $cell.css({
+                                    verticalAlign: alignPosition,
+                                });
+                            }, tableState);
+                        });
+                    };
+
+                    var verticalAlignTop = {
+                        title: t.lang.tableVerticalAlignTop,
+                        text: t.lang.tableVerticalAlignTop,
+                        ico: 'align-top',
+
+                        fn: tableVerticalAlign('top'),
+                    };
+
+                    var verticalAlignMiddle = {
+                        title: t.lang.tableVerticalAlignMiddle,
+                        text: t.lang.tableVerticalAlignMiddle,
+                        ico: 'align-middle',
+
+                        fn: tableVerticalAlign('middle'),
+                    };
+
+                    var verticalAlignBottom = {
+                        title: t.lang.tableVerticalAlignBottom,
+                        text: t.lang.tableVerticalAlignBottom,
+                        ico: 'align-bottom',
+
+                        fn: tableVerticalAlign('bottom'),
+                    };
+
+
+
+                    ////// Register buttons
+
                     t.addBtnDef('table', buildButtonDef);
+
                     t.addBtnDef('tableAddHeaderRow', addHeaderRow);
+
                     t.addBtnDef('tableAddRowAbove', addRowAbove);
                     t.addBtnDef('tableAddRow', addRowBelow);
+
                     t.addBtnDef('tableAddColumnLeft', addColumnLeft);
                     t.addBtnDef('tableAddColumn', addColumnRight);
+
+                    t.addBtnDef('tableMergeCells', mergeCells);
+
+                    t.addBtnDef('tableVerticalAlignTop', verticalAlignTop);
+                    t.addBtnDef('tableVerticalAlignMiddle', verticalAlignMiddle);
+                    t.addBtnDef('tableVerticalAlignBottom', verticalAlignBottom);
+
                     t.addBtnDef('tableDeleteRow', deleteRow);
                     t.addBtnDef('tableDeleteColumn', deleteColumn);
                     t.addBtnDef('tableDestroy', destroy);
-                    t.addBtnDef('tableMergeCells', mergeCells);
                 },
                 destroy: function (t) {
                     $(window)
@@ -1099,6 +1174,24 @@
 
                     $('table', t.$ed)
                         .off('mousedown.tbwTable');
+                },
+                tagHandler: function (element) {
+                    var tags = [];
+
+                    if (element.tagName === 'table') {
+                        tags.push('table');
+                    }
+
+                    if (!element.style) {
+                        return tags;
+                    }
+
+                    var elementVerticalAlign = element.style.verticalAlign;
+                    if (elementVerticalAlign !== '') {
+                        tags.push('tableVerticalAlign' + elementVerticalAlign[0].toUpperCase() + elementVerticalAlign.slice(1).toLowerCase());
+                    }
+
+                    return tags;
                 },
             }
         }
