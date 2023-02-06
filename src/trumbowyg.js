@@ -1953,7 +1953,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 prefix = t.o.prefix,
                 activeClasses = prefix + 'active-button ' + prefix + 'active',
                 originalIconClass = prefix + 'original-icon',
-                tags = t.getTagsRecursive(t.doc.getSelection().focusNode);
+                tags = t.getTagsRecursive(t.doc.getSelection().anchorNode);
 
             t.clearButtonPaneStatus();
 
@@ -1995,7 +1995,9 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             tags = tags || (element && element.tagName ? [element.tagName] : []);
 
             if (element && element.parentNode) {
-                element = element.parentNode;
+                if (element.nodeType !== Node.ELEMENT_NODE) {
+                    element = element.parentNode;
+                }
             } else {
                 return tags;
             }
@@ -2014,7 +2016,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             tags.push(tag);
 
-            return t.getTagsRecursive(element, tags).filter(function (tag) {
+            return t.getTagsRecursive(element.parentNode, tags).filter(function (tag) {
                 return tag != null;
             });
         },
