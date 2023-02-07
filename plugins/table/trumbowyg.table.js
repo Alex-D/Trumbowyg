@@ -480,7 +480,7 @@
                     ////// Rows
 
                     var addRowButtonAction = function (isBefore = false) {
-                        return tableButtonAction(function ($table, $focusedRow) {
+                        return tableButtonAction(function ($table, $focusedRow, node, tableState) {
                             var $newRow = $('<tr/>');
 
                             if ($focusedRow.closest('thead').length !== 0) {
@@ -488,9 +488,10 @@
                             }
 
                             // add columns according to current columns count
-                            $('td', $focusedRow).each(function () {
-                                $(this).clone().appendTo($newRow).text('');
-                            });
+                            var columnCount = tableState[0].length;
+                            for (var columnIndex = 0; columnIndex < columnCount; columnIndex += 1) {
+                                $('<td/>').appendTo($newRow);
+                            }
 
                             // add row to table
                             if (isBefore) {
