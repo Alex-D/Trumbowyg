@@ -524,13 +524,12 @@
                         text: t.lang.tableAddHeaderRow,
                         ico: 'header-row',
 
-                        fn: tableButtonAction(function ($table) {
+                        fn: tableButtonAction(function ($table, $focusedRow, node, tableState) {
                             var hasThead = $('thead', $table).length !== 0;
                             if (hasThead) {
                                 return false;
                             }
 
-                            var tableState = getTableState($table);
                             var columnCount = tableState[0].length;
 
                             var $thead = $('<thead/>');
