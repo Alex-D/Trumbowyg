@@ -25,6 +25,28 @@
         ],
         allowCustomBackgroundColor: true,
         displayBackgroundColorsAsList: false,
+        dropdown: [
+            // Rows
+            'tableAddRowAbove',
+            'tableAddRow',
+
+            // Columns
+            'tableAddColumnLeft',
+            'tableAddColumn',
+
+            // Cell merge/split
+            'tableMergeCells',
+
+            // Vertical align
+            'tableVerticalAlignTop',
+            'tableVerticalAlignMiddle',
+            'tableVerticalAlignBottom',
+
+            // Destroy actions
+            'tableDeleteRow',
+            'tableDeleteColumn',
+            'tableDestroy',
+        ],
     };
 
     function hex(x) {
@@ -264,25 +286,19 @@
 
                             // when active table show AddRow / AddColumn
                             if (t.$box.find('.' + t.o.prefix + 'table-button').hasClass(t.o.prefix + 'active-button')) {
-                                // Conditional thead button
-                                var $table = $(t.doc.getSelection().anchorNode).closest('table');
-                                var hasThead = $('thead', $table).length !== 0;
-                                if (!hasThead) {
-                                    $dropdown.append(t.buildSubBtn('tableAddHeaderRow'));
-                                }
+                                $(t.o.plugins.table.dropdown).each(function (_, buttonName) {
+                                    // Conditional thead button
+                                    if (buttonName === 'tableAddHeaderRow') {
+                                        var $table = $(t.doc.getSelection().anchorNode).closest('table');
+                                        var hasThead = $('thead', $table).length !== 0;
+                                        if (!hasThead) {
+                                            $dropdown.append(t.buildSubBtn('tableAddHeaderRow'));
+                                        }
+                                        return;
+                                    }
 
-                                // All other buttons
-                                $dropdown.append(t.buildSubBtn('tableAddRowAbove'));
-                                $dropdown.append(t.buildSubBtn('tableAddRow'));
-                                $dropdown.append(t.buildSubBtn('tableAddColumnLeft'));
-                                $dropdown.append(t.buildSubBtn('tableAddColumn'));
-                                $dropdown.append(t.buildSubBtn('tableMergeCells'));
-                                $dropdown.append(t.buildSubBtn('tableVerticalAlignTop'));
-                                $dropdown.append(t.buildSubBtn('tableVerticalAlignMiddle'));
-                                $dropdown.append(t.buildSubBtn('tableVerticalAlignBottom'));
-                                $dropdown.append(t.buildSubBtn('tableDeleteRow'));
-                                $dropdown.append(t.buildSubBtn('tableDeleteColumn'));
-                                $dropdown.append(t.buildSubBtn('tableDestroy'));
+                                    $dropdown.append(t.buildSubBtn(buttonName));
+                                });
                             } else {
                                 var tableSelect = $('<table/>');
                                 $('<tbody/>').appendTo(tableSelect);
@@ -300,7 +316,8 @@
                             }
 
                             t.dropdown(btnName);
-                        }
+                        },
+                        class: t.o.prefix + 'open-dropdown'
                     };
 
                     var toggleActiveDropdownCells = function (columnEvent) {
