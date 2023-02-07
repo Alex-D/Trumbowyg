@@ -27,6 +27,7 @@
         displayBackgroundColorsAsList: false,
         dropdown: [
             // Rows
+            'tableAddHeaderRow',
             'tableAddRowAbove',
             'tableAddRow',
 
@@ -36,6 +37,7 @@
 
             // Cell merge/split
             'tableMergeCells',
+            'tableUnmergeCells',
 
             // Vertical align
             'tableVerticalAlignTop',
@@ -81,6 +83,7 @@
                 tableDeleteColumn: 'Delete column',
                 tableDestroy: 'Delete table',
                 tableMergeCells: 'Merge cells',
+                tableUnmergeCells: 'Unmerge cells',
                 tableVerticalAlignTop: 'Align text to top',
                 tableVerticalAlignMiddle: 'Center text vertically',
                 tableVerticalAlignBottom: 'Align text to bottom',
@@ -154,6 +157,7 @@
                 tableDeleteColumn: 'Supprimer la colonne',
                 tableDestroy: 'Supprimer le tableau',
                 tableMergeCells: 'Fusionner les cellules',
+                tableUnmergeCells: 'Dissocier les cellules',
                 tableVerticalAlignTop: 'Aligner en haut',
                 tableVerticalAlignMiddle: 'Aligner au milieu',
                 tableVerticalAlignBottom: 'Aligner en bas',
@@ -821,6 +825,36 @@
                         }),
                     };
 
+                    var unmergeCells = {
+                        title: t.lang.tableUnmergeCells,
+                        text: t.lang.tableUnmergeCells,
+                        ico: 'table-unmerge',
+
+                        fn: tableButtonAction(function ($table, $focusedRow, node, tableState) {
+                            foreachSelectedCell(function ($cell) {
+                                $cell.removeAttr('colspan').removeAttr('rowspan');
+                                var $rows = $('tr', $table);
+
+                                var cellRowIndex = $rows.index($cell.closest('tr'));
+                                var cellColumnIndex = getCellIndex($cell[0], tableState[cellRowIndex]);
+                                var cellState = tableState[cellRowIndex][cellColumnIndex];
+
+                                for (var rowIndex = 0; rowIndex < cellState.rowspan; rowIndex += 1) {
+                                    var $row = $rows[cellRowIndex + rowIndex];
+
+                                    var colIndex = (rowIndex === 0) ? 1 : 0;
+                                    var $previousCell = $('th, td', $row)[cellColumnIndex + colIndex - 1];
+                                    for (; colIndex < cellState.colspan; colIndex += 1) {
+                                        var newCellElement = t.doc.createElement($previousCell.tagName);
+                                        $previousCell.after(newCellElement);
+                                    }
+                                }
+                            }, tableState);
+
+                            redrawResizeLayers();
+                        }),
+                    };
+
 
                     ////// Cell selection
 
@@ -938,12 +972,12 @@
 
                     var foreachSelectedCell = function (callback, tableState) {
                         if (tableSelectedCells === undefined) {
-                            var $node = $(t.doc.getSelection().anchorNode).closest('td, th');
-                            if ($node.length === 0) {
+                            var $cell = $(t.doc.getSelection().anchorNode).closest('td, th');
+                            if ($cell.length === 0) {
                                 return;
                             }
 
-                            callback($node);
+                            callback($cell);
                             return;
                         }
 
@@ -1297,6 +1331,7 @@
                     t.addBtnDef('tableAddColumn', addColumnRight);
 
                     t.addBtnDef('tableMergeCells', mergeCells);
+                    t.addBtnDef('tableUnmergeCells', unmergeCells);
 
                     t.addBtnDef('tableVerticalAlignTop', verticalAlignTop);
                     t.addBtnDef('tableVerticalAlignMiddle', verticalAlignMiddle);
