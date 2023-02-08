@@ -53,9 +53,10 @@
 }
 
 
-// Background color
+// Background/Border color
 
-.trumbowyg-dropdown-tableCellBackgroundColor:not(.trumbowyg-dropdown--color-list) {
+.trumbowyg-dropdown-tableCellBackgroundColor:not(.trumbowyg-dropdown--color-list),
+.trumbowyg-dropdown-tableBorderColor:not(.trumbowyg-dropdown--color-list) {
     max-width: 276px;
     padding: 7px 5px;
     overflow: initial;
@@ -90,8 +91,9 @@
     }
 }
 
-.trumbowyg-dropdown-tableCellBackgroundColor.trumbowyg-dropdown--color-list {
-    button:not(.trumbowyg-removeCellBackgroundColor-dropdown-button) {
+.trumbowyg-dropdown-tableCellBackgroundColor.trumbowyg-dropdown--color-list,
+.trumbowyg-dropdown-tableBorderColor.trumbowyg-dropdown--color-list {
+    button:not(.trumbowyg-removeTableCellBackgroundColor-dropdown-button):not(.trumbowyg-removeTableBorderColor-dropdown-button) {
         position: relative;
         color: #fff !important;
 

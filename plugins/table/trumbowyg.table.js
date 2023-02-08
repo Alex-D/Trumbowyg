@@ -15,7 +15,7 @@
     var defaultOptions = {
         rows: 8,
         columns: 8,
-        backgroundColorList: [
+        colorList: [
             'ffffff', '000000', 'eeece1', '1f497d', '4f81bd', 'c0504d', '9bbb59', '8064a2', '4bacc6', 'f79646', 'ffff00',
             'f2f2f2', '7f7f7f', 'ddd9c3', 'c6d9f0', 'dbe5f1', 'f2dcdb', 'ebf1dd', 'e5e0ec', 'dbeef3', 'fdeada', 'fff2ca',
             'd8d8d8', '595959', 'c4bd97', '8db3e2', 'b8cce4', 'e5b9b7', 'd7e3bc', 'ccc1d9', 'b7dde8', 'fbd5b5', 'ffe694',
@@ -50,6 +50,10 @@
             'tableDestroy',
         ],
     };
+
+    function ucFirst(value) {
+        return value[0].toUpperCase() + value.slice(1);
+    }
 
     function hex(x) {
         return ('0' + parseInt(x).toString(16)).slice(-2);
@@ -1228,7 +1232,73 @@
 
                     ////// Cell Background color
 
-                    var backgroundColorDropdownClass = t.o.plugins.table.displayAsList ? t.o.prefix + 'dropdown--color-list' : '';
+                    var colorsDropdownClass = t.o.plugins.table.displayAsList ? t.o.prefix + 'dropdown--color-list' : '';
+                    var buildColorDropdown = function (name, callback) {
+                        var dropdown = [];
+                        var trumbowygTableOptions = t.o.plugins.table;
+                        var colorList = trumbowygTableOptions.colorList;
+
+                        $.each(colorList, function (i, color) {
+                            var btn = name + color;
+                            var btnDef = {
+                                fn: callback('#' + color),
+                                hasIcon: false,
+                                text: t.lang['#' + color] || ('#' + color),
+                                style: 'background-color: #' + color + ';'
+                            };
+
+                            t.addBtnDef(btn, btnDef);
+                            dropdown.push(btn);
+                        });
+
+                        // Remove color
+                        var removeColorButtonName = 'remove' + ucFirst(name),
+                            removeColorBtnDef = {
+                                fn: callback(''),
+                                hasIcon: false,
+                                style: 'background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAG0lEQVQIW2NkQAAfEJMRmwBYhoGBYQtMBYoAADziAp0jtJTgAAAAAElFTkSuQmCC);'
+                            };
+
+                        if (trumbowygTableOptions.displayAsList) {
+                            removeColorBtnDef.style = '';
+                        }
+
+                        t.addBtnDef(removeColorButtonName, removeColorBtnDef);
+                        dropdown.push(removeColorButtonName);
+
+                        // Custom color
+                        if (trumbowygTableOptions.allowCustomBackgroundColor) {
+                            var freeColorBtnDef = {
+                                fn: function () {
+                                    t.openModalInsert(t.lang.backgroundColor,
+                                        {
+                                            color: {
+                                                label: 'backgroundColor',
+                                                forceCss: true,
+                                                type: 'color',
+                                                value: '#FFFFFF'
+                                            }
+                                        },
+                                        // callback
+                                        function (values) {
+                                            callback(values.color)();
+                                            return true;
+                                        }
+                                    );
+                                },
+                                hasIcon: false,
+                                text: '#',
+                                // style adjust for displaying the text
+                                style: 'text-indent: 0; line-height: 20px; padding: 0 5px;'
+                            };
+
+                            var freeColorButtonName = 'free' + ucFirst(name);
+                            t.addBtnDef(freeColorButtonName, freeColorBtnDef);
+                            dropdown.push(freeColorButtonName);
+                        }
+
+                        return dropdown;
+                    };
                     var applyBackgroundColorToSelectedCells = function (color) {
                         return function () {
                             var $table = $(t.doc.getSelection().anchorNode).closest('table');
@@ -1248,74 +1318,48 @@
                         };
                     };
                     var cellBackgroundColorBtnDef = {
-                        dropdown: (function () {
-                            var dropdown = [];
-                            var trumbowygTableOptions = t.o.plugins.table;
-                            var colorList = trumbowygTableOptions.backgroundColorList;
-
-                            $.each(colorList, function (i, color) {
-                                var btn = 'tableCellBackgroundColor' + color;
-                                var btnDef = {
-                                    fn: applyBackgroundColorToSelectedCells('#' + color),
-                                    hasIcon: false,
-                                    text: t.lang['#' + color] || ('#' + color),
-                                    style: 'background-color: #' + color + ';'
-                                };
-
-                                t.addBtnDef(btn, btnDef);
-                                dropdown.push(btn);
-                            });
-
-                            // Remove color
-                            var removeColorButtonName = 'removeCellBackgroundColor',
-                                removeColorBtnDef = {
-                                    fn: applyBackgroundColorToSelectedCells(''),
-                                    hasIcon: false,
-                                    style: 'background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAG0lEQVQIW2NkQAAfEJMRmwBYhoGBYQtMBYoAADziAp0jtJTgAAAAAElFTkSuQmCC);'
-                                };
-
-                            if (trumbowygTableOptions.displayAsList) {
-                                removeColorBtnDef.style = '';
-                            }
-
-                            t.addBtnDef(removeColorButtonName, removeColorBtnDef);
-                            dropdown.push(removeColorButtonName);
-
-                            // Custom color
-                            if (trumbowygTableOptions.allowCustomBackgroundColor) {
-                                var freeColorBtnDef = {
-                                    fn: function () {
-                                        t.openModalInsert(t.lang.backgroundColor,
-                                            {
-                                                color: {
-                                                    label: 'backgroundColor',
-                                                    forceCss: true,
-                                                    type: 'color',
-                                                    value: '#FFFFFF'
-                                                }
-                                            },
-                                            // callback
-                                            function (values) {
-                                                applyBackgroundColorToSelectedCells(values.color)();
-                                                return true;
-                                            }
-                                        );
-                                    },
-                                    hasIcon: false,
-                                    text: '#',
-                                    // style adjust for displaying the text
-                                    style: 'text-indent: 0; line-height: 20px; padding: 0 5px;'
-                                };
-
-                                var freeColorButtonName = 'freeCellBackgroundColor';
-                                t.addBtnDef(freeColorButtonName, freeColorBtnDef);
-                                dropdown.push(freeColorButtonName);
-                            }
-
-                            return dropdown;
-                        })(),
-                        dropdownClass: backgroundColorDropdownClass,
+                        dropdown: buildColorDropdown(
+                            'tableCellBackgroundColor',
+                            applyBackgroundColorToSelectedCells
+                        ),
+                        dropdownClass: colorsDropdownClass,
                     };
+
+
+                    ////// Table border color
+
+                    var applyBorderColor = function (color) {
+                        return function () {
+                            var $table = $(t.doc.getSelection().anchorNode).closest('table');
+
+                            if ($table.length === 0) {
+                                return;
+                            }
+
+                            var border = {
+                                borderColor: color,
+                            };
+                            if (parseInt($table.css('border-width'), 10) === 0) {
+                                border.borderWidth = '2px';
+                                border.borderStyle = 'solid';
+                            }
+
+                            if (color === '') {
+                                border.borderWidth = '';
+                                border.borderStyle = '';
+                            }
+
+                            $table.css(border);
+                        };
+                    };
+                    var tableBorderColorBtnDef = {
+                        dropdown: buildColorDropdown(
+                            'tableBorderColor',
+                            applyBorderColor
+                        ),
+                        dropdownClass: colorsDropdownClass,
+                    };
+
 
 
                     ////// Register buttons
@@ -1338,6 +1382,7 @@
                     t.addBtnDef('tableVerticalAlignBottom', verticalAlignBottom);
 
                     t.addBtnDef('tableCellBackgroundColor', cellBackgroundColorBtnDef);
+                    t.addBtnDef('tableBorderColor', tableBorderColorBtnDef);
 
                     t.addBtnDef('tableDeleteRow', deleteRow);
                     t.addBtnDef('tableDeleteColumn', deleteColumn);
@@ -1361,8 +1406,18 @@
                 tagHandler: function (element, t) {
                     var tags = [];
 
-                    if (element.tagName === 'table') {
+                    if (element.tagName === 'TABLE') {
                         tags.push('table');
+
+                        var elementBorderColor = element.style.borderColor;
+                        if (elementBorderColor !== '') {
+                            var borderColor = colorToHex(elementBorderColor);
+                            if (t.o.plugins.table.colorList.indexOf(borderColor) >= 0) {
+                                tags.push('tableBorderColor' + borderColor);
+                            } else {
+                                tags.push('freeTableBorderColor');
+                            }
+                        }
                     }
 
                     if (!element.style) {
@@ -1371,16 +1426,16 @@
 
                     var elementVerticalAlign = element.style.verticalAlign;
                     if (elementVerticalAlign !== '') {
-                        tags.push('tableVerticalAlign' + elementVerticalAlign[0].toUpperCase() + elementVerticalAlign.slice(1).toLowerCase());
+                        tags.push('tableVerticalAlign' + ucFirst(elementVerticalAlign));
                     }
 
                     var elementBackgroundColor = element.style.backgroundColor;
                     if ((element.tagName === 'TH' || element.tagName === 'TD') && elementBackgroundColor !== '') {
-                        var backColor = colorToHex(elementBackgroundColor);
-                        if (t.o.plugins.table.backgroundColorList.indexOf(backColor) >= 0) {
-                            tags.push('tableCellBackgroundColor' + backColor);
+                        var backgroundColor = colorToHex(elementBackgroundColor);
+                        if (t.o.plugins.table.colorList.indexOf(backgroundColor) >= 0) {
+                            tags.push('tableCellBackgroundColor' + backgroundColor);
                         } else {
-                            tags.push('freeCellBackgroundColor');
+                            tags.push('freeTableCellBackgroundColor');
                         }
                     }
 
