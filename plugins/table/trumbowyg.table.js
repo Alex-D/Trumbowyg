@@ -485,20 +485,55 @@
 
                     var addRowButtonAction = function (isBefore = false) {
                         return tableButtonAction(function ($table, $focusedRow, node, tableState) {
+                            var $rows = $('tr', $table);
                             var $newRow = $('<tr/>');
 
-                            if ($focusedRow.closest('thead').length !== 0) {
-                                $focusedRow = $('tbody tr', $table).first();
+                            // Shift one row before if insert before
+                            var focusedRowIndex = $rows.index($focusedRow);
+                            if (isBefore) {
+                                focusedRowIndex = Math.max(0, focusedRowIndex - 1);
+                                $focusedRow = $($rows[focusedRowIndex]);
+                            } else {
+                                var rawCellRowspan = $(node).closest('td, th').attr('rowspan');
+                                var cellRowspan = parseInt(rawCellRowspan ? rawCellRowspan : 1, 10);
+                                focusedRowIndex += cellRowspan - 1;
+                                $focusedRow = $($rows[focusedRowIndex]);
+                            }
+
+                            // Cannot add line to thead, so move to first tbody row
+                            var $tbodyRows = $('tbody tr', $table);
+                            var isFocusInHead = $focusedRow.closest('thead').length !== 0;
+                            if (isFocusInHead) {
+                                $focusedRow = $tbodyRows.first();
                             }
 
                             // add columns according to current columns count
+                            var focusedRowState = tableState[focusedRowIndex];
+                            var nextRowState = tableState[focusedRowIndex + 1];
                             var columnCount = tableState[0].length;
                             for (var columnIndex = 0; columnIndex < columnCount; columnIndex += 1) {
+                                if (nextRowState !== undefined) {
+                                    var originCellState = focusedRowState[columnIndex];
+                                    var originCellMergedInState = getCellState(tableState, originCellState.mergedIn);
+                                    var nextCellState = nextRowState[columnIndex];
+                                    var nextCellMergedInState = getCellState(tableState, nextCellState.mergedIn);
+
+                                    var realOriginCellState = originCellState.element ? originCellState : originCellMergedInState;
+                                    var originCellElement = realOriginCellState.element;
+                                    var nextCellElement = nextCellState.element ? nextCellState.element : nextCellMergedInState.element;
+
+                                    if (originCellElement === nextCellElement) {
+                                        originCellElement.setAttribute('rowspan', realOriginCellState.rowspan + 1);
+
+                                        continue;
+                                    }
+                                }
+
                                 $('<td/>').appendTo($newRow);
                             }
 
                             // add row to table
-                            if (isBefore) {
+                            if (focusedRowIndex === 0 && (isBefore || isFocusInHead)) {
                                 $focusedRow.before($newRow);
                             } else {
                                 $focusedRow.after($newRow);
@@ -643,19 +678,30 @@
 
                     ////// Cell merging
 
+                    var getCellState = function (tableState, cellCoordinates, mustGetDeep = true) {
+                        if (cellCoordinates === undefined) {
+                            return undefined;
+                        }
+
+                        var cellState = tableState[cellCoordinates[0]][cellCoordinates[1]];
+
+                        if (mustGetDeep && cellState.mergedIn !== undefined) {
+                            cellState = tableState[cellState.mergedIn[0]][cellState.mergedIn[1]];
+                        }
+
+                        return cellState;
+                    };
+
                     var canMergeSelectedCells = function (tableState) {
                         if (tableSelectedCells.length === 0) {
                             return false;
                         }
 
                         // Check that all tags are the same
-                        var firstCellState = tableSelectedCells[0];
-                        var firstSelectedCellTag = tableState[firstCellState[0]][firstCellState[1]].tag;
-                        var allTagsAreTheSame = tableSelectedCells.every(function (value) {
-                            var cellState = tableState[value[0]][value[1]];
-                            if (cellState.mergedIn !== undefined) {
-                                cellState = tableState[cellState.mergedIn[0]][cellState.mergedIn[1]];
-                            }
+                        var firstCellStateCoordinates = tableSelectedCells[0];
+                        var firstSelectedCellTag = getCellState(tableState, firstCellStateCoordinates).tag;
+                        var allTagsAreTheSame = tableSelectedCells.every(function (cellCoordinates) {
+                            var cellState = getCellState(tableState, cellCoordinates);
 
                             return cellState.tag === firstSelectedCellTag;
                         });
@@ -790,7 +836,7 @@
                                 return;
                             }
 
-                            var topLeftCellState = tableState[topLeftCellCoordinates[0]][topLeftCellCoordinates[1]];
+                            var topLeftCellState = getCellState(tableState, topLeftCellCoordinates);
                             var $topLeftCell = $(topLeftCellState.element);
                             var minY = 999999;
                             var maxY = 0;
@@ -898,6 +944,8 @@
                         rebuildResizeLayers();
 
                         $(t.doc).on('selectionchange.tbwTable', function () {
+                            tableSelectedCells = undefined;
+
                             var selection = t.doc.getSelection();
                             var rangeCount = selection.rangeCount;
 
@@ -986,8 +1034,8 @@
                         }
 
                         $(tableSelectedCells).each(function (_, cellCoordinates) {
-                            var cellState = tableState[cellCoordinates[0]][cellCoordinates[1]];
-                            if (cellState.mergedIn) {
+                            var cellState = getCellState(tableState, cellCoordinates, false);
+                            if (cellState.mergedIn !== undefined) {
                                 return;
                             }
 
