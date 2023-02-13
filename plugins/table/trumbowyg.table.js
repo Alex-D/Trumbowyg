@@ -591,20 +591,66 @@
                     ////// Columns
 
                     var addColumnButtonAction = function (isBefore = false) {
-                        return tableButtonAction(function ($table, $focusedRow, node) {
+                        return tableButtonAction(function ($table, $focusedRow, node, tableState) {
+                            var $rows = $('tr', $table);
+                            var focusedRowIndex = $rows.index($focusedRow);
+                            var focusedRowState = tableState[focusedRowIndex];
                             var $focusedCell = $(node).closest('td, th');
-                            var focusedColIdx = $focusedCell.index();
 
-                            $('tr', $table).each(function () {
-                                var $previousCell = $(this).children()[focusedColIdx];
+                            // Shift one column before if insert before
+                            var cellIndex = getCellIndex($focusedCell[0], focusedRowState);
+                            if (isBefore) {
+                                cellIndex = Math.max(0, cellIndex - 1);
+                            } else {
+                                var rawCellColspan = $focusedCell.attr('colspan');
+                                var cellColspan = parseInt(rawCellColspan ? rawCellColspan : 1, 10);
+                                cellIndex += cellColspan - 1;
+                            }
+
+                            // add a cell to each row
+                            var rowCount = tableState.length;
+                            var mustInsertBefore = isBefore && cellIndex === 0;
+                            for (var rowIndex = 0; rowIndex < rowCount; rowIndex += 1) {
+                                var rowState = tableState[rowIndex];
+                                var nextCellState = mustInsertBefore ? undefined : rowState[cellIndex + 1];
+                                if (nextCellState !== undefined) {
+                                    var originCellState = rowState[cellIndex];
+                                    var originCellMergedInState = getCellState(tableState, originCellState.mergedIn);
+                                    var nextCellMergedInState = getCellState(tableState, nextCellState.mergedIn);
+
+                                    var realOriginCellState = originCellState.element ? originCellState : originCellMergedInState;
+                                    var originCellElement = realOriginCellState.element;
+                                    var nextCellElement = nextCellState.element ? nextCellState.element : nextCellMergedInState.element;
+
+                                    if (originCellElement === nextCellElement) {
+                                        originCellElement.setAttribute('colspan', realOriginCellState.colspan + 1);
+
+                                        continue;
+                                    }
+                                }
+
+                                // Get previous real cell state
+                                var previousRealCellState;
+                                var previousColumnShift = 0;
+                                do {
+                                    var newIndex = cellIndex - previousColumnShift;
+                                    if (newIndex < 0) {
+                                        break;
+                                    }
+
+                                    previousRealCellState = rowState[newIndex];
+                                    previousColumnShift += 1;
+                                } while (previousRealCellState.mergedIn !== undefined);
+
+                                // Create and append the cell next to the previous
+                                var $previousCell = previousRealCellState.element;
                                 var newCellElement = t.doc.createElement($previousCell.tagName);
-
-                                if (isBefore) {
+                                if (cellIndex === 0 && isBefore) {
                                     $previousCell.before(newCellElement);
                                 } else {
                                     $previousCell.after(newCellElement);
                                 }
-                            });
+                            }
 
                             rebuildResizeLayers();
                         });
@@ -773,7 +819,7 @@
                         // Remove colspan if every line contains same amount of th/td
                         var realCellCountByRow = $.map(tableState, function (rowState) {
                             return rowState.reduce(function (rowCellCount, cellState) {
-                                if (cellState.mergedIn === undefined) {
+                                if (cellState.mergedIn === undefined || getCellState(tableState, cellState.mergedIn).rowspan > 1) {
                                     return rowCellCount + 1;
                                 }
 
@@ -799,21 +845,27 @@
                                 return cellState.mergedIn !== undefined;
                             });
 
-                            if (isRowEmpty) {
-                                // Reduce by 1 the rowspan on each cell in previous row
-                                $(tableState[rowIndex - 1]).each(function (_, cellState) {
-                                    cellState.rowspan -= 1;
-
-                                    if (cellState.rowspan === 1) {
-                                        return cellState.element.removeAttribute('rowspan');
-                                    }
-
-                                    cellState.element.setAttribute('rowspan', cellState.rowspan);
-                                });
-
-                                // Remove empty tr
-                                $rows[rowIndex].remove();
+                            if (!isRowEmpty) {
+                                return;
                             }
+
+                            // Reduce by 1 the rowspan on each cell in previous row
+                            $(tableState[rowIndex - 1]).each(function (_, cellState) {
+                                if (cellState.mergedIn !== undefined) {
+                                    cellState = getCellState(tableState, cellState.mergedIn)
+                                }
+                                cellState.rowspan -= 1;
+
+                                if (cellState.rowspan === 1) {
+                                    cellState.element.removeAttribute('rowspan');
+                                    return;
+                                }
+
+                                cellState.element.setAttribute('rowspan', cellState.rowspan);
+                            });
+
+                            // Remove empty tr
+                            $rows[rowIndex].remove();
                         });
 
                         // Remove empty attributes
