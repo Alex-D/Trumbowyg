@@ -299,15 +299,33 @@
 
                             // when active table show AddRow / AddColumn
                             if (t.$box.find('.' + t.o.prefix + 'table-button').hasClass(t.o.prefix + 'active-button')) {
+                                var $table = $(t.doc.getSelection().anchorNode).closest('table');
+                                var tableState = getTableState($table);
+                                var hasSelectedCells = tableSelectedCells !== undefined;
                                 $(t.o.plugins.table.dropdown).each(function (_, buttonName) {
                                     // Conditional thead button
                                     if (buttonName === 'tableAddHeaderRow') {
-                                        var $table = $(t.doc.getSelection().anchorNode).closest('table');
                                         var hasThead = $('thead', $table).length !== 0;
-                                        if (!hasThead) {
-                                            $dropdown.append(t.buildSubBtn('tableAddHeaderRow'));
+                                        if (hasThead) {
+                                            return;
                                         }
+                                    }
+
+                                    // Conditional merge button
+                                    if (buttonName === 'tableMergeCells' && !hasSelectedCells) {
                                         return;
+                                    }
+
+                                    // Conditional unmerge button
+                                    if (buttonName === 'tableUnmergeCells') {
+                                        var hasAtLeastOneMergedCell = false;
+                                        foreachSelectedCell(function ($cell) {
+                                            var isMergedCell = $cell.is('[colspan]') || $cell.is('[rowspan]');
+                                            hasAtLeastOneMergedCell = hasAtLeastOneMergedCell || isMergedCell;
+                                        }, tableState);
+                                        if (!hasAtLeastOneMergedCell) {
+                                            return;
+                                        }
                                     }
 
                                     $dropdown.append(t.buildSubBtn(buttonName));
