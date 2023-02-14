@@ -816,28 +816,6 @@
                     var simplifyCells = function ($table) {
                         var tableState = getTableState($table);
 
-                        // Remove colspan if every line contains same amount of th/td
-                        var realCellCountByRow = $.map(tableState, function (rowState) {
-                            return rowState.reduce(function (rowCellCount, cellState) {
-                                if (cellState.mergedIn === undefined || getCellState(tableState, cellState.mergedIn).rowspan > 1) {
-                                    return rowCellCount + 1;
-                                }
-
-                                return rowCellCount;
-                            }, 0);
-                        });
-                        var hasSameCellCountByRow = realCellCountByRow.every(function (rowCellCount) {
-                            return rowCellCount === realCellCountByRow[0];
-                        });
-
-                        if (hasSameCellCountByRow) {
-                            $(tableState).each(function (_, rowState) {
-                                $(rowState).each(function (_, cellState) {
-                                    $(cellState.element).removeAttr('colspan');
-                                });
-                            });
-                        }
-
                         // Remove rowspan if a row is empty
                         var $rows = $('tr', $table);
                         $(tableState).each(function (rowIndex, rowState) {
@@ -852,11 +830,11 @@
                             // Reduce by 1 the rowspan on each cell in previous row
                             $(tableState[rowIndex - 1]).each(function (_, cellState) {
                                 if (cellState.mergedIn !== undefined) {
-                                    cellState = getCellState(tableState, cellState.mergedIn)
+                                    cellState = getCellState(tableState, cellState.mergedIn);
                                 }
                                 cellState.rowspan -= 1;
 
-                                if (cellState.rowspan === 1) {
+                                if (cellState.rowspan <= 1) {
                                     cellState.element.removeAttribute('rowspan');
                                     return;
                                 }
