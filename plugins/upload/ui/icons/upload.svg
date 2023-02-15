@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72">
-    <path d="M64 27v28H8V27H0v36h72V27h-8z"/>
-    <path d="M32 50h8V16h-8z"/>
-    <path d="M36 6L24 20h24z"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <path d="M32,20L24,20L36,6L48,20L40,20L40,50L32,50L32,20ZM64,27L72,27L72,63L0,63L0,27L8,27L8,55L64,55L64,27Z"/>
 </svg>
