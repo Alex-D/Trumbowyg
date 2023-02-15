@@ -66,6 +66,22 @@
     cursor: col-resize;
 }
 
+.trumbowyg-table-resize-vertical-handle::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 1px;
+    width: 3px;
+    height: 100%;
+    background: #0073ff;
+    border-radius: 3px;
+    pointer-events: none;
+    opacity: 0;
+}
+.trumbowyg-table-resize-vertical-handle:hover::after {
+    opacity: 1;
+}
+
 
 // Background/Border color
 
