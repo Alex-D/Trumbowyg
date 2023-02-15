@@ -1,4 +1,6 @@
 .trumbowyg-dropdown-table {
+    max-height: unset;
+
     table {
         margin: 10px;
         display: inline-block;
@@ -14,7 +16,7 @@
         box-shadow: 0 0 0 1px #cecece inset;
 
         &.active {
-            background-color: #00b393;
+            background-color: #000;
             box-shadow: none;
             cursor: pointer;
         }
@@ -23,6 +25,18 @@
     .trumbowyg-table-size {
         text-align: center;
     }
+}
+
+.trumbowyg-table-dropdown-title {
+    padding: 8px 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.trumbowyg-dropdown-button-group + .trumbowyg-table-dropdown-title {
+    margin-top: 24px;
 }
 
 .trumbowyg-table-cell-selection-mode ::selection {

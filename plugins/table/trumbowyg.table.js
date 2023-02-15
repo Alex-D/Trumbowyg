@@ -26,28 +26,40 @@
         allowCustomBackgroundColor: true,
         displayBackgroundColorsAsList: false,
         dropdown: [
-            // Rows
-            'tableAddHeaderRow',
-            'tableAddRowAbove',
-            'tableAddRow',
-
-            // Columns
-            'tableAddColumnLeft',
-            'tableAddColumn',
-
-            // Cell merge/split
-            'tableMergeCells',
-            'tableUnmergeCells',
-
-            // Vertical align
-            'tableVerticalAlignTop',
-            'tableVerticalAlignMiddle',
-            'tableVerticalAlignBottom',
-
-            // Destroy actions
-            'tableDeleteRow',
-            'tableDeleteColumn',
-            'tableDestroy',
+            {
+                title: 'tableRows',
+                buttons: [
+                    'tableAddHeaderRow',
+                    'tableAddRowAbove',
+                    'tableAddRow',
+                    'tableDeleteRow',
+                ],
+            },
+            {
+                title: 'tableColumns',
+                buttons: [
+                    'tableAddColumnLeft',
+                    'tableAddColumn',
+                    'tableDeleteColumn',
+                ],
+            },
+            {
+                title: 'tableVerticalAlign',
+                buttons: [
+                    'tableVerticalAlignTop',
+                    'tableVerticalAlignMiddle',
+                    'tableVerticalAlignBottom',
+               ],
+            },
+            {
+                title: 'tableOthers',
+                buttons: [
+                    // Cell merge/split
+                    'tableMergeCells',
+                    'tableUnmergeCells',
+                    'tableDestroy',
+                ]
+            }
         ],
     };
 
@@ -78,11 +90,15 @@
             // jshint camelcase:false
             en: {
                 table: 'Insert table',
-                tableAddHeaderRow: 'Add head row',
-                tableAddRowAbove: 'Add row above',
-                tableAddRow: 'Add row below',
-                tableAddColumnLeft: 'Add column to the left',
-                tableAddColumn: 'Add column to the right',
+                tableRows: 'Rows',
+                tableColumns: 'Columns',
+                tableVerticalAlign: 'Vertical align',
+                tableOthers: 'Others',
+                tableAddHeaderRow: 'Insert head row',
+                tableAddRowAbove: 'Insert row above',
+                tableAddRow: 'Insert row below',
+                tableAddColumnLeft: 'Insert column to the left',
+                tableAddColumn: 'Insert column to the right',
                 tableDeleteRow: 'Delete row',
                 tableDeleteColumn: 'Delete column',
                 tableDestroy: 'Delete table',
@@ -152,11 +168,15 @@
             },
             fr: {
                 table: 'Insérer un tableau',
-                tableAddHeaderRow: 'Ajouter une line d\'en-tête',
-                tableAddRowAbove: 'Ajouter une ligne au dessus',
-                tableAddRow: 'Ajouter une ligne en dessous',
-                tableAddColumnLeft: 'Ajouter une colonne à gauche',
-                tableAddColumn: 'Ajouter une colonne à droite',
+                tableRows: 'Lignes',
+                tableColumns: 'Colonnes',
+                tableVerticalAlign: 'Alignement vertical',
+                tableOthers: 'Autres',
+                tableAddHeaderRow: 'Insérer une line d\'en-tête',
+                tableAddRowAbove: 'Insérer une ligne au dessus',
+                tableAddRow: 'Insérer une ligne en dessous',
+                tableAddColumnLeft: 'Insérer une colonne à gauche',
+                tableAddColumn: 'Insérer une colonne à droite',
                 tableDeleteRow: 'Supprimer la ligne',
                 tableDeleteColumn: 'Supprimer la colonne',
                 tableDestroy: 'Supprimer le tableau',
@@ -165,7 +185,8 @@
                 tableVerticalAlignTop: 'Aligner en haut',
                 tableVerticalAlignMiddle: 'Aligner au milieu',
                 tableVerticalAlignBottom: 'Aligner en bas',
-                tableCellBackgroundColor: 'Couleur de fond des cellules'
+                tableCellBackgroundColor: 'Couleur de fond des cellules',
+                tableBorderColor: 'Couleur de la bordure du tableau'
             },
             hu: {
                 table: 'Táblázat beszúrás',
@@ -302,47 +323,59 @@
                                 var $table = $(t.doc.getSelection().anchorNode).closest('table');
                                 var tableState = getTableState($table);
                                 var hasSelectedCells = tableSelectedCells !== undefined;
-                                $(t.o.plugins.table.dropdown).each(function (_, buttonName) {
-                                    // Conditional thead button
-                                    if (buttonName === 'tableAddHeaderRow') {
-                                        var hasThead = $('thead', $table).length !== 0;
-                                        if (hasThead) {
+                                $(t.o.plugins.table.dropdown).each(function (_, buttonGroup) {
+                                    $dropdown.append($('<div/>', {
+                                        html: t.lang[buttonGroup.title] ? t.lang[buttonGroup.title] : buttonGroup.title,
+                                        class: t.o.prefix + 'table-dropdown-title'
+                                    })).text();
+                                    var $buttonGroup = $('<div/>', {
+                                        class: t.o.prefix + 'dropdown-button-group'
+                                    })
+
+                                    $(buttonGroup.buttons).each(function (_, buttonName) {
+                                        // Conditional thead button
+                                        if (buttonName === 'tableAddHeaderRow') {
+                                            var hasThead = $('thead', $table).length !== 0;
+                                            if (hasThead) {
+                                                return;
+                                            }
+                                        }
+
+                                        // Conditional merge button
+                                        if (buttonName === 'tableMergeCells' && !hasSelectedCells) {
                                             return;
                                         }
-                                    }
 
-                                    // Conditional merge button
-                                    if (buttonName === 'tableMergeCells' && !hasSelectedCells) {
-                                        return;
-                                    }
-
-                                    // Conditional unmerge button
-                                    if (buttonName === 'tableUnmergeCells') {
-                                        var hasAtLeastOneMergedCell = false;
-                                        foreachSelectedCell(function ($cell) {
-                                            var isMergedCell = $cell.is('[colspan]') || $cell.is('[rowspan]');
-                                            hasAtLeastOneMergedCell = hasAtLeastOneMergedCell || isMergedCell;
-                                        }, tableState);
-                                        if (!hasAtLeastOneMergedCell) {
-                                            return;
+                                        // Conditional unmerge button
+                                        if (buttonName === 'tableUnmergeCells') {
+                                            var hasAtLeastOneMergedCell = false;
+                                            foreachSelectedCell(function ($cell) {
+                                                var isMergedCell = $cell.is('[colspan]') || $cell.is('[rowspan]');
+                                                hasAtLeastOneMergedCell = hasAtLeastOneMergedCell || isMergedCell;
+                                            }, tableState);
+                                            if (!hasAtLeastOneMergedCell) {
+                                                return;
+                                            }
                                         }
-                                    }
 
-                                    $dropdown.append(t.buildSubBtn(buttonName));
+                                        $buttonGroup.append(t.buildSubBtn(buttonName));
+                                    });
+
+                                    $dropdown.append($buttonGroup);
                                 });
                             } else {
-                                var tableSelect = $('<table/>');
-                                $('<tbody/>').appendTo(tableSelect);
+                                var $tableSelect = $('<table/>');
+                                $('<tbody/>').appendTo($tableSelect);
                                 for (var i = 0; i < t.o.plugins.table.rows; i += 1) {
-                                    var row = $('<tr/>').appendTo(tableSelect);
+                                    var row = $('<tr/>').appendTo($tableSelect);
                                     for (var j = 0; j < t.o.plugins.table.columns; j += 1) {
                                         $('<td/>').appendTo(row);
                                     }
                                 }
-                                tableSelect.find('td').on('mouseover', toggleActiveDropdownCells);
-                                tableSelect.find('td').on('mousedown', tableBuild);
+                                $tableSelect.find('td').on('mouseover', toggleActiveDropdownCells);
+                                $tableSelect.find('td').on('mousedown', tableBuild);
 
-                                $dropdown.append(tableSelect);
+                                $dropdown.append($tableSelect);
                                 $dropdown.append($('<div class="trumbowyg-table-size">1x1</div>'));
                             }
 
