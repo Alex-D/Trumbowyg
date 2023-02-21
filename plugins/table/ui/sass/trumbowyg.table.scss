@@ -2,23 +2,37 @@
     max-height: unset;
 
     table {
-        margin: 10px;
+        all: unset;
         display: inline-block;
-        border-collapse: separate;
-        border-spacing: 1px;
+        margin: 10px;
+        border-collapse: collapse;
     }
 
     table td {
+        all: unset;
+        position: relative;
+        display: table-cell;
         height: 20px;
         width: 20px;
-        padding: 0;
-        background-color: #fff;
-        box-shadow: 0 0 0 1px #cecece inset;
+        cursor: pointer;
+        background: #fff;
 
-        &.active {
+        &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            $padding: 1px;
+            top: $padding;
+            right: $padding;
+            bottom: $padding;
+            left: $padding;
+            border: 1px solid #cecece;
+            pointer-events: none;
+        }
+
+        &.active::after {
             background-color: #000;
-            box-shadow: none;
-            cursor: pointer;
+            border-color: #000;
         }
     }
 
