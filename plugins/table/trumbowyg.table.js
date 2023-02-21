@@ -15,6 +15,7 @@
     var defaultOptions = {
         rows: 8,
         columns: 8,
+        allowHorizontalResize: true,
         colorList: [
             'ffffff', '000000', 'eeece1', '1f497d', '4f81bd', 'c0504d', '9bbb59', '8064a2', '4bacc6', 'f79646', 'ffff00',
             'f2f2f2', '7f7f7f', 'ddd9c3', 'c6d9f0', 'dbe5f1', 'f2dcdb', 'ebf1dd', 'e5e0ec', 'dbeef3', 'fdeada', 'fff2ca',
@@ -1134,6 +1135,10 @@
 
                     var TRUMBOWYG_TABLE_HANDLE_FOR = 'trumbowyg-table-handle-for';
                     var rebuildResizeLayers = function () {
+                        if (!t.o.plugins.table.allowHorizontalResize) {
+                            return;
+                        }
+
                         var tableState;
                         var targetColumnIndex;
                         var $table;
