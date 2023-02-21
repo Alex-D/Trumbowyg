@@ -453,6 +453,8 @@
                         }
 
                         t.syncCode();
+
+                        rebuildResizeLayers();
                     };
 
                     var getTableState = function ($table) {
@@ -951,8 +953,6 @@
                             }
 
                             simplifyCells($table);
-
-                            redrawResizeLayers();
                         }),
                     };
 
@@ -971,18 +971,18 @@
                                 var cellState = tableState[cellRowIndex][cellColumnIndex];
 
                                 for (var rowIndex = 0; rowIndex < cellState.rowspan; rowIndex += 1) {
-                                    var $row = $rows[cellRowIndex + rowIndex];
-
                                     var colIndex = (rowIndex === 0) ? 1 : 0;
-                                    var $previousCell = $('th, td', $row)[cellColumnIndex + colIndex - 1];
+                                    var previousCellState = getCellState(tableState, [
+                                        cellRowIndex + rowIndex,
+                                        cellColumnIndex + colIndex - 1
+                                    ]);
+                                    var previousCellElement = previousCellState.element
                                     for (; colIndex < cellState.colspan; colIndex += 1) {
-                                        var newCellElement = t.doc.createElement($previousCell.tagName);
-                                        $previousCell.after(newCellElement);
+                                        var newCellElement = t.doc.createElement(previousCellElement.tagName);
+                                        $(previousCellElement).after(newCellElement);
                                     }
                                 }
                             }, tableState);
-
-                            redrawResizeLayers();
                         }),
                     };
 
@@ -1020,6 +1020,7 @@
                         resetTableMouseHacks();
                         t.$c.on('tbwchange.tbwTable', function () {
                             resetTableMouseHacks();
+                            rebuildResizeLayers();
                         });
 
                         rebuildResizeLayers();
@@ -1232,8 +1233,8 @@
                                 tableState = undefined;
                                 targetColumnIndex = undefined;
 
-                                // Ensure resize layers are up to date
-                                redrawResizeLayers();
+                                // Update HTML
+                                t.syncCode()
                             });
 
                         $(window)
