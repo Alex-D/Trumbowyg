@@ -408,10 +408,23 @@
                         table.next('.trumbowyg-table-size').html((colIndex + 1) + 'x' + (rowIndex + 1));
                     };
 
+                    var applyTagClassesToElement = function (element) {
+                        var tagClasses = t.o.tagClasses[element.tagName.toLowerCase()];
+                        if (!tagClasses) {
+                            return;
+                        }
+                        $(element).addClass(tagClasses);
+                    };
+                    var applyTagClasses = function ($table) {
+                        applyTagClassesToElement($table);
+                        $('*', $table).each(function (_, element) {
+                            applyTagClassesToElement(element);
+                        });
+                    };
                     var tableBuild = function () {
                         t.saveRange();
 
-                        var newTable = $('<table/>');
+                        var $newTable = $('<table/>');
 
                         // Build thead
                         var $thead = $('<thead/>');
@@ -420,7 +433,7 @@
                         for (var th = 0; th <= this.cellIndex; th += 1) {
                             $('<th/>', {scope: 'col'}).appendTo($theadTr);
                         }
-                        $thead.appendTo(newTable);
+                        $thead.appendTo($newTable);
 
                         // Build tbody
                         var $tbody = $('<tbody/>');
@@ -435,7 +448,10 @@
                             }
                         }
 
-                        $tbody.appendTo(newTable);
+                        $tbody.appendTo($newTable);
+
+                        // Apply tag classes
+                        applyTagClasses($newTable);
 
                         // Find first parent element
                         var rangeNode = t.range.endContainer;
@@ -450,7 +466,7 @@
 
                         // Insert table after the range
                         t.range.collapse();
-                        t.range.insertNode(newTable[0]);
+                        t.range.insertNode($newTable[0]);
 
                         // Remove empty paragraph
                         if (rangeNode.nodeName === 'P' && rangeNode.textContent.trim().length === 0) {
@@ -597,6 +613,7 @@
                                 $focusedRow.after($newRow);
                             }
 
+                            applyTagClasses($table);
                             rebuildResizeLayers();
                         });
                     };
@@ -641,6 +658,7 @@
                             // add thead to table
                             $table.prepend($thead);
 
+                            applyTagClasses($table);
                             rebuildResizeLayers();
                         }),
                     };
@@ -710,6 +728,7 @@
                                 }
                             }
 
+                            applyTagClasses($table);
                             rebuildResizeLayers();
                         });
                     };
@@ -958,6 +977,8 @@
                             }
 
                             simplifyCells($table);
+
+                            rebuildResizeLayers();
                         }),
                     };
 
@@ -988,6 +1009,9 @@
                                     }
                                 }
                             }, tableState);
+
+                            applyTagClasses($table);
+                            rebuildResizeLayers();
                         }),
                     };
 
