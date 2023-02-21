@@ -23,8 +23,12 @@
             'a5a5a5', '262626', '494429', '17365d', '366092', '953734', '76923c', '5f497a', '92cddc', 'e36c09', 'c09100',
             '7f7f7f', '0c0c0c', '1d1b10', '0f243e', '244061', '632423', '4f6128', '3f3151', '31859b', '974806', '7f6000'
         ],
+        backgroundColorList: null, // fallbacks on colorList
         allowCustomBackgroundColor: true,
         displayBackgroundColorsAsList: false,
+        borderColorList: null, // fallbacks on colorList
+        allowCustomBorderColor: true,
+        displayBorderColorsAsList: false,
         dropdown: [
             {
                 title: 'tableRows',
@@ -330,7 +334,7 @@
                                     })).text();
                                     var $buttonGroup = $('<div/>', {
                                         class: t.o.prefix + 'dropdown-button-group'
-                                    })
+                                    });
 
                                     $(buttonGroup.buttons).each(function (_, buttonName) {
                                         // Conditional thead button
@@ -976,7 +980,7 @@
                                         cellRowIndex + rowIndex,
                                         cellColumnIndex + colIndex - 1
                                     ]);
-                                    var previousCellElement = previousCellState.element
+                                    var previousCellElement = previousCellState.element;
                                     for (; colIndex < cellState.colspan; colIndex += 1) {
                                         var newCellElement = t.doc.createElement(previousCellElement.tagName);
                                         $(previousCellElement).after(newCellElement);
@@ -1234,7 +1238,7 @@
                                 targetColumnIndex = undefined;
 
                                 // Update HTML
-                                t.syncCode()
+                                t.syncCode();
                             });
 
                         $(window)
@@ -1362,11 +1366,13 @@
 
                     ////// Cell Background color
 
-                    var colorsDropdownClass = t.o.plugins.table.displayAsList ? t.o.prefix + 'dropdown--color-list' : '';
-                    var buildColorDropdown = function (name, callback) {
+                    var getColorDropdownClass = function (mustDisplayAsList) {
+                        return mustDisplayAsList ? t.o.prefix + 'dropdown--color-list' : '';
+                    };
+
+                    var buildColorDropdown = function (name, colorList, mustDisplayAsList, allowCustomColor, callback) {
                         var dropdown = [];
                         var trumbowygTableOptions = t.o.plugins.table;
-                        var colorList = trumbowygTableOptions.colorList;
 
                         $.each(colorList, function (i, color) {
                             var btn = name + color;
@@ -1389,7 +1395,7 @@
                                 style: 'background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAG0lEQVQIW2NkQAAfEJMRmwBYhoGBYQtMBYoAADziAp0jtJTgAAAAAElFTkSuQmCC);'
                             };
 
-                        if (trumbowygTableOptions.displayAsList) {
+                        if (mustDisplayAsList) {
                             removeColorBtnDef.style = '';
                         }
 
@@ -1450,9 +1456,12 @@
                     var cellBackgroundColorBtnDef = {
                         dropdown: buildColorDropdown(
                             'tableCellBackgroundColor',
+                            t.o.plugins.table.backgroundColorList || t.o.plugins.table.colorList,
+                            t.o.plugins.table.displayBackgroundColorsAsList,
+                            t.o.plugins.table.allowCustomBackgroundColor,
                             applyBackgroundColorToSelectedCells
                         ),
-                        dropdownClass: colorsDropdownClass,
+                        dropdownClass: getColorDropdownClass(t.o.plugins.table.displayBackgroundColorsAsList),
                     };
 
 
@@ -1485,9 +1494,12 @@
                     var tableBorderColorBtnDef = {
                         dropdown: buildColorDropdown(
                             'tableBorderColor',
+                            t.o.plugins.table.borderColorList || t.o.plugins.table.colorList,
+                            t.o.plugins.table.displayBorderColorsAsList,
+                            t.o.plugins.table.allowCustomBorderColor,
                             applyBorderColor
                         ),
-                        dropdownClass: colorsDropdownClass,
+                        dropdownClass: getColorDropdownClass(t.o.plugins.table.displayBorderColorsAsList),
                     };
 
 
