@@ -242,11 +242,23 @@ $('#my-editor').trumbowyg({
                     <br>
                     <strong>Default</strong>: fallbacks on <code>colorList</code>
                 </dd>
+                <dt><strong><code>allowCustomForeColor</code></strong> <code class="type">boolean</code></dt>
+                <dd>
+                    Allow user to pick a color outside the list.
+                    <br>
+                    <strong>Default</strong>: <code>true</code>
+                </dd>
                 <dt><strong><code>backColorList</code></strong> <code class="type">array&lt;string&gt;</code></dt>
                 <dd>
                     List of colors available used in the <code>backColor</code> dropdown instead of <code>colorList</code>'s one.
                     <br>
                     <strong>Default</strong>: fallbacks on <code>colorList</code>
+                </dd>
+                <dt><strong><code>allowCustomBackColor</code></strong> <code class="type">boolean</code></dt>
+                <dd>
+                    Allow user to pick a color outside the list.
+                    <br>
+                    <strong>Default</strong>: <code>true</code>
                 </dd>
                 <dt><strong><code>displayAsList</code></strong> <code class="type">boolean</code></dt>
                 <dd>
@@ -1213,7 +1225,7 @@ $('#editor-custom-list')
             <pre><code class="javascript">
 $('#my-editor').trumbowyg({
     btns: [
-        ['table']
+        ['table', 'tableCellBackgroundColor', 'tableBorderColor']
     ],
     plugins: {
         table: {
@@ -1262,21 +1274,208 @@ td {
                     <br>
                     <strong>Default</strong>: <code>8</code>
                 </dd>
-                <dt><strong><code>styler</code></strong> <code class="type">string</code></dt>
-                    <dd>
+                <dt><strong><code>allowHorizontalResize</code></strong> <code class="type">boolean</code></dt>
+                <dd>
+                    Enable handles to adjust columns width.
+                    <br>
+                    <strong>Default</strong>: <code>true</code>
+                </dd>
+                <dt><strong><code>colorList</code></strong> <code class="type">array&lt;string&gt;</code></dt>
+                <dd>
+                    List of colors available for both <code>tableCellBackgroundColor</code> and <code>tableBorderColor</code> dropdowns.
+                    <br>
+                    <strong>Default</strong>:
+                    <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/table/trumbowyg.table.js">check the code</a>
+                    or
+                    <a href="../../demos/#plugins-table">the demo</a>
+                </dd>
+                <dt><strong><code>backgroundColorList</code></strong> <code class="type">array&lt;string&gt;</code></dt>
+                <dd>
+                    List of colors available used in the <code>tableCellBackgroundColor</code> dropdown instead of <code>colorList</code>'s one.
+                    <br>
+                    <strong>Default</strong>: fallbacks on <code>colorList</code>
+                </dd>
+                <dt><strong><code>allowCustomBackgroundColor</code></strong> <code class="type">boolean</code></dt>
+                <dd>
+                    Allow user to pick a color outside the list for <code>tableCellBackgroundColor</code>.
+                    <br>
+                    <strong>Default</strong>: <code>true</code>
+                </dd>
+                <dt><strong><code>displayBackgroundColorsAsList</code></strong> <code class="type">boolean</code></dt>
+                <dd>
+                    Switch from square to labelled list view for <code>tableCellBackgroundColor</code>. Default view is the square's one.
+                    <br>
+                    <strong>Default</strong>: <code>false</code>
+                </dd>
+                <dt><strong><code>borderColorList</code></strong> <code class="type">array&lt;string&gt;</code></dt>
+                <dd>
+                    List of colors available used in the <code>tableBorderColor</code> dropdown instead of <code>colorList</code>'s one.
+                    <br>
+                    <strong>Default</strong>: fallbacks on <code>colorList</code>
+                </dd>
+                <dt><strong><code>allowCustomBorderColor</code></strong> <code class="type">boolean</code></dt>
+                <dd>
+                    Allow user to pick a color outside the list for <code>tableBorderColor</code>.
+                    <br>
+                    <strong>Default</strong>: <code>true</code>
+                </dd>
+                <dt><strong><code>displayBorderColorsAsList</code></strong> <code class="type">boolean</code></dt>
+                <dd>
+                    Switch from square to labelled list view for <code>tableBorderColor</code>. Default view is the square's one.
+                    <br>
+                    <strong>Default</strong>: <code>false</code>
+                </dd>
+                <dt><strong><code>dropdown</code></strong> <code class="type">object</code></dt>
+                <dd>
+                    Define the <code>'table'</code> dropdown buttons when selection is inside a table.
+                    <br>
+                    <strong>Default</strong>:
+                    <pre><code>
+[
+    {
+        title: 'tableRows',
+        buttons: [
+            'tableAddHeaderRow',
+            'tableAddRowAbove',
+            'tableAddRow',
+            'tableDeleteRow',
+        ],
+    },
+    {
+        title: 'tableColumns',
+        buttons: [
+            'tableAddColumnLeft',
+            'tableAddColumn',
+            'tableDeleteColumn',
+        ],
+    },
+    {
+        title: 'tableVerticalAlign',
+        buttons: [
+            'tableVerticalAlignTop',
+            'tableVerticalAlignMiddle',
+            'tableVerticalAlignBottom',
+       ],
+    },
+    {
+        title: 'tableOthers',
+        buttons: [
+            // Cell merge/split
+            'tableMergeCells',
+            'tableUnmergeCells',
+            'tableDestroy',
+        ]
+    }
+]
+                    </code></pre>
+                </dd>
+                <dt><strong><code>styler</code></strong> <code class="type">string</code> <span class="deprecated-feature">Removed in 2.27.0</span></dt>
+                <dd>
                     The class which should be assigned to each table by default
                     <br>
                     <strong>Default</strong>: <code>'table'</code>
+                    <p>
+                        From version 2.27, use <a href="../#tag-classes">core's <code>tagClasses</code> feature</a>:
+                    </p>
+                    <pre><code class="diff javascript">
+$('.trumbowyg').trumbowyg({
+-    plugins: {
+-        table: {
+-            styler: 'table',
+-        },
+-    },
++    tagClasses: {
++        table: 'table',
++    },
+});
+                    </code></pre>
                 </dd>
             </dl>
 
-            <div class="note">
-                <p>
-                    The table plugin provides a button with two different dropdowns depending on current selection.
-                    If the current cursor is inside a table, the dropdown shows table actions. <br>
-                    Otherwise, renders a table grid where you can build the table.
-                </p>
-            </div>
+            <h4>Buttons</h4>
+            <p>
+                Table plugin comes with <em>a lot of buttons</em>.
+                <br>
+                You can use most of them anywhere: in the table dropdown,
+                in the button pane or in your custom dropdown.
+                <br>
+                Exceptions are: <code>table</code>,
+                <code>tableCellBackgroundColor</code> and <code>tableBorderColor</code> which can
+                only be used directly in the button pane.
+            </p>
+            <dl>
+                <dt><strong><code>table</code></strong></dt>
+                <dd>
+                    The table button comes with two different dropdowns depending on current selection:
+                    <ul>
+                        <li>If the current cursor is inside a table, the dropdown shows table actions;</li>
+                        <li>Otherwise, renders a table grid where you can build the table.</li>
+                    </ul>
+                    See the <code>dropdown</code> option details above to see all default dropdown buttons.
+                </dd>
+                <dt><strong><code>tableAddHeaderRow</code></strong></dt>
+                <dd>
+                    Add a <code>&lt;thead&gt;</code> to the table if there is no one already.
+                    <br>
+                    Can be deleted using <code>tableRemoveRow</code>.
+                </dd>
+                <dt><strong><code>tableAddRowAbove</code></strong></dt>
+                <dd>
+                    Add a row above the selected row.
+                </dd>
+                <dt><strong><code>tableAddRow</code></strong></dt>
+                <dd>
+                    Add a row under the selected row.
+                </dd>
+                <dt><strong><code>tableDeleteRow</code></strong></dt>
+                <dd>
+                    Remove selected rows.
+                </dd>
+                <dt><strong><code>tableAddColumnLeft</code></strong></dt>
+                <dd>
+                    Add a column to the left of the selected cell.
+                </dd>
+                <dt><strong><code>tableAddColumn</code></strong></dt>
+                <dd>
+                    Add a column to the right of the selected cell.
+                </dd>
+                <dt><strong><code>tableDeleteColumn</code></strong></dt>
+                <dd>
+                    Remove the selected cells columns.
+                </dd>
+                <dt><strong><code>tableVerticalAlignTop</code></strong></dt>
+                <dd>
+                    Vertically align cell text to top.
+                </dd>
+                <dt><strong><code>tableVerticalAlignMiddle</code></strong></dt>
+                <dd>
+                    Vertically align cell text to middle.
+                </dd>
+                <dt><strong><code>tableVerticalAlignBottom</code></strong></dt>
+                <dd>
+                    Vertically align cell text to bottom.
+                </dd>
+                <dt><strong><code>tableMergeCells</code></strong></dt>
+                <dd>
+                    Merge selected cells, if possible.
+                </dd>
+                <dt><strong><code>tableUnmergeCells</code></strong></dt>
+                <dd>
+                    Unmerge selected cells.
+                </dd>
+                <dt><strong><code>tableDestroy</code></strong></dt>
+                <dd>
+                    Delete the selected table.
+                </dd>
+                <dt><strong><code>tableCellBackgroundColor</code></strong></dt>
+                <dd>
+                    Allow to choose selected cells background color.
+                </dd>
+                <dt><strong><code>tableBorderColor</code></strong></dt>
+                <dd>
+                    Allow to choose table border color.
+                </dd>
+            </dl>
         </div>
 
         <div class="feature">
