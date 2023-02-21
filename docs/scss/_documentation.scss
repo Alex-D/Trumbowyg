@@ -46,7 +46,8 @@ $beer-height: 70px;
     p,
     dd,
     ul {
-        code {
+        & > code,
+        *:not(pre) > code {
             color: #616870;
             background: #dfe5eb;
             padding: 0 5px;
@@ -458,7 +459,7 @@ $beer-height: 70px;
 dl {
     dt {
         display: inline-block;
-        color: #616870;
+        color: #1b2126;
         background: #dfe5eb;
         padding: 0 4px 0 6px;
         border-radius: 4px;
@@ -466,5 +467,9 @@ dl {
     dd {
         padding: 5px 0 15px;
         margin-left: 15px;
+
+        ul {
+            margin: 0.5em 0;
+        }
     }
 }

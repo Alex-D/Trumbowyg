@@ -829,10 +829,10 @@ $('.trumbowyg').trumbowyg({
                     Upgrade from <code>defaultLinkTarget</code>
                 </h4>
 
-                <pre><code class="javascript">
+                <pre><code class="diff javascript">
 $('.trumbowyg').trumbowyg({
-<span class="hljs-deletion">-    defaultLinkTarget: '_blank',</span>
-<span class="hljs-addition">+    linkTargets: ['_blank', '_self', '_parent', '_top'],</span>
+-    defaultLinkTarget: '_blank',
++    linkTargets: ['_blank', '_self', '_parent', '_top'],
 });
                 </code></pre>
             </div>
