@@ -114,6 +114,7 @@
 $('#default-editor').trumbowyg();
                 </pre></code>
             </div>
+            <button id="reset-default-editor">Reset</button>
 
             <div id="simple-editor">
                 <h2>This is a minimalist demo of Trumbowyg.</h2>
@@ -260,6 +261,11 @@ $('#form-content').trumbowyg({
             .trumbowyg()
             .on('tbwinit tbwfocus tbwblur tbwchange tbwresize tbwpaste tbwopenfullscreen tbwclosefullscreen tbwclose', function(e){
                 console.log(e.type);
+            });
+
+            $('#reset-default-editor').click(function () {
+                $('#default-editor').trumbowyg('empty');
+                console.log($('#default-editor').trumbowyg('html'));
             });
 
             $('#enable-disabled-textarea').click(function () {

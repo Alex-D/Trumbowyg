@@ -1066,6 +1066,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
         // Empty the editor
         empty: function () {
+            this.doc.execCommand('insertHTML', false, '');
             this.$ta.val('');
             this.syncCode(true);
         },
