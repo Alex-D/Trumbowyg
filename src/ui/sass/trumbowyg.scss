@@ -34,7 +34,8 @@ $slow-transition-duration: 300ms !default;
 
 $modal-label-width: 150px;
 
-#trumbowyg-icons {
+#trumbowyg-icons,
+.trumbowyg-icons {
     overflow: hidden;
     visibility: hidden;
     height: 0;
