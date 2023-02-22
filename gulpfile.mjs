@@ -133,19 +133,31 @@ const icons = function () {
 
 
 const styles = function () {
-    return gulp.src(paths.styles)
-        .pipe(gulpSass())
-        .pipe(gulpSourcemaps.init())
+    let stylesPipe = gulp.src(paths.styles)
+        .pipe(gulpSass());
+
+    if (process.env.ENV !== 'production') {
+        stylesPipe = stylesPipe.pipe(gulpSourcemaps.init());
+    }
+
+    stylesPipe = stylesPipe
         .pipe(gulpAutoprefixer(['last 1 version', '> 1%', 'ff >= 20', 'ie >= 9', 'opera >= 12', 'Android >= 2.2'], {cascade: true}))
         .pipe(gulpHeader(banner, {pkg: pkg, description: 'Default stylesheet for Trumbowyg editor'}))
         .pipe(gulp.dest('dist/ui/'))
         .pipe(gulpSize({title: 'trumbowyg.css'}))
         .pipe(gulpRename({suffix: '.min'}))
         .pipe(gulpCleanCss())
-        .pipe(gulpHeader(bannerLight, {pkg: pkg}))
-        .pipe(gulpSourcemaps.write('.'))
+        .pipe(gulpHeader(bannerLight, {pkg: pkg}));
+
+    if (process.env.ENV !== 'production') {
+        stylesPipe = stylesPipe.pipe(gulpSourcemaps.write('.'));
+    }
+
+    stylesPipe = stylesPipe
         .pipe(gulp.dest('dist/ui/'))
         .pipe(gulpSize({title: 'trumbowyg.min.css'}));
+
+    return stylesPipe;
 };
 
 const sassDist = gulp.series(styles, function sassDist() {
