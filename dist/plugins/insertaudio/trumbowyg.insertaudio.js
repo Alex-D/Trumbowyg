@@ -37,6 +37,9 @@
             en: {
                 insertAudio: 'Insert Audio'
             },
+            az: {
+                insertAudio: 'Səs yerləşdir'
+            },
             sl: {
                 insertAudio: 'Vstavi zvočno datoteko'
             },

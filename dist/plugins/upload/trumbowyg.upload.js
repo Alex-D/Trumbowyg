@@ -53,6 +53,11 @@
                 file: 'File',
                 uploadError: 'Error'
             },
+            az: {
+                upload: 'Yüklə',
+                file: 'Fayl',
+                uploadError: 'Xəta'
+            },
             sl: {
                 upload: 'Naloži datoteko',
                 file: 'Datoteka',

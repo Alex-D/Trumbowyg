@@ -23,6 +23,9 @@
             en: {
                 mention: 'Mention'
             },
+            az: {
+                mention: 'Bildirmək'
+            },
             sl: {
                 mention: 'Omeni'
             },

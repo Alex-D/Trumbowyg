@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.26.0 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.27.0 - A lightweight WYSIWYG editor
  * Default stylesheet for Trumbowyg editor
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -74,7 +74,7 @@ $modal-label-width: 150px;
 }
 
 .trumbowyg-box,
-.trumbowyg-editor {
+.trumbowyg-editor-box {
     display: block;
     position: relative;
     border: 1px solid $light-border-color;
@@ -91,7 +91,7 @@ $modal-label-width: 150px;
     border: none !important;
 }
 
-.trumbowyg-editor,
+.trumbowyg-editor-box,
 .trumbowyg-textarea {
     position: relative;
     box-sizing: border-box;
@@ -107,6 +107,16 @@ $modal-label-width: 150px;
     &.trumbowyg-autogrow-on-enter {
         transition: height $slow-transition-duration ease-out;
     }
+}
+
+.trumbowyg-editor-box {
+    padding: 0;
+}
+
+
+.trumbowyg-editor {
+    outline: none;
+    padding: 20px;
 }
 
 .trumbowyg-box-blur .trumbowyg-editor {
@@ -166,7 +176,7 @@ $modal-label-width: 150px;
     }
 }
 
-.trumbowyg-editor[contenteditable=true]:empty:not(:focus)::before {
+.trumbowyg-editor-box[contenteditable=true]:empty:not(:focus)::before {
     content: attr(placeholder);
     color: #999;
     pointer-events: none;
@@ -267,7 +277,7 @@ $modal-label-width: 150px;
             display: block;
             content: " ";
             position: absolute;
-            top: 25px;
+            top: 27px;
             right: 3px;
             height: 0;
             width: 0;

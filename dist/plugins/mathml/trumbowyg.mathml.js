@@ -17,6 +17,11 @@
                 formulas: 'Formulas',
                 inline: 'Inline'
             },
+            az: {
+                mathml: 'Düstur əlavə et',
+                formulas: 'Düsturlar',
+                inline: 'Sətir içi'
+            },
             sl: {
                 mathml: 'Vstavi matematični izraz',
                 formulas: 'Formula',

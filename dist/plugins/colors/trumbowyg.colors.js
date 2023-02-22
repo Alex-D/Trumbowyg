@@ -20,6 +20,12 @@
                 foreColorRemove: 'Remove text color',
                 backColorRemove: 'Remove background color'
             },
+            az: {
+                foreColor: 'Yazı rəngi',
+                backColor: 'Arxa plan rəngi',
+                foreColorRemove: 'Yazı rəngini sil',
+                backColorRemove: 'Arxa plan rəngini sil'
+            },
             sl: {
                 foreColor: 'Barva teksta',
                 backColor: 'Barva ozadja',

@@ -17,6 +17,12 @@
                     undo: 'Undo'
                 }
             },
+            az: {
+                history: {
+                    redo: 'İrəli al',
+                    undo: 'Geri al'
+                }
+            },
             sl: {
                 history: {
                     redo: 'Ponovno uveljavi',
