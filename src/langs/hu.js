@@ -11,6 +11,9 @@
 jQuery.trumbowyg.langs.hu = {
     viewHTML: 'HTML nézet',
 
+    undo: 'Visszavon',
+    redo: 'Visszállít',
+
     formatting: 'Stílusok',
 
     p: 'Bekezdés',

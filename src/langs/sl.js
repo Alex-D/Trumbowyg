@@ -10,6 +10,9 @@
 jQuery.trumbowyg.langs.sl = {
     viewHTML: 'Prikaži HTML',
 
+    undo: 'Razveljavi',
+    redo: 'Ponovno uveljavi',
+
     formatting: 'Oblika',
     p: 'Odstavek',
     blockquote: 'Citat',
