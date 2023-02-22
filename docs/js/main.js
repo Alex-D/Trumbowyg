@@ -4,7 +4,185 @@ if (window.location.href.indexOf('index.html') > 0) {
     window.location = window.location.href.replace('index.html', '');
 }
 
-hljs.initHighlightingOnLoad();
+hljs.configure({
+    ignoreUnescapedHTML: true,
+});
+// Highlight.js mergeHtmlPlugin
+hljs.addPlugin((function () {
+    'use strict';
+
+    var originalStream;
+
+    /**
+     * @param {string} value
+     * @returns {string}
+     */
+    function escapeHTML(value) {
+        return value
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#x27;');
+    }
+
+    /* plugin itself */
+
+    /** @type {HLJSPlugin} */
+    const mergeHTMLPlugin = {
+        // preserve the original HTML token stream
+        "before:highlightElement": ({ el }) => {
+            originalStream = nodeStream(el);
+        },
+        // merge it afterwards with the highlighted token stream
+        "after:highlightElement": ({ el, result, text }) => {
+            if (!originalStream.length) return;
+
+            const resultNode = document.createElement('div');
+            resultNode.innerHTML = result.value;
+            result.value = mergeStreams(originalStream, nodeStream(resultNode), text);
+            el.innerHTML = result.value;
+        }
+    };
+
+    /* Stream merging support functions */
+
+    /**
+     * @typedef Event
+     * @property {'start'|'stop'} event
+     * @property {number} offset
+     * @property {Node} node
+     */
+
+    /**
+     * @param {Node} node
+     */
+    function tag(node) {
+        return node.nodeName.toLowerCase();
+    }
+
+    /**
+     * @param {Node} node
+     */
+    function nodeStream(node) {
+        /** @type Event[] */
+        const result = [];
+        (function _nodeStream(node, offset) {
+            for (let child = node.firstChild; child; child = child.nextSibling) {
+                if (child.nodeType === 3) {
+                    offset += child.nodeValue.length;
+                } else if (child.nodeType === 1) {
+                    result.push({
+                        event: 'start',
+                        offset: offset,
+                        node: child
+                    });
+                    offset = _nodeStream(child, offset);
+                    // Prevent void elements from having an end tag that would actually
+                    // double them in the output. There are more void elements in HTML
+                    // but we list only those realistically expected in code display.
+                    if (!tag(child).match(/br|hr|img|input/)) {
+                        result.push({
+                            event: 'stop',
+                            offset: offset,
+                            node: child
+                        });
+                    }
+                }
+            }
+            return offset;
+        })(node, 0);
+        return result;
+    }
+
+    /**
+     * @param {any} original - the original stream
+     * @param {any} highlighted - stream of the highlighted source
+     * @param {string} value - the original source itself
+     */
+    function mergeStreams(original, highlighted, value) {
+        let processed = 0;
+        let result = '';
+        const nodeStack = [];
+
+        function selectStream() {
+            if (!original.length || !highlighted.length) {
+                return original.length ? original : highlighted;
+            }
+            if (original[0].offset !== highlighted[0].offset) {
+                return (original[0].offset < highlighted[0].offset) ? original : highlighted;
+            }
+
+            return highlighted[0].event === 'start' ? original : highlighted;
+        }
+
+        /**
+         * @param {Node} node
+         */
+        function open(node) {
+            function attributeString(attr) {
+                return ' ' + attr.nodeName + '="' + escapeHTML(attr.value) + '"';
+            }
+            result += '<' + tag(node) + [].map.call(node.attributes, attributeString).join('') + '>';
+        }
+
+        /**
+         * @param {Node} node
+         */
+        function close(node) {
+            result += '</' + tag(node) + '>';
+        }
+
+        /**
+         * @param {Event} event
+         */
+        function render(event) {
+            (event.event === 'start' ? open : close)(event.node);
+        }
+
+        while (original.length || highlighted.length) {
+            let stream = selectStream();
+            result += escapeHTML(value.substring(processed, stream[0].offset));
+            processed = stream[0].offset;
+            if (stream === original) {
+                /*
+                On any opening or closing tag of the original markup we first close
+                the entire highlighted node stack, then render the original tag along
+                with all the following original tags at the same offset and then
+                reopen all the tags on the highlighted stack.
+                */
+                nodeStack.reverse().forEach(close);
+                do {
+                    render(stream.splice(0, 1)[0]);
+                    stream = selectStream();
+                } while (stream === original && stream.length && stream[0].offset === processed);
+                nodeStack.reverse().forEach(open);
+            } else {
+                if (stream[0].event === 'start') {
+                    nodeStack.push(stream[0].node);
+                } else {
+                    nodeStack.pop();
+                }
+                render(stream.splice(0, 1)[0]);
+            }
+        }
+        return result + escapeHTML(value.substr(processed));
+    }
+
+    return mergeHTMLPlugin;
+
+}()));
+Array.from(document.querySelectorAll('pre code')).forEach(function (codeElement) {
+    const hasDiff = codeElement.classList.contains('diff');
+    if (hasDiff) {
+        hljs.highlightElement(codeElement);
+        codeElement.classList.remove('diff', 'language-diff');
+    }
+    hljs.highlightElement(codeElement);
+    if (hasDiff) {
+        codeElement.classList.add('language-diff');
+    }
+});
 
 (function ($) {
     if ($.trumbowyg) {
@@ -85,7 +263,7 @@ hljs.initHighlightingOnLoad();
     });
 
     // Add anchors
-    $('.feature h3[id]').each(function () {
+    $('.feature h3[id], .feature h4[id]').each(function () {
         $(this).after($('<a/>', {
             html: '<svg><use xlink:href="#trumbowyg-link"></use></svg>',
             'class': 'title-link',
@@ -93,16 +271,6 @@ hljs.initHighlightingOnLoad();
             title: 'Permalink to ' + $(this).text()
         }));
     });
-
-    // Force scroll to anchor
-    setTimeout(function () {
-        if (window.location.hash.length > 1 &&
-            $(window.location.hash).length > 0 &&
-            $(window.location.hash).offset().top > 0
-        ) {
-            $('main').scrollTop($(window.location.hash).offset().top);
-        }
-    }, 100);
 
     // Show star count
     function setStarsCount(stars) {

@@ -26,8 +26,8 @@
         border-color: rgba(255, 255, 255, 0.4);
     }
 
-    & + & {
-        margin-left: 20px;
+    &:not(:last-child) {
+        margin-right: 20px;
     }
 }
 .button:hover,

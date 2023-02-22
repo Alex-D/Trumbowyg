@@ -2,7 +2,7 @@
   "name": "trumbowyg",
   "title": "Trumbowyg",
   "description": "A lightweight WYSIWYG editor",
-  "version": "2.26.0",
+  "version": "2.27.0",
   "main": "dist/trumbowyg.js",
   "license": "MIT",
   "scripts": {
@@ -12,27 +12,27 @@
     "test": "gulp test"
   },
   "devDependencies": {
-    "del": "6.0.0",
+    "del": "7.0.0",
     "gulp": "4.0.2",
-    "gulp-autoprefixer": "6.1.0",
+    "gulp-autoprefixer": "8.0.0",
+    "gulp-clean-css": "4.3.0",
     "gulp-concat": "2.6.1",
     "gulp-header": "2.0.9",
     "gulp-jshint": "2.1.0",
     "gulp-livereload": "4.0.2",
-    "gulp-load-plugins": "2.0.7",
-    "gulp-minify-css": "1.2.4",
     "gulp-newer": "1.4.0",
     "gulp-rename": "2.0.0",
-    "gulp-sass": "4.1.0",
-    "gulp-size": "3.0.0",
+    "gulp-sass": "5.1.0",
+    "gulp-size": "4.0.1",
     "gulp-sourcemaps": "3.0.0",
-    "gulp-svgmin": "3.0.0",
-    "gulp-svgstore": "7.0.1",
-    "gulp-terser": "2.0.1",
+    "gulp-svgmin": "4.1.0",
+    "gulp-svgstore": "9.0.0",
+    "gulp-terser": "2.1.0",
     "jquery": "^3.6.0",
-    "jshint": "2.13.0",
+    "jshint": "2.13.6",
     "jshint-stylish": "2.2.1",
-    "vinyl-paths": "3.0.1"
+    "sass": "^1.57.1",
+    "vinyl-paths": "5.0.0"
   },
   "peerDependencies": {
     "jquery": ">=1.8"
@@ -41,7 +41,7 @@
   "author": {
     "name": "Alexandre Demode (Alex-D)",
     "email": "contact@alex-d.fr",
-    "url": "http://alex-d.fr"
+    "url": "https://alex-d.fr"
   },
   "repository": {
     "type": "git",
@@ -58,7 +58,7 @@
     "trumbowyg"
   ],
   "volta": {
-    "node": "14.18.1",
-    "npm": "6.14.15"
+    "node": "18.12.1",
+    "npm": "9.3.0"
   }
 }

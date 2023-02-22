@@ -101,16 +101,26 @@ textarea {
     }
 
     .note {
-        color: #888;
-        padding: 3px 0 3px 15px;
+        display: table;
+        color: #666;
+        background: rgba(0, 0, 0, 0.02);
+        padding: 8px 12px;
         border-left: 3px solid $primary-color-light;
-        margin-right: 30px;
+        border-radius: 8px;
+        font-size: 15px;
+        margin-block-start: 0.5em;
+        margin-block-end: 0.5em;
 
         > :first-child {
-            margin-top: 0;
+            margin-top: 6px;
         }
         > :last-child {
-            margin-bottom: 0;
+            margin-bottom: 6px;
+        }
+
+        code {
+            margin-left: 2px;
+            margin-right: 2px;
         }
     }
 }
@@ -148,30 +158,36 @@ hr.clearfix {
     clear: both;
 }
 
+code,
+kbd,
+pre,
+samp {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 15px;
+    line-height: 1.5;
+}
 
 
+:root {
+    --tbw-cell-vertical-padding: 4px;
+    --tbw-cell-horizontal-padding: 8px;
+    --tbw-cell-line-height: 1.5em;
+}
 
 table {
-    margin: 30px auto;
-    text-align: left;
+    margin-bottom: var(--tbw-cell-line-height);
+}
 
-    thead {
-        background: #fff;
-    }
-    tbody {
-        tr {
-            border-bottom: 1px solid #ddd;
+th,
+td {
+    height: calc(var(--tbw-cell-vertical-padding) * 2 + var(--tbw-cell-line-height));
+    min-width: calc(var(--tbw-cell-horizontal-padding) * 2);
+    padding: var(--tbw-cell-vertical-padding) var(--tbw-cell-horizontal-padding);
+    border: 1px solid #e7eaec;
+}
 
-            &:nth-child(2n){
-                background: #fcfcfc;
-            }
-        }
-    }
-
-    td,
-    th {
-        padding: 5px 15px;
-    }
+thead {
+    background: #FFFFFF;
 }
 
 

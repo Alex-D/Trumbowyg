@@ -65,6 +65,28 @@
             p {
                 margin-top: 0;
             }
+
+            :root {
+                --tbw-cell-vertical-padding: 4px;
+                --tbw-cell-horizontal-padding: 8px;
+                --tbw-cell-line-height: 1.5em;
+            }
+
+            table {
+                margin-bottom: var(--tbw-cell-line-height);
+            }
+
+            th,
+            td {
+                height: calc(var(--tbw-cell-vertical-padding) * 2 + var(--tbw-cell-line-height));
+                min-width: calc(var(--tbw-cell-horizontal-padding) * 2);
+                padding: var(--tbw-cell-vertical-padding) var(--tbw-cell-horizontal-padding);
+                border: 1px solid #e7eaec;
+            }
+
+            thead {
+                background: #FFFFFF;
+            }
         </style>
         <link rel="stylesheet" href="/dist/ui/trumbowyg.css">
         <link rel="stylesheet" href="/dist/plugins/colors/ui/trumbowyg.colors.css">

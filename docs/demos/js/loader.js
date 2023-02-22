@@ -1,4 +1,5 @@
-var baseURL = window.location.hostname.indexOf('github.') !== -1 ? '//rawcdn.githack.com/Alex-D/Trumbowyg/v2.26.0/' : '../../../';
+var isOnline = window.location.hostname.indexOf('github.io') !== -1;
+var baseURL = isOnline ? '//rawcdn.githack.com/Alex-D/Trumbowyg/v2.26.0/' : '../../../';
 var styleLoadingContainer = document.querySelector('.loading-head');
 var scriptLoadingContainer = document.querySelector('.loading-body');
 
@@ -33,6 +34,10 @@ function loadStyle(stylePath, comment) {
 
 function loadScript(scriptPath, comment) {
     'use strict';
+
+    if (!isOnline) {
+        scriptPath = scriptPath.replace('.min', '');
+    }
 
     loadTag(
       '<script src="' + baseURL + scriptPath + '"></script>',

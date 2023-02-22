@@ -46,12 +46,16 @@ $beer-height: 70px;
     p,
     dd,
     ul {
-        code {
+        & > code,
+        *:not(pre) > code {
             color: #616870;
             background: #dfe5eb;
             padding: 0 5px;
-            border: 1px solid #d0d9e1;
-            border-radius: 2px;
+            border-radius: 4px;
+        }
+
+        a code {
+            color: inherit;
         }
     }
 
@@ -335,7 +339,7 @@ $beer-height: 70px;
 
 .deprecated-info {
     padding: 7px 15px;
-    border-radius: 2px;
+    border-radius: 4px;
     background: #f2dfc1;
     border: 1px solid $deprecated-color;
 
@@ -380,21 +384,22 @@ $beer-height: 70px;
         position: relative;
     }
     h3 {
-        position: relative;
         padding-top: 50px;
         margin-left: -15px;
         padding-left: 15px;
     }
     h4 {
-        position: relative;
         font-size: 20px;
         font-weight: bold;
+    }
+    h3 + h4,
+    h3 + a + h4 {
+        display: block;
     }
 
     .title-link {
         display: block;
         position: absolute;
-        top: 53px;
         left: -45px;
         height: 30px;
         width: 30px;
@@ -403,6 +408,7 @@ $beer-height: 70px;
         text-decoration: none;
         background: $primary-color;
         border-radius: 50%;
+        transform: translateY(-36px);
         transition: opacity $transition-duration, background $transition-duration, color $transition-duration;
 
         &:hover,
@@ -420,6 +426,10 @@ $beer-height: 70px;
             width: 70%;
             height: 100%;
         }
+    }
+
+    h4 + .title-link {
+        transform: translateY(-30px);
     }
 
     &:hover {
@@ -458,14 +468,17 @@ $beer-height: 70px;
 dl {
     dt {
         display: inline-block;
-        color: #616870;
+        color: #1b2126;
         background: #dfe5eb;
-        padding: 0 5px;
-        border: 1px solid #d0d9e1;
-        border-radius: 2px;
+        padding: 0 4px 0 6px;
+        border-radius: 4px;
     }
     dd {
         padding: 5px 0 15px;
         margin-left: 15px;
+
+        ul {
+            margin: 0.5em 0;
+        }
     }
 }

@@ -20,24 +20,162 @@
             <a href="../../documentation/plugins/#plugin-table" class="button button-demo">Read table plugin documentation</a>
 
             <div id="editor">
-                <h2>Add a table to the editor</h2>
+                <h4>Add a table to the editor</h4>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident
-                    optio nam reiciendis eius beatae quibusdam!
+                    Below is an example of a simple table with a header row.
                 </p>
+                <table>
+                    <thead>
+                    <tr>
+                        <th scope="col">Project & Pitch</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Technologies</th>
+                        <th scope="col">Stars</th>
+                        <th scope="col">Downloads</th>
+                        <th scope="col">URL</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><strong>Trumbowyg</strong> <br> Lightweight WYSIWYG Editor</td>
+                        <td>Active</td>
+                        <td>JavaScript</td>
+                        <td>~4&nbsp;000&nbsp;★</td>
+                        <td>70&nbsp;000&nbsp;/&nbsp;month</td>
+                        <td>
+                            <a href="https://alex-d.github.io/Trumbowyg/">Landing</a> <br>
+                            <a href="https://github.com/Alex-D/Trumbowyg/">GitHub</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Monitoror</strong> <br> Unified monitoring wallboard</td>
+                        <td>Maintenance</td>
+                        <td>Go <br> Vue</td>
+                        <td>~4&nbsp;000&nbsp;★</td>
+                        <td>100&nbsp;000&nbsp;+</td>
+                        <td>
+                            <a href="https://monitoror.com">Landing</a> <br>
+                            <a href="https://github.com/monitoror/monitoror/">GitHub</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cookies EU Banner</strong> <br> 1kb vanilla JS for cookie banner</td>
+                        <td>Maintenance</td>
+                        <td>JavaScript</td>
+                        <td>~420&nbsp;★</td>
+                        <td>4&nbsp;000&nbsp;/&nbsp;month</td>
+                        <td>
+                            <a href="https://alex-d.github.io/Cookies-EU-banner/">Landing</a> <br>
+                            <a href="https://github.com/Alex-D/Cookies-EU-banner">GitHub</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Colllect</strong> <br> Bookmark Manager for Creatives</td>
+                        <td>Paused</td>
+                        <td>Symfony <br> Vue</td>
+                        <td>~340&nbsp;★</td>
+                        <td></td>
+                        <td>
+                            <a href="https://colllect.io">Landing</a> <br>
+                            <a href="https://github.com/Colllect/Colllect">GitHub</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Check Disk Space</strong> <br> Multi-platform disk space checker for Node.js</td>
+                        <td>Maintenance</td>
+                        <td>TypeScript</td>
+                        <td>~78&nbsp;★</td>
+                        <td>2&nbsp;000&nbsp;000&nbsp;/&nbsp;month</td>
+                        <td>
+                            <a href="https://github.com/Alex-D/check-disk-space">GitHub</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Column View</strong> <br> Multi-columns page viewer</td>
+                        <td>Maintenance</td>
+                        <td>TypeScript <br> Snabbdom</td>
+                        <td>~7&nbsp;★</td>
+                        <td></td>
+                        <td>
+                            <a href="https://column-view.com">Landing</a> <br>
+                            <a href="https://github.com/Alex-D/Column-View/">GitHub</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <hr>
+                <h4>Tables with merged cells</h4>
                 <p>
-                    The text is derived from Cicero's De Finibus Bonorum et Malorum (On the Ends of Goods and Evils, or
-                    alternatively [About] The Purposes of Good and Evil). The original passage began: Neque porro quisquam est
-                    qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit (Translation: &quot;Neither is there
-                    anyone who loves grief itself since it is grief and thus wants to obtain it&quot;).
+                    Example of a pricing table.
                 </p>
+                <table>
+                    <thead>
+                    <tr>
+                        <th scope="col">Feature</th>
+                        <th scope="col">Free</th>
+                        <th scope="col">Premium</th>
+                        <th scope="col">Business</th>
+                        <th scope="col">Enterprise</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Price</td>
+                        <td>Free</td>
+                        <td>5,99€ / user</td>
+                        <td>12,99€ / user</td>
+                        <td>22,99€ / user</td>
+                    </tr>
+                    <tr>
+                        <td>Users</td>
+                        <td>1</td>
+                        <td rowspan="3" colspan="2" style="text-align: center;">Unlimited</td>
+                        <td>20 users minimum</td>
+                    </tr>
+                    <tr>
+                        <td>Items</td>
+                        <td>100</td>
+                        <td>Unlimited</td>
+                    </tr>
+                    <tr>
+                        <td>Bandwidth</td>
+                        <td>5&nbsp;Mbps</td>
+                        <td>On your charge</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    Another tab with different merged cells:
+                </p>
+                <table>
+                    <tbody>
+                    <tr>
+                        <td>Those plugins allow you to merge cells</td>
+                        <td>And also unmerge</td>
+                        <td colspan="2">Two cells merged</td>
+                    </tr>
+                    <tr>
+                        <td>You can see some examples on this page</td>
+                        <td colspan="2">Two horizontally merged too</td>
+                        <td>Simple cell</td>
+                    </tr>
+                    <tr>
+                        <td>Upload image</td>
+                        <td>Pick, upload, and inserts an image</td>
+                        <td>Next is empty</td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
 
             <h3>The code</h3>
             <pre><code class="js-code-to-eval javascript">
 $('#editor')
 .trumbowyg({
-    btns: ['table']
+    btns: [['table'], ['tableCellBackgroundColor', 'tableBorderColor']]
 });
             </code></pre>
         </div>

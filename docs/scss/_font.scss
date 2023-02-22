@@ -1,10 +1,44 @@
 // Panton Light
 @font-face {
     font-family: 'Panton';
-    src: url('../font/panton.eot');
-    src: url('../font/panton.eot?#iefix') format('embedded-opentype'),
-         url('../font/panton.woff2') format('woff2'),
-         url('../font/panton.woff') format('woff'),
-         url('../font/panton.ttf') format('truetype');
+    src: url('../fonts/panton.eot');
+    src: url('../fonts/panton.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/panton.woff2') format('woff2'),
+         url('../fonts/panton.woff') format('woff'),
+         url('../fonts/panton.ttf') format('truetype');
     font-weight: 300;
+}
+
+// Open Sans
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/open-sans-light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/open-sans-regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/open-sans-semibold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+// JetBrains Mono
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('../fonts/jetbrains-mono-regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }

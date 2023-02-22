@@ -10,7 +10,6 @@
     <link rel="icon" type="image/png" href="../favicon.png">
 
     <link rel="stylesheet" href="../css/main.css">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 </head>
 <body class="documentation-body">
 <svg xmlns="http://www.w3.org/2000/svg" style="overflow: hidden;visibility: hidden;height: 0;width: 0;">
@@ -221,18 +220,18 @@ $('#trumbowyg-demo').trumbowyg({
                 initialize Trumbowyg:
             </p>
             <pre><code class="html">
-&lt;-- Import jQuery -->
+&lt;!-- Import jQuery -->
 &lt;script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">&lt;/script>
 &lt;script>window.jQuery || document.write('&lt;script src="js/vendor/jquery-3.3.1.min.js">&lt;\/script>')&lt;/script>
 
-&lt;-- Import Trumbowyg -->
+&lt;!-- Import Trumbowyg -->
 &lt;script src="trumbowyg/dist/trumbowyg.min.js">&lt;/script>
 
-&lt;-- Import Trumbowyg plugins... -->
+&lt;!-- Import Trumbowyg plugins... -->
 &lt;script src="trumbowyg/dist/plugins/upload/trumbowyg.cleanpaste.min.js">&lt;/script>
 &lt;script src="trumbowyg/dist/plugins/upload/trumbowyg.pasteimage.min.js">&lt;/script>
 
-&lt;-- Init Trumbowyg -->
+&lt;!-- Init Trumbowyg -->
 &lt;script>
     // Doing this in a loaded JS file is better, I put this here for simplicity
     $('#my-editor').trumbowyg();
@@ -830,10 +829,10 @@ $('.trumbowyg').trumbowyg({
                     Upgrade from <code>defaultLinkTarget</code>
                 </h4>
 
-                <pre><code class="javascript">
+                <pre><code class="diff javascript">
 $('.trumbowyg').trumbowyg({
-<span class="hljs-deletion">-    defaultLinkTarget: '_blank',</span>
-<span class="hljs-addition">+    linkTargets: ['_blank', '_self', '_parent', '_top'],</span>
+-    defaultLinkTarget: '_blank',
++    linkTargets: ['_blank', '_self', '_parent', '_top'],
 });
                 </code></pre>
             </div>

@@ -7,6 +7,9 @@
       en: {
         giphy: 'Insert GIF',
       },
+      az: {
+        giphy: 'GIF yerləşdir',
+      },
       sl: {
         giphy: 'Vstavi GIF',
       },

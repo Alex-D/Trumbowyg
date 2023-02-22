@@ -8,6 +8,9 @@
             en: {
                 template: 'Template'
             },
+            az: {
+                template: 'Şablon'
+            },
             sl: {
                 template: 'Predloga'
             },
