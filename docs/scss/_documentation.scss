@@ -392,7 +392,8 @@ $beer-height: 70px;
         font-size: 20px;
         font-weight: bold;
     }
-    h3 + h4 {
+    h3 + h4,
+    h3 + a + h4 {
         display: block;
     }
 
