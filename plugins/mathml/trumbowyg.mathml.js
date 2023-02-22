@@ -22,20 +22,25 @@
                 formulas: 'Düsturlar',
                 inline: 'Sətir içi'
             },
-            sl: {
-                mathml: 'Vstavi matematični izraz',
-                formulas: 'Formula',
-                inline: 'V vrstici'
-            },
             by: {
                 mathml: 'Уставіць формулу',
                 formulas: 'Формула',
                 inline: 'Inline-элемент'
             },
+            ca: {
+                mathml: 'Inserir Fórmula',
+                formulas: 'Fórmula',
+                inline: 'En línia'
+            },
             da: {
                 mathml: 'Indsæt formler',
                 formulas: 'Formler',
                 inline: 'Inline'
+            },
+            es: {
+                mathml: 'Insertar Fórmula',
+                formulas: 'Fórmula',
+                inline: 'En línea'
             },
             et: {
                 mathml: 'Sisesta valem',
@@ -66,6 +71,11 @@
                 mathml: 'Вставить формулу',
                 formulas: 'Формула',
                 inline: 'Строчный элемент'
+            },
+            sl: {
+                mathml: 'Vstavi matematični izraz',
+                formulas: 'Formula',
+                inline: 'V vrstici'
             },
             tr: {
                 mathml: 'Formül Ekle',

@@ -124,15 +124,16 @@
                 tableDeleteColumn: 'Sütunu sil',
                 tableDestroy: 'Cədvəli sil',
             },
-            sl: {
-                table: 'Dodaj tabelo',
-                tableAddRow: 'Dodaj vrstico',
-                tableAddRowAbove: 'Vrini vrstico',
-                tableAddColumnLeft: 'Vrini stolpec',
-                tableAddColumn: 'Dodaj stolpec',
-                tableDeleteRow: 'Izbriši vrstico',
-                tableDeleteColumn: 'Izbriši stolpec',
-                tableDestroy: 'Izbriši tabelo',
+            ca: {
+                table: 'Inserir taula',
+                tableAddRow: 'Afegir fila',
+                tableAddRowAbove: 'Afegir fila a dalt',
+                tableAddColumnLeft: 'Afegir columna a l\'esquerra',
+                tableAddColumn: 'Afegir columna a la dreta',
+                tableDeleteRow: 'Esborrar fila',
+                tableDeleteColumn: 'Esborrar columna',
+                tableDestroy: 'Esborrar taula',
+                error: 'Error'
             },
             cs: {
                 table: 'Vytvořit příkaz Table',
@@ -249,6 +250,16 @@
                 tableDeleteRow: 'Удалить строку',
                 tableDeleteColumn: 'Удалить столбец',
                 tableDestroy: 'Удалить таблицу',
+            },
+            sl: {
+                table: 'Dodaj tabelo',
+                tableAddRow: 'Dodaj vrstico',
+                tableAddRowAbove: 'Vrini vrstico',
+                tableAddColumnLeft: 'Vrini stolpec',
+                tableAddColumn: 'Dodaj stolpec',
+                tableDeleteRow: 'Izbriši vrstico',
+                tableDeleteColumn: 'Izbriši stolpec',
+                tableDestroy: 'Izbriši tabelo',
             },
             sk: {
                 table: 'Vytvoriť tabuľky',

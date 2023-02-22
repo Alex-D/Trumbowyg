@@ -11,9 +11,6 @@
             az: {
                 template: 'Şablon'
             },
-            sl: {
-                template: 'Predloga'
-            },
             by: {
                 template: 'Шаблон'
             },
@@ -46,6 +43,9 @@
             },
             ru: {
                 template: 'Шаблон'
+            },
+            sl: {
+                template: 'Predloga'
             },
             tr: {
                 template: 'Şablon'

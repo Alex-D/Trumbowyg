@@ -23,12 +23,6 @@
                     undo: 'Geri al'
                 }
             },
-            sl: {
-                history: {
-                    redo: 'Ponovno uveljavi',
-                    undo: 'Razveljavi'
-                }
-            },
             by: {
                 history: {
                     redo: 'Паўтарыць',
@@ -81,6 +75,12 @@
                 history: {
                     redo: 'Повторить',
                     undo: 'Отменить'
+                }
+            },
+            sl: {
+                history: {
+                    redo: 'Ponovno uveljavi',
+                    undo: 'Razveljavi'
                 }
             },
             tr: {
