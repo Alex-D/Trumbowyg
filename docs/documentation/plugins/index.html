@@ -1716,9 +1716,10 @@ fileToUpload: // The image file
 
     // If the plugin is a button
     function buildButtonIcon() {
-        if (document.querySelector("#trumbowyg-myplugin")) {
+        if ($("#trumbowyg-myplugin").length > 0) {
             return;
         }
+
         /*
         When your button is created, an SVG will be inserted with an xref to a
         symbol living at the fragment "#trumbowyg-myplugin". For Trumbowyg's
@@ -1735,16 +1736,8 @@ fileToUpload: // The image file
         custom SVG symbol into the document with the correct ID.
         */
         const iconWrap = $(document.createElementNS("http://www.w3.org/2000/svg", "svg"));
+        iconWrap.addClass("trumbowyg-icons");
 
-        /*
-        This class is only here to allow CSS to hide it. In your plugin's
-        stylesheet you will probably want something like this:
-
-        .trumbowyg-myplugin-icons {
-            display: none;
-        }
-        */
-        iconWrap.addClass("trumbowyg-myplugin-icons");
         // For demonstration purposes, we've taken the "File" icon from
         // Remix Icon - https://remixicon.com/
         iconWrap.html(`
