@@ -263,7 +263,7 @@ Array.from(document.querySelectorAll('pre code')).forEach(function (codeElement)
     });
 
     // Add anchors
-    $('.feature h3[id]').each(function () {
+    $('.feature h3[id], .feature h4[id]').each(function () {
         $(this).after($('<a/>', {
             html: '<svg><use xlink:href="#trumbowyg-link"></use></svg>',
             'class': 'title-link',

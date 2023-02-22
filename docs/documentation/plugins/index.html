@@ -1210,7 +1210,13 @@ $('#editor-custom-list')
                 </a>
             </p>
 
-            <h4>How to use it?</h4>
+            <ul>
+                <li><a href="#plugin-table--how-to-use-it">How to use it?</a></li>
+                <li><a href="#plugin-table--options">Options</a></li>
+                <li><a href="#plugin-table--buttons">Buttons</a></li>
+            </ul>
+
+            <h4 id="plugin-table--how-to-use-it">How to use it?</h4>
           <pre><code class="html">
 &lt;!-- Import Trumbowyg Table style in &lt;head>... -->
 &lt;link rel="stylesheet" href="trumbowyg/dist/plugins/table/ui/trumbowyg.table.min.css">
@@ -1236,8 +1242,8 @@ $('#my-editor').trumbowyg({
             </code></pre>
             <p>
                 To get a good UX, you need to have some CSS defined on your tables.
-                A good start can be something to guarantee that cell height and width
-                will not be junky, and allow to click inside. Also, ensure you have some borders
+                A good start can be something to guarantee that cell width and height
+                will not collapse, and allow to click inside. Also, ensure you have some borders
                 to distinguish cells. Here is a minimal example using CSS custom properties:
             </p>
             <pre><code class="css">
@@ -1260,7 +1266,7 @@ td {
 }
             </code></pre>
 
-            <h4>Options</h4>
+            <h4 id="plugin-table--options">Options</h4>
             <dl>
                 <dt><strong><code>rows</code></strong> <code class="type">number</code></dt>
                 <dd>
@@ -1328,7 +1334,11 @@ td {
                 <dt><strong><code>dropdown</code></strong> <code class="type">object</code></dt>
                 <dd>
                     Define the <code>'table'</code> dropdown buttons when selection is inside a table.
-                    <br>
+                    <ul>
+                        <li><code>title</code>: the dropdown section title translation key.</li>
+                        <li><code>buttons</code>: button list</li>
+                    </ul>
+                    You can rearrange them and remove those you do not want. <br>
                     <strong>Default</strong>:
                     <pre><code>
 [
@@ -1392,7 +1402,7 @@ $('.trumbowyg').trumbowyg({
                 </dd>
             </dl>
 
-            <h4>Buttons</h4>
+            <h4 id="plugin-table--buttons">Buttons</h4>
             <p>
                 Table plugin comes with <em>a lot of buttons</em>.
                 <br>
@@ -1536,7 +1546,13 @@ $('#my-editor').trumbowyg({
                 </a>
             </p>
 
-            <h4>How to use it?</h4>
+            <ul>
+                <li><a href="#plugin-upload--how-to-use-it">How to use it?</a></li>
+                <li><a href="#plugin-upload--options">Options</a></li>
+                <li><a href="#plugin-upload--server-side">Server side</a></li>
+            </ul>
+
+            <h4 id="plugin-upload--how-to-use-it">How to use it?</h4>
             <pre><code class="html">
 &lt;!-- Import Trumbowyg plugins... -->
 &lt;script src="trumbowyg/dist/plugins/upload/trumbowyg.upload.min.js">&lt;/script>
@@ -1557,7 +1573,7 @@ $('#my-editor').trumbowyg({
 });
             </code></pre>
 
-            <h4>Options</h4>
+            <h4 id="plugin-upload--options">Options</h4>
             <dl>
                 <dt><strong><code>serverPath</code></strong> <code class="type">string</code></dt>
                 <dd>
@@ -1625,7 +1641,7 @@ $('#my-editor').trumbowyg({
                 </dd>
             </dl>
 
-            <h4>Server side</h4>
+            <h4 id="plugin-upload--server-side">Server side</h4>
             <p>
                 Server side receives a POST request with the image in the <code>fileFieldName</code> field and
                 <code>alt</code> which contains image description:

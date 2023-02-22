@@ -53,6 +53,10 @@ $beer-height: 70px;
             padding: 0 5px;
             border-radius: 4px;
         }
+
+        a code {
+            color: inherit;
+        }
     }
 
     code.type {
@@ -395,7 +399,6 @@ $beer-height: 70px;
     .title-link {
         display: block;
         position: absolute;
-        top: 53px;
         left: -45px;
         height: 30px;
         width: 30px;
@@ -404,6 +407,7 @@ $beer-height: 70px;
         text-decoration: none;
         background: $primary-color;
         border-radius: 50%;
+        transform: translateY(-36px);
         transition: opacity $transition-duration, background $transition-duration, color $transition-duration;
 
         &:hover,
@@ -421,6 +425,10 @@ $beer-height: 70px;
             width: 70%;
             height: 100%;
         }
+    }
+
+    h4 + .title-link {
+        transform: translateY(-30px);
     }
 
     &:hover {
