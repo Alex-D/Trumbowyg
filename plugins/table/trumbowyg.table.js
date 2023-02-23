@@ -427,7 +427,7 @@
                         $(element).addClass(tagClasses);
                     };
                     var applyTagClasses = function ($table) {
-                        applyTagClassesToElement($table);
+                        applyTagClassesToElement($table[0]);
                         $('*', $table).each(function (_, element) {
                             applyTagClassesToElement(element);
                         });
