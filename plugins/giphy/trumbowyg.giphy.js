@@ -10,9 +10,6 @@
       az: {
         giphy: 'GIF yerləşdir',
       },
-      sl: {
-        giphy: 'Vstavi GIF',
-      },
       by: {
         giphy: 'Уставіць GIF',
       },
@@ -27,6 +24,9 @@
       },
       ru: {
         giphy: 'Вставить GIF',
+      },
+      sl: {
+        giphy: 'Vstavi GIF',
       },
       tr: {
         giphy: 'GIF ekle',

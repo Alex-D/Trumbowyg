@@ -474,7 +474,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
         init: function () {
             var t = this;
-            t.height = t.$ta.height();
+            t.height = t.$ta.outerHeight() - 39; // Remove button pane height
 
             t.initPlugins();
 
@@ -1066,6 +1066,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
         // Empty the editor
         empty: function () {
+            this.doc.execCommand('insertHTML', false, '');
             this.$ta.val('');
             this.syncCode(true);
         },

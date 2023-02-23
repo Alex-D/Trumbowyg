@@ -10,6 +10,9 @@
 jQuery.trumbowyg.langs.de = {
     viewHTML: 'HTML anzeigen',
 
+    undo: 'Rückgängig',
+    redo: 'Wiederholen',
+
     formatting: 'Formatierung',
     p: 'Absatz',
     blockquote: 'Zitat',

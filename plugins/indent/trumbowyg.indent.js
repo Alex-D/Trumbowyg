@@ -22,10 +22,6 @@
                 indent: 'Girinti',
                 outdent: 'Çıxıntı'
             },
-            sl: {
-                indent: 'Povečaj zamik',
-                outdent: 'Zmanjšaj zamik'
-            },
             by: {
                 indent: 'Водступ',
                 outdent: 'Выступ'
@@ -45,6 +41,10 @@
             ru: {
                 indent: 'Отступ',
                 outdent: 'Выступ'
+            },
+            sl: {
+                indent: 'Povečaj zamik',
+                outdent: 'Zmanjšaj zamik'
             },
             tr: {
                 indent: 'Girinti',

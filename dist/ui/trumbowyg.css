@@ -9,13 +9,15 @@
  *         Website : alex-d.fr
  */
 
-#trumbowyg-icons {
+#trumbowyg-icons,
+.trumbowyg-icons {
   overflow: hidden;
   visibility: hidden;
   height: 0;
   width: 0;
 }
-#trumbowyg-icons svg {
+#trumbowyg-icons svg,
+.trumbowyg-icons svg {
   height: 0;
   width: 0;
 }
@@ -48,6 +50,7 @@
 }
 
 .trumbowyg-box .trumbowyg-editor {
+  min-height: 100%;
   margin: 0 auto;
 }
 
@@ -132,7 +135,7 @@
   display: block;
   margin-bottom: 1px;
 }
-.trumbowyg-box.trumbowyg-editor-hidden .trumbowyg-editor {
+.trumbowyg-box.trumbowyg-editor-hidden .trumbowyg-editor-box {
   display: none;
 }
 
@@ -548,7 +551,8 @@ body.trumbowyg-body-fullscreen {
   font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif !important;
   font-size: 14px !important;
   line-height: 1.45em !important;
-  color: #333;
+  color: #333 !important;
+  font-weight: normal !important;
 }
 .trumbowyg-editor.trumbowyg-reset-css a {
   color: #15c !important;
@@ -567,7 +571,7 @@ body.trumbowyg-body-fullscreen {
   line-height: 1.4em !important;
   font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif !important;
   font-size: 14px !important;
-  border: none;
+  border: none !important;
 }
 .trumbowyg-editor.trumbowyg-reset-css iframe,
 .trumbowyg-editor.trumbowyg-reset-css object,
@@ -577,13 +581,13 @@ body.trumbowyg-body-fullscreen {
 .trumbowyg-editor.trumbowyg-reset-css blockquote {
   margin-left: 32px !important;
   font-style: italic !important;
-  color: #555;
+  color: #555 !important;
 }
 .trumbowyg-editor.trumbowyg-reset-css ul {
-  list-style: disc;
+  list-style: disc !important;
 }
 .trumbowyg-editor.trumbowyg-reset-css ol {
-  list-style: decimal;
+  list-style: decimal !important;
 }
 .trumbowyg-editor.trumbowyg-reset-css ul,
 .trumbowyg-editor.trumbowyg-reset-css ol {
@@ -593,26 +597,26 @@ body.trumbowyg-body-fullscreen {
 .trumbowyg-editor.trumbowyg-reset-css ol ol,
 .trumbowyg-editor.trumbowyg-reset-css ul ol,
 .trumbowyg-editor.trumbowyg-reset-css ol ul {
-  border: none;
+  border: none !important;
   margin: 2px !important;
   padding: 0 !important;
   padding-left: 24px !important;
 }
 .trumbowyg-editor.trumbowyg-reset-css hr {
-  display: block;
-  height: 1px;
-  border: none;
-  border-top: 1px solid #CCC;
+  display: block !important;
+  height: 1px !important;
+  border: none !important;
+  border-top: 1px solid #CCC !important;
 }
 .trumbowyg-editor.trumbowyg-reset-css h1,
 .trumbowyg-editor.trumbowyg-reset-css h2,
 .trumbowyg-editor.trumbowyg-reset-css h3,
 .trumbowyg-editor.trumbowyg-reset-css h4 {
-  color: #111;
-  background: none;
+  color: #111 !important;
+  background: none !important;
   margin: 0 !important;
   padding: 0 !important;
-  font-weight: bold;
+  font-weight: bold !important;
 }
 .trumbowyg-editor.trumbowyg-reset-css h1 {
   font-size: 32px !important;

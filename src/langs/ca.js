@@ -3,38 +3,51 @@
  * Catalan translation for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
- * Author : Àlfons Sánchez (alsanan)
- *          Twitter : @alsanan
- *          Website : about.me/alsanan
- *          Github : https://github.com/alsanan
+ * Authors : Àlfons Sánchez (alsanan)
+ *             Twitter : @alsanan
+ *             Website : about.me/alsanan
+ *             Github : https://github.com/alsanan
+ *
+ *           Carles Martínez
+ *             Website : calaix.net
  */
 
 jQuery.trumbowyg.langs.ca = {
     viewHTML: 'Veure HTML',
 
-    formatting: 'Formatar',
+    undo: 'Desfés',
+    redo: 'Refés',
+
+    formatting: 'Format',
     p: 'Paragraf',
     blockquote: 'Citació',
     code: 'Codi',
     header: 'Títol',
 
     bold: 'Negreta',
-    italic: 'Itàlica',
-    strikethrough: 'Suprimir',
+    italic: 'Cursiva',
+    strikethrough: 'Ratllat',
     underline: 'Subratllat',
 
-    strong: 'Forta',
-    em: 'Èmfasi',
+    strong: 'Negreta',
+    em: 'Cursiva',
     del: 'Apagar',
 
-    unorderedList: 'Lista desordenada',
-    orderedList: 'Lista ordenada',
+    superscript: 'Superíndex',
+    subscript: 'Subíndex',
+
+    unorderedList: 'Llista desordenada',
+    orderedList: 'Llista ordenada',
 
     insertImage: 'Inserir imatge',
     insertVideo: 'Inserir vídeo',
     link: 'Enllaç',
     createLink: 'Crear un enllaç',
     unlink: 'Eliminar enllaç',
+
+    target: 'Obertura',
+    _self: 'Mateixa pestanya',
+    _blank: 'Nova pestanya',
 
     justifyLeft: 'Alinear a esquerra',
     justifyCenter: 'Centrar',
@@ -43,15 +56,19 @@ jQuery.trumbowyg.langs.ca = {
 
     horizontalRule: 'Inserir separador horitzontal',
 
+    removeformat: 'Eliminar format',
+
     fullscreen: 'Pantalla completa',
 
     close: 'Tancar',
 
     submit: 'Enviar',
-    reset: 'Reiniciar',
+    reset: 'Cancel·lar',
 
     required: 'Obligatori',
     description: 'Descripció',
     title: 'Títol',
-    text: 'Text'
+    text: 'Text',
+
+    width: 'Amplada'
 };

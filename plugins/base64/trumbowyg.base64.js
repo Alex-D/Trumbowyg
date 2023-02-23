@@ -32,12 +32,6 @@
                 errFileReaderNotSupported: 'FileReader brauzeriniz tərəfindən dəstəklənmir.',
                 errInvalidImage: 'Yanlış şəkil faylı.'
             },
-            sl: {
-                base64: 'Slika kot base64',
-                file: 'Datoteka',
-                errFileReaderNotSupported: 'FileReader ni podprt v tem brskalniku.',
-                errInvalidImage: 'Neveljavna datoteka s sliko.'
-            },
             by: {
                 base64: 'Выява (фармат base64)',
                 file: 'Файл',
@@ -62,7 +56,9 @@
             },
             fr: {
                 base64: 'Image en base64',
-                file: 'Fichier'
+                file: 'Fichier',
+                errFileReaderNotSupported: 'FileReader n\'est pas supporté par votre navigateur.',
+                errInvalidImage: 'Fichier image invalide.'
             },
             hu: {
                 base64: 'Kép beszúrás inline',
@@ -99,6 +95,12 @@
                 file: 'Файл',
                 errFileReaderNotSupported: 'FileReader не поддерживается вашим браузером.',
                 errInvalidImage: 'Недопустимый файл изображения.'
+            },
+            sl: {
+                base64: 'Slika kot base64',
+                file: 'Datoteka',
+                errFileReaderNotSupported: 'FileReader ni podprt v tem brskalniku.',
+                errInvalidImage: 'Neveljavna datoteka s sliko.'
             },
             tr: {
                 base64: 'Base64 olarak resim',

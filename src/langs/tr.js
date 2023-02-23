@@ -13,6 +13,9 @@
 jQuery.trumbowyg.langs.tr = {
     viewHTML: 'HTML Kodu',
 
+    undo: 'Yinele',
+    redo: 'Geri al',
+
     formatting: 'Biçimlendirme',
     p: 'Paragraf',
     blockquote: 'Alıntı',
@@ -55,9 +58,6 @@ jQuery.trumbowyg.langs.tr = {
     description: 'Açıklama',
     title: 'Başlık',
     text: 'Metin',
-
-    undo: 'Geri al',
-    redo: 'İleri al',
 
     removeformat: 'Biçimlendirmeyi temizle'
 };

@@ -1392,14 +1392,17 @@
             az: {
                 emoji: 'Emoji yerləşdir'
             },
-            sl: {
-                emoji: 'Vstavi emotikon'
+            ca: {
+                emoji: 'Afegir una emoticona'
             },
             da: {
                 emoji: 'Tilføj et humørikon'
             },
             de: {
                 emoji: 'Emoticon einfügen'
+            },
+            es: {
+                emoji: 'Añadir un emoticono'
             },
             et: {
                 emoji: 'Lisa emotikon'
@@ -1418,6 +1421,9 @@
             },
             ru: {
                 emoji: 'Вставить emoji'
+            },
+            sl: {
+                emoji: 'Vstavi emotikon'
             },
             tr: {
                 emoji: 'Emoji ekle'

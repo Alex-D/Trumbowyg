@@ -1,5 +1,5 @@
 /* ===========================================================
- * no_nb.js
+ * nb.js
  * Norwegian Bokmål translation for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
@@ -8,7 +8,7 @@
  */
 
 // jshint camelcase:false
-jQuery.trumbowyg.langs.no_nb = {
+jQuery.trumbowyg.langs.nb = {
     viewHTML: 'Vis HTML',
 
     formatting: 'Formater',

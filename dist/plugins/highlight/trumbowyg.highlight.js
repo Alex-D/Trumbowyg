@@ -273,10 +273,6 @@
                 highlight: 'Kod birləşməsini vurğulamaq',
                 highlightLine: 'Sətirləri vurğulamaq, məsələn: 1,3-5'
             },
-            sl: {
-                highlight: 'Označi sintakso kode',
-                highlightLine: 'Označi številko vrstice, npr.: 1,3-5'
-            },
             by: {
                 highlight: 'Падсветка сінтаксісу кода',
                 highlightLine: 'Падсвятліць радкі, напр.: 1,3-5'
@@ -301,6 +297,10 @@
             ru: {
                 highlight: 'Подсветка синтаксиса кода',
                 highlightLine: 'Подсветить строки, напр.: 1,3-5'
+            },
+            sl: {
+                highlight: 'Označi sintakso kode',
+                highlightLine: 'Označi številko vrstice, npr.: 1,3-5'
             },
             tr: {
                 highlight: 'Kod sözdizimini vurgula',
