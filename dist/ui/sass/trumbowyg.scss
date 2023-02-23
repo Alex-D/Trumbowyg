@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.27.0 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.27.1 - A lightweight WYSIWYG editor
  * Default stylesheet for Trumbowyg editor
  * ------------------------
  * @link http://alex-d.github.io/Trumbowyg
@@ -45,7 +45,8 @@ $slow-transition-duration: 300ms !default;
 
 $modal-label-width: 150px;
 
-#trumbowyg-icons {
+#trumbowyg-icons,
+.trumbowyg-icons {
     overflow: hidden;
     visibility: hidden;
     height: 0;
@@ -83,6 +84,7 @@ $modal-label-width: 150px;
 }
 
 .trumbowyg-box .trumbowyg-editor {
+    min-height: 100%;
     margin: 0 auto;
 }
 
@@ -164,7 +166,7 @@ $modal-label-width: 150px;
         display: block;
         margin-bottom: 1px;
     }
-    .trumbowyg-editor {
+    .trumbowyg-editor-box {
         display: none;
     }
 }
@@ -608,7 +610,8 @@ body.trumbowyg-body-fullscreen {
         font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif !important;
         font-size: 14px !important;
         line-height: 1.45em !important;
-        color: #333;
+        color: #333 !important;
+        font-weight: normal !important;
 
         a {
             color: #15c !important;
@@ -627,7 +630,7 @@ body.trumbowyg-body-fullscreen {
             line-height: 1.4em !important;
             font-family: "Trebuchet MS", Helvetica, Verdana, sans-serif !important;
             font-size: 14px !important;
-            border: none;
+            border: none !important;
         }
         iframe,
         object,
@@ -637,13 +640,13 @@ body.trumbowyg-body-fullscreen {
         blockquote {
             margin-left: 32px !important;
             font-style: italic !important;
-            color: #555;
+            color: #555 !important;
         }
         ul {
-            list-style: disc;
+            list-style: disc !important;
         }
         ol {
-            list-style: decimal;
+            list-style: decimal !important;
         }
         ul,
         ol {
@@ -653,27 +656,27 @@ body.trumbowyg-body-fullscreen {
         ol ol,
         ul ol,
         ol ul {
-            border: none;
+            border: none !important;
             margin: 2px !important;
             padding: 0 !important;
             padding-left: 24px !important;
         }
         hr {
-            display: block;
-            height: 1px;
-            border: none;
-            border-top: 1px solid #CCC;
+            display: block !important;
+            height: 1px !important;
+            border: none !important;
+            border-top: 1px solid #CCC !important;
         }
 
         h1,
         h2,
         h3,
         h4 {
-            color: #111;
-            background: none;
+            color: #111 !important;
+            background: none !important;
             margin: 0 !important;
             padding: 0 !important;
-            font-weight: bold;
+            font-weight: bold !important;
         }
 
         h1 {
