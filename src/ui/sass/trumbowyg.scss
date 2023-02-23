@@ -73,6 +73,7 @@ $modal-label-width: 150px;
 }
 
 .trumbowyg-box .trumbowyg-editor {
+    min-height: 100%;
     margin: 0 auto;
 }
 
@@ -154,7 +155,7 @@ $modal-label-width: 150px;
         display: block;
         margin-bottom: 1px;
     }
-    .trumbowyg-editor {
+    .trumbowyg-editor-box {
         display: none;
     }
 }
