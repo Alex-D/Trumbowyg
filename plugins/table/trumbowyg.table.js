@@ -1312,6 +1312,7 @@
 
                                 // Update HTML
                                 t.syncCode();
+                                redrawResizeLayers();
                             });
 
                         $(window)
