@@ -550,12 +550,16 @@
                             t.saveRange();
 
                             var node = t.doc.getSelection().anchorNode;
-                            var $focusedRow = $(node).closest('tr');
                             var $table = $(node).closest('table');
 
                             if ($table.length === 0) {
                                 return;
                             }
+
+                            if (node.tagName === 'TR') {
+                                node = $('td, th', node)[0];
+                            }
+                            var $focusedRow = $(node).closest('tr');
 
                             var tableState = getTableState($table);
 
