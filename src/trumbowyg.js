@@ -585,12 +585,6 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 t.$ed.addClass(prefix + 'reset-css');
             }
 
-            if (!t.o.autogrow) {
-                t.$ta.add(t.$edBox).css({
-                    height: t.height
-                });
-            }
-
             t.semanticCode();
 
             if (t.o.autogrowOnEnter) {

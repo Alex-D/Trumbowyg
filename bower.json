@@ -1,12 +1,12 @@
 {
   "name": "trumbowyg",
-  "version": "2.27.1",
+  "version": "2.27.2",
   "homepage": "https://github.com/Alex-D/Trumbowyg",
   "authors": [
     {
       "name": "Alexandre Demode (Alex-D)",
       "email": "contact@alex-d.fr",
-      "homepage": "http://alex-d.fr"
+      "homepage": "https://alex-d.fr"
     }
   ],
   "description": "A lightweight WYSIWYG editor",
