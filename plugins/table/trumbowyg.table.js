@@ -825,6 +825,7 @@
 
                             $elementToRemove.remove();
                             simplifyCells($table);
+                            redrawResizeLayers();
                         }),
                     };
 
@@ -833,12 +834,27 @@
                         text: t.lang.tableDeleteColumn,
                         ico: 'col-delete',
 
-                        fn: tableButtonAction(function ($table, $focusedRow, node) {
-                            var cellIndex = $(node).closest('td').index();
+                        fn: tableButtonAction(function ($table, $focusedRow, node, tableState) {
+                            var $rows = $('tr', $table);
+                            var rowIndex = $rows.index($(node).closest('tr'));
+                            var columnIndex = getCellIndex($(node).closest('td, th')[0], tableState[rowIndex]);
 
-                            $table.find('tr').each(function () {
-                                $(this).find('td:eq(' + cellIndex + '), th:eq(' + cellIndex + ')').remove();
-                            });
+                            for (var x = 0; x < tableState.length; x += 1) {
+                                var cellState = getCellState(tableState, [x, columnIndex], false);
+
+                                // Reduce cell colspan by 1
+                                if (cellState.colspan > 1) {
+                                    var originCellState = getCellState(tableState, [x, columnIndex]);
+                                    originCellState.element.setAttribute('colspan', originCellState.colspan - 1);
+                                    continue;
+                                }
+
+                                // Delete cell if not merged
+                                cellState.element.remove();
+                            }
+
+                            simplifyCells();
+                            redrawResizeLayers();
                         })
                     };
 
