@@ -778,7 +778,7 @@
                         text: t.lang.tableDeleteRow,
                         ico: 'row-delete',
 
-                        fn: tableButtonAction(function ($table, $focusedRow) {
+                        fn: tableButtonAction(function ($table, $focusedRow, node, tableState) {
                             // Only one row is remaining in the table, remove the table
                             if ($('tbody tr', $table).length === 1) {
                                 $table.remove();
@@ -791,7 +791,40 @@
                             if ($focusedRowParent.is('thead')) {
                                 $elementToRemove = $focusedRowParent;
                             }
+
+                            // Manage merged cells
+                            var $rows = $('tr', $table);
+                            var rowIndex = $rows.index($(node).closest('tr'));
+                            for (var y = 0; y < tableState[0].length; y += 1) {
+                                var cellState = getCellState(tableState, [rowIndex, y], false);
+
+                                if (cellState.rowspan === 1) {
+                                    continue;
+                                }
+
+                                var originCellState = getCellState(tableState, [rowIndex, y]);
+                                originCellState.element.setAttribute('rowspan', originCellState.rowspan - 1);
+
+                                // If origin cell is not in this row, continue
+                                if (cellState.mergedIn !== undefined) {
+                                    continue;
+                                }
+
+                                // If origin cell is in this row, move it to the next row
+                                var originCellIndex = getCellIndex(cellState.element, tableState[rowIndex]);
+                                if (originCellIndex === 0) {
+                                    $($rows[rowIndex + 1]).prepend(originCellState.element);
+                                    continue;
+                                }
+                                var nextRowPreviousColumnCellState = getCellState(tableState, [
+                                    rowIndex + 1,
+                                    originCellIndex - 1
+                                ]);
+                                $(nextRowPreviousColumnCellState.element).after(originCellState.element);
+                            }
+
                             $elementToRemove.remove();
+                            simplifyCells($table);
                         }),
                     };
 
