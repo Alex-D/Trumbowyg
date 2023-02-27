@@ -2,7 +2,7 @@
   "name": "trumbowyg",
   "title": "Trumbowyg",
   "description": "A lightweight WYSIWYG editor",
-  "version": "2.27.1",
+  "version": "2.27.2",
   "main": "dist/trumbowyg.js",
   "license": "MIT",
   "scripts": {
@@ -28,7 +28,7 @@
     "gulp-svgmin": "4.1.0",
     "gulp-svgstore": "9.0.0",
     "gulp-terser": "2.1.0",
-    "jquery": "^3.6.0",
+    "jquery": "^3.6.2",
     "jshint": "2.13.6",
     "jshint-stylish": "2.2.1",
     "sass": "^1.57.1",
@@ -37,7 +37,7 @@
   "peerDependencies": {
     "jquery": ">=1.8"
   },
-  "homepage": "http://alex-d.github.io/Trumbowyg",
+  "homepage": "https://alex-d.github.io/Trumbowyg/",
   "author": {
     "name": "Alexandre Demode (Alex-D)",
     "email": "contact@alex-d.fr",
