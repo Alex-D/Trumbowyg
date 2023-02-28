@@ -1,5 +1,5 @@
 var isOnline = window.location.hostname.indexOf('github.io') !== -1;
-var baseURL = isOnline ? '//rawcdn.githack.com/Alex-D/Trumbowyg/v2.27.2/' : '../../../';
+var baseURL = isOnline ? '//rawcdn.githack.com/Alex-D/Trumbowyg/v2.27.3/' : '../../../';
 var styleLoadingContainer = document.querySelector('.loading-head');
 var scriptLoadingContainer = document.querySelector('.loading-body');
 
