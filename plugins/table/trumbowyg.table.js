@@ -112,7 +112,8 @@
                 tableVerticalAlignTop: 'Align text to top',
                 tableVerticalAlignMiddle: 'Center text vertically',
                 tableVerticalAlignBottom: 'Align text to bottom',
-                tableCellBackgroundColor: 'Cell background color'
+                tableCellBackgroundColor: 'Cell background color',
+                tableBorderColor: 'Table border color'
             },
             az: {
                 table: 'Cədvəl yerləşdir',
@@ -154,13 +155,25 @@
             },
             de: {
                 table: 'Tabelle einfügen',
-                tableAddRow: 'Zeile hinzufügen',
-                tableAddRowAbove: 'Zeile hinzufügen',
-                tableAddColumnLeft: 'Spalte hinzufügen',
-                tableAddColumn: 'Spalte hinzufügen',
+                tableRows: 'Zeilen',
+                tableColumns: 'Spalten',
+                tableVerticalAlign: 'Vertikal ausrichten',
+                tableOthers: 'Andere',
+                tableAddHeaderRow: 'Kopfzeile einfügen',
+                tableAddRowAbove: 'Zeile oberhalb einfügen',
+                tableAddRow: 'Zeile unterhalb einfügen',
+                tableAddColumnLeft: 'Spalte links einfügen',
+                tableAddColumn: 'Spalte rechts einfügen',
                 tableDeleteRow: 'Zeile löschen',
                 tableDeleteColumn: 'Spalte löschen',
                 tableDestroy: 'Tabelle löschen',
+                tableMergeCells: 'Zellen zusammenführen',
+                tableUnmergeCells: 'Zellen trennen',
+                tableVerticalAlignTop: 'Text nach oben ausrichten',
+                tableVerticalAlignMiddle: 'Text vertikal zentrieren',
+                tableVerticalAlignBottom: 'Text nach unten ausrichten',
+                tableCellBackgroundColor: 'Hintergrundfarbe der Zelle',
+                tableBorderColor: 'Farbe des Tabellenrahmens'
             },
             et: {
                 table: 'Sisesta tabel',
