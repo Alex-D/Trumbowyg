@@ -1244,7 +1244,7 @@
                         var targetColumnIndex;
                         var $table;
 
-                        var $resizeLayers = $(t.o.prefix + 'table-resize-layers');
+                        var $resizeLayers = $('.' + t.o.prefix + 'table-resize-layers');
                         var hasResizeLayers = $resizeLayers.length > 0;
                         if (!hasResizeLayers) {
                             $resizeLayers = $('<div/>', {
