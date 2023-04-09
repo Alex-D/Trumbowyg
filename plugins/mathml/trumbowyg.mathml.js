@@ -37,6 +37,11 @@
                 formulas: 'Formler',
                 inline: 'Inline'
             },
+            de: {
+                mathml: 'Formel einfügen',
+                formulas: 'Formel',
+                inline: 'Innerhalb der Zeile'
+            },
             es: {
                 mathml: 'Insertar Fórmula',
                 formulas: 'Fórmula',

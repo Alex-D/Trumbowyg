@@ -40,6 +40,15 @@
                     '2.0': 'Ekstra stor'
                 }
             },
+            de: {
+                lineheight: 'Zeilenhöhe',
+                lineheights: {
+                    '0.9': 'Klein',
+                    'normal': 'Normal',
+                    '1.5': 'Groß',
+                    '2.0': 'Sehr groß'
+                }
+            },
             et: {
                 lineheight: 'Reavahe',
                 lineheights: {

@@ -3,8 +3,8 @@
  * German translation for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
- * Author : Manfred Timm
- *          Github : https://github.com/Manfred62
+ * Author : Manfred Timm, johangroe
+ *          Github : https://github.com/Manfred62, https://github.com/johangroe
  */
 
 jQuery.trumbowyg.langs.de = {
@@ -28,6 +28,9 @@ jQuery.trumbowyg.langs.de = {
     em: 'Betont',
     del: 'Gelöscht',
 
+    superscript: 'Hochgestellt',
+    subscript: 'Tiefgestellt',
+
     unorderedList: 'Ungeordnete Liste',
     orderedList: 'Geordnete Liste',
 
@@ -37,6 +40,9 @@ jQuery.trumbowyg.langs.de = {
     link: 'Link',
     createLink: 'Link einfügen',
     unlink: 'Link entfernen',
+
+    _self: 'Gleicher Tab (Standard)',
+    _blank: 'Neuer Tab',
 
     justifyLeft: 'Links ausrichten',
     justifyCenter: 'Zentrieren',
