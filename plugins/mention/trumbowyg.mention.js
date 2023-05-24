@@ -32,6 +32,9 @@
             da: {
                 mention: 'Nævn'
             },
+            de: {
+                mention: 'Erwähnung'
+            },
             et: {
                 mention: 'Maini'
             },

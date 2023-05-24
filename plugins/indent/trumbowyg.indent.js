@@ -26,6 +26,10 @@
                 indent: 'Водступ',
                 outdent: 'Выступ'
             },
+            de: {
+                indent: 'Einzug vergrößern',
+                outdent: 'Einzug verkleinern'
+            },
             et: {
                 indent: 'Taande suurendamine',
                 outdent: 'Taande vähendamine'

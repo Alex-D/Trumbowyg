@@ -34,6 +34,11 @@
                 rubyModal: 'Ruby modal',
                 rubyText: 'Ruby tekst'
             },
+            en: {
+                ruby: 'Ruby-Text einfügen',
+                rubyModal: 'Ruby-Modal',
+                rubyText: 'Ruby-Text'
+            },
             et: {
                 ruby: 'Lisa ruby tekst',
                 rubyModal: 'Ruby modaal',

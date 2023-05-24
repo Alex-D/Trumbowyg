@@ -13,6 +13,9 @@
       by: {
         giphy: 'Уставіць GIF',
       },
+      de: {
+        giphy: 'GIF einfügen',
+      },
       et: {
         giphy: 'Sisesta GIF',
       },
