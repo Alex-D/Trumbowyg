@@ -80,6 +80,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         autogrowOnEnter: false,
         imageWidthModalEdit: false,
         hideButtonTexts: null,
+        height: 'auto',
 
         prefix: 'trumbowyg-',
         tagClasses: {},
@@ -568,6 +569,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 })
                 .html(html)
             ;
+
+            t.$box.css('height', t.o.height);
+            t.$ed.css('height', t.o.height);
+            t.$ta.css('height', t.o.height);
 
             if (t.o.tabindex) {
                 t.$ed.attr('tabindex', t.o.tabindex);
