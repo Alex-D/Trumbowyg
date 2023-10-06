@@ -148,6 +148,11 @@
                 file: '文件',
                 uploadError: '錯誤'
             },
+            ua: {
+                upload: 'Завантажити зображення',
+                file: 'Зображення',
+                uploadError: 'Помилка'
+            },
         },
         // jshint camelcase:true
 
