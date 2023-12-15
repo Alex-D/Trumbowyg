@@ -71,20 +71,18 @@
 
     var html = response.data
       .filter(function (gifData) {
-        // jshint camelcase:false
-        var downsized = gifData.images.downsized || gifData.images.downsized_medium;
-        // jshint camelcase:true
-        return !!downsized.url;
+        var image = gifData.images[trumbowyg.o.plugins.giphy.rendition] || gifData.images[trumbowyg.o.plugins.giphy.renditionBackup];
+        return !!(image[trumbowyg.o.plugins.giphy.renditionUrlAttribute] || image[trumbowyg.o.plugins.giphy.renditionBackupUrlAttribute]);
       })
       .map(function (gifData) {
         // jshint camelcase:false
-        var downsized = gifData.images.downsized || gifData.images.downsized_medium;
+        var image = gifData.images[trumbowyg.o.plugins.giphy.rendition] || gifData.images[trumbowyg.o.plugins.giphy.renditionBackup];
         // jshint camelcase:true
-        var image = downsized,
-            imageRatio = image.height / image.width,
+        var imageRatio = image.height / image.width,
             altText = gifData.title;
 
-        var imgHtml = '<img src=' + image.url + ' width="' + width + '" height="' + imageRatio * width + '" alt="' + altText + '" loading="lazy" />';
+        var url = image[trumbowyg.o.plugins.giphy.renditionUrlAttribute] || image[trumbowyg.o.plugins.giphy.renditionBackupUrlAttribute];
+        var imgHtml = '<img src=' + url + ' width="' + width + '" height="' + imageRatio * width + '" alt="' + altText + '" loading="lazy" />';
         return '<div class="img-container">' + imgHtml + '</div>';
       })
       .join('')
@@ -134,11 +132,18 @@
     });
   }
 
+  // see: https://developers.giphy.com/explorer/
   var defaultOptions = {
     rating: 'g',
     apiKey: null,
     throttleDelay: 300,
-    noResultGifUrl: 'https://media.giphy.com/media/2Faz9FbRzmwxY0pZS/giphy.gif'
+    limit: 50,
+    bundle: 'low_bandwidth',
+    noResultGifUrl: 'https://media.giphy.com/media/2Faz9FbRzmwxY0pZS/giphy.gif',
+    rendition: 'fixed_width_small', // see: https://developers.giphy.com/docs/optional-settings/#renditions-on-demand
+    renditionUrlAttribute: 'webp', // can be 'url' or 'mp4' or 'webp'
+    renditionBackup: 'original',
+    renditionBackupUrlAttribute: 'url'
   };
 
   // Add dropdown with font sizes
@@ -157,7 +162,8 @@
                 throw new Error('You must set a Giphy API Key');
               }
 
-              var BASE_URL = 'https://api.giphy.com/v1/gifs/search?api_key=' + trumbowyg.o.plugins.giphy.apiKey + '&rating=' + trumbowyg.o.plugins.giphy.rating,
+              var BASE_URL = 'https://api.giphy.com/v1/gifs/search?api_key=' + trumbowyg.o.plugins.giphy.apiKey + '&rating=' + trumbowyg.o.plugins.giphy.rating +
+                  '&limit=' + trumbowyg.o.plugins.giphy.limit + '&bundle=' + trumbowyg.o.plugins.giphy.bundle,
                   DEFAULT_URL = BASE_URL.replace('/search', '/trending');
               var previousAjaxCall = {abort: function () {}};
               var prefix = trumbowyg.o.prefix;
