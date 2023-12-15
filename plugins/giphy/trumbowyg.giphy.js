@@ -1,3 +1,6 @@
+// Customizes Giphy plugin. A PR has been submitted:
+// https://github.com/Alex-D/Trumbowyg/pull/1437
+// Revert to upstream version once this PR is merged.
 (function ($) {
   'use strict';
 
@@ -71,18 +74,18 @@
 
     var html = response.data
       .filter(function (gifData) {
-        var image = gifData.images[trumbowyg.o.plugins.giphy.rendition] || gifData.images[trumbowyg.o.plugins.giphy.renditionBackup];
-        return !!(image[trumbowyg.o.plugins.giphy.renditionUrlAttribute] || image[trumbowyg.o.plugins.giphy.renditionBackupUrlAttribute]);
+        var image = gifData.images[trumbowyg.o.plugins.giphy.pickerRendition];
+        return !!image[trumbowyg.o.plugins.giphy.pickerRenditionUrlAttribute];
       })
       .map(function (gifData) {
-        // jshint camelcase:false
-        var image = gifData.images[trumbowyg.o.plugins.giphy.rendition] || gifData.images[trumbowyg.o.plugins.giphy.renditionBackup];
-        // jshint camelcase:true
+        var image = gifData.images[trumbowyg.o.plugins.giphy.pickerRendition];
+        var selectionImage = gifData.images[trumbowyg.o.plugins.giphy.selectionRendition];
         var imageRatio = image.height / image.width,
             altText = gifData.title;
 
-        var url = image[trumbowyg.o.plugins.giphy.renditionUrlAttribute] || image[trumbowyg.o.plugins.giphy.renditionBackupUrlAttribute];
-        var imgHtml = '<img src=' + url + ' width="' + width + '" height="' + imageRatio * width + '" alt="' + altText + '" loading="lazy" />';
+        var url = image[trumbowyg.o.plugins.giphy.pickerRenditionUrlAttribute];
+        var selectionUrl = selectionImage[trumbowyg.o.plugins.giphy.selectionRenditionUrlAttribute];
+        var imgHtml = '<img src=' + url + ' width="' + width + '" height="' + imageRatio * width + '" alt="' + altText + '" data-selectionurl="' + selectionUrl + '" loading="lazy" />';
         return '<div class="img-container">' + imgHtml + '</div>';
       })
       .join('')
@@ -115,7 +118,7 @@
     });
 
     $('img', $giphyModal).on('click', function () {
-      var src = $(this).attr('src'),
+      var src = $(this).data('selectionurl'),
           alt = $(this).attr('alt');
       trumbowyg.restoreRange();
       trumbowyg.execCmd('insertImage', src, false, true);
@@ -140,10 +143,10 @@
     limit: 50,
     bundle: 'low_bandwidth',
     noResultGifUrl: 'https://media.giphy.com/media/2Faz9FbRzmwxY0pZS/giphy.gif',
-    rendition: 'fixed_width_small', // see: https://developers.giphy.com/docs/optional-settings/#renditions-on-demand
-    renditionUrlAttribute: 'webp', // can be 'url' or 'mp4' or 'webp'
-    renditionBackup: 'original',
-    renditionBackupUrlAttribute: 'url'
+    pickerRendition: 'fixed_width_small', // see: https://developers.giphy.com/docs/optional-settings/#renditions-on-demand
+    pickerRenditionUrlAttribute: 'webp', // can be 'url' or 'mp4' or 'webp'
+    selectionRendition: 'original',
+    selectionRenditionUrlAttribute: 'url'
   };
 
   // Add dropdown with font sizes
