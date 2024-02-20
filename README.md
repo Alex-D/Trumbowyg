@@ -12,7 +12,6 @@
     <img src="https://img.shields.io/bower/v/trumbowyg.svg?color=blue&style=for-the-badge" alt="Version on bower" />
 </p>
 
-
 <h2 align="center">Supporting Trumbowyg</h2>
 
 Trumbowyg is an MIT-licensed open source project and completely free to use.
@@ -54,7 +53,7 @@ You can support it's ongoing development by being a backer or a sponsor:
     </a>
 </p>
 
-------------------------------------
+---
 
 ## Introduction
 
@@ -62,11 +61,9 @@ Trumbowyg is a simple and lightweight WYSIWYG editor, weight only 20kB minifed (
 
 Visit presentation page: http://alex-d.github.io/Trumbowyg/
 
-
 ## Documentation
 
 All you need to know about Trumbowyg is here: http://alex-d.github.io/Trumbowyg/documentation/ (or even [on the home](http://alex-d.github.io/Trumbowyg/#get-started))
-
 
 ## Contribution
 
@@ -84,12 +81,14 @@ npm run build # to build the project
 
 `gulp` command launch default Gulp task watcher and rebuild on the fly.
 
-
 ## Stay in touch
 
 For the latest release and announcements, follow on Twitter: [@AlexandreDemode](https://twitter.com/AlexandreDemode)
 
-
 ## License
 
 This project is under [MIT license](LICENSE).
+
+## mod file
+
+Hello world!
