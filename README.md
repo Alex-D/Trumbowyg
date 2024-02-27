@@ -88,7 +88,3 @@ For the latest release and announcements, follow on Twitter: [@AlexandreDemode](
 ## License
 
 This project is under [MIT license](LICENSE).
-
-## mod file
-
-Hello world!
