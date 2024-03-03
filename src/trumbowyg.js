@@ -1775,13 +1775,11 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 $row = $field.closest('.' + prefix + 'input-row');
 
             $field
-                .on('change keyup', function () {
+                .one('change keyup', function () {
                     $row.removeClass(prefix + 'input-error');
-                    setTimeout(function () {
-                        $row.find('.' + spanErrorClass).remove();
-                    }, 150);
                 });
 
+            $row.find('.' + spanErrorClass).remove();
             $row
                 .addClass(prefix + 'input-error')
                 .find('.' + prefix + 'input-infos label')
