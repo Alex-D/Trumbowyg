@@ -8,7 +8,7 @@
  *          Website : https://www.maxmade.nl/
  */
 
-/* global AbortController:true */
+/* global AbortSignal:true */
 (function($) {
     'use strict';
 
@@ -53,7 +53,7 @@
                             fetch(requestUrl, {
                                 method: 'GET',
                                 cache: 'no-cache',
-                                signal: AbortController.timeout(2000)
+                                signal: AbortSignal.timeout(2000)
                             }).then((response) => {
                                 return response.json().then((json) => {
                                     return json.html;
