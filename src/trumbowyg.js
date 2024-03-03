@@ -1743,7 +1743,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                                 values[n] = $field.filter(':checked').val();
                                 break;
                             default:
-                                values[n] = $.trim($field.val());
+                                values[n] = $field.val().trim();
                                 break;
                         }
                         // Validate value
