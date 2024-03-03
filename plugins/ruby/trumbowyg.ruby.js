@@ -34,7 +34,7 @@
                 rubyModal: 'Ruby modal',
                 rubyText: 'Ruby tekst'
             },
-            en: {
+            de: {
                 ruby: 'Ruby-Text einfügen',
                 rubyModal: 'Ruby-Modal',
                 rubyText: 'Ruby-Text'
