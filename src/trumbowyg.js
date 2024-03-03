@@ -247,19 +247,16 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 var div = t.doc.createElement('div');
                 div.id = trumbowygIconsId;
                 t.doc.body.insertBefore(div, t.doc.body.childNodes[0]);
-                $.ajax({
-                    async: true,
-                    type: 'GET',
-                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                    dataType: 'xml',
-                    crossDomain: true,
-                    url: svgPathOption,
-                    data: null,
-                    beforeSend: null,
-                    complete: null,
-                    success: function (data) {
-                        div.innerHTML = new XMLSerializer().serializeToString(data.documentElement);
+                fetch(svgPathOption, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
                     }
+                }).then((response) => {
+                    response.text()
+                        .then((svg) => {
+                            div.innerHTML = svg;
+                        });
                 });
             }
         }
