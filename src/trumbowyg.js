@@ -1563,7 +1563,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }).css({
                 top: t.$box.offset().top + t.$btnPane.height(),
                 zIndex: 99999
-            }).appendTo($(t.doc.body));
+            }).insertAfter($(t.$box));
 
             var darkClass = prefix + 'dark';
             if (t.$c.parents('.' + darkClass).length !== 0) {
