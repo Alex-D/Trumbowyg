@@ -2,7 +2,7 @@
   "name": "trumbowyg",
   "title": "Trumbowyg",
   "description": "A lightweight WYSIWYG editor",
-  "version": "2.27.3",
+  "version": "2.28.0",
   "main": "dist/trumbowyg.js",
   "license": "MIT",
   "scripts": {
