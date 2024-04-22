@@ -10,16 +10,18 @@
     'use strict';
 
     const defaultOptions = {
-        lang: "en-GB"
+        lang: 'en-GB'
     };
 
-    const iconWrap = $(document.createElementNS("http://www.w3.org/2000/svg", "svg"));
+    const iconWrap = $(document.createElementNS('http://www.w3.org/2000/svg', 'svg'));
     let btnElement = null;
     let editor = null;
     let finalText = '';
     let recognizing = false;
 
-    const recognition = new webkitSpeechRecognition();
+    const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+    const recognition = new SpeechRecognition();
+    //const recognition = new webkitSpeechRecognition();
     recognition.continuous = true;
     recognition.interimResults = true;
 
@@ -28,7 +30,7 @@
         btnElement.style.fill='red';
     };
 
-    recognition.onerror = function(event) {
+    recognition.onerror = function() {
         recognizing = false;
         btnElement.style.fill='#222';
     };
@@ -40,14 +42,14 @@
 
     recognition.onresult = function(event) {
         let interimText = '';
-        if (typeof(event.results) == 'undefined') {
+        if (typeof(event.results) === 'undefined') {
             recognition.onend = null;
             recognition.stop();
             return;
         }
-        for (let i = event.resultIndex; i < event.results.length; ++i) {
+        for (let i = event.resultIndex; i < event.results.length; i+=1) {
             if (event.results[i].isFinal) {
-                finalText += event.results[i][0].transcript + "<br>";
+                finalText += event.results[i][0].transcript + '<br>';
                 editor.html(finalText);
             } else {
                 interimText += event.results[i][0].transcript;
@@ -72,15 +74,15 @@
                 recognition.start();
                 btnElement.style.fill='red';
             }
-        }
+        };
     }
 
     function buildButtonIcon() {
-        if ($("#trumbowyg-speechrecognition").length > 0) {
+        if ($('#trumbowyg-speechrecognition').length > 0) {
             return;
         }
 
-        iconWrap.addClass("trumbowyg-icons");
+        iconWrap.addClass('trumbowyg-icons');
 
         // Mic icon from Remix Icon - https://remixicon.com/
         iconWrap.html(`
@@ -195,5 +197,5 @@
                 }
             }
         }
-    })
+    });
 })(jQuery);
