@@ -21,7 +21,7 @@
 
     const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
     const recognition = new SpeechRecognition();
-    //const recognition = new webkitSpeechRecognition();
+
     recognition.continuous = true;
     recognition.interimResults = true;
 
