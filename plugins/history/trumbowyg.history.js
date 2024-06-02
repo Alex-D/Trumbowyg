@@ -32,8 +32,7 @@
                                 var newState = t.o.plugins.history._stack[index];
 
                                 t.execCmd('html', newState);
-                                // because of some semantic optimisations we have to save the state back
-                                // to history
+                                // Save the state back to history
                                 t.o.plugins.history._stack[index] = t.$ed.html();
 
                                 carretToEnd();
@@ -53,8 +52,7 @@
                                     newState = t.o.plugins.history._stack[index];
 
                                 t.execCmd('html', newState);
-                                // because of some semantic optimisations we have to save the state back
-                                // to history
+                                // Save the state back to history
                                 t.o.plugins.history._stack[index] = t.$ed.html();
 
                                 carretToEnd();
@@ -71,39 +69,27 @@
                             newState = t.$ed.html(),
                             focusEl = t.doc.getSelection().focusNode,
                             focusElText = '',
-                            latestStateTagsList,
-                            newStateTagsList,
+                            latestStateText = $(latestState).text(),
+                            newStateText = $(newState).text(),
                             prevFocusEl = t.o.plugins.history._focusEl;
 
-                        latestStateTagsList = $('<div>' + latestState + '</div>').find('*').map(function () {
-                            return this.localName;
-                        });
-                        newStateTagsList = $('<div>' + newState + '</div>').find('*').map(function () {
-                            return this.localName;
-                        });
                         if (focusEl) {
                             t.o.plugins.history._focusEl = focusEl;
                             focusElText = focusEl.outerHTML || focusEl.textContent;
                         }
 
-                        if (newState !== prevState) {
-                            // a new stack entry is defined when current insert ends on a whitespace character
-                            // or count of node elements has been changed
-                            // or focused element differs from previous one
+                        if (newStateText !== $(prevState).text()) {
+                            // Check if the state has changed by comparing the text content
                             if (focusElText.slice(-1).match(/\s/) ||
-                                !arraysAreIdentical(latestStateTagsList, newStateTagsList) ||
-                                t.o.plugins.history._index <= 0 || focusEl !== prevFocusEl)
-                            {
+                                latestStateText !== newStateText ||
+                                t.o.plugins.history._index <= 0 || focusEl !== prevFocusEl) {
                                 t.o.plugins.history._index += 1;
-                                // remove newer entries in history when something new was added
-                                // because timeline was changes with interaction
-                                t.o.plugins.history._stack = stack.slice(
-                                    0, t.o.plugins.history._index
-                                );
-                                // now add new state to modified history
+                                // Remove newer entries in history when something new was added
+                                t.o.plugins.history._stack = stack.slice(0, t.o.plugins.history._index);
+                                // Add new state to modified history
                                 t.o.plugins.history._stack.push(newState);
                             } else {
-                                // modify last stack entry
+                                // Modify last stack entry
                                 t.o.plugins.history._stack[index] = newState;
                             }
 
@@ -131,25 +117,6 @@
                         }
                     };
 
-                    var arraysAreIdentical = function (a, b) {
-                        if (a === b) {
-                            return true;
-                        }
-                        if (a == null || b == null) {
-                            return false;
-                        }
-                        if (a.length !== b.length) {
-                            return false;
-                        }
-
-                        for (var i = 0; i < a.length; i += 1) {
-                            if (a[i] !== b[i]) {
-                                return false;
-                            }
-                        }
-                        return true;
-                    };
-
                     var carretToEnd = function () {
                         var node = t.doc.getSelection().focusNode,
                             range = t.doc.createRange();
@@ -171,3 +138,4 @@
         }
     });
 })(jQuery);
+
