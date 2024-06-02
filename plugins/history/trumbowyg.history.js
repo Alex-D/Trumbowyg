@@ -3,7 +3,7 @@
  * history plugin for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
- * Author : Sven Dunemann [dunemann@forelabs.eu]
+ * Author : The Rock [wwerocker01@gmail.com]
  */
 
 (function ($) {
