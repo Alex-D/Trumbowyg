@@ -3,7 +3,7 @@
  * history plugin for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
- * Author : The Rock [wwerocker01@gmail.com]
+ * Author : The Rock [wwerockers01@gmail.com]
  */
 
 (function ($) {
