@@ -58,7 +58,7 @@
 
         // Set XHR fields
         Object.keys(options.xhrFields).forEach((xhrFieldKey) => {
-            xhrRequest[xhrFieldKey] = options.headers[xhrFieldKey];
+            xhrRequest[xhrFieldKey] = options.xhrFields[xhrFieldKey];
         });
 
         // Progress
