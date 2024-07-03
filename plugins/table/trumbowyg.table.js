@@ -1247,14 +1247,21 @@
                     ////// Cell resize
 
                     var TRUMBOWYG_TABLE_HANDLE_FOR = 'trumbowyg-table-handle-for';
+                    var resizeState = {
+                        tableState: undefined,
+                        targetColumnIndex: undefined,
+                        $table: undefined
+                    };
                     var rebuildResizeLayers = function () {
                         if (!t.o.plugins.table.allowHorizontalResize) {
                             return;
                         }
 
-                        var tableState;
-                        var targetColumnIndex;
-                        var $table;
+                        for (var k in resizeState) {
+                            if (resizeState.hasOwnProperty(k)) {
+                                resizeState[k] = undefined;
+                            }
+                        }
 
                         var $resizeLayers = $('.' + t.o.prefix + 'table-resize-layers');
                         var hasResizeLayers = $resizeLayers.length > 0;
@@ -1262,13 +1269,12 @@
                             $resizeLayers = $('<div/>', {
                                 class: t.o.prefix + 'table-resize-layers',
                             }).appendTo(t.$edBox);
-
-                            $(t.o.prefix + 'table-resize-vertical-handle', $resizeLayers).each(function (_, handle) {
-                                $(handle)
-                                    .off()
-                                    .remove();
-                            });
                         }
+                        $('.' + t.o.prefix + 'table-resize-vertical-handle', $resizeLayers).each(function (_, handle) {
+                            $(handle)
+                                .off()
+                                .remove();
+                        });
 
                         $('table', t.$ed).each(function (_tableIndex, table) {
                             $('td, th', $(table)).each(function (_cellIndex, cell) {
@@ -1281,24 +1287,24 @@
                                         e.preventDefault();
                                         e.stopPropagation();
                                         var targetCell = $(e.target).prop(TRUMBOWYG_TABLE_HANDLE_FOR);
-                                        $table = $(targetCell).closest('table');
-                                        tableState = getTableState($table);
-                                        var $allRows = $('tr', $table);
+                                        resizeState.$table = $(targetCell).closest('table');
+                                        resizeState.tableState = getTableState(resizeState.$table);
+                                        var $allRows = $('tr', resizeState.$table);
                                         var $row = $(targetCell).closest('tr');
                                         var rowIndex = $allRows.index($row);
-                                        var rowState = tableState[rowIndex];
+                                        var rowState = resizeState.tableState[rowIndex];
                                         var columnIndex = getCellIndex(targetCell, rowState);
-                                        var targetCellState = tableState[rowIndex][columnIndex];
+                                        var targetCellState = resizeState.tableState[rowIndex][columnIndex];
                                         if (targetCellState.mergedIn !== undefined) {
-                                            targetCellState = tableState[targetCellState.mergedIn[0]][targetCellState.mergedIn[1]];
+                                            targetCellState = resizeState.tableState[targetCellState.mergedIn[0]][targetCellState.mergedIn[1]];
                                         }
 
-                                        targetColumnIndex = columnIndex + targetCellState.colspan - 1;
+                                        resizeState.targetColumnIndex = columnIndex + targetCellState.colspan - 1;
 
-                                        ensureColgroupExists($table, tableState);
-                                        setColWidthInPixels($table, tableState);
+                                        ensureColgroupExists(resizeState.$table, resizeState.tableState);
+                                        setColWidthInPixels(resizeState.$table, resizeState.tableState);
 
-                                        $table.css({
+                                        resizeState.$table.css({
                                             maxWidth: '',
                                         });
                                     })
@@ -1315,16 +1321,16 @@
 
                         $(t.doc)
                             .on('mousemove.tbwTable', function (e) {
-                                if (targetColumnIndex === undefined) {
+                                if (resizeState.targetColumnIndex === undefined) {
                                     return;
                                 }
                                 e.preventDefault();
                                 e.stopPropagation();
 
-                                var tableRect = $table[0].getBoundingClientRect();
+                                var tableRect = resizeState.$table[0].getBoundingClientRect();
                                 var tableLeftInPixels = e.pageX - tableRect.left;
 
-                                var cellState = findFirstCellAtIndex(tableState, targetColumnIndex);
+                                var cellState = findFirstCellAtIndex(resizeState.tableState, resizeState.targetColumnIndex);
 
                                 var cellElement = cellState.element;
                                 var cellRect = cellElement.getBoundingClientRect();
@@ -1332,7 +1338,7 @@
 
                                 var cellWidthInPixels = tableLeftInPixels - cellLeftInPixels;
 
-                                var colElement = $('col', $table)[targetColumnIndex];
+                                var colElement = $('col', resizeState.$table)[resizeState.targetColumnIndex];
                                 $(colElement).css({
                                     width: cellWidthInPixels,
                                 });
@@ -1340,20 +1346,22 @@
                                 redrawResizeLayers();
                             })
                             .on('mouseup.tbwTable', function (e) {
-                                if (targetColumnIndex === undefined) {
+                                if (resizeState.targetColumnIndex === undefined) {
                                     return;
                                 }
                                 e.preventDefault();
                                 e.stopPropagation();
 
                                 // Fix width
-                                ensureColgroupExists($table, tableState);
-                                setColWidthInPercents($table, tableState);
+                                ensureColgroupExists(resizeState.$table, resizeState.tableState);
+                                setColWidthInPercents(resizeState.$table, resizeState.tableState);
 
                                 // Reset resize state
-                                $table = undefined;
-                                tableState = undefined;
-                                targetColumnIndex = undefined;
+                                for (var k in resizeState) {
+                                    if (resizeState.hasOwnProperty(k)) {
+                                        resizeState[k] = undefined;
+                                    }
+                                }
 
                                 // Update HTML
                                 t.syncCode();
