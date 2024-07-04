@@ -271,6 +271,22 @@
                     value: '48px'
                 }
             },
+            zh_cn: {
+                fontsize: '字号',
+                fontsizes: {
+                    'x-small': '超小',
+                    'small': '小',
+                    'medium': '正常',
+                    'large': '大',
+                    'x-large': '特大',
+                    'custom': '自定义'
+                },
+                fontCustomSize: {
+                    title: '自定义字号',
+                    label: '字号',
+                    value: '48px'
+                }
+            },
             zh_tw: {
                 fontsize: '字體大小',
                 fontsizes: {

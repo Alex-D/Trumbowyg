@@ -306,6 +306,10 @@
                 highlight: 'Kod sözdizimini vurgula',
                 highlightLine: 'Vurgu çizgileri, örneğin: 1,3-5'
             },
+            zh_cn: {
+                highlight: '代码语法高亮',
+                highlightLine: '高亮行，例如：1,3-5'
+            },
             // jshint camelcase:true
         },
         // Add our plugin to Trumbowyg registered plugins

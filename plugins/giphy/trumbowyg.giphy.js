@@ -34,7 +34,10 @@
             },
             tr: {
                 giphy: 'GIF ekle'
-            }
+            },
+            zh_cn: {
+                giphy: '插入GIF'
+            },
             // jshint camelcase:true
         }
     });

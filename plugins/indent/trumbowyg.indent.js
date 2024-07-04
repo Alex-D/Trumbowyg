@@ -54,6 +54,10 @@
                 indent: 'Girinti',
                 outdent: 'Çıkıntı'
             },
+            zh_cn: {
+                indent: '增加缩进',
+                outdent: '减少缩进'
+            }
             // jshint camelcase:true
         }
     });

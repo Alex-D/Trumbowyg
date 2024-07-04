@@ -116,7 +116,9 @@
             },
             zh_cn: {
                 base64: '图片（Base64编码）',
-                file: '文件'
+                file: '文件',
+                errFileReaderNotSupported: '浏览器不支持FileReader',
+                errInvalidImage: '无效的图片格式'
             },
             zh_tw: {
                 base64: '圖片(base64編碼)',

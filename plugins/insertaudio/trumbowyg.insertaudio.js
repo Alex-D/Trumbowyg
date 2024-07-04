@@ -82,6 +82,9 @@
             tr: {
                 insertAudio: 'Ses Ekle'
             },
+            zh_cn: {
+                insertAudio: '插入音频'
+            }
             // jshint camelcase:true
         },
         plugins: {

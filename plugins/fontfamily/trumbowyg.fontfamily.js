@@ -52,6 +52,9 @@
             tr: {
                 fontFamily: 'Yazı tipi'
             },
+            zh_cn: {
+                fontFamily: '字体',
+            },
             zh_tw: {
                 fontFamily: '字體',
             },

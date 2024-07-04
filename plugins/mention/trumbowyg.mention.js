@@ -59,6 +59,9 @@
             tr: {
                 mention: 'Bahset'
             },
+            zh_cn: {
+                mention: '标记'
+            },
             zh_tw: {
                 mention: '標記'
             },

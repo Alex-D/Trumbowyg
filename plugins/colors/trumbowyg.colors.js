@@ -118,7 +118,9 @@
             },
             zh_cn: {
                 foreColor: '文字颜色',
-                backColor: '背景颜色'
+                backColor: '背景颜色',
+                foreColorRemove: '清除文字颜色',
+                backColorRemove: '清除背景颜色'
             },
             zh_tw: {
                 foreColor: '文字顏色',

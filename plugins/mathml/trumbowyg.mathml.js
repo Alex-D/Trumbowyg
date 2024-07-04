@@ -87,6 +87,11 @@
                 formulas: 'Formüller',
                 inline: 'Satır içi'
             },
+            zh_cn: {
+                mathml: '插入公式',
+                formulas: '公式',
+                inline: '行内'
+            },
             zh_tw: {
                 mathml: '插入方程式',
                 formulas: '方程式',
