@@ -50,6 +50,9 @@
             tr: {
                 template: 'Şablon'
             },
+            zh_cn: {
+                template: '模板'
+            },
             zh_tw: {
                 template: '模板',
             },

@@ -25,6 +25,7 @@
 
     $.extend(true, $.trumbowyg, {
         langs: {
+            // jshint camelcase:false
             en: {
                 specialChars: 'Special characters'
             },
@@ -58,6 +59,10 @@
             tr: {
                 specialChars: 'Özel karakterler'
             },
+            zh_cn: {
+                specialChars: '特殊字符'
+            },
+            // jshint camelcase:true
         },
         plugins: {
             specialchars: {

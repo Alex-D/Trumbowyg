@@ -77,6 +77,10 @@
             tr: {
                 noembedError: 'Hata'
             },
+            zh_cn: {
+                noembed: '嵌入内容',
+                noembedError: '错误'
+            },
             zh_tw: {
                 noembed: '插入影片',
                 noembedError: '錯誤'

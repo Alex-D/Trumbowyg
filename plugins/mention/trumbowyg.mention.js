@@ -60,7 +60,7 @@
                 mention: 'Bahset'
             },
             zh_cn: {
-                mention: '标记'
+                mention: '提及'
             },
             zh_tw: {
                 mention: '標記'
