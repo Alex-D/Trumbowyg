@@ -69,13 +69,14 @@
 
     // Fills modal with response gifs
     function renderGifs(response, $tenorModal, trumbowyg, mustEmpty) {
+        var $tenorLoading = $tenorModal.siblings('.' + trumbowyg.o.prefix + 'tenor-loading');
         var width = ($tenorModal.width() - 20) / 3;
 
         nextCursor = response.next;
         var html = response.results
             .map(function (gifData) {
                 // jshint camelcase:false
-                var image = gifData.media_formats.tinygif,
+                var image = gifData.media_formats.nanogif,
                     imageRatio = image.dims[1] / image.dims[0],
                     altText = gifData.content_description;
 
@@ -99,6 +100,12 @@
             $tenorModal.empty();
         }
         $tenorModal.append(html);
+
+        if (!nextCursor || nextCursor.length === 0) {
+            $tenorLoading.hide();
+        } else {
+            $tenorLoading.show();
+        }
 
         // Remove gray overlay on image load
         // moved here from inline callback definition due to CSP issue
@@ -159,7 +166,7 @@
                                 throw new Error('You must set a Tenor API Key');
                             }
 
-                            var BASE_URL = 'https://g.tenor.com/v2/search?ar_range=all&media_filter=gif,tinygif,tinywebm&limit=50&key=' +
+                            var BASE_URL = 'https://g.tenor.com/v2/search?ar_range=all&media_filter=gif,nanogif&limit=50&key=' +
                                 trumbowyg.o.plugins.tenor.apiKey +
                                 '&locale=' + trumbowyg.o.plugins.tenor.locale +
                                 '&contentfilter=' + trumbowyg.o.plugins.tenor.contentFilter;
@@ -172,7 +179,7 @@
                             var searchInput = '<input name="" class="' + prefix + 'tenor-search" placeholder="Search a GIF" autofocus="autofocus">',
                                 closeButton = '<button class="' + prefix + 'tenor-close" title="' + trumbowyg.lang.close + '"><svg><use xlink:href="' + trumbowyg.svgPath + '#' + prefix + 'close"/></svg></button>',
                                 poweredByTenor = '<div class="' + prefix + 'powered-by-tenor"><span>Powered by</span>' + tenorLogo + '</div>',
-                                tenorModalHtml = searchInput + closeButton + poweredByTenor + '<div class="' + prefix + 'tenor-modal-scroll"><div class="' + prefix + 'tenor-modal"></div><p class="' + prefix + 'tenor-loading">Loading more gifs...</p></div>';
+                                tenorModalHtml = searchInput + closeButton + poweredByTenor + '<div class="' + prefix + 'tenor-modal-scroll"><div class="' + prefix + 'tenor-modal"></div><p class="' + prefix + 'tenor-loading"><img src="https://media.tenor.com/YtAOA9y7VG0AAAAM/loading.gif"> Loading more gifs...</p></div>';
 
                             trumbowyg
                                 .openModal(null, tenorModalHtml, false)
@@ -189,8 +196,7 @@
                             var $tenorInput = $('.' + prefix + 'tenor-search'),
                                 $tenorClose = $('.' + prefix + 'tenor-close'),
                                 $tenorModal = $('.' + prefix + 'tenor-modal'),
-                                $tenorModalScroll = $('.' + prefix + 'tenor-modal-scroll'),
-                                $tenorLoading = $('.' + prefix + 'tenor-loading');
+                                $tenorModalScroll = $('.' + prefix + 'tenor-modal-scroll');
 
                             var onError = function () {
                                 if (navigator.onLine || $('.' + prefix + 'tenor-offline', $tenorModal).length) {
@@ -256,7 +262,6 @@
                                         var url = query.length === 0 ? DEFAULT_URL : BASE_URL + '&q=' + encodeURIComponent(query);
                                         url += '&pos=' + nextCursor;
 
-                                        $tenorLoading.show();
                                         fetch(url, {
                                             method: 'GET',
                                             cache: 'no-cache',

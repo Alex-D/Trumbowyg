@@ -56,6 +56,15 @@
     overflow: auto;
     overflow-x: hidden;
     height: 240px;
+
+    .trumbowyg-tenor-loading {
+        display: none;
+        padding: 20px;
+
+        img {
+            height: 25px;
+        }
+    }
 }
 
 .trumbowyg-tenor-modal {
@@ -96,6 +105,5 @@
 
     img.tbw-loaded {
         opacity: 1;
-        background: var(--bg-url) cover center no-repeat;
     }
 }
