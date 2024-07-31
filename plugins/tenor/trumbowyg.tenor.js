@@ -67,6 +67,25 @@
         };
     }
 
+    function registerGifClickEventInModal(trumbowyg, $tenorModal) {
+        $('img', $tenorModal).on('click', function () {
+            var src = $(this).attr('data-full'),
+                alt = $(this).attr('alt');
+            trumbowyg.restoreRange();
+            trumbowyg.execCmd('insertImage', src, false, true);
+
+            // relay alt tag into inserted image
+            if (alt) {
+                var $img = $('img[src="' + src + '"]:not([alt])', trumbowyg.$box);
+                $img.attr('alt', alt);
+                // Note: This seems to fire relatively early and could be wrapped in a setTimeout if needed
+                trumbowyg.syncCode();
+            }
+            $('img', $tenorModal).off();
+            trumbowyg.closeModal();
+        });
+    }
+
     // Fills modal with response gifs
     function renderGifs(response, $tenorModal, trumbowyg, mustEmpty) {
         var $tenorLoading = $tenorModal.siblings('.' + trumbowyg.o.prefix + 'tenor-loading');
@@ -122,23 +141,6 @@
                     addLoadedClass(this);
                 });
             }
-        });
-
-        $('img', $tenorModal).on('click', function () {
-            var src = $(this).attr('data-full'),
-                alt = $(this).attr('alt');
-            trumbowyg.restoreRange();
-            trumbowyg.execCmd('insertImage', src, false, true);
-
-            // relay alt tag into inserted image
-            if (alt) {
-                var $img = $('img[src="' + src + '"]:not([alt])', trumbowyg.$box);
-                $img.attr('alt', alt);
-                // Note: This seems to fire relatively early and could be wrapped in a setTimeout if needed
-                trumbowyg.syncCode();
-            }
-            $('img', $tenorModal).off();
-            trumbowyg.closeModal();
         });
     }
 
@@ -206,6 +208,8 @@
                                 $tenorModal.empty();
                                 $tenorModal.append('<p class="' + prefix + 'tenor-offline">You are offline</p>');
                             };
+
+                            registerGifClickEventInModal(trumbowyg, $tenorModal);
 
                             // Load trending gifs as default
                             fetch(DEFAULT_URL, {
