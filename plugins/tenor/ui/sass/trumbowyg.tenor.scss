@@ -68,13 +68,13 @@
 }
 
 .trumbowyg-tenor-modal {
-    padding: 0 5%;
-    columns: 3;
-    column-gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 
   .trumbowyg-tenor-no-result {
-    width: 250%;
-    margin: 13% 0 0 29%;
+    width: 100%;
+    margin: 0 5%;
   }
 
   .trumbowyg-tenor-offline {
@@ -87,7 +87,6 @@
 }
 
 .trumbowyg-tenor-modal .img-container {
-    width: 100%;
     margin-bottom: 10px;
     background-color: #ecf0f1;
 
@@ -96,6 +95,7 @@
         cursor: pointer;
         opacity: 0;
         transition: opacity 150ms;
+        display: block;
 
         &:hover,
         &:focus {

@@ -89,11 +89,20 @@
     // Fills modal with response gifs
     function renderGifs(response, $tenorModal, trumbowyg, mustEmpty) {
         var $tenorLoading = $tenorModal.siblings('.' + trumbowyg.o.prefix + 'tenor-loading');
-        var width = ($tenorModal.width() - 20) / 3;
+        var modalWidth = $tenorModal.width();
+        var gapBetweenImages = 10;
+        var imagesPerRow = 3;
+        var imageWidth = (modalWidth - (gapBetweenImages * (imagesPerRow + 1))) / imagesPerRow;
 
         nextCursor = response.next;
+        var columnHeights = Array(imagesPerRow).fill(gapBetweenImages);
+
+        if (!mustEmpty) {
+            columnHeights = $tenorModal.data('columnHeights') || columnHeights;
+        }
+
         var html = response.results
-            .map(function (gifData) {
+            .map(function (gifData, index) {
                 // jshint camelcase:false
                 var image = gifData.media_formats.nanogif,
                     imageRatio = image.dims[1] / image.dims[0],
@@ -101,11 +110,19 @@
 
                 var full_size = gifData.media_formats.gif.url;
 
-                var imgHtml = '<img src=' + image.url + ' width="' + width + '" height="' + imageRatio * width + '" alt="' + altText + '" loading="lazy" data-full="'+ full_size +'" />';
-                return '<div class="img-container">' + imgHtml + '</div>';
+                var imgHtml = '<img src=' + image.url + ' width="' + imageWidth + '" height="' + imageRatio * imageWidth + '" alt="' + altText + '" loading="lazy" data-full="'+ full_size +'" />';
+
+                var minHeight = Math.min(...columnHeights);
+                var columnIndex = columnHeights.indexOf(minHeight);
+                var top = columnHeights[columnIndex];
+                var left = gapBetweenImages + (columnIndex * (imageWidth + gapBetweenImages));
+
+                columnHeights[columnIndex] += imageRatio * imageWidth + gapBetweenImages;
+
+                var divHtml = '<div class="img-container" style="position:absolute; top:' + top + 'px; left:' + left + 'px;">' + imgHtml + '</div>';
+                return divHtml;
             })
-            .join('')
-        ;
+            .join('');
 
         if (mustEmpty === true) {
             if (html.length === 0) {
@@ -141,6 +158,14 @@
                     addLoadedClass(this);
                 });
             }
+        });
+
+        $tenorModal.data('columnHeights', columnHeights);
+
+        var maxHeight = Math.max(...columnHeights);
+        $tenorModal.css({
+            position: 'relative',
+            height: maxHeight,
         });
     }
 
