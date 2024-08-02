@@ -104,7 +104,7 @@
         var html = response.results
             .map(function (gifData, index) {
                 // jshint camelcase:false
-                var image = gifData.media_formats.nanogif,
+                var image = gifData.media_formats.tinygif,
                     imageRatio = image.dims[1] / image.dims[0],
                     altText = gifData.content_description;
 
@@ -193,7 +193,7 @@
                                 throw new Error('You must set a Tenor API Key');
                             }
 
-                            var BASE_URL = 'https://g.tenor.com/v2/search?ar_range=all&media_filter=gif,nanogif&limit=50&key=' +
+                            var BASE_URL = 'https://g.tenor.com/v2/search?ar_range=all&media_filter=gif,tinygif&limit=50&key=' +
                                 trumbowyg.o.plugins.tenor.apiKey +
                                 '&locale=' + trumbowyg.o.plugins.tenor.locale +
                                 '&contentfilter=' + trumbowyg.o.plugins.tenor.contentFilter;
