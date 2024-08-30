@@ -1,3 +1,5 @@
+// Adapted from giphy plugin 
+
 .trumbowyg-tenor-button svg {
     transform: scale(1.22);
 }
@@ -19,11 +21,16 @@
     background: none;
     border: 1px solid transparent;
 
+    @media screen and (max-width: $phone) {
+        top: calc(5% + 2px);
+    }
+
     &:hover,
     &:focus {
         outline: none;
         background: #ecf0f1;
     }
+
     &:focus {
         border-color: rgba(0, 0, 0, 0.3);
     }
@@ -31,10 +38,15 @@
 
 .trumbowyg-powered-by-tenor {
     position: absolute;
-    top: calc(5% + 12px);
-    right: calc(15% + 10px);
+    top: calc(5% + 9px);
+    right: calc(15% + 5px);
     pointer-events: none;
     user-select: none;
+
+    @media screen and (max-width: $phone) {
+        top: calc(5% + 5px);
+        right: calc(15%);
+    }
 
     span {
         text-transform: uppercase;
@@ -73,18 +85,18 @@
     justify-content: center;
     margin: 0 3%;
 
-  .trumbowyg-tenor-no-result {
-    width: 100%;
-    margin: 0 3%;
-  }
+    .trumbowyg-tenor-no-result {
+        width: 100%;
+        margin: 0 3%;
+    }
 
-  .trumbowyg-tenor-offline {
-    font-size: 18px;
-    width: 305%;
-    height: 600px;
-    margin-top: 95px;
-    text-align: center;
-  }
+    .trumbowyg-tenor-offline {
+        font-size: 18px;
+        width: 305%;
+        height: 600px;
+        margin-top: 95px;
+        text-align: center;
+    }
 }
 
 .trumbowyg-tenor-modal .img-container {

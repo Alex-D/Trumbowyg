@@ -1,3 +1,4 @@
+// adapted from giphy plugin
 /* global AbortController: true */
 (function ($) {
     'use strict';
@@ -68,7 +69,7 @@
     }
 
     function registerGifClickEventInModal(trumbowyg, $tenorModal) {
-        $('img', $tenorModal).on('click', function () {
+        $tenorModal.on('click', 'img', function () {
             var src = $(this).attr('data-full'),
                 alt = $(this).attr('alt');
             trumbowyg.restoreRange();
@@ -81,7 +82,7 @@
                 // Note: This seems to fire relatively early and could be wrapped in a setTimeout if needed
                 trumbowyg.syncCode();
             }
-            $('img', $tenorModal).off();
+            $tenorModal.off('click', 'img');
             trumbowyg.closeModal();
         });
     }
@@ -110,7 +111,7 @@
 
                 var full_size = gifData.media_formats.gif.url;
 
-                var imgHtml = '<img src=' + image.url + ' width="' + imageWidth + '" height="' + imageRatio * imageWidth + '" alt="' + altText + '" loading="lazy" data-full="'+ full_size +'" />';
+                var imgHtml = '<img src=' + image.url + ' width="' + imageWidth + '" height="' + imageRatio * imageWidth + '" alt="' + altText + '" loading="lazy" data-full="' + full_size + '" />';
 
                 var minHeight = Math.min(...columnHeights);
                 var columnIndex = columnHeights.indexOf(minHeight);
@@ -193,7 +194,7 @@
                                 throw new Error('You must set a Tenor API Key');
                             }
 
-                            var BASE_URL = 'https://g.tenor.com/v2/search?ar_range=all&media_filter=gif,tinygif&limit=50&key=' +
+                            var BASE_URL = 'https://g.tenor.com/v2/search?ar_range=all&media_filter=gif,tinygif&limit=10&key=' +
                                 trumbowyg.o.plugins.tenor.apiKey +
                                 '&locale=' + trumbowyg.o.plugins.tenor.locale +
                                 '&contentfilter=' + trumbowyg.o.plugins.tenor.contentFilter;
@@ -284,7 +285,7 @@
                                 $tenorModal.trigger(CANCEL_EVENT);
                             });
 
-                            var throttledQuery = trumbowygThrottle(function() {
+                            var throttledQuery = trumbowygThrottle(function () {
                                 if ($tenorModalScroll.scrollTop() + $tenorModalScroll.innerHeight() >= $tenorModalScroll[0].scrollHeight - 100) {
                                     if (nextCursor) {
                                         var query = $tenorInput.val();
