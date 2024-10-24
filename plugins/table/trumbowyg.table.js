@@ -1556,7 +1556,7 @@
                     };
                     var applyBackgroundColorToSelectedCells = function (color) {
                         return function () {
-                            var $table = $(t.doc.getSelection().anchorNode).closest('table');
+                            var $table = $(t.doc.getSelection().anchorNode).closest('table').parents('.trumbowyg-editor').find('table').has($(t.doc.getSelection().anchorNode));
 
                             if ($table.length === 0) {
                                 return;
@@ -1588,7 +1588,7 @@
 
                     var applyBorderColor = function (color) {
                         return function () {
-                            var $table = $(t.doc.getSelection().anchorNode).closest('table');
+                            var $table = $(t.doc.getSelection().anchorNode).closest('table').parents('.trumbowyg-editor').find('table').has($(t.doc.getSelection().anchorNode));
 
                             if ($table.length === 0) {
                                 return;
