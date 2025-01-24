@@ -12,6 +12,30 @@
 (function ($) {
     'use strict';
 
+    // Throttle helper
+    function trumbowygThrottle(callback, delay) {
+        var last;
+        var timer;
+
+        return function () {
+            var context = this;
+            var now = new Date().getTime();
+            var args = arguments;
+
+            if (last && now < last + delay) {
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    last = now;
+                    callback.apply(context, args);
+                }, delay);
+                return;
+            }
+
+            last = now;
+            callback.apply(context, args);
+        };
+    }
+
     var defaultOptions = {
         rows: 8,
         columns: 8,
@@ -527,8 +551,9 @@
                                 var $cell = $(cell);
                                 var colspanAttr = $cell.attr('colspan');
                                 var rowspanAttr = $cell.attr('rowspan');
-                                var colspan = parseInt(colspanAttr ? colspanAttr : 1, 10);
-                                var rowspan = parseInt(rowspanAttr ? rowspanAttr : 1, 10);
+
+                                var colspan = parseInt(colspanAttr > 0 ? colspanAttr : 1, 10);
+                                var rowspan = parseInt(rowspanAttr > 0 ? rowspanAttr : 1, 10);
 
                                 while (tableState[rowIndex][columnIndex] !== undefined) {
                                     columnIndex += 1;
@@ -1247,14 +1272,13 @@
                     ////// Cell resize
 
                     var TRUMBOWYG_TABLE_HANDLE_FOR = 'trumbowyg-table-handle-for';
-                    var rebuildResizeLayers = function () {
+                    var $targetTable;
+                    var targetTableState;
+                    var targetColumnIndex;
+                    var rebuildResizeLayers = trumbowygThrottle(function () {
                         if (!t.o.plugins.table.allowHorizontalResize) {
                             return;
                         }
-
-                        var tableState;
-                        var targetColumnIndex;
-                        var $table;
 
                         var $resizeLayers = $('.' + t.o.prefix + 'table-resize-layers');
                         var hasResizeLayers = $resizeLayers.length > 0;
@@ -1262,48 +1286,48 @@
                             $resizeLayers = $('<div/>', {
                                 class: t.o.prefix + 'table-resize-layers',
                             }).appendTo(t.$edBox);
-
-                            $(t.o.prefix + 'table-resize-vertical-handle', $resizeLayers).each(function (_, handle) {
-                                $(handle)
-                                    .off()
-                                    .remove();
-                            });
                         }
 
-                        $('table', t.$ed).each(function (_tableIndex, table) {
-                            $('td, th', $(table)).each(function (_cellIndex, cell) {
-                                // Vertical handles
-                                $('<div/>', {
-                                    class: t.o.prefix + 'table-resize-vertical-handle',
+                        // Reset and remove old handles
+                        $('.' + t.o.prefix + 'table-resize-vertical-handle', $resizeLayers).each(function (_, handle) {
+                            $(handle)
+                                .off()
+                                .remove();
+                        });
+
+                        $('td, th', t.$ed).each(function (_cellIndex, cell) {
+                            // Vertical handles
+                            $('<div/>', {
+                                class: t.o.prefix + 'table-resize-vertical-handle',
+                            })
+                                .prop(TRUMBOWYG_TABLE_HANDLE_FOR, cell)
+                                .on('mousedown.tbwTable', function (e) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    var targetCell = $(e.target).prop(TRUMBOWYG_TABLE_HANDLE_FOR);
+                                    $targetTable = $(targetCell).closest('table');
+                                    targetTableState = getTableState($targetTable);
+                                    var $allRows = $('tr', $targetTable);
+                                    var $row = $(targetCell).closest('tr');
+                                    var rowIndex = $allRows.index($row);
+                                    var rowState = targetTableState[rowIndex];
+                                    var columnIndex = getCellIndex(targetCell, rowState);
+                                    var targetCellState = targetTableState[rowIndex][columnIndex];
+                                    if (targetCellState.mergedIn !== undefined) {
+                                        targetCellState = targetTableState[targetCellState.mergedIn[0]][targetCellState.mergedIn[1]];
+                                    }
+
+                                    targetColumnIndex = columnIndex + targetCellState.colspan - 1;
+
+                                    ensureColgroupExists($targetTable, targetTableState);
+                                    setColWidthInPixels($targetTable, targetTableState);
+                                    redrawResizeLayers();
+
+                                    $targetTable.css({
+                                        maxWidth: '',
+                                    });
                                 })
-                                    .prop(TRUMBOWYG_TABLE_HANDLE_FOR, cell)
-                                    .on('mousedown.tbwTable', function (e) {
-                                        e.preventDefault();
-                                        e.stopPropagation();
-                                        var targetCell = $(e.target).prop(TRUMBOWYG_TABLE_HANDLE_FOR);
-                                        $table = $(targetCell).closest('table');
-                                        tableState = getTableState($table);
-                                        var $allRows = $('tr', $table);
-                                        var $row = $(targetCell).closest('tr');
-                                        var rowIndex = $allRows.index($row);
-                                        var rowState = tableState[rowIndex];
-                                        var columnIndex = getCellIndex(targetCell, rowState);
-                                        var targetCellState = tableState[rowIndex][columnIndex];
-                                        if (targetCellState.mergedIn !== undefined) {
-                                            targetCellState = tableState[targetCellState.mergedIn[0]][targetCellState.mergedIn[1]];
-                                        }
-
-                                        targetColumnIndex = columnIndex + targetCellState.colspan - 1;
-
-                                        ensureColgroupExists($table, tableState);
-                                        setColWidthInPixels($table, tableState);
-
-                                        $table.css({
-                                            maxWidth: '',
-                                        });
-                                    })
-                                    .appendTo($resizeLayers);
-                            });
+                                .appendTo($resizeLayers);
                         });
                         redrawResizeLayers();
 
@@ -1321,10 +1345,10 @@
                                 e.preventDefault();
                                 e.stopPropagation();
 
-                                var tableRect = $table[0].getBoundingClientRect();
+                                var tableRect = $targetTable[0].getBoundingClientRect();
                                 var tableLeftInPixels = e.pageX - tableRect.left;
 
-                                var cellState = findFirstCellAtIndex(tableState, targetColumnIndex);
+                                var cellState = findFirstCellAtIndex(targetTableState, targetColumnIndex);
 
                                 var cellElement = cellState.element;
                                 var cellRect = cellElement.getBoundingClientRect();
@@ -1332,7 +1356,7 @@
 
                                 var cellWidthInPixels = tableLeftInPixels - cellLeftInPixels;
 
-                                var colElement = $('col', $table)[targetColumnIndex];
+                                var colElement = $('col', $targetTable)[targetColumnIndex];
                                 $(colElement).css({
                                     width: cellWidthInPixels,
                                 });
@@ -1347,12 +1371,12 @@
                                 e.stopPropagation();
 
                                 // Fix width
-                                ensureColgroupExists($table, tableState);
-                                setColWidthInPercents($table, tableState);
+                                ensureColgroupExists($targetTable, targetTableState);
+                                setColWidthInPercents($targetTable, targetTableState);
 
                                 // Reset resize state
-                                $table = undefined;
-                                tableState = undefined;
+                                $targetTable = undefined;
+                                targetTableState = undefined;
                                 targetColumnIndex = undefined;
 
                                 // Update HTML
@@ -1364,7 +1388,7 @@
                             .on('resize.tbwTable', function () {
                                 redrawResizeLayers();
                             });
-                    };
+                    }, 100);
 
                     var ensureColgroupExists = function ($table, tableState) {
                         var $colgroup = $('colgroup', $table);
@@ -1393,9 +1417,9 @@
                     var setColWidths = function ($table, tableState, isUnitPercent = false) {
                         var $colgroup = $('colgroup', $table);
                         var $cols = $('col', $colgroup);
-                        var tableWidth = $table[0].offsetWidth;
+                        var tableWidth = Math.ceil($table[0].getBoundingClientRect().width);
                         $table.css({
-                            maxWidth: $table[0].offsetWidth,
+                            maxWidth: tableWidth,
                         });
 
                         var columnCount = tableState[0].length;
@@ -1426,7 +1450,7 @@
                         setColWidths($table, tableState, true);
                     };
 
-                    var redrawResizeLayers = function () {
+                    var redrawResizeLayers = trumbowygThrottle(function () {
                         var $resizeLayers = $('.' + t.o.prefix + 'table-resize-layers', t.$edBox);
 
                         var resizeLayersBoundingClientRect = $resizeLayers[0].getBoundingClientRect();
@@ -1443,7 +1467,7 @@
                                 height: cellBoundingClientRect.height,
                             });
                         });
-                    };
+                    }, 20);
 
 
                     ////// Vertical alignment
