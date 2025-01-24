@@ -1280,7 +1280,7 @@
                             return;
                         }
 
-                        var $resizeLayers = $('.' + t.o.prefix + 'table-resize-layers');
+                        var $resizeLayers = $('.' + t.o.prefix + 'table-resize-layers', t.$edBox);
                         var hasResizeLayers = $resizeLayers.length > 0;
                         if (!hasResizeLayers) {
                             $resizeLayers = $('<div/>', {
