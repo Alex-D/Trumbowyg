@@ -29,26 +29,11 @@ You can support its ongoing development by being a backer or a sponsor:
 <h4 align="center">Gold</h4>
 
 <p align="center">
-    <a href="https://avot.nl/?ref=trumbowyg">
-        <img src="https://cdn.rawgit.com/Alex-D/Trumbowyg/develop/sponsors/avot.svg" alt="avot®" width="200px"/>
-    </a>
+    <a href="https://www.premirus.com/?ref=trumbowyg">Premirus Corporation</a>
 </p>
 
 <p align="center">
-    <a href="https://www.patreon.com/bePatron?c=1176005&rid=1940456">
-        Become a Sponsor
-    </a>
-</p>
-
-<h4 align="center">Silver</h4>
-
-<p align="center">
-    <a href="https://socialoptic.com/?ref=trumbowyg">
-        <img src="https://rawcdn.githack.com/Alex-D/Trumbowyg/develop/sponsors/socialoptic.png" alt="SocialOptic" width="150px"/>
-    </a>
-</p>
-
-<p align="center">
+    &bull;&bull;&bull;<br>
     <a href="https://www.patreon.com/bePatron?c=1176005&rid=1940456">
         Become a Sponsor
     </a>
@@ -58,14 +43,20 @@ You can support its ongoing development by being a backer or a sponsor:
 
 ## Introduction
 
-Trumbowyg is a simple and lightweight WYSIWYG editor, weight only 20kB minifed (8kB gzip) for faster page loading.
+Trumbowyg is a simple and lightweight WYSIWYG editor, weight only 30kB minified (10kB gzip) for faster page loading.
 
 Visit presentation page: http://alex-d.github.io/Trumbowyg/
 
 
 ## Documentation
 
-All you need to know about Trumbowyg is here: http://alex-d.github.io/Trumbowyg/documentation/ (or even [on the home](http://alex-d.github.io/Trumbowyg/#get-started))
+All you need to know about Trumbowyg is here:
+- [Get started](https://alex-d.github.io/Trumbowyg/documentation/)
+- [25+ Demos](https://alex-d.github.io/Trumbowyg/demos/)
+- [45+ Supported languages](https://alex-d.github.io/Trumbowyg/#languages)
+- [All Options explained](https://alex-d.github.io/Trumbowyg/documentation/#basic-options)
+- [All existing Plugins](https://alex-d.github.io/Trumbowyg/documentation/plugins/)
+- [Create your own Plugin](https://alex-d.github.io/Trumbowyg/documentation/plugins/#create-your-own)
 
 
 ## Contribution
@@ -82,12 +73,22 @@ npm run dev # watch mode
 npm run build # to build the project
 ```
 
-`gulp` command launch default Gulp task watcher and rebuild on the fly.
+## Author
 
-
-## Stay in touch
-
-For the latest release and announcements, follow on Twitter: [@AlexandreDemode](https://twitter.com/AlexandreDemode)
+<table>
+  <tr width="100%">
+    <td align="center" width="100%">
+      <a href="https://github.com/Alex-D">
+        <img src="https://avatars2.githubusercontent.com/u/426843?s=150&v=4"><br>
+        @Alex-D
+      </a> <br>
+      <strong>Alexandre Demode</strong><br>
+      &bull; &bull; &bull;<br>
+      <em>Latest release and announcements</em><br>
+      https://x.com/AlexandreDemode
+    </td>
+  </tr>
+</table>
 
 
 ## License
