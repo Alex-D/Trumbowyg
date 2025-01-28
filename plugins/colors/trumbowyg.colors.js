@@ -48,7 +48,9 @@
             },
             de: {
                 foreColor: 'Textfarbe',
-                backColor: 'Hintergrundfarbe'
+                backColor: 'Hintergrundfarbe',
+                foreColorRemove: 'Textfarbe entfernen',
+                backColorRemove: 'Hintergundfarbe entfernen'
             },
             es: {
                 foreColor: 'Color del texto',

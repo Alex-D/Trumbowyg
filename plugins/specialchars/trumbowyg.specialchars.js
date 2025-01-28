@@ -34,6 +34,9 @@
             by: {
                 specialChars: 'Спецыяльныя сімвалы'
             },
+            de: {
+                specialChars: 'Spezialzeichen'
+            },
             et: {
                 specialChars: 'Erimärgid'
             },
