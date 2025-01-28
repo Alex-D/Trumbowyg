@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.27.3 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.29.0 - A lightweight WYSIWYG editor
  * Trumbowyg core file
  * ------------------------
  * @link https://alex-d.github.io/Trumbowyg/
@@ -258,19 +258,16 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 var div = t.doc.createElement('div');
                 div.id = trumbowygIconsId;
                 t.doc.body.insertBefore(div, t.doc.body.childNodes[0]);
-                $.ajax({
-                    async: true,
-                    type: 'GET',
-                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                    dataType: 'xml',
-                    crossDomain: true,
-                    url: svgPathOption,
-                    data: null,
-                    beforeSend: null,
-                    complete: null,
-                    success: function (data) {
-                        div.innerHTML = new XMLSerializer().serializeToString(data.documentElement);
+                fetch(svgPathOption, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
                     }
+                }).then((response) => {
+                    response.text()
+                        .then((svg) => {
+                            div.innerHTML = svg;
+                        });
                 });
             }
         }
@@ -1754,7 +1751,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                                 values[n] = $field.filter(':checked').val();
                                 break;
                             default:
-                                values[n] = $.trim($field.val());
+                                values[n] = $field.val().trim();
                                 break;
                         }
                         // Validate value
@@ -1789,13 +1786,11 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 $row = $field.closest('.' + prefix + 'input-row');
 
             $field
-                .on('change keyup', function () {
+                .one('change keyup', function () {
                     $row.removeClass(prefix + 'input-error');
-                    setTimeout(function () {
-                        $row.find('.' + spanErrorClass).remove();
-                    }, 150);
                 });
 
+            $row.find('.' + spanErrorClass).remove();
             $row
                 .addClass(prefix + 'input-error')
                 .find('.' + prefix + 'input-infos label')

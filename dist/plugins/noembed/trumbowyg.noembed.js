@@ -6,6 +6,7 @@
  * Author : Jake Johns (jakejohns)
  */
 
+/* global AbortSignal:true */
 (function ($) {
     'use strict';
 
@@ -36,6 +37,10 @@
             },
             da: {
                 noembedError: 'Fejl'
+            },
+            de: {
+                noembed: 'Noembed',
+                noembedError: 'Fehler'
             },
             et: {
                 noembed: 'Noembed',
@@ -100,38 +105,47 @@
 
                                 // Callback
                                 function (data) {
-                                    $.ajax({
-                                        url: trumbowyg.o.plugins.noembed.proxy,
-                                        type: 'GET',
-                                        data: data,
-                                        cache: false,
-                                        dataType: 'json',
+                                    // Build request URL
+                                    var requestUrl = new URL(trumbowyg.o.plugins.noembed.proxy);
+                                    Object.keys(data).forEach((key) => {
+                                        requestUrl.searchParams.append(key, data[key].trim());
+                                    });
 
-                                        success: function (data) {
-                                            if (trumbowyg.o.plugins.noembed.success) {
-                                                trumbowyg.o.plugins.noembed.success(data, trumbowyg, $modal);
-                                                return;
-                                            }
+                                    // Launch async request
+                                    fetch(requestUrl, {
+                                        method: 'GET',
+                                        cache: 'no-cache',
+                                        signal: AbortSignal.timeout(2000)
+                                    }).then((response) => {
+                                        if (trumbowyg.o.plugins.noembed.success) {
+                                            trumbowyg.o.plugins.noembed.success(data, trumbowyg, $modal);
+                                            return;
+                                        }
 
-                                            if (!data.html) {
+                                        return response.json().then((json) => {
+                                            if (!json.html) {
                                                 trumbowyg.addErrorOnModalField(
                                                     $('input[type=text]', $modal),
-                                                    data.error
+                                                    json.error
                                                 );
                                                 return;
                                             }
 
-                                            trumbowyg.execCmd('insertHTML', data.html);
+                                            trumbowyg.execCmd('insertHTML', json.html);
                                             setTimeout(function () {
                                                 trumbowyg.closeModal();
                                             }, 250);
-                                        },
-                                        error: trumbowyg.o.plugins.noembed.error || function () {
-                                            trumbowyg.addErrorOnModalField(
-                                                $('input[type=text]', $modal),
-                                                trumbowyg.lang.noembedError
-                                            );
+                                        });
+                                    }).catch((...args) => {
+                                        if (trumbowyg.o.plugins.noembed.error) {
+                                            trumbowyg.o.plugins.noembed.error(...args);
+                                            return;
                                         }
+
+                                        trumbowyg.addErrorOnModalField(
+                                            $('input[type=text]', $modal),
+                                            trumbowyg.lang.noembedError
+                                        );
                                     });
                                 }
                             );

@@ -43,7 +43,49 @@
         return object;
     }
 
-    addXhrProgressEvent();
+    function runXhrRequest(url, data, options) {
+        var xhrRequest = new XMLHttpRequest();
+        xhrRequest.open(
+            'POST',
+            url,
+            true
+        );
+
+        // Set Headers
+        Object.keys(options.headers).forEach((headerKey) => {
+            xhrRequest.setRequestHeader(headerKey, options.headers[headerKey]);
+        });
+
+        // Set XHR fields
+        Object.keys(options.xhrFields).forEach((xhrFieldKey) => {
+            xhrRequest[xhrFieldKey] = options.headers[xhrFieldKey];
+        });
+
+        // Progress
+        xhrRequest.upload.addEventListener('progress', function (e) {
+            options.progress(e);
+        }, false);
+
+        // Success
+        xhrRequest.onreadystatechange = function() {
+            if (xhrRequest.readyState !== 4) {
+                return;
+            }
+
+            if ((xhrRequest.status < 200 || xhrRequest.status >= 300) && xhrRequest.status !== 304) {
+                options.error();
+                xhrRequest = null;
+                return;
+            }
+
+            var jsonResponse = JSON.parse(xhrRequest.responseText);
+            options.success(jsonResponse);
+
+            xhrRequest = null;
+        };
+
+        xhrRequest.send(data);
+    }
 
     $.extend(true, $.trumbowyg, {
         langs: {
@@ -148,11 +190,6 @@
                 file: '文件',
                 uploadError: '錯誤'
             },
-            ua: {
-                upload: 'Завантажити зображення',
-                file: 'Зображення',
-                uploadError: 'Помилка'
-            },
         },
         // jshint camelcase:true
 
@@ -199,15 +236,17 @@
 
                                 // Callback
                                 function (values) {
+                                    const uploadPluginOptions = trumbowyg.o.plugins.upload;
+
                                     if (isUploading) {
                                         return;
                                     }
                                     isUploading = true;
 
                                     var data = new FormData();
-                                    data.append(trumbowyg.o.plugins.upload.fileFieldName, file);
+                                    data.append(uploadPluginOptions.fileFieldName, file);
 
-                                    trumbowyg.o.plugins.upload.data.map(function (cur) {
+                                    uploadPluginOptions.data.map(function (cur) {
                                         data.append(cur.name, cur.value);
                                     });
 
@@ -230,72 +269,66 @@
                                             );
                                     }
 
-                                    $.ajax({
-                                        url: trumbowyg.o.plugins.upload.serverPath,
-                                        headers: trumbowyg.o.plugins.upload.headers,
-                                        xhrFields: trumbowyg.o.plugins.upload.xhrFields,
-                                        type: 'POST',
-                                        data: data,
-                                        cache: false,
-                                        dataType: 'json',
-                                        processData: false,
-                                        contentType: false,
+                                    runXhrRequest(
+                                        uploadPluginOptions.serverPath,
+                                        data,
+                                        {
+                                            headers: uploadPluginOptions.headers,
+                                            xhrFields: uploadPluginOptions.xhrFields,
 
-                                        progressUpload: function (e) {
-                                            $('.' + prefix + 'progress-bar').css('width', Math.round(e.loaded * 100 / e.total) + '%');
-                                        },
+                                            progress: function (e) {
+                                                $('.' + prefix + 'progress-bar').css('width', Math.round(e.loaded * 100 / e.total) + '%');
+                                            },
 
-                                        success: function (data) {
-                                            if (trumbowyg.o.plugins.upload.success) {
-                                                trumbowyg.o.plugins.upload.success(data, trumbowyg, $modal, values);
-                                            } else {
-                                                if (!!getDeep(data, trumbowyg.o.plugins.upload.statusPropertyName.split('.'))) {
-                                                    var url = getDeep(data, trumbowyg.o.plugins.upload.urlPropertyName.split('.'));
-                                                    trumbowyg.execCmd('insertImage', url, false, true);
-                                                    var $img = $('img[src="' + url + '"]:not([alt])', trumbowyg.$box);
-                                                    $img.attr('alt', values.alt);
-                                                    if (trumbowyg.o.plugins.upload.imageWidthModalEdit && parseInt(values.width) > 0) {
-                                                        $img.attr({
-                                                            width: values.width
-                                                        });
-                                                    }
-                                                    setTimeout(function () {
-                                                        trumbowyg.closeModal();
-                                                    }, 250);
-                                                    trumbowyg.$c.trigger('tbwuploadsuccess', [trumbowyg, data, url]);
-                                                } else {
+                                            success: function (data) {
+                                                isUploading = false;
+
+                                                if (uploadPluginOptions.success) {
+                                                    uploadPluginOptions.success(data, trumbowyg, $modal, values);
+                                                    return;
+                                                }
+
+                                                if (!getDeep(data, uploadPluginOptions.statusPropertyName.split('.'))) {
                                                     trumbowyg.addErrorOnModalField(
                                                         $('input[type=file]', $modal),
                                                         trumbowyg.lang[data.message]
                                                     );
                                                     trumbowyg.$c.trigger('tbwuploaderror', [trumbowyg, data]);
+                                                    return;
                                                 }
+
+                                                var url = getDeep(data, uploadPluginOptions.urlPropertyName.split('.'));
+                                                trumbowyg.execCmd('insertImage', url, false, true);
+                                                var $img = $('img[src="' + url + '"]:not([alt])', trumbowyg.$box);
+                                                $img.attr('alt', values.alt);
+                                                if (uploadPluginOptions.imageWidthModalEdit && parseInt(values.width) > 0) {
+                                                    $img.attr({
+                                                        width: values.width
+                                                    });
+                                                }
+                                                setTimeout(function () {
+                                                    trumbowyg.closeModal();
+                                                }, 250);
+                                                trumbowyg.$c.trigger('tbwuploadsuccess', [trumbowyg, data, url]);
+                                            },
+
+                                            error: uploadPluginOptions.error || function () {
+                                                trumbowyg.addErrorOnModalField(
+                                                    $('input[type=file]', $modal),
+                                                    trumbowyg.lang.uploadError
+                                                );
+                                                trumbowyg.$c.trigger('tbwuploaderror', [trumbowyg]);
+
+                                                isUploading = false;
                                             }
-
-                                            isUploading = false;
-                                        },
-
-                                        error: trumbowyg.o.plugins.upload.error || function () {
-                                            trumbowyg.addErrorOnModalField(
-                                                $('input[type=file]', $modal),
-                                                trumbowyg.lang.uploadError
-                                            );
-                                            trumbowyg.$c.trigger('tbwuploaderror', [trumbowyg]);
-
-                                            isUploading = false;
                                         }
-                                    });
+                                    );
                                 }
                             );
 
                             $('input[type=file]').on('change', function (e) {
-                                try {
-                                    // If multiple files allowed, we just get the first.
-                                    file = e.target.files[0];
-                                } catch (err) {
-                                    // In IE8, multiple files not allowed
-                                    file = e.target.value;
-                                }
+                                // We just get the first.
+                                file = e.target.files[0];
                             });
                         }
                     };
@@ -305,25 +338,4 @@
             }
         }
     });
-
-    function addXhrProgressEvent() {
-        if (!$.trumbowyg.addedXhrProgressEvent) {   // Avoid adding progress event multiple times
-            var originalXhr = $.ajaxSettings.xhr;
-            $.ajaxSetup({
-                xhr: function () {
-                    var that = this,
-                        req = originalXhr();
-
-                    if (req && typeof req.upload === 'object' && that.progressUpload !== undefined) {
-                        req.upload.addEventListener('progress', function (e) {
-                            that.progressUpload(e);
-                        }, false);
-                    }
-
-                    return req;
-                }
-            });
-            $.trumbowyg.addedXhrProgressEvent = true;
-        }
-    }
 })(jQuery);

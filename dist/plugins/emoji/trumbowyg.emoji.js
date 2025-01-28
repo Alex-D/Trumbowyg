@@ -1450,7 +1450,7 @@
         var dropdown = [];
 
         $.each(trumbowyg.o.plugins.emoji.emojiList, function (i, emoji) {
-            if ($.isArray(emoji)) { // Custom emoji behaviour
+            if (Array.isArray(emoji)) { // Custom emoji behaviour
                 var emojiCode = emoji[0],
                     emojiUrl = emoji[1],
                     emojiHtml = '<img src="' + emojiUrl + '" alt="' + emojiCode + '">',

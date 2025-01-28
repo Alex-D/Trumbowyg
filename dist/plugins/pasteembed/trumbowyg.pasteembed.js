@@ -8,15 +8,13 @@
  *          Website : https://www.maxmade.nl/
  */
 
+/* global AbortSignal:true */
 (function($) {
     'use strict';
 
     var defaultOptions = {
         enabled: true,
-        endpoints: [
-            'https://noembed.com/embed?nowrap=on',
-            'https://api.maxmade.nl/url2iframe/embed'
-        ]
+        endpoint: 'https://noembed.com/embed?nowrap=on'
     };
 
     $.extend(true, $.trumbowyg, {
@@ -24,6 +22,11 @@
             pasteEmbed: {
                 init: function(trumbowyg) {
                     trumbowyg.o.plugins.pasteEmbed = $.extend(true, {}, defaultOptions, trumbowyg.o.plugins.pasteEmbed || {});
+
+                    // Compatibility layer with older 'endpoints' array options
+                    if (Array.isArray(trumbowyg.o.plugins.pasteEmbed.endpoints)) {
+                        trumbowyg.o.plugins.pasteEmbed.endpoint = trumbowyg.o.plugins.pasteEmbed.endpoints[0];
+                    }
 
                     if (!trumbowyg.o.plugins.pasteEmbed.enabled) {
                         return;
@@ -33,60 +36,40 @@
                         try {
                             var clipboardData = (pasteEvent.originalEvent || pasteEvent).clipboardData,
                                 pastedData = clipboardData.getData('Text'),
-                                endpoints = trumbowyg.o.plugins.pasteEmbed.endpoints,
-                                request = null;
+                                endpoint = trumbowyg.o.plugins.pasteEmbed.endpoint;
 
-                            if (pastedData.startsWith('http')) {
-                                pasteEvent.stopPropagation();
-                                pasteEvent.preventDefault();
+                            if (!pastedData.startsWith('http')) {
+                                return;
+                            }
 
-                                var query = {
-                                    url: pastedData.trim()
-                                };
-                                var content = '';
-                                var index = 0;
+                            pasteEvent.stopPropagation();
+                            pasteEvent.preventDefault();
 
-                                if (request && request.transport) {
-                                    request.transport.abort();
+                            // Build request URL
+                            var requestUrl = new URL(endpoint);
+                            requestUrl.searchParams.append('url', pastedData.trim());
+
+                            // Launch async request
+                            fetch(requestUrl, {
+                                method: 'GET',
+                                cache: 'no-cache',
+                                signal: AbortSignal.timeout(2000)
+                            }).then((response) => {
+                                return response.json().then((json) => {
+                                    return json.html;
+                                });
+                            }).catch(() => {
+                                return undefined;
+                            }).then((content) => {
+                                if (content === undefined) {
+                                    content = $('<a>', {
+                                        href: pastedData,
+                                        text: pastedData
+                                    })[0].outerHTML;
                                 }
 
-                                request = $.ajax({
-                                    crossOrigin: true,
-                                    url: endpoints[index],
-                                    type: 'GET',
-                                    data: query,
-                                    cache: false,
-                                    dataType: 'jsonp',
-                                    success: function(res) {
-                                        if (res.html) {
-                                            index = 0;
-                                            content = res.html;
-                                        } else {
-                                            index += 1;
-                                        }
-                                    },
-                                    error: function() {
-                                        index += 1;
-                                    },
-                                    complete: function() {
-                                        if (content.length === 0 && index < endpoints.length - 1) {
-                                            this.url = endpoints[index];
-                                            this.data = query;
-                                            $.ajax(this);
-                                        }
-                                        if (index === endpoints.length - 1) {
-                                            content = $('<a>', {
-                                                href: pastedData,
-                                                text: pastedData
-                                            }).prop('outerHTML');
-                                        }
-                                        if (content.length > 0) {
-                                            index = 0;
-                                            trumbowyg.execCmd('insertHTML', content);
-                                        }
-                                    }
-                                });
-                            }
+                                trumbowyg.execCmd('insertHTML', content);
+                            });
                         } catch (c) {}
                     });
                 }

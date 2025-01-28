@@ -49,6 +49,9 @@
             da: {
                 insertAudio: 'Indsæt lyd'
             },
+            de: {
+                insertAudio: 'Audio einfügen'
+            },
             es: {
                 insertAudio: 'Insertar Audio'
             },

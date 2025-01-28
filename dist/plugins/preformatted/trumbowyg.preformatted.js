@@ -25,6 +25,9 @@
             da: {
                 preformatted: 'Præformateret <pre>'
             },
+            de: {
+                preformatted: 'Code-Beispiel <pre>'
+            },
             et: {
                 preformatted: 'Eelvormindatud tekst <pre>'
             },
