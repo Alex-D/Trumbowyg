@@ -125,14 +125,8 @@ $modal-label-width: 150px;
     &::before {
         color: transparent !important;
         text-shadow: 0 0 7px #333;
-
-        @media screen and (min-width: 0 \0) {
-            color: rgba(200, 200, 200, 0.6) !important;
-        }
-        @supports (-ms-accelerator:true) {
-            color: rgba(200, 200, 200, 0.6) !important;
-        }
     }
+
     img,
     hr {
         opacity: 0.2;
@@ -166,6 +160,7 @@ $modal-label-width: 150px;
         flex: 1;
         margin-bottom: 1px;
     }
+
     .trumbowyg-editor-box {
         display: none;
     }
@@ -269,6 +264,7 @@ $modal-label-width: 150px;
         cursor: default;
         pointer-events: none;
     }
+
     &.trumbowyg-disable,
     .trumbowyg-disabled & {
         .trumbowyg-button-group::before {
@@ -457,7 +453,7 @@ $modal-label-width: 150px;
                 transition: all $transition-duration;
                 height: 27px;
                 line-height: 27px;
-                border:0;
+                border: 0;
                 width: 100%;
                 padding: 0 7px;
 
@@ -465,6 +461,7 @@ $modal-label-width: 150px;
                 &:focus {
                     outline: 1px solid #95a5a6;
                 }
+
                 &:focus {
                     background: color.adjust($light-color, $lightness: 5%, $space: hsl);
                 }
@@ -526,6 +523,7 @@ $modal-label-width: 150px;
                 background: color.adjust($modal-submit-color, $lightness: 5%, $space: hsl);
                 outline: none;
             }
+
             &:active {
                 background: color.adjust($modal-submit-color, $lightness: -10%, $space: hsl);
             }
@@ -540,6 +538,7 @@ $modal-label-width: 150px;
                 background: color.adjust($modal-reset-color, $lightness: 5%, $space: hsl);
                 outline: none;
             }
+
             &:active {
                 background: color.adjust($modal-reset-color, $lightness: -10%, $space: hsl);
             }
@@ -579,14 +578,17 @@ body.trumbowyg-body-fullscreen {
     .trumbowyg-editor-box {
         border: none;
     }
+
     .trumbowyg-editor-box,
     .trumbowyg-textarea {
         height: auto !important;
         overflow: auto;
     }
+
     .trumbowyg-overlay {
         height: 100% !important;
     }
+
     .trumbowyg-button-group .trumbowyg-fullscreen-button svg {
         color: $dark-color;
         fill: transparent;
@@ -600,13 +602,16 @@ body.trumbowyg-body-fullscreen {
     img {
         max-width: 100%;
     }
+
     video,
     img {
         height: auto;
     }
+
     img {
         cursor: move;
     }
+
     canvas:focus {
         outline: none;
     }
@@ -641,26 +646,32 @@ body.trumbowyg-body-fullscreen {
             font-size: 14px !important;
             border: none !important;
         }
+
         iframe,
         object,
         hr {
             margin-bottom: 15px !important;
         }
+
         blockquote {
             margin-left: 32px !important;
             font-style: italic !important;
             color: #555 !important;
         }
+
         ul {
             list-style: disc !important;
         }
+
         ol {
             list-style: decimal !important;
         }
+
         ul,
         ol {
             padding-left: 20px !important;
         }
+
         ul ul,
         ol ol,
         ul ol,
@@ -670,6 +681,7 @@ body.trumbowyg-body-fullscreen {
             padding: 0 !important;
             padding-left: 24px !important;
         }
+
         hr {
             display: block !important;
             height: 1px !important;
@@ -693,16 +705,19 @@ body.trumbowyg-body-fullscreen {
             line-height: 38px !important;
             margin-bottom: 20px !important;
         }
+
         h2 {
             font-size: 26px !important;
             line-height: 34px !important;
             margin-bottom: 15px !important;
         }
+
         h3 {
             font-size: 22px !important;
             line-height: 28px !important;
             margin-bottom: 7px !important;
         }
+
         h4 {
             font-size: 16px !important;
             line-height: 22px !important;
@@ -720,6 +735,7 @@ body.trumbowyg-body-fullscreen {
         color: $dark-text-color;
         border-color: $dark-border-color;
     }
+
     .trumbowyg-box {
         border: 1px solid color.adjust($dark-color, $lightness: 7%, $space: hsl);
 
@@ -731,14 +747,6 @@ body.trumbowyg-body-fullscreen {
             *,
             &::before {
                 text-shadow: 0 0 7px #ccc;
-
-                @media screen and (min-width: 0 \0
-                ) {
-                    color: rgba(20, 20, 20, 0.6) !important;
-                }
-                @supports (-ms-accelerator:true) {
-                    color: rgba(20, 20, 20, 0.6) !important;
-                }
             }
         }
 
@@ -747,6 +755,7 @@ body.trumbowyg-body-fullscreen {
             color: $dark-text-color;
         }
     }
+
     .trumbowyg-button-pane {
         background-color: $dark-background-color-pane;
         border-bottom-color: $dark-border-color;
@@ -760,6 +769,7 @@ body.trumbowyg-body-fullscreen {
             &::after {
                 background-color: color.adjust($dark-color, $lightness: 7%, $space: hsl);
             }
+
             .trumbowyg-fullscreen-button svg {
                 color: transparent;
             }
@@ -781,6 +791,7 @@ body.trumbowyg-body-fullscreen {
             border-top-color: #fff;
         }
     }
+
     .trumbowyg-fullscreen {
         .trumbowyg-button-pane .trumbowyg-button-group:not(:empty) .trumbowyg-fullscreen-button svg {
             color: $light-color;
@@ -829,6 +840,7 @@ body.trumbowyg-body-fullscreen {
                 background-color: color.adjust($dark-color, $lightness: 5%, $space: hsl);
                 border-color: $dark-border-color;
             }
+
             span.trumbowyg-msg-error {
                 color: #e74c3c;
             }
@@ -853,6 +865,7 @@ body.trumbowyg-body-fullscreen {
             &:focus {
                 border-color: color.adjust($dark-color, $lightness: 25%, $space: hsl);
             }
+
             &:focus {
                 background-color: color.adjust($dark-color, $lightness: 5%, $space: hsl);
             }
@@ -866,10 +879,12 @@ body.trumbowyg-body-fullscreen {
                 &:focus {
                     background: color.adjust($modal-submit-color, $lightness: -10%, $space: hsl);
                 }
+
                 &:active {
                     background: color.adjust($modal-submit-color, $lightness: -25%, $space: hsl);
                 }
             }
+
             &.trumbowyg-modal-reset {
                 background: #333;
                 color: #ccc;
@@ -878,6 +893,7 @@ body.trumbowyg-body-fullscreen {
                 &:focus {
                     background: #444;
                 }
+
                 &:active {
                     background: #111;
                 }

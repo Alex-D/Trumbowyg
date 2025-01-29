@@ -16,7 +16,7 @@
 jQuery.trumbowyg.langs.nb = {
     viewHTML: 'Vis HTML',
 
-	undo: 'Angre',
+    undo: 'Angre',
     redo: 'Gjør om',
 
     formatting: 'Formater',
@@ -34,7 +34,7 @@ jQuery.trumbowyg.langs.nb = {
     em: 'Kursiv',
     del: 'Slettet',
 
-	superscript: 'Hevet',
+    superscript: 'Hevet',
     subscript: 'Senket',
 
     unorderedList: 'Punktliste',
@@ -52,7 +52,7 @@ jQuery.trumbowyg.langs.nb = {
     justifyFull: 'Blokkjuster',
 
     horizontalRule: 'Horisontal linje',
-	removeformat: 'Fjern formatering',
+    removeformat: 'Fjern formatering',
 
     fullscreen: 'Fullskjerm',
 
@@ -65,6 +65,6 @@ jQuery.trumbowyg.langs.nb = {
     description: 'Beskrivelse',
     title: 'Tittel',
     text: 'Tekst',
-	target: 'Mål',
+    target: 'Mål',
     width: 'Bredde'
 };
