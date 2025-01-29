@@ -10,7 +10,7 @@
 
 jQuery.trumbowyg.langs.fa = {
     _dir: 'rtl',
-    
+
     viewHTML: 'نمایش کد اچ تی ام ال',
 
     formatting: 'قالب بندی',

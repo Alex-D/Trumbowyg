@@ -1,5 +1,5 @@
 /**
- * Trumbowyg v2.29.0 - A lightweight WYSIWYG editor
+ * Trumbowyg v2.30.0 - A lightweight WYSIWYG editor
  * Default stylesheet for Trumbowyg editor
  * ------------------------
  * @link https://alex-d.github.io/Trumbowyg/
@@ -9,12 +9,14 @@
  *         Website : alex-d.fr
  */
 
+@use "sass:color";
+
 $button-size: 35px;
 $icon-size: 17px;
 $pane-spacing: 5px;
 
 $light-color: #ecf0f1;
-$light-background-color-pane: darken($light-color, 3%);
+$light-background-color-pane: color.adjust($light-color, $lightness: -3%, $space: hsl);
 $light-background-color-button: #ecf0f1;
 $light-background-color-button-active: #fff;
 $light-background-color-editor: #fff;
@@ -134,14 +136,8 @@ $modal-label-width: 150px;
     &::before {
         color: transparent !important;
         text-shadow: 0 0 7px #333;
-
-        @media screen and (min-width: 0 \0) {
-            color: rgba(200, 200, 200, 0.6) !important;
-        }
-        @supports (-ms-accelerator:true) {
-            color: rgba(200, 200, 200, 0.6) !important;
-        }
     }
+
     img,
     hr {
         opacity: 0.2;
@@ -175,6 +171,7 @@ $modal-label-width: 150px;
         flex: 1;
         margin-bottom: 1px;
     }
+
     .trumbowyg-editor-box {
         display: none;
     }
@@ -220,7 +217,7 @@ $modal-label-width: 150px;
         right: 0;
         width: 100%;
         height: 1px;
-        background: darken($light-color, 7%);
+        background: color.adjust($light-color, $lightness: -7%, $space: hsl);
     }
 
     &::after {
@@ -239,7 +236,7 @@ $modal-label-width: 150px;
             content: " ";
             display: block;
             width: 1px;
-            background: darken($light-color, 7%);
+            background: color.adjust($light-color, $lightness: -7%, $space: hsl);
             margin: 0 $pane-spacing;
             height: $button-size;
             vertical-align: top;
@@ -278,10 +275,11 @@ $modal-label-width: 150px;
         cursor: default;
         pointer-events: none;
     }
+
     &.trumbowyg-disable,
     .trumbowyg-disabled & {
         .trumbowyg-button-group::before {
-            background: darken($light-background-color-button, 3%);
+            background: color.adjust($light-background-color-button, $lightness: -3%, $space: hsl);
         }
     }
 
@@ -430,14 +428,14 @@ $modal-label-width: 150px;
             width: $modal-label-width;
             border-right: 1px solid #dedede;
             padding: 0 7px;
-            background-color: lighten($light-color, 5%);
+            background-color: color.adjust($light-color, $lightness: 5%, $space: hsl);
             position: absolute;
             left: 0;
             top: 0;
             bottom: 0;
 
             label {
-                color: darken($light-color, 45%);
+                color: color.adjust($light-color, $lightness: -45%, $space: hsl);
                 overflow: hidden;
                 height: 27px;
                 line-height: 27px;
@@ -466,7 +464,7 @@ $modal-label-width: 150px;
                 transition: all $transition-duration;
                 height: 27px;
                 line-height: 27px;
-                border:0;
+                border: 0;
                 width: 100%;
                 padding: 0 7px;
 
@@ -474,8 +472,9 @@ $modal-label-width: 150px;
                 &:focus {
                     outline: 1px solid #95a5a6;
                 }
+
                 &:focus {
-                    background: lighten($light-color, 5%);
+                    background: color.adjust($light-color, $lightness: 5%, $space: hsl);
                 }
             }
 
@@ -528,29 +527,31 @@ $modal-label-width: 150px;
 
         &.trumbowyg-modal-submit {
             right: 110px;
-            background: darken($modal-submit-color, 3%);
+            background: color.adjust($modal-submit-color, $lightness: -3%, $space: hsl);
 
             &:hover,
             &:focus {
-                background: lighten($modal-submit-color, 5%);
+                background: color.adjust($modal-submit-color, $lightness: 5%, $space: hsl);
                 outline: none;
             }
+
             &:active {
-                background: darken($modal-submit-color, 10%);
+                background: color.adjust($modal-submit-color, $lightness: -10%, $space: hsl);
             }
         }
 
         &.trumbowyg-modal-reset {
             color: #555;
-            background: darken($modal-reset-color, 3%);
+            background: color.adjust($modal-reset-color, $lightness: -3%, $space: hsl);
 
             &:hover,
             &:focus {
-                background: lighten($modal-reset-color, 5%);
+                background: color.adjust($modal-reset-color, $lightness: 5%, $space: hsl);
                 outline: none;
             }
+
             &:active {
-                background: darken($modal-reset-color, 10%);
+                background: color.adjust($modal-reset-color, $lightness: -10%, $space: hsl);
             }
         }
     }
@@ -558,7 +559,7 @@ $modal-label-width: 150px;
 
 .trumbowyg-overlay {
     position: absolute;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: hsla(0, 0%, 100%, 0.5);
     height: 100%;
     width: 100%;
     left: 0;
@@ -588,14 +589,17 @@ body.trumbowyg-body-fullscreen {
     .trumbowyg-editor-box {
         border: none;
     }
+
     .trumbowyg-editor-box,
     .trumbowyg-textarea {
         height: auto !important;
         overflow: auto;
     }
+
     .trumbowyg-overlay {
         height: 100% !important;
     }
+
     .trumbowyg-button-group .trumbowyg-fullscreen-button svg {
         color: $dark-color;
         fill: transparent;
@@ -609,13 +613,16 @@ body.trumbowyg-body-fullscreen {
     img {
         max-width: 100%;
     }
+
     video,
     img {
         height: auto;
     }
+
     img {
         cursor: move;
     }
+
     canvas:focus {
         outline: none;
     }
@@ -650,26 +657,32 @@ body.trumbowyg-body-fullscreen {
             font-size: 14px !important;
             border: none !important;
         }
+
         iframe,
         object,
         hr {
             margin-bottom: 15px !important;
         }
+
         blockquote {
             margin-left: 32px !important;
             font-style: italic !important;
             color: #555 !important;
         }
+
         ul {
             list-style: disc !important;
         }
+
         ol {
             list-style: decimal !important;
         }
+
         ul,
         ol {
             padding-left: 20px !important;
         }
+
         ul ul,
         ol ol,
         ul ol,
@@ -679,6 +692,7 @@ body.trumbowyg-body-fullscreen {
             padding: 0 !important;
             padding-left: 24px !important;
         }
+
         hr {
             display: block !important;
             height: 1px !important;
@@ -702,16 +716,19 @@ body.trumbowyg-body-fullscreen {
             line-height: 38px !important;
             margin-bottom: 20px !important;
         }
+
         h2 {
             font-size: 26px !important;
             line-height: 34px !important;
             margin-bottom: 15px !important;
         }
+
         h3 {
             font-size: 22px !important;
             line-height: 28px !important;
             margin-bottom: 7px !important;
         }
+
         h4 {
             font-size: 16px !important;
             line-height: 22px !important;
@@ -729,8 +746,9 @@ body.trumbowyg-body-fullscreen {
         color: $dark-text-color;
         border-color: $dark-border-color;
     }
+
     .trumbowyg-box {
-        border: 1px solid lighten($dark-color, 7%);
+        border: 1px solid color.adjust($dark-color, $lightness: 7%, $space: hsl);
 
         &.trumbowyg-fullscreen {
             background: #111;
@@ -740,14 +758,6 @@ body.trumbowyg-body-fullscreen {
             *,
             &::before {
                 text-shadow: 0 0 7px #ccc;
-
-                @media screen and (min-width: 0 \0
-                ) {
-                    color: rgba(20, 20, 20, 0.6) !important;
-                }
-                @supports (-ms-accelerator:true) {
-                    color: rgba(20, 20, 20, 0.6) !important;
-                }
             }
         }
 
@@ -756,19 +766,21 @@ body.trumbowyg-body-fullscreen {
             color: $dark-text-color;
         }
     }
+
     .trumbowyg-button-pane {
         background-color: $dark-background-color-pane;
         border-bottom-color: $dark-border-color;
 
         &::before,
         &::after {
-            background: lighten($dark-color, 7%);
+            background: color.adjust($dark-color, $lightness: 7%, $space: hsl);
         }
 
         .trumbowyg-button-group:not(:empty) {
             &::after {
-                background-color: lighten($dark-color, 7%);
+                background-color: color.adjust($dark-color, $lightness: 7%, $space: hsl);
             }
+
             .trumbowyg-fullscreen-button svg {
                 color: transparent;
             }
@@ -776,7 +788,7 @@ body.trumbowyg-body-fullscreen {
 
         &.trumbowyg-disable {
             .trumbowyg-button-group::after {
-                background-color: lighten($dark-color, 3%);
+                background-color: color.adjust($dark-color, $lightness: 3%, $space: hsl);
             }
         }
 
@@ -790,6 +802,7 @@ body.trumbowyg-body-fullscreen {
             border-top-color: #fff;
         }
     }
+
     .trumbowyg-fullscreen {
         .trumbowyg-button-pane .trumbowyg-button-group:not(:empty) .trumbowyg-fullscreen-button svg {
             color: $light-color;
@@ -821,7 +834,7 @@ body.trumbowyg-body-fullscreen {
         .trumbowyg-modal-title {
             border-bottom: 1px solid #555;
             color: $dark-text-color;
-            background: lighten($dark-color, 10%);
+            background: color.adjust($dark-color, $lightness: 10%, $space: hsl);
         }
 
         .trumbowyg-input-row {
@@ -830,14 +843,15 @@ body.trumbowyg-body-fullscreen {
 
         .trumbowyg-input-infos {
             color: #eee;
-            background-color: lighten($dark-color, 5%);
+            background-color: color.adjust($dark-color, $lightness: 5%, $space: hsl);
             border-right-color: $dark-background-color-button;
 
             span {
                 color: #eee;
-                background-color: lighten($dark-color, 5%);
+                background-color: color.adjust($dark-color, $lightness: 5%, $space: hsl);
                 border-color: $dark-border-color;
             }
+
             span.trumbowyg-msg-error {
                 color: #e74c3c;
             }
@@ -860,25 +874,28 @@ body.trumbowyg-body-fullscreen {
 
             &:hover,
             &:focus {
-                border-color: lighten($dark-color, 25%);
+                border-color: color.adjust($dark-color, $lightness: 25%, $space: hsl);
             }
+
             &:focus {
-                background-color: lighten($dark-color, 5%);
+                background-color: color.adjust($dark-color, $lightness: 5%, $space: hsl);
             }
         }
 
         .trumbowyg-modal-button {
             &.trumbowyg-modal-submit {
-                background: darken($modal-submit-color, 20%);
+                background: color.adjust($modal-submit-color, $lightness: -20%, $space: hsl);
 
                 &:hover,
                 &:focus {
-                    background: darken($modal-submit-color, 10%);
+                    background: color.adjust($modal-submit-color, $lightness: -10%, $space: hsl);
                 }
+
                 &:active {
-                    background: darken($modal-submit-color, 25%);
+                    background: color.adjust($modal-submit-color, $lightness: -25%, $space: hsl);
                 }
             }
+
             &.trumbowyg-modal-reset {
                 background: #333;
                 color: #ccc;
@@ -887,6 +904,7 @@ body.trumbowyg-body-fullscreen {
                 &:focus {
                     background: #444;
                 }
+
                 &:active {
                     background: #111;
                 }

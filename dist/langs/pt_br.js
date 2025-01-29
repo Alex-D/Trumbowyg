@@ -11,7 +11,7 @@
 // jshint camelcase:false
 jQuery.trumbowyg.langs.pt_br = {
     viewHTML: 'Ver HTML',
-    
+
     undo: 'Desfazer',
     redo: 'Refazer',
 
@@ -32,7 +32,7 @@ jQuery.trumbowyg.langs.pt_br = {
 
     superscript: 'Sobrescrito',
     subscript: 'Subscrito',
-            
+
     unorderedList: 'Lista não ordenada',
     orderedList: 'Lista ordenada',
 

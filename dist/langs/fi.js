@@ -9,7 +9,7 @@
 
 jQuery.trumbowyg.langs.fi = {
     viewHTML: 'Näytä HTML',
-    
+
     undo: 'Kumoa',
     redo: 'Tee uudelleen',
 

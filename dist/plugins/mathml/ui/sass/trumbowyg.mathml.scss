@@ -1,6 +1,6 @@
 /**
- * Trumbowyg v2.29.0 - A lightweight WYSIWYG editor
- * Default stylesheet for Trumbowyg editor plugin
+ * Trumbowyg v2.30.0 - A lightweight WYSIWYG editor
+ * Trumbowyg plugin stylesheet
  * ------------------------
  * @link https://alex-d.github.io/Trumbowyg/
  * @license MIT
@@ -10,32 +10,32 @@
  */
 
 [formulas] {
-	position: relative;
-	display: inline-block;
-	pointer-events: none;
+    position: relative;
+    display: inline-block;
+    pointer-events: none;
 
-	&[inline="false"] {
-		display: block;
-		width: 100%;
-	}
+    &[inline="false"] {
+        display: block;
+        width: 100%;
+    }
 
-	&::after {
-		content: '\270E';
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		opacity: 0;
-		background-color: rgba(255, 255, 255, 0.83);
-		box-shadow: 0 0 5px 5px rgba(255, 255, 255, 0.83);
-		cursor: pointer;
-		pointer-events: auto;
-	}
+    &::after {
+        content: '\270E';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0;
+        background-color: rgba(255, 255, 255, 0.83);
+        box-shadow: 0 0 5px 5px rgba(255, 255, 255, 0.83);
+        cursor: pointer;
+        pointer-events: auto;
+    }
 
-	&:hover {
-		&::after {
-			opacity: 1;
-		}
-	}
+    &:hover {
+        &::after {
+            opacity: 1;
+        }
+    }
 }
