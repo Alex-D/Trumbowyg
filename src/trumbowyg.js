@@ -198,7 +198,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
     };
 
     // @param: editorElem is the DOM element
-    var Trumbowyg = function (editorElem, options) {
+    var Trumbowyg = function (editorElem, options) { // jshint ignore:line
         var t = this,
             trumbowygIconsId = 'trumbowyg-icons',
             $trumbowyg = $.trumbowyg;
@@ -821,7 +821,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
 
         // Build a button and his action
-        buildBtn: function (btnName) { // btnName is name of the button
+        // @param btnName The name of the button
+        buildBtn: function (btnName) { // jshint ignore:line
             var t = this,
                 prefix = t.o.prefix,
                 btn = t.btnsDef[btnName],
