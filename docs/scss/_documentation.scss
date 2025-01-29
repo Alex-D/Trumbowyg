@@ -498,8 +498,11 @@ dl {
 }
 
 .tree {
-    padding-left: 0;
     list-style: none;
+    background: white;
+    padding: 1em 1.5em;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
 
     ul {
         position: relative;
@@ -511,6 +514,10 @@ dl {
 
     li {
         padding-top: 8px;
+    }
+
+    & > li {
+        padding-top: 0;
     }
 
     ul li {
