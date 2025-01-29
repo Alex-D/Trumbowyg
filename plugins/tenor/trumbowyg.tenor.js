@@ -103,7 +103,7 @@
         }
 
         var html = response.results
-            .map(function (gifData, index) {
+            .map(function (gifData) {
                 // jshint camelcase:false
                 var image = gifData.media_formats.tinygif,
                     imageRatio = image.dims[1] / image.dims[0],
@@ -154,11 +154,12 @@
             var img = this;
             if (img.complete) { // images load instantly when cached and esp. when loaded in previous modal open
                 addLoadedClass(img);
-            } else {
-                img.addEventListener('load', function () {
-                    addLoadedClass(this);
-                });
+                return;
             }
+
+            img.addEventListener('load', function () {
+                addLoadedClass(this);
+            });
         });
 
         $tenorModal.data('columnHeights', columnHeights);
