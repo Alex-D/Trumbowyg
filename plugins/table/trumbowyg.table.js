@@ -78,7 +78,7 @@
                     'tableVerticalAlignTop',
                     'tableVerticalAlignMiddle',
                     'tableVerticalAlignBottom',
-               ],
+                ],
             },
             {
                 title: 'tableOthers',

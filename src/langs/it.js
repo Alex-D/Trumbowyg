@@ -8,7 +8,7 @@
 
 jQuery.trumbowyg.langs.it = {
     viewHTML: 'Mostra HTML',
-    
+
     undo: 'Annulla',
     redo: 'Ripeti',
 
@@ -58,5 +58,5 @@ jQuery.trumbowyg.langs.it = {
     removeformat: 'Rimuovi Formattazione',
 
     superscript: 'Apice',
-    subscript: 'Pedice',
+    subscript: 'Pedice'
 };

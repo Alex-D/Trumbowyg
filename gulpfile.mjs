@@ -18,9 +18,8 @@ import gulpSourcemaps from 'gulp-sourcemaps';
 import gulpSvgMin from 'gulp-svgmin';
 import gulpSvgStore from 'gulp-svgstore';
 import gulpTerser from 'gulp-terser';
-import {deleteSync} from 'del';
-import sass from 'sass';
-import vinylPaths from 'vinyl-paths';
+import {deleteAsync} from 'del';
+import * as sass from 'sass';
 
 const gulpSass = () => gulpSassPlugin(sass)();
 
@@ -59,28 +58,21 @@ const bannerLight = [
 
 
 const clean = function () {
-    return gulp.src('dist/*')
-        .pipe(vinylPaths(deleteSync));
+    return deleteAsync(['dist/*']);
 };
 
-const testScripts = function () {
-    return gulp.src(paths.scripts)
+const lint = function () {
+    return gulp.src([
+        ...paths.scripts,
+        ...paths.pluginsScripts,
+        ...paths.langs,
+    ])
         .pipe(gulpJsHint())
-        .pipe(gulpJsHint.reporter('jshint-stylish', {}));
+        .pipe(gulpJsHint.reporter('jshint-stylish', {}))
+        .pipe(gulpJsHint.reporter('fail', {}));
 };
-const testPluginsScripts = function () {
-    return gulp.src(paths.pluginsScripts)
-        .pipe(gulpJsHint())
-        .pipe(gulpJsHint.reporter('jshint-stylish', {}));
-};
-const testLangs = function () {
-    return gulp.src(paths.langs)
-        .pipe(gulpJsHint())
-        .pipe(gulpJsHint.reporter('jshint-stylish', {}));
-};
-const test = gulp.parallel(testScripts, testPluginsScripts, testLangs);
 
-const scripts = gulp.series(testScripts, function scripts() {
+const scripts = function scripts() {
     return gulp.src(paths.scripts)
         .pipe(gulpHeader(banner, {pkg: pkg, description: 'Trumbowyg core file'}))
         .pipe(gulpNewer('dist/trumbowyg.js'))
@@ -96,9 +88,9 @@ const scripts = gulp.series(testScripts, function scripts() {
         .pipe(gulpHeader(bannerLight, {pkg: pkg}))
         .pipe(gulp.dest('dist/'))
         .pipe(gulpSize({title: 'trumbowyg.min.js'}));
-});
+};
 
-const pluginsScripts = gulp.series(testPluginsScripts, function pluginsScripts() {
+const pluginsScripts = function pluginsScripts() {
     return gulp.src(paths.pluginsScripts)
         .pipe(gulp.dest('dist/plugins/'))
         .pipe(gulpRename({suffix: '.min'}))
@@ -108,9 +100,9 @@ const pluginsScripts = gulp.series(testPluginsScripts, function pluginsScripts()
             }
         }))
         .pipe(gulp.dest('dist/plugins/'));
-});
+};
 
-const langs = gulp.series(testLangs, function langs() {
+const langs = function langs() {
     return gulp.src(paths.langs)
         .pipe(gulp.dest('dist/langs/'))
         .pipe(gulpRename({suffix: '.min'}))
@@ -120,7 +112,7 @@ const langs = gulp.series(testLangs, function langs() {
             }
         }))
         .pipe(gulp.dest('dist/langs/'));
-});
+};
 
 
 const icons = function () {
@@ -141,7 +133,7 @@ const styles = function () {
     }
 
     stylesPipe = stylesPipe
-        .pipe(gulpAutoprefixer(['last 1 version', '> 1%', 'ff >= 20', 'ie >= 9', 'opera >= 12', 'Android >= 2.2'], {cascade: true}))
+        .pipe(gulpAutoprefixer(['last 2 version', '> 1%'], {cascade: true}))
         .pipe(gulpHeader(banner, {pkg: pkg, description: 'Default stylesheet for Trumbowyg editor'}))
         .pipe(gulp.dest('dist/ui/'))
         .pipe(gulpSize({title: 'trumbowyg.css'}))
@@ -169,7 +161,7 @@ const sassDist = gulp.series(styles, function sassDist() {
 const pluginsStyles = function () {
     return gulp.src(paths.pluginsStyles)
         .pipe(gulpSass())
-        .pipe(gulpAutoprefixer(['last 1 version', '> 1%', 'ff >= 20', 'ie >= 9', 'opera >= 12', 'Android >= 2.2'], {cascade: true}))
+        .pipe(gulpAutoprefixer(['last 2 version', '> 1%'], {cascade: true}))
         .pipe(gulpHeader(banner, {pkg: pkg, description: 'Trumbowyg plugin stylesheet'}))
         .pipe(gulpRename(function (path) {
             path.dirname += '/..';
@@ -190,6 +182,11 @@ const pluginsSassDist = gulp.series(pluginsStyles, function pluginsSassDist() {
 
 
 const watch = function () {
+    gulp.watch([
+        ...paths.scripts,
+        ...paths.pluginsScripts,
+        ...paths.langs,
+    ], lint);
     gulp.watch(paths.icons, icons);
     gulp.watch(paths.scripts, scripts);
     gulp.watch(paths.langs, langs);
@@ -219,6 +216,6 @@ export default buildAndWatch;
 export {
     clean,
     build,
-    test,
+    lint,
     watch
 };
