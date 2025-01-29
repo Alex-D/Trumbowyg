@@ -597,7 +597,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 .on('keydown', function (e) {
                     // append flags to differentiate Chrome spans
                     var keyCode = e.which;
-                    if (keyCode === 8 || keyCode === 13 || keyCode === 46) {
+                    if (keyCode === 8 || keyCode === 13 || keyCode === 229 || keyCode === 46) {
                         t.toggleSpan(true);
                     }
                     if ((e.ctrlKey || e.metaKey) && !e.altKey) {
