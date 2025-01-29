@@ -1,8 +1,8 @@
-@import "variables";
+@use "variables";
 
 .installation-first-step {
     height: 400px;
-    color: $text-color;
+    color: variables.$text-color;
     text-align: center;
     padding-top: 10px;
     margin: 20px 0 50px;
@@ -18,15 +18,16 @@
         width: 48%;
         float: left;
     }
+
     .installation-col-title {
         font-size: 22px;
         padding: 30px 0;
-        color: $text-color;
+        color: variables.$text-color;
     }
 
     .button {
         display: block;
-        color: $text-color;
+        color: variables.$text-color;
         border-color: rgba(0, 0, 0, 0.07);
         background-color: transparent;
         box-shadow: 0 0 50px rgba(0, 0, 0, 0.03);
@@ -34,10 +35,10 @@
 
         &:hover {
             text-decoration: none;
-            color: $white;
+            color: variables.$white;
             border-color: transparent;
-            background-color: $primary-color;
-            box-shadow: 0 0 50px rgba($primary-color, 0.4);
+            background-color: variables.$primary-color;
+            box-shadow: 0 0 50px rgba(variables.$primary-color, 0.4);
         }
     }
 
@@ -52,6 +53,7 @@
         border-radius: 50px;
         z-index: 0;
     }
+
     .installation-or::before {
         content: "";
         display: block;
@@ -63,7 +65,7 @@
         padding-top: 100%;
         min-width: 45px;
         min-height: 45px;
-        background: $white;
+        background: variables.$white;
         border-radius: 100%;
         transform: translate(-50%, -50%);
     }

@@ -156,7 +156,7 @@
                     '1.5': '大',
                     '2.0': '特大'
                 }
-            },
+            }
         }
     });
     // jshint camelcase:true
@@ -176,8 +176,8 @@
             lineheight: {
                 init: function (trumbowyg) {
                     trumbowyg.o.plugins.lineheight = $.extend({},
-                      defaultOptions,
-                      trumbowyg.o.plugins.lineheight || {}
+                        defaultOptions,
+                        trumbowyg.o.plugins.lineheight || {}
                     );
 
                     trumbowyg.addBtnDef('lineheight', {
@@ -192,11 +192,11 @@
     function buildDropdown(trumbowyg) {
         var dropdown = [];
 
-        $.each(trumbowyg.o.plugins.lineheight.sizeList, function(index, size) {
+        $.each(trumbowyg.o.plugins.lineheight.sizeList, function (index, size) {
             trumbowyg.addBtnDef('lineheight_' + size, {
                 text: trumbowyg.lang.lineheights[size] || size,
                 hasIcon: false,
-                fn: function(){
+                fn: function () {
                     trumbowyg.saveRange();
                     var text = trumbowyg.getRangeText();
                     if (text.replace(/\s/g, '') !== '') {

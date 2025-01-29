@@ -41,7 +41,7 @@
                 fontFamily: 'Lettertype'
             },
             pt_br: {
-                fontFamily: 'Fonte',
+                fontFamily: 'Fonte'
             },
             ru: {
                 fontFamily: 'Шрифт'
@@ -56,8 +56,8 @@
                 fontFamily: '字体',
             },
             zh_tw: {
-                fontFamily: '字體',
-            },
+                fontFamily: '字體'
+            }
         }
     });
     // jshint camelcase:true
@@ -86,8 +86,8 @@
             fontfamily: {
                 init: function (trumbowyg) {
                     trumbowyg.o.plugins.fontfamily = $.extend({},
-                      defaultOptions,
-                      trumbowyg.o.plugins.fontfamily || {}
+                        defaultOptions,
+                        trumbowyg.o.plugins.fontfamily || {}
                     );
 
                     trumbowyg.addBtnDef('fontfamily', {

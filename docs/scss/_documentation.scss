@@ -1,4 +1,4 @@
-@import "variables";
+@use "variables";
 
 $added-color: #5ecb0e;
 $deprecated-color: #ff9a4d;
@@ -7,7 +7,7 @@ $sidebar-width: 22%;
 $beer-height: 70px;
 
 .documentation-body {
-    background: $grey;
+    background: variables.$grey;
     display: flex;
 
     .main {
@@ -24,7 +24,7 @@ $beer-height: 70px;
         iframe {
             width: 100%;
             height: 100vh;
-            background: $grey;
+            background: variables.$grey;
         }
     }
 
@@ -35,14 +35,17 @@ $beer-height: 70px;
     .section-title {
         padding: 50px 0 0;
     }
+
     h3 {
         display: inline-block;
         font-weight: bold;
         font-size: 26px;
     }
+
     h4 {
         padding: 20px 0 0;
     }
+
     p,
     dd,
     ul {
@@ -61,40 +64,43 @@ $beer-height: 70px;
 
     code.type {
         padding: 0 3px;
-        color: $primary-color-dark;
+        color: variables.$primary-color-dark;
 
         &::before {
             content: "<";
         }
+
         &::after {
             content: ">";
         }
     }
 
     .button.button-demo {
-        border-color: rgba($secondary-color, 0.6);
-        color: $secondary-color;
+        border-color: rgba(variables.$secondary-color, 0.6);
+        color: variables.$secondary-color;
         width: auto;
         padding: 10px 30px;
 
         &:hover,
         &:focus {
             text-decoration: none;
-            border-color: $secondary-color;
-            background: $secondary-color;
-            color: $white;
+            border-color: variables.$secondary-color;
+            background: variables.$secondary-color;
+            color: variables.$white;
         }
     }
 
     ::-webkit-scrollbar {
         width: 17px;
     }
+
     ::-webkit-scrollbar-track {
-        background: $grey;
+        background: variables.$grey;
     }
+
     ::-webkit-scrollbar-thumb {
         background: #cfd7de;
-        border: 2px solid $grey;
+        border: 2px solid variables.$grey;
 
         &:hover {
             background: #616870;
@@ -115,9 +121,10 @@ $beer-height: 70px;
             width: 100%;
         }
     }
+
     .documentation-title {
         text-align: center;
-        font-family: $panton;
+        font-family: variables.$panton;
         font-weight: 100;
         line-height: 1;
 
@@ -125,10 +132,11 @@ $beer-height: 70px;
             font-size: 2.5vw;
         }
     }
+
     .documentation-menu {
         text-align: center;
         margin-top: 40px;
-        background: $secondary-color;
+        background: variables.$secondary-color;
 
         a {
             display: inline-block;
@@ -160,20 +168,21 @@ $beer-height: 70px;
     top: 0;
     left: 0;
     height: 100vh;
-    color: $white;
-    background: $primary-color linear-gradient(to bottom left, $primary-color, $primary-color-light);
+    color: variables.$white;
+    background: variables.$primary-color linear-gradient(to bottom left, variables.$primary-color, variables.$primary-color-light);
     width: $sidebar-width;
 
     ::-webkit-scrollbar-track {
         background: transparent;
     }
+
     ::-webkit-scrollbar-thumb {
-        background: $primary-color-light;
-        border: 1px solid $primary-color-light;
+        background: variables.$primary-color-light;
+        border: 1px solid variables.$primary-color-light;
         border-right: none;
 
         &:hover {
-            background: $white;
+            background: variables.$white;
         }
     }
 
@@ -185,7 +194,7 @@ $beer-height: 70px;
         bottom: $beer-height;
         width: calc(100% - 17px);
         height: 100px;
-        background: linear-gradient(to bottom, rgba($primary-color-light, 0), $primary-color-light);
+        background: linear-gradient(to bottom, rgba(variables.$primary-color-light, 0), variables.$primary-color-light);
         pointer-events: none;
     }
 
@@ -202,10 +211,11 @@ $beer-height: 70px;
         margin: 0;
         list-style: none;
     }
+
     a {
         text-decoration: none;
-        color: $white;
-        transition: color $transition-duration, text-indent $transition-duration;
+        color: variables.$white;
+        transition: color variables.$transition-duration, text-indent variables.$transition-duration;
     }
 
     .documentation-summary {
@@ -246,14 +256,14 @@ $beer-height: 70px;
                 > a {
                     &:hover,
                     &:focus {
-                        color: $primary-color-dark;
+                        color: variables.$primary-color-dark;
                     }
                 }
 
                 ul li a {
                     &:hover,
                     &:focus {
-                        color: $primary-color-dark;
+                        color: variables.$primary-color-dark;
                         text-indent: 10px;
                     }
                 }
@@ -266,7 +276,7 @@ $beer-height: 70px;
         width: $sidebar-width;
         bottom: 0;
         left: 0;
-        background: $white;
+        background: variables.$white;
         height: $beer-height;
 
         a {
@@ -323,7 +333,7 @@ $beer-height: 70px;
     display: inline-block;
     padding: 3px 13px;
     margin: 0;
-    color: $white;
+    color: variables.$white;
     font-size: 14px;
     border-radius: 50px;
     transform: translateX(10px) translateY(-4px);
@@ -374,7 +384,7 @@ $beer-height: 70px;
         left: 50%;
         width: 40%;
         height: 0;
-        border-bottom: 1px solid $primary-color-light;
+        border-bottom: 1px solid variables.$primary-color-light;
         transform: translateX(-50%);
     }
 
@@ -383,15 +393,18 @@ $beer-height: 70px;
         display: inline-block;
         position: relative;
     }
+
     h3 {
         padding-top: 50px;
         margin-left: -15px;
         padding-left: 15px;
     }
+
     h4 {
         font-size: 20px;
         font-weight: bold;
     }
+
     h3 + h4,
     h3 + a + h4 {
         display: block;
@@ -406,23 +419,23 @@ $beer-height: 70px;
         opacity: 0;
         text-align: center;
         text-decoration: none;
-        background: $primary-color;
+        background: variables.$primary-color;
         border-radius: 50%;
         transform: translateY(-36px);
-        transition: opacity $transition-duration, background $transition-duration, color $transition-duration;
+        transition: opacity variables.$transition-duration, background variables.$transition-duration, color variables.$transition-duration;
 
         &:hover,
         &:focus {
-            background: $white;
+            background: variables.$white;
             text-decoration: none;
 
             svg {
-                fill: $primary-color;
+                fill: variables.$primary-color;
             }
         }
 
         svg {
-            fill: $white;
+            fill: variables.$white;
             width: 70%;
             height: 100%;
         }
@@ -445,7 +458,7 @@ $beer-height: 70px;
 }
 
 .sample-data {
-    background: $white;
+    background: variables.$white;
     padding: 25px;
 
     h4 {
@@ -473,12 +486,64 @@ dl {
         padding: 0 4px 0 6px;
         border-radius: 4px;
     }
+
     dd {
         padding: 5px 0 15px;
         margin-left: 15px;
 
         ul {
             margin: 0.5em 0;
+        }
+    }
+}
+
+.tree {
+    list-style: none;
+    background: white;
+    padding: 1em 1.5em;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+
+    ul {
+        position: relative;
+        list-style: none;
+        margin: 0;
+        padding-left: 8px;
+        overflow: hidden;
+    }
+
+    li {
+        padding-top: 8px;
+    }
+
+    & > li {
+        padding-top: 0;
+    }
+
+    ul li {
+        position: relative;
+        padding-left: 16px;
+
+        &::before,
+        &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            background: variables.$primary-color;
+        }
+
+        &::before {
+            top: 20px;
+            left: 0;
+            width: 12px;
+            height: 1px;
+        }
+
+        &::after {
+            left: 0;
+            bottom: calc(100% - 20px);
+            width: 1px;
+            height: 500px;
         }
     }
 }

@@ -1,12 +1,10 @@
 // Panton Light
 @font-face {
     font-family: 'Panton';
-    src: url('../fonts/panton.eot');
-    src: url('../fonts/panton.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/panton.woff2') format('woff2'),
-         url('../fonts/panton.woff') format('woff'),
-         url('../fonts/panton.ttf') format('truetype');
+    src: url('../fonts/panton.woff2') format('woff2');
     font-weight: 300;
+    font-style: normal;
+    font-display: swap;
 }
 
 // Open Sans

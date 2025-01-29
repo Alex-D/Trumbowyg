@@ -1,172 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Trumbowyg by Alex-D</title>
-        <base href="/test/base/url/">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <style>
-            html,
-            body {
-                margin: 0;
-                padding: 0;
-                background-color: #f4f7fa;
-                font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
-            }
+<head>
+    <meta charset="UTF-8">
+    <title>Trumbowyg by Alex-D</title>
+    <base href="/test/base/url/">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fa;
+            font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+        }
 
-            header {
-                text-align: center;
-            }
+        header {
+            text-align: center;
+        }
 
-            .container {
-                max-width: 960px;
-                margin: 0 auto;
-            }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
 
-            .dark-section {
-                background: #111;
-                color: #ddd;
-                margin-top: 50px;
-                padding: 50px 0 100px;
-            }
+        .dark-section {
+            background: #111;
+            color: #ddd;
+            margin-top: 50px;
+            padding: 50px 0 100px;
+        }
 
-            .dark-section .title {
-                font-weight: normal;
-                text-align: center;
-                font-size: 32px;
-                margin: 20px 0 50px;
-            }
+        .dark-section .title {
+            font-weight: normal;
+            text-align: center;
+            font-size: 32px;
+            margin: 20px 0 50px;
+        }
 
-            .form-submit {
-                background: transparent;
-                border: 1px solid #555;
-                color: #ccc;
-                padding: 7px 13px;
-                margin-right: 17px;
-                float: right;
-            }
+        .form-submit {
+            background: transparent;
+            border: 1px solid #555;
+            color: #ccc;
+            padding: 7px 13px;
+            margin-right: 17px;
+            float: right;
+        }
 
-            .trumbowyg {
-                margin-bottom: 32px;
-            }
+        .trumbowyg {
+            margin-bottom: 32px;
+        }
 
-            h2 {
-                font-size: 26px;
-                margin-top: 0;
-            }
+        h2 {
+            font-size: 26px;
+            margin-top: 0;
+        }
 
-            h1 + pre,
-            h2 + pre,
-            h3 + pre,
-            h4 + pre {
-                margin-top: -20px;
-            }
+        h1 + pre,
+        h2 + pre,
+        h3 + pre,
+        h4 + pre {
+            margin-top: -20px;
+        }
 
-            p {
-                margin-top: 0;
-            }
+        p {
+            margin-top: 0;
+        }
 
-            :root {
-                --tbw-cell-vertical-padding: 4px;
-                --tbw-cell-horizontal-padding: 8px;
-                --tbw-cell-line-height: 1.5em;
-            }
+        :root {
+            --tbw-cell-vertical-padding: 4px;
+            --tbw-cell-horizontal-padding: 8px;
+            --tbw-cell-line-height: 1.5em;
+        }
 
-            table {
-                margin-bottom: var(--tbw-cell-line-height);
-            }
+        table {
+            margin-bottom: var(--tbw-cell-line-height);
+        }
 
-            th,
-            td {
-                height: calc(var(--tbw-cell-vertical-padding) * 2 + var(--tbw-cell-line-height));
-                min-width: calc(var(--tbw-cell-horizontal-padding) * 2);
-                padding: var(--tbw-cell-vertical-padding) var(--tbw-cell-horizontal-padding);
-                border: 1px solid #e7eaec;
-            }
+        th,
+        td {
+            height: calc(var(--tbw-cell-vertical-padding) * 2 + var(--tbw-cell-line-height));
+            min-width: calc(var(--tbw-cell-horizontal-padding) * 2);
+            padding: var(--tbw-cell-vertical-padding) var(--tbw-cell-horizontal-padding);
+            border: 1px solid #e7eaec;
+        }
 
-            thead {
-                background: #FFFFFF;
-            }
-        </style>
-        <link rel="stylesheet" href="/dist/ui/trumbowyg.css">
-        <link rel="stylesheet" href="/dist/plugins/colors/ui/trumbowyg.colors.css">
-    </head>
-    <body>
-        <div class="container">
-            <header>
-                <h1>Trumbowyg examples</h1>
+        thead {
+            background: #FFFFFF;
+        }
+    </style>
+    <link rel="stylesheet" href="/dist/ui/trumbowyg.css">
+    <link rel="stylesheet" href="/dist/plugins/colors/ui/trumbowyg.colors.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Trumbowyg examples</h1>
 
-                <p>
-                    Close an editor on clic on "Close" in top right corner. <br>
-                    To reopen an editor, double-click on his text.
-                </p>
-            </header>
+        <p>
+            Close an editor on clic on "Close" in top right corner. <br>
+            To reopen an editor, double-click on his text.
+        </p>
+    </header>
 
-            <div id="default-editor">
-                <h2>This editor is the default build of Trumbowyg.</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, <a href="https://alex-d.github.io/Trumbowyg/">consectetur adipisicing</a> elit. Possimus, aliquam, minima fugiat placeat provident optio nam reiciendis eius beatae quibusdam!
-                </p>
-                <p>
-                    The text is derived from Cicero's De Finibus Bonorum et Malorum (On the Ends of Goods and Evils, or alternatively [About] The Purposes of Good and Evil ). The original passage began: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit (Translation: &quot;Neither is there anyone who loves grief itself since it is grief and thus wants to obtain it&quot;).
-                </p>
-                <code><pre>
+    <div id="default-editor">
+        <h2>This editor is the default build of Trumbowyg.</h2>
+        <p>
+            Lorem ipsum dolor sit amet, <a href="https://alex-d.github.io/Trumbowyg/">consectetur adipisicing</a> elit.
+            Possimus, aliquam, minima fugiat placeat provident optio nam reiciendis eius beatae quibusdam!
+        </p>
+        <p>
+            The text is derived from Cicero's De Finibus Bonorum et Malorum (On the Ends of Goods and Evils, or
+            alternatively [About] The Purposes of Good and Evil ). The original passage began: Neque porro quisquam est
+            qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit (Translation: &quot;Neither is there
+            anyone who loves grief itself since it is grief and thus wants to obtain it&quot;).
+        </p>
+        <code><pre>
 $('#default-editor').trumbowyg();
-                </pre></code>
-            </div>
-            <button id="reset-default-editor">Reset</button>
+                </pre>
+        </code>
+    </div>
+    <button id="reset-default-editor">Reset</button>
 
-            <div id="simple-editor">
-                <h2>This is a minimalist demo of Trumbowyg.</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident optio nam reiciendis eius beatae quibusdam!
-                </p>
-                <code><pre>
+    <div id="simple-editor">
+        <h2>This is a minimalist demo of Trumbowyg.</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident
+            optio nam reiciendis eius beatae quibusdam!
+        </p>
+        <code><pre>
 $('#simple-editor').trumbowyg({
     btns: ['strong', 'em', 'del']
 });
-                </pre></code>
-            </div>
+                </pre>
+        </code>
+    </div>
 
-            <div id="upload-editor">
-                <h2>This is a minimalist demo of Trumbowyg with upload image plugin.</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident optio nam reiciendis eius beatae quibusdam!
-                </p>
-                <code><pre>
+    <div id="upload-editor">
+        <h2>This is a minimalist demo of Trumbowyg with upload image plugin.</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident
+            optio nam reiciendis eius beatae quibusdam!
+        </p>
+        <code><pre>
 $('#simple-editor').trumbowyg({
     btns: ['strong', 'em', 'del', 'upload'],
     btnsDef: {
-      upload: {
-        ico: 'insertImage'
-      }
+        upload: {
+            ico: 'insertImage'
+        }
     }
 });
-                </pre></code>
-            </div>
+                </pre>
+        </code>
+    </div>
 
-            <div id="flat-buttonpane">
-                <h2>All buttons of Trumbowyg are here.</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident optio nam reiciendis eius beatae quibusdam!
-                </p>
-            </div>
+    <div id="flat-buttonpane">
+        <h2>All buttons of Trumbowyg are here.</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, aliquam, minima fugiat placeat provident
+            optio nam reiciendis eius beatae quibusdam!
+        </p>
+    </div>
 
-            <div id="customized-buttonpane">
-                <h2>This is a demo of Trumbowyg with a customized button pane</h2>
-                <p>
-                    The text is derived from Cicero's De Finibus Bonorum et Malorum (On the Ends of Goods and Evils, or alternatively [About] The Purposes of Good and Evil ). The original passage began: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit (Translation: &quot;Neither is there anyone who loves grief itself since it is grief and thus wants to obtain it&quot;).
-                </p>
-                <p style="text-align: center;">
-                    <img src="https://raw.githubusercontent.com/Alex-D/Trumbowyg/develop/banner.jpg" alt="Trumbowyg logo">
-                </p>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, minima, asperiores libero architecto sequi fugit dolore sunt in officiis facere ut quaerat ullam laudantium delectus aliquam tenetur alias! Ea, nisi, est earum temporibus dolores quas qui repellendus aliquid voluptatibus tempore facilis eligendi omnis reiciendis nihil ullam quo dolorem nam deleniti. Fugit dignissimos dolorum dolore voluptate repudiandae recusandae debitis. Neque, adipisci, maiores magni aliquam molestiae ex natus minus quod tempora nemo debitis eum laboriosam voluptatum ut architecto animi nobis vero quis dolore eaque! Corporis, dolore, illum, autem in eum ea doloribus ut consequuntur modi et ullam adipisci blanditiis corrupti ab voluptate.
-                </p>
-                <p>
-                    It is not known exactly when the text acquired its current standard form; it may have been as late as the 1960s. The passage was discovered by Richard McClintock, a Latin scholar who is the publications director at Hampden-Sydney College in Virginia, by searching for citings of the rarely used word 'consectetur' in classical literature.
-                </p>
-                <code><pre>
+    <div id="customized-buttonpane">
+        <h2>This is a demo of Trumbowyg with a customized button pane</h2>
+        <p>
+            The text is derived from Cicero's De Finibus Bonorum et Malorum (On the Ends of Goods and Evils, or
+            alternatively [About] The Purposes of Good and Evil ). The original passage began: Neque porro quisquam est
+            qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit (Translation: &quot;Neither is there
+            anyone who loves grief itself since it is grief and thus wants to obtain it&quot;).
+        </p>
+        <p style="text-align: center;">
+            <img src="https://raw.githubusercontent.com/Alex-D/Trumbowyg/develop/banner.jpg" alt="Trumbowyg logo">
+        </p>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, minima, asperiores libero architecto
+            sequi fugit dolore sunt in officiis facere ut quaerat ullam laudantium delectus aliquam tenetur alias! Ea,
+            nisi, est earum temporibus dolores quas qui repellendus aliquid voluptatibus tempore facilis eligendi omnis
+            reiciendis nihil ullam quo dolorem nam deleniti. Fugit dignissimos dolorum dolore voluptate repudiandae
+            recusandae debitis. Neque, adipisci, maiores magni aliquam molestiae ex natus minus quod tempora nemo
+            debitis eum laboriosam voluptatum ut architecto animi nobis vero quis dolore eaque! Corporis, dolore, illum,
+            autem in eum ea doloribus ut consequuntur modi et ullam adipisci blanditiis corrupti ab voluptate.
+        </p>
+        <p>
+            It is not known exactly when the text acquired its current standard form; it may have been as late as the
+            1960s. The passage was discovered by Richard McClintock, a Latin scholar who is the publications director at
+            Hampden-Sydney College in Virginia, by searching for citings of the rarely used word 'consectetur' in
+            classical literature.
+        </p>
+        <code><pre>
 /* Add new words for customs btnsDef just below */
 $.extend(true, $.trumbowyg.langs, {
 fr: {
@@ -196,10 +218,11 @@ btns: ['viewHTML',
     ['preformatted'],
     'fullscreen', 'close']
 });
-                </pre></code>
-            </div>
+                </pre>
+        </code>
+    </div>
 
-            <textarea id="form-content" cols="30" rows="10" required>
+    <textarea id="form-content" cols="30" rows="10" required>
                 <h1>This editor is create from a textarea</h1>
                 <p>
                     Even though using &quot;lorem ipsum&quot; often arouses curiosity due to its resemblance to classical Latin, it is not intended to have meaning. Where text is visible in a document, people tend to focus on the textual content rather than upon overall presentation, so publishers use lorem ipsum when displaying a typeface or design in order to direct the focus to presentation. &quot;Lorem ipsum&quot; also approximates a typical distribution of spaces in English. <br>
@@ -219,264 +242,266 @@ $('#form-content').trumbowyg({
                 </pre></code>
             </textarea>
 
-            <textarea id="empty-textarea" cols="30" rows="10" required></textarea>
+    <textarea id="empty-textarea" cols="30" rows="10" required></textarea>
 
-            <textarea id="disabled-textarea" cols="30" rows="10" disabled>
+    <textarea id="disabled-textarea" cols="30" rows="10" disabled>
                 Disabled textarea
             </textarea>
-            <button id="enable-disabled-textarea">Enable</button>
-            <button id="disable-disabled-textarea">Disable</button>
+    <button id="enable-disabled-textarea">Enable</button>
+    <button id="disable-disabled-textarea">Disable</button>
 
-            <div id="dynamic-iframe-example"></div>
-        </div>
+    <div id="dynamic-iframe-example"></div>
+</div>
 
-        <div class="dark-section">
-            <div class="container">
-                <form action="#">
-                    <h2 class="title">The dark side of Trumbowyg</h2>
+<div class="dark-section">
+    <div class="container">
+        <form action="#">
+            <h2 class="title">The dark side of Trumbowyg</h2>
 
-                    <div class="trumbowyg-dark">
-                        <textarea id="placeholder-editor" cols="30" rows="10" placeholder="This is a placeholder..." required></textarea>
-                    </div>
-
-                    <button type="submit" class="form-submit">Submit</button>
-                </form>
+            <div class="trumbowyg-dark">
+                <textarea
+                    id="placeholder-editor"
+                    cols="30"
+                    rows="10"
+                    placeholder="This is a placeholder..."
+                    required
+                ></textarea>
             </div>
-        </div>
 
-        <script src="/node_modules/jquery/dist/jquery.min.js"></script>
-        <script src="/dist/trumbowyg.js"></script>
-        <script src="/dist/langs/fr.min.js"></script>
-        <script src="/dist/plugins/base64/trumbowyg.base64.js"></script>
-        <script src="/dist/plugins/colors/trumbowyg.colors.js"></script>
-        <script src="/dist/plugins/noembed/trumbowyg.noembed.js"></script>
-        <script src="/dist/plugins/pasteimage/trumbowyg.pasteimage.js"></script>
-        <script src="/dist/plugins/template/trumbowyg.template.js"></script>
-        <script src="/dist/plugins/preformatted/trumbowyg.preformatted.js"></script>
-        <script src="/dist/plugins/ruby/trumbowyg.ruby.js"></script>
-        <script src="/dist/plugins/upload/trumbowyg.upload.js"></script>
-        <script>
-            /** Default editor configuration **/
-            $('#default-editor, #empty-textarea, #disabled-textarea')
-            .trumbowyg()
-            .on('tbwinit tbwfocus tbwblur tbwchange tbwresize tbwpaste tbwopenfullscreen tbwclosefullscreen tbwclose', function(e){
-                console.log(e.type);
-            });
+            <button type="submit" class="form-submit">Submit</button>
+        </form>
+    </div>
+</div>
 
-            $('#reset-default-editor').click(function () {
-                $('#default-editor').trumbowyg('empty');
-                console.log($('#default-editor').trumbowyg('html'));
-            });
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/dist/trumbowyg.js"></script>
+<script src="/dist/langs/fr.min.js"></script>
+<script src="/dist/plugins/base64/trumbowyg.base64.js"></script>
+<script src="/dist/plugins/colors/trumbowyg.colors.js"></script>
+<script src="/dist/plugins/noembed/trumbowyg.noembed.js"></script>
+<script src="/dist/plugins/pasteimage/trumbowyg.pasteimage.js"></script>
+<script src="/dist/plugins/template/trumbowyg.template.js"></script>
+<script src="/dist/plugins/preformatted/trumbowyg.preformatted.js"></script>
+<script src="/dist/plugins/ruby/trumbowyg.ruby.js"></script>
+<script src="/dist/plugins/upload/trumbowyg.upload.js"></script>
+<script>
+    /** Default editor configuration **/
+    $('#default-editor, #empty-textarea, #disabled-textarea')
+        .trumbowyg()
+        .on('tbwinit tbwfocus tbwblur tbwchange tbwresize tbwpaste tbwopenfullscreen tbwclosefullscreen tbwclose', function (e) {
+            console.log(e.type);
+        });
 
-            $('#enable-disabled-textarea').click(function () {
-                $('#disabled-textarea').trumbowyg('enable');
-            });
-            $('#disable-disabled-textarea').click(function () {
-                $('#disabled-textarea').trumbowyg('disable');
-            });
+    $('#reset-default-editor').click(function () {
+        $('#default-editor').trumbowyg('empty');
+        console.log($('#default-editor').trumbowyg('html'));
+    });
 
-
-            /** Minimal configuration **/
-            $('#simple-editor')
-              .trumbowyg({
-                btns: ['strong', 'em', 'del']
-              });
+    $('#enable-disabled-textarea').click(function () {
+        $('#disabled-textarea').trumbowyg('enable');
+    });
+    $('#disable-disabled-textarea').click(function () {
+        $('#disabled-textarea').trumbowyg('disable');
+    });
 
 
-            /** Minimal with upload **/
-            $('#upload-editor')
-              .trumbowyg({
-                btns: ['strong', 'em', 'del', 'upload'],
-                btnsDef: {
-                  upload: {
+    /** Minimal configuration **/
+    $('#simple-editor')
+        .trumbowyg({
+            btns: ['strong', 'em', 'del']
+        });
+
+
+    /** Minimal with upload **/
+    $('#upload-editor')
+        .trumbowyg({
+            btns: ['strong', 'em', 'del', 'upload'],
+            btnsDef: {
+                upload: {
                     ico: 'insertImage',
                     title: 'insertImage'
-                  }
                 }
-              });
+            }
+        });
 
 
-            /* Add imgur parameters to upload plugin */
-            var uploadOptions = {
-                serverPath: 'https://api.imgur.com/3/image',
-                fileFieldName: 'image',
-                headers: {'Authorization': 'Client-ID 9e57cb1c4791cea'},
-                urlPropertyName: 'data.link',
-                imageWidthModalEdit: true
-            };
+    /* Add imgur parameters to upload plugin */
+    var uploadOptions = {
+        serverPath: 'https://api.imgur.com/3/image',
+        fileFieldName: 'image',
+        headers: {'Authorization': 'Client-ID 9e57cb1c4791cea'},
+        urlPropertyName: 'data.link',
+        imageWidthModalEdit: true
+    };
 
-            /** Full flat button pane **/
-            $('#flat-buttonpane')
-            .trumbowyg({
-                btns: [
-                    ['viewHTML'],
-                    ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4'],
-                    ['strong', 'em', 'underline', 'del'],
-                    ['superscript', 'subscript'],
-                    ['createLink', 'unlink'],
-                    ['insertImage'],
-                    ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
-                    ['unorderedList', 'orderedList'],
-                    ['horizontalRule'],
-                    ['removeformat'],
+    /** Full flat button pane **/
+    $('#flat-buttonpane')
+        .trumbowyg({
+            btns: [
+                ['viewHTML'],
+                ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4'],
+                ['strong', 'em', 'underline', 'del'],
+                ['superscript', 'subscript'],
+                ['createLink', 'unlink'],
+                ['insertImage'],
+                ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                ['unorderedList', 'orderedList'],
+                ['horizontalRule'],
+                ['removeformat'],
 
-                    ['upload', 'base64', 'noembed'],
-                    ['ruby'],
-                    ['foreColor', 'backColor'],
-                    ['preformatted'],
-                    ['template'],
-                    ['fullscreen', 'close']
-                ],
-                plugins: {
-                    upload: uploadOptions,
-                    templates: [
-                        {
-                            name: 'Template 1',
-                            html: '<p>I am a template!</p>'
-                        },
-                        {
-                            name: 'Template 2',
-                            html: '<p>I am a different template!</p>'
-                        }
-                    ]
-                }
-            });
-
-
-            /********************************************************
-             * Customized button pane + buttons groups + dropdowns
-             * Use upload and base64 plugins
-             *******************************************************/
-
-            /* Add new words for customs btnsDef just below */
-            $.extend(true, $.trumbowyg.langs, {
-                fr: {
-                    align: 'Alignement',
-                    image: 'Image'
-                }
-            });
-            var customizedButtonPaneTbwOptions = {
-                lang: 'fr',
-                fixedBtnPane: true,
-                semantic: false,
-                btnsDef: {
-                    // Customizable dropdowns
-                    align: {
-                        dropdown: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
-                        ico: 'justifyLeft'
+                ['upload', 'base64', 'noembed'],
+                ['ruby'],
+                ['foreColor', 'backColor'],
+                ['preformatted'],
+                ['template'],
+                ['fullscreen', 'close']
+            ],
+            plugins: {
+                upload: uploadOptions,
+                templates: [
+                    {
+                        name: 'Template 1',
+                        html: '<p>I am a template!</p>'
                     },
-                    image: {
-                        dropdown: ['insertImage', 'upload', 'base64', 'noembed'],
-                        ico: 'insertImage'
+                    {
+                        name: 'Template 2',
+                        html: '<p>I am a different template!</p>'
                     }
-                },
-                btns: [
-                    ['viewHTML'],
-                    ['formatting'],
-                    ['bold', 'italic', 'strikethrough'],
-                    ['link'],
-                    ['align'],
-                    ['image'],
-                    ['foreColor', 'backColor'],
-                    ['preformatted'],
-                    ['fullscreen', 'close']
-                ],
-                changeActiveDropdownIcon: true,
-                minimalLinks: true,
-                defaultLinkTarget: '_blank',
-                plugins: {
-                    upload: uploadOptions
-                }
-            };
-            $('#customized-buttonpane')
-            .trumbowyg(customizedButtonPaneTbwOptions)
-            .on('dblclick', function(){
-                $(this).trumbowyg(customizedButtonPaneTbwOptions);
-            });
+                ]
+            }
+        });
 
 
+    // Customized button pane + buttons groups + dropdowns
+    // Use upload and base64 plugins
 
-            /** Simple customization with current options **/
-            var formTbwOptions = {
-                lang: 'fr',
-                mobile: true,
-                fixedBtnPane: true,
-                fixedFullWidth: true,
-                semantic: true,
-                resetCss: true,
-                removeformatPasted: true,
-                tagsToRemove: ['script', 'style'],
-                imageWidthModalEdit: true,
-
-                autogrow: true,
-                autogrowOnEnter: true,
-
-                btnsDef: {
-                    strong: {
-                        fn: 'bold',
-                        key: 'G'
-                    }
-                }
-            };
-            $('#form-content')
-            .trumbowyg(formTbwOptions)
-            .on('dblclick', function(){
-                $(this).trumbowyg(formTbwOptions);
-            });
-
-
-
-            /** Dynamic Iframe **/
-
-            // Create the iframe element.
-            var $iframe = $('<iframe/>').css({
-                width: '100%',
-                height: 400,
-                border: 0
-            });
-            $('#dynamic-iframe-example').append($iframe);
-            // Get the document of the iframe.
-            var $editor = $('<div>', {
-                    id: 'editor'
-                }).html(
-                      '<h2>This is within an iframe</h2> <p>Soc'
-                    + 'tempor pulvinar ac ultricies, placerat in, elementum,'
-                    + 'adipiscing pid, mid augue pulvinar eros nisi! In magn'
-                    + 'magnis. Porttitor platea turpis nisi. Pulvinar massa,'
-                    + ' habitasse <strong>a nunc rhoncus adipiscing</strong></p>');
-
-            setTimeout(function(){
-                var contextIframe = $iframe.contents()[0];
-                // Set the style on the head of the iframe.
-                $('head', contextIframe).append($('<link>', {
-                    href: '/dist/ui/trumbowyg.css',
-                    rel: 'stylesheet'
-                }));
-                // Set the content to be editable.
-                $('body', contextIframe).append($editor);
-
-                $editor
-                .trumbowyg()
-                .on('dblclick', function(){
-                    $(this).trumbowyg();
-                });
-            }, 500);
+    /* Add new words for customs btnsDef just below */
+    $.extend(true, $.trumbowyg.langs, {
+        fr: {
+            align: 'Alignement',
+            image: 'Image'
+        }
+    });
+    var customizedButtonPaneTbwOptions = {
+        lang: 'fr',
+        fixedBtnPane: true,
+        semantic: false,
+        btnsDef: {
+            // Customizable dropdowns
+            align: {
+                dropdown: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                ico: 'justifyLeft'
+            },
+            image: {
+                dropdown: ['insertImage', 'upload', 'base64', 'noembed'],
+                ico: 'insertImage'
+            }
+        },
+        btns: [
+            ['viewHTML'],
+            ['formatting'],
+            ['bold', 'italic', 'strikethrough'],
+            ['link'],
+            ['align'],
+            ['image'],
+            ['foreColor', 'backColor'],
+            ['preformatted'],
+            ['fullscreen', 'close']
+        ],
+        changeActiveDropdownIcon: true,
+        minimalLinks: true,
+        defaultLinkTarget: '_blank',
+        plugins: {
+            upload: uploadOptions
+        }
+    };
+    $('#customized-buttonpane')
+        .trumbowyg(customizedButtonPaneTbwOptions)
+        .on('dblclick', function () {
+            $(this).trumbowyg(customizedButtonPaneTbwOptions);
+        });
 
 
-            /** Editor with placeholder **/
-            $('#placeholder-editor')
-            .trumbowyg({
-              autogrowOnEnter: true,
-            })
-            .on('dblclick', function(){
+    /** Simple customization with current options **/
+    var formTbwOptions = {
+        lang: 'fr',
+        mobile: true,
+        fixedBtnPane: true,
+        fixedFullWidth: true,
+        semantic: true,
+        resetCss: true,
+        removeformatPasted: true,
+        tagsToRemove: ['script', 'style'],
+        imageWidthModalEdit: true,
+
+        autogrow: true,
+        autogrowOnEnter: true,
+
+        btnsDef: {
+            strong: {
+                fn: 'bold',
+                key: 'G'
+            }
+        }
+    };
+    $('#form-content')
+        .trumbowyg(formTbwOptions)
+        .on('dblclick', function () {
+            $(this).trumbowyg(formTbwOptions);
+        });
+
+
+    /** Dynamic Iframe **/
+
+        // Create the iframe element.
+    var $iframe = $('<iframe/>').css({
+            width: '100%',
+            height: 400,
+            border: 0
+        });
+    $('#dynamic-iframe-example').append($iframe);
+    // Get the document of the iframe.
+    var $editor = $('<div>', {
+        id: 'editor'
+    }).html(
+        '<h2>This is within an iframe</h2> <p>Soc'
+        + 'tempor pulvinar ac ultricies, placerat in, elementum,'
+        + 'adipiscing pid, mid augue pulvinar eros nisi! In magn'
+        + 'magnis. Porttitor platea turpis nisi. Pulvinar massa,'
+        + ' habitasse <strong>a nunc rhoncus adipiscing</strong></p>');
+
+    setTimeout(function () {
+        var contextIframe = $iframe.contents()[0];
+        // Set the style on the head of the iframe.
+        $('head', contextIframe).append($('<link>', {
+            href: '/dist/ui/trumbowyg.css',
+            rel: 'stylesheet'
+        }));
+        // Set the content to be editable.
+        $('body', contextIframe).append($editor);
+
+        $editor
+            .trumbowyg()
+            .on('dblclick', function () {
                 $(this).trumbowyg();
-            })
-            .on('tbwfocus', function(){
-                console.log('focus event fired');
-            })
-            .on('tbwblur', function(){
-                console.log('blur event fired');
             });
-        </script>
-    </body>
+    }, 500);
+
+
+    /** Editor with placeholder **/
+    $('#placeholder-editor')
+        .trumbowyg({
+            autogrowOnEnter: true
+        })
+        .on('dblclick', function () {
+            $(this).trumbowyg();
+        })
+        .on('tbwfocus', function () {
+            console.log('focus event fired');
+        })
+        .on('tbwblur', function () {
+            console.log('blur event fired');
+        });
+</script>
+</body>
 </html>

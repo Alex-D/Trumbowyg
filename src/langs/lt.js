@@ -55,5 +55,5 @@ jQuery.trumbowyg.langs.lt = {
     removeformat: 'Pašalinti formatavimą',
 
     superscript: 'Viršutinis indeksas',
-    subscript: 'Apatinis indeksas',
+    subscript: 'Apatinis indeksas'
 };

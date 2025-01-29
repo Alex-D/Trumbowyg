@@ -184,7 +184,7 @@
         return [
             '<pre class="language-' + language + '" ' + (lineHighlight ? 'data-line="' + lineHighlight + '"' : '') + '>',
             '<code class="language-' + language + '">' + Prism.highlight(text, Prism.languages[language]) + '</code>',
-            '</pre>',
+            '</pre>'
         ].join('');
     }
 
@@ -198,16 +198,16 @@
         var prismLanguageKeys = Object.keys(Prism.languages);
 
         var options = prismLanguageKeys.filter(function (languageKey) {
-          return languageNameKeys.indexOf(languageKey) >= 0;
+            return languageNameKeys.indexOf(languageKey) >= 0;
         }).map(function (languageKey) {
             return {
                 id: languageKey,
                 name: languageNames[languageKey]
             };
-        }).sort(function(a, b){
+        }).sort(function (a, b) {
             // Sort languages by name
             return a.name.localeCompare(b.name);
-        }).map(function( language){
+        }).map(function (language) {
             // Generate a list of options
             return '<option value="' + escapeHtml(language.id) + '">' + escapeHtml(language.name) + '</option>';
         }).join('');

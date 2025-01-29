@@ -295,14 +295,14 @@
                     'medium': '中',
                     'large': '大',
                     'x-large': '最大',
-                    'custom': '自訂大小',
+                    'custom': '自訂大小'
                 },
                 fontCustomSize: {
                     title: '自訂義字體大小',
                     label: '字體大小',
                     value: '48px'
                 }
-            },
+            }
         }
     });
     // jshint camelcase:true
@@ -324,8 +324,8 @@
             fontsize: {
                 init: function (trumbowyg) {
                     trumbowyg.o.plugins.fontsize = $.extend({},
-                      defaultOptions,
-                      trumbowyg.o.plugins.fontsize || {}
+                        defaultOptions,
+                        trumbowyg.o.plugins.fontsize || {}
                     );
 
                     trumbowyg.addBtnDef('fontsize', {
@@ -351,10 +351,10 @@
         fontElements.find('span[style*="font-size"]').contents().unwrap();
 
         // Find <font> elements that were added and change to <span> with chosen size
-        fontElements.replaceWith(function() {
+        fontElements.replaceWith(function () {
             return $('<span/>', {
-                css: { 'font-size': size },
-                html: this.innerHTML,
+                css: {'font-size': size},
+                html: this.innerHTML
             });
         });
 

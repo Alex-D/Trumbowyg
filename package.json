@@ -2,37 +2,38 @@
   "name": "trumbowyg",
   "title": "Trumbowyg",
   "description": "A lightweight WYSIWYG editor",
-  "version": "2.28.0",
+  "version": "2.29.0",
   "main": "dist/trumbowyg.js",
   "license": "MIT",
   "scripts": {
     "dev": "gulp",
     "build": "gulp build",
     "clean": "gulp clean",
-    "test": "gulp test"
+    "lint": "gulp lint",
+    "lint:editorconfig": "editorconfig-checker"
   },
   "devDependencies": {
-    "del": "7.0.0",
-    "gulp": "4.0.2",
-    "gulp-autoprefixer": "8.0.0",
-    "gulp-clean-css": "4.3.0",
-    "gulp-concat": "2.6.1",
-    "gulp-header": "2.0.9",
-    "gulp-jshint": "2.1.0",
-    "gulp-livereload": "4.0.2",
-    "gulp-newer": "1.4.0",
-    "gulp-rename": "2.0.0",
-    "gulp-sass": "5.1.0",
-    "gulp-size": "4.0.1",
-    "gulp-sourcemaps": "3.0.0",
-    "gulp-svgmin": "4.1.0",
-    "gulp-svgstore": "9.0.0",
-    "gulp-terser": "2.1.0",
-    "jquery": "^4.0.0-beta",
-    "jshint": "2.13.6",
-    "jshint-stylish": "2.2.1",
-    "sass": "^1.57.1",
-    "vinyl-paths": "5.0.0"
+    "del": "^8.0.0",
+    "editorconfig-checker": "^6.0.1",
+    "gulp": "^5.0.0",
+    "gulp-autoprefixer": "^9.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-header": "^2.0.9",
+    "gulp-jshint": "^2.1.0",
+    "gulp-livereload": "^4.0.2",
+    "gulp-newer": "^1.4.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^6.0.0",
+    "gulp-size": "^5.0.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-svgmin": "^4.1.0",
+    "gulp-svgstore": "^9.0.0",
+    "gulp-terser": "^2.1.0",
+    "jquery": "^4.0.0-beta.2",
+    "jshint": "^2.13.6",
+    "jshint-stylish": "^2.2.1",
+    "sass": "^1.83.4"
   },
   "peerDependencies": {
     "jquery": ">=1.8"
@@ -58,7 +59,6 @@
     "trumbowyg"
   ],
   "volta": {
-    "node": "18.12.1",
-    "npm": "9.3.0"
+    "node": "22.13.1"
   }
 }
