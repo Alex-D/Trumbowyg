@@ -1,4 +1,4 @@
-// Adapted from giphy plugin 
+// Adapted from giphy plugin
 
 .trumbowyg-tenor-button svg {
     transform: scale(1.22);
@@ -21,10 +21,6 @@
     background: none;
     border: 1px solid transparent;
 
-    @media screen and (max-width: $phone) {
-        top: calc(5% + 2px);
-    }
-
     &:hover,
     &:focus {
         outline: none;
@@ -42,11 +38,6 @@
     right: calc(15% + 5px);
     pointer-events: none;
     user-select: none;
-
-    @media screen and (max-width: $phone) {
-        top: calc(5% + 5px);
-        right: calc(15%);
-    }
 
     span {
         text-transform: uppercase;
