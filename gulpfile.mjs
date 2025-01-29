@@ -176,7 +176,7 @@ const pluginsStyles = function () {
 
 const pluginsSassDist = gulp.series(pluginsStyles, function pluginsSassDist() {
     return gulp.src(paths.pluginsStyles)
-        .pipe(gulpHeader(banner, {pkg: pkg, description: 'Default stylesheet for Trumbowyg editor plugin'}))
+        .pipe(gulpHeader(banner, {pkg: pkg, description: 'Trumbowyg plugin stylesheet'}))
         .pipe(gulp.dest('dist/plugins'));
 });
 

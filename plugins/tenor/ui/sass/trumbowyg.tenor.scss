@@ -1,0 +1,113 @@
+// Adapted from giphy plugin
+
+.trumbowyg-tenor-button svg {
+    transform: scale(1.22);
+}
+
+.trumbowyg-tenor-search {
+    display: block;
+    width: 80%;
+    margin: 5%;
+    padding-left: 10px;
+    padding-right: 150px;
+}
+
+.trumbowyg-tenor-close {
+    position: absolute;
+    top: calc(5% + 8px);
+    right: calc(5% - 2px);
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: 1px solid transparent;
+
+    &:hover,
+    &:focus {
+        outline: none;
+        background: #ecf0f1;
+    }
+
+    &:focus {
+        border-color: rgba(0, 0, 0, 0.3);
+    }
+}
+
+.trumbowyg-powered-by-tenor {
+    position: absolute;
+    top: calc(5% + 11px);
+    right: calc(15% + 5px);
+    pointer-events: none;
+    user-select: none;
+
+    span {
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 10px;
+        opacity: 0.6;
+    }
+
+    svg {
+        width: 66px;
+        height: 15px;
+        vertical-align: middle;
+        margin-left: 6px;
+        opacity: 0.45;
+    }
+}
+
+.trumbowyg-tenor-modal-scroll {
+    overflow: auto;
+    overflow-x: hidden;
+    height: 240px;
+
+    .trumbowyg-tenor-loading {
+        display: none;
+        padding: 20px;
+
+        img {
+            height: 25px;
+        }
+    }
+}
+
+.trumbowyg-tenor-modal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 3%;
+
+    .trumbowyg-tenor-no-result {
+        width: 100%;
+        margin: 0 3%;
+    }
+
+    .trumbowyg-tenor-offline {
+        font-size: 18px;
+        width: 305%;
+        height: 600px;
+        margin-top: 95px;
+        text-align: center;
+    }
+}
+
+.trumbowyg-tenor-modal .img-container {
+    margin-bottom: 10px;
+    background-color: #ecf0f1;
+
+    img {
+        width: 100%;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 150ms;
+        display: block;
+
+        &:hover,
+        &:focus {
+            border: #2ecc71 solid 3px;
+        }
+    }
+
+    img.tbw-loaded {
+        opacity: 1;
+    }
+}
