@@ -16,7 +16,7 @@ trim_trailing_whitespace = true
 indent_size = 2
 
 # Ignore paths
-[{docs/css/**,docs/scss/_normalize.scss,**/vendor/**}]
+[{docs/css/**,docs/scss/_normalize.scss,**/vendor/**,dist/**}]
 charset = unset
 end_of_line = unset
 insert_final_newline = unset
