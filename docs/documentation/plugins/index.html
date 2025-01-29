@@ -328,7 +328,7 @@ $('#my-editor').trumbowyg({
             </p>
 
             <h4>How to use it?</h4>
-	    <pre><code class="html">
+            <pre><code class="html">
 &lt;!-- Import Trumbowyg emoji style in &lt;head>... -->
 &lt;link rel="stylesheet" href="trumbowyg/dist/plugins/emoji/ui/trumbowyg.emoji.min.css">
             </code></pre>
@@ -944,7 +944,7 @@ $('#my-editor').trumbowyg({
             </code></pre>
         </div>
 
-		<div class="feature">
+        <div class="feature">
             <h3 id="plugin-pasteembed">Paste embed</h3>
 
             <p>
@@ -1142,7 +1142,7 @@ $('#my-editor').trumbowyg({
             </p>
 
             <h4>How to use it?</h4>
-	        <pre><code class="html">
+            <pre><code class="html">
 &lt;!-- Import Trumbowyg specialchars style in &lt;head>... -->
 &lt;link rel="stylesheet" href="trumbowyg/dist/plugins/specialchars/ui/trumbowyg.specialchars.min.css">
             </code></pre>
@@ -1217,7 +1217,7 @@ $('#editor-custom-list')
             </ul>
 
             <h4 id="plugin-table--how-to-use-it">How to use it?</h4>
-          <pre><code class="html">
+            <pre><code class="html">
 &lt;!-- Import Trumbowyg Table style in &lt;head>... -->
 &lt;link rel="stylesheet" href="trumbowyg/dist/plugins/table/ui/trumbowyg.table.min.css">
             </code></pre>
@@ -1365,7 +1365,7 @@ td {
             'tableVerticalAlignTop',
             'tableVerticalAlignMiddle',
             'tableVerticalAlignBottom',
-       ],
+        ],
     },
     {
         title: 'tableOthers',
@@ -1670,19 +1670,41 @@ fileToUpload: // The image file
             <h3 id="introduction">Introduction</h3>
 
             <p>
-                A plugin can be a button, a paste handler or whatever you want. If you want add a plugin <em>myplugin</em>
-                to the official Trumbowyg list, your should follow this tree:
+                A plugin can be a button, a paste handler or whatever you want. If you want to add a plugin <em>myplugin</em>
+                to the official Trumbowyg list, you should follow this tree:
             </p>
-            <pre><code>
-<strong>plugins</strong>
- └── <strong>myplugin</strong>
-     ├── <strong>ui</strong>
-     │   ├── <strong>icons</strong>
-     │   │   └── myplugin.svg
-     │   └── <strong>sass</strong>
-     │       └── trumbowyg.myplugin.scss
-     └── trumbowyg.myplugin.js
-            </code></pre>
+            <ul class="tree">
+                <li>
+                    <strong>plugins</strong>
+                    <ul>
+                        <li>
+                            <strong>myplugin</strong>
+                            <ul>
+                                <li>
+                                    <strong>ui</strong>
+                                    <ul>
+                                        <li>
+                                            <strong>icons</strong>
+                                            <ul>
+                                                <li>myplugin.svg</li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <strong>sass</strong>
+                                            <ul>
+                                                <li>trumbowyg.myplugin.scss</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    trumbowyg.myplugin.js
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
             <p>
                 As plugin can be something other than a button, icons and scss are optional depending on your feature.
             </p>

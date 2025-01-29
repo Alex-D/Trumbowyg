@@ -25,10 +25,10 @@ function loadStyle(stylePath, comment) {
     'use strict';
 
     loadTag(
-      '<link rel="stylesheet" href="' + baseURL + stylePath + '"/>',
-      styleLoadingContainer,
-      comment,
-      '\n<link rel="stylesheet" href="trumbowyg/' + stylePath + '">\n\n'
+        '<link rel="stylesheet" href="' + baseURL + stylePath + '"/>',
+        styleLoadingContainer,
+        comment,
+'\n<link rel="stylesheet" href="trumbowyg/' + stylePath + '">\n\n'
     );
 }
 
@@ -40,10 +40,10 @@ function loadScript(scriptPath, comment) {
     }
 
     loadTag(
-      '<script src="' + baseURL + scriptPath + '"></script>',
-      scriptLoadingContainer,
-      comment,
-      '\n<script src="trumbowyg/' + scriptPath + '"></script>\n\n'
+        '<script src="' + baseURL + scriptPath + '"></script>',
+        scriptLoadingContainer,
+        comment,
+'\n<script src="trumbowyg/' + scriptPath + '"></script>\n\n'
     );
 }
 

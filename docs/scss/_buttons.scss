@@ -1,4 +1,4 @@
-@import "variables";
+@use "variables";
 
 .button {
     display: inline-block;
@@ -14,14 +14,16 @@
     text-decoration: none;
     border-radius: 50px;
     text-align: center;
-    transition: color $transition-duration, background-color $transition-duration;
+    transition: color variables.$transition-duration, background-color variables.$transition-duration;
 
     &-primary {
-        background: $primary-color;
+        background: variables.$primary-color;
     }
+
     &-secondary {
-        background: $secondary-color;
+        background: variables.$secondary-color;
     }
+
     &-ghost {
         border-color: rgba(255, 255, 255, 0.4);
     }
@@ -30,9 +32,10 @@
         margin-right: 20px;
     }
 }
+
 .button:hover,
 .button:focus {
     background: #fff;
-    color: $primary-color;
+    color: variables.$primary-color;
     outline: none;
 }

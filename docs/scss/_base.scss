@@ -1,4 +1,4 @@
-@import "variables";
+@use "variables";
 
 /*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
 
@@ -57,13 +57,10 @@ textarea {
 }
 
 
-
-
-
-
 html {
     box-sizing: border-box;
 }
+
 *,
 *:before,
 *:after {
@@ -75,7 +72,7 @@ button,
 input,
 select,
 textarea {
-    font-family: $font;
+    font-family: variables.$font;
     font-size: 18px;
     font-weight: 300;
 }
@@ -94,7 +91,7 @@ textarea {
     }
 
     code.console {
-        background: $text-color;
+        background: variables.$text-color;
         color: #fff;
         font-size: 16px;
         padding: 3px 7px;
@@ -105,7 +102,7 @@ textarea {
         color: #666;
         background: rgba(0, 0, 0, 0.02);
         padding: 8px 12px;
-        border-left: 3px solid $primary-color-light;
+        border-left: 3px solid variables.$primary-color-light;
         border-radius: 8px;
         font-size: 15px;
         margin-block-start: 0.5em;
@@ -114,6 +111,7 @@ textarea {
         > :first-child {
             margin-top: 6px;
         }
+
         > :last-child {
             margin-bottom: 6px;
         }
@@ -124,10 +122,11 @@ textarea {
         }
     }
 }
+
 .section {
     a {
         text-decoration: none;
-        color: $primary-color;
+        color: variables.$primary-color;
 
         &:hover,
         &:focus {
@@ -188,75 +187,4 @@ td {
 
 thead {
     background: #FFFFFF;
-}
-
-
-
-
-
-/* ==========================================================================
-   Print styles
-   ========================================================================== */
-
-@media print {
-    * {
-        background: transparent !important;
-        color: #000 !important;
-        box-shadow: none !important;
-        text-shadow: none !important;
-    }
-
-    a,
-    a:visited {
-        text-decoration: underline;
-    }
-
-    a[href]:after {
-        content: " (" attr(href) ")";
-    }
-
-    abbr[title]:after {
-        content: " (" attr(title) ")";
-    }
-
-    .ir a:after,
-    a[href^="javascript:"]:after,
-    a[href^="#"]:after {
-        content: "";
-    }
-
-    pre,
-    blockquote {
-        border: 1px solid #999;
-        page-break-inside: avoid;
-    }
-
-    thead {
-        display: table-header-group;
-    }
-
-    tr,
-    img {
-        page-break-inside: avoid;
-    }
-
-    img {
-        max-width: 100% !important;
-    }
-
-    @page {
-        margin: 0.5cm;
-    }
-
-    p,
-    h2,
-    h3 {
-        orphans: 3;
-        widows: 3;
-    }
-
-    h2,
-    h3 {
-        page-break-after: avoid;
-    }
 }
