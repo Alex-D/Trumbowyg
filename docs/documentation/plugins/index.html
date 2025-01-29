@@ -62,6 +62,7 @@
                         <li><a href="#plugin-resizimg">Resizimg</a></li>
                         <li><a href="#plugin-ruby">Ruby</a></li>
                         <li><a href="#plugin-specialchars">Special Chars</a></li>
+                        <li><a href="#plugin-speechrecognition">Speech recognition</a></li>
                         <li><a href="#plugin-table">Table</a></li>
                         <li><a href="#plugin-template">Template</a></li>
                         <li><a href="#plugin-upload">Upload</a></li>
@@ -1190,6 +1191,65 @@ $('#editor-custom-list')
                 '2023', '25B6', '2B29', '25C6', null,
                 '2211', '2243', '2264', '2265'
             ]
+        }
+    }
+});
+            </code></pre>
+        </div>
+
+        <div class="feature">
+            <h3 id="plugin-speechrecognition">Speech recogintion</h3>
+
+            <p>
+                Speech recognition plugin allows you to add text via speech.
+            </p>
+
+            <p>
+                <a href="../../demos/#plugins-speechrecognition" class="button button-demo">Try speech recognition live demo!</a>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/speechrecognition/trumbowyg.speechrecognition.js" class="button button-demo">
+                    View speech recognition plugin code on GitHub
+                </a>
+            </p>
+
+            <h4>How to use it?</h4>
+            <pre><code class="html">
+&lt;!-- Import Trumbowyg speech recognition at the end of &lt;body>... -->
+&lt;script src="trumbowyg/dist/plugins/speechrecognition/trumbowyg.speechrecognition.min.js">&lt;/script>
+            </code></pre>
+            <p>
+                Then you can use the new button definition <code>speechrecognition</code>.
+            </p>
+
+            <pre><code class="javascript">
+$('#my-editor').trumbowyg({
+    btns: [
+        ['speechrecognition']
+    ]
+});
+            </code></pre>
+
+            <h4>Options</h4>
+            <dl>
+                <dt><strong><code>lang</code></strong> <code class="type">string</code></dt>
+                <dd>
+                    Language code which language should be detected.
+                    <br>
+                    <strong>Default</strong>: en_GB
+                </dd>
+            </dl>
+
+            <p>
+                Example with options:
+            </p>
+            <pre><code class="javascript">
+$('#my-editor)
+.trumbowyg({
+    btns: [
+        ['speechrecognition']
+    ],
+    plugins: {
+        speechrecognition: {
+            lang: 'de-DE'
         }
     }
 });
