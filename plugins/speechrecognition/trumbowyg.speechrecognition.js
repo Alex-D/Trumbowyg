@@ -3,197 +3,194 @@
  * Speech recognition plugin for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
- * Author : Tobias Rohde
+ * Authors :
+ *  - Tobias Rohde
+ *  - Alexandre Demode (Alex-D)
  * Website : tobiasrohde.de
  */
 (function ($) {
     'use strict';
 
     const defaultOptions = {
-        lang: 'en-GB'
+        lang: 'en-US'
     };
-
-    const iconWrap = $(document.createElementNS('http://www.w3.org/2000/svg', 'svg'));
-    let btnElement = null;
-    let editor = null;
-    let finalText = '';
-    let recognizing = false;
 
     const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
-    const recognition = new SpeechRecognition();
 
-    recognition.continuous = true;
-    recognition.interimResults = true;
+    function buildButtonDef(trumbowyg) {
+        let btnElement = null;
+        let isRecognizing = false;
+        let $resultTextParagraph = null;
 
-    recognition.onstart = function() {
-        recognizing = true;
-        btnElement.style.fill='red';
-    };
+        const recognition = new SpeechRecognition();
 
-    recognition.onerror = function() {
-        recognizing = false;
-        btnElement.style.fill='#222';
-    };
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.maxAlternatives = 1; // We only read the first
 
-    recognition.onend = function() {
-        recognizing = false;
-        btnElement.style.fill='#222';
-    };
+        recognition.onstart = function () {
+            isRecognizing = true;
+            btnElement.style.color = '#e71d36';
+        };
 
-    recognition.onresult = function(event) {
-        let interimText = '';
-        if (typeof(event.results) === 'undefined') {
-            recognition.onend = null;
-            recognition.stop();
-            return;
-        }
-        for (let i = event.resultIndex; i < event.results.length; i+=1) {
-            if (event.results[i].isFinal) {
-                finalText += event.results[i][0].transcript + '<br>';
-                editor.html(finalText);
-            } else {
-                interimText += event.results[i][0].transcript;
-                editor.html(finalText + interimText);
-            }
-        }
-    };
+        recognition.onerror = function () {
+            isRecognizing = false;
+            btnElement.style.removeProperty('color');
+        };
 
-    function buildButtonDef (trumbowyg) {
+        recognition.onend = function () {
+            isRecognizing = false;
+            btnElement.style.removeProperty('color');
+        };
+
+        recognition.onresult = function (event) {
+            const resultText = [...event.results].map((result) => {
+                return result[0].transcript + (result.isFinal ? '<br>' : '');
+            }).join('');
+            $resultTextParagraph.html(resultText);
+            trumbowyg.range.setEndAfter($resultTextParagraph[0]);
+            trumbowyg.range.collapse();
+            trumbowyg.syncCode();
+        };
+
         return {
+            isSupported,
             fn: function () {
-                if (recognizing) {
+                if (isRecognizing) {
                     recognition.stop();
                     return;
                 }
 
-                // I don't know it there's a more elegant way to access the speech recognition button.
-                btnElement = document.body.querySelector(`#${trumbowyg.$c[0].id}`).parentElement.querySelector('.trumbowyg-speechrecognition-button').firstChild;
-                editor = trumbowyg;
-                finalText = '';
-                recognition.lang = trumbowyg.o.plugins.speechrecognition.lang;
-                recognition.start();
-                btnElement.style.fill='red';
+                // Get the actual button to allow to switch his color
+                btnElement = trumbowyg.$btnPane.find('.' + trumbowyg.o.prefix + 'speechrecognition-button svg')[0];
+
+                // Create a container if needed in which we will put the recognized text
+                trumbowyg.$ed.focus();
+                setTimeout(() => {
+                    trumbowyg.saveRange();
+                    if (
+                        trumbowyg.range.startContainer === trumbowyg.range.endContainer &&
+                        trumbowyg.range.startContainer.nodeName === 'P' &&
+                        trumbowyg.range.startContainer.innerText.trim() === ''
+                    ) {
+                        $resultTextParagraph = $(trumbowyg.range.startContainer);
+                    } else {
+                        $resultTextParagraph = $('<p/>');
+                        trumbowyg.range.deleteContents();
+                        trumbowyg.range.insertNode($resultTextParagraph[0]);
+                    }
+
+                    // Set up the recognition
+                    recognition.lang = trumbowyg.o.plugins.speechRecognition.lang;
+                    recognition.start();
+                });
             }
         };
     }
 
-    function buildButtonIcon() {
-        if ($('#trumbowyg-speechrecognition').length > 0) {
-            return;
-        }
-
-        iconWrap.addClass('trumbowyg-icons');
-
-        // Mic icon from Remix Icon - https://remixicon.com/
-        iconWrap.html(`
-            <symbol id="trumbowyg-speechrecognition" viewBox="0 0 24 24">
-                <path class="btn-speechrecognition" d="M11.9998 3C10.3429 3 8.99976 4.34315 8.99976 6V10C8.99976 11.6569 10.3429 13 11.9998 13C13.6566 13 14.9998 11.6569 14.9998 10V6C14.9998 4.34315 13.6566 3 11.9998 3ZM11.9998 1C14.7612 1 16.9998 3.23858 16.9998 6V10C16.9998 12.7614 14.7612 15 11.9998 15C9.23833 15 6.99976 12.7614 6.99976 10V6C6.99976 3.23858 9.23833 1 11.9998 1ZM3.05469 11H5.07065C5.55588 14.3923 8.47329 17 11.9998 17C15.5262 17 18.4436 14.3923 18.9289 11H20.9448C20.4837 15.1716 17.1714 18.4839 12.9998 18.9451V23H10.9998V18.9451C6.82814 18.4839 3.51584 15.1716 3.05469 11Z"></path>
-            </symbol>
-        `).appendTo(document.body);
+    function isSupported() {
+        return SpeechRecognition !== undefined;
     }
 
 
     $.extend(true, $.trumbowyg, {
         langs: {
             az: {
-                speechrecognition: 'Nitqin tanınması'
+                speechRecognition: 'Nitqin tanınması'
             },
             bg: {
-                speechrecognition: 'Разпознаване на реч'
+                speechRecognition: 'Разпознаване на реч'
             },
             by: {
-                speechrecognition: 'Распазнаванне маўлення'
+                speechRecognition: 'Распазнаванне маўлення'
             },
             ca: {
-                speechrecognition: 'Reconeixement de veu'
+                speechRecognition: 'Reconeixement de veu'
             },
             cs: {
-                speechrecognition: 'Rozpoznávání řeči'
+                speechRecognition: 'Rozpoznávání řeči'
             },
             da: {
-                speechrecognition: 'Talegenkendelse'
+                speechRecognition: 'Talegenkendelse'
             },
             de: {
-                speechrecognition: 'Spracherkennung'
+                speechRecognition: 'Spracherkennung'
             },
             el: {
-                speechrecognition: 'Αναγνώριση ομιλίας'
+                speechRecognition: 'Αναγνώριση ομιλίας'
             },
             en: {
-                speechrecognition: 'Speech recognition'
+                speechRecognition: 'Speech recognition'
             },
             es: {
-                speechrecognition: 'Reconocimiento de voz'
+                speechRecognition: 'Reconocimiento de voz'
             },
             et: {
-                speechrecognition: 'Kõnetuvastus'
+                speechRecognition: 'Kõnetuvastus'
             },
             fi: {
-                speechrecognition: 'Puheentunnistus'
+                speechRecognition: 'Puheentunnistus'
             },
             fr: {
-                speechrecognition: 'Reconnaissance vocale'
+                speechRecognition: 'Reconnaissance vocale'
             },
             hr: {
-                speechrecognition: 'Prepoznavanje govora'
+                speechRecognition: 'Prepoznavanje govora'
             },
             hu: {
-                speechrecognition: 'Beszédfelismerés'
+                speechRecognition: 'Beszédfelismerés'
             },
             it: {
-                speechrecognition: 'Riconoscimento vocale'
+                speechRecognition: 'Riconoscimento vocale'
             },
             lt: {
-                speechrecognition: 'Kalbos atpažinimas'
+                speechRecognition: 'Kalbos atpažinimas'
             },
             nb: {
-                speechrecognition: 'Talegjenkjenning'
+                speechRecognition: 'Talegjenkjenning'
             },
             nl: {
-                speechrecognition: 'Spraakherkenning'
+                speechRecognition: 'Spraakherkenning'
             },
             pl: {
-                speechrecognition: 'Rozpoznawanie mowy'
+                speechRecognition: 'Rozpoznawanie mowy'
             },
             pt: {
-                speechrecognition: 'Reconhecimento de voz'
+                speechRecognition: 'Reconhecimento de voz'
             },
             ro: {
-                speechrecognition: 'Recunoașterea vorbirii'
+                speechRecognition: 'Recunoașterea vorbirii'
             },
             rs: {
-                speechrecognition: 'Препознавање говора'
+                speechRecognition: 'Препознавање говора'
             },
             ru: {
-                speechrecognition: 'Распознавание речи'
+                speechRecognition: 'Распознавание речи'
             },
             sk: {
-                speechrecognition: 'Rozpoznávanie reči'
+                speechRecognition: 'Rozpoznávanie reči'
             },
             sq: {
-                speechrecognition: 'Njohja e të folurit'
+                speechRecognition: 'Njohja e të folurit'
             },
             sv: {
-                speechrecognition: 'Taligenkänning'
+                speechRecognition: 'Taligenkänning'
             },
             ua: {
-                speechrecognition: 'Розпізнавання мови'
+                speechRecognition: 'Розпізнавання мови'
             }
         },
 
         plugins: {
-            speechrecognition: {
+            speechRecognition: {
+                shouldInit: isSupported,
                 init: function (trumbowyg) {
-                    trumbowyg.o.plugins.speechrecognition = $.extend(true, {},
+                    trumbowyg.o.plugins.speechRecognition = $.extend(true, {},
                         defaultOptions,
-                        trumbowyg.o.plugins.speechrecognition || {}
+                        trumbowyg.o.plugins.speechRecognition || {}
                     );
 
-                    // Unfortunately Firefox has not implemented the WebSpeechAPI yet.
-                    if(!navigator.userAgent.toLowerCase().includes('firefox')) {
-                        buildButtonIcon();
-                        trumbowyg.addBtnDef('speechrecognition', buildButtonDef(trumbowyg));
-                    }
+                    trumbowyg.addBtnDef('speechrecognition', buildButtonDef(trumbowyg));
                 }
             }
         }
