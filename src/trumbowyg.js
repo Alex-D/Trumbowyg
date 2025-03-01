@@ -1708,7 +1708,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 html += '<div class="' + prefix + 'input-html">';
 
                 if ($.isPlainObject(field.options)) {
-                    html += '<select name="target">';
+                    html += '<select id="' + fieldId + '" name="' + n + '">';
                     html += Object.keys(field.options).map((optionValue) => {
                         return '<option value="' + optionValue + '" ' + (optionValue === field.value ? 'selected' : '') + '>' + field.options[optionValue] + '</option>';
                     }).join('');
