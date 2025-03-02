@@ -245,6 +245,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 console.warn('You must define svgPath: https://goo.gl/CfTY9U'); // jshint ignore:line
             } else if (!$trumbowyg.svgAbsoluteUseHref) {
                 var div = t.doc.createElement('div');
+                div.style.width = '0';
+                div.style.height = '0';
+                div.style.overflow = 'hidden';
+                div.style.visibility = 'hidden';
                 div.id = trumbowygIconsId;
                 t.doc.body.insertBefore(div, t.doc.body.childNodes[0]);
                 fetch(svgPathOption, {
