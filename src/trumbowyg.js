@@ -1663,6 +1663,11 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             var t = this,
                 prefix = t.o.prefix;
 
+            // Prevent multiple calls when having multiple editors in the same page
+            if (!t.$btnPane.hasClass(prefix + 'disable')) {
+                return;
+            }
+
             t.$btnPane.removeClass(prefix + 'disable');
             t.$overlay.off();
 
