@@ -583,6 +583,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }
 
             t.semanticCode();
+            t.applyTagClasses();
 
             if (t.o.autogrowOnEnter) {
                 t.$ed.addClass(prefix + 'autogrow-on-enter');
@@ -1475,6 +1476,13 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             t.$c.trigger('tbw' + (isFullscreen ? 'open' : 'close') + 'fullscreen');
         },
 
+        applyTagClasses: function () {
+            var t = this;
+            for (const tag of Object.keys(t.o.tagClasses)) {
+                $(tag, t.$ed).addClass(t.o.tagClasses[tag]);
+            }
+            t.syncCode();
+        },
 
         /*
          * Call method of trumbowyg if exist
@@ -1514,25 +1522,17 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
                     t.syncCode();
                     t.semanticCode(false, true);
-                    try {
-                        var listId = window.getSelection().focusNode;
-                        if (!$(window.getSelection().focusNode.parentNode).hasClass('trumbowyg-editor')) {
-                            listId = window.getSelection().focusNode.parentNode;
-                        }
-                        var classes = t.o.tagClasses[param];
-                        if (classes) {
-                            $(listId).addClass(classes);
-                        }
-                    } catch (e) {
-
-                    }
-
                 }
 
                 if (cmd !== 'dropdown') {
                     t.updateButtonPaneStatus();
                     t.$c.trigger('tbwchange');
                 }
+            }
+
+            try {
+                t.applyTagClasses();
+            } catch (e) {
             }
         },
 
