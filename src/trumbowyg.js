@@ -198,7 +198,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
     };
 
     // @param: editorElem is the DOM element
-    var Trumbowyg = function (editorElem, options) {
+    var Trumbowyg = function (editorElem, options) { // jshint ignore:line
         var t = this,
             trumbowygIconsId = 'trumbowyg-icons',
             $trumbowyg = $.trumbowyg;
@@ -695,7 +695,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     }
                 })
                 .on('keyup focus', function () {
-                  if (!t.$ta.val().match(/<.*>/) && !t.$ed.html().match(/<.*>/)) {
+                    if (!t.$ta.val().match(/<.*>/) && !t.$ed.html().match(/<.*>/)) {
                         setTimeout(function () {
                             var block = t.isIE ? '<p>' : 'p';
                             t.doc.execCommand('formatBlock', false, block);
@@ -840,7 +840,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
 
         // Build a button and his action
-        buildBtn: function (btnName) { // btnName is name of the button
+        // btnName is name of the button
+        buildBtn: function (btnName) { // jshint ignore:line
             var t = this,
                 prefix = t.o.prefix,
                 btn = t.btnsDef[btnName],
@@ -1283,7 +1284,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 return;
             }
 
-            if(revert) {
+            if (revert) {
                 oldTag = newTag;
                 newTag = tmpTag;
             }
@@ -1307,7 +1308,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 }
                 $newTag.html($oldTag.html());
                 $oldTag.remove();
-                if(resetRange === true) {
+                if (resetRange === true) {
                     t.range.selectNodeContents($newTag.get(0));
                     t.range.collapse(false);
                 }
@@ -1513,7 +1514,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 t.$ed.focus();
             }
 
-            if(cmd === 'strikethrough' && t.o.semantic) {
+            if (cmd === 'strikethrough' && t.o.semantic) {
                 t.semanticTag('strike', t.o.semanticKeepAttributes, true); // browsers cannot undo e.g. <del> as they expect <strike>
             }
 
@@ -1540,7 +1541,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     t.semanticCode(false, true);
                     try {
                         var listId = window.getSelection().focusNode;
-                        if(!$(window.getSelection().focusNode.parentNode).hasClass('trumbowyg-editor')){
+                        if (!$(window.getSelection().focusNode.parentNode).hasClass('trumbowyg-editor')) {
                             listId = window.getSelection().focusNode.parentNode;
                         }
                         var classes = t.o.tagClasses[param];
@@ -1718,13 +1719,13 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 }).join(' ');
 
                 if (typeof field.type === 'function') {
-                  if (!field.name) {
-                    field.name = n;
-                  }
+                    if (!field.name) {
+                        field.name = n;
+                    }
 
-                  html += field.type(field, fieldId, prefix, lg);
+                    html += field.type(field, fieldId, prefix, lg);
 
-                  return;
+                    return;
                 }
 
                 html += '<div class="' + prefix + 'input-row">';
