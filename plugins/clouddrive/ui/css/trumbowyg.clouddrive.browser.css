@@ -1,0 +1,84 @@
+.-XC_OS_GD.--Link       { cursor : pointer ;}
+.-XC_OS_GD.--Embedded   { border : solid ; border-color : transparent ; border : solid ; border-color : transparent ;}
+.-XC_OS_GD.--Renamer    { width : 100% ; height : 4em ; text-align : center ; background-color : #FF000088 ; color : white ;}
+.-XC_OS_GD.--BackPanel  { text-align : left ;}
+/* #region Back-Button*/
+@keyframes fadeIN_BackButton {
+  90%     { opacity : 1 ; scale : 1.1 ;}
+  100%    { scale : 1 ; opacity : 1 ;}}
+
+@keyframes fadeIN_Span {
+  90%     { opacity : 1 ;}
+  100%    { opacity : 1 ; margin-left : 2em ;}}
+
+.-XC_OS_GD.--BackPanel #BackButton         { transition : .5s ; animation : fadeIN_BackButton .5s forwards ease-in ; opacity : 0 ; font-weight : bolder ; border : solid ; background-color : #FFFFFF10 ; scale : 0 ; border-radius : .5em ; box-shadow : 0 0 .5em black ; margin-right : auto ; padding : .5em ; border-width : .2em ; cursor : pointer ;}
+.-XC_OS_GD.--BackPanel #BackButton:hover   { scale : 1.1   !important ;}
+.-XC_OS_GD.--BackPanel #BackButton:active  { scale : .9    !important ;}
+
+.-XC_OS_GD.--BackPanel span { font-size : 1.5em ; margin-left : 0 ; margin-right : auto ; text-shadow : 0 0 .1em darkorange ; vertical-align : middle ; transition : .5s ; animation : fadeIN_Span .5s forwards ease-in ; opacity : 0 ;}
+/* #endregion Back-Button*/
+/* #region Filelist */
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList                   { display : grid ; overflow-y : auto ; overflow-x : hidden ;}
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList.--file,
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList.--directory       { width : 100% ; display : grid ; grid-template-columns : 90% 5% ; cursor : pointer ; transition : .5s ; background-color :rgba( 255, 255, 255, 0.21 ) ; border-width : .1em ; border-top-style : none ; border-left-style : none ; border-right-style : none ;}
+
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList #Element:hover .--file      { width : 80% ;}
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList #Element:hover .--directory { width : 90% ;}
+
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList.--directory span { margin-top : auto ; margin-bottom : auto ; font-weight : bolder ; font-size : 1.5em ; margin-left : auto ; margin-right : 1em ;}
+
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList.--file:hover,
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList.--directory:hover { color : white !important ; background-color :rgba( 8, 8, 117, 0.29 ) !important ;}
+
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList #Element { width : 100% ; display : flex ; height : 3.5em ;}
+
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList #Element #FolderActions { width : 0 ; opacity : 0 ; margin-top : auto ; margin-bottom : auto ; transition : .5s all ;}
+
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList #Element:hover #FolderActions { width : 10% !important ; opacity : 1 !important ;}
+
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList #Element #FolderActions #btnRename          { margin-left : .5em ; margin-right : .5em ; transition : .5s all ; background-color : transparent ; border-radius : .5em ; box-shadow : 0 0 .25em black ; cursor : pointer ;}
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList #Element #FolderActions #btnRename:hover    { scale : 1.5 ;}
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList #Element #FolderActions #btnRename:active   { scale : .9 ;}
+                                
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList #Element #FolderActions #Element:has( #btnRename.--active )                 { opacity : 1 !important ; width : 100% !important ;}
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList #Element #FolderActions #Element:has( #btnRename.--active ) #FolderActions  { width : 0 !important ; opacity : 0 !important ;}
+
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList #Element #FolderActions #btnRename img { width : 100% ; pointer-events : none ;}
+
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList #Element #Actions { transition : .5s all ; width : 0 ; opacity : 0 ; display : grid ; grid-template-columns : 50% 50% ; border : solid ; padding : .5em ; border-radius : .5em ; border-width : .1em ; box-shadow : 0 0 .25em black ; margin : .25em ; margin-left : -5% ;}
+
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList #Element:hover #Actions         { width : 20% !important ; opacity : 1 !important ; margin-left : .25em !important ;}
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList #Element:hover #Actions button  { padding-top : 0 ;}
+
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList #Element #Actions #LinkFile           { border : none ; background-color : transparent ; cursor : pointer ; transition : .5s all ; width : 100% ;}
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList #Element #Actions #EmbedFile          { border : none ; background-color : transparent ; transition : .5s ; width : 100% ;}
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList #Element #Actions #LinkFile:hover,
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList #Element #Actions #EmbedFile:hover    { scale : 1.25 ;}
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList #Element #Actions #LinkFile:active,
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList #Element #Actions #EmbedFile:active   { scale : .9 ;}
+
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList #Element #Actions #LinkFile img,
+.---WaXCode.--T3.--CX_Editor.--GoogleDrive.--FileList #Element #Actions #EmbedFile img  { width : 100% ; pointer-events : none ;}
+/* #endregion Filelist */
+/* #region Modal Options */
+.trumbowyg-modal-title #Close         { margin-left : 2em ; padding : .25em ; border-radius : .5em ; box-shadow : 0 0 .5em black ; cursor : pointer ; background-color : red ; color : white ; font-weight : bolder ; font-size : .75em ; border-radius : 10em ; border : solid ; line-height : 1em ;}
+.trumbowyg-modal-title #Close:hover   { scale : 1.1 ;}
+.trumbowyg-modal-title #Close:active  { scale : .9 ;}
+/* #endregion Modal Options */
+/* #region Directory Options */
+.trumbowyg-modal-title #Options { margin-left : auto ;}
+
+@keyframes fadeIN_DirectoryOptions {
+  0%      { opacity : 0 ; scale : 0 ;}
+  90%     { scale : 1.1 ; opacity : 1 ;}
+  100%    { scale : 1 ;}}
+.trumbowyg-modal-title #Options button         { animation : fadeIN_DirectoryOptions 1s ease-in forwards !important ; transition : .5s all ; background-color : transparent ; border : none ; border-radius : .5em ; box-shadow : 0 0 .25em black ; margin-top : 1.5em ; cursor : pointer ; transition : .5s all ;}
+.trumbowyg-modal-title #Options button:hover   { scale : 1.1 !important ;}
+.trumbowyg-modal-title #Options button:active  { scale : .9 !important ;}
+
+.trumbowyg-modal-title #Options button:nth-child( 2 ) { border-style : none ; box-shadow : none !important ; position : relative ; top : .3em ;}
+
+.trumbowyg-modal-title #Options button img                { pointer-events : none ;}
+.trumbowyg-modal-title #Options button:first-child img    { height : 2em ;}
+.trumbowyg-modal-title #Options button:nth-child( 2 ) img { height : 2.5em ;}
+/* #endregion Directory Options */

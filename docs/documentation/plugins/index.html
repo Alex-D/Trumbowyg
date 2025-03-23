@@ -43,6 +43,7 @@
                         <li><a href="#plugin-allowtagsfrompaste">Allow tags from paste</a></li>
                         <li><a href="#plugin-base64">Base 64</a></li>
                         <li><a href="#plugin-cleanpaste">Clean paste</a></li>
+                        <li><a href="#plugin-clouddrive">Clouddrive</a></li>
                         <li><a href="#plugin-colors">Colors</a></li>
                         <li><a href="#plugin-emoji">Emoji</a></li>
                         <li><a href="#plugin-fontfamily">Font family</a></li>
@@ -192,6 +193,57 @@ $('#my-editor').trumbowyg({
                 Clean paste works now on every new Trumbowyg instance.
             </p>
         </div>
+
+        <div class="feature">
+            <h3 id="plugin-clouddrive">Clouddrive</h3>
+
+            <p>Allows the user to browse, upload, select and ultimatly embed or link content from their <a class="reference external" href="https://drive.google.com/" >Google Drive</a>.</p>
+            <p>Browser Code and Drive Access Code are separated from each other in order to allow easy implementation of code to access other services like OneDrive, DropBox etc.</p>
+
+            <p>
+                <a href="../../demos/#plugins-clouddrive" class="button button-demo">Try Clouddrive live demo</a>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/clouddrive/trumbowyg.clouddrive.browser.js" class="button button-demo">View Clouddrive / Browser plugin code on GitHub</a>
+                <a href="https://github.com/Alex-D/Trumbowyg/tree/develop/plugins/clouddrive/trumbowyg.clouddrive.google.js" class="button button-demo">View Clouddrive / Google Drive plugin code on GitHub</a></p>
+
+            <h4>How to use it?</h4>
+
+            <pre>
+                <code class="html hljs language-xml">
+<span class="hljs-comment">&lt;!-- Import Trumbowyg plugins... --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"trumbowyg/dist/plugins/clouddrive/ui/trumbowyg.clouddrive.browser.min.css"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+                </code>
+                    
+                <code class="html hljs language-xml">
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"trumbowyg/dist/plugins/clouddrive/trumbowyg.clouddrive.browser.lang.en.min.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"trumbowyg/dist/plugins/clouddrive/trumbowyg.clouddrive.browser.min.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+                </code>
+                    
+                <code class="html hljs language-xml">
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"trumbowyg/dist/plugins/clouddrive/trumbowyg.clouddrive.google.lang.en.min.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"trumbowyg/dist/plugins/clouddrive/trumbowyg.clouddrive.google.min.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+                </code></pre>
+            </br>
+            <p>Configure the plugin (get the ClientID & APIKey from your <a href = "https://developers.google.com/drive/api/quickstart/js?hl=en">Google Workspace</a>).</p>
+
+            <pre>
+                <code class="html hljs language-xml">"plugins" : {
+                        "WaXCode_OnlineStorage_Google" : {
+                          "clientID"            : "xxxxxxxxxxxxxxx.apps.googleusercontent.com",
+                          "apiKey"              : "xxxxxxxxxxxxxxx",
+                          "scopes"              : "https://www.googleapis.com/auth/drive",
+                          "cDriveLinkIcon"      : "URL (to your icon for linking)",
+                          "cDriveEmbedIcon"     : "URL (to your icon for embedding)",
+                          "cDriveDirectoryIcon" : "URL (to your icon for directories)",
+                          "cDriveRenameIcon"    : "URL (to your icon for renaming directories)",
+                          "cDriveUploadIcon"    : "URL (to your icon for uploading)",
+                          "cDriveLoaderHTML"    : "URL (to your HTML to be shown in the modal during uploads)"}}</code></pre>
+            </br>
+            <p>Then you can use the new button definition <code>WaXCode_OnlineStorage_Google</code>.</p>
+
+            <pre>
+                <code class="html hljs language-xml">$('#my-editor').trumbowyg({
+                    btns: ['WaXCode_OnlineStorage_Google']
+                    });</code></pre></div>
 
         <div class="feature">
             <h3 id="plugin-colors">Colors</h3>
