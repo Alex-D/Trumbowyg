@@ -10,8 +10,8 @@
 jQuery.trumbowyg.langs.et = {
     viewHTML: 'HTML vaade',
 
-	undo: 'Võta tagasi',
-	redo: 'Tee uuesti',
+    undo: 'Võta tagasi',
+    redo: 'Tee uuesti',
 
     formatting: 'Vorming',
     p: 'Lõik',
@@ -28,8 +28,8 @@ jQuery.trumbowyg.langs.et = {
     em: 'Rõhutus',
     del: 'Eemaldatud',
 
-	superscript: 'Ülemine indeks',
-	subscript: 'Alumine indeks',
+    superscript: 'Ülemine indeks',
+    subscript: 'Alumine indeks',
 
     unorderedList: 'Järjestamata loend',
     orderedList: 'Järjestatud loend',
@@ -46,7 +46,7 @@ jQuery.trumbowyg.langs.et = {
     justifyFull: 'Joonda rööpselt',
 
     horizontalRule: 'Horisontaaljoon',
-	removeformat: 'Eemalda vorming',
+    removeformat: 'Eemalda vorming',
 
     fullscreen: 'Täisekraan',
 
@@ -59,7 +59,7 @@ jQuery.trumbowyg.langs.et = {
     description: 'Kirjeldus',
     title: 'Pealkiri',
     text: 'Tekst',
-	target: 'Sihtmärk',
-	width: 'Laius'
+    target: 'Sihtmärk',
+    width: 'Laius'
 
 };

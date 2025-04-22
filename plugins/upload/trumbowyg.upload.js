@@ -306,6 +306,7 @@
                                                         width: values.width
                                                     });
                                                 }
+                                                trumbowyg.syncCode();
                                                 setTimeout(function () {
                                                     trumbowyg.closeModal();
                                                 }, 250);

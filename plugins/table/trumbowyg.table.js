@@ -78,7 +78,7 @@
                     'tableVerticalAlignTop',
                     'tableVerticalAlignMiddle',
                     'tableVerticalAlignBottom',
-               ],
+                ],
             },
             {
                 title: 'tableOthers',
@@ -385,7 +385,7 @@
 
                             // when active table show AddRow / AddColumn
                             if (t.$box.find('.' + t.o.prefix + 'table-button').hasClass(t.o.prefix + 'active-button')) {
-                                var $table = $(t.doc.getSelection().anchorNode).closest('table');
+                                var $table = $(t.doc.getSelection().anchorNode).closest('table', t.$ed[0]);
                                 var tableState = getTableState($table);
                                 var hasSelectedCells = tableSelectedCells !== undefined;
                                 $(t.o.plugins.table.dropdown).each(function (_, buttonGroup) {
@@ -451,7 +451,7 @@
 
                     var toggleActiveDropdownCells = function (columnEvent) {
                         var column = $(columnEvent.target),
-                            table = column.closest('table'),
+                            table = column.closest('table', t.$ed[0]),
                             colIndex = this.cellIndex,
                             rowIndex = this.parentNode.rowIndex;
 
@@ -600,7 +600,7 @@
                             t.saveRange();
 
                             var node = t.doc.getSelection().anchorNode;
-                            var $table = $(node).closest('table');
+                            var $table = $(node).closest('table', t.$ed[0]);
 
                             if ($table.length === 0) {
                                 return;
@@ -609,7 +609,7 @@
                             if (node.tagName === 'TR') {
                                 node = $('td, th', node)[0];
                             }
-                            var $focusedRow = $(node).closest('tr');
+                            var $focusedRow = $(node).closest('tr', t.$ed[0]);
 
                             var tableState = getTableState($table);
 
@@ -633,7 +633,7 @@
                                 focusedRowIndex = Math.max(0, focusedRowIndex - 1);
                                 $focusedRow = $($rows[focusedRowIndex]);
                             } else {
-                                var rawCellRowspan = $(node).closest('td, th').attr('rowspan');
+                                var rawCellRowspan = $(node).closest('td, th', t.$ed[0]).attr('rowspan');
                                 var cellRowspan = parseInt(rawCellRowspan ? rawCellRowspan : 1, 10);
                                 focusedRowIndex += cellRowspan - 1;
                                 $focusedRow = $($rows[focusedRowIndex]);
@@ -1580,7 +1580,7 @@
                     };
                     var applyBackgroundColorToSelectedCells = function (color) {
                         return function () {
-                            var $table = $(t.doc.getSelection().anchorNode).closest('table');
+                            var $table = $(t.doc.getSelection().anchorNode).closest('table', t.$ed[0]);
 
                             if ($table.length === 0) {
                                 return;
@@ -1612,7 +1612,7 @@
 
                     var applyBorderColor = function (color) {
                         return function () {
-                            var $table = $(t.doc.getSelection().anchorNode).closest('table');
+                            var $table = $(t.doc.getSelection().anchorNode).closest('table', t.$ed[0]);
 
                             if ($table.length === 0) {
                                 return;

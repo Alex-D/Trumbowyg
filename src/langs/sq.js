@@ -7,7 +7,7 @@
  */
 
 jQuery.trumbowyg.langs.sq = {
-    
+
     viewHTML: 'Shfaq HTML',
 
     undo: 'Prish',

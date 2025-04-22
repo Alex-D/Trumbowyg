@@ -1,4 +1,4 @@
-@import "variables";
+@use "variables";
 
 .plugins-packages {
     .wrapper {
@@ -8,6 +8,7 @@
     .col-plugins {
         flex: 1.07;
     }
+
     .col-packages {
         flex: 0.93;
     }
@@ -40,20 +41,20 @@
             position: relative;
             display: inline-block;
             overflow: visible;
-            color: $text-color;
-            transition: color $transition-duration, transform $transition-duration;
+            color: variables.$text-color;
+            transition: color variables.$transition-duration, transform variables.$transition-duration;
             line-height: 1.8;
 
             &:hover {
-                color: $primary-color;
+                color: variables.$primary-color;
                 text-decoration: none;
             }
 
             img,
             svg {
                 display: inline-block;
-                color: $primary-color;
-                fill: $primary-color;
+                color: variables.$primary-color;
+                fill: variables.$primary-color;
                 width: 20px;
                 height: 20px;
                 margin-right: 8px;

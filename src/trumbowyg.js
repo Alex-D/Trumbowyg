@@ -245,12 +245,16 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 console.warn('You must define svgPath: https://goo.gl/CfTY9U'); // jshint ignore:line
             } else if (!$trumbowyg.svgAbsoluteUseHref) {
                 var div = t.doc.createElement('div');
+                div.style.width = '0';
+                div.style.height = '0';
+                div.style.overflow = 'hidden';
+                div.style.visibility = 'hidden';
                 div.id = trumbowygIconsId;
                 t.doc.body.insertBefore(div, t.doc.body.childNodes[0]);
                 fetch(svgPathOption, {
                     method: 'GET',
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                     }
                 }).then((response) => {
                     response.text()
@@ -284,7 +288,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         t.btnsDef = {
             viewHTML: {
                 fn: 'toggle',
-                class: 'trumbowyg-not-disable',
+                class: 'trumbowyg-not-disable'
             },
 
             undo: {
@@ -523,7 +527,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             });
 
             t.$edBox = $('<div/>', {
-                class: prefix + 'editor-box',
+                class: prefix + 'editor-box'
             });
 
             // $ta = Textarea
@@ -581,6 +585,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }
 
             t.semanticCode();
+            t.applyTagClasses();
 
             if (t.o.autogrowOnEnter) {
                 t.$ed.addClass(prefix + 'autogrow-on-enter');
@@ -840,7 +845,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
 
         // Build a button and his action
-        // btnName is name of the button
+        // @param btnName The name of the button
         buildBtn: function (btnName) { // jshint ignore:line
             var t = this,
                 prefix = t.o.prefix,
@@ -1500,6 +1505,13 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             t.$c.trigger('tbw' + (isFullscreen ? 'open' : 'close') + 'fullscreen');
         },
 
+        applyTagClasses: function () {
+            var t = this;
+            for (const tag of Object.keys(t.o.tagClasses)) {
+                $(tag, t.$ed).addClass(t.o.tagClasses[tag]);
+            }
+            t.syncCode();
+        },
 
         /*
          * Call method of trumbowyg if exist
@@ -1539,25 +1551,17 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
                     t.syncCode();
                     t.semanticCode(false, true);
-                    try {
-                        var listId = window.getSelection().focusNode;
-                        if (!$(window.getSelection().focusNode.parentNode).hasClass('trumbowyg-editor')) {
-                            listId = window.getSelection().focusNode.parentNode;
-                        }
-                        var classes = t.o.tagClasses[param];
-                        if (classes) {
-                            $(listId).addClass(classes);
-                        }
-                    } catch (e) {
-
-                    }
-
                 }
 
                 if (cmd !== 'dropdown') {
                     t.updateButtonPaneStatus();
                     t.$c.trigger('tbwchange');
                 }
+            }
+
+            try {
+                t.applyTagClasses();
+            } catch (e) {
             }
         },
 
@@ -1635,7 +1639,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 .css({
                     top: '-' + t.$btnPane.outerHeight(),
                     opacity: 0,
-                    paddingBottom: buildForm ? null : '5%',
+                    paddingBottom: buildForm ? null : '5%'
                 })
                 .appendTo($modal)
                 .animate({
@@ -1683,6 +1687,11 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         closeModal: function () {
             var t = this,
                 prefix = t.o.prefix;
+
+            // Prevent multiple calls when having multiple editors in the same page
+            if (!t.$btnPane.hasClass(prefix + 'disable')) {
+                return;
+            }
 
             t.$btnPane.removeClass(prefix + 'disable');
             t.$overlay.off();
@@ -1733,7 +1742,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 html += '<div class="' + prefix + 'input-html">';
 
                 if ($.isPlainObject(field.options)) {
-                    html += '<select name="target">';
+                    html += '<select id="' + fieldId + '" name="' + n + '">';
                     html += Object.keys(field.options).map((optionValue) => {
                         return '<option value="' + optionValue + '" ' + (optionValue === field.value ? 'selected' : '') + '>' + field.options[optionValue] + '</option>';
                     }).join('');

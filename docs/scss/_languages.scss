@@ -1,14 +1,14 @@
-@import "variables";
+@use "variables";
 
 .languages {
     p {
         text-align: center;
         margin: 0 0 5px;
         font-size: 18px;
-        color: $white;
+        color: variables.$white;
 
         a {
-            color: $primary-color-dark;
+            color: variables.$primary-color-dark;
         }
     }
 
@@ -33,7 +33,7 @@
         font-weight: 400;
 
         .continent-name {
-            color: $white;
+            color: variables.$white;
             font-size: 22px;
             font-weight: 400;
             background: none;
@@ -51,7 +51,7 @@
                 height: 0;
                 width: 0;
                 border: 6px solid transparent;
-                border-left-color: $white;
+                border-left-color: variables.$white;
                 transform: translateX(5px) translateY(-1px);
             }
         }
@@ -60,7 +60,7 @@
             .continent-name {
                 &::after {
                     border-left-color: transparent;
-                    border-top-color: $white;
+                    border-top-color: variables.$white;
                     transform: translateX(2px) translateY(2px);
                 }
             }
@@ -71,23 +71,25 @@
             min-width: 30px;
             padding-right: 8px;
             opacity: 0.6;
-            transition: opacity $transition-duration;
+            transition: opacity variables.$transition-duration;
         }
+
         .lang-name {
-            transition: padding-left $transition-duration;
+            transition: padding-left variables.$transition-duration;
         }
 
         a {
-            color: $primary-color-dark;
-            transition: color $transition-duration;
+            color: variables.$primary-color-dark;
+            transition: color variables.$transition-duration;
 
             &:hover {
-                color: $white;
+                color: variables.$white;
                 text-decoration: none;
 
                 .lang-code {
                     opacity: 1;
                 }
+
                 .lang-name {
                     padding-left: 8px;
                 }
@@ -106,7 +108,7 @@
 
             > li {
                 overflow: hidden;
-                transition: height $transition-duration linear;
+                transition: height variables.$transition-duration linear;
 
                 &[data-height] {
                     height: 30px;

@@ -72,20 +72,18 @@
 
         var html = response.data
             .filter(function (gifData) {
-                // jshint camelcase:false
-                var downsized = gifData.images.downsized || gifData.images.downsized_medium;
-                // jshint camelcase:true
-                return !!downsized.url;
+                var image = gifData.images[GIPHY_OPTIONS.pickerRendition];
+                return !!image[GIPHY_OPTIONS.pickerRenditionUrlAttribute];
             })
             .map(function (gifData) {
-                // jshint camelcase:false
-                var downsized = gifData.images.downsized || gifData.images.downsized_medium;
-                // jshint camelcase:true
-                var image = downsized,
-                    imageRatio = image.height / image.width,
+                var image = gifData.images[GIPHY_OPTIONS.pickerRendition];
+                var selectionImage = gifData.images[GIPHY_OPTIONS.selectionRendition];
+                var imageRatio = image.height / image.width,
                     altText = gifData.title;
 
-                var imgHtml = '<img src=' + image.url + ' width="' + width + '" height="' + imageRatio * width + '" alt="' + altText + '" loading="lazy" />';
+                var url = image[GIPHY_OPTIONS.pickerRenditionUrlAttribute];
+                var selectionUrl = selectionImage[GIPHY_OPTIONS.selectionRenditionUrlAttribute];
+                var imgHtml = '<img src=' + url + ' width="' + width + '" height="' + imageRatio * width + '" alt="' + altText + '" data-selection-url="' + selectionUrl + '" loading="lazy" />';
                 return '<div class="img-container">' + imgHtml + '</div>';
             })
             .join('')
@@ -122,7 +120,7 @@
         });
 
         $('img', $giphyModal).on('click', function () {
-            var src = $(this).attr('src'),
+            var src = $(this).data('selection-url'),
                 alt = $(this).attr('alt');
             trumbowyg.restoreRange();
             trumbowyg.execCmd('insertImage', src, false, true);
@@ -139,11 +137,21 @@
         });
     }
 
+    // see: https://developers.giphy.com/explorer/
     var defaultOptions = {
         rating: 'g',
         apiKey: null,
         throttleDelay: 300,
+        limit: 50,
         noResultGifUrl: 'https://media.giphy.com/media/2Faz9FbRzmwxY0pZS/giphy.gif'
+    };
+
+    const GIPHY_OPTIONS = {
+        bundle: 'low_bandwidth',
+        pickerRendition: 'fixed_width_small', // see: https://developers.giphy.com/docs/optional-settings/#renditions-on-demand
+        pickerRenditionUrlAttribute: 'webp', // can be 'url' or 'mp4' or 'webp'
+        selectionRendition: 'original',
+        selectionRenditionUrlAttribute: 'url'
     };
 
     // Add dropdown with font sizes
@@ -162,8 +170,17 @@
                                 throw new Error('You must set a Giphy API Key');
                             }
 
-                            var BASE_URL = 'https://api.giphy.com/v1/gifs/search?api_key=' + trumbowyg.o.plugins.giphy.apiKey + '&rating=' + trumbowyg.o.plugins.giphy.rating,
-                                DEFAULT_URL = BASE_URL.replace('/search', '/trending');
+                            var BASE_URL = [
+                                'https://api.giphy.com/v1/gifs/search?api_key=',
+                                trumbowyg.o.plugins.giphy.apiKey,
+                                '&rating=',
+                                trumbowyg.o.plugins.giphy.rating,
+                                '&limit=',
+                                trumbowyg.o.plugins.giphy.limit,
+                                '&bundle=',
+                                GIPHY_OPTIONS.bundle,
+                            ].join('');
+                            const DEFAULT_URL = BASE_URL.replace('/search', '/trending');
                             var prefix = trumbowyg.o.prefix;
                             var abortController = new AbortController();
 

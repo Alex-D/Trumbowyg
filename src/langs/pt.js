@@ -11,7 +11,7 @@
 
 jQuery.trumbowyg.langs.pt = {
     viewHTML: 'Ver HTML',
-    
+
     undo: 'Desfazer',
     redo: 'Refazer',
 
@@ -32,7 +32,7 @@ jQuery.trumbowyg.langs.pt = {
 
     superscript: 'Sobrescrito',
     subscript: 'Subscrito',
-            
+
     unorderedList: 'Lista não ordenada',
     orderedList: 'Lista ordenada',
 

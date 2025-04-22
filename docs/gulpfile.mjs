@@ -6,9 +6,8 @@ import gulpAutoprefixer from 'gulp-autoprefixer';
 import gulpLivereload from 'gulp-livereload';
 import gulpCleanCss from 'gulp-clean-css';
 import gulpSassPlugin from 'gulp-sass';
-import sass from 'sass';
-import vinylPaths from 'vinyl-paths';
-import {deleteSync} from 'del';
+import * as sass from 'sass';
+import {deleteAsync} from 'del';
 
 const gulpSass = () => gulpSassPlugin(sass)();
 
@@ -16,8 +15,7 @@ const mainStyle = 'scss/main.scss';
 
 
 const clean = function () {
-    return gulp.src('dist/*')
-        .pipe(vinylPaths(deleteSync));
+    return deleteAsync(['dist/*']);
 };
 
 
