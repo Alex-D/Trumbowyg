@@ -54,6 +54,7 @@
         borderColorList: null, // fallbacks on colorList
         allowCustomBorderColor: true,
         displayBorderColorsAsList: false,
+        enableHeaderRow: true,
         dropdown: [
             {
                 title: 'tableRows',
@@ -486,14 +487,16 @@
 
                         var $newTable = $('<table/>');
 
-                        // Build thead
-                        var $thead = $('<thead/>');
-                        var $theadTr = $('<tr/>');
-                        $theadTr.appendTo($thead);
-                        for (var th = 0; th <= this.cellIndex; th += 1) {
-                            $('<th/>', {scope: 'col'}).appendTo($theadTr);
+                        if (t.o.plugins.table.enableHeaderRow) {
+                            // Build thead
+                            var $thead = $('<thead/>');
+                            var $theadTr = $('<tr/>');
+                            $theadTr.appendTo($thead);
+                            for (var th = 0; th <= this.cellIndex; th += 1) {
+                                $('<th/>', {scope: 'col'}).appendTo($theadTr);
+                            }
+                            $thead.appendTo($newTable);
                         }
-                        $thead.appendTo($newTable);
 
                         // Build tbody
                         var $tbody = $('<tbody/>');
