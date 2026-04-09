@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -28,6 +28,28 @@
             <h3>The code</h3>
             <pre><code class="js-code-to-eval javascript">
 $('#editor').trumbowyg();
+            </code></pre>
+        </div>
+
+        <div class="feature">
+            <h3>File size</h3>
+
+            <div id="editor-max-file-size">
+                <p>
+                    Option <code>maxFileSize</code> allows to specify maximum file size, in bytes. Default value is <code>0</code> which means that uploaded file can have unlimited size.
+                </p>
+            </div>
+
+            <h4>The code</h4>
+            <pre><code class="js-code-to-eval javascript">
+$('#editor-max-file-size')
+.trumbowyg({
+    plugins: {
+        pasteimage: {
+            maxFileSize: 2 * 1024 * 1024 // 2 MB
+        }
+    }
+});
             </code></pre>
         </div>
 

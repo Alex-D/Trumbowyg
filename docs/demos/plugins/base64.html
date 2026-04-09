@@ -90,6 +90,31 @@ $('#editor-dropdown')
         </div>
 
         <div class="feature">
+            <h3>File size</h3>
+
+            <div id="editor-max-file-size">
+                <p>
+                    Option <code>maxFileSize</code> allows to specify maximum file size, in bytes. Default value is <code>0</code> which means that uploaded file can have unlimited size.
+                </p>
+            </div>
+
+            <h4>The code</h4>
+            <pre><code class="js-code-to-eval javascript">
+$('#editor-max-file-size')
+.trumbowyg({
+    btns: [
+        ['base64']
+    ],
+    plugins: {
+        base64: {
+            maxFileSize: 2 * 1024 * 1024 // 2 MB
+        }
+    }
+});
+            </code></pre>
+        </div>
+
+        <div class="feature">
             <h3>Setup</h3>
 
             <h4>In head tag</h4>
