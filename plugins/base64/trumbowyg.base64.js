@@ -31,7 +31,7 @@
                 errFileReaderNotSupported: 'FileReader is not supported by your browser.',
                 errInvalidImage: 'Invalid image file.',
                 errFileTooLarge: 'Image file is too large.',
-                errInvalidMimeType: 'File type is not allowed.'
+                errNotAllowedMimeType: 'File type is not allowed.'
             },
             az: {
                 base64: 'base64 olaraq şəkil',
@@ -39,7 +39,7 @@
                 errFileReaderNotSupported: 'FileReader brauzeriniz tərəfindən dəstəklənmir.',
                 errInvalidImage: 'Yanlış şəkil faylı.',
                 errFileTooLarge: 'Şəkil faylı çox böyükdür.',
-                errInvalidMimeType: 'Fayl növünə icazə verilmir.'
+                errNotAllowedMimeType: 'Fayl növünə icazə verilmir.'
             },
             by: {
                 base64: 'Выява (фармат base64)',
@@ -47,7 +47,7 @@
                 errFileReaderNotSupported: 'FileReader не падтрымліваецца вашым браўзэрам.',
                 errInvalidImage: 'Несапраўдны файл выявы.',
                 errFileTooLarge: 'Файл выявы занадта вялікі.',
-                errInvalidMimeType: 'Тып файла не дазволены.'
+                errNotAllowedMimeType: 'Тып файла не дазволены.'
             },
             cs: {
                 base64: 'Vložit obrázek',
@@ -59,7 +59,7 @@
                 errFileReaderNotSupported: 'FileReader er ikke understøttet af din browser.',
                 errInvalidImage: 'Ugyldig billedfil.',
                 errFileTooLarge: 'Billedfilen er for stor.',
-                errInvalidMimeType: 'Filtypen er ikke tilladt.'
+                errNotAllowedMimeType: 'Filtypen er ikke tilladt.'
             },
             de: {
                 base64: 'Bild als base64',
@@ -67,7 +67,7 @@
                 errFileReaderNotSupported: 'FileReader ist nicht in deinem Browser unterstützt.',
                 errInvalidImage: 'Ungültige Bilddatei.',
                 errFileTooLarge: 'Bilddatei ist zu groß.',
-                errInvalidMimeType: 'Dateityp ist nicht erlaubt.'
+                errNotAllowedMimeType: 'Dateityp ist nicht erlaubt.'
             },
             et: {
                 base64: 'Pilt base64 formaadis',
@@ -75,7 +75,7 @@
                 errFileReaderNotSupported: 'Teie veebilehitseja ei toeta FileReader funktsiooni.',
                 errInvalidImage: 'Vigane pildifail.',
                 errFileTooLarge: 'Pildifail on liiga suur.',
-                errInvalidMimeType: 'Failitüüp ei ole lubatud.'
+                errNotAllowedMimeType: 'Failitüüp ei ole lubatud.'
             },
             fr: {
                 base64: 'Image en base64',
@@ -83,7 +83,7 @@
                 errFileReaderNotSupported: 'FileReader n\'est pas supporté par votre navigateur.',
                 errInvalidImage: 'Fichier image invalide.',
                 errFileTooLarge: 'Le fichier image est trop volumineux.',
-                errInvalidMimeType: 'Le type de fichier n\'est pas autorisé.'
+                errNotAllowedMimeType: 'Le type de fichier n\'est pas autorisé.'
             },
             ha: {
                 base64: 'Hoto a matsayin base64',
@@ -91,7 +91,7 @@
                 errFileReaderNotSupported: 'Burauzar bata da FileReader.',
                 errInvalidImage: 'Fayil ɗin hoton ba shida inganci.',
                 errFileTooLarge: 'Fichye imaj la twò gwo.',
-                errInvalidMimeType: 'Kalite fichye a pa otorize.'
+                errNotAllowedMimeType: 'Kalite fichye a pa otorize.'
             },
             hu: {
                 base64: 'Kép beszúrás inline',
@@ -99,7 +99,7 @@
                 errFileReaderNotSupported: 'Ez a böngésző nem támogatja a FileReader funkciót.',
                 errInvalidImage: 'Érvénytelen képfájl.',
                 errFileTooLarge: 'A képfájl túl nagy.',
-                errInvalidMimeType: 'A fájltípus nem engedélyezett.'
+                errNotAllowedMimeType: 'A fájltípus nem engedélyezett.'
             },
             ja: {
                 base64: '画像 (Base64形式)',
@@ -107,7 +107,7 @@
                 errFileReaderNotSupported: 'あなたのブラウザーはFileReaderをサポートしていません',
                 errInvalidImage: '画像形式が正しくありません',
                 errFileTooLarge: '画像ファイルが大きすぎます',
-                errInvalidMimeType: '許可されていないファイル形式です'
+                errNotAllowedMimeType: '許可されていないファイル形式です'
             },
             ko: {
                 base64: '그림 넣기(base64)',
@@ -115,7 +115,7 @@
                 errFileReaderNotSupported: 'FileReader가 현재 브라우저를 지원하지 않습니다.',
                 errInvalidImage: '유효하지 않은 파일',
                 errFileTooLarge: '이미지 파일이 너무 큽니다.',
-                errInvalidMimeType: '허용되지 않는 파일 형식입니다.'
+                errNotAllowedMimeType: '허용되지 않는 파일 형식입니다.'
             },
             nl: {
                 base64: 'Afbeelding inline',
@@ -123,7 +123,7 @@
                 errFileReaderNotSupported: 'Uw browser ondersteunt deze functionaliteit niet.',
                 errInvalidImage: 'De gekozen afbeelding is ongeldig.',
                 errFileTooLarge: 'Het afbeeldingsbestand is te groot.',
-                errInvalidMimeType: 'Het bestandstype is niet toegestaan.'
+                errNotAllowedMimeType: 'Het bestandstype is niet toegestaan.'
             },
             pt_br: {
                 base64: 'Imagem em base64',
@@ -131,7 +131,7 @@
                 errFileReaderNotSupported: 'FileReader não é suportado pelo seu navegador.',
                 errInvalidImage: 'Arquivo de imagem inválido.',
                 errFileTooLarge: 'O arquivo de imagem é muito grande.',
-                errInvalidMimeType: 'Tipo de arquivo não permitido.'
+                errNotAllowedMimeType: 'Tipo de arquivo não permitido.'
             },
             ru: {
                 base64: 'Изображение как код в base64',
@@ -139,7 +139,7 @@
                 errFileReaderNotSupported: 'FileReader не поддерживается вашим браузером.',
                 errInvalidImage: 'Недопустимый файл изображения.',
                 errFileTooLarge: 'Файл изображения слишком большой.',
-                errInvalidMimeType: 'Тип файла не разрешён.'
+                errNotAllowedMimeType: 'Тип файла не разрешён.'
             },
             sl: {
                 base64: 'Slika kot base64',
@@ -147,7 +147,7 @@
                 errFileReaderNotSupported: 'FileReader ni podprt v tem brskalniku.',
                 errInvalidImage: 'Neveljavna datoteka s sliko.',
                 errFileTooLarge: 'Slikovna datoteka je prevelika.',
-                errInvalidMimeType: 'Vrsta datoteke ni dovoljena.'
+                errNotAllowedMimeType: 'Vrsta datoteke ni dovoljena.'
             },
             tr: {
                 base64: 'Base64 olarak resim',
@@ -155,7 +155,7 @@
                 errFileReaderNotSupported: 'FileReader tarayıcınız tarafından desteklenmiyor.',
                 errInvalidImage: 'Geçersiz resim dosyası.',
                 errFileTooLarge: 'Resim dosyası çok büyük.',
-                errInvalidMimeType: 'Dosya türüne izin verilmiyor.'
+                errNotAllowedMimeType: 'Dosya türüne izin verilmiyor.'
             },
             zh_cn: {
                 base64: '图片（Base64编码）',
@@ -167,7 +167,7 @@
                 errFileReaderNotSupported: '你的瀏覽器不支援FileReader',
                 errInvalidImage: '不正確的檔案格式',
                 errFileTooLarge: '圖片檔案過大',
-                errInvalidMimeType: '不允許的檔案類型'
+                errNotAllowedMimeType: '不允許的檔案類型'
             },
         },
         // jshint camelcase:true
@@ -233,7 +233,7 @@
                                         if (!isAllowed) {
                                             trumbowyg.addErrorOnModalField(
                                                 $('input[type=file]', $modal),
-                                                trumbowyg.lang.errInvalidMimeType
+                                                trumbowyg.lang.errNotAllowedMimeType
                                             );
                                             return;
                                         }
