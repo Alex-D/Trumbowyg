@@ -151,7 +151,10 @@
             base64: {
                 shouldInit: isSupported,
                 init: function (trumbowyg) {
-                    trumbowyg.o.plugins.base64 = trumbowyg.o.plugins.base64 || defaultOptions;
+                    trumbowyg.o.plugins.base64 = $.extend({},
+                        defaultOptions,
+                        trumbowyg.o.plugins.base64 || {}
+                    );
 
                     var btnDef = {
                         isSupported: isSupported,
@@ -181,7 +184,7 @@
                                 // Callback
                                 function (values) {
                                     // Validate file size
-                                    var maxFileSize = trumbowyg.o.plugins.base64.maxFileSize || 0;
+                                    var maxFileSize = trumbowyg.o.plugins.base64.maxFileSize;
                                     if (maxFileSize > 0 && file.size > maxFileSize) {
                                         trumbowyg.addErrorOnModalField(
                                             $('input[type=file]', $modal),
