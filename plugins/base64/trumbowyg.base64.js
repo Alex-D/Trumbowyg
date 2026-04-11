@@ -231,15 +231,10 @@
                                        file 
                                        && Array.isArray(mimeTypes) 
                                        && mimeTypes.length 
-                                       && mimeTypes.indexOf('image/*') === -1
+                                       && !mimeTypes.includes('image/*')
                                     ) {
                                         var fileType = file.type || '';
-                                        var isAllowed = mimeTypes.some(function (mimeType) {
-                                            if (mimeType.indexOf('/*') !== -1) {
-                                                return fileType.indexOf(mimeType.replace('/*', '/')) === 0;
-                                            }
-                                            return fileType === mimeType;
-                                        });
+                                        var isAllowed = mimeTypes.includes(fileType);
 
                                         if (!isAllowed) {
                                             trumbowyg.addErrorOnModalField(
