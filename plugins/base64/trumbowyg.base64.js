@@ -187,7 +187,7 @@
                             trumbowyg.saveRange();
 
                             var file;
-                            var mimeTypes = trumbowyg.o.plugins.base64.mimeTypes || ['image/*'];
+                            var mimeTypes = trumbowyg.o.plugins.base64.mimeTypes;
 
                             var $modal = trumbowyg.openModalInsert(
                                 // Title
@@ -221,7 +221,18 @@
                                     }
 
                                     // Validate MIME type
-                                    if (file && mimeTypes.indexOf('image/*') === -1) {
+                                    //
+                                    // If:
+                                    //    1) file is provided, and
+                                    //    2) list of allowed MIME types is an array, and
+                                    //    3) list of allowed MIME types is not empty, and
+                                    //    4) list of allowed MIME types doesn't contain entry that accepts all images
+                                    if (
+                                       file 
+                                       && Array.isArray(mimeTypes) 
+                                       && mimeTypes.length 
+                                       && mimeTypes.indexOf('image/*') === -1
+                                    ) {
                                         var fileType = file.type || '';
                                         var isAllowed = mimeTypes.some(function (mimeType) {
                                             if (mimeType.indexOf('/*') !== -1) {
