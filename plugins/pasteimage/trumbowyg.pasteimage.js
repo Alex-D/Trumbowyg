@@ -19,7 +19,10 @@
         plugins: {
             pasteImage: {
                 init: function (trumbowyg) {
-                    trumbowyg.o.plugins.pasteImage = trumbowyg.o.plugins.pasteImage || defaultOptions;
+                    trumbowyg.o.plugins.pasteImage = $.extend({},
+                        defaultOptions,
+                        trumbowyg.o.plugins.pasteImage || {}
+                    );
 
                     trumbowyg.pasteHandlers.push(function (pasteEvent) {
                         try {
@@ -33,7 +36,7 @@
                                     file = items[i].getAsFile();
 
                                     // Validate file size
-                                    var maxFileSize = trumbowyg.o.plugins.pasteImage.maxFileSize || 0;
+                                    var maxFileSize = trumbowyg.o.plugins.pasteImage.maxFileSize;
                                     if (maxFileSize > 0 && file.size > maxFileSize) {
                                         continue;
                                     }
