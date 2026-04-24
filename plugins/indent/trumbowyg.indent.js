@@ -37,6 +37,10 @@
                 indent: 'Augmenter le retrait',
                 outdent: 'Diminuer le retrait'
             },
+            ha: {
+                indent: 'Tura rubutu',
+                outdent: 'Dawo da rubutu'
+            },
             pt_br: {
                 indent: 'Aumentar Recuo',
                 outdent: 'Diminuir Recuo'

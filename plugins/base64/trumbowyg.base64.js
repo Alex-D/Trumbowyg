@@ -77,6 +77,12 @@
                 errInvalidImage: 'Fichier image invalide.',
                 errFileTooLarge: 'Le fichier image est trop volumineux.'
             },
+            ha: {
+                base64: 'Hoto a matsayin base64',
+                file: 'Fayil',
+                errFileReaderNotSupported: 'Burauzar bata da FileReader.',
+                errInvalidImage: 'Fayil ɗin hoton ba shida inganci.'
+            },
             hu: {
                 base64: 'Kép beszúrás inline',
                 file: 'Fájl',

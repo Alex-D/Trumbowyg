@@ -134,6 +134,9 @@
             fr: {
                 speechRecognition: 'Reconnaissance vocale'
             },
+            ha: {
+                speechRecognition: 'Nazartar furuci'
+            },
             hr: {
                 speechRecognition: 'Prepoznavanje govora'
             },

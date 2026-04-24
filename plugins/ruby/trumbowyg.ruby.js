@@ -49,6 +49,11 @@
                 rubyModal: 'Modale ruby',
                 rubyText: 'Texte ruby'
             },
+            ha: {
+                ruby: 'Saka rubutun ruby',
+                rubyModal: 'Allon ruby',
+                rubyText: 'Rubutun ruby'
+            },
             hu: {
                 ruby: 'Ruby szöveg hozzáadás',
                 rubyModal: 'Ruby modal',

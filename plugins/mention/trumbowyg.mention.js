@@ -41,6 +41,9 @@
             fr: {
                 mention: 'Mentionner'
             },
+            ha: {
+                mention: 'Ambaci'
+            },
             hu: {
                 mention: 'Említ'
             },

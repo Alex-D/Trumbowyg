@@ -67,6 +67,15 @@
                     '2.0': 'Très grande'
                 }
             },
+            ha: {
+                lineheight: 'Tsayin layi',
+                lineheights: {
+                    '0.9': 'Ƙarami',
+                    'normal': 'Ma dai-daici',
+                    '1.5': 'Babba',
+                    '2.0': 'Mafi girma'
+                }
+            },
             hu: {
                 lineheight: 'Line height',
                 lineheights: {

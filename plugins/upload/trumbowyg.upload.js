@@ -140,6 +140,11 @@
                 file: 'Fichier',
                 uploadError: 'Erreur'
             },
+            ha: {
+                upload: 'Ɗora',
+                file: 'Fayil',
+                uploadError: 'Matsala'
+            },
             hu: {
                 upload: 'Feltöltés',
                 file: 'Fájl',

@@ -26,6 +26,9 @@
             fr: {
                 template: 'Patron'
             },
+            ha: {
+                template: 'Samfuri'
+            },
             hu: {
                 template: 'Sablon'
             },
