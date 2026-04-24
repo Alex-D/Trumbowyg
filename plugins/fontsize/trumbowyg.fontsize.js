@@ -143,6 +143,22 @@
                     value: '48px'
                 }
             },
+            ha: {
+                fontsize: 'Girman rubutu',
+                fontsizes: {
+                    'x-small': 'Mafi ƙanƙanta',
+                    'small': 'Ƙarami',
+                    'medium': 'Ma dai-daici',
+                    'large': 'Babba',
+                    'x-large': 'Mafi girma',
+                    'custom': 'Zaɓi'
+                },
+                fontCustomSize: {
+                    title: 'Zaɓi Girman Rubutu',
+                    label: 'Girman Rubutu',
+                    value: '48px'
+                }
+            },
             hu: {
                 fontsize: 'Betű méret',
                 fontsizes: {

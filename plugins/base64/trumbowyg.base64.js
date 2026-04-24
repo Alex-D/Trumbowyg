@@ -66,6 +66,12 @@
                 errFileReaderNotSupported: 'FileReader n\'est pas supporté par votre navigateur.',
                 errInvalidImage: 'Fichier image invalide.'
             },
+            ha: {
+                base64: 'Hoto a matsayin base64',
+                file: 'Fayil',
+                errFileReaderNotSupported: 'Burauzar bata da FileReader.',
+                errInvalidImage: 'Fayil ɗin hoton ba shida inganci.'
+            },
             hu: {
                 base64: 'Kép beszúrás inline',
                 file: 'Fájl',

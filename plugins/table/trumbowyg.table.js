@@ -231,6 +231,28 @@
                 tableCellBackgroundColor: 'Couleur de fond des cellules',
                 tableBorderColor: 'Couleur de la bordure du tableau'
             },
+            ha: {
+                table: 'Saka tebur',
+                tableRows: 'Layuka',
+                tableColumns: 'Shafi',
+                tableVerticalAlign: 'Dai-daita Vertical',
+                tableOthers: 'Saura',
+                tableAddHeaderRow: 'Saka layin sama',
+                tableAddRowAbove: 'Saka layi a sama',
+                tableAddRow: 'Saka layi a ƙasa',
+                tableAddColumnLeft: 'Saka shafi a hagu',
+                tableAddColumn: 'Saka shafi a dama',
+                tableDeleteRow: 'Goge layi',
+                tableDeleteColumn: 'Goge shafi',
+                tableDestroy: 'Goge tebur',
+                tableMergeCells: 'Haɗe akwati',
+                tableUnmergeCells: 'Raba akwati',
+                tableVerticalAlignTop: 'Tura rubutu zuwa sama',
+                tableVerticalAlignMiddle: 'Tura rubutu zuwa tsakiya ta tsaye',
+                tableVerticalAlignBottom: 'Tura rubutu zuwa ƙasa',
+                tableCellBackgroundColor: 'Kalar bayan akwati',
+                tableBorderColor: 'Kalar gewayen tebur'
+            },
             hu: {
                 table: 'Táblázat beszúrás',
                 tableAddRow: 'Sor hozzáadás',

@@ -70,6 +70,12 @@
                 foreColorRemove: 'Supprimer la couleur du texte',
                 backColorRemove: 'Supprimer la couleur de fond'
             },
+            ha: {
+                foreColor: 'Kalar rubutu',
+                backColor: 'Kalar bayan rubutu',
+                foreColorRemove: 'Cire kalar rubutu',
+                backColorRemove: 'Cire kalar bayan rubutu'
+            },
             hu: {
                 foreColor: 'Betű szín',
                 backColor: 'Háttér szín',

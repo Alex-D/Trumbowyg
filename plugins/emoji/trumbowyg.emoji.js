@@ -1410,6 +1410,9 @@
             fr: {
                 emoji: 'Ajouter un emoji'
             },
+            ha: {
+                emoji: 'Saka imoji'
+            },
             hu: {
                 emoji: 'Emoji beszúrás'
             },

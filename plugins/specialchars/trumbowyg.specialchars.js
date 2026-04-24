@@ -43,6 +43,9 @@
             fr: {
                 specialChars: 'Caractères spéciaux'
             },
+            ha: {
+                specialChars: 'Haruffa na musamman'
+            },
             hu: {
                 specialChars: 'Speciális karakterek'
             },

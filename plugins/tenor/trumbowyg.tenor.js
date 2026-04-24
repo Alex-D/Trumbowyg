@@ -24,6 +24,9 @@
             fr: {
                 tenor: 'Insérer un GIF'
             },
+            ha: {
+                tenor: 'Saka GIF'
+            },
             hu: {
                 tenor: 'GIF beszúrás'
             },
