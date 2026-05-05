@@ -7,7 +7,7 @@
  * 	    Github : https://github.com/sysadev
  */
 
-jQuery.trumbowyg.langs.fr = {
+jQuery.trumbowyg.langs.ha = {
     viewHTML: 'Duba HTML',
 
     undo: 'Warwara',
