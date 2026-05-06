@@ -61,6 +61,9 @@
             fr: {
                 insertAudio: 'Insérer un son'
             },
+            ha: {
+                insertAudio: 'Saka audiyo'
+            },
             hu: {
                 insertAudio: 'Audio beszúrás'
             },

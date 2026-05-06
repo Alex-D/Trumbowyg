@@ -23,6 +23,9 @@
             fr: {
                 giphy: 'Insérer un GIF'
             },
+            ha: {
+                giphy: 'Saka GIF'
+            },
             hu: {
                 giphy: 'GIF beszúrás'
             },

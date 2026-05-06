@@ -31,6 +31,9 @@
             fr: {
                 fontFamily: 'Police'
             },
+            ha: {
+                fontFamily: 'Sigar rubutu'
+            },
             hu: {
                 fontFamily: 'Betűtípus'
             },

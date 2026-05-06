@@ -49,6 +49,10 @@
             fr: {
                 noembedError: 'Erreur'
             },
+            ha: {
+                noembed: 'Noembed',
+                noembedError: 'Matsala'
+            },
             hu: {
                 noembed: 'Noembed',
                 noembedError: 'Hiba'

@@ -34,6 +34,9 @@
             fr: {
                 preformatted: 'Exemple de code <pre>'
             },
+            ha: {
+                preformatted: 'Samfurin kod <pre>'
+            },
             hu: {
                 preformatted: 'Kód minta <pre>'
             },

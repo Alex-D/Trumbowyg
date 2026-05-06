@@ -285,6 +285,10 @@
                 highlight: 'Koodi esiletoomine',
                 highlightLine: 'Koodiread, näiteks: 1,3-5'
             },
+            ha: {
+                highlight: 'Haskaka kod',
+                highlightLine: 'Haskaka layuka, misali: 1,3-5'
+            },
             hu: {
                 highlight: 'Kód kiemelés'
             },

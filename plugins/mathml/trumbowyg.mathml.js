@@ -57,6 +57,11 @@
                 formulas: 'Formule',
                 inline: 'En ligne'
             },
+            ha: {
+                mathml: 'Saka Fomuloli',
+                formulas: 'Fomuloli',
+                inline: 'Kan layi'
+            },
             hu: {
                 mathml: 'Formulák beszúrás',
                 formulas: 'Formulák',
