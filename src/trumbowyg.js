@@ -558,8 +558,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             t.$ta
                 .addClass(prefix + 'textarea')
-                .attr('tabindex', -1)
-            ;
+                .attr('tabindex', -1);
 
             t.$ed
                 .addClass(prefix + 'editor')
@@ -567,8 +566,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     contenteditable: true,
                     dir: t.lang._dir || 'ltr'
                 })
-                .html(html)
-            ;
+                .html(html);
 
             if (t.o.tabindex) {
                 t.$ed.attr('tabindex', t.o.tabindex);
@@ -696,7 +694,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                             t.autogrowOnEnterWasFocused = true;
                             t.autogrowEditorOnEnter();
                         } else if (!t.o.autogrow) {
-                            t.$edBox.css({height: t.$edBox.css('min-height')});
+                            t.$edBox.css({ height: t.$edBox.css('min-height') });
                             t.$c.trigger('tbwresize');
                         }
                     }
@@ -783,7 +781,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             if (oldHeight !== totalHeight) {
                 t.$edBox.height(oldHeight);
                 setTimeout(function () {
-                    t.$edBox.css({height: totalHeight});
+                    t.$edBox.css({ height: totalHeight });
                     t.$c.trigger('tbwresize');
                 }, 0);
             }
@@ -810,7 +808,28 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 $.each(btnGrp, function (i, btn) {
                     try { // Prevent buildBtn error
                         if (t.isSupportedBtn(btn)) { // It's a supported button
-                            $btnGroup.append(t.buildBtn(btn));
+                            var $btn = t.buildBtn(btn);
+                            $btnGroup.append($btn);
+
+                            if (t.o.keyboardAccessible) {
+                                var btnDef = t.btnsDef[btn],
+                                    isDropdown = btnDef.dropdown;
+                                if (isDropdown) {
+                                    var dropdownPrefix = prefix + 'dropdown',
+                                        dropdownOptions = { // the dropdown
+                                            class: dropdownPrefix + '-' + btn + ' ' + dropdownPrefix + ' ' + prefix +
+                                                'fixed-top ' + (btnDef.dropdownClass || '')
+                                        };
+                                    dropdownOptions['data-' + dropdownPrefix] = btn;
+                                    var $dropdown = $('<div/>', dropdownOptions);
+                                    $.each(isDropdown, function (i, def) {
+                                        if (t.btnsDef[def] && t.isSupportedBtn(def)) {
+                                            $dropdown.append(t.buildSubBtn(def));
+                                        }
+                                    });
+                                    $btnGroup.append($dropdown.hide());
+                                }
+                            }
                         }
                     } catch (c) {
                     }
@@ -834,6 +853,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 isDropdown = btn.dropdown,
                 hasIcon = btn.hasIcon != null ? btn.hasIcon : true,
                 textDef = t.lang[btnName] || btnName,
+                eventName = t.o.keyboardAccessible ? 'click' : 'mousedown',
 
                 $btn = $('<button/>', {
                     type: 'button',
@@ -842,10 +862,10 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' :
                         t.hideButtonTexts ? '' : (btn.text || btn.title || t.lang[btnName] || btnName),
                     title: (btn.title || btn.text || textDef) + (btn.key ? ' (' + (t.isMac ? 'Cmd' : 'Ctrl') + ' + ' + btn.key + ')' : ''),
-                    tabindex: -1,
-                    mousedown: function () {
+                    tabindex: t.o.keyboardAccessible ? null : -1,
+                    [eventName]: function () {
                         if (!isDropdown || $('.' + btnName + '-' + prefix + 'dropdown', t.$box).is(':hidden')) {
-                            $('body', t.doc).trigger('mousedown');
+                            $('body', t.doc).trigger(eventName);
                         }
 
                         if ((t.$btnPane.hasClass(prefix + 'disable') || t.$box.hasClass(prefix + 'disabled')) &&
@@ -862,18 +882,20 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             if (isDropdown) {
                 $btn.addClass(prefix + 'open-dropdown');
-                var dropdownPrefix = prefix + 'dropdown',
-                    dropdownOptions = { // the dropdown
-                        class: dropdownPrefix + '-' + btnName + ' ' + dropdownPrefix + ' ' + prefix + 'fixed-top ' + (btn.dropdownClass || '')
-                    };
-                dropdownOptions['data-' + dropdownPrefix] = btnName;
-                var $dropdown = $('<div/>', dropdownOptions);
-                $.each(isDropdown, function (i, def) {
-                    if (t.btnsDef[def] && t.isSupportedBtn(def)) {
-                        $dropdown.append(t.buildSubBtn(def));
-                    }
-                });
-                t.$box.append($dropdown.hide());
+                if (!t.o.keyboardAccessible) {
+                    var dropdownPrefix = prefix + 'dropdown',
+                        dropdownOptions = { // the dropdown
+                            class: dropdownPrefix + '-' + btnName + ' ' + dropdownPrefix + ' ' + prefix + 'fixed-top ' + (btn.dropdownClass || '')
+                        };
+                    dropdownOptions['data-' + dropdownPrefix] = btnName;
+                    var $dropdown = $('<div/>', dropdownOptions);
+                    $.each(isDropdown, function (i, def) {
+                        if (t.btnsDef[def] && t.isSupportedBtn(def)) {
+                            $dropdown.append(t.buildSubBtn(def));
+                        }
+                    });
+                    $btn.after($dropdown.hide());
+                }
             } else if (btn.key) {
                 t.keys[btn.key] = {
                     fn: btn.fn || btnName,
@@ -889,11 +911,12 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
         },
         // Build a button for dropdown menu
         // @param n : name of the subbutton
-        buildSubBtn: function (btnName) {
+        buildSubBtn: function (btnName) { // jshint ignore:line
             var t = this,
                 prefix = t.o.prefix,
                 btn = t.btnsDef[btnName],
-                hasIcon = btn.hasIcon != null ? btn.hasIcon : true;
+                hasIcon = btn.hasIcon != null ? btn.hasIcon : true,
+                eventName = t.o.keyboardAccessible ? 'click' : 'mousedown';
 
             if (btn.key) {
                 t.keys[btn.key] = {
@@ -912,8 +935,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     (btn.text || btn.title || t.lang[btnName] || btnName),
                 title: (btn.key ? '(' + (t.isMac ? 'Cmd' : 'Ctrl') + ' + ' + btn.key + ')' : null),
                 style: btn.style || null,
-                mousedown: function () {
-                    $('body', t.doc).trigger('mousedown');
+                [eventName]: function () {
+                    $('body', t.doc).trigger(eventName);
 
                     t.execCmd(btn.fn || btnName, btn.param || btnName, btn.forceCss);
 
@@ -984,7 +1007,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                                 left: fixedFullWidth ? 0 : 'auto',
                                 zIndex: 7
                             });
-                            t.$box.css({paddingTop: $buttonPane.height()});
+                            t.$box.css({ paddingTop: $buttonPane.height() });
                         }
                         $buttonPane.css({
                             width: fixedFullWidth ? '100%' : (($box.width() - 1))
@@ -998,7 +1021,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     } else if (t.isFixed) {
                         t.isFixed = false;
                         $buttonPane.removeAttr('style');
-                        t.$box.css({paddingTop: 0});
+                        t.$box.css({ paddingTop: 0 });
                         $('.' + t.o.prefix + 'fixed-top', $box).css({
                             position: 'absolute',
                             top: buttonPaneOuterHeight
@@ -1031,7 +1054,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             if (t.isTextarea) {
                 t.$box.after(
                     t.$ta
-                        .css({height: ''})
+                        .css({ height: '' })
                         .val(t.html())
                         .removeClass(prefix + 'textarea')
                         .show()
@@ -1039,7 +1062,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             } else {
                 t.$box.after(
                     t.$edBox
-                        .css({height: ''})
+                        .css({ height: '' })
                         .removeClass(prefix + 'editor')
                         .removeAttr('contenteditable')
                         .removeAttr('dir')
@@ -1121,27 +1144,29 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 prefix = t.o.prefix,
                 $dropdown = $('[data-' + prefix + 'dropdown=' + name + ']', t.$box),
                 $btn = $('.' + prefix + name + '-button', t.$btnPane),
-                show = $dropdown.is(':hidden');
+                show = $dropdown.is(':hidden'),
+                eventName = t.o.keyboardAccessible ? 'click' : 'mousedown';
 
-            $body.trigger('mousedown');
+            $body.trigger(eventName);
 
             if (show) {
                 var btnOffsetLeft = $btn.offset().left;
                 $btn.addClass(prefix + 'active');
 
                 $dropdown.css({
-                    position: 'absolute',
-                    top: $btn.offset().top - t.$btnPane.offset().top + $btn.outerHeight(),
-                    left: (t.o.fixedFullWidth && t.isFixed) ? btnOffsetLeft : (btnOffsetLeft - t.$btnPane.offset().left)
+                    position: t.o.keyboardAccessible ? 'fixed' : 'absolute',
+                    top: $btn.offset().top + $btn.outerHeight(),
+                    left: (t.o.fixedFullWidth && t.isFixed) || t.o.keyboardAccessible ?
+                        btnOffsetLeft : (btnOffsetLeft - t.$btnPane.offset().left)
                 }).show();
 
                 $(window).trigger('scroll');
 
-                $body.on('mousedown.' + t.eventNamespace, function (e) {
+                $body.on(`${eventName}.${t.eventNamespace}`, function (e) {
                     if (!$dropdown.is(e.target)) {
                         $('.' + prefix + 'dropdown', t.$box).hide();
                         $('.' + prefix + 'active', t.$btnPane).removeClass(prefix + 'active');
-                        $body.off('mousedown.' + t.eventNamespace);
+                        $body.off(`${eventName}.${t.eventNamespace}`);
                     }
                 });
             }
@@ -1181,7 +1206,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             if (t.o.autogrow) {
                 t.height = t.$edBox.height();
                 if (t.height !== t.$ta.css('height')) {
-                    t.$ta.css({height: t.height});
+                    t.$ta.css({ height: t.height });
                     t.$c.trigger('tbwresize');
                 }
             }
@@ -1189,7 +1214,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 t.$edBox.height('auto');
                 var totalHeight = t.autogrowOnEnterWasFocused ? t.$edBox[0].scrollHeight : t.$edBox.css('min-height');
                 if (totalHeight !== t.$ta.css('height')) {
-                    t.$edBox.css({height: totalHeight});
+                    t.$edBox.css({ height: totalHeight });
                     t.$c.trigger('tbwresize');
                 }
             }
