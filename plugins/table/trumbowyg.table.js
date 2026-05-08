@@ -54,7 +54,7 @@
         borderColorList: null, // fallbacks on colorList
         allowCustomBorderColor: true,
         displayBorderColorsAsList: false,
-        enableHeaderRow: true,
+        addHeaderRowToNewTables: true,
         dropdown: [
             {
                 title: 'tableRows',
@@ -487,7 +487,7 @@
 
                         var $newTable = $('<table/>');
 
-                        if (t.o.plugins.table.enableHeaderRow) {
+                        if (t.o.plugins.table.addHeaderRowToNewTables) {
                             // Build thead
                             var $thead = $('<thead/>');
                             var $theadTr = $('<tr/>');
