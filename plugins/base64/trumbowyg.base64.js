@@ -19,7 +19,7 @@
 
     var defaultOptions = {
         maxFileSize: 0,
-        allowedMimeTypes: ['image/*']
+        mimeTypes: ['image/*']
     };
 
     $.extend(true, $.trumbowyg, {
