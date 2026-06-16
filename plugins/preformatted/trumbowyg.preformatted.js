@@ -1,9 +1,10 @@
 /* ===========================================================
- * trumbowyg.preformatted.js v1.0
+ * trumbowyg.preformatted.js v1.1
  * Preformatted plugin for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
- * Author : Casella Edoardo (Civile)
+ * Author : Casella Edoardo (Civile) v1.0
+ * Author : SD/S4T v1.1
  */
 
 
@@ -76,23 +77,28 @@
                     var btnDef = {
                         fn: function () {
                             trumbowyg.saveRange();
-                            var text = trumbowyg.getRangeText();
-                            if (text.replace(/\s/g, '') !== '') {
+                            let tempDiv = document.createElement('div');
+                            tempDiv.appendChild(trumbowyg.range.cloneContents());
+                            let html = tempDiv.innerHTML;
+                            
+                            if (html.replace(/\s/g, '') !== '') {
                                 try {
                                     var curtag = getSelectionParentElement().tagName.toLowerCase();
                                     if (curtag === 'code' || curtag === 'pre') {
                                         return unwrapCode();
-                                    }
-                                    else {
-                                        trumbowyg.execCmd('insertHTML', '<pre><code>' + strip(text) + '</code></pre>');
+                                    } else {
+                                        var formattedText = convertToPreformatted(html);
+                                        trumbowyg.execCmd('insertHTML', '<pre>' + formattedText + '</pre>');
                                     }
                                 } catch (e) {
+                                    console.error(e);
                                 }
+                            } else {
+                                trumbowyg.execCmd('insertHTML', '<pre><br></pre>');
                             }
                         },
                         tag: 'pre'
                     };
-
                     trumbowyg.addBtnDef('preformatted', btnDef);
                 }
             }
@@ -121,25 +127,19 @@
         return parentEl;
     }
 
-    /*
-     * Strip
-     * returns a text without HTML tags
-     */
-    function strip(html) {
-        var tmp = document.createElement('DIV');
-        tmp.innerHTML = html;
-        return tmp.textContent || tmp.innerText || '';
+    function convertToPreformatted(html) {
+        return html .replace(/<p>/gi, '')
+            .replace(/<\/p>/gi, '\n')
+            .replace(/<br\s*\/?>/gi, '\n')
+            .replace(/<h[1-6]>|<\/h[1-6]>/gi, '\n')
+            .replace(/<li>/gi, '- ')
+            .replace(/<\/li>/gi, '\n');
     }
 
-    /*
-     * UnwrapCode
-     * ADD/FIX: to improve, works but can be better
-     * "paranoic" solution
-     */
     function unwrapCode() {
         var container = null;
 
-        if (document.selection) { //for IE
+        if (document.selection) {
             container = document.selection.createRange().parentElement();
         } else {
             var select = window.getSelection();
@@ -148,16 +148,22 @@
             }
         }
 
-        //'paranoic' unwrap
-        var ispre = $(container).contents().closest('pre').length;
-        var iscode = $(container).contents().closest('code').length;
+        const pre = $(container);
+        const text = pre.text(); // pure text content w/ line breaks & whitespaces
 
-        if (ispre && iscode) {
-            $(container).contents().unwrap('code').unwrap('pre');
-        } else if (ispre) {
-            $(container).contents().unwrap('pre');
-        } else if (iscode) {
-            $(container).contents().unwrap('code');
-        }
+        // step 1: make html safe
+        let html = text
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+
+        // step 2: keep whitespaces & line breaks
+        html = html
+            .replace(/  /g, '&nbsp;&nbsp;')             // keep double spaces
+            .replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;') // keep tabs
+            .replace(/\n/g, '<br>');                    // convert line breaks to <br> 
+
+        // step 3: convert <pre> to html block
+        pre.replaceWith(html);
     }
 })(jQuery);
