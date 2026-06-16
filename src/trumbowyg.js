@@ -842,22 +842,21 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                         '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' :
                         t.hideButtonTexts ? '' : (btn.text || btn.title || t.lang[btnName] || btnName),
                     title: (btn.title || btn.text || textDef) + (btn.key ? ' (' + (t.isMac ? 'Cmd' : 'Ctrl') + ' + ' + btn.key + ')' : ''),
-                    tabindex: -1,
-                    mousedown: function () {
-                        if (!isDropdown || $('.' + btnName + '-' + prefix + 'dropdown', t.$box).is(':hidden')) {
-                            $('body', t.doc).trigger('mousedown');
-                        }
+                    tabindex: -1
+                }).on('mousedown', function () {
+                    if (!isDropdown || $('.' + btnName + '-' + prefix + 'dropdown', t.$box).is(':hidden')) {
+                        $('body', t.doc).trigger('mousedown');
+                    }
 
-                        if ((t.$btnPane.hasClass(prefix + 'disable') || t.$box.hasClass(prefix + 'disabled')) &&
-                            !$(this).hasClass(prefix + 'active') &&
-                            !$(this).hasClass(prefix + 'not-disable')) {
-                            return false;
-                        }
-
-                        t.execCmd((isDropdown ? 'dropdown' : false) || btn.fn || btnName, btn.param || btnName, btn.forceCss);
-
+                    if ((t.$btnPane.hasClass(prefix + 'disable') || t.$box.hasClass(prefix + 'disabled')) &&
+                        !$(this).hasClass(prefix + 'active') &&
+                        !$(this).hasClass(prefix + 'not-disable')) {
                         return false;
                     }
+
+                    t.execCmd((isDropdown ? 'dropdown' : false) || btn.fn || btnName, btn.param || btnName, btn.forceCss);
+
+                    return false;
                 });
 
             if (isDropdown) {
@@ -911,14 +910,13 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     '<svg><use xlink:href="' + t.svgPath + '#' + prefix + (btn.ico || btnName).replace(/([A-Z]+)/g, '-$1').toLowerCase() + '"/></svg>' + (btn.text || btn.title || t.lang[btnName] || btnName) :
                     (btn.text || btn.title || t.lang[btnName] || btnName),
                 title: (btn.key ? '(' + (t.isMac ? 'Cmd' : 'Ctrl') + ' + ' + btn.key + ')' : null),
-                style: btn.style || null,
-                mousedown: function () {
-                    $('body', t.doc).trigger('mousedown');
+                style: btn.style || null
+            }).on('mousedown', function () {
+                $('body', t.doc).trigger('mousedown');
 
-                    t.execCmd(btn.fn || btnName, btn.param || btnName, btn.forceCss);
+                t.execCmd(btn.fn || btnName, btn.param || btnName, btn.forceCss);
 
-                    return false;
-                }
+                return false;
             });
         },
         // Check if button is supported
@@ -1498,7 +1496,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             skipTrumbowyg = !!skipTrumbowyg || '';
 
             if (cmd !== 'dropdown') {
-                t.$ed.focus();
+                t.$ed.trigger('focus');
             }
 
             if (cmd === 'strikethrough' && t.o.semantic) {
@@ -1633,7 +1631,7 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
 
             if (buildForm) {
                 // Focus in modal box
-                $(':input:first', $box).focus();
+                $(':input:first', $box).trigger('focus');
 
                 // Append Confirm and Cancel buttons
                 t.buildModalBtn('submit', $box);
