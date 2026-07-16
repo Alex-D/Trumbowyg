@@ -605,6 +605,14 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     if (keyCode === 8 || keyCode === 13 || keyCode === 46) {
                         t.toggleSpan(true);
                     }
+
+                    // Ctrl + Backspace clear the text, so we need to sync after them
+                    if ((e.ctrlKey || e.metaKey) && (keyCode === 8)) {
+                        setTimeout(function() {
+                            t.syncTextarea();
+                        }, 0)
+                    }
+
                     if ((e.ctrlKey || e.metaKey) && !e.altKey) {
                         ctrl = true;
                         var key = t.keys[String.fromCharCode(e.which).toUpperCase()];
