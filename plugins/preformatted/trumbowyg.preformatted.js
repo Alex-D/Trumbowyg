@@ -128,18 +128,32 @@
     }
 
     function convertToPreformatted(html) {
-        return html .replace(/<p>/gi, '')
-            .replace(/<\/p>/gi, '\n')
-            .replace(/<br\s*\/?>/gi, '\n')
-            .replace(/<h[1-6]>|<\/h[1-6]>/gi, '\n')
-            .replace(/<li>/gi, '- ')
-            .replace(/<\/li>/gi, '\n');
+        // strip structural whitespaces
+        html = html.replace(/[ \t]*[\r\n]+[ \t]*/g, '');
+
+        let tempDiv = document.createElement('div');
+        tempDiv.innerHTML = html;
+
+        tempDiv.querySelectorAll('br').forEach(function (br) {
+            br.replaceWith('\n');
+        });
+        tempDiv.querySelectorAll('li').forEach(function (li) {
+            li.prepend('- ');
+        });
+        tempDiv.querySelectorAll('div, li').forEach(function (el) {
+            el.append('\n');
+        });
+        tempDiv.querySelectorAll('p, h1, h2, h3, h4, h5, h6, ul, ol').forEach(function (el) {
+            el.append('\n\n');
+        });
+        // reduce breaks and trim text
+        return tempDiv.textContent.replace(/\n{3,}/g, '\n\n').trim();
     }
 
     function unwrapCode() {
         var container = null;
 
-        if (document.selection) {
+        if (document.selection) { //for IE
             container = document.selection.createRange().parentElement();
         } else {
             var select = window.getSelection();
@@ -159,9 +173,9 @@
 
         // step 2: keep whitespaces & line breaks
         html = html
-            .replace(/  /g, '&nbsp;&nbsp;')             // keep double spaces
-            .replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;') // keep tabs
-            .replace(/\n/g, '<br>');                    // convert line breaks to <br> 
+            .replace(/  /g, '&nbsp;&nbsp;')  // keep double spaces
+            .replace(/\t/g, '&tab;')         // keep tabs
+            .replace(/\n/g, '<br>');         // convert line breaks to <br> 
 
         // step 3: convert <pre> to html block
         pre.replaceWith(html);
