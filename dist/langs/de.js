@@ -1,0 +1,66 @@
+/* ===========================================================
+ * de.js
+ * German translation for Trumbowyg
+ * http://alex-d.github.com/Trumbowyg
+ * ===========================================================
+ * Author : Manfred Timm, johangroe
+ *          Github : https://github.com/Manfred62, https://github.com/johangroe
+ */
+
+jQuery.trumbowyg.langs.de = {
+    viewHTML: 'HTML anzeigen',
+
+    undo: 'Rückgängig',
+    redo: 'Wiederholen',
+
+    formatting: 'Formatierung',
+    p: 'Absatz',
+    blockquote: 'Zitat',
+    code: 'Code',
+    header: 'Überschrift',
+
+    bold: 'Fett',
+    italic: 'Kursiv',
+    strikethrough: 'Durchgestrichen',
+    underline: 'Unterstrichen',
+
+    strong: 'Wichtig',
+    em: 'Betont',
+    del: 'Gelöscht',
+
+    superscript: 'Hochgestellt',
+    subscript: 'Tiefgestellt',
+
+    unorderedList: 'Ungeordnete Liste',
+    orderedList: 'Geordnete Liste',
+
+    image: 'Bild',
+    insertImage: 'Bild einfügen',
+    insertVideo: 'Video einfügen',
+    link: 'Link',
+    createLink: 'Link einfügen',
+    unlink: 'Link entfernen',
+
+    _self: 'Gleicher Tab (Standard)',
+    _blank: 'Neuer Tab',
+
+    justifyLeft: 'Links ausrichten',
+    justifyCenter: 'Zentrieren',
+    justifyRight: 'Rechts ausrichten',
+    justifyFull: 'Blocksatz',
+
+    horizontalRule: 'Horizontale Linie einfügen',
+    removeformat: 'Formatierung entfernen',
+
+    fullscreen: 'Vollbild',
+
+    close: 'Schließen',
+
+    submit: 'Bestätigen',
+    reset: 'Abbrechen',
+
+    required: 'Erforderlich',
+    description: 'Beschreibung',
+    title: 'Titel',
+    text: 'Text'
+};
