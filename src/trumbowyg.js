@@ -1303,7 +1303,9 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 url,
                 title,
                 target,
-                linkDefaultTarget = t.o.linkTargets[0];
+                linkDefaultTarget = t.o.linkTargets[0],
+                classes,
+                style;
 
             while (['A', 'DIV'].indexOf(node.nodeName) < 0) {
                 node = node.parentNode;
@@ -1317,6 +1319,8 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                     title = $a.attr('title');
                     target = $a.attr('target') || linkDefaultTarget;
                 }
+                classes = $a.attr('class');
+                style = $a.attr('style');
                 var range = t.doc.createRange();
                 range.selectNode(node);
                 documentSelection.removeAllRanges();
@@ -1370,6 +1374,13 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
                 if (v.target || linkDefaultTarget) {
                     link.attr('target', v.target || linkDefaultTarget);
                 }
+                if (classes) {
+                    link.attr('class', classes);
+                }
+                if (style) {
+                    link.attr('style', style);
+                }
+
                 t.range.deleteContents();
                 t.range.insertNode(link[0]);
                 t.syncCode();
