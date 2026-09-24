@@ -585,6 +585,12 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             if (t.o.resetCss) {
                 t.$ed.addClass(prefix + 'reset-css');
             }
+            
+            if (!t.o.autogrow) {
+                t.$ta.add(t.$ed).css({
+                    height: t.height
+                });
+            }
 
             t.semanticCode();
             t.applyTagClasses();
