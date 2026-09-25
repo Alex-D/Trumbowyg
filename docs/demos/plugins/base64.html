@@ -115,6 +115,31 @@ $('#editor-max-file-size')
         </div>
 
         <div class="feature">
+            <h3>MIME types</h3>
+
+            <div id="editor-mime-types">
+                <p>
+                    Option <code>mimeTypes</code> allows to specify allowed MIME types. Default value is <code>['image/*']</code> which accepts all images.
+                </p>
+            </div>
+
+            <h4>The code</h4>
+            <pre><code class="js-code-to-eval javascript">
+$('#editor-mime-types')
+.trumbowyg({
+    btns: [
+        ['base64']
+    ],
+    plugins: {
+        base64: {
+            mimeTypes: ['image/gif', 'image/jpeg', 'image/png', 'image/webp']
+        }
+    }
+});
+            </code></pre>
+        </div>
+
+        <div class="feature">
             <h3>Setup</h3>
 
             <h4>In head tag</h4>
