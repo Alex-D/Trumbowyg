@@ -1,10 +1,9 @@
 /* ===========================================================
- * trumbowyg.preformatted.js v1.1
+ * trumbowyg.preformatted.js v1.0
  * Preformatted plugin for Trumbowyg
  * http://alex-d.github.com/Trumbowyg
  * ===========================================================
- * Author : Casella Edoardo (Civile) v1.0
- * Author : SD/S4T v1.1
+ * Author : Casella Edoardo (Civile)
  */
 
 
@@ -34,9 +33,6 @@
             },
             fr: {
                 preformatted: 'Exemple de code <pre>'
-            },
-            ha: {
-                preformatted: 'Samfurin kod <pre>'
             },
             hu: {
                 preformatted: 'Kód minta <pre>'
@@ -77,28 +73,23 @@
                     var btnDef = {
                         fn: function () {
                             trumbowyg.saveRange();
-                            let tempDiv = document.createElement('div');
-                            tempDiv.appendChild(trumbowyg.range.cloneContents());
-                            let html = tempDiv.innerHTML;
-                            
-                            if (html.replace(/\s/g, '') !== '') {
+                            var text = trumbowyg.getRangeText();
+                            if (text.replace(/\s/g, '') !== '') {
                                 try {
                                     var curtag = getSelectionParentElement().tagName.toLowerCase();
                                     if (curtag === 'code' || curtag === 'pre') {
                                         return unwrapCode();
-                                    } else {
-                                        var formattedText = convertToPreformatted(html);
-                                        trumbowyg.execCmd('insertHTML', '<pre>' + formattedText + '</pre>');
+                                    }
+                                    else {
+                                        trumbowyg.execCmd('insertHTML', '<pre><code>' + strip(text) + '</code></pre>');
                                     }
                                 } catch (e) {
-                                    console.error(e);
                                 }
-                            } else {
-                                trumbowyg.execCmd('insertHTML', '<pre><br></pre>');
                             }
                         },
                         tag: 'pre'
                     };
+
                     trumbowyg.addBtnDef('preformatted', btnDef);
                 }
             }
@@ -127,29 +118,21 @@
         return parentEl;
     }
 
-    function convertToPreformatted(html) {
-        // strip structural whitespaces
-        html = html.replace(/[ \t]*[\r\n]+[ \t]*/g, '');
-
-        let tempDiv = document.createElement('div');
-        tempDiv.innerHTML = html;
-
-        tempDiv.querySelectorAll('br').forEach(function (br) {
-            br.replaceWith('\n');
-        });
-        tempDiv.querySelectorAll('li').forEach(function (li) {
-            li.prepend('- ');
-        });
-        tempDiv.querySelectorAll('div, li').forEach(function (el) {
-            el.append('\n');
-        });
-        tempDiv.querySelectorAll('p, h1, h2, h3, h4, h5, h6, ul, ol').forEach(function (el) {
-            el.append('\n\n');
-        });
-        // reduce breaks and trim text
-        return tempDiv.textContent.replace(/\n{3,}/g, '\n\n').trim();
+    /*
+     * Strip
+     * returns a text without HTML tags
+     */
+    function strip(html) {
+        var tmp = document.createElement('DIV');
+        tmp.innerHTML = html;
+        return tmp.textContent || tmp.innerText || '';
     }
 
+    /*
+     * UnwrapCode
+     * ADD/FIX: to improve, works but can be better
+     * "paranoic" solution
+     */
     function unwrapCode() {
         var container = null;
 
@@ -162,22 +145,16 @@
             }
         }
 
-        const pre = $(container);
-        const text = pre.text(); // pure text content w/ line breaks & whitespaces
+        //'paranoic' unwrap
+        var ispre = $(container).contents().closest('pre').length;
+        var iscode = $(container).contents().closest('code').length;
 
-        // step 1: make html safe
-        let html = text
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;');
-
-        // step 2: keep whitespaces & line breaks
-        html = html
-            .replace(/  /g, '&nbsp;&nbsp;')  // keep double spaces
-            .replace(/\t/g, '&tab;')         // keep tabs
-            .replace(/\n/g, '<br>');         // convert line breaks to <br> 
-
-        // step 3: convert <pre> to html block
-        pre.replaceWith(html);
+        if (ispre && iscode) {
+            $(container).contents().unwrap('code').unwrap('pre');
+        } else if (ispre) {
+            $(container).contents().unwrap('pre');
+        } else if (iscode) {
+            $(container).contents().unwrap('code');
+        }
     }
 })(jQuery);
