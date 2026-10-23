@@ -1096,20 +1096,26 @@ Object.defineProperty(jQuery.trumbowyg, 'defaultOptions', {
             }, 0);
         },
 
-        // Remove or add flags to span tags to remove Chrome generated spans
+        // Remove Chrome-generated spans without relying on DOM attributes that editing may strip
         toggleSpan: function (addFlag) {
             var t = this;
+            if (addFlag === true) {
+                t.spansBeforeToggle = t.$ed.find('span').get();
+                return;
+            }
+
+            if (!t.spansBeforeToggle) {
+                return;
+            }
+
             t.$ed.find('span').each(function () {
-                if (addFlag === true) {
-                    $(this).attr('data-tbw-flag', true);
+                if (t.spansBeforeToggle.indexOf(this) < 0) {
+                    $(this).contents().unwrap();
                 } else {
-                    if ($(this).attr('data-tbw-flag')) {
-                        $(this).removeAttr('data-tbw-flag');
-                    } else {
-                        $(this).contents().unwrap();
-                    }
+                    $(this).removeAttr('data-tbw-flag');
                 }
             });
+            t.spansBeforeToggle = null;
         },
 
         // Open dropdown when click on a button which open that
