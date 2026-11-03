@@ -999,6 +999,89 @@ $('#my-editor').trumbowyg({
             <p>
                 Paste image works now on every new Trumbowyg instance.
             </p>
+
+            <h4 id="plugin-pasteimage--options">Options</h4>
+            <pre><code class="javascript">
+$('#my-editor').trumbowyg({
+    plugins: {
+        pasteImage: {
+            maxFileSize: 400 * 1024, // 400 KB
+            compress: true,
+            maxWidth: 1600,
+            maxHeight: 1600,
+            onError: function (message) {
+                alert(message);
+            }
+        }
+    }
+});
+            </code></pre>
+            <dl>
+                <dt><strong><code>maxFileSize</code></strong> <code class="type">number</code></dt>
+                <dd>
+                    Maximum size of a pasted image, in bytes. Larger images are ignored, or compressed when
+                    <code>compress</code> is enabled. <code>0</code> means unlimited.
+                    <br>
+                    <strong>Default</strong>: <code>0</code>
+                </dd>
+                <dt><strong><code>compress</code></strong> <code class="type">boolean</code></dt>
+                <dd>
+                    Compress the images which are too large instead of ignoring them. An image larger than
+                    <code>maxFileSize</code>, <code>maxWidth</code> or <code>maxHeight</code> is downscaled and
+                    re-encoded in the browser, lowering its quality and then its dimensions until it fits
+                    <code>maxFileSize</code>. Images which already fit are pasted unchanged.
+                    Re-encoding strips the image metadata (EXIF, GPS...) and flattens animated GIFs to their first frame.
+                    <br>
+                    <strong>Default</strong>: <code>false</code>
+                </dd>
+                <dt><strong><code>maxWidth</code></strong> <code class="type">number</code></dt>
+                <dd>
+                    Maximum width of a pasted image, in pixels, when <code>compress</code> is enabled.
+                    <code>0</code> means unlimited.
+                    <br>
+                    <strong>Default</strong>: <code>0</code>
+                </dd>
+                <dt><strong><code>maxHeight</code></strong> <code class="type">number</code></dt>
+                <dd>
+                    Maximum height of a pasted image, in pixels, when <code>compress</code> is enabled.
+                    <code>0</code> means unlimited.
+                    <br>
+                    <strong>Default</strong>: <code>0</code>
+                </dd>
+                <dt><strong><code>mimeType</code></strong> <code class="type">string</code></dt>
+                <dd>
+                    Format of the compressed images: <code>'image/jpeg'</code> or <code>'image/webp'</code>.
+                    Falls back to JPEG when the browser can't encode the requested format.
+                    <br>
+                    <strong>Default</strong>: <code>'image/jpeg'</code>
+                </dd>
+                <dt><strong><code>quality</code></strong> <code class="type">number</code></dt>
+                <dd>
+                    Starting quality of the compressed images, between <code>0</code> and <code>1</code>.
+                    <br>
+                    <strong>Default</strong>: <code>0.8</code>
+                </dd>
+                <dt><strong><code>minQuality</code></strong> <code class="type">number</code></dt>
+                <dd>
+                    Lowest quality used before reducing the image dimensions, between <code>0</code> and <code>1</code>.
+                    <br>
+                    <strong>Default</strong>: <code>0.5</code>
+                </dd>
+                <dt><strong><code>maxInputFileSize</code></strong> <code class="type">number</code></dt>
+                <dd>
+                    Images larger than this size, in bytes, are refused without being decoded, when
+                    <code>compress</code> is enabled. <code>0</code> means unlimited.
+                    <br>
+                    <strong>Default</strong>: <code>25 * 1024 * 1024</code> (25 MB)
+                </dd>
+                <dt><strong><code>onError</code></strong> <code class="type">function</code></dt>
+                <dd>
+                    Called with a translated message and the file when an image can't be pasted, for example
+                    when it is still too large after compression: <code>function (message, file) {}</code>
+                    <br>
+                    <strong>Default</strong>: <code>undefined</code>
+                </dd>
+            </dl>
         </div>
 
         <div class="feature">

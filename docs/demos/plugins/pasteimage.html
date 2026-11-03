@@ -45,8 +45,38 @@ $('#editor').trumbowyg();
 $('#editor-max-file-size')
 .trumbowyg({
     plugins: {
-        pasteimage: {
+        pasteImage: {
             maxFileSize: 2 * 1024 * 1024 // 2 MB
+        }
+    }
+});
+            </code></pre>
+        </div>
+
+        <div class="feature">
+            <h3>Compress too large images</h3>
+
+            <div id="editor-compress">
+                <p>
+                    With the <code>compress</code> option, an image larger than <code>maxFileSize</code>,
+                    <code>maxWidth</code> or <code>maxHeight</code> is downscaled and re-encoded instead of being ignored.
+                    Try to paste a large screenshot here.
+                </p>
+            </div>
+
+            <h4>The code</h4>
+            <pre><code class="js-code-to-eval javascript">
+$('#editor-compress')
+.trumbowyg({
+    plugins: {
+        pasteImage: {
+            maxFileSize: 200 * 1024, // 200 KB
+            compress: true,
+            maxWidth: 1200,
+            maxHeight: 1200,
+            onError: function (message) {
+                alert(message);
+            }
         }
     }
 });
